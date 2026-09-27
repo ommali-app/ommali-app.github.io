@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260927185124">
+<meta name="amali-build" content="20260927194131">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1221,6 +1221,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 .rldec .h{font-weight:700;font-size:13.5px;margin-bottom:8px}
 .rldec .acts2{display:flex;flex-wrap:wrap;gap:6px}
 .rldec .row{display:flex;gap:8px;margin-top:8px}
+#rl_dwarn{color:var(--warn);font-weight:700}
 @media print{
   body.prl #rl_sheetout h3{font-size:13pt;margin:14px 0 6px}
   body.prl #rl_sheetout td.no{font-weight:700}
@@ -1612,7 +1613,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     <h3>التقويم والدائرة</h3>
     <p class="k">الجلسة كل أربعاء عدا آخر أربعاء في الشهر (ثلاث جلسات). اضغط على يوم لتعليمه عطلة أو لإعادته جلسة.</p>
     <div id="rl_calbody"></div>
-    <div class="row"><label class="rlday">اسم الدائرة في الأوراق <input id="rl_circ" type="text" placeholder="مثال: الدائرة العمالية الثانية"></label></div>
+    <div class="row"><label class="rlday">اسم الدائرة في الأوراق <input id="rl_circ" type="text" placeholder="مثال: الدائرة العمالية الثانية — استئناف حولي"></label></div>
     <h3 style="margin-top:14px">أعضاء الدائرة</h3>
     <p class="k">اكتب اسم كل عضو كما يرد في كشف النظام بعد «المستشار:» (يكفي الاسم الأول والأخير)، فيحدد التطبيق كاتب الحكم تلقائيًا عند استيراد كشف المحجوزة. الأسماء تُحفظ على هذا الجهاز وحده ولا تظهر في الأوراق المطبوعة.</p>
     <div class="rlmem"><label>الرئيس <input id="rm_p" type="text" autocomplete="off"></label><label>العضو اليمين <input id="rm_r" type="text" autocomplete="off"></label><label>العضو اليسار <input id="rm_l" type="text" autocomplete="off"></label><label>(د) عند الحاجة <input id="rm_d" type="text" autocomplete="off"></label></div>
@@ -1955,7 +1956,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V88 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V89 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -3180,12 +3181,12 @@ function rlAbbrEdit() {
 // محاضر الجلسة للطباعة: جدول لكل قضية على نسق «قائمة الاستئناف» (الطرف · الحضور · الطلبات) + القرار
 function rlSessPrint(d) {
   const L = rlSessList(d); if (!L.length) { toast('لا قضايا'); return; }
-  let h = '<h2>محاضر مختصرة — جلسة ' + rlDay(d) + ' ' + rlFmt(d) + (RL.circuit ? ' — ' + esc(RL.circuit) : '') + '</h2>';
+  let h = '';
   L.forEach((c, k) => { const s = rlSheet(c, d) || {}, dec = rlDecOn(c, d);
     h += '<div class="sspg"><h3>' + (k + 1) + '. الاستئناف رقم ' + esc(c.code.replace('/', ' لسنة ')) + (c.auto ? ' · الرقم الآلي ' + esc(c.auto) : '') + (c.fi ? ' · أول درجة ' + esc(c.fi) + (c.fid ? ' (' + rlFmt(c.fid) + ')' : '') : '') + '</h3><table><thead><tr><th>الطرف</th><th>الحضور</th><th>الطلبات</th></tr></thead><tbody>'
       + rlParties(c).map(p => '<tr><td>' + rlPLabel(c, p) + '</td><td>' + rlAttTxt(rlAttOf(s, p.id)) + '</td><td>' + [((s.req || {})[p.id] || []).map(q => (RL_REQ.find(a => a[0] === q) || [])[1]).filter(Boolean).join('، '), esc((s.oth || {})[p.id] || '')].filter(Boolean).join(' — ') + '</td></tr>').join('')
       + '</tbody></table>' + ((s.note || '').trim() ? '<p class="nt">ملاحظة: ' + esc(s.note.trim()) + '</p>' : '') + '<p class="dq"><b>القرار:</b> ' + (dec ? esc(rlDecTxt(dec)) : '&nbsp;') + '</p></div>'; });
-  h += '<p class="ft">من «ورقة الرول» في عمّالي — بلا أسماء الخصوم (الأطراف بصفاتهم وأرقامهم كما في قائمة الاستئناف) · مسودة عمل داخلية.</p>';
+  h = rlDoc('محاضر مختصرة', rlChip('الجلسة', rlDay(d) + ' ' + rlDAI(d)) + rlChip('القضايا', rlAI(L.length), 'g'), h, 'بلا أسماء الخصوم — الأطراف بصفاتهم وأرقامهم كما في قائمة الاستئناف');
   $('#rl_sheetout').innerHTML = h; rlOut(h);
 }
 // ---- البطاقة
@@ -3397,41 +3398,57 @@ function rlRender() {
   if (rlFocus) { const e = document.getElementById('rl-' + rlFocus); if (e) setTimeout(() => e.scrollIntoView({ block: 'center' }), 30); rlFocus = null; }
 }
 // ---- الطباعة: ورقة المراجعة / التوزيع
+
+// V89 — ترويسة موحّدة لأوراق الرول المطبوعة
+const RL_DOC_CSS = ':is(#rl_sheetout,body) .rdoc.rdoc{font-family:"IBM Plex Sans Arabic","Noto Naskh Arabic",-apple-system,Tahoma,Arial,sans-serif;color:#111;direction:rtl;-webkit-print-color-adjust:exact;print-color-adjust:exact}:is(#rl_sheetout,body) .rdoc.rdoc .rdh{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;padding:0 0 10px;border-bottom:3px double #1C2E4A;margin:0 0 12px}:is(#rl_sheetout,body) .rdoc.rdoc .rdc b{display:block;font-size:15pt;color:#1C2E4A;line-height:1.35}:is(#rl_sheetout,body) .rdoc.rdoc .rdc span{display:block;font-size:11pt;color:#8A6A2A;font-weight:600}:is(#rl_sheetout,body) .rdoc.rdoc .rdm svg{width:52px;height:52px;display:block}:is(#rl_sheetout,body) .rdoc.rdoc .rdd{text-align:left;font-size:8.5pt;color:#666}:is(#rl_sheetout,body) .rdoc.rdoc .rdd b{display:block;font-size:10.5pt;color:#111}:is(#rl_sheetout,body) .rdoc.rdoc h2.rdt{text-align:center;font-size:17pt;margin:2px 0 8px;color:#1C2E4A;border:0}:is(#rl_sheetout,body) .rdoc.rdoc .rdchips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:0 0 12px}:is(#rl_sheetout,body) .rdoc.rdoc .rdchip{display:inline-flex;align-items:baseline;gap:8px;border:1.5px solid #1C2E4A;border-radius:999px;padding:3px 14px;font-size:11pt;background:#fff}:is(#rl_sheetout,body) .rdoc.rdoc .rdchip i{font-style:normal;color:#555;font-size:9pt}:is(#rl_sheetout,body) .rdoc.rdoc .rdchip.j{border-color:#B8893A;background:#FBF3E2}:is(#rl_sheetout,body) .rdoc.rdoc .rdchip.j i{color:#8A6A2A}:is(#rl_sheetout,body) .rdoc.rdoc .rdchip.g{border-color:#9AA3AE}:is(#rl_sheetout,body) .rdoc.rdoc table{width:100%;border-collapse:collapse;font-size:10.5pt;margin:0}:is(#rl_sheetout,body) .rdoc.rdoc th{background:#1C2E4A;color:#fff;font-weight:700;padding:6px 7px;border:1px solid #1C2E4A;text-align:right;vertical-align:middle}:is(#rl_sheetout,body) .rdoc.rdoc td{border:1px solid #AAB2BC;padding:6px 7px;vertical-align:top;text-align:right}:is(#rl_sheetout,body) .rdoc.rdoc tbody tr:nth-child(even) td{background:#F4F6F8}:is(#rl_sheetout,body) .rdoc.rdoc tr{break-inside:avoid}:is(#rl_sheetout,body) .rdoc.rdoc td.num{text-align:center;color:#1C2E4A;font-weight:700;width:4%}:is(#rl_sheetout,body) .rdoc.rdoc td.code b{font-size:11.5pt}:is(#rl_sheetout,body) .rdoc.rdoc td.ck{text-align:center;width:5%}:is(#rl_sheetout,body) .rdoc.rdoc td.dec,:is(#rl_sheetout,body) .rdoc.rdoc th.dec{width:22%}:is(#rl_sheetout,body) .rdoc.rdoc tbody tr td.dec{background:#fff}:is(#rl_sheetout,body) .rdoc.rdoc td.no{font-weight:700;color:#8B1E1E}:is(#rl_sheetout,body) .rdoc.rdoc tr.lk td{border-right:3px solid #B8893A}:is(#rl_sheetout,body) .rdoc.rdoc h3{font-size:12.5pt;color:#1C2E4A;margin:14px 0 6px;padding-right:8px;border-right:4px solid #B8893A}:is(#rl_sheetout,body) .rdoc.rdoc .nt{font-size:9pt;color:#444;margin-top:3px}:is(#rl_sheetout,body) .rdoc.rdoc ul{margin:0;padding-right:14px}:is(#rl_sheetout,body) .rdoc.rdoc .rdist{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:10px;margin:0 0 14px}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol{border:1.5px solid #1C2E4A;border-radius:10px;overflow:hidden;break-inside:avoid;background:#fff}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol h4{margin:0;background:#1C2E4A;color:#fff;text-align:center;padding:7px 4px;font-size:11pt;font-weight:700}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol h4 b{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#B8893A;color:#fff;margin-left:6px;font-size:12pt}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol h4 small{display:block;font-weight:400;font-size:9pt;color:#E9D6AE}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol ol{list-style:none;margin:0;padding:6px 8px;text-align:center;font-size:13pt;font-weight:700;line-height:1.9}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol li+li{border-top:1px dashed #D5DAE0}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol li.e{color:#999;font-weight:400}:is(#rl_sheetout,body) .rdoc.rdoc .rdblk{break-inside:avoid;margin:0 0 10px}:is(#rl_sheetout,body) .rdoc.rdoc .rdwarn{color:#8B1E1E;font-size:10pt;text-align:center;margin:0 0 10px}:is(#rl_sheetout,body) .rdoc.rdoc .sspg{break-inside:avoid;margin:0 0 12px}:is(#rl_sheetout,body) .rdoc.rdoc .dq{margin:5px 0 0;font-size:10.5pt}:is(#rl_sheetout,body) .rdoc.rdoc .rdf{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #1C2E4A;margin-top:12px;padding-top:6px;font-size:8.5pt;color:#555}';
+const RL_SEAL = '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#1C2E4A"/><circle cx="32" cy="32" r="26.5" fill="none" stroke="#B8893A" stroke-width="1.2"/><g stroke="#E9C77B" stroke-width="2.2" stroke-linecap="round" fill="none"><path d="M32 16v30M22 47h20M18 22h28"/><path d="M18 22l-6 12h12zM46 22l-6 12h12z"/></g><circle cx="32" cy="15" r="2.4" fill="#E9C77B"/></svg>';
+function rlCircLines() { const c = (RL.circuit || '').trim(); if (!c) return []; return c.split(/\s*[—–|]\s*|\s+[-\/]\s+/).map(x => x.trim()).filter(Boolean).slice(0, 2); }
+function rlRole(k) { return ({ p: 'الرئيس', r: 'العضو اليمين', l: 'العضو اليسار', d: 'العضو (د)' })[k] || RL_W[k] || ''; }
+function rlChip(label, val, cls) { return '<span class="rdchip' + (cls ? ' ' + cls : '') + '"><i>' + label + '</i><b>' + val + '</b></span>'; }
+function rlDoc(title, chips, body, foot) {
+  const L = rlCircLines().map(esc);
+  return '<div class="rdoc"><style>' + RL_DOC_CSS + '</style><header class="rdh"><div class="rdc">' + (L[0] ? '<b>' + L[0] + '</b>' : '') + (L[1] ? '<span>' + L[1] + '</span>' : '') + '</div><div class="rdm">' + RL_SEAL + '</div><div class="rdd"><span>تاريخ الطباعة</span><b>' + rlDay(rlToday()) + ' ' + rlFmt(rlToday()) + '</b></div></header>'
+    + '<h2 class="rdt">' + title + '</h2>' + (chips ? '<div class="rdchips">' + chips + '</div>' : '') + body + '<footer class="rdf"><span>' + (foot || '') + '</span><span>عمّالي · مسودة عمل داخلية</span></footer></div>';
+}
+function rlDistKeys(D) { return Object.keys(RL_W).filter(k => k !== 'd' || (D && D.by.d && D.by.d.length) || (RL.members && RL.members.d)); }
+function rlDistGrid(D) { const ks = rlDistKeys(D); return '<div class="rdist" style="--n:' + ks.length + '">' + ks.map(k => '<div class="rdcol"><h4><b>' + RL_LT[k] + '</b>' + rlRole(k) + '<small>' + rlAI(D.by[k].length) + '</small></h4><ol>' + (D.by[k].length ? D.by[k].map(e => '<li>' + rlAI(e) + '</li>').join('') : '<li class="e">—</li>') + '</ol></div>').join('') + '</div>'; }
+function rlJudgTxt(D) { return D.judg.length ? D.judg.map(d => rlDay(d) + ' ' + rlDAI(d)).join('، ') : '—'; }
 function rlPrint() {
   const cell = s => esc(s || ''); let h = '';
   const circ = RL.circuit ? ' — ' + cell(RL.circuit) : '';
   if (rlMode === 'stat') {
     if (!RL.cards.length) { toast('لا قضايا في الرول'); return; }
-    h = '<h2>إحصاءات الدائرة' + circ + ' — حتى ' + rlFmt(rlToday()) + '</h2>' + rlStatHtml(rlStats(), true) + '<p class="ft">من بيانات رول الجلسة على هذا الجهاز · مسودة عمل داخلية.</p>';
+    h = rlDoc('إحصاءات الدائرة', rlChip('حتى', rlFmt(rlToday())), rlStatHtml(rlStats(), true), 'من بيانات رول الجلسة على هذا الجهاز');
   } else if (rlMode === 'arch') {
     const done = RL.cards.filter(c => c.stage === 'صدر الحكم'); if (!done.length) { toast('لا أحكام صادرة'); return; }
     const q = norm(($('#arch_q') || {}).value || ''), w = ($('#arch_w') || {}).value || '', vd = ($('#arch_vd') || {}).value || '', mon = ($('#arch_mon') || {}).value || '';
     let list = done.filter(c => (!w || c.writer === w) && (!vd || c.vd === vd) && (!mon || (rlJudgedAt(c) || '').slice(0, 7) === mon) && (!q || norm(c.code + ' ' + (c.auto || '') + ' ' + (c.subj || '')).includes(q)));
     list = rlAdj(list).sort((a, b) => (rlJudgedAt(b) || '').localeCompare(rlJudgedAt(a) || '') || a.code.localeCompare(b.code, 'ar', { numeric: true }));
     if (!list.length) { toast('لا أحكام مطابقة'); return; }
-    h = '<h2>أرشيف الأحكام الصادرة' + circ + (mon ? ' — ' + rlMonLabel(mon) : '') + '</h2><table><thead><tr><th>م</th><th>رقم القضية</th><th>الرقم الآلي</th><th>تاريخ الصدور</th><th>كاتب الحكم</th><th>المنطوق</th><th>مسار التقاضي</th></tr></thead><tbody>'
+    h = '<table><thead><tr><th>م</th><th>رقم القضية</th><th>الرقم الآلي</th><th>تاريخ الصدور</th><th>كاتب الحكم</th><th>المنطوق</th><th>مسار التقاضي</th></tr></thead><tbody>'
       + list.map((c, i) => { const sib = rlSibs(c), path = [c.d1 ? 'أول درجة: ' + cell(c.d1) : '', c.tm ? 'تمييز: ' + cell(c.tm) : ''].filter(Boolean).join(' · '); return '<tr' + (sib.length ? ' class="lk"' : '') + '><td>' + (i + 1) + '</td><td><b>' + cell(c.code) + '</b>' + (sib.length ? '<div class="nt">+ ' + sib.map(s => cell(s.code)).join('، ') + '</div>' : '') + '</td><td>' + cell(c.auto) + '</td><td>' + (rlJudgedAt(c) ? rlFmt(rlJudgedAt(c)) : '—') + '</td><td>' + (RL_W[c.writer] || '—') + '</td><td>' + cell(c.vd || '—') + '</td><td>' + (path || '—') + '</td></tr>'; }).join('')
-      + '</tbody></table><p class="ft">' + rlUnits(list) + ' حكمًا · مسودة عمل داخلية.</p>';
+      + '</tbody></table>'; h = rlDoc('أرشيف الأحكام الصادرة', (mon ? rlChip('الشهر', rlMonLabel(mon)) : '') + rlChip('العدد', rlUnits(list), 'g'), h, '');
   } else if (rlMode === 'res' && RL.cards.some(c => c.resAt)) {
     const ds = [...new Set(RL.cards.map(c => c.resAt).filter(Boolean))].sort().reverse().slice(0, 4);
     let tb = '';
-    h = '<h2>توزيع القضايا المحجوزة للحكم' + circ + '</h2><table><thead><tr><th>جلسة</th>' + Object.keys(RL_W).map(k => '<th>' + RL_LT[k] + '</th>').join('') + '</tr></thead><tbody>'
-      + (tb = ds.map(d => { const D = rlDistData(d); return '<tr><td><b>' + rlDAI(d) + '</b>' + (D.judg.length ? '<div class="nt">النطق ' + D.judg.map(x => rlDAI(x)).join('، ') + '</div>' : '') + '</td>' + Object.keys(RL_W).map(k => '<td class="dist">' + D.by[k].map(e => '<div>' + rlAI(e) + '</div>').join('') + '</td>').join('') + '</tr>'; }).join('')) + '</tbody></table><p class="ft">(أ) الرئيس · (ب) العضو اليمين · (ج) العضو اليسار · ' + (/\+/.test(tb) ? 'الأرقام الموصولة بـ«+» حكم واحد (مرتبطة أو متقابلة) · ' : '') + 'مسودة عمل داخلية.</p>';
+    tb = ds.map(d => { const D = rlDistData(d); return '<section class="rdblk"><div class="rdchips">' + rlChip('جلسة الحجز', rlDay(d) + ' ' + rlDAI(d)) + rlChip('جلسة النطق بالحكم', rlJudgTxt(D), 'j') + '</div>' + rlDistGrid(D) + (D.by[''].length ? '<p class="rdwarn">غير موزّعة: ' + D.by[''].map(rlAI).join('، ') + '</p>' : '') + '</section>'; }).join('');
+    h = rlDoc('توزيع القضايا المحجوزة للحكم', '', tb, (/\+/.test(tb) ? 'الأرقام الموصولة بـ«+» حكم واحد (مرتبطة أو متقابلة)' : ''));
   } else if (rlMode === 'res') {
     const R = rlAdj(rlResList('').sort((a, b) => (a.next || '').localeCompare(b.next || '') || (a.writer || 'z').localeCompare(b.writer || 'z'))); if (!R.length) { toast('لا قضايا محجوزة'); return; }
-    h = '<h2>توزيع القضايا المحجوزة للحكم' + circ + '</h2><table><thead><tr><th>م</th><th>جلسة النطق</th><th>رقم القضية</th><th>الرقم الآلي</th><th>كاتب الحكم</th><th>ملاحظات</th></tr></thead><tbody>';
-    R.forEach((c, i) => { h += '<tr' + (rlSibs(c).length ? ' class="lk"' : '') + '><td>' + (i + 1) + '</td><td>' + rlFmt(c.next) + '</td><td><b>' + cell(c.code) + '</b>' + (rlSibs(c).length ? '<div class="nt">مرتبط بـ ' + cell(rlLinkNote(c)) + '</div>' : '') + '</td><td>' + cell(c.auto) + '</td><td>' + (RL_W[c.writer] || '—') + '</td><td class="dec"></td></tr>'; });
-    h += '</tbody></table><p class="ft">' + Object.keys(RL_W).map(k => RL_W[k] + ': ' + rlUnits(R.filter(c => c.writer === k))).join(' · ') + (rlUnits(R) < R.length ? ' (عدد الأحكام؛ المرتبطة حكم واحد)' : '') + ' · مسودة عمل داخلية.</p>';
+    h = '<table><thead><tr><th>م</th><th>جلسة الحجز</th><th>جلسة النطق</th><th>رقم القضية</th><th>الرقم الآلي</th><th>كاتب الحكم</th><th class="dec">ملاحظات</th></tr></thead><tbody>';
+    R.forEach((c, i) => { h += '<tr' + (rlSibs(c).length ? ' class="lk"' : '') + '><td class="num">' + (i + 1) + '</td><td>' + (c.resAt ? rlFmt(c.resAt) : '—') + '</td><td><b>' + rlFmt(c.next) + '</b></td><td class="code"><b>' + cell(c.code) + '</b>' + (rlSibs(c).length ? '<div class="nt">مرتبط بـ ' + cell(rlLinkNote(c)) + '</div>' : '') + '</td><td>' + cell(c.auto) + '</td><td>' + (RL_W[c.writer] || '—') + '</td><td class="dec"></td></tr>'; });
+    h += '</tbody></table>'; h = rlDoc('القضايا المحجوزة للحكم', Object.keys(RL_W).filter(k => R.some(c => c.writer === k)).map(k => rlChip(RL_W[k], rlUnits(R.filter(c => c.writer === k)), 'g')).join(''), h, rlUnits(R) < R.length ? 'العدد بالأحكام؛ المرتبطة حكم واحد' : '');
   } else {
     const day = rlMode === 'roll' ? rlDaySel : ($('#rl_dayx') && $('#rl_dayx').value) || rlDaySel;
     const L = rlSortList(rlDayList(day)), R = rlAdj(rlResList(day));
     if (!L.length && !R.length) { toast('لا قضايا لجلسة ' + rlFmt(day)); return; }
-    h = '<h2>مراجعة جلسة ' + rlDay(day) + ' ' + rlFmt(day) + circ + '</h2><table><thead><tr><th>م</th><th>رقم القضية</th><th>الرقم الآلي</th><th>الإعلان</th><th>آخر قرار</th><th>نُفّذ</th><th>المبادئ المحفوظة</th><th class="dec">القرار</th></tr></thead><tbody>';
+    h = (L.length ? '<table><thead><tr><th>م</th><th>رقم القضية</th><th>الرقم الآلي</th><th>الإعلان</th><th>آخر قرار</th><th>نُفّذ</th><th>المبادئ المحفوظة</th><th class="dec">القرار</th></tr></thead><tbody>' : '');
     L.forEach((c, i) => { const prs = (c.pids || []).map(rlPrin).filter(Boolean); const ok = rlAnnOk(c);
-      h += '<tr' + (rlSibs(c).length ? ' class="lk"' : '') + '><td>' + (c.ordFor === day && c.ord ? c.ord : i + 1) + '</td><td><b>' + cell(c.code) + '</b>' + (rlSibs(c).length ? '<div class="nt">مرتبط بـ ' + cell(rlLinkNote(c)) + '</div>' : '') + (c.subj ? '<div class="nt">' + cell(c.subj) + '</div>' : '') + '</td><td>' + cell(c.auto) + '</td><td class="' + (ok === false ? 'no' : '') + '">' + rlAnnTxt(c.ann) + (ok === false ? ' ✗' : ok ? ' ✓' : '') + '</td><td>' + cell(rlLast(c)) + (rlAnnAdj(c) >= 2 ? '<div class="nt">أُجّلت للإعلان ' + rlAnnAdj(c) + ' مرات</div>' : '') + (c.note ? '<div class="nt">' + cell(c.note) + '</div>' : '') + '</td><td class="ck">' + (c.exec ? '✓' : '☐') + '</td><td>' + (prs.length ? '<ul>' + prs.map(p => '<li>' + cell(p.cite_std) + '</li>').join('') + '</ul>' : '') + '</td><td class="dec"></td></tr>'; });
-    h += '</tbody></table>';
-    if (R.length) { h += '<h3>للنطق بالحكم في الجلسة نفسها</h3><table><thead><tr><th>م</th><th>رقم القضية</th><th>الرقم الآلي</th><th>كاتب الحكم</th><th>المسودة</th><th class="dec">التوقيع</th></tr></thead><tbody>'; R.forEach((c, i) => { h += '<tr' + (rlSibs(c).length ? ' class="lk"' : '') + '><td>' + (i + 1) + '</td><td><b>' + cell(c.code) + '</b>' + (rlSibs(c).length ? '<div class="nt">مرتبط بـ ' + cell(rlLinkNote(c)) + '</div>' : '') + '</td><td>' + cell(c.auto) + '</td><td>' + (RL_W[c.writer] || '—') + '</td><td class="ck">☐</td><td class="dec"></td></tr>'; }); h += '</tbody></table>'; }
-    h += '<p class="ft">للنظر: ' + L.length + (R.length ? ' · للنطق: ' + R.length : '') + ' · الإعلان غير تام: ' + L.filter(c => rlAnnOk(c) === false).length + ' · مسودة عمل داخلية.</p>';
+      h += '<tr' + (rlSibs(c).length ? ' class="lk"' : '') + '><td class="num">' + (c.ordFor === day && c.ord ? c.ord : i + 1) + '</td><td class="code"><b>' + cell(c.code) + '</b>' + (rlSibs(c).length ? '<div class="nt">مرتبط بـ ' + cell(rlLinkNote(c)) + '</div>' : '') + (c.subj ? '<div class="nt">' + cell(c.subj) + '</div>' : '') + '</td><td>' + cell(c.auto) + '</td><td class="' + (ok === false ? 'no' : '') + '">' + rlAnnTxt(c.ann) + (ok === false ? ' ✗' : ok ? ' ✓' : '') + '</td><td>' + cell(rlLast(c)) + (rlAnnAdj(c) >= 2 ? '<div class="nt">أُجّلت للإعلان ' + rlAnnAdj(c) + ' مرات</div>' : '') + (c.note ? '<div class="nt">' + cell(c.note) + '</div>' : '') + '</td><td class="ck">' + (c.exec ? '✓' : '☐') + '</td><td>' + (prs.length ? '<ul>' + prs.map(p => '<li>' + cell(p.cite_std) + '</li>').join('') + '</ul>' : '') + '</td><td class="dec"></td></tr>'; });
+    if (L.length) h += '</tbody></table>';
+    if (R.length) { h += '<h3>للنطق بالحكم في هذه الجلسة</h3><table><thead><tr><th>م</th><th>رقم القضية</th><th>الرقم الآلي</th><th>كاتب الحكم</th><th>المسودة</th><th class="dec">التوقيع</th></tr></thead><tbody>'; R.forEach((c, i) => { h += '<tr' + (rlSibs(c).length ? ' class="lk"' : '') + '><td class="num">' + (i + 1) + '</td><td class="code"><b>' + cell(c.code) + '</b>' + (rlSibs(c).length ? '<div class="nt">مرتبط بـ ' + cell(rlLinkNote(c)) + '</div>' : '') + '</td><td>' + cell(c.auto) + '</td><td>' + (RL_W[c.writer] || '—') + '</td><td class="ck">☐</td><td class="dec"></td></tr>'; }); h += '</tbody></table>'; }
+    const na = L.filter(c => rlAnnOk(c) === false).length;
+    h = rlDoc('رول الجلسة', rlChip('الجلسة', rlDay(day) + ' ' + rlDAI(day)) + rlChip('للنظر', rlAI(L.length), 'g') + (R.length ? rlChip('للنطق بالحكم', rlAI(R.length), 'j') : '') + (na ? rlChip('الإعلان غير تام', rlAI(na), 'g') : ''), h, 'الشريط الذهبي على يمين الصف: قضايا مرتبطة');
   }
   $('#rl_sheetout').innerHTML = h;
   rlOut(h);
@@ -3784,7 +3801,7 @@ function syReplace(d) {
   const rc = d.cases || {}; CASES = rc.items || {}; CS_DEL = rc.del || {}; Object.keys(CASES).forEach(id => { delete CS_DEL[id]; }); casesSave();
   BMT = {}; (d.bm || []).forEach(id => { BMT[id] = [1, Date.now()]; }); bookmarks.clear(); (d.bm || []).forEach(id => bookmarks.add(isNaN(+id) ? id : +id));
   RL_SH = null; rlCHAll(); rlSave(); RL_SH = rlSetHash(); saveBm();
-  try { if ($('#rl_circuit')) $('#rl_circuit').value = RL.circuit; } catch (e) {}
+  try { if ($('#rl_circ')) $('#rl_circ').value = RL.circuit; } catch (e) {}
   if (rlInit) rlRender(); if (typeof rlHomeAlert === 'function') rlHomeAlert(); try { run(); } catch (e) {}
   try { if (document.getElementById('casewrap') && document.getElementById('casewrap').classList.contains('show')) renderCases(); } catch (e) {}
   syMark('pulled'); syMark('rep'); SY.merged = true;
@@ -3973,32 +3990,61 @@ function rlDistData(resAt) {
   return { resAt, n: L.length, by, judg };
 }
 function rlDistText(D) {
-  let t = 'توزيع القضايا المحجوزة للحكم' + (RL.circuit ? ' — ' + RL.circuit : '') + '\nجلسة ' + rlDAI(D.resAt) + (D.judg.length ? ' — النطق ' + D.judg.map(d => rlDAI(d)).join('، ') : '') + '\n';
-  Object.keys(RL_W).forEach(k => { if (D.by[k].length) t += '\n(' + RL_LT[k] + ')  ' + D.by[k].map(rlAI).join('\n        '); });
-  if (D.by[''].length) t += '\n\nغير موزّعة: ' + D.by[''].map(rlAI).join('، ');
-  return t;
+  const L = rlCircLines(), ks = rlDistKeys(D);
+  let t = (L.length ? '*' + L.join(' — ') + '*\n' : '') + '*توزيع القضايا المحجوزة للحكم*\n\nجلسة الحجز: ' + rlDay(D.resAt) + ' ' + rlDAI(D.resAt) + '\nجلسة النطق: ' + rlJudgTxt(D) + '\n';
+  ks.forEach(k => { t += '\n*(' + RL_LT[k] + ') ' + rlRole(k) + '* — ' + rlAI(D.by[k].length) + '\n' + (D.by[k].length ? D.by[k].map(e => '   ' + rlAI(e)).join('\n') : '   —') + '\n'; });
+  if (D.by[''].length) t += '\nغير موزّعة: ' + D.by[''].map(rlAI).join('، ') + '\n';
+  return t.trim();
 }
+function rlRR(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
 async function rlDistCanvas(D) {
   const ff = '"IBM Plex Sans Arabic","Noto Naskh Arabic",Tahoma,Arial,sans-serif';
-  try { await document.fonts.load('600 26px "IBM Plex Sans Arabic"'); await document.fonts.load('700 30px "IBM Plex Sans Arabic"'); } catch (e) {}
-  const keys = Object.keys(RL_W), cols = [{ h: 'جلسة', w: 230 }].concat(keys.map(k => ({ h: RL_LT[k], w: 250, k })));
-  const W = cols.reduce((s, c) => s + c.w, 0) + 60, lineH = 46, pad = 22;
-  const nLines = Math.max(1, ...keys.map(k => D.by[k].length));
-  const top = 150, headH = 70, rowH = nLines * lineH + pad * 2, H = top + headH + rowH + (D.by[''].length ? 90 : 40);
+  try { await Promise.all(['400 20px', '600 26px', '700 30px'].map(f => document.fonts.load(f + ' "IBM Plex Sans Arabic"'))); } catch (e) {}
+  let seal = null; try { const im = new Image(); im.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(RL_SEAL.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" ')); await im.decode(); seal = im; } catch (e) {}
+  const NAV = '#1C2E4A', GOLD = '#B8893A', GL = '#E9C77B', ks = rlDistKeys(D), n = ks.length;
+  const W = 1200, M = 48, gap = 18, lineH = 54, band = 150;
+  const rows = Math.max(1, ...ks.map(k => D.by[k].length));
+  const colY = 400, headH = 112, bodyH = rows * lineH + 26, un = D.by[''].length ? 56 : 0;
+  const H = colY + headH + bodyH + un + 110;
   const cv = document.createElement('canvas'); cv.width = W * 2; cv.height = H * 2; const g = cv.getContext('2d'); g.scale(2, 2);
-  g.fillStyle = '#fff'; g.fillRect(0, 0, W, H); g.fillStyle = '#111'; g.textAlign = 'center'; g.direction = 'rtl'; g.textBaseline = 'middle';
-  g.font = '700 30px ' + ff; g.fillText('توزيع القضايا المحجوزة للحكم' + (RL.circuit ? ' — ' + RL.circuit : ''), W / 2, 50);
-  g.font = '500 22px ' + ff; g.fillStyle = '#444'; g.fillText(D.judg.length ? 'جلسة النطق: ' + D.judg.map(d => rlDAI(d)).join('، ') : '', W / 2, 98);
-  let x = W - 30; g.strokeStyle = '#222'; g.lineWidth = 2;
-  cols.forEach(c => {
-    const x0 = x - c.w; g.fillStyle = '#eee'; g.fillRect(x0, top, c.w, headH); g.strokeRect(x0, top, c.w, headH); g.strokeRect(x0, top + headH, c.w, rowH);
-    g.fillStyle = '#111'; g.font = '700 30px ' + ff; g.fillText(c.h, x0 + c.w / 2, top + headH / 2);
-    g.font = '600 25px ' + ff;
-    if (!c.k) g.fillText(rlDAI(D.resAt), x0 + c.w / 2, top + headH + pad + lineH / 2);
-    else D.by[c.k].forEach((e, i) => g.fillText(rlAI(e), x0 + c.w / 2, top + headH + pad + lineH / 2 + i * lineH));
-    x = x0;
+  g.direction = 'rtl'; g.textBaseline = 'middle';
+  g.fillStyle = '#F7F5F0'; g.fillRect(0, 0, W, H);
+  const gr = g.createLinearGradient(0, 0, W, band); gr.addColorStop(0, '#223A5E'); gr.addColorStop(1, '#14233A'); g.fillStyle = gr; g.fillRect(0, 0, W, band);
+  g.fillStyle = GOLD; g.fillRect(0, band, W, 5);
+  const L = rlCircLines();
+  g.textAlign = 'right'; g.fillStyle = '#fff'; g.font = '700 36px ' + ff; g.fillText(L[0] || 'عمّالي', W - M, L[1] ? 58 : 75);
+  if (L[1]) { g.fillStyle = GL; g.font = '600 26px ' + ff; g.fillText(L[1], W - M, 104); }
+  if (seal) g.drawImage(seal, M, 22, 106, 106);
+  g.textAlign = 'center'; g.fillStyle = NAV; g.font = '700 38px ' + ff; g.fillText('توزيع القضايا المحجوزة للحكم', W / 2, 212);
+  // بطاقتا الجلستين
+  const bw = 440, bh = 104, by = 256, bx1 = W / 2 + 30, bx2 = W / 2 - 30 - bw;
+  rlRR(g, bx1, by, bw, bh, 18); g.fillStyle = '#fff'; g.fill(); g.lineWidth = 2.5; g.strokeStyle = NAV; g.stroke();
+  rlRR(g, bx2, by, bw, bh, 18); g.fillStyle = '#FBF1DC'; g.fill(); g.strokeStyle = GOLD; g.stroke();
+  g.fillStyle = '#5A6573'; g.font = '600 21px ' + ff; g.fillText('جلسة الحجز', bx1 + bw / 2, by + 30);
+  g.fillStyle = NAV; g.font = '700 30px ' + ff; g.fillText(rlDay(D.resAt) + '  ' + rlDAI(D.resAt), bx1 + bw / 2, by + 70);
+  g.fillStyle = '#8A6A2A'; g.font = '600 21px ' + ff; g.fillText('جلسة النطق بالحكم', bx2 + bw / 2, by + 30);
+  g.fillStyle = '#5B4210'; g.font = '700 30px ' + ff; const jt = D.judg.length ? D.judg.map(d => (D.judg.length === 1 ? rlDay(d) + '  ' : '') + rlDAI(d)).join('، ') : '—'; g.fillText(jt, bx2 + bw / 2, by + 70, bw - 24);
+  g.fillStyle = GOLD; g.font = '700 34px ' + ff; g.fillText('←', W / 2, by + bh / 2);
+  // أعمدة الأعضاء
+  const cw = (W - 2 * M - gap * (n - 1)) / n;
+  ks.forEach((k, i) => {
+    const x = W - M - (i + 1) * cw - i * gap, cx = x + cw / 2;
+    rlRR(g, x, colY, cw, headH + bodyH, 18); g.fillStyle = '#fff'; g.fill(); g.lineWidth = 2; g.strokeStyle = NAV; g.stroke();
+    g.save(); rlRR(g, x, colY, cw, headH + bodyH, 18); g.clip(); g.fillStyle = NAV; g.fillRect(x, colY, cw, headH); g.restore();
+    g.beginPath(); g.arc(cx, colY + 38, 25, 0, Math.PI * 2); g.fillStyle = GOLD; g.fill();
+    g.fillStyle = '#fff'; g.font = '700 28px ' + ff; g.fillText(RL_LT[k], cx, colY + 39);
+    g.font = '600 21px ' + ff; g.fillText(rlRole(k) + '  ·  ' + rlAI(D.by[k].length), cx, colY + 88, cw - 16);
+    const E = D.by[k].length ? D.by[k] : ['—'];
+    E.forEach((e, r) => { const y = colY + headH + 13 + lineH * r + lineH / 2;
+      if (r) { g.strokeStyle = '#E1E5EA'; g.lineWidth = 1; g.beginPath(); g.moveTo(x + 22, y - lineH / 2); g.lineTo(x + cw - 22, y - lineH / 2); g.stroke(); }
+      g.fillStyle = D.by[k].length ? '#111' : '#9AA3AE'; g.font = (D.by[k].length ? '700 29px ' : '400 26px ') + ff; g.fillText(rlAI(e), cx, y, cw - 20); });
   });
-  if (D.by[''].length) { g.fillStyle = '#a33'; g.font = '600 22px ' + ff; g.fillText('غير موزّعة: ' + D.by[''].map(rlAI).join('، '), W / 2, top + headH + rowH + 45); }
+  let fy = colY + headH + bodyH;
+  if (un) { g.fillStyle = '#8B1E1E'; g.font = '600 22px ' + ff; g.fillText('غير موزّعة: ' + D.by[''].map(rlAI).join('، '), W / 2, fy + 34, W - 2 * M); fy += un; }
+  g.strokeStyle = NAV; g.lineWidth = 1.5; g.beginPath(); g.moveTo(M, fy + 44); g.lineTo(W - M, fy + 44); g.stroke();
+  const tot = ks.reduce((s, k) => s + D.by[k].length, 0) + D.by[''].length;
+  g.textAlign = 'right'; g.fillStyle = NAV; g.font = '700 22px ' + ff; g.fillText('المجموع: ' + rlAI(tot) + (tot === 1 ? ' حكم' : tot === 2 ? ' حكمان' : tot <= 10 ? ' أحكام' : ' حكمًا'), W - M, fy + 76);
+  g.textAlign = 'left'; g.fillStyle = '#6B7480'; g.font = '400 18px ' + ff; g.fillText('عمّالي · مسودة عمل داخلية', M, fy + 76);
   return cv;
 }
 async function rlDistOpen() {
@@ -4006,9 +4052,9 @@ async function rlDistOpen() {
   const ds = [...new Set(RL.cards.map(c => c.resAt).filter(Boolean))].sort().reverse();
   if (!ds.length) { toast('لا قضايا محجوزة مسجّلة بجلسة حجز'); return; }
   box.classList.remove('hidden');
-  box.innerHTML = '<h3>إرسال التوزيع</h3><div class="rw"><span>جلسة الحجز</span><select class="sel" id="rl_dsel">' + ds.map(d => '<option value="' + d + '">' + rlDay(d) + ' ' + rlFmt(d) + '</option>').join('') + '</select></div><div class="dprev"><img id="rl_dimg" alt="صورة التوزيع"></div><textarea id="rl_dtxt" rows="7"></textarea><div class="row"><button type="button" class="btn primary" id="rl_dshare">مشاركة (صورة + نص)</button><button type="button" class="btn" id="rl_dwa">واتساب — النص</button><button type="button" class="btn" id="rl_dcopy">نسخ النص</button><button type="button" class="btn" id="rl_dpng">تنزيل الصورة</button><button type="button" class="btn" id="rl_dx">إغلاق</button></div><p class="k">«مشاركة» تفتح نافذة الجهاز فتختار الواتساب ثم القروب. على الحاسوب: نزّل الصورة وافتح «واتساب — النص».</p>';
+  box.innerHTML = '<h3>إرسال التوزيع</h3><div class="rw"><span>جلسة الحجز</span><select class="sel" id="rl_dsel">' + ds.map(d => '<option value="' + d + '">' + rlDay(d) + ' ' + rlFmt(d) + '</option>').join('') + '</select></div><p class="k warn hidden" id="rl_dwarn">تنبيه: جلسة النطق مطابقة لجلسة الحجز في بعض القضايا — راجع «موعد النطق» في بطاقاتها.</p><div class="dprev"><img id="rl_dimg" alt="صورة التوزيع"></div><textarea id="rl_dtxt" rows="7"></textarea><div class="row"><button type="button" class="btn primary" id="rl_dshare">مشاركة (صورة + نص)</button><button type="button" class="btn" id="rl_dwa">واتساب — النص</button><button type="button" class="btn" id="rl_dcopy">نسخ النص</button><button type="button" class="btn" id="rl_dpng">تنزيل الصورة</button><button type="button" class="btn" id="rl_dx">إغلاق</button></div><p class="k">«مشاركة» تفتح نافذة الجهاز فتختار الواتساب ثم القروب. على الحاسوب: نزّل الصورة وافتح «واتساب — النص».</p>';
   let cv = null;
-  const draw = async () => { const D = rlDistData($('#rl_dsel').value); $('#rl_dtxt').value = rlDistText(D); cv = await rlDistCanvas(D); $('#rl_dimg').src = cv.toDataURL('image/png'); };
+  const draw = async () => { const D = rlDistData($('#rl_dsel').value); $('#rl_dtxt').value = rlDistText(D); cv = await rlDistCanvas(D); $('#rl_dimg').src = cv.toDataURL('image/png'); const wn = $('#rl_dwarn'); if (wn) wn.classList.toggle('hidden', !D.judg.includes(D.resAt)); };
   $('#rl_dsel').onchange = draw; await draw();
   const fname = () => 'توزيع جلسة ' + $('#rl_dsel').value + '.png';
   const blobP = () => new Promise(r => cv.toBlob(r, 'image/png'));
