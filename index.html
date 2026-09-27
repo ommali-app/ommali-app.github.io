@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260927181737">
+<meta name="amali-build" content="20260927184047">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3719,7 +3719,7 @@ function initDl() {
 
 // ---- V50: المزامنة المشفّرة بين الأجهزة (ملف واحد في OneDrive أو أي مجلد سحابي)
 const SY = { key: null, salt: null, handle: null, pass: null, ask: null, merged: false };
-const SY_ITER = 310000, SY_NAME = 'عمالي-بيانات.amali';
+const SY_ITER = 310000, SY_NAME = 'amali-data.amali';
 const syB64 = u8 => { let s = ''; for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); };
 const syUnb64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
 function syIdb() { return new Promise((res, rej) => { const r = indexedDB.open('amali_sync', 1); r.onupgradeneeded = () => r.result.createObjectStore('kv'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); }); }
@@ -3791,7 +3791,7 @@ function syReplace(d) {
 }
 async function syAfterReplace() {
   if (!(syCanFS() && window.showDirectoryPicker)) return; const dir = await syDirOk(); if (!dir) return;
-  try { const L = await syDirFiles(dir), M = []; for (const x of L) { const o = await syOpen(await x.f.text()); if (o.d) M.push({ name: x.name, mod: x.f.lastModified }); } SY.dirMerged = M; await syPush(); } catch (e) {}
+  try { const L = await syDirFiles(dir), M = []; for (const x of L) { const t = await x.f.text(), o = await syOpen(t); if (o.d) M.push({ name: x.name, iv: syIv(t) }); } SY.dirMerged = M; await syPush(); } catch (e) {}
 }
 async function syPickReplace() {
   SY.mode = 'replace';
@@ -3804,27 +3804,28 @@ async function syOpen(txt) {
   let key = null; if (SY.key && SY.salt && syB64(SY.salt) === j.kdf.salt) key = SY.key; else if (SY.pass) { try { key = await syDerive(SY.pass, syUnb64(j.kdf.salt)); } catch (e) {} }
   if (!key) return { err: 'key' }; try { return { d: await syDecrypt(j, key) }; } catch (e) { return { err: 'key' }; }
 }
+function syIv(t) { try { return JSON.parse(t).iv || ''; } catch (e) { return ''; } }
 async function syDirFiles(dir) { const L = []; for await (const [name, h] of dir.entries()) { if (h.kind === 'file' && /\.amali$/i.test(name)) { try { const f = await h.getFile(); L.push({ name, h, f }); } catch (e) {} } } return L; }
 async function syPullDir(dir) {
   const L = await syDirFiles(dir); if (!L.length) { syToast('لا ملفات مزامنة في المجلد «' + dir.name + '» بعد — اضغط «حفظ فقط» لإنشائه'); return true; }
   const ok = [], bad = []; let add = 0, upd = 0, del = 0, newest = null;
-  for (const x of L) { const t = await x.f.text(), o = await syOpen(t); if (o.d) ok.push({ x, d: o.d }); else bad.push({ x, t, err: o.err }); }
+  for (const x of L) { const t = await x.f.text(), o = await syOpen(t); if (o.d) ok.push({ x, d: o.d, iv: syIv(t) }); else bad.push({ x, t, err: o.err }); }
   if (!ok.length) { const k = bad.find(y => y.err === 'key'); if (k) { SY.fname = k.x.name; await syApply(k.t); } else syToast('لا ملف صالح في المجلد'); return true; }
   const rp = syMeta().rep || 0, old = rp ? ok.filter(o => (o.d.saved || 0) < rp) : [];
   if (old.length) { old.forEach(o => ok.splice(ok.indexOf(o), 1)); }
-  if (!ok.length) { SY.dirMerged = old.map(o => ({ name: o.x.name, mod: o.x.f.lastModified })); syToast('كل النسخ في المجلد أقدم من آخر استبدال — لا شيء للدمج؛ «حفظ فقط» يحذفها'); syRender(); return true; }
+  if (!ok.length) { SY.dirMerged = old.map(o => ({ name: o.x.name, iv: o.iv })); syToast('كل النسخ في المجلد أقدم من آخر استبدال — لا شيء للدمج؛ «حفظ فقط» يحذفها'); syRender(); return true; }
   ok.sort((a, b) => (a.d.saved || 0) - (b.d.saved || 0));
   ok.forEach(o => { const r = syMerge(o.d); add += r.add; upd += r.upd; del += r.del; newest = o; });
-  SY.dirMerged = ok.concat(old).map(o => ({ name: o.x.name, mod: o.x.f.lastModified }));
+  SY.dirMerged = ok.concat(old).map(o => ({ name: o.x.name, iv: o.iv }));
   SY.last = { name: newest.x.name, saved: newest.d.saved || 0, n: ((newest.d.roll || {}).cards || []).length };
   syMark('pulled'); SY.merged = true; const tot = add + upd + del;
   syToast((ok.length > 1 ? 'دُمجت ' + ok.length + ' نسخ من المجلد — ' : '') + (tot ? add + ' جديدة، ' + upd + ' محدَّثة' + (del ? '، ' + del + ' محذوفة' : '') : 'لا جديد — أحدث نسخة محفوظة ' + syWhen(newest.d.saved)) + (old.length ? ' · تُجوهلت ' + old.length + ' نسخة أقدم من الاستبدال' : '') + (bad.length ? ' · تُرك ' + bad.length + ' ملف لم يُفتح' : ''));
   syRender(); return true;
 }
 async function syCleanDir(dir) {
-  const M = SY.dirMerged || []; let n = 0;
-  for (const m of M) { if (m.name === SY_NAME) continue; try { const h = await dir.getFileHandle(m.name); const f = await h.getFile(); if (f.lastModified === m.mod) { await dir.removeEntry(m.name); n++; } } catch (e) {} }
-  SY.dirMerged = []; return n;
+  const M = SY.dirMerged || []; let n = 0, bad = 0;
+  for (const m of M) { if (m.name === SY_NAME) continue; try { const h = await dir.getFileHandle(m.name); const t = await (await h.getFile()).text(); if (m.iv && syIv(t) === m.iv) { try { await dir.removeEntry(m.name); n++; } catch (e) { bad++; } } } catch (e) {} }
+  SY.dirMerged = []; SY.cleanBad = bad; return n;
 }
 async function syPickDir() {
   try { const d = await window.showDirectoryPicker({ id: 'amali-sync', mode: 'readwrite' }); if (!(await syPerm(d))) { toast('لم يُمنح الإذن بالمجلد'); return; } SY.dir = d; await sySet('dir', d); syRender(); toast('رُبط المجلد «' + d.name + '» — اضغط «مزامنة الآن»'); } catch (e) {}
@@ -3841,7 +3842,7 @@ async function syPull() {
 async function syPush() {
   if (!SY.key) { toast('اعتمد رمز المزامنة أولًا'); return; }
   const txt = await syEncrypt(syPayload());
-  if (syCanFS() && window.showDirectoryPicker) { const d = await syDirOk(); if (d) { try { const h = await d.getFileHandle(SY_NAME, { create: true }); const w = await h.createWritable(); await w.write(txt); await w.close(); const n = await syCleanDir(d); syMark('pushed'); SY.merged = false; syRender(); syToast('حُفظ «' + SY_NAME + '» في المجلد' + (n ? ' وحُذفت ' + n + ' نسخة مكررة بعد دمجها' : '')); return; } catch (e) { toast('تعذّر الحفظ في المجلد'); return; } } }
+  if (syCanFS() && window.showDirectoryPicker) { const d = await syDirOk(); if (d) { try { const h = await d.getFileHandle(SY_NAME, { create: true }); const w = await h.createWritable(); await w.write(txt); await w.close(); const n = await syCleanDir(d); syMark('pushed'); SY.merged = false; syRender(); syToast('حُفظ «' + SY_NAME + '» في المجلد' + (n ? ' وحُذفت ' + n + ' نسخة مكررة بعد دمجها' : '') + (SY.cleanBad ? ' · تعذّر حذف ' + SY.cleanBad + ' نسخة — احذفها يدويًا (كلها مدموجة)' : '')); return; } catch (e) { toast('تعذّر الحفظ في المجلد'); return; } } }
   if (syCanFS()) {
     try { let h = SY.handle || await syGet('handle'); if (!h || !(await syPerm(h))) { h = await window.showSaveFilePicker({ suggestedName: SY_NAME, types: [{ description: 'بيانات عمّالي المشفّرة', accept: { 'application/octet-stream': ['.amali'] } }] }); }
       const w = await h.createWritable(); await w.write(txt); await w.close(); SY.handle = h; await sySet('handle', h); syMark('pushed'); SY.merged = false; syRender(); toast('حُفظت النسخة المشفّرة في «' + h.name + '»'); return; } catch (e) { if (e && e.name === 'AbortError') return; }
