@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260927184047">
+<meta name="amali-build" content="20260927185124">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1955,7 +1955,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V84</p>
+      <p class="dver">الإصدار V88 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -3889,6 +3889,7 @@ function syRender() {
   const dj = $('#sy_dir'); if (dj) dj.onclick = syPickDir; const ud = $('#sy_undir'); if (ud) ud.onclick = syPickDir;
   $('#sy_forget').onclick = async () => { SY.key = null; SY.salt = null; SY.pass = null; await sySet('key'); await sySet('salt'); syRender(); syDot(); toast('نُسي الرمز على هذا الجهاز؛ البيانات باقية'); };
 }
+{ const m = document.querySelector('meta[name=amali-build]'), b = m && m.content; if (b && /^\d{14}$/.test(b) && $('#dbuild')) $('#dbuild').textContent = '· بناء ' + +b.slice(6, 8) + '/' + +b.slice(4, 6) + ' — ' + b.slice(8, 10) + ':' + b.slice(10, 12); }
 $('#sy_file').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (f) { SY.fname = f.name; await syApply(await f.text()); } else SY.mode = ''; };
 (async () => { SY.key = await syGet('key') || null; SY.salt = await syGet('salt') || null; SY.handle = await syGet('handle') || null; SY.dir = await syGet('dir') || null; if (!SY.key) SY.salt = null; syRender(); syDot(); })();
 
