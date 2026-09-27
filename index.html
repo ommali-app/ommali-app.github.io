@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260927171603">
+<meta name="amali-build" content="20260927173927">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2946,8 +2946,11 @@ function rlSortList(list) {
 }
 (function rlLoad() { try { const s = localStorage.getItem(RL_KEY); if (s) { const j = JSON.parse(s); if (j && Array.isArray(j.cards)) RL = { v: 2, circuit: j.circuit || '', cards: j.cards, cal: j.cal || { off: [], on: [] }, members: j.members || {}, del: j.del || {}, st: j.st || 0, hol: j.hol || [], fm: j.fm || [] }; } localStorage.setItem(RL_KEY + '_t', '1'); localStorage.removeItem(RL_KEY + '_t'); } catch (e) { RL_MEM = true; } })();
 { let mg = 0; RL.cards.forEach(c => { if (RL_RES.includes(c.stage) && !c.resAt && c.src === 'kashf' && !(c.hist || []).length && c.next && c.stage !== 'مد أجل النطق') { c.resAt = c.next; c.next = rlNextSessions(c.next, 2, RL.cal, false)[1] || c.next; mg++; } }); if (mg) rlSave(); }
+rlCHAll();
 var RL_SH = null; function rlSetHash() { return JSON.stringify([RL.circuit || '', RL.members || {}, RL.cal || {}, RL.hol || [], RL.fm || []]); }
-function rlSave() { const h = rlSetHash(); if (RL_SH !== null && h !== RL_SH) RL.st = Date.now(); RL_SH = h; try { localStorage.setItem('tm_chg', String(Date.now())); } catch (e) {} try { syDot(); } catch (e) {} if (RL_MEM) return; try { localStorage.setItem(RL_KEY, JSON.stringify(RL)); } catch (e) { RL_MEM = true; rlStoreNote(); toast('تعذّر الحفظ على الجهاز — صدّر البطاقات'); } }
+var RL_CH = {}; function rlCHash(c) { const o = Object.assign({}, c); delete o.updated; return JSON.stringify(o); }
+function rlCHAll() { RL_CH = {}; RL.cards.forEach(c => { RL_CH[c.id] = rlCHash(c); }); }
+function rlSave() { try { const now = Date.now(), nx = {}; RL.cards.forEach(c => { const hh = rlCHash(c); if (RL_CH[c.id] !== undefined && RL_CH[c.id] !== hh && (c.updated || 0) < now - 50) c.updated = now; nx[c.id] = hh; }); RL_CH = nx; } catch (e) {} const h = rlSetHash(); if (RL_SH !== null && h !== RL_SH) RL.st = Date.now(); RL_SH = h; try { localStorage.setItem('tm_chg', String(Date.now())); } catch (e) {} try { syDot(); } catch (e) {} if (RL_MEM) return; try { localStorage.setItem(RL_KEY, JSON.stringify(RL)); } catch (e) { RL_MEM = true; rlStoreNote(); toast('تعذّر الحفظ على الجهاز — صدّر البطاقات'); } }
 RL_SH = rlSetHash();
 function rlToday() { const d = new Date(); return rlIso(d.getFullYear(), d.getMonth() + 1, d.getDate()); }
 function rlDays(iso) { if (!iso) return null; const [y, m, d] = iso.split('-').map(Number); const [a, b, c] = rlToday().split('-').map(Number); return Math.round((Date.UTC(y, m - 1, d) - Date.UTC(a, b - 1, c)) / 864e5); }
@@ -3730,14 +3733,18 @@ function syDot() { const d = $('#rl_sydot'); if (d) d.classList.toggle('hidden',
 const syCanFS = () => !!(window.showSaveFilePicker && window.showOpenFilePicker) && !IS_IOS;
 async function syPerm(h) { try { if ((await h.queryPermission({ mode: 'readwrite' })) === 'granted') return true; return (await h.requestPermission({ mode: 'readwrite' })) === 'granted'; } catch (e) { return false; } }
 function syPayload() { return { app: 'amali-data', v: 1, saved: Date.now(), roll: RL, cases: { items: CASES, del: CS_DEL }, bm: [...bookmarks], bmt: BMT }; }
-window.syPayload = syPayload; window.csPut = csPut; window.csDel = csDel;
+window.syPayload = syPayload; window.csPut = csPut; window.csDel = csDel; window.syMerge = syMerge; window.syReplace = d => syReplace(d); window.syEnc = o => syEncrypt(o);
 async function syEncrypt(obj) { const iv = crypto.getRandomValues(new Uint8Array(12)); const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, SY.key, new TextEncoder().encode(JSON.stringify(obj)))); return JSON.stringify({ app: 'amali-sync', v: 1, kdf: { name: 'PBKDF2', hash: 'SHA-256', iter: SY_ITER, salt: syB64(SY.salt) }, cipher: 'AES-GCM-256', iv: syB64(iv), ct: syB64(ct) }); }
 async function syDecrypt(j, key) { const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: syUnb64(j.iv) }, key, syUnb64(j.ct)); return JSON.parse(new TextDecoder().decode(pt)); }
 function syMerge(d) {
   const r = d.roll || {}; let add = 0, upd = 0;
   RL.del = RL.del || {}; const rd = r.del || {};
   Object.keys(rd).forEach(id => { if (!RL.del[id] || rd[id] > RL.del[id]) RL.del[id] = rd[id]; });
-  (r.cards || []).forEach(c => { if (!c || !c.id || !c.code) return; const cur = RL.cards.find(x => x.id === c.id); if (!cur) { RL.cards.push(c); add++; } else if ((c.updated || 0) > (cur.updated || 0)) { Object.keys(cur).forEach(k => delete cur[k]); Object.assign(cur, c); upd++; } });
+  (r.cards || []).forEach(c => { if (!c || !c.id || !c.code) return; const cur = RL.cards.find(x => x.id === c.id); if (!cur) { RL.cards.push(c); add++; return; }
+    const newer = (c.updated || 0) > (cur.updated || 0), keep = newer ? Object.assign({}, cur.sheets || {}) : c.sheets || {};
+    if (newer) { Object.keys(cur).forEach(k => delete cur[k]); Object.assign(cur, c); upd++; }
+    let sh = 0; Object.keys(keep).forEach(k => { if (!(cur.sheets && cur.sheets[k]) && keep[k]) { cur.sheets = cur.sheets || {}; cur.sheets[k] = keep[k]; sh++; } });
+    if (sh && !newer) { cur.updated = Math.max(cur.updated || 0, c.updated || 0) + 1; upd++; } });
   const n0 = RL.cards.length; RL.cards = RL.cards.filter(c => !(RL.del[c.id] && RL.del[c.id] >= (c.updated || 0))); let del = n0 - RL.cards.length;
   const best = {}; RL.cards.forEach(c => { const b = best[c.code]; if (!b || (c.updated || 0) > (b.updated || 0)) best[c.code] = c; });
   RL.cards = RL.cards.filter(c => { if (best[c.code] === c) return true; RL.del[c.id] = Math.max(Date.now(), c.updated || 0); if (add) add--; return false; });
@@ -3746,7 +3753,7 @@ function syMerge(d) {
   Object.keys(T).forEach(id => { if (!BMT[id] || T[id][1] > BMT[id][1]) BMT[id] = T[id]; });
   const bm0 = bookmarks.size; bookmarks.clear(); Object.keys(BMT).forEach(id => { if (BMT[id][0]) bookmarks.add(isNaN(+id) ? id : +id); });
   { const rc = d.cases || {}, rci = rc.items || {}, rcd = rc.del || {}; Object.keys(rcd).forEach(id => { if (!CS_DEL[id] || rcd[id] > CS_DEL[id]) CS_DEL[id] = rcd[id]; }); Object.keys(rci).forEach(id => { const c = rci[id]; if (!c) return; if (!c.id) c.id = id; const cur = CASES[id]; if (!cur || (c.updated || 0) > (cur.updated || 0)) CASES[id] = c; }); Object.keys(CASES).forEach(id => { if (CS_DEL[id] && CS_DEL[id] >= (CASES[id].updated || 0)) delete CASES[id]; }); casesSave(); try { if (document.getElementById('casewrap') && document.getElementById('casewrap').classList.contains('show')) renderCases(); } catch (e) {} }
-  RL_SH = rlSetHash(); rlSave(); saveBm(); if (rlInit) rlRender(); if (typeof rlHomeAlert === 'function') rlHomeAlert(); try { run(); } catch (e) {}
+  RL_SH = rlSetHash(); rlCHAll(); rlSave(); saveBm(); if (rlInit) rlRender(); if (typeof rlHomeAlert === 'function') rlHomeAlert(); try { run(); } catch (e) {}
   return { add, upd, del, bm: bookmarks.size - bm0 };
 }
 async function syApply(txt, handle) {
@@ -3760,8 +3767,31 @@ async function syApply(txt, handle) {
   if (!d) { SY.ask = { txt, handle }; syRender(); toast(key ? 'الرمز لا يفتح هذا الملف — اكتب رمزه' : 'اكتب رمز المزامنة لفتح الملف'); return; }
   if (key !== SY.key) { SY.key = key; SY.salt = salt; await sySet('key', key); await sySet('salt', salt); }
   if (handle) { SY.handle = handle; await sySet('handle', handle); }
-  SY.ask = null; const r = syMerge(d); syMark('pulled'); SY.merged = true;
-  toast('دُمج: ' + r.add + ' جديدة، ' + r.upd + ' محدَّثة' + (r.del ? '، ' + r.del + ' محذوفة' : '')); syRender();
+  SY.ask = null; const fname = (handle && handle.name) || SY.fname || ''; SY.fname = '';
+  SY.last = { name: fname, saved: d.saved || 0, n: ((d.roll || {}).cards || []).length };
+  if (SY.mode === 'replace') { SY.mode = ''; SY.rep = d; syRender(); return; }
+  const r = syMerge(d); syMark('pulled'); SY.merged = true;
+  const tot = r.add + r.upd + r.del;
+  syToast(tot ? 'دُمج: ' + r.add + ' جديدة، ' + r.upd + ' محدَّثة' + (r.del ? '، ' + r.del + ' محذوفة' : '') : 'لا جديد في الملف — محفوظ ' + syWhen(d.saved) + '. إن كان أقدم مما تتوقع فاختر الملف الأحدث أو «استبدال بيانات هذا الجهاز»');
+  syRender();
+}
+function syToast(m) { toast(m); const t = $('#toast'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 6000); }
+function syReplace(d) {
+  const r = d.roll || {};
+  RL = { v: 2, circuit: r.circuit || '', cards: (r.cards || []).filter(c => c && c.id && c.code), cal: r.cal || { off: [], on: [] }, members: r.members || {}, del: r.del || {}, st: Date.now(), hol: r.hol || [], fm: r.fm || [] };
+  const ids = new Set(RL.cards.map(c => c.id)); Object.keys(RL.del).forEach(id => { if (ids.has(id)) delete RL.del[id]; });
+  const rc = d.cases || {}; CASES = rc.items || {}; CS_DEL = rc.del || {}; Object.keys(CASES).forEach(id => { delete CS_DEL[id]; }); casesSave();
+  BMT = {}; (d.bm || []).forEach(id => { BMT[id] = [1, Date.now()]; }); bookmarks.clear(); (d.bm || []).forEach(id => bookmarks.add(isNaN(+id) ? id : +id));
+  RL_SH = null; rlCHAll(); rlSave(); RL_SH = rlSetHash(); saveBm();
+  try { if ($('#rl_circuit')) $('#rl_circuit').value = RL.circuit; } catch (e) {}
+  if (rlInit) rlRender(); if (typeof rlHomeAlert === 'function') rlHomeAlert(); try { run(); } catch (e) {}
+  try { if (document.getElementById('casewrap') && document.getElementById('casewrap').classList.contains('show')) renderCases(); } catch (e) {}
+  syMark('pulled'); SY.merged = true;
+}
+async function syPickReplace() {
+  SY.mode = 'replace';
+  if (syCanFS()) { try { const [h] = await window.showOpenFilePicker({ types: [{ description: 'بيانات عمّالي المشفّرة', accept: { 'application/octet-stream': ['.amali'] } }] }); const f = await h.getFile(); SY.fname = h.name; await syApply(await f.text()); return; } catch (e) { SY.mode = ''; if (e && e.name === 'AbortError') return; } SY.mode = 'replace'; }
+  $('#sy_file').click();
 }
 async function syPull() {
   if (syCanFS()) {
@@ -3801,18 +3831,24 @@ function syRender() {
       SY.pass = a; SY.salt = crypto.getRandomValues(new Uint8Array(16)); SY.key = await syDerive(a, SY.salt); await sySet('key', SY.key); await sySet('salt', SY.salt); try { localStorage.setItem('tm_chg', String(Date.now())); } catch (e) {} syRender(); syDot(); toast('اعتُمد الرمز على هذا الجهاز'); };
     return;
   }
+  if (SY.rep) {
+    const d = SY.rep, nf = ((d.roll || {}).cards || []).length, nc = Object.keys((d.cases || {}).items || {}).length;
+    b.innerHTML = '<div class="sybox syrep"><div class="systat"><b>استبدال بيانات هذا الجهاز بنسخة الملف</b><br>الملف: <b>' + esc(SY.last.name || '—') + '</b> · محفوظ: <b>' + syWhen(d.saved) + '</b><br>في الملف: <b>' + nf + '</b> قضية في الرول، و<b>' + nc + '</b> من ملفاتي.<br>على هذا الجهاز الآن: <b>' + RL.cards.length + '</b> قضية، و<b>' + Object.keys(CASES).length + '</b> من ملفاتي.</div><p class="synote">يُحذف ما على هذا الجهاز من الرول وملفاتي والمفضلة ويحلّ محله ما في الملف. إعدادات الجهاز (الخط، المظهر، الاختصارات، القفل) لا تتغير.</p><div class="sybtns"><button type="button" class="btn primary" id="sy_rgo">استبدال</button><button type="button" class="btn" id="sy_rx">إلغاء</button></div></div>';
+    $('#sy_rgo').onclick = () => { const bt = $('#sy_rgo'); if (!bt.dataset.sure) { bt.dataset.sure = '1'; bt.textContent = 'تأكيد الاستبدال؟ اضغط مرة أخرى'; return; } syReplace(d); SY.rep = null; syRender(); syToast('استُبدلت البيانات: ' + RL.cards.length + ' قضية من الملف'); };
+    $('#sy_rx').onclick = () => { SY.rep = null; syRender(); }; return;
+  }
   const dirty = syDirty(), fs = syCanFS();
-  b.innerHTML = '<div class="sybox"><div class="systat">' + (SY.handle ? 'الملف: <b>' + esc(SY.handle.name) + '</b><br>' : '') + 'آخر حفظ: <b>' + syWhen(m.pushed) + '</b> · آخر جلب: <b>' + syWhen(m.pulled) + '</b>' + (dirty ? '<br><span class="warn">تغييرات على هذا الجهاز لم تُحفظ في الملف بعد</span>' : '') + '</div>' +
+  b.innerHTML = '<div class="sybox"><div class="systat">' + (SY.handle ? 'الملف: <b>' + esc(SY.handle.name) + '</b><br>' : '') + 'آخر حفظ: <b>' + syWhen(m.pushed) + '</b> · آخر جلب: <b>' + syWhen(m.pulled) + '</b>' + (SY.last ? '<br>آخر ملف فُتح: <b>' + esc(SY.last.name || '—') + '</b> — محفوظ ' + syWhen(SY.last.saved) + ' (' + SY.last.n + ' قضية)' : '') + (dirty ? '<br><span class="warn">تغييرات على هذا الجهاز لم تُحفظ في الملف بعد</span>' : '') + '</div>' +
     '<div class="sybtns">' + (fs ? '<button type="button" class="btn primary" id="sy_now">مزامنة الآن</button>' : '') + '<button type="button" class="btn' + (fs ? '' : ' primary') + '" id="sy_pull">جلب ودمج</button><button type="button" class="btn' + (!fs && SY.merged ? ' primary' : '') + '" id="sy_push">' + (fs ? 'حفظ فقط' : 'حفظ النسخة المشفّرة') + '</button></div>' +
     '<p class="synote">' + (fs ? 'أول مرة: «حفظ فقط» واختر مجلد OneDrive على الحاسوب. بعدها «مزامنة الآن» يجلب التغييرات من الجهاز الآخر ويدمجها ثم يحفظ.' : 'على الآيفون والآيباد: «جلب ودمج» واختر الملف من OneDrive، ثم «حفظ النسخة المشفّرة» ← «حفظ في الملفات» ← OneDrive واستبدل الملف القديم.') + '</p>' +
-    '<div class="sybtns"><button type="button" class="sylink" id="sy_chg">تغيير الرمز</button>' + (SY.handle ? '<button type="button" class="sylink" id="sy_unh">اختيار ملف آخر</button>' : '') + '<button type="button" class="sylink" id="sy_forget">نسيان الرمز على هذا الجهاز</button></div></div>';
+    '<div class="sybtns"><button type="button" class="sylink" id="sy_rep">استبدال بيانات هذا الجهاز من ملف…</button><button type="button" class="sylink" id="sy_chg">تغيير الرمز</button>' + (SY.handle ? '<button type="button" class="sylink" id="sy_unh">اختيار ملف آخر</button>' : '') + '<button type="button" class="sylink" id="sy_forget">نسيان الرمز على هذا الجهاز</button></div></div>';
   if (fs) $('#sy_now').onclick = sySyncNow;
-  $('#sy_pull').onclick = syPull; $('#sy_push').onclick = syPush;
+  $('#sy_pull').onclick = syPull; $('#sy_push').onclick = syPush; $('#sy_rep').onclick = syPickReplace;
   $('#sy_chg').onclick = async () => { SY.key = null; SY.salt = null; SY.pass = null; await sySet('key'); await sySet('salt'); syRender(); toast('اكتب الرمز الجديد، ثم احفظ؛ وعلى الأجهزة الأخرى اكتب الرمز الجديد عند الجلب'); };
   const u = $('#sy_unh'); if (u) u.onclick = async () => { SY.handle = null; await sySet('handle'); syRender(); };
   $('#sy_forget').onclick = async () => { SY.key = null; SY.salt = null; SY.pass = null; await sySet('key'); await sySet('salt'); syRender(); syDot(); toast('نُسي الرمز على هذا الجهاز؛ البيانات باقية'); };
 }
-$('#sy_file').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (f) await syApply(await f.text()); };
+$('#sy_file').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (f) { SY.fname = f.name; await syApply(await f.text()); } else SY.mode = ''; };
 (async () => { SY.key = await syGet('key') || null; SY.salt = await syGet('salt') || null; SY.handle = await syGet('handle') || null; if (!SY.key) SY.salt = null; syRender(); syDot(); })();
 
 function initRoll() {
