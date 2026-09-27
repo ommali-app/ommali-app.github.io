@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260927175710">
+<meta name="amali-build" content="20260927181737">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3770,6 +3770,7 @@ async function syApply(txt, handle) {
   SY.ask = null; const fname = (handle && handle.name) || SY.fname || ''; SY.fname = '';
   SY.last = { name: fname, saved: d.saved || 0, n: ((d.roll || {}).cards || []).length };
   if (SY.mode === 'replace') { SY.mode = ''; SY.rep = d; syRender(); return; }
+  const rp = syMeta().rep || 0; if (rp && (d.saved || 0) < rp) { syToast('هذا الملف محفوظ ' + syWhen(d.saved) + '، قبل آخر استبدال على هذا الجهاز (' + syWhen(rp) + ') — لم يُدمج. اختر الملف الأحدث.'); syRender(); return; }
   const r = syMerge(d); syMark('pulled'); SY.merged = true;
   const tot = r.add + r.upd + r.del;
   syToast(tot ? 'دُمج: ' + r.add + ' جديدة، ' + r.upd + ' محدَّثة' + (r.del ? '، ' + r.del + ' محذوفة' : '') : 'لا جديد في الملف — محفوظ ' + syWhen(d.saved) + '. إن كان أقدم مما تتوقع فاختر الملف الأحدث أو «استبدال بيانات هذا الجهاز»');
@@ -3786,7 +3787,11 @@ function syReplace(d) {
   try { if ($('#rl_circuit')) $('#rl_circuit').value = RL.circuit; } catch (e) {}
   if (rlInit) rlRender(); if (typeof rlHomeAlert === 'function') rlHomeAlert(); try { run(); } catch (e) {}
   try { if (document.getElementById('casewrap') && document.getElementById('casewrap').classList.contains('show')) renderCases(); } catch (e) {}
-  syMark('pulled'); SY.merged = true;
+  syMark('pulled'); syMark('rep'); SY.merged = true;
+}
+async function syAfterReplace() {
+  if (!(syCanFS() && window.showDirectoryPicker)) return; const dir = await syDirOk(); if (!dir) return;
+  try { const L = await syDirFiles(dir), M = []; for (const x of L) { const o = await syOpen(await x.f.text()); if (o.d) M.push({ name: x.name, mod: x.f.lastModified }); } SY.dirMerged = M; await syPush(); } catch (e) {}
 }
 async function syPickReplace() {
   SY.mode = 'replace';
@@ -3805,12 +3810,15 @@ async function syPullDir(dir) {
   const ok = [], bad = []; let add = 0, upd = 0, del = 0, newest = null;
   for (const x of L) { const t = await x.f.text(), o = await syOpen(t); if (o.d) ok.push({ x, d: o.d }); else bad.push({ x, t, err: o.err }); }
   if (!ok.length) { const k = bad.find(y => y.err === 'key'); if (k) { SY.fname = k.x.name; await syApply(k.t); } else syToast('لا ملف صالح في المجلد'); return true; }
+  const rp = syMeta().rep || 0, old = rp ? ok.filter(o => (o.d.saved || 0) < rp) : [];
+  if (old.length) { old.forEach(o => ok.splice(ok.indexOf(o), 1)); }
+  if (!ok.length) { SY.dirMerged = old.map(o => ({ name: o.x.name, mod: o.x.f.lastModified })); syToast('كل النسخ في المجلد أقدم من آخر استبدال — لا شيء للدمج؛ «حفظ فقط» يحذفها'); syRender(); return true; }
   ok.sort((a, b) => (a.d.saved || 0) - (b.d.saved || 0));
   ok.forEach(o => { const r = syMerge(o.d); add += r.add; upd += r.upd; del += r.del; newest = o; });
-  SY.dirMerged = ok.map(o => ({ name: o.x.name, mod: o.x.f.lastModified }));
+  SY.dirMerged = ok.concat(old).map(o => ({ name: o.x.name, mod: o.x.f.lastModified }));
   SY.last = { name: newest.x.name, saved: newest.d.saved || 0, n: ((newest.d.roll || {}).cards || []).length };
   syMark('pulled'); SY.merged = true; const tot = add + upd + del;
-  syToast((ok.length > 1 ? 'دُمجت ' + ok.length + ' نسخ من المجلد — ' : '') + (tot ? add + ' جديدة، ' + upd + ' محدَّثة' + (del ? '، ' + del + ' محذوفة' : '') : 'لا جديد — أحدث نسخة محفوظة ' + syWhen(newest.d.saved)) + (bad.length ? ' · تُرك ' + bad.length + ' ملف لم يُفتح' : ''));
+  syToast((ok.length > 1 ? 'دُمجت ' + ok.length + ' نسخ من المجلد — ' : '') + (tot ? add + ' جديدة، ' + upd + ' محدَّثة' + (del ? '، ' + del + ' محذوفة' : '') : 'لا جديد — أحدث نسخة محفوظة ' + syWhen(newest.d.saved)) + (old.length ? ' · تُجوهلت ' + old.length + ' نسخة أقدم من الاستبدال' : '') + (bad.length ? ' · تُرك ' + bad.length + ' ملف لم يُفتح' : ''));
   syRender(); return true;
 }
 async function syCleanDir(dir) {
@@ -3865,7 +3873,7 @@ function syRender() {
   if (SY.rep) {
     const d = SY.rep, nf = ((d.roll || {}).cards || []).length, nc = Object.keys((d.cases || {}).items || {}).length;
     b.innerHTML = '<div class="sybox syrep"><div class="systat"><b>استبدال بيانات هذا الجهاز بنسخة الملف</b><br>الملف: <b>' + esc(SY.last.name || '—') + '</b> · محفوظ: <b>' + syWhen(d.saved) + '</b><br>في الملف: <b>' + nf + '</b> قضية في الرول، و<b>' + nc + '</b> من ملفاتي.<br>على هذا الجهاز الآن: <b>' + RL.cards.length + '</b> قضية، و<b>' + Object.keys(CASES).length + '</b> من ملفاتي.</div><p class="synote">يُحذف ما على هذا الجهاز من الرول وملفاتي والمفضلة ويحلّ محله ما في الملف. إعدادات الجهاز (الخط، المظهر، الاختصارات، القفل) لا تتغير.</p><div class="sybtns"><button type="button" class="btn primary" id="sy_rgo">استبدال</button><button type="button" class="btn" id="sy_rx">إلغاء</button></div></div>';
-    $('#sy_rgo').onclick = () => { const bt = $('#sy_rgo'); if (!bt.dataset.sure) { bt.dataset.sure = '1'; bt.textContent = 'تأكيد الاستبدال؟ اضغط مرة أخرى'; return; } syReplace(d); SY.rep = null; syRender(); syToast('استُبدلت البيانات: ' + RL.cards.length + ' قضية من الملف'); };
+    $('#sy_rgo').onclick = () => { const bt = $('#sy_rgo'); if (!bt.dataset.sure) { bt.dataset.sure = '1'; bt.textContent = 'تأكيد الاستبدال؟ اضغط مرة أخرى'; return; } syReplace(d); SY.rep = null; syRender(); syToast('استُبدلت البيانات: ' + RL.cards.length + ' قضية من الملف'); syAfterReplace(); };
     $('#sy_rx').onclick = () => { SY.rep = null; syRender(); }; return;
   }
   const dirty = syDirty(), fs = syCanFS(), dm = fs && !!window.showDirectoryPicker;
