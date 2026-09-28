@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260928172915">
+<meta name="amali-build" content="20260928183231">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1976,7 +1976,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V98 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V100 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -3017,7 +3017,7 @@ function rlAnnAdj(c) { return (c.hist || []).filter(h => h.a === 'تأجيل ل�
 function rlLast(c) { const h = (c.hist || []).slice(-1)[0]; return h ? h.a + (h.n ? ' — ' + h.n : '') + ' (' + rlFmt(h.d) + ')' : (c.why ? c.why + ' (من الكشف)' : ''); }
 function rlStoreNote() { const b = $('#rl_store'); if (!b) return; b.innerHTML = RL_MEM ? '<div class="rlwarn">التخزين على الجهاز غير متاح في هذه النافذة (كما داخل claude.ai أحيانًا): البطاقات تبقى حتى إغلاق الصفحة. صدّرها قبل الإغلاق، أو استعمل الموقع المستضاف.</div>' : ''; }
 function rlLeak(t) { const w = []; if (/(?<!\d)\d{11,}(?!\d)/.test(AR2EN(t))) w.push('رقمًا طويلًا (مدنيًا أو هاتفًا)'); if (/(^|\s)(ضد|السيد|السيدة|المدعو|المدعوة)\s/.test(t)) w.push('ما يشبه اسم خصم («ضد»، «السيد»…)'); return w; }
-function rlStageOpts(sel, withAll) { const L = RL_STAGES.slice(); if (sel && !L.includes(sel)) L.unshift(sel); return (withAll ? '<option value="">كل المراحل</option>' : '') + L.map(s => '<option' + (s === sel ? ' selected' : '') + '>' + s + '</option>').join(''); }
+function rlStageOpts(sel, withAll) { const K = rlProf().kind, L = RL_STAGES.filter(x => !(x === 'لإحضار المتهم' && K !== 'cri')); /* V99/V100: مرحلة جزائية تظهر للجزائي وحده — حُذفت من العمالي بطلب القاضي (28/9) */ if (sel && !L.includes(sel)) L.unshift(sel); return (withAll ? '<option value="">كل المراحل</option>' : '') + L.map(s => '<option' + (s === sel ? ' selected' : '') + '>' + s + '</option>').join(''); }
 function rlSess(n, from, incl) { return rlNextSessions(from || rlToday(), n, RL.cal, incl); }
 function rlChips(boxId, targetId, from, n, sel) {
   const b = $('#' + boxId); if (!b) return; const ds = rlSess(n || 5, from, true);
@@ -6615,7 +6615,7 @@ var STOURS = {
   ]
 };
 // V98: صفحة فصل كل قسم في docs/amali-guide.pdf — يتحقق منها media_src/makeguide.py وtest/v98.py
-const GUIDE_PAGES = {r: 3, p: 8, t: 8, l: 9, m: 9, s: 10, c: 10, e: 11, x: 12, i: 13, d: 14, w: 15, f: 16, a: 16};
+const GUIDE_PAGES = {r: 3, p: 9, t: 9, l: 10, m: 10, s: 11, c: 11, e: 12, x: 13, i: 14, d: 15, w: 16, f: 17, a: 17};
 var ST = null;
 function stVis(e) { if (!e) return null; const r = e.getBoundingClientRect(); return (r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== 'hidden') ? e : null; }
 function stFind(st) { for (const q of st.s) { let e = null; try { e = document.querySelector(q); } catch (x) { e = null; } if (e && !stVis(e) && e.closest('label')) e = e.closest('label'); if (stVis(e)) return e; } return null; }
