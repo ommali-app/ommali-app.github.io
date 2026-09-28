@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260928161001">
+<meta name="amali-build" content="20260928172915">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -784,6 +784,7 @@ input[type=date]::-webkit-date-and-time-value{min-width:0}
 
 /* ---------- settings & help drawer (V45) */
 .note .more{border:0;background:none;color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:3px;padding:0 2px;font-size:inherit;cursor:pointer}
+.note>.more{display:inline;width:auto;min-height:0;margin:0;white-space:nowrap}   /* V98: روابط الملاحظة في سطر واحد (كان رول الجلسة يعرضها كتلًا) */
 .drawer{position:fixed;top:0;bottom:0;left:0;width:min(400px,92vw);z-index:55;background:var(--panel);box-shadow:var(--shadow);transform:translateX(-102%);visibility:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),visibility .25s;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
 .drawer.show{transform:none;visibility:visible}
 .drawer{overflow:hidden}
@@ -1664,7 +1665,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 </div>
 
 <div class="casewrap" id="casewrap">
-  <div class="note" id="casenote">ملفات القضايا تُحفظ في قاعدة التطبيق على حسابك وتظهر على كل أجهزتك. تحتاج تسجيل الدخول.</div>
+  <div class="note" id="casenote">ملفات القضايا تُحفظ على جهازك وتنتقل بين أجهزتك بالمزامنة المشفّرة، بلا أسماء خصوم. <button type="button" class="more" data-help>المزيد</button></div>
   <div class="lawhead"><input id="casenew" type="text" placeholder="اسم ملف جديد… مثال: استئناف 880/2026 عمالي/2"><button class="btn primary" id="casecreate" type="button">إنشاء</button></div>
   <div class="caselist" id="caselist"></div>
 </div>
@@ -1918,7 +1919,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     <section class="ds" id="dhelp"><h3 id="dhelph">تعليمات</h3><div class="dhelp" id="dhelpb"></div></section>
     <section class="ds" id="dguide"><h3>الدليل والفيديو التعريفي</h3>
       <div class="gvid"><video id="gd_vid" controls playsinline preload="none" data-poster="docs/amali-tour.jpg" data-src="docs/amali-tour.mp4" aria-label="الفيديو التعريفي بعمّالي"></video></div>
-      <div class="gbtns"><a class="btn" id="gd_pdf" href="docs/amali-guide.pdf" target="_blank" rel="noopener">📘 عرض الدليل</a><button type="button" class="btn" id="gd_pdfdl">⬇︎ تنزيل الدليل (PDF)</button><button type="button" class="btn" id="gd_viddl">⬇︎ تنزيل الفيديو</button><button type="button" class="btn" id="gd_tour">جولة سريعة داخل التطبيق</button></div>
+      <div class="gbtns"><a class="btn" id="gd_pdf" href="docs/amali-guide.pdf" target="_blank" rel="noopener">📘 عرض الدليل</a><a class="btn" id="gd_roll" href="docs/amali-roll.mp4" target="_blank" rel="noopener">🎬 فيديو رول الجلسة (دقيقة)</a><button type="button" class="btn" id="gd_pdfdl">⬇︎ تنزيل الدليل (PDF)</button><button type="button" class="btn" id="gd_viddl">⬇︎ تنزيل الفيديو</button><button type="button" class="btn" id="gd_tour">جولة سريعة داخل التطبيق</button></div>
       <div class="demobox" id="demobox"><b>🧪 عرض تجريبي لدائرة أخرى</b><span>يملأ التطبيق مؤقتًا ببيانات وهمية لنوع الدائرة الذي تختاره — لعرضه على الزملاء. لا يمسّ بياناتك، ولا يُحفظ منه شيء، وينتهي بزر «إنهاء العرض».</span><div class="row2"><select class="sel" id="dm_deg"><option value="a">محكمة الاستئناف</option><option value="f">المحكمة الكلية</option></select><select class="sel" id="dm_kind"><option value="lab">عمالي</option><option value="civ">مدني</option><option value="com">تجاري</option><option value="gov">حكومي</option><option value="adm">إداري</option><option value="fam">أسرة</option><option value="cri">جزائي</option></select><select class="sel" id="dm_n"><option value="3">ثلاثة أعضاء</option><option value="4">أربعة أعضاء</option><option value="1">قاضٍ فرد</option></select><button type="button" class="btn primary" id="dm_go">ابدأ العرض</button></div></div>
       <p class="synote hidden" id="gd_miss">الدليل والفيديو غير متاحين في هذه النسخة؛ يُفتحان من الموقع المستضاف (مجلد docs/).</p>
     </section>
@@ -1975,7 +1976,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V97 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V98 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -4591,7 +4592,7 @@ async function bootLive() {
   try {
     const [db, user, sample, dl] = await Promise.all([claude.use('db'), claude.use('user'), claude.use('sample'), claude.use('downloads')]);
     DBX = db; USERX = user; SAMPLEX = sample; DLX = dl;
-    if (!DBX) { $('#casenote').textContent = 'قاعدة التطبيق غير متاحة في هذه النافذة (تحتاج فتح الرابط وأنت مسجل الدخول). القراءة والبحث يعملان كالمعتاد.'; return; }
+    if (!DBX) return;   // V98: «ملفاتي» محلية ومزامَنة منذ V77 — لا تغيير لملاحظتها
     const [ns, ts, cs, xs] = await Promise.all([DBX.collection('notes').limit(1000).get(), DBX.collection('tags').limit(1000).get(), DBX.collection('cases').limit(500).get(), DBX.collection('extra').limit(1000).get()]);
     ns.docs.forEach(d => { NOTES[d.id] = d.data(); });
     ts.docs.forEach(d => { TAGS[d.id] = d.data(); });
@@ -6613,6 +6614,8 @@ var STOURS = {
     { s: ['#asksend'], t: 'اسأل', p: 'يجيب من قاعدة التطبيق وحدها بإحالة، أو يقول: لا يوجد سند في قاعدة التطبيق.' }
   ]
 };
+// V98: صفحة فصل كل قسم في docs/amali-guide.pdf — يتحقق منها media_src/makeguide.py وtest/v98.py
+const GUIDE_PAGES = {r: 3, p: 8, t: 8, l: 9, m: 9, s: 10, c: 10, e: 11, x: 12, i: 13, d: 14, w: 15, f: 16, a: 16};
 var ST = null;
 function stVis(e) { if (!e) return null; const r = e.getBoundingClientRect(); return (r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== 'hidden') ? e : null; }
 function stFind(st) { for (const q of st.s) { let e = null; try { e = document.querySelector(q); } catch (x) { e = null; } if (e && !stVis(e) && e.closest('label')) e = e.closest('label'); if (stVis(e)) return e; } return null; }
@@ -6644,7 +6647,9 @@ document.addEventListener('keydown', e => { if (ST && e.key === 'Escape') stEnd(
 (function stButtons() {
   const WV = { lawwrap: 'l', chkwrap: 'c', casewrap: 'f', askwrap: 'a', intakewrap: 'i', drwrap: 'd', tlwrap: 't', wewrap: 'w', mstwrap: 's', dlwrap: 'e', mskwrap: 'x', rlwrap: 'r' };
   Object.keys(WV).forEach(id => { const w = document.getElementById(id), v = WV[id]; if (!w || !STOURS[v]) return; const n = w.querySelector(':scope > .note') || w.querySelector('.note'); if (!n || n.querySelector('[data-stour]')) return;
-    const b = document.createElement('button'); b.type = 'button'; b.className = 'more'; b.dataset.stour = v; b.textContent = 'كيف أستعمله؟'; b.onclick = () => stShow(v); n.appendChild(document.createTextNode(' ')); n.appendChild(b); });
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'more'; b.dataset.stour = v; b.textContent = 'كيف أستعمله؟'; b.onclick = () => stShow(v); n.appendChild(document.createTextNode(' ')); n.appendChild(b);
+    if (v === 'r') { const f = document.createElement('a'); f.className = 'more'; f.dataset.vid = 'r'; f.href = 'docs/amali-roll.mp4'; f.target = '_blank'; f.rel = 'noopener'; f.textContent = 'فيديو (دقيقة)'; n.appendChild(document.createTextNode(' ')); n.appendChild(f); }
+    if (GUIDE_PAGES[v]) { const g = document.createElement('a'); g.className = 'more'; g.dataset.guide = v; g.href = 'docs/amali-guide.pdf#page=' + GUIDE_PAGES[v]; g.target = '_blank'; g.rel = 'noopener'; g.textContent = 'الدليل'; g.title = 'الدليل المصوّر — فصل هذا القسم (صفحة ' + GUIDE_PAGES[v] + ')'; n.appendChild(document.createTextNode(' ')); n.appendChild(g); } });
 })();
 window.stShow = stShow;
 
