@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260928183231">
+<meta name="amali-build" content="20260928192125">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -181,7 +181,12 @@ html.locked #lockscr .lkform{display:flex}
 .tourdots i.on{background:var(--accent);width:18px}
 .tourrow{display:flex;gap:8px}.tourrow .btn{flex:1;justify-content:center}
 .tile.app{position:relative}
-.aibadge{position:absolute;top:7px;inset-inline-start:7px;font-size:9.5px;font-weight:700;letter-spacing:.3px;background:var(--mix-soft);color:var(--mix);border-radius:6px;padding:1px 6px}
+.tile.app .ic{position:relative}
+.safebar{flex:1 1 100%;width:100%;box-sizing:border-box;background:var(--gold-soft);color:var(--gold-ink);border:1px solid var(--gold);border-radius:14px;padding:10px 14px;margin:0 0 4px;display:flex;flex-direction:column;gap:8px;font-size:13px;line-height:1.7}
+.safebar .sfh{font-size:14px}.sfi{display:flex;gap:10px;align-items:center;justify-content:space-between}.sfi .btn{flex:none;padding:5px 12px;font-size:13px}
+.sfx{align-self:flex-start;background:none;border:0;color:inherit;text-decoration:underline;font:inherit;font-size:12.5px;cursor:pointer;padding:0}
+.sfstat{border-inline-start:3px solid var(--gold);padding-inline-start:8px}
+@media (max-width:700px){.sfi{flex-direction:column;align-items:stretch}.sfi .btn{align-self:flex-start}}.aibadge{position:absolute;top:-9px;inset-inline-start:-22px;white-space:nowrap;line-height:1.5;box-shadow:0 0 0 2px var(--panel);font-size:9.5px;font-weight:700;letter-spacing:.3px;background:var(--mix-soft);color:var(--mix);border-radius:6px;padding:1px 6px}
 .tmodes{display:flex;border:1px solid var(--line2);border-radius:12px;overflow:hidden;margin-bottom:8px;background:var(--bg)}
 .tmodes button{flex:1 1 0;min-width:0;border:0;background:transparent;color:var(--ink2);padding:10px 8px;font:600 13.5px inherit;cursor:pointer;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
 .tmodes button+button{border-inline-start:1px solid var(--line2)}
@@ -1966,6 +1971,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <button type="button" class="drowb" id="fb_open"><span>افتح نموذج الملاحظات</span><small>دقيقتان</small></button>
     </section>
     <section class="ds" id="dsync"><h3>المزامنة بين أجهزتك</h3>
+      <p class="synote sfstat" id="sf_stat"></p>
       <p class="synote">تنقل الرول وملفاتي والمفضلة بين أجهزتك <b>أنت</b> عبر ملف واحد مشفّر في خدمة تخزين تختارها (OneDrive أو Google Drive أو iCloud). لا يُرسل شيء إلى أي خادم.</p>
       <div id="sy_body"></div>
       <details class="syhow"><summary>أول مرة: تجهيز خدمة التخزين</summary><ul><li><b>OneDrive:</b> برنامج OneDrive على الحاسوب، وتطبيقه على الجوال (يظهر في «الملفات» على الآيفون).</li><li><b>Google Drive:</b> برنامج «Google Drive للكمبيوتر» فيظهر قرصًا (مثل G:)، وتطبيق Drive على الجوال؛ وعلى الآيفون فعّله من «الملفات» ← تصفّح ← ⋯ ← تعديل.</li><li><b>iCloud Drive:</b> مدمج في الآيفون والآيباد والماك؛ وعلى ويندوز ببرنامج iCloud.</li><li><b>Dropbox:</b> برنامجه على الحاسوب وتطبيقه على الجوال.</li></ul><p>أنشئ مجلدًا باسم «عمّالي» واستعمل <b>الخدمة نفسها على كل أجهزتك</b>. الملف amali-data.amali مشفّر فلا تقرؤه الخدمة. هذه مزامنة شخصية بين أجهزتك أنت؛ لا تشارك رمزها ولا مجلدها مع غيرك.</p></details>
@@ -1976,7 +1982,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V100 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V102 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -2518,9 +2524,9 @@ function toolVisRender() {
 }
 function renderHome() {
   try { rlHomeAlert(); } catch (e) {}
-  const tile = t => '<button type="button" class="tile app ' + t[4] + '" data-go="' + t[0] + '" title="' + esc(t[2]) + '" aria-label="' + esc(t[1]) + '">' + (AI_TOOLS.has(t[0]) ? '<span class="aibadge" title="تستعمل أداة ذكاء اصطناعي (Claude أو غيرها) — بالنسخ واللصق، أو مباشرة داخل claude.ai">✦ ذكاء</span>' : '') + '<span class="ic">' + t[5] + '</span><b>' + t[1] + '</b></button>';
-  $('#tiles').innerHTML = rlProfNote() + NAV_GROUPS.map(G => { const vs = G.views.filter(v => !isHid(v)); return vs.length ? '<section class="tgroup" data-g="' + G.g + '" style="--n:' + vs.length + '"><h3 class="tgh">' + G.name + '<small>' + G.sub + '</small></h3><div class="tiles">' + vs.map(v => HOME_TILES.find(t => t[0] === v)).filter(Boolean).map(tile).join('') + '</div></section>' : ''; }).join('');
-  $('#tiles').querySelectorAll('[data-go]').forEach(b => b.onclick = () => setView(b.dataset.go));
+  const tile = t => '<button type="button" class="tile app ' + t[4] + '" data-go="' + t[0] + '" title="' + esc(t[2]) + '" aria-label="' + esc(t[1]) + '">' + '<span class="ic">' + t[5] + (AI_TOOLS.has(t[0]) ? '<span class="aibadge" title="تستعمل أداة ذكاء اصطناعي (Claude أو غيرها) — بالنسخ واللصق، أو مباشرة داخل claude.ai">✦ ذكاء</span>' : '') + '</span><b>' + t[1] + '</b></button>';
+  $('#tiles').innerHTML = sfBar() + rlProfNote() + NAV_GROUPS.map(G => { const vs = G.views.filter(v => !isHid(v)); return vs.length ? '<section class="tgroup" data-g="' + G.g + '" style="--n:' + vs.length + '"><h3 class="tgh">' + G.name + '<small>' + G.sub + '</small></h3><div class="tiles">' + vs.map(v => HOME_TILES.find(t => t[0] === v)).filter(Boolean).map(tile).join('') + '</div></section>' : ''; }).join('');
+  $('#tiles').querySelectorAll('[data-go]').forEach(b => b.onclick = () => setView(b.dataset.go)); sfWire($('#tiles'));
   try { if (!HOME_ANIMED) { HOME_ANIMED = true; var rm = false; try { rm = matchMedia('(prefers-reduced-motion:reduce)').matches; } catch (e) {} if (!rm) { $('#tiles').querySelectorAll('.tiles').forEach(t => t.classList.add('anim')); setTimeout(() => $('#tiles').querySelectorAll('.tiles').forEach(t => t.classList.remove('anim')), 950); } } } catch (e) {}
   try { if (window.amaliBrief) window.amaliBrief(); } catch (e) {}
 }
@@ -2709,7 +2715,7 @@ function drawerFill() {
   else if ($('#installbtn').classList.contains('hidden')) t = 'للتثبيت: من قائمة المتصفح اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».';
   $('#dinstt').innerHTML = t;
 }
-function openDrawer(toHelp) { drawerFill(); try { window.gdInit && window.gdInit(); } catch (e) {} document.documentElement.classList.add('noscroll'); $('#drawer').classList.add('show'); $('#scrim').classList.add('show'); $('#menubtn').classList.add('on'); const b = $('#dbody'); b.scrollTop = 0; if (!toHelp) setTimeout(() => $('#dclose').focus(), 50); }
+function openDrawer(toHelp) { drawerFill(); try { sfStat(); } catch (e) {} try { window.gdInit && window.gdInit(); } catch (e) {} document.documentElement.classList.add('noscroll'); $('#drawer').classList.add('show'); $('#scrim').classList.add('show'); $('#menubtn').classList.add('on'); const b = $('#dbody'); b.scrollTop = 0; if (!toHelp) setTimeout(() => $('#dclose').focus(), 50); }
 function closeDrawer() { if (!$('#drawer').classList.contains('show')) return; document.documentElement.classList.remove('noscroll'); $('#drawer').classList.remove('show'); $('#menubtn').classList.remove('on'); if (!$('#panel').classList.contains('show') && !$('#side').classList.contains('show')) $('#scrim').classList.remove('show'); }
 $('#menubtn').onclick = () => $('#drawer').classList.contains('show') ? closeDrawer() : openDrawer();
 $('#dclose').onclick = closeDrawer;
@@ -3000,7 +3006,7 @@ rlCHAll();
 var RL_SH = null; function rlSetHash() { return JSON.stringify([RL.circuit || '', RL.members || {}, RL.cal || {}, RL.hol || [], RL.fm || [], RL.prof || null]); }
 var RL_CH = {}; function rlCHash(c) { const o = Object.assign({}, c); delete o.updated; return JSON.stringify(o); }
 function rlCHAll() { RL_CH = {}; RL.cards.forEach(c => { RL_CH[c.id] = rlCHash(c); }); }
-function rlSave() { if (window.DEMO) { try { syDot(); } catch (e) {} return; } try { const now = Date.now(), nx = {}; RL.cards.forEach(c => { const hh = rlCHash(c); if (RL_CH[c.id] !== undefined && RL_CH[c.id] !== hh && (c.updated || 0) < now - 50) c.updated = now; nx[c.id] = hh; }); RL_CH = nx; } catch (e) {} const h = rlSetHash(); if (RL_SH !== null && h !== RL_SH) RL.st = Date.now(); RL_SH = h; try { localStorage.setItem('tm_chg', String(Date.now())); } catch (e) {} try { syDot(); } catch (e) {} if (RL_MEM) return; try { localStorage.setItem(RL_KEY, JSON.stringify(RL)); } catch (e) { RL_MEM = true; rlStoreNote(); toast('تعذّر الحفظ على الجهاز — صدّر البطاقات'); } }
+function rlSave() { if (window.DEMO) { try { syDot(); } catch (e) {} return; } if (!SF_ASKED) { SF_ASKED = true; sfPersist(true); } try { const now = Date.now(), nx = {}; RL.cards.forEach(c => { const hh = rlCHash(c); if (RL_CH[c.id] !== undefined && RL_CH[c.id] !== hh && (c.updated || 0) < now - 50) c.updated = now; nx[c.id] = hh; }); RL_CH = nx; } catch (e) {} const h = rlSetHash(); if (RL_SH !== null && h !== RL_SH) RL.st = Date.now(); RL_SH = h; try { localStorage.setItem('tm_chg', String(Date.now())); } catch (e) {} try { syDot(); } catch (e) {} if (RL_MEM) return; try { localStorage.setItem(RL_KEY, JSON.stringify(RL)); } catch (e) { RL_MEM = true; rlStoreNote(); toast('تعذّر الحفظ على الجهاز — صدّر البطاقات'); } }
 RL_SH = rlSetHash();
 function rlToday() { const d = new Date(); return rlIso(d.getFullYear(), d.getMonth() + 1, d.getDate()); }
 function rlDays(iso) { if (!iso) return null; const [y, m, d] = iso.split('-').map(Number); const [a, b, c] = rlToday().split('-').map(Number); return Math.round((Date.UTC(y, m - 1, d) - Date.UTC(a, b - 1, c)) / 864e5); }
@@ -3696,7 +3702,7 @@ function rlImpShow(res, how) {
 // ---- تصدير/استيراد نسخة
 async function rlExport() {
   const blob = new Blob([JSON.stringify({ app: 'amali-roll', v: 2, exported: new Date().toISOString(), circuit: RL.circuit, cal: RL.cal, members: RL.members, cards: RL.cards }, null, 1)], { type: 'application/json' });
-  const fname = 'amali-roll-' + rlToday() + '.json';
+  const fname = 'amali-roll-' + rlToday() + '.json'; syMark('exported');
   if (DLX) { try { await DLX.save({ filename: fname, data: blob }); toast('أُنشئ الملف؛ أكّد الحفظ'); } catch (e) { toast('تعذّر الحفظ'); } return; }
   try { const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = fname; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 4000); toast('نُزّل ملف الرول (' + RL.cards.length + ' بطاقة)'); } catch (e) { toast('تعذّر التنزيل في هذه النافذة'); }
 }
@@ -3890,6 +3896,25 @@ async function syDerive(pass, salt) { const base = await crypto.subtle.importKey
 const syMeta = () => { try { return JSON.parse(localStorage.getItem('tm_sync') || '{}') || {}; } catch (e) { return {}; } };
 function syMark(k) { const m = syMeta(); m[k] = Date.now(); try { localStorage.setItem('tm_sync', JSON.stringify(m)); } catch (e) {} syDot(); }
 function syDirty() { const m = syMeta(); let c = 0; try { c = +localStorage.getItem('tm_chg') || 0; } catch (e) {} return !!SY.key && c > (m.pushed || 0); }
+// V102 — حماية البيانات: تنبيه في الرئيسية (التثبيت على iOS، والنسخة الاحتياطية)، وحالة في الإعدادات، وطلب حماية التخزين من المتصفح
+function sfLastBackup() { const m = syMeta(); return Math.max(m.pushed || 0, m.exported || 0); }
+function sfHasData() { try { return (RL.cards || []).length > 0 || Object.keys(CASES || {}).length > 0; } catch (e) { return false; } }
+function sfDays(t) { return t ? Math.floor((Date.now() - t) / 864e5) : null; }
+let SF_PERSIST = null, SF_ASKED = false;
+async function sfPersist(ask) { try { if (!navigator.storage || !navigator.storage.persisted) return null; let p = await navigator.storage.persisted(); if (!p && ask && navigator.storage.persist) p = await navigator.storage.persist(); SF_PERSIST = p; return p; } catch (e) { return null; } }
+function sfIssues() {
+  const out = []; if (window.DEMO || !sfHasData()) return out;
+  if (IS_IOS && !isStandalone()) out.push({ k: 'inst', t: 'ثبّت عمّالي على الشاشة الرئيسية', p: 'قد يمسح Safari بيانات المواقع غير المثبّتة إن لم تُفتح مدة؛ التثبيت يحفظها.', b: 'كيف؟' });
+  const d = sfDays(sfLastBackup()); if (d === null || d >= 7) out.push({ k: 'bak', t: d === null ? 'لم تُحفظ نسخة احتياطية بعد' : 'آخر نسخة احتياطية قبل ' + d + ' يومًا', p: 'احفظ نسخة مشفّرة في مجلدك السحابي من «المزامنة»، فلا يضيع الرول إن فُقد الجهاز أو مُسحت بياناته.', b: 'احفظ الآن' });
+  return out;
+}
+function sfBar() { let s = 0; try { s = +localStorage.getItem('tm_sfsnooze') || 0; } catch (e) {} if (Date.now() < s) return ''; const I = sfIssues(); if (!I.length) return '';
+  return '<div class="safebar" id="safebar" role="status"><b class="sfh">🛡 حماية بياناتك</b>' + I.map(x => '<div class="sfi" data-k="' + x.k + '"><span><b>' + x.t + '</b> — ' + x.p + '</span><button type="button" class="btn" data-sf="' + x.k + '">' + x.b + '</button></div>').join('') + '<button type="button" class="sfx" id="sf_x">ذكّرني لاحقًا</button></div>'; }
+function sfWire(root) { const r = root && root.querySelector('#safebar'); if (!r) return;
+  r.querySelectorAll('[data-sf]').forEach(b => b.onclick = () => { openDrawer(); setTimeout(() => { const t = document.getElementById(b.dataset.sf === 'inst' ? 'dinst' : 'dsync'); if (t) t.scrollIntoView({ block: 'start' }); }, 150); });
+  const x = r.querySelector('#sf_x'); if (x) x.onclick = () => { try { localStorage.setItem('tm_sfsnooze', String(Date.now() + 3 * 864e5)); } catch (e) {} r.remove(); }; }
+async function sfStat() { const e = document.getElementById('sf_stat'); if (!e) return; const p = await sfPersist(false), d = sfDays(sfLastBackup());
+  e.innerHTML = '<b>حماية البيانات:</b> التخزين ' + (p ? 'محمي من المسح التلقائي' : p === false ? 'غير محمي بعد (يحميه التثبيت أو الاستعمال المتكرر)' : 'غير معروف في هذا المتصفح') + ' · ' + (isStandalone() ? 'مثبّت على الجهاز' : 'غير مثبّت') + ' · آخر نسخة احتياطية: ' + (d === null ? 'لا توجد' : d === 0 ? 'اليوم' : 'قبل ' + d + ' يومًا'); }
 function syDot() { const d = $('#rl_sydot'); if (d) d.classList.toggle('hidden', !syDirty()); }
 const syCanFS = () => !!(window.showSaveFilePicker && window.showOpenFilePicker) && !IS_IOS;
 async function syPerm(h) { if (h && !h.queryPermission) return true; try { if ((await h.queryPermission({ mode: 'readwrite' })) === 'granted') return true; return (await h.requestPermission({ mode: 'readwrite' })) === 'granted'; } catch (e) { return false; } }
