@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260928141613">
+<meta name="amali-build" content="20260928161001">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -159,6 +159,13 @@ html.locked #lockscr .lkform{display:flex}
 /* V61: جولة أول تشغيل */
 #tour{position:fixed;inset:0;z-index:9500;background:rgba(20,20,19,.55);display:flex;align-items:center;justify-content:center;padding:20px 16px calc(20px + env(safe-area-inset-bottom,0px))}
 #tour.hidden{display:none}
+#stour{position:fixed;inset:0;z-index:9600}#stour.hidden{display:none}
+.stdim{position:fixed;inset:0;background:rgba(20,20,19,.55)}.stdim.off{background:transparent}
+.string{position:fixed;border:2px solid var(--accent);border-radius:10px;box-shadow:0 0 0 9999px rgba(20,20,19,.55);pointer-events:none;transition:all .2s ease}.string.hidden{display:none}
+.stbub{position:fixed;width:min(360px,calc(100vw - 32px));background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px 12px;box-sizing:border-box}
+.sthd{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}.sthd b{font-size:16px}.sthd span{font-size:12px;color:var(--ink3);white-space:nowrap}
+.stbub p{margin:0 0 10px;font-size:14px;line-height:1.8;color:var(--ink2)}
+.stbtns{display:flex;align-items:center;gap:8px}.stbtns span{flex:1}.stbtns .tourx{position:static}
 .tourbox{position:relative;width:100%;max-width:400px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:22px 20px 18px;text-align:center}
 .tourx{position:absolute;top:12px;left:14px;background:none;border:0;color:var(--ink3);font-size:13px;cursor:pointer;font-family:inherit;text-decoration:underline}
 .tourico{width:60px;height:60px;margin:4px auto 10px;border-radius:16px;background:var(--accent-soft);color:var(--accent-soft-ink);display:grid;place-items:center}
@@ -1314,6 +1321,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
   </div>
 </div>
 
+<div id="stour" class="hidden" role="dialog" aria-modal="true" aria-label="شرح القسم"><div class="stdim" id="st_dim"></div><div class="string" id="st_ring"></div><div class="stbub" id="st_bub"><div class="sthd"><b id="st_t"></b><span id="st_n"></span></div><p id="st_p"></p><div class="stbtns"><button type="button" class="tourx" id="st_x">إنهاء</button><span></span><button type="button" class="btn" id="st_prev">السابق</button><button type="button" class="btn primary" id="st_next">التالي</button></div></div></div>
 <div id="tour" class="hidden" role="dialog" aria-modal="true" aria-label="جولة تعريفية بالتطبيق"><div class="tourbox">
   <button type="button" class="tourx" id="tour_x">تخطّي</button>
   <div class="tourico" id="tour_ico" aria-hidden="true"></div>
@@ -1866,6 +1874,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       </div>
       <div class="wefx" id="we_x" hidden>
         <label>صيغة الترويسة<select id="we_mode" class="sel"></select></label>
+        <label id="we_authl">سلطة الاتهام<select id="we_auth" class="sel"><option>النيابة العامة</option><option>الإدارة العامة للتحقيقات</option></select></label>
         <label id="we_regl">والمقيدة برقم <small>(يبقى مكانه إن تركته فارغًا)</small><input id="we_reg" type="text" placeholder="12/2026 جنح المخفر"></label>
         <label id="we_civl">المدعي بالحق المدني <small>(إن وُجد — اسم في كل سطر)</small><textarea id="we_civil" rows="1" placeholder="اتركه فارغًا إن لم يوجد"></textarea></label>
         <p class="help wefxnote">صيغة مبدئية للمراجعة — تُعتمد بعد مراجعة قاضٍ من الدائرة المعنية.</p>
@@ -1910,7 +1919,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     <section class="ds" id="dguide"><h3>الدليل والفيديو التعريفي</h3>
       <div class="gvid"><video id="gd_vid" controls playsinline preload="none" data-poster="docs/amali-tour.jpg" data-src="docs/amali-tour.mp4" aria-label="الفيديو التعريفي بعمّالي"></video></div>
       <div class="gbtns"><a class="btn" id="gd_pdf" href="docs/amali-guide.pdf" target="_blank" rel="noopener">📘 عرض الدليل</a><button type="button" class="btn" id="gd_pdfdl">⬇︎ تنزيل الدليل (PDF)</button><button type="button" class="btn" id="gd_viddl">⬇︎ تنزيل الفيديو</button><button type="button" class="btn" id="gd_tour">جولة سريعة داخل التطبيق</button></div>
-      <div class="demobox" id="demobox"><b>🧪 عرض تجريبي لدائرة أخرى</b><span>يملأ التطبيق مؤقتًا ببيانات وهمية لنوع الدائرة الذي تختاره — لعرضه على الزملاء. لا يمسّ بياناتك، ولا يُحفظ منه شيء، وينتهي بزر «إنهاء العرض».</span><div class="row2"><select class="sel" id="dm_deg"><option value="a">استئناف</option><option value="f">أول درجة</option></select><select class="sel" id="dm_kind"><option value="lab">عمالي</option><option value="civ">مدني</option><option value="com">تجاري</option><option value="gov">حكومي</option><option value="adm">إداري</option><option value="fam">أسرة</option><option value="cri">جزائي</option></select><select class="sel" id="dm_n"><option value="3">ثلاثة أعضاء</option><option value="4">أربعة أعضاء</option><option value="1">قاضٍ فرد</option></select><button type="button" class="btn primary" id="dm_go">ابدأ العرض</button></div></div>
+      <div class="demobox" id="demobox"><b>🧪 عرض تجريبي لدائرة أخرى</b><span>يملأ التطبيق مؤقتًا ببيانات وهمية لنوع الدائرة الذي تختاره — لعرضه على الزملاء. لا يمسّ بياناتك، ولا يُحفظ منه شيء، وينتهي بزر «إنهاء العرض».</span><div class="row2"><select class="sel" id="dm_deg"><option value="a">محكمة الاستئناف</option><option value="f">المحكمة الكلية</option></select><select class="sel" id="dm_kind"><option value="lab">عمالي</option><option value="civ">مدني</option><option value="com">تجاري</option><option value="gov">حكومي</option><option value="adm">إداري</option><option value="fam">أسرة</option><option value="cri">جزائي</option></select><select class="sel" id="dm_n"><option value="3">ثلاثة أعضاء</option><option value="4">أربعة أعضاء</option><option value="1">قاضٍ فرد</option></select><button type="button" class="btn primary" id="dm_go">ابدأ العرض</button></div></div>
       <p class="synote hidden" id="gd_miss">الدليل والفيديو غير متاحين في هذه النسخة؛ يُفتحان من الموقع المستضاف (مجلد docs/).</p>
     </section>
     <section class="ds"><h3>العرض</h3>
@@ -1966,7 +1975,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V95 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V97 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -3114,10 +3123,12 @@ let RL_ABBR = Object.assign({}, RL_ABBR_DEF); try { const u = JSON.parse(localSt
 
 // V92 — «ملف الدائرة»: الدرجة والنوع وعدد أعضاء الهيئة وأيام الانعقاد. الافتراضي = استئناف عمالي، ثلاثة أعضاء، الأربعاء عدا الأخير (سلوك الإصدارات السابقة).
 const RL_KINDS = { lab: 'عمالي', civ: 'مدني', com: 'تجاري', gov: 'حكومي', adm: 'إداري', fam: 'أسرة', cri: 'جزائي' };
-const RL_DEGS = { a: 'استئناف', f: 'أول درجة' };
+const RL_DEGS = { a: 'محكمة الاستئناف', f: 'المحكمة الكلية' };   // V97: اسم المحكمة بدل «الدرجة» — القيم المخزّنة a/f كما هي
+const RL_SUBS = { jn: 'جنايات', jh: 'جنح', jm: 'جنح مستأنفة' };   // V96: طبيعة الدائرة الجزائية في أول درجة
 const RL_WD = [[0, 'الأحد'], [1, 'الاثنين'], [2, 'الثلاثاء'], [3, 'الأربعاء'], [4, 'الخميس']];
-function rlProf() { const p = Object.assign({ deg: 'a', kind: 'lab', n: 3, days: [3], exl: true }, (typeof RL !== 'undefined' && RL && RL.prof) || {}); if (!RL_KINDS[p.kind]) p.kind = 'lab'; if (!RL_DEGS[p.deg]) p.deg = 'a'; if (![1, 3, 4].includes(+p.n)) p.n = 3; p.n = +p.n; return p; }
-function rlProfName(p) { p = p || rlProf(); return RL_DEGS[p.deg] + ' ' + RL_KINDS[p.kind]; }
+function rlProf() { const p = Object.assign({ deg: 'a', kind: 'lab', n: 3, days: [3], exl: true }, (typeof RL !== 'undefined' && RL && RL.prof) || {}); if (!RL_KINDS[p.kind]) p.kind = 'lab'; if (!RL_DEGS[p.deg]) p.deg = 'a'; if (![1, 3, 4].includes(+p.n)) p.n = 3; p.n = +p.n; if (!RL_SUBS[p.sub]) p.sub = 'jh'; return p; }
+function rlPenSub(p) { p = p || rlProf(); return p.kind === 'cri' && p.deg === 'f' ? p.sub : ''; }
+function rlProfName(p) { p = p || rlProf(); return RL_DEGS[p.deg] + ' · ' + RL_KINDS[p.kind] + (rlPenSub(p) ? ' — ' + RL_SUBS[p.sub] : ''); }
 const RL_RQG_TM = ['tm', 'تمسّك بطلباته', 'تمسّك بطلباته'];
 const RL_RQ_ALL = {
   mm: ['مذكرة', 'قدّم مذكرة'], hf: ['حافظة', 'قدّم حافظة مستندات'], mg: ['مستندات غير مفرزة', 'قدّم مستندات غير مفرزة'], sf: ['استئناف فرعي', 'قدّم استئنافًا فرعيًّا'], sd: ['صحيفة إدخال', 'قدّم صحيفة إدخال خصم'],
@@ -3127,9 +3138,9 @@ const RL_RQ_ALL = {
 };
 function rlRqg(list) { return list.map(g => [g[0], g[1].map(k => [k, RL_RQ_ALL[k][0], RL_RQ_ALL[k][1]])]); }
 function rlVocab() {
-  const P = rlProf(), cri = P.kind === 'cri', app = P.deg === 'a';
+  const P = rlProf(), cri = P.kind === 'cri', app = P.deg === 'a' || rlPenSub(P) === 'jm', sub = rlPenSub(P);
   const TM = ['tm', RL_RQG_TM[1], RL_RQG_TM[2]];
-  RL_ROLES = cri ? { a: 'المتهم', e: 'النيابة العامة', x: 'المدعي بالحق المدني' } : app ? { a: 'المستأنف', e: 'المستأنف ضده', x: 'الخصم المتدخل' } : { a: 'المدعي', e: 'المدعى عليه', x: 'الخصم المدخل' };
+  RL_ROLES = cri ? { a: 'المتهم', e: sub === 'jh' || sub === 'jm' ? 'سلطة الاتهام' : 'النيابة العامة', x: 'المدعي بالحق المدني' } : app ? { a: 'المستأنف', e: 'المستأنف ضده', x: 'الخصم المتدخل' } : { a: 'المدعي', e: 'المدعى عليه', x: 'الخصم المدخل' };
   RL_ATT = cri ? [['h', 'حاضر'], ['j', 'محبوس وحضر'], ['q', 'لم يُحضر'], ['l', 'محامٍ'], ['w', 'وكيل'], ['n', 'غائب']] : [['p', 'بشخصه'], ['o', 'صاحب الشركة'], ['l', 'محامٍ'], ['w', 'وكيل'], ['n', 'لم يحضر']];
   RL_RQG = cri ? rlRqg([['قدّم', ['mm', 'hf']], ['طلب', ['ai', 'ts', 'sh', 'ik', 'kh', 'hj']], ['دفع', ['bq', 'ds', 'nq']]])
     : app ? rlRqg([['قدّم', ['mm', 'hf', 'mg', 'sf']], ['طلب', ['ai', 'ar', 'am', 'hj', 'kh', 'th', 'mc', 'tj']], ['دفع', ['dj', 'ds', 'dn']]])
@@ -3163,7 +3174,7 @@ function rlCalHint() { const P = rlProf(); const dn = RL_WD.filter(w => P.days.i
 function rlProfForm() {
   const box = document.getElementById('rl_profbox'); if (!box) return; const P = rlProf();
   const opt = (o, v) => Object.keys(o).map(k => '<option value="' + k + '"' + (String(k) === String(v) ? ' selected' : '') + '>' + o[k] + '</option>').join('');
-  box.innerHTML = '<div class="rlprof"><label>الدرجة<select id="rp_deg" class="sel">' + opt(RL_DEGS, P.deg) + '</select></label><label>نوع الدائرة<select id="rp_kind" class="sel">' + opt(RL_KINDS, P.kind) + '</select></label><label>أعضاء الهيئة<select id="rp_n" class="sel">' + opt({ 1: 'قاضٍ فرد', 3: 'ثلاثة', 4: 'أربعة' }, P.n) + '</select></label></div>'
+  box.innerHTML = '<div class="rlprof"><label>المحكمة<select id="rp_deg" class="sel">' + opt(RL_DEGS, P.deg) + '</select></label><label>نوع الدائرة<select id="rp_kind" class="sel">' + opt(RL_KINDS, P.kind) + '</select></label>' + (P.kind === 'cri' && P.deg === 'f' ? '<label>طبيعة الدائرة<select id="rp_sub" class="sel">' + opt(RL_SUBS, P.sub) + '</select></label>' : '') + '<label>أعضاء الهيئة<select id="rp_n" class="sel">' + opt({ 1: 'قاضٍ فرد', 3: 'ثلاثة', 4: 'أربعة' }, P.n) + '</select></label></div>'
     + '<div class="rlwd"><span>أيام الانعقاد:</span>' + RL_WD.map(w => '<button type="button" class="chip' + (P.days.includes(w[0]) ? ' on' : '') + '" data-wd="' + w[0] + '" aria-pressed="' + P.days.includes(w[0]) + '">' + w[1] + '</button>').join('') + '</div>'
     + '<label class="rlexl"><input type="checkbox" id="rp_exl"' + (P.exl ? ' checked' : '') + '> بلا جلسة في آخر أسبوع من كل شهر</label>'
     + '<p class="k">يغيّر المسميات (الأطراف، الحضور، الطلبات، قرارات الجلسة، المنطوق) وأيام الجلسات، ويُظهر الأدوات المناسبة. بياناتك لا تتغير.</p>';
@@ -3171,6 +3182,7 @@ function rlProfForm() {
   box.querySelector('#rp_deg').onchange = e => save({ deg: e.target.value });
   box.querySelector('#rp_kind').onchange = e => save({ kind: e.target.value });
   box.querySelector('#rp_n').onchange = e => save({ n: +e.target.value });
+  if (box.querySelector('#rp_sub')) box.querySelector('#rp_sub').onchange = e => save({ sub: e.target.value });
   box.querySelector('#rp_exl').onchange = e => save({ exl: e.target.checked });
   box.querySelectorAll('[data-wd]').forEach(b => b.onclick = () => { const d = +b.dataset.wd, cur = rlProf().days.slice(); const i = cur.indexOf(d); if (i >= 0) { if (cur.length === 1) { toast('اختر يومًا واحدًا على الأقل'); return; } cur.splice(i, 1); } else cur.push(d); save({ days: cur.sort() }); });
 }
@@ -3256,7 +3268,7 @@ function rlSessRender(top) {
   h += '<div class="ssbody">';
   h += '<div class="sscase"><div class="ssn">' + (SS.i + 1) + '<small>/' + cards.length + '</small></div><div class="ssid"><b>' + esc(c.code) + '</b>' + (c.auto ? '<span class="auto">آلي ' + esc(c.auto) + '</span>' : '') + '<span class="tag stg">' + esc(c.stage || '') + '</span>'
     + (c.ann ? '<span class="ann ' + (rlAnnOk(c) ? 'ok' : 'no') + '">الإعلان ' + rlAnnTxt(c.ann) + (rlAnnOk(c) ? ' ✓' : ' ✗') + '</span>' : '') + (sibs.length ? '<span class="tag lnk">مضموم: ' + sibs.map(x => esc(x.code)).join('، ') + '</span>' : '') + '</div>'
-    + (rlProf().deg === 'f' ? '' : '<details class="ssfi"><summary>أول درجة' + (c.fi ? ': ' + esc(c.fi) + (c.fid ? ' · ' + rlFmt(c.fid) : '') : '') + '</summary><div class="ssfr"><label>رقم القضية<input type="text" data-f="fi" value="' + esc(c.fi || '') + '" inputmode="numeric" placeholder="مثال: 25/2103"></label><label>تاريخ الحكم<input type="date" data-f="fid" value="' + esc(c.fid || '') + '"></label></div></details>') + '</div>';
+    + (rlProf().deg === 'f' && rlPenSub() !== 'jm' ? '' : '<details class="ssfi"><summary>أول درجة' + (c.fi ? ': ' + esc(c.fi) + (c.fid ? ' · ' + rlFmt(c.fid) : '') : '') + '</summary><div class="ssfr"><label>رقم القضية<input type="text" data-f="fi" value="' + esc(c.fi || '') + '" inputmode="numeric" placeholder="مثال: 25/2103"></label><label>تاريخ الحكم<input type="date" data-f="fid" value="' + esc(c.fid || '') + '"></label></div></details>') + '</div>';
   // الجلسة السابقة
   if (prev.length) { const lp = prev[prev.length - 1]; h += '<section class="ssprev"><h4>الجلسة السابقة <span>' + rlDay(lp.d) + ' ' + rlFmt(lp.d) + '</span></h4><ul>' + lp.lines.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>'
     + (prev.length > 1 ? '<details><summary>كل الجلسات السابقة (' + prev.length + ')</summary>' + prev.slice(0, -1).reverse().map(x => '<div class="ssold"><b>' + rlFmt(x.d) + '</b><ul>' + x.lines.map(y => '<li>' + esc(y) + '</li>').join('') + '</ul></div>').join('') + '</details>' : '') + '</section>'; }
@@ -3320,7 +3332,7 @@ function rlSessPrint(d) {
   const L = rlSessList(d); if (!L.length) { toast('لا قضايا'); return; }
   let h = '';
   L.forEach((c, k) => { const s = rlSheet(c, d) || {}, dec = rlDecOn(c, d);
-    h += '<div class="sspg"><h3>' + (k + 1) + '. ' + (rlProf().kind === 'cri' ? 'القضية' : rlProf().deg === 'f' ? 'الدعوى' : 'الاستئناف') + ' رقم ' + esc(c.code.replace('/', ' لسنة ')) + (c.auto ? ' · الرقم الآلي ' + esc(c.auto) : '') + (c.fi ? ' · أول درجة ' + esc(c.fi) + (c.fid ? ' (' + rlFmt(c.fid) + ')' : '') : '') + '</h3><table><thead><tr><th>الطرف</th><th>الحضور</th><th>الطلبات</th></tr></thead><tbody>'
+    h += '<div class="sspg"><h3>' + (k + 1) + '. ' + (rlProf().kind === 'cri' && rlPenSub() !== 'jm' ? 'القضية' : rlProf().deg === 'f' && rlPenSub() !== 'jm' ? 'الدعوى' : 'الاستئناف') + ' رقم ' + esc(c.code.replace('/', ' لسنة ')) + (c.auto ? ' · الرقم الآلي ' + esc(c.auto) : '') + (c.fi ? ' · أول درجة ' + esc(c.fi) + (c.fid ? ' (' + rlFmt(c.fid) + ')' : '') : '') + '</h3><table><thead><tr><th>الطرف</th><th>الحضور</th><th>الطلبات</th></tr></thead><tbody>'
       + rlParties(c).map(p => '<tr><td>' + rlPLabel(c, p) + '</td><td>' + rlAttTxt(rlAttOf(s, p.id)) + '</td><td>' + [((s.req || {})[p.id] || []).map(q => (RL_REQ.find(a => a[0] === q) || [])[1]).filter(Boolean).join('، '), esc((s.oth || {})[p.id] || '')].filter(Boolean).join(' — ') + '</td></tr>').join('')
       + '</tbody></table>' + ((s.note || '').trim() ? '<p class="nt">ملاحظة: ' + esc(s.note.trim()) + '</p>' : '') + '<p class="dq"><b>القرار:</b> ' + (dec ? esc(rlDecTxt(dec)) : '&nbsp;') + '</p></div>'; });
   h = rlDoc('محاضر مختصرة', rlChip('الجلسة', rlDay(d) + ' ' + rlDAI(d)) + rlChip('القضايا', rlAI(L.length), 'g'), h, 'بلا أسماء الخصوم — الأطراف بصفاتهم وأرقامهم كما في قائمة الاستئناف');
@@ -5349,13 +5361,12 @@ const WE_MODES = {
   jm: { t: 'جنح مستأنفة — «الاستئناف رقم …»', cri: 1, reg: 1, fromL: 'المقام من', fa: 'المستأنف', fe: 'المستأنف ضده', pa: 'النيابة العامة أو اسم المتهم', pe: 'النيابة العامة أو اسم المتهم', no: 'رقم الاستئناف', noPh: '123/2026', fn: 'استئناف', cph: 'جنح مستأنفة', rph: '12/2026 جنح المخفر' }
 };
 function weModePref() { try { return JSON.parse(localStorage.getItem('tm_wemode') || '{}') || {}; } catch (e) { return {}; } }
-function weModeKey() { const P = rlProf(); if (P.deg !== 'f') return 'lab'; const s = weModePref(); return P.kind === 'cri' ? (['jn', 'jh', 'jm'].includes(s.c) ? s.c : 'jh') : (['cl', 'ap'].includes(s.f) ? s.f : 'cl'); }
+let WE_CRI = null;   // V96: اختيار الصيغة الجزائية لحكم بعينه (في الذاكرة)؛ الافتراضي «طبيعة الدائرة» من ملف الدائرة
+function weModeKey() { const P = rlProf(); if (P.deg !== 'f') return 'lab'; if (P.kind === 'cri') { if (!WE_CRI || WE_CRI.sub !== P.sub) WE_CRI = { sub: P.sub, k: P.sub }; return WE_CRI.k; } const s = weModePref(); return ['cl', 'ap'].includes(s.f) ? s.f : 'cl'; }
+const WE_AUTHS = ['النيابة العامة', 'الإدارة العامة للتحقيقات'];
+function weAuth(M) { if (M.key === 'jn') return 'النيابة العامة'; const e = $('#we_auth'); return (e && e.value) || 'النيابة العامة'; }
 function weCfg() { const k = weModeKey(); return k === 'lab' ? { key: 'lab', fromL: 'المقام من' } : Object.assign({ key: k }, WE_MODES[k]); }
-function wePre(d, M) {
-  if (!M.cri) return 'بعد الاطلاع على الأوراق وسماع المرافعة والمداولة:';
-  const acc = M.key === 'jm' ? weParties(d.from).concat(weParties(d.against)).filter(x => !/النيابة/.test(x)) : weParties(d.against);
-  return 'بعد الاطلاع على الأوراق وسماع طلبات النيابة العامة ودفاع ' + (acc.length > 1 ? 'المتهمين' : 'المتهم') + ' والمداولة:';
-}
+function wePre(d, M) { return M.cri ? 'بعد سماع المرافعة والاطلاع على الأوراق والمداولة:' : 'بعد الاطلاع على الأوراق وسماع المرافعة والمداولة:'; }   // V96: صيغة عامة لكل القضايا الجزائية
 function weCivil(d, M) { return M.cri ? weNumbered(weParties(d.civil)) : []; }
 function weTitle(d) {
   const M = weCfg(), a = weAppeals(d.appealNo), cv = d.circuit || (profKind() === 'lab' && M.key === 'lab' ? 'عمالي/2' : ''), c = cv ? ' ' + cv : '';
@@ -5426,7 +5437,7 @@ const FM_CATS = ['الشكل', 'المصاريف والأتعاب', 'المنط�
 let fmCat = '', fmEditId = null;
 function fmList() { RL.fm = RL.fm || []; return RL.fm; }
 function fmFill(t) { const d = weFields(); const m = { 'رقم_الاستئناف': d.appealNo, 'الدائرة': d.circuit, 'الجلسة': d.session, 'المستأنف': weParties(d.from).join(' و'), 'المستأنف_ضده': weParties(d.against).join(' و'), 'المستأنفين': weParties(d.from).join(' و'), 'المستأنف_ضدهم': weParties(d.against).join(' و'), 'الأتعاب': d.amount };
-  if (weCfg().key !== 'lab') Object.assign(m, { 'رقم_الدعوى': d.appealNo, 'رقم_القضية': d.appealNo, 'المدعي': m['المستأنف'], 'المدعى_عليه': m['المستأنف_ضده'], 'المتهم': m['المستأنف_ضده'], 'المقيدة': d.reg, 'المدعي_بالحق_المدني': weParties(d.civil).join(' و'), 'سلطة_الاتهام': m['المستأنف'] || 'النيابة العامة' });
+  if (weCfg().key !== 'lab') Object.assign(m, { 'رقم_الدعوى': d.appealNo, 'رقم_القضية': d.appealNo, 'المدعي': m['المستأنف'], 'المدعى_عليه': m['المستأنف_ضده'], 'المتهم': m['المستأنف_ضده'], 'المقيدة': d.reg, 'المدعي_بالحق_المدني': weParties(d.civil).join(' و'), 'سلطة_الاتهام': weAuth(weCfg()) });
   return String(t).replace(/\{([^{}]+)\}/g, (all, k) => { const v = m[k.trim().replace(/\s+/g, '_')]; return v ? v : '〖' + k.trim().replace(/_/g, ' ') + '〗'; }); }
 function fmInsert(f) {
   const ta = $('#we_body'), t = fmFill(f.text), a = ta.selectionStart != null ? ta.selectionStart : ta.value.length, b = ta.selectionEnd != null ? ta.selectionEnd : a;
@@ -5440,8 +5451,8 @@ const WE_SKELETON = 'مسودة بأسباب ومنطوق الحكم الصاد�
 // V94: هياكل لغير الاستئناف العمالي — عناوين ومواضع تعبئة [[…]] فقط، بلا نص قانوني ولا أسباب (مبدئية للمراجعة)
 const WE_SKEL_AP = 'مسودة بأسباب ومنطوق الحكم الصادر بالاستئناف رقم {رقم_الاستئناف} {الدائرة} الصادر بجلسة {الجلسة}\n\nالمقام من: {المستأنف}\n\nضد\n\n{المستأنف_ضده}\n\nبعد الاطلاع على الأوراق وسماع المرافعة والمداولة:\n\nوحيث إن وقائع الدعوى حسبما يبين من مطالعة الحكم المستأنف وسائر الأوراق تتحصل في أن [[سرد الوقائع وطلبات الخصوم أمام أول درجة، ومنطوق الحكم المستأنف وأسبابه]].\n\nوحيث إن المستأنف طعن على هذا القضاء بالاستئناف الماثل بصحيفة أودعت إدارة الكتاب بتاريخ [[تاريخ الإيداع]]، وطلب في ختامها [[الطلبات]]، ونعى على الحكم المستأنف [[أوجه النعي]].\n\nوحيث إنه عن جواز الاستئناف وشكله فإنه [[بحث الجواز والشكل — قرار المحكمة]].\n\n[[الدفوع الشكلية إن وُجدت — كل دفع في فقرة مستقلة]]\n\nوحيث إنه عن الموضوع — إن كان له مقتضى بعد الفصل في الشكل — فإنه [[حلقات الاستدلال والرد على أوجه النعي — من مادتك أنت]].\n\nفلهذه الأسباب\n\nحكمت المحكمة: [[المنطوق — يسجّله القاضي]]، وألزمت [[الطرف المحكوم عليه]] المصروفات ومبلغ {الأتعاب} مقابل أتعاب المحاماة الفعلية.\n';
 const WE_SKEL_CL = 'مسودة بأسباب ومنطوق الحكم الصادر في الدعوى رقم {رقم_الدعوى} {الدائرة} الصادر بجلسة {الجلسة}\n\nالمرفوعة من: {المدعي}\n\nضد\n\n{المدعى_عليه}\n\nبعد الاطلاع على الأوراق وسماع المرافعة والمداولة:\n\nوحيث إن وقائع الدعوى تتحصل حسبما يبين من سائر الأوراق في أن المدعي أقام دعواه بصحيفة أودعت إدارة الكتاب بتاريخ [[تاريخ الإيداع]]، طلب في ختامها [[الطلبات]]، على سند من [[سند الدعوى]].\n\n[[ما تم في الدعوى: الجلسات، المستندات والمذكرات، الخبرة أو التحقيق إن وُجدا]]\n\nوحيث إنه عن [[الاختصاص وقبول الدعوى والدفوع الشكلية — كل دفع في فقرة مستقلة]].\n\nوحيث إنه عن الموضوع فإنه [[حلقات الاستدلال — من مادتك أنت]].\n\nفلهذه الأسباب\n\nحكمت المحكمة: [[المنطوق — يسجّله القاضي]]، وألزمت [[الطرف المحكوم عليه]] المصروفات ومبلغ {الأتعاب} مقابل أتعاب المحاماة الفعلية.\n';
-const WE_SKEL_JN = 'مسودة بأسباب ومنطوق الحكم الصادر في القضية رقم {رقم_القضية} {الدائرة} والمقيدة برقم {المقيدة} الصادر بجلسة {الجلسة}\n\nالمرفوعة من: {سلطة_الاتهام}\n\nضد\n\n{المتهم}\n\nبعد الاطلاع على الأوراق وسماع طلبات النيابة العامة ودفاع المتهم والمداولة:\n\nوحيث إن النيابة العامة أسندت إلى المتهم أنه في يوم [[التاريخ]] بدائرة [[المخفر/المنطقة]]: [[وصف التهمة كما ورد في أمر الإحالة]]، وطلبت عقابه بالمواد [[مواد الاتهام]].\n\n[[ما تم في الدعوى: الجلسات، الحضور، الإنكار أو الاعتراف، الدفاع ومذكراته]]\n\n[[الدفوع — كل دفع في فقرة مستقلة]]\n\nوحيث إنه عن موضوع الدعوى الجزائية فإنه [[أدلة الثبوت أو النفي وحلقات الاستدلال — من مادتك أنت]].\n\n[[الدعوى المدنية التبعية إن وُجدت]]\n\nفلهذه الأسباب\n\nحكمت المحكمة: [[المنطوق — يسجّله القاضي]].\n';
-const WE_SKEL_JM = 'مسودة بأسباب ومنطوق الحكم الصادر بالاستئناف رقم {رقم_الاستئناف} {الدائرة} والمقيدة برقم {المقيدة} الصادر بجلسة {الجلسة}\n\nالمقام من: {المستأنف}\n\nضد\n\n{المستأنف_ضده}\n\nبعد الاطلاع على الأوراق وسماع طلبات النيابة العامة ودفاع المتهم والمداولة:\n\nوحيث إن النيابة العامة أسندت إلى المتهم أنه في يوم [[التاريخ]] بدائرة [[المخفر/المنطقة]]: [[وصف التهمة]]، وطلبت عقابه بالمواد [[مواد الاتهام]].\n\nوحيث إن محكمة أول درجة قضت بجلسة [[التاريخ]] [[منطوق الحكم المستأنف]]، فاستأنفه [[المستأنف]] بتاريخ [[تاريخ التقرير بالاستئناف]] طالبًا [[الطلبات]].\n\nوحيث إنه عن شكل الاستئناف فإنه [[بحث الشكل — قرار المحكمة]].\n\n[[الدفوع — كل دفع في فقرة مستقلة]]\n\nوحيث إنه عن الموضوع فإنه [[حلقات الاستدلال — من مادتك أنت]].\n\nفلهذه الأسباب\n\nحكمت المحكمة: [[المنطوق — يسجّله القاضي]].\n';
+const WE_SKEL_JN = 'مسودة بأسباب ومنطوق الحكم الصادر في القضية رقم {رقم_القضية} {الدائرة} والمقيدة برقم {المقيدة} الصادر بجلسة {الجلسة}\n\nالمرفوعة من: {سلطة_الاتهام}\n\nضد\n\n{المتهم}\n\nبعد سماع المرافعة والاطلاع على الأوراق والمداولة:\n\nوحيث إن {سلطة_الاتهام} أسندت إلى المتهم أنه في يوم [[التاريخ]] بدائرة [[المخفر/المنطقة]]: [[وصف التهمة كما ورد في أمر الإحالة]]، وطلبت عقابه بالمواد [[مواد الاتهام]].\n\n[[ما تم في الدعوى: الجلسات، الحضور، الإنكار أو الاعتراف، الدفاع ومذكراته]]\n\n[[الدفوع — كل دفع في فقرة مستقلة]]\n\nوحيث إنه عن موضوع الدعوى الجزائية فإنه [[أدلة الثبوت أو النفي وحلقات الاستدلال — من مادتك أنت]].\n\n[[الدعوى المدنية التبعية إن وُجدت]]\n\nفلهذه الأسباب\n\nحكمت المحكمة: [[المنطوق — يسجّله القاضي]].\n';
+const WE_SKEL_JM = 'مسودة بأسباب ومنطوق الحكم الصادر بالاستئناف رقم {رقم_الاستئناف} {الدائرة} والمقيدة برقم {المقيدة} الصادر بجلسة {الجلسة}\n\nالمقام من: {المستأنف}\n\nضد\n\n{المستأنف_ضده}\n\nبعد سماع المرافعة والاطلاع على الأوراق والمداولة:\n\nوحيث إن {سلطة_الاتهام} أسندت إلى المتهم أنه في يوم [[التاريخ]] بدائرة [[المخفر/المنطقة]]: [[وصف التهمة]]، وطلبت عقابه بالمواد [[مواد الاتهام]].\n\nوحيث إن محكمة أول درجة قضت بجلسة [[التاريخ]] [[منطوق الحكم المستأنف]]، فاستأنفه [[المستأنف]] بتاريخ [[تاريخ التقرير بالاستئناف]] طالبًا [[الطلبات]].\n\nوحيث إنه عن شكل الاستئناف فإنه [[بحث الشكل — قرار المحكمة]].\n\n[[الدفوع — كل دفع في فقرة مستقلة]]\n\nوحيث إنه عن الموضوع فإنه [[حلقات الاستدلال — من مادتك أنت]].\n\nفلهذه الأسباب\n\nحكمت المحكمة: [[المنطوق — يسجّله القاضي]].\n';
 function weSkelText() { const k = weCfg().key; return k === 'lab' ? (profKind() === 'lab' ? WE_SKELETON : WE_SKEL_AP) : k === 'ap' ? WE_SKEL_AP : k === 'cl' ? WE_SKEL_CL : k === 'jm' ? WE_SKEL_JM : WE_SKEL_JN; }
 // V94: تطبيق ملف الدائرة على حقول «تصدير Word» — في الاستئناف العمالي تُعاد الحقول كما هي حرفيًا
 let WE_ORIG = null, WE_CLR = false, WE_NIY = false;
@@ -5455,17 +5466,18 @@ function weProfApply() {
   help.innerHTML = WE_ORIG.help;
   if (labKind) { if (WE_CLR && !cir.value.trim()) cir.value = 'عمالي/2'; WE_CLR = false; }
   else { if (cir.value.trim() === 'عمالي/2') { cir.value = ''; WE_CLR = true; } cir.placeholder = M.cph || 'مثال: مدني/3'; }
-  if (WE_NIY && !(M.key === 'jn' || M.key === 'jh') && fr.value.trim() === 'النيابة العامة') { fr.value = ''; WE_NIY = false; }
+  if (WE_NIY && !(M.key === 'jn' || M.key === 'jh') && WE_AUTHS.includes(fr.value.trim())) { fr.value = ''; WE_NIY = false; }
   if (M.key === 'lab') { X.hidden = true; return; }
   X.hidden = false;
   L[0].firstChild.nodeValue = M.no; L[3].firstChild.nodeValue = M.fa + ' '; L[4].firstChild.nodeValue = M.fe + ' ';
   $('#we_appeal').placeholder = M.noPh; fr.placeholder = M.pa; $('#we_against').placeholder = M.pe;
-  if ((M.key === 'jn' || M.key === 'jh') && !fr.value.trim()) { fr.value = 'النيابة العامة'; WE_NIY = true; }
+  if (M.key === 'jn' || M.key === 'jh') { const au = weAuth(M); if (!fr.value.trim() || (WE_NIY && WE_AUTHS.includes(fr.value.trim()))) { fr.value = au; WE_NIY = true; } }
+  $('#we_authl').hidden = !(M.key === 'jh' || M.key === 'jm'); $('#we_auth').onchange = () => weProfApply();
   const sel = $('#we_mode'), keys = P.kind === 'cri' ? ['jn', 'jh', 'jm'] : ['cl', 'ap'];
   sel.innerHTML = keys.map(k => '<option value="' + k + '"' + (k === M.key ? ' selected' : '') + '>' + WE_MODES[k].t + '</option>').join('');
-  sel.onchange = () => { const s = weModePref(); s[P.kind === 'cri' ? 'c' : 'f'] = sel.value; try { localStorage.setItem('tm_wemode', JSON.stringify(s)); } catch (e) {} weProfApply(); };
+  sel.onchange = () => { if (P.kind === 'cri') WE_CRI = { sub: P.sub, k: sel.value }; else { const s = weModePref(); s.f = sel.value; try { localStorage.setItem('tm_wemode', JSON.stringify(s)); } catch (e) {} } weProfApply(); };
   $('#we_regl').hidden = !M.reg; $('#we_civl').hidden = !M.cri; if (M.reg) $('#we_reg').placeholder = M.rph;
-  const vars = M.key === 'cl' ? '{رقم_الدعوى} {الدائرة} {الجلسة} {المدعي} {المدعى_عليه} {الأتعاب}' : M.key === 'ap' ? '{رقم_الاستئناف} {الدائرة} {الجلسة} {المستأنف} {المستأنف_ضده} {الأتعاب}' : M.key === 'jm' ? '{رقم_الاستئناف} {الدائرة} {المقيدة} {الجلسة} {المستأنف} {المستأنف_ضده} {المدعي_بالحق_المدني}' : '{رقم_القضية} {الدائرة} {المقيدة} {الجلسة} {سلطة_الاتهام} {المتهم} {المدعي_بالحق_المدني}';
+  const vars = M.key === 'cl' ? '{رقم_الدعوى} {الدائرة} {الجلسة} {المدعي} {المدعى_عليه} {الأتعاب}' : M.key === 'ap' ? '{رقم_الاستئناف} {الدائرة} {الجلسة} {المستأنف} {المستأنف_ضده} {الأتعاب}' : M.key === 'jm' ? '{رقم_الاستئناف} {الدائرة} {المقيدة} {الجلسة} {المستأنف} {المستأنف_ضده} {سلطة_الاتهام} {المدعي_بالحق_المدني}' : '{رقم_القضية} {الدائرة} {المقيدة} {الجلسة} {سلطة_الاتهام} {المتهم} {المدعي_بالحق_المدني}';
   help.innerHTML = WE_ORIG.help.replace(/\{رقم_الاستئناف\}[^(]*\{الأتعاب\}/, vars);
 }
 function weSkeleton() {
@@ -6525,6 +6537,117 @@ var TOUR_ICO = {
   ai: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4z"/><path d="M8 8h8M8 11.5h5"/></svg>',
   sync: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/></svg>'
 };
+// V97 — «كيف أستعمله؟»: جولة لكل قسم تضيء العنصر نفسه على الشاشة. الخطوة التي لا يوجد عنصرها تُعرض وسط الشاشة، و«skip» تُتخطّى إن غاب العنصر.
+var STOURS = {
+  r: [
+    { s: ['#rl_days'], t: 'الجلسات', p: 'كل يوم انعقاد زرّ في هذا الشريط. اختر الجلسة لتظهر قضاياها؛ اسحب الشريط أفقيًا، و📅 ليوم آخر.' },
+    { s: ['#rl_kashf'], t: 'استيراد الكشف', p: 'ارفع كشف الجلسة (PDF أو صورة) أو الصق جدوله. يُقرأ على جهازك، ويُحفظ منه رقم القضية والرقم الآلي والإعلان والقرار فقط — بلا أسماء.' },
+    { s: ['#rl_new'], t: '＋ قضية', p: 'أضف قضية يدويًا برقمها إن لم تكن في الكشف.' },
+    { s: ['#rl_list > [id^="rl-"]', '#rl_list'], t: 'بطاقة القضية', p: 'مطويّة في سطرين: الرقم والمرحلة والموعد. المسها لتفتح، ثم «قرار الجلسة» لتسجّل ما تقرر (تأجيل، حجز للحكم، صدر الحكم…)، فتنتقل القضية إلى موعدها التالي تلقائيًا.' },
+    { s: ['#rl_sessb'], t: 'وضع الجلسة', p: 'ورقة الرول الرقمية: قضية قضية بترتيب الجلسة، تسجّل الحضور والطلبات والقرار بلمسات، وتطبع المحاضر المختصرة.' },
+    { s: ['#rl_modes'], t: 'الجلسة · المحجوزة · الكل', p: '«المحجوزة» تعرض القضايا المحجوزة للحكم بمواعيد النطق وكاتب كل حكم، و«الكل» كل القضايا.' },
+    { s: ['#rl_dist'], skip: 1, t: 'التوزيع', p: 'وزّع الأحكام المحجوزة على أعضاء الهيئة، وأرسل الجدول صورة أو نصًا.' },
+    { s: ['#rl_cal', '#rl_morebtn'], t: 'التقويم وملف الدائرة', p: 'المحكمة ونوع الدائرة وأيام الانعقاد والعطل وأسماء الأعضاء. على الهاتف تجده تحت «⋯».' },
+    { s: ['#rl_sync', '#rl_morebtn'], t: 'المزامنة', p: 'انقل الرول بين أجهزتك بملف مشفّر في مجلدك السحابي: اجلب قبل أن تعمل، واحفظ بعد أن تنتهي.' }
+  ],
+  w: [
+    { s: ['#we_appeal'], t: 'بيانات الترويسة', p: 'الرقم والدائرة والجلسة والأطراف. تُملأ أيضًا من بطاقة الرول أو من «تحليل الملف» بزر «تعبئة».' },
+    { s: ['#we_x'], skip: 1, t: 'صيغة الترويسة', p: 'تتبع ملف الدائرة، ويمكن تغييرها لحكم بعينه.' },
+    { s: ['#we_body'], t: 'نص الحكم', p: 'الصق نصك من «حيث إن وقائع الدعوى…» حتى المنطوق. ما يحتاج قرارك ضعه بين 〖 〗 فيظهر بالأصفر.' },
+    { s: ['#we_skeleton'], t: 'هيكل الحكم', p: 'عناوين ومواضع تعبئة [[ ]] فقط — لا يكتب أسبابًا ولا منطوقًا.' },
+    { s: ['#fmbox'], t: 'صياغاتي', p: 'عباراتك المعتادة (الشكل، المصاريف، المنطوق…) تكتبها مرة واحدة وتدرجها بلمسة.' },
+    { s: ['#we_export'], t: 'تنزيل Word', p: 'ملف بخط Arial 14، وترقيم الصفحات، والرقم الآلي في التذييل. «معاينة» تعرضه قبل التنزيل.' }
+  ],
+  d: [
+    { s: ['#dr_text'], t: 'المسودة', p: 'الصق مسودة الحكم.' },
+    { s: ['#dr_claims'], skip: 1, t: 'الطلبات', p: 'اختياري: الطلبات، ليُفحص شمول المنطوق لها.' },
+    { s: ['#dr_go'], t: 'افحص', p: 'فحص محلي على جهازك: الإحالات إلى الطعون والمواد، والأرقام، والوصلات. لا يصوغ ولا يرجّح.' },
+    { s: ['#dr_out'], t: 'النتائج', p: 'كل ملاحظة بموضعها وسندها من قاعدة التطبيق؛ ما لا سند له يُقال صراحة.' }
+  ],
+  i: [
+    { s: ['#in_text'], t: 'النص', p: 'الصق نص الحكم المستأنف أو الأوراق.' },
+    { s: ['label[for="in_files"]'], t: 'الصور أو PDF', p: 'أو ارفع صور الصفحات أو ملف PDF.' },
+    { s: ['#in_ocr'], skip: 1, t: 'قراءة ضوئية على جهازك', p: 'تستخرج النص من الصور دون إرسال شيء.' },
+    { s: ['#in_go'], t: 'حلّل', p: '✦ ذكاء: بعد التعتيم الإجباري يُرسل النص إلى أداة الذكاء التي تستعملها، ثم تظهر بطاقة القضية لتراجعها.' },
+    { s: ['#in_import'], t: 'استيراد ملخص مرجعي', p: 'الصق الملخص المرجعي (JSON) فيُملأ بلا قراءة ضوئية وبلا أسماء.' }
+  ],
+  x: [
+    { s: ['label[for="msk_files"]'], t: 'اختر الملف', p: 'PDF أو صور الأوراق.' },
+    { s: ['#msk_go'], t: 'اكشف وعتّم', p: 'يقرأ الصفحات على جهازك ويعتّم الأسماء والأرقام المدنية والهواتف. لا يُرسل شيء.' },
+    { s: ['#msk_pages > *', '#msk_mode'], t: 'راجع كل صفحة', p: 'بعد الكشف تظهر الصفحات هنا: المس كلمة لتعتيمها أو إلغاء تعتيمها، أو اختر «رسم مستطيل».' },
+    { s: ['#msk_addq'], t: 'اسم فاته الكشف', p: 'اكتبه هنا فيُعتَّم في كل الصفحات.' },
+    { s: ['#msk_pdf'], t: 'تنزيل PDF معتّم', p: 'صور فقط بلا طبقة نص — ارفعه وحده في محادثاتك.' }
+  ],
+  s: [
+    { s: ['#ms_modesel'], t: 'نوع الحساب', p: 'حاسبة المستحقات، أو العامل المنزلي (68/2015).' },
+    { s: ['#ms_form'], t: 'البيانات', p: 'الأجر الأساسي والشامل، وتاريخا الالتحاق والانتهاء، وسبب الانتهاء، ورصيد الإجازات.' },
+    { s: ['#ms_out'], t: 'النتيجة', p: 'خطوة بخطوة بسندها من النص والمبادئ — مسودة عمل تُراجع.' },
+    { s: ['#ms_copy', '#ms_save'], t: 'نسخ وحفظ', p: 'انسخ البيان، أو احفظه في القضية ليدخل «حزمة القضية».' }
+  ],
+  e: [
+    { s: ['#dl_kind'], t: 'نوع الميعاد', p: 'الاستئناف، التمييز، الالتماس، الشطب، الوقف، سقوط الخصومة…' },
+    { s: ['#dl_start'], t: 'تاريخ البدء', p: 'يوم الحدث؛ لا يُحسب في الميعاد.' },
+    { s: ['#dl_opts'], skip: 1, t: 'الخيارات', p: 'البدء من الإعلان، والموطن خارج الكويت، والعطل.' },
+    { s: ['#dl_out'], t: 'النتيجة', p: 'آخر يوم في الميعاد مع المادة التي بُني عليها، ويمكن إضافته إلى مواعيد القضية.' }
+  ],
+  c: [
+    { s: ['#k_type'], t: 'المعطيات', p: 'أدخل معطيات القضية: نوع العقد والأجر والتواريخ وسبب الانتهاء.' },
+    { s: ['#k_out'], t: 'النتيجة', p: 'المواعيد والنصاب والمستحقات المحتملة مع سندها — استرشادية لا تحسم شيئًا.' }
+  ],
+  l: [
+    { s: ['#lawq'], t: 'البحث في النصوص', p: 'ابحث بكلمة أو برقم المادة.' },
+    { s: ['#lawsel'], t: 'القانون', p: 'اختر القانون أو القرار.' },
+    { s: ['#lawlist'], t: 'المواد', p: 'كل مادة بنصها النافذ، والمعدَّلة موسومة ومعها نصها الأصلي.' }
+  ],
+  f: [
+    { s: ['#casenew'], t: 'ملف جديد', p: 'أنشئ ملفًا باسم القضية، ثم أضف إليه المبادئ من لوحة أي مبدأ.' },
+    { s: ['#caselist'], t: 'ملفاتي', p: 'على جهازك، وتنتقل بين أجهزتك بالمزامنة المشفّرة، بلا أسماء خصوم.' }
+  ],
+  t: [
+    { s: ['#tl_q'], t: 'المسألة', p: 'اكتب المسألة أو رقم المادة، أو اختر موضوعًا.' },
+    { s: ['#tl_go'], t: 'الخط الزمني', p: 'أحكام التمييز المتصلة مرتبة زمنيًا لتتبيّن استقرار القاعدة.' },
+    { s: ['#tl_ai'], t: 'حلّل الاستقرار', p: '✦ ذكاء، اختياري.' }
+  ],
+  a: [
+    { s: ['#askq'], t: 'سؤالك', p: 'اكتب سؤالك القانوني.' },
+    { s: ['#asksend'], t: 'اسأل', p: 'يجيب من قاعدة التطبيق وحدها بإحالة، أو يقول: لا يوجد سند في قاعدة التطبيق.' }
+  ]
+};
+var ST = null;
+function stVis(e) { if (!e) return null; const r = e.getBoundingClientRect(); return (r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== 'hidden') ? e : null; }
+function stFind(st) { for (const q of st.s) { let e = null; try { e = document.querySelector(q); } catch (x) { e = null; } if (e && !stVis(e) && e.closest('label')) e = e.closest('label'); if (stVis(e)) return e; } return null; }
+function stSteps(v) { return (STOURS[v] || []).filter(st => !st.skip || stFind(st)); }
+function stShow(v) { const L = stSteps(v); if (!L.length) return; ST = { v, L, i: 0 }; $('#stour').classList.remove('hidden'); stRender(); }
+function stEnd() { $('#stour').classList.add('hidden'); ST = null; }
+function stRender() {
+  if (!ST) return; const st = ST.L[ST.i], e = stFind(st), ring = $('#st_ring'), bub = $('#st_bub'), dim = $('#st_dim');
+  $('#st_t').textContent = st.t; $('#st_p').textContent = st.p; $('#st_n').textContent = (ST.i + 1) + ' من ' + ST.L.length;
+  $('#st_prev').style.visibility = ST.i ? 'visible' : 'hidden'; $('#st_next').textContent = ST.i === ST.L.length - 1 ? 'تم' : 'التالي';
+  const place = () => {
+    const W = document.documentElement.clientWidth, H = window.innerHeight, bh = bub.offsetHeight, bw = bub.offsetWidth, bn = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bnh')) || 0;
+    if (!e) { ring.classList.add('hidden'); dim.classList.remove('off'); bub.style.left = Math.round((W - bw) / 2) + 'px'; bub.style.top = Math.round((H - bh) / 2) + 'px'; return; }
+    const r = e.getBoundingClientRect(), pad = 6, top = Math.max(4, r.top - pad), h = Math.min(r.height + pad * 2, H - top - 4);
+    ring.classList.remove('hidden'); dim.classList.add('off');
+    Object.assign(ring.style, { left: Math.max(4, r.left - pad) + 'px', top: top + 'px', width: Math.min(r.width + pad * 2, W - 8) + 'px', height: Math.max(20, h) + 'px' });
+    let y = top + h + 10; if (y + bh > H - bn - 8) y = top - bh - 10; if (y < 8) y = Math.max(8, H - bn - bh - 8);
+    const x = Math.min(Math.max(16, r.left + r.width / 2 - bw / 2), W - bw - 16);
+    bub.style.left = Math.round(x) + 'px'; bub.style.top = Math.round(y) + 'px';
+  };
+  if (e) { const r = e.getBoundingClientRect(); if (r.top < 60 || r.bottom > window.innerHeight - 120) e.scrollIntoView({ block: 'center' }); }
+  place(); setTimeout(place, 60);
+}
+$('#st_x').onclick = stEnd; $('#st_dim').onclick = stEnd;
+$('#st_prev').onclick = () => { if (ST && ST.i) { ST.i--; stRender(); } };
+$('#st_next').onclick = () => { if (!ST) return; if (ST.i < ST.L.length - 1) { ST.i++; stRender(); } else stEnd(); };
+window.addEventListener('resize', () => { if (ST) stRender(); });
+document.addEventListener('keydown', e => { if (ST && e.key === 'Escape') stEnd(); });
+(function stButtons() {
+  const WV = { lawwrap: 'l', chkwrap: 'c', casewrap: 'f', askwrap: 'a', intakewrap: 'i', drwrap: 'd', tlwrap: 't', wewrap: 'w', mstwrap: 's', dlwrap: 'e', mskwrap: 'x', rlwrap: 'r' };
+  Object.keys(WV).forEach(id => { const w = document.getElementById(id), v = WV[id]; if (!w || !STOURS[v]) return; const n = w.querySelector(':scope > .note') || w.querySelector('.note'); if (!n || n.querySelector('[data-stour]')) return;
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'more'; b.dataset.stour = v; b.textContent = 'كيف أستعمله؟'; b.onclick = () => stShow(v); n.appendChild(document.createTextNode(' ')); n.appendChild(b); });
+})();
+window.stShow = stShow;
+
 var TOUR = [
   { ico: 'home', t: 'مرحبًا بك في «عمّالي»', p: 'منضدة عمل الدائرة العمالية: مبادئ محكمة التمييز، والتشريعات، وإدارة رول الجلسة، وحساب المستحقات والمواعيد، وإخراج الحكم — كلها على جهازك وتعمل دون اتصال. حجم الخط والإضاءة من زر القائمة ☰.' },
   { ico: 'roll', t: 'رول الجلسة — قلب التطبيق', p: 'اختر الجلسة من شريط الأيام (اسحبه أفقيًا، أو 📅 ليوم آخر)، واستورد كشفها. كل قضية بطاقة مطويّة في سطرين: الرقم والمرحلة والموعد وكاتب الحكم ومؤشّر المسار ●●●○ — اضغطها لتفتح. «قرار الجلسة» ظاهر، وبقية الإجراءات في «⋯ المزيد». لا يُحفظ اسم خصم.' },
