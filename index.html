@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260928192125">
+<meta name="amali-build" content="20260928194909">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -191,6 +191,26 @@ html.locked #lockscr .lkform{display:flex}
 .tmodes button{flex:1 1 0;min-width:0;border:0;background:transparent;color:var(--ink2);padding:10px 8px;font:600 13.5px inherit;cursor:pointer;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
 .tmodes button+button{border-inline-start:1px solid var(--line2)}
 .tmodes button.on{background:var(--accent);color:var(--accent-ink)}
+.tvh{margin:10px 2px 6px;font-size:12.5px;font-weight:700;color:var(--ink3)}
+.tourhm{display:flex;flex-direction:column;gap:6px;margin-top:4px}.tourhm>span:first-child{font-size:13px;font-weight:700;color:var(--ink2)}.tourhm .tmodes{margin:0}.tourhm .mnote{font-size:12.5px;color:var(--ink3);line-height:1.7}
+.ctabs button small{font-size:11.5px;opacity:.75}
+@media (max-width:520px){.ctabs{flex-wrap:nowrap}.ctabs button{flex:1 1 auto;padding:7px 8px;font-size:13px;white-space:nowrap}.ctabs button small{display:none}}
+.tcore{flex:1 1 100%}
+.rolltile{display:flex;align-items:center;gap:14px;width:100%;box-sizing:border-box;border:1px solid var(--line);background:var(--accent-soft);color:var(--ink);border-radius:16px;padding:12px 14px;margin:0 0 8px;cursor:pointer;font:inherit;text-align:start}
+.rolltile:hover{border-color:var(--accent)}
+.rolltile .ic{flex:0 0 auto;width:58px;height:58px;border-radius:17px;display:grid;place-items:center;background:var(--accent);color:var(--accent-ink)}
+.rolltile .ic svg{width:30px;height:30px}
+.rolltile .rt{display:flex;flex-direction:column;gap:3px;min-width:0}
+.rolltile b{font-size:17px}
+.rolltile .rsub{font-size:13.5px;color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rolltile .go{margin-inline-start:auto;font-size:22px;color:var(--accent)}
+.tmore{flex:1 1 100%;min-width:0}
+.tmore>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border:1px solid var(--line2);border-radius:999px;background:var(--panel);font-weight:700;font-size:14.5px;color:var(--ink2)}
+.tmore>summary::-webkit-details-marker{display:none}
+.tmore>summary:after{content:'▾';font-size:12px}
+.tmore[open]>summary:after{content:'▴'}
+.tmore>summary small{font-weight:500;color:var(--ink3)}
+.tmore[open]>summary{margin-bottom:14px}
 .tmcust{font-size:12.5px;color:var(--warn);margin:0 0 10px;font-weight:600}
 .tvlist{display:grid;grid-template-columns:1fr 1fr;gap:2px 14px}
 @media (max-width:600px){.tvlist{grid-template-columns:1fr}}
@@ -1357,7 +1377,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     <button class="ib hidden" id="lockbtn" title="اقفل التطبيق الآن" aria-label="اقفل التطبيق الآن" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
     <button class="ib" id="menubtn" title="الإعدادات والتعليمات" aria-label="الإعدادات والتعليمات" aria-haspopup="dialog" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
-  <nav class="nav" id="nav" aria-label="التنقل"><div class="grp" id="grp" role="tablist"><button type="button" data-g="home" title="الرئيسية" aria-label="الرئيسية"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg></button><button type="button" data-g="research">البحث</button><button type="button" data-g="case">القضية</button><button type="button" data-g="write">الكتابة</button><button type="button" data-g="ai">المساعد</button></div><span class="sep" aria-hidden="true"></span><div class="seg" id="seg"><button type="button" data-v="p" data-g="research" class="on">المبادئ</button><button type="button" data-v="l" data-g="research">التشريعات</button><button type="button" data-v="m" data-g="research">الخرائط</button><button type="button" data-v="t" data-g="research">الخط الزمني</button><button type="button" data-v="r" data-g="case">رول الجلسة</button><button type="button" data-v="i" data-g="case">تحليل الملف</button><button type="button" data-v="x" data-g="case">إخفاء الهوية</button><button type="button" data-v="c" data-g="case">التحقق</button><button type="button" data-v="s" data-g="case">حاسبة المستحقات</button><button type="button" data-v="e" data-g="case">المواعيد الإجرائية</button><button type="button" data-v="f" data-g="case">ملفاتي</button><button type="button" data-v="d" data-g="write">فحص المسودة</button><button type="button" data-v="w" data-g="write">Word وصياغاتي</button><button type="button" data-v="a" data-g="ai">المساعد</button></div><button class="ib gsbtn gsnav" id="gsbtn2" title="بحث شامل: مادة، طعن، مبدأ، أداة (Ctrl+K)" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg><span>بحث شامل</span><span class="kbd gskbd">Ctrl K</span></button></nav>
+  <nav class="nav" id="nav" aria-label="التنقل"><div class="grp" id="grp" role="tablist"><button type="button" data-g="home" title="الرئيسية" aria-label="الرئيسية"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg></button><button type="button" data-g="research">البحث</button><button type="button" data-g="case">القضية</button><button type="button" data-g="write">الكتابة</button><button type="button" data-g="ai">المساعد</button></div><span class="sep" aria-hidden="true"></span><div class="seg" id="seg"><button type="button" data-v="p" data-g="research" class="on">المبادئ</button><button type="button" data-v="l" data-g="research">التشريعات</button><button type="button" data-v="m" data-g="research">الخرائط</button><button type="button" data-v="t" data-g="research">الخط الزمني</button><button type="button" data-v="r" data-g="case">رول الجلسة</button><button type="button" data-v="i" data-g="case">تحليل الملف</button><button type="button" data-v="x" data-g="case">إخفاء الهوية</button><button type="button" data-v="s" data-g="case">حاسبة المستحقات</button><button type="button" data-v="e" data-g="case">المواعيد الإجرائية</button><button type="button" data-v="f" data-g="case">ملفاتي</button><button type="button" data-v="d" data-g="write">فحص المسودة</button><button type="button" data-v="w" data-g="write">Word وصياغاتي</button><button type="button" data-v="a" data-g="ai">المساعد</button></div><button class="ib gsbtn gsnav" id="gsbtn2" title="بحث شامل: مادة، طعن، مبدأ، أداة (Ctrl+K)" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg><span>بحث شامل</span><span class="kbd gskbd">Ctrl K</span></button></nav>
 </header>
 <nav class="bnav" id="bnav" aria-label="التنقل السفلي"><button type="button" data-g="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg><span>الرئيسية</span></button><button type="button" data-g="research"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20M8 7h8M8 10.5h6"/></svg><span>البحث</span></button><button type="button" data-g="case"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M8 13h8"/></svg><span>القضية</span></button><button type="button" data-g="write"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M13 7l3 3"/></svg><span>الكتابة</span></button><button type="button" data-g="ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4z"/><path d="M8 8h8M8 11.5h5"/></svg><span>المساعد</span></button></nav>
 
@@ -1546,7 +1566,8 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 </div>
 
 <div class="chkwrap" id="chkwrap">
-  <div class="note">أداة استرشادية: لا تحسم شيئًا، والتقدير للمحكمة. <button type="button" class="more" data-help>المزيد</button></div>
+  <div class="note">فحص سريع: أداة استرشادية لا تحسم شيئًا، والتقدير للمحكمة. المعطيات المشتركة (الأجر والتاريخان ونوع العقد) تنتقل بين تبويبات الحاسبة. <button type="button" class="more" data-help>المزيد</button></div>
+  <div class="mstmode ctabs" id="k_tabs" role="tablist"><button type="button" data-m="c" class="on">فحص سريع</button><button type="button" data-m="p">حساب تفصيلي <small>(6/2010)</small></button><button type="button" data-m="d">عامل منزلي <small>(68/2015)</small></button></div>
   <div class="chkgrid">
     <section class="chkform">
       <h3>معطيات القضية</h3>
@@ -1745,7 +1766,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 </div>
 <div class="intakewrap" id="mstwrap">
   <div class="note">حساب محلي — الأرقام مسودة عمل تخضع لمراجعة المحكمة. <button type="button" class="more" data-help>المزيد</button></div>
-  <div class="mstmode" id="ms_modesel" role="tablist"><button type="button" data-m="p" class="on">عامل في القطاع الأهلي (6/2010)</button><button type="button" data-m="d">عامل منزلي (68/2015)</button></div>
+  <div class="mstmode ctabs" id="ms_modesel" role="tablist"><button type="button" data-m="c">فحص سريع</button><button type="button" data-m="p" class="on">حساب تفصيلي <small>(6/2010)</small></button><button type="button" data-m="d">عامل منزلي <small>(68/2015)</small></button></div>
   <div class="ingrid mstgrid" id="ms_pgrid">
     <section class="inbox mstform" id="ms_form">
       <h3>الأجر</h3>
@@ -1982,7 +2003,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V102 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V103 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -2411,10 +2432,10 @@ function relCount(a) { const ks = relKeys(a); return P.filter(p => p.articles.so
 // ---- navigation groups (V44): البحث · القضية · الكتابة · المساعد
 const NAV_GROUPS = [
   { g: 'research', name: 'البحث', sub: 'المبادئ والتشريعات والخرائط والخط الزمني', views: ['p', 'l', 'm', 't'] },
-  { g: 'case', name: 'القضية', sub: 'الجلسات وأوراق القضية وحساباتها وملفاتها', views: ['r', 'i', 'x', 'c', 's', 'e', 'f'] },
+  { g: 'case', name: 'القضية', sub: 'الجلسات وأوراق القضية وحساباتها وملفاتها', views: ['r', 'i', 'x', 's', 'e', 'f'] },
   { g: 'write', name: 'الكتابة', sub: 'مراجعة المسودة وإخراجها', views: ['d', 'w'] },
   { g: 'ai', name: 'المساعد', sub: 'سؤال بالعربية بإحالة من قاعدة التطبيق', views: ['a'] }];
-const VIEW_GROUP = { h: 'home' }; NAV_GROUPS.forEach(G => G.views.forEach(v => VIEW_GROUP[v] = G.g));
+const VIEW_GROUP = { h: 'home', c: 'case' }; NAV_GROUPS.forEach(G => G.views.forEach(v => VIEW_GROUP[v] = G.g));
 let NAV_LAST = {}; try { NAV_LAST = JSON.parse(localStorage.getItem('tm_navlast') || '{}') || {}; } catch (e) {}
 function navSync(v) {
   const g = VIEW_GROUP[v] || 'research';
@@ -2441,7 +2462,8 @@ function bgWork(kind, on) {
 }
 try { window.bgWork = bgWork; } catch (e) {}
 function setView(v) {
-  navSync(v);
+  navSync(v === 'c' ? 's' : v); /* V103: «التحقق» تبويب «فحص سريع» داخل الحاسبة */
+  try { calcShare(v); } catch (e) {}
   $('#lawwrap').classList.toggle('show', v === 'l');
   $('#mapwrap').classList.toggle('show', v === 'm');
   $('#chkwrap').classList.toggle('show', v === 'c');
@@ -2505,6 +2527,18 @@ function rlHomeAlert() {
 }
 let TOOL_HIDE = new Set(); try { TOOL_HIDE = new Set(JSON.parse(localStorage.getItem('tm_hide') || '[]')); } catch (e) {}
 let PROF_HIDE = new Set();
+// V103: واجهة الرئيسية «أساسية» (الافتراضي للجميع) أو «كاملة»؛ الأساسية تُظهر خمس أدوات والباقي في «كل الأدوات» بضغطة واحدة
+const HOME_CORE = ['r', 'p', 'l', 'w', 'x'];
+let HOME_MODE = 'basic'; try { HOME_MODE = localStorage.getItem('tm_homemode') === 'full' ? 'full' : 'basic'; } catch (e) {}
+function setHomeMode(m) { HOME_MODE = m === 'full' ? 'full' : 'basic'; try { localStorage.setItem('tm_homemode', HOME_MODE); } catch (e) {} if (document.body.classList.contains('home')) renderHome(); }
+function rollTileSub() {
+  if (!RL.cards.length) return 'ابدأ باستيراد كشف الجلسة';
+  const t = rlToday(), nx = RL.cards.map(c => c.next).filter(x => x && x >= t).sort(), s = nx[0];
+  const cnt = n => n === 1 ? 'قضية واحدة' : n === 2 ? 'قضيتان' : n + ' ' + (n <= 10 ? 'قضايا' : 'قضية');
+  if (!s) return cnt(RL.cards.length) + ' في الرول';
+  const n = nx.filter(x => x === s).length, dd = rlDays(s);
+  return (dd === 0 ? 'جلسة اليوم' : dd === 1 ? 'جلسة الغد' : 'جلسة ' + rlDay(s)) + ' ' + rlFmt(s) + ' · ' + cnt(n);
+}
 function isHid(v) { return TOOL_HIDE.has(v) || PROF_HIDE.has(v); }
 function toolVisApply() { document.querySelectorAll('#seg button[data-v]').forEach(b => b.classList.toggle('hidden', isHid(b.dataset.v))); }
 // V61: أدوات الذكاء (تعمل عبر Claude) — يوسَم بها، ووضع «بلا أدوات الذكاء» يخفيها لمن لا اشتراك له
@@ -2515,17 +2549,29 @@ function setToolMode(m) { TOOL_HIDE = m === 'noai' ? new Set(AI_TOOLS) : new Set
 function toolVisRender() {
   const box = $('#toolvis'); if (!box) return; const m = toolMode();
   const db = $('#dbody'); const sc = db ? db.scrollTop : 0;
-  box.innerHTML = '<div class="tmodes"><button type="button" class="' + (m === 'full' ? 'on' : '') + '" data-tm="full">كامل</button><button type="button" class="' + (m === 'noai' ? 'on' : '') + '" data-tm="noai">بلا أدوات الذكاء</button></div>'
+  box.innerHTML = '<p class="tvh">واجهة الرئيسية</p><div class="tmodes" id="hmodes"><button type="button" class="' + (HOME_MODE === 'basic' ? 'on' : '') + '" data-hm="basic">أساسية — 5 أدوات</button><button type="button" class="' + (HOME_MODE === 'full' ? 'on' : '') + '" data-hm="full">كاملة — كل الأدوات</button></div><p class="tvh">الأدوات الظاهرة</p><div class="tmodes"><button type="button" class="' + (m === 'full' ? 'on' : '') + '" data-tm="full">كامل</button><button type="button" class="' + (m === 'noai' ? 'on' : '') + '" data-tm="noai">بلا أدوات الذكاء</button></div>'
     + (m === 'custom' ? '<p class="tmcust">وضع مخصّص — حسب اختيارك أدناه</p>' : '')
-    + '<div class="tvlist">' + HOME_TILES.filter(t => !PROF_HIDE.has(t[0])).map(t => '<label class="mskopt"><input type="checkbox" data-tv="' + t[0] + '"' + (TOOL_HIDE.has(t[0]) ? '' : ' checked') + '> ' + t[1] + (AI_TOOLS.has(t[0]) ? ' <small class="aitag">يتطلب أداة ذكاء</small>' : '') + '</label>').join('') + '</div>';
+    + '<div class="tvlist">' + HOME_TILES.filter(t => !PROF_HIDE.has(t[0]) && t[0] !== 'c').map(t => '<label class="mskopt"><input type="checkbox" data-tv="' + t[0] + '"' + (TOOL_HIDE.has(t[0]) ? '' : ' checked') + '> ' + t[1] + (AI_TOOLS.has(t[0]) ? ' <small class="aitag">يتطلب أداة ذكاء</small>' : '') + '</label>').join('') + '</div>';
   if (db) db.scrollTop = sc;
   box.querySelectorAll('[data-tm]').forEach(b => b.onclick = () => setToolMode(b.dataset.tm));
+  box.querySelectorAll('[data-hm]').forEach(b => b.onclick = () => { setHomeMode(b.dataset.hm); toolVisRender(); });
   box.querySelectorAll('[data-tv]').forEach(i => i.onchange = () => { if (i.checked) TOOL_HIDE.delete(i.dataset.tv); else TOOL_HIDE.add(i.dataset.tv); toolSave(); toolVisRender(); });
 }
 function renderHome() {
   try { rlHomeAlert(); } catch (e) {}
   const tile = t => '<button type="button" class="tile app ' + t[4] + '" data-go="' + t[0] + '" title="' + esc(t[2]) + '" aria-label="' + esc(t[1]) + '">' + '<span class="ic">' + t[5] + (AI_TOOLS.has(t[0]) ? '<span class="aibadge" title="تستعمل أداة ذكاء اصطناعي (Claude أو غيرها) — بالنسخ واللصق، أو مباشرة داخل claude.ai">✦ ذكاء</span>' : '') + '</span><b>' + t[1] + '</b></button>';
-  $('#tiles').innerHTML = sfBar() + rlProfNote() + NAV_GROUPS.map(G => { const vs = G.views.filter(v => !isHid(v)); return vs.length ? '<section class="tgroup" data-g="' + G.g + '" style="--n:' + vs.length + '"><h3 class="tgh">' + G.name + '<small>' + G.sub + '</small></h3><div class="tiles">' + vs.map(v => HOME_TILES.find(t => t[0] === v)).filter(Boolean).map(tile).join('') + '</div></section>' : ''; }).join('');
+  const basic = HOME_MODE === 'basic', core = basic ? HOME_CORE.filter(v => !isHid(v)) : [];
+  const groups = NAV_GROUPS.map(G => { const vs = G.views.filter(v => !isHid(v) && !core.includes(v)); return vs.length ? '<section class="tgroup" data-g="' + G.g + '" style="--n:' + vs.length + '"><h3 class="tgh">' + G.name + '<small>' + G.sub + '</small></h3><div class="tiles">' + vs.map(v => HOME_TILES.find(t => t[0] === v)).filter(Boolean).map(tile).join('') + '</div></section>' : ''; }).join('');
+  let body = groups;
+  if (basic) {
+    const rest = NAV_GROUPS.reduce((n, G) => n + G.views.filter(v => !isHid(v) && !core.includes(v)).length, 0), R = HOME_TILES.find(t => t[0] === 'r'), cs = core.filter(v => v !== 'r');
+    let open = false; try { open = localStorage.getItem('tm_moreopen') === '1'; } catch (e) {}
+    body = '<section class="tgroup tcore" data-g="core" style="--n:' + cs.length + '">' + (core.includes('r') ? '<button type="button" class="rolltile" data-go="r" aria-label="رول الجلسة"><span class="ic">' + R[5] + '</span><span class="rt"><b>رول الجلسة</b><span class="rsub">' + esc(rollTileSub()) + '</span></span><span class="go" aria-hidden="true">←</span></button>' : '')
+      + '<div class="tiles">' + cs.map(v => HOME_TILES.find(t => t[0] === v)).filter(Boolean).map(tile).join('') + '</div></section>'
+      + (rest ? '<details class="tmore" id="tmore"' + (open ? ' open' : '') + '><summary>كل الأدوات <small>(' + rest + ')</small></summary><div class="tgroups">' + groups + '</div></details>' : '');
+  }
+  $('#tiles').innerHTML = sfBar() + rlProfNote() + body;
+  const tm = $('#tmore'); if (tm) tm.addEventListener('toggle', () => { try { localStorage.setItem('tm_moreopen', tm.open ? '1' : '0'); } catch (e) {} });
   $('#tiles').querySelectorAll('[data-go]').forEach(b => b.onclick = () => setView(b.dataset.go)); sfWire($('#tiles'));
   try { if (!HOME_ANIMED) { HOME_ANIMED = true; var rm = false; try { rm = matchMedia('(prefers-reduced-motion:reduce)').matches; } catch (e) {} if (!rm) { $('#tiles').querySelectorAll('.tiles').forEach(t => t.classList.add('anim')); setTimeout(() => $('#tiles').querySelectorAll('.tiles').forEach(t => t.classList.remove('anim')), 950); } } } catch (e) {}
   try { if (window.amaliBrief) window.amaliBrief(); } catch (e) {}
@@ -5941,6 +5987,26 @@ function dmInit() {
   g('dm_reset').onclick = () => { g('dm_form').querySelectorAll('input').forEach(i => { if (i.type === 'checkbox') i.checked = false; else i.value = ''; }); run(); };
   run();
 }
+// V103: تبويبات الحاسبة من «الفحص السريع» + مشاركة المعطيات المشتركة بين الفحص والحساب التفصيلي
+document.querySelectorAll('#k_tabs [data-m]').forEach(b => b.onclick = () => { if (b.dataset.m === 'c') return; setView('s'); mstMode(b.dataset.m); });
+let CALC_LAST = null, K_TOUCH = false;
+try { document.querySelector('#chkwrap .chkform').addEventListener('input', e => { if (e.isTrusted) K_TOUCH = true; }); document.querySelector('#chkwrap .chkform').addEventListener('change', e => { if (e.isTrusted) K_TOUCH = true; }); } catch (e) {}
+function calcShare(v) {
+  const prev = CALC_LAST; CALC_LAST = v; const g = id => document.getElementById(id);
+  const put = (el, val) => { if (!el || val === '' || val == null || el.value === String(val)) return false; el.value = val; return true; };
+  if (v === 'c' && prev === 's') {
+    let ch = false;
+    ch = put(g('k_w'), g('ms_total').value) || ch; ch = put(g('k_s'), g('ms_start').value) || ch; ch = put(g('k_e'), g('ms_end').value) || ch;
+    if (g('ms_total').value || g('ms_start').value) { ch = put(g('k_type'), g('ms_contract').value) || ch; ch = put(g('k_wt'), g('ms_pay').value) || ch; ch = put(g('k_nat'), g('ms_kw').checked ? 'kw' : 'x') || ch; }
+    if (ch) { K_TOUCH = true; g('k_type').dispatchEvent(new Event('input', { bubbles: true })); }
+  } else if (v === 's' && prev === 'c' && K_TOUCH) {
+    let ch = false;
+    if (g('ms_contract').value !== g('k_type').value) { g('ms_contract').value = g('k_type').value; g('ms_contract').dispatchEvent(new Event('change', { bubbles: true })); }
+    ch = put(g('ms_total'), g('k_w').value) || ch; ch = put(g('ms_start'), g('k_s').value) || ch; ch = put(g('ms_end'), g('k_e').value) || ch; ch = put(g('ms_pay'), g('k_wt').value) || ch;
+    if (g('ms_kw').checked !== (g('k_nat').value === 'kw')) { g('ms_kw').checked = g('k_nat').value === 'kw'; ch = true; }
+    if (ch) g('ms_total').dispatchEvent(new Event('input', { bubbles: true }));
+  }
+}
 function mstMode(m) {
   document.querySelectorAll('#ms_modesel [data-m]').forEach(b => b.classList.toggle('on', b.dataset.m === m));
   $('#ms_pgrid').hidden = m !== 'p'; $('#ms_dgrid').hidden = m !== 'd';
@@ -5948,7 +6014,7 @@ function mstMode(m) {
 }
 function initMst() {
   if (mstInit) return; mstInit = true;
-  document.querySelectorAll('#ms_modesel [data-m]').forEach(b => b.onclick = () => mstMode(b.dataset.m)); dmInit(); let mm = 'p'; try { mm = localStorage.getItem('tm_msmode') || 'p'; } catch (e) {} mstMode(mm);
+  document.querySelectorAll('#ms_modesel [data-m]').forEach(b => b.onclick = () => b.dataset.m === 'c' ? setView('c') : mstMode(b.dataset.m)); dmInit(); let mm = 'p'; try { mm = localStorage.getItem('tm_msmode') || 'p'; } catch (e) {} mstMode(mm);
   const g = id => $('#' + id);
   const REASON_MAIN = ['resign', 'emp', 'expiry'];
   function fillReasons() {
@@ -6605,7 +6671,7 @@ var STOURS = {
     { s: ['#msk_pdf'], t: 'تنزيل PDF معتّم', p: 'صور فقط بلا طبقة نص — ارفعه وحده في محادثاتك.' }
   ],
   s: [
-    { s: ['#ms_modesel'], t: 'نوع الحساب', p: 'حاسبة المستحقات، أو العامل المنزلي (68/2015).' },
+    { s: ['#ms_modesel'], t: 'تبويبات الحاسبة', p: '«فحص سريع» لقائمة التحقق، و«حساب تفصيلي» للمستحقات (6/2010)، و«عامل منزلي» (68/2015). الأجر والتاريخان ينتقلان بين الفحص والحساب.' },
     { s: ['#ms_form'], t: 'البيانات', p: 'الأجر الأساسي والشامل، وتاريخا الالتحاق والانتهاء، وسبب الانتهاء، ورصيد الإجازات.' },
     { s: ['#ms_out'], t: 'النتيجة', p: 'خطوة بخطوة بسندها من النص والمبادئ — مسودة عمل تُراجع.' },
     { s: ['#ms_copy', '#ms_save'], t: 'نسخ وحفظ', p: 'انسخ البيان، أو احفظه في القضية ليدخل «حزمة القضية».' }
@@ -6679,10 +6745,10 @@ document.addEventListener('keydown', e => { if (ST && e.key === 'Escape') stEnd(
 window.stShow = stShow;
 
 var TOUR = [
-  { ico: 'home', t: 'مرحبًا بك في «عمّالي»', p: 'منضدة عمل الدائرة العمالية: مبادئ محكمة التمييز، والتشريعات، وإدارة رول الجلسة، وحساب المستحقات والمواعيد، وإخراج الحكم — كلها على جهازك وتعمل دون اتصال. حجم الخط والإضاءة من زر القائمة ☰.' },
+  { ico: 'home', t: 'مرحبًا بك في «عمّالي»', p: 'منضدة عمل الدائرة العمالية: مبادئ محكمة التمييز، والتشريعات، وإدارة رول الجلسة، وحساب المستحقات والمواعيد، وإخراج الحكم — كلها على جهازك وتعمل دون اتصال. حجم الخط والإضاءة من زر القائمة ☰.', hm: true },
   { ico: 'roll', t: 'رول الجلسة — قلب التطبيق', p: 'اختر الجلسة من شريط الأيام (اسحبه أفقيًا، أو 📅 ليوم آخر)، واستورد كشفها. كل قضية بطاقة مطويّة في سطرين: الرقم والمرحلة والموعد وكاتب الحكم ومؤشّر المسار ●●●○ — اضغطها لتفتح. «قرار الجلسة» ظاهر، وبقية الإجراءات في «⋯ المزيد». لا يُحفظ اسم خصم.' },
   { ico: 'search', t: 'البحث والتشريعات', p: 'ابحث في المبادئ بالكلمة أو رقم الطعن، واطّلع على قانون العمل والمرافعات بنصهما. و«بحث شامل» (⌘K) يجمع المادة والطعن والأداة في نافذة واحدة.' },
-  { ico: 'calc', t: 'الحسابات والمواعيد', p: 'حاسبة المستحقات (وحاسبة العامل المنزلي) تحسب المكافأة والإجازات وبدل الإخطار خطوة بخطوة، وحاسبة المواعيد الإجرائية تحسب الميعاد بحساب م17 وامتداد العطلة. كلها مسودات تُراجَع.' },
+  { ico: 'calc', t: 'الحسابات والمواعيد', p: 'حاسبة المستحقات بثلاثة تبويبات (فحص سريع، وحساب تفصيلي، وعامل منزلي) تحسب المكافأة والإجازات وبدل الإخطار خطوة بخطوة، وحاسبة المواعيد الإجرائية تحسب الميعاد بحساب م17 وامتداد العطلة. كلها مسودات تُراجَع.' },
   { ico: 'sync', t: 'المزامنة بين أجهزتك', p: 'مرة واحدة: أنشئ مجلدًا «عمّالي» في خدمة التخزين (OneDrive أو Google Drive أو iCloud)، ثم الإعدادات ☰ ← «المزامنة»: اختر رمزًا واحدًا لكل أجهزتك. بعدها قاعدة واحدة: «اجلب قبل أن تعمل، واحفظ بعد أن تنتهي». على الحاسوب زر واحد «مزامنة الآن» في البداية والنهاية؛ وعلى الجوال «① جلب» ثم «② حفظ». الملف مشفّر، ولا يصل إلى أحد غيرك.' },
   { ico: 'ai', t: 'أدوات الذكاء الاصطناعي (اختيارية)', p: 'تحليل الملف وفحص المسودة المعمّق والمساعد والخط الزمني موسومة «✦ ذكاء». تعمل مع أي أداة ذكاء اصطناعي تستعملها (Claude أو غيرها) بالنسخ واللصق، ومباشرة إن فتحت التطبيق داخل claude.ai. تُرسل النص معتّمًا، وتبقى مقيّدة بمبادئ التطبيق. إن لم تستعمل أداة ذكاء فاختر «بلا أدوات الذكاء» ويبقى جوهر التطبيق كاملًا:', mode: true }
 ];
@@ -6698,6 +6764,10 @@ function tourRender() {
     ex.innerHTML = '<div class="tourmode"><button type="button" class="btn primary" data-m="full">أستعمل أداة ذكاء — الوضع الكامل</button><button type="button" class="btn" data-m="noai">بلا أدوات الذكاء</button><span class="mnote">يمكنك تغيير ذلك في أي وقت من الإعدادات ← «الأدوات الظاهرة».</span></div>';
     ex.querySelectorAll('[data-m]').forEach(function (b) { b.onclick = function () { try { setToolMode(b.dataset.m); } catch (e) {} tourEnd(); }; });
     $('#tour_next').textContent = 'إنهاء'; $('#tour_next').classList.add('hidden');
+  } else if (st.hm) {
+    ex.innerHTML = '<div class="tourhm"><span>واجهة الرئيسية:</span><div class="tmodes"><button type="button" data-hm="basic" class="' + (HOME_MODE === 'basic' ? 'on' : '') + '">أساسية — 5 أدوات</button><button type="button" data-hm="full" class="' + (HOME_MODE === 'full' ? 'on' : '') + '">كاملة</button></div><span class="mnote">الأساسية: رول الجلسة والمبادئ والتشريعات وWord وإخفاء الهوية، والباقي في «كل الأدوات» بضغطة.</span></div>';
+    ex.querySelectorAll('[data-hm]').forEach(function (b) { b.onclick = function () { setHomeMode(b.dataset.hm); tourRender(); }; });
+    $('#tour_next').textContent = 'التالي'; $('#tour_next').classList.remove('hidden');
   } else { ex.innerHTML = ''; $('#tour_next').textContent = last ? 'ابدأ' : 'التالي'; $('#tour_next').classList.remove('hidden'); }
 }
 function tourShow(from) { tourI = 0; $('#tour').classList.remove('hidden'); tourRender(); if (from) try { closeDrawer(); } catch (e) {} }
