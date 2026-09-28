@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260928110511">
+<meta name="amali-build" content="20260928124812">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -526,7 +526,8 @@ body.home .search{visibility:hidden}
 .wepage mark{background:#ffe94d;color:#111;padding:0 2px}
 .wepage .wefoot{margin-top:22px;border-top:1px solid #ddd;padding-top:6px;font-size:11px;color:#444;display:flex;justify-content:space-between}
 .wepage .wefoot span{color:#888}
-@media (max-width:700px){.wefields{grid-template-columns:1fr}.wepage{padding:16px}}
+.wefx{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.wefx[hidden]{display:none}.wefx [hidden]{display:none}.wefx label{display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--ink2);min-width:0}.wefx small{color:var(--ink3);font-size:11.5px}.wefx input,.wefx textarea,.wefx select{width:100%;box-sizing:border-box;padding:7px 10px;border:1px solid var(--line2);border-radius:8px;background:var(--bg);color:var(--ink);font-size:14px;font-family:var(--ui)}.wefx textarea{resize:vertical;min-height:40px;line-height:1.6}.wefx #we_civl{grid-column:1/-1}.wefx .wefxnote{grid-column:1/-1;margin:0}
+@media (max-width:700px){.wefields{grid-template-columns:1fr}.wefx{grid-template-columns:1fr}.wepage{padding:16px}}
 
 /* ---------- live layer */
 .casewrap,.askwrap{max-width:1100px;margin:0 auto;padding:18px 16px 80px;display:none}
@@ -1863,6 +1864,12 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
         <label>الرقم الآلي<input id="we_autoid" type="text" placeholder="........."></label>
         <label>مبلغ الأتعاب (يُظلَّل)<input id="we_amount" type="text" placeholder="اتركه ليُظلَّل مكانه أو اكتب الرقم"></label>
       </div>
+      <div class="wefx" id="we_x" hidden>
+        <label>صيغة الترويسة<select id="we_mode" class="sel"></select></label>
+        <label id="we_regl">والمقيدة برقم <small>(يبقى مكانه إن تركته فارغًا)</small><input id="we_reg" type="text" placeholder="12/2026 جنح المخفر"></label>
+        <label id="we_civl">المدعي بالحق المدني <small>(إن وُجد — اسم في كل سطر)</small><textarea id="we_civil" rows="1" placeholder="اتركه فارغًا إن لم يوجد"></textarea></label>
+        <p class="help wefxnote">صيغة مبدئية للمراجعة — تُعتمد بعد مراجعة قاضٍ من الدائرة المعنية.</p>
+      </div>
       <h3 style="margin-top:6px">نص الحكم (الوقائع والأسباب والمنطوق)</h3>
       <textarea id="we_body" placeholder="الصق النص من «حيث إن وقائع الدعوى…» حتى «حكمت المحكمة: …». ضع أي موضع يحتاج قرارك بين 〖 〗 ليظهر بالأصفر."></textarea>
       <div class="row">
@@ -1959,7 +1966,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V93 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V94 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -5329,23 +5336,45 @@ function weBodyRuns(line, amount) {
 function weParties(s) { return String(s || '').replace(/\r/g, '').split('\n').map(l => l.replace(/^\s*(?:[0-9٠-٩]+|[أ-ي])\s*[-–.)]\s*/, '').trim()).filter(Boolean); }
 function weNumbered(arr) { return arr.length > 1 ? arr.map((x, i) => (i + 1) + '- ' + x) : arr; }
 function weAppeals(no) { const a = String(no || '').split(/\s*(?:،|,|\+|&|\s+و\s*)\s*/).map(x => x.trim()).filter(Boolean); return a.length ? a : []; }
+// V94 — «تصدير Word» وهيكل الحكم وصياغاتي تتبع «ملف الدائرة». الاستئناف (ومنه الاستئناف العمالي) بصيغته السابقة حرفيًا.
+// أول درجة: «الدعوى رقم» (المرفوعة من/ضد) أو «الاستئناف رقم» للدوائر الاستئنافية بالكلية؛ الجزائي: «القضية رقم … والمقيدة برقم …» أو «الاستئناف رقم … جنح مستأنفة». صيغ مبدئية للمراجعة.
+const WE_JP = { cri: 1, reg: 1, fromL: 'المرفوعة من', fa: 'المرفوعة من', fe: 'المتهم', pa: 'النيابة العامة', pe: 'اسم المتهم', no: 'رقم القضية', noPh: '123/2026', fn: 'قضية', in: 1, one: 'القضية', du: 'القضيتين رقمي', pl: 'القضايا أرقام' };
+const WE_MODES = {
+  cl: { t: 'دعوى — «الدعوى رقم»', in: 1, one: 'الدعوى', du: 'الدعويين رقمي', pl: 'الدعاوى أرقام', fromL: 'المرفوعة من', fa: 'المدعي', fe: 'المدعى عليه', pa: 'اسم المدعي', pe: 'الاسم — مع «بصفته» للجهات الحكومية', no: 'رقم الدعوى', noPh: '123/2026', fn: 'دعوى', cph: 'مثال: مدني كلي/3' },
+  ap: { t: 'استئناف — دائرة استئنافية بالكلية', fromL: 'المقام من', fa: 'المقام من', fe: 'المستأنف ضده', pa: 'اسم المستأنف', pe: 'الاسم — مع «بصفته» للجهات الحكومية', no: 'رقم الاستئناف', noPh: '123/2026', fn: 'استئناف', cph: 'مثال: استئناف جزئي ومستعجل/5' },
+  jn: Object.assign({ t: 'جنايات — «القضية رقم … والمقيدة برقم …»', cph: 'جنايات', rph: '45/2026 المباحث' }, WE_JP),
+  jh: Object.assign({ t: 'جنح — «القضية رقم … والمقيدة برقم …»', cph: 'جنح', rph: '12/2026 جنح المخفر' }, WE_JP),
+  jm: { t: 'جنح مستأنفة — «الاستئناف رقم …»', cri: 1, reg: 1, fromL: 'المقام من', fa: 'المستأنف', fe: 'المستأنف ضده', pa: 'النيابة العامة أو اسم المتهم', pe: 'النيابة العامة أو اسم المتهم', no: 'رقم الاستئناف', noPh: '123/2026', fn: 'استئناف', cph: 'جنح مستأنفة', rph: '12/2026 جنح المخفر' }
+};
+function weModePref() { try { return JSON.parse(localStorage.getItem('tm_wemode') || '{}') || {}; } catch (e) { return {}; } }
+function weModeKey() { const P = rlProf(); if (P.deg !== 'f') return 'lab'; const s = weModePref(); return P.kind === 'cri' ? (['jn', 'jh', 'jm'].includes(s.c) ? s.c : 'jh') : (['cl', 'ap'].includes(s.f) ? s.f : 'cl'); }
+function weCfg() { const k = weModeKey(); return k === 'lab' ? { key: 'lab', fromL: 'المقام من' } : Object.assign({ key: k }, WE_MODES[k]); }
+function wePre(d, M) {
+  if (!M.cri) return 'بعد الاطلاع على الأوراق وسماع المرافعة والمداولة:';
+  const acc = M.key === 'jm' ? weParties(d.from).concat(weParties(d.against)).filter(x => !/النيابة/.test(x)) : weParties(d.against);
+  return 'بعد الاطلاع على الأوراق وسماع طلبات النيابة العامة ودفاع ' + (acc.length > 1 ? 'المتهمين' : 'المتهم') + ' والمداولة:';
+}
+function weCivil(d, M) { return M.cri ? weNumbered(weParties(d.civil)) : []; }
 function weTitle(d) {
-  const a = weAppeals(d.appealNo), c = ' ' + (d.circuit || 'عمالي/2');
-  const head = a.length > 2 ? 'بالاستئنافات أرقام ' + a.join(' و') + c : a.length === 2 ? 'بالاستئنافين رقمي ' + a[0] + ' و' + a[1] + c : 'بالاستئناف رقم ' + (a[0] || '.../...') + c;
-  return 'مسودة بأسباب ومنطوق الحكم الصادر ' + head + ' الصادر بجلسة ' + (d.session || '.../.../...');
+  const M = weCfg(), a = weAppeals(d.appealNo), cv = d.circuit || (profKind() === 'lab' && M.key === 'lab' ? 'عمالي/2' : ''), c = cv ? ' ' + cv : '';
+  const head = M.in ? (a.length > 2 ? 'في ' + M.pl + ' ' + a.join(' و') + c : a.length === 2 ? 'في ' + M.du + ' ' + a[0] + ' و' + a[1] + c : 'في ' + M.one + ' رقم ' + (a[0] || '.../...') + c)
+    : a.length > 2 ? 'بالاستئنافات أرقام ' + a.join(' و') + c : a.length === 2 ? 'بالاستئنافين رقمي ' + a[0] + ' و' + a[1] + c : 'بالاستئناف رقم ' + (a[0] || '.../...') + c;
+  return 'مسودة بأسباب ومنطوق الحكم الصادر ' + head + (M.reg ? ' والمقيدة برقم ' + (d.reg || '.........') : '') + ' الصادر بجلسة ' + (d.session || '.../.../...');
 }
 function weBuild(d) {
   const paras = [];
   // العنوان (وسط + تحته خط)
   paras.push(wePara(weTitle(d), { jc: 'center', u: true, b: true }));
   paras.push(wePara('', { jc: 'center' }));
-  const fr = weNumbered(weParties(d.from)), ag = weNumbered(weParties(d.against));
-  if (fr.length > 1) { paras.push(wePara([{ t: 'المقام من:', b: true }], { jc: 'center' })); fr.forEach(x => paras.push(wePara(x, { jc: 'center' }))); }
-  else paras.push(wePara([{ t: 'المقام من: ', b: true }, { t: fr[0] || '.........' }], { jc: 'center' }));
+  const fr = weNumbered(weParties(d.from)), ag = weNumbered(weParties(d.against)), M = weCfg(), cvl = weCivil(d, M);
+  if (fr.length > 1) { paras.push(wePara([{ t: M.fromL + ':', b: true }], { jc: 'center' })); fr.forEach(x => paras.push(wePara(x, { jc: 'center' }))); }
+  else paras.push(wePara([{ t: M.fromL + ': ', b: true }, { t: fr[0] || '.........' }], { jc: 'center' }));
   paras.push(wePara('ضد', { jc: 'center', b: true }));
   (ag.length ? ag : ['.........']).forEach(x => paras.push(wePara(x, { jc: 'center' })));
+  if (cvl.length === 1) paras.push(wePara([{ t: 'والمدعي بالحق المدني: ', b: true }, { t: cvl[0] }], { jc: 'center' }));
+  else if (cvl.length > 1) { paras.push(wePara([{ t: 'والمدعون بالحق المدني:', b: true }], { jc: 'center' })); cvl.forEach(x => paras.push(wePara(x, { jc: 'center' }))); }
   paras.push(wePara('', { jc: 'center' }));
-  paras.push(wePara('بعد الاطلاع على الأوراق وسماع المرافعة والمداولة:', { jc: 'center', b: true }));
+  paras.push(wePara(wePre(d, M), { jc: 'center', b: true }));
   paras.push(wePara('', { jc: 'center' }));
   // النص
   const lines = String(d.body || '').replace(/\r/g, '').split('\n').map(l => l.trim());
@@ -5388,13 +5417,14 @@ function weBuild(d) {
     { name: 'word/footer1.xml', data: footerXml },
   ]);
 }
-function weFields() { return { appealNo: $('#we_appeal').value.trim(), circuit: $('#we_circuit').value.trim(), session: $('#we_session').value.trim(), from: $('#we_from').value.trim(), against: $('#we_against').value.trim(), autoId: $('#we_autoid').value.trim(), amount: $('#we_amount').value.trim(), body: $('#we_body').value }; }
+function weFields() { return { appealNo: $('#we_appeal').value.trim(), circuit: $('#we_circuit').value.trim(), session: $('#we_session').value.trim(), from: $('#we_from').value.trim(), against: $('#we_against').value.trim(), autoId: $('#we_autoid').value.trim(), amount: $('#we_amount').value.trim(), body: $('#we_body').value, reg: ($('#we_reg') ? $('#we_reg').value.trim() : ''), civil: ($('#we_civil') ? $('#we_civil').value.trim() : '') }; }
 
 // ---- V55: «صياغاتي» — عبارات يكتبها القاضي بنفسه (الشكل، المصاريف، المنطوق…) وتُدرج في نص الحكم. التطبيق لا يقترح نصًا.
 const FM_CATS = ['الشكل', 'المصاريف والأتعاب', 'المنطوق', 'الوقائع', 'الأسباب', 'أخرى'];
 let fmCat = '', fmEditId = null;
 function fmList() { RL.fm = RL.fm || []; return RL.fm; }
 function fmFill(t) { const d = weFields(); const m = { 'رقم_الاستئناف': d.appealNo, 'الدائرة': d.circuit, 'الجلسة': d.session, 'المستأنف': weParties(d.from).join(' و'), 'المستأنف_ضده': weParties(d.against).join(' و'), 'المستأنفين': weParties(d.from).join(' و'), 'المستأنف_ضدهم': weParties(d.against).join(' و'), 'الأتعاب': d.amount };
+  if (weCfg().key !== 'lab') Object.assign(m, { 'رقم_الدعوى': d.appealNo, 'رقم_القضية': d.appealNo, 'المدعي': m['المستأنف'], 'المدعى_عليه': m['المستأنف_ضده'], 'المتهم': m['المستأنف_ضده'], 'المقيدة': d.reg, 'المدعي_بالحق_المدني': weParties(d.civil).join(' و'), 'سلطة_الاتهام': m['المستأنف'] || 'النيابة العامة' });
   return String(t).replace(/\{([^{}]+)\}/g, (all, k) => { const v = m[k.trim().replace(/\s+/g, '_')]; return v ? v : '〖' + k.trim().replace(/_/g, ' ') + '〗'; }); }
 function fmInsert(f) {
   const ta = $('#we_body'), t = fmFill(f.text), a = ta.selectionStart != null ? ta.selectionStart : ta.value.length, b = ta.selectionEnd != null ? ta.selectionEnd : a;
@@ -5405,9 +5435,40 @@ function fmInsert(f) {
 }
 // V70: هيكل الحكم — إطار بنيوي بعناوينه ومواضع تعبئة [[…]]؛ لا نصّ ولا أسباب (أداة تنسيق لا صياغة)
 const WE_SKELETON = 'مسودة بأسباب ومنطوق الحكم الصادر بالاستئناف رقم {رقم_الاستئناف} {الدائرة} الصادر بجلسة {الجلسة}\n\nالمقام من: {المستأنف}\n\nضد\n\n{المستأنف_ضده}\n\nبعد الاطلاع على الأوراق وسماع المرافعة والمداولة:\n\nوحيث إن وقائع الدعوى حسبما يبين من مطالعة الحكم المستأنف وسائر الأوراق تتحصل في أن [[سرد الوقائع: تاريخ الالتحاق، المهنة، الأجر (أساسي/شامل)، تاريخ الانتهاء وسببه، الطلبات، خلاصة تقرير الخبير، ومنطوق حكم أول درجة وأسبابه]].\n\nوحيث إن الطاعن طعن على القضاء المتقدم بالاستئناف الماثل بصحيفة أودعت إدارة الكتاب بتاريخ [[تاريخ الإيداع]]، وطلب في ختامها أولًا: بقبول الاستئناف شكلًا، وثانيًا: [[الطلبات الموضوعية]]، ونعى على الحكم المستأنف [[أوجه النعي]].\n\nوحيث إنه عن جواز الطعن بالاستئناف وشكله — وهو مما تقضي به المحكمة قبل الموضوع — فإنه [[بحث الجواز والشكل: النصاب (م34/م138 مرافعات — حكم المحكمة الكلية انتهائي إذا لم تجاوز قيمة الطلبات خمسة آلاف دينار)، والميعاد (م141)، والصفة، والمصلحة — قرار المحكمة]].\n\n[[الدفوع الشكلية إن وُجدت — كل دفع في فقرة مستقلة]]\n\nوحيث إنه عن الموضوع — إن كان له مقتضى بعد الفصل في الشكل — فإنه [[حلقات الاستدلال والردّ على أوجه النعي — من مادتك أنت]].\n\nفلهذه الأسباب\n\nحكمت المحكمة: [[المنطوق — يسجّله القاضي: في الشكل، وفي الموضوع إن بُحث]]، وألزمت [[الطرف الخاسر]] المصروفات ومبلغ {الأتعاب} مقابل أتعاب المحاماة الفعلية.\n';
+// V94: هياكل لغير الاستئناف العمالي — عناوين ومواضع تعبئة [[…]] فقط، بلا نص قانوني ولا أسباب (مبدئية للمراجعة)
+const WE_SKEL_AP = 'مسودة بأسباب ومنطوق الحكم الصادر بالاستئناف رقم {رقم_الاستئناف} {الدائرة} الصادر بجلسة {الجلسة}\n\nالمقام من: {المستأنف}\n\nضد\n\n{المستأنف_ضده}\n\nبعد الاطلاع على الأوراق وسماع المرافعة والمداولة:\n\nوحيث إن وقائع الدعوى حسبما يبين من مطالعة الحكم المستأنف وسائر الأوراق تتحصل في أن [[سرد الوقائع وطلبات الخصوم أمام أول درجة، ومنطوق الحكم المستأنف وأسبابه]].\n\nوحيث إن المستأنف طعن على هذا القضاء بالاستئناف الماثل بصحيفة أودعت إدارة الكتاب بتاريخ [[تاريخ الإيداع]]، وطلب في ختامها [[الطلبات]]، ونعى على الحكم المستأنف [[أوجه النعي]].\n\nوحيث إنه عن جواز الاستئناف وشكله فإنه [[بحث الجواز والشكل — قرار المحكمة]].\n\n[[الدفوع الشكلية إن وُجدت — كل دفع في فقرة مستقلة]]\n\nوحيث إنه عن الموضوع — إن كان له مقتضى بعد الفصل في الشكل — فإنه [[حلقات الاستدلال والرد على أوجه النعي — من مادتك أنت]].\n\nفلهذه الأسباب\n\nحكمت المحكمة: [[المنطوق — يسجّله القاضي]]، وألزمت [[الطرف المحكوم عليه]] المصروفات ومبلغ {الأتعاب} مقابل أتعاب المحاماة الفعلية.\n';
+const WE_SKEL_CL = 'مسودة بأسباب ومنطوق الحكم الصادر في الدعوى رقم {رقم_الدعوى} {الدائرة} الصادر بجلسة {الجلسة}\n\nالمرفوعة من: {المدعي}\n\nضد\n\n{المدعى_عليه}\n\nبعد الاطلاع على الأوراق وسماع المرافعة والمداولة:\n\nوحيث إن وقائع الدعوى تتحصل حسبما يبين من سائر الأوراق في أن المدعي أقام دعواه بصحيفة أودعت إدارة الكتاب بتاريخ [[تاريخ الإيداع]]، طلب في ختامها [[الطلبات]]، على سند من [[سند الدعوى]].\n\n[[ما تم في الدعوى: الجلسات، المستندات والمذكرات، الخبرة أو التحقيق إن وُجدا]]\n\nوحيث إنه عن [[الاختصاص وقبول الدعوى والدفوع الشكلية — كل دفع في فقرة مستقلة]].\n\nوحيث إنه عن الموضوع فإنه [[حلقات الاستدلال — من مادتك أنت]].\n\nفلهذه الأسباب\n\nحكمت المحكمة: [[المنطوق — يسجّله القاضي]]، وألزمت [[الطرف المحكوم عليه]] المصروفات ومبلغ {الأتعاب} مقابل أتعاب المحاماة الفعلية.\n';
+const WE_SKEL_JN = 'مسودة بأسباب ومنطوق الحكم الصادر في القضية رقم {رقم_القضية} {الدائرة} والمقيدة برقم {المقيدة} الصادر بجلسة {الجلسة}\n\nالمرفوعة من: {سلطة_الاتهام}\n\nضد\n\n{المتهم}\n\nبعد الاطلاع على الأوراق وسماع طلبات النيابة العامة ودفاع المتهم والمداولة:\n\nوحيث إن النيابة العامة أسندت إلى المتهم أنه في يوم [[التاريخ]] بدائرة [[المخفر/المنطقة]]: [[وصف التهمة كما ورد في أمر الإحالة]]، وطلبت عقابه بالمواد [[مواد الاتهام]].\n\n[[ما تم في الدعوى: الجلسات، الحضور، الإنكار أو الاعتراف، الدفاع ومذكراته]]\n\n[[الدفوع — كل دفع في فقرة مستقلة]]\n\nوحيث إنه عن موضوع الدعوى الجزائية فإنه [[أدلة الثبوت أو النفي وحلقات الاستدلال — من مادتك أنت]].\n\n[[الدعوى المدنية التبعية إن وُجدت]]\n\nفلهذه الأسباب\n\nحكمت المحكمة: [[المنطوق — يسجّله القاضي]].\n';
+const WE_SKEL_JM = 'مسودة بأسباب ومنطوق الحكم الصادر بالاستئناف رقم {رقم_الاستئناف} {الدائرة} والمقيدة برقم {المقيدة} الصادر بجلسة {الجلسة}\n\nالمقام من: {المستأنف}\n\nضد\n\n{المستأنف_ضده}\n\nبعد الاطلاع على الأوراق وسماع طلبات النيابة العامة ودفاع المتهم والمداولة:\n\nوحيث إن النيابة العامة أسندت إلى المتهم أنه في يوم [[التاريخ]] بدائرة [[المخفر/المنطقة]]: [[وصف التهمة]]، وطلبت عقابه بالمواد [[مواد الاتهام]].\n\nوحيث إن محكمة أول درجة قضت بجلسة [[التاريخ]] [[منطوق الحكم المستأنف]]، فاستأنفه [[المستأنف]] بتاريخ [[تاريخ التقرير بالاستئناف]] طالبًا [[الطلبات]].\n\nوحيث إنه عن شكل الاستئناف فإنه [[بحث الشكل — قرار المحكمة]].\n\n[[الدفوع — كل دفع في فقرة مستقلة]]\n\nوحيث إنه عن الموضوع فإنه [[حلقات الاستدلال — من مادتك أنت]].\n\nفلهذه الأسباب\n\nحكمت المحكمة: [[المنطوق — يسجّله القاضي]].\n';
+function weSkelText() { const k = weCfg().key; return k === 'lab' ? (profKind() === 'lab' ? WE_SKELETON : WE_SKEL_AP) : k === 'ap' ? WE_SKEL_AP : k === 'cl' ? WE_SKEL_CL : k === 'jm' ? WE_SKEL_JM : WE_SKEL_JN; }
+// V94: تطبيق ملف الدائرة على حقول «تصدير Word» — في الاستئناف العمالي تُعاد الحقول كما هي حرفيًا
+let WE_ORIG = null, WE_CLR = false, WE_NIY = false;
+function weProfApply() {
+  const X = $('#we_x'); if (!X) return;
+  const L = [...document.querySelectorAll('#wewrap .wefields > label')], help = $('#fmbox p.help');
+  if (!WE_ORIG) WE_ORIG = { lab: L.map(l => l.firstChild.nodeValue), help: help.innerHTML, ph: ['we_appeal', 'we_circuit', 'we_from', 'we_against'].map(id => $('#' + id).placeholder) };
+  const M = weCfg(), P = rlProf(), labKind = P.kind === 'lab', cir = $('#we_circuit'), fr = $('#we_from');
+  L.forEach((l, i) => { l.firstChild.nodeValue = WE_ORIG.lab[i]; });
+  ['we_appeal', 'we_circuit', 'we_from', 'we_against'].forEach((id, i) => { $('#' + id).placeholder = WE_ORIG.ph[i]; });
+  help.innerHTML = WE_ORIG.help;
+  if (labKind) { if (WE_CLR && !cir.value.trim()) cir.value = 'عمالي/2'; WE_CLR = false; }
+  else { if (cir.value.trim() === 'عمالي/2') { cir.value = ''; WE_CLR = true; } cir.placeholder = M.cph || 'مثال: مدني/3'; }
+  if (WE_NIY && !(M.key === 'jn' || M.key === 'jh') && fr.value.trim() === 'النيابة العامة') { fr.value = ''; WE_NIY = false; }
+  if (M.key === 'lab') { X.hidden = true; return; }
+  X.hidden = false;
+  L[0].firstChild.nodeValue = M.no; L[3].firstChild.nodeValue = M.fa + ' '; L[4].firstChild.nodeValue = M.fe + ' ';
+  $('#we_appeal').placeholder = M.noPh; fr.placeholder = M.pa; $('#we_against').placeholder = M.pe;
+  if ((M.key === 'jn' || M.key === 'jh') && !fr.value.trim()) { fr.value = 'النيابة العامة'; WE_NIY = true; }
+  const sel = $('#we_mode'), keys = P.kind === 'cri' ? ['jn', 'jh', 'jm'] : ['cl', 'ap'];
+  sel.innerHTML = keys.map(k => '<option value="' + k + '"' + (k === M.key ? ' selected' : '') + '>' + WE_MODES[k].t + '</option>').join('');
+  sel.onchange = () => { const s = weModePref(); s[P.kind === 'cri' ? 'c' : 'f'] = sel.value; try { localStorage.setItem('tm_wemode', JSON.stringify(s)); } catch (e) {} weProfApply(); };
+  $('#we_regl').hidden = !M.reg; $('#we_civl').hidden = !M.cri; if (M.reg) $('#we_reg').placeholder = M.rph;
+  const vars = M.key === 'cl' ? '{رقم_الدعوى} {الدائرة} {الجلسة} {المدعي} {المدعى_عليه} {الأتعاب}' : M.key === 'ap' ? '{رقم_الاستئناف} {الدائرة} {الجلسة} {المستأنف} {المستأنف_ضده} {الأتعاب}' : M.key === 'jm' ? '{رقم_الاستئناف} {الدائرة} {المقيدة} {الجلسة} {المستأنف} {المستأنف_ضده} {المدعي_بالحق_المدني}' : '{رقم_القضية} {الدائرة} {المقيدة} {الجلسة} {سلطة_الاتهام} {المتهم} {المدعي_بالحق_المدني}';
+  help.innerHTML = WE_ORIG.help.replace(/\{رقم_الاستئناف\}[^(]*\{الأتعاب\}/, vars);
+}
 function weSkeleton() {
   const ta = $('#we_body'); if (!ta) return;
-  const t = fmFill(WE_SKELETON);
+  const t = fmFill(weSkelText());
   if (!ta.value.trim()) { ta.value = t; } else { const a = ta.selectionStart != null ? ta.selectionStart : ta.value.length, b = ta.selectionEnd != null ? ta.selectionEnd : a; const before = ta.value.slice(0, a), after = ta.value.slice(b); ta.value = before + (before && !/\n$/.test(before) ? '\n' : '') + t + after; }
   ta.focus(); try { ta.dispatchEvent(new Event('input', { bubbles: true })); } catch (e) {}
   toast('أُدرج هيكل الحكم — املأ المواضع بين [[ ]]');
@@ -5449,6 +5510,7 @@ function weFromCard(c, quiet) {
   return filled;
 }
 function initWord() {
+  weProfApply();
   if (weInit) { fmRender(); return; } weInit = true; fmInit();
   const st = $('#we_status');
   // ملء تلقائي من فاحص المسودة أو تحليل الملف إن توفّر
@@ -5473,11 +5535,12 @@ function initWord() {
   $('#we_preview').onclick = () => {
     const d = weFields(); if (!d.body.trim()) { toast('الصق نص الحكم أولًا'); return; }
     const O = $('#we_out'); const esc2 = s => (s || '').replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
-    const fr = weNumbered(weParties(d.from)), ag = weNumbered(weParties(d.against));
+    const fr = weNumbered(weParties(d.from)), ag = weNumbered(weParties(d.against)), M = weCfg(), cvl = weCivil(d, M);
     let h = '<div class="wepage"><p class="wetitle">' + esc2(weTitle(d)) + '</p>'
-      + (fr.length > 1 ? '<p class="wec"><b>المقام من:</b></p>' + fr.map(x => '<p class="wec">' + esc2(x) + '</p>').join('') : '<p class="wec"><b>المقام من:</b> ' + esc2(fr[0] || '.........') + '</p>')
+      + (fr.length > 1 ? '<p class="wec"><b>' + M.fromL + ':</b></p>' + fr.map(x => '<p class="wec">' + esc2(x) + '</p>').join('') : '<p class="wec"><b>' + M.fromL + ':</b> ' + esc2(fr[0] || '.........') + '</p>')
       + '<p class="wec"><b>ضد</b></p>' + (ag.length ? ag : ['.........']).map(x => '<p class="wec">' + esc2(x) + '</p>').join('')
-      + '<p class="wec"><b>بعد الاطلاع على الأوراق وسماع المرافعة والمداولة:</b></p>';
+      + (cvl.length === 1 ? '<p class="wec"><b>والمدعي بالحق المدني:</b> ' + esc2(cvl[0]) + '</p>' : cvl.length > 1 ? '<p class="wec"><b>والمدعون بالحق المدني:</b></p>' + cvl.map(x => '<p class="wec">' + esc2(x) + '</p>').join('') : '')
+      + '<p class="wec"><b>' + wePre(d, M) + '</b></p>';
     String(d.body).replace(/\r/g, '').split('\n').map(l => l.trim()).forEach(line => {
       if (!line) return;
       if (/^فلهذه\s+الأسباب/.test(line)) { h += '<p class="wec"><b>فلهذه <u>الأسباب</u></b></p>'; return; }
@@ -5491,7 +5554,7 @@ function initWord() {
     const d = weFields(); if (!d.body.trim()) { toast('الصق نص الحكم أولًا'); return; }
     let bytes; try { bytes = weBuild(d); } catch (e) { st.textContent = 'تعذّر توليد الملف: ' + (e.message || e); return; }
     const blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-    const fname = 'مسودة حكم ' + (d.appealNo ? d.appealNo.replace(/\//g, '-') : 'استئناف') + '.docx';
+    const fname = 'مسودة حكم ' + (d.appealNo ? d.appealNo.replace(/\//g, '-') : (weCfg().fn || 'استئناف')) + '.docx';
     if (DLX) {
       try { await DLX.save({ filename: fname, data: blob }); st.textContent = 'تم إنشاء الملف؛ أكّد الحفظ.'; }
       catch (e) { const c = e && e.code; st.textContent = c === 'declined' ? 'أُلغي الحفظ.' : c === 'rejected_extension' ? 'صيغة غير مسموحة.' : c === 'too_large' ? 'الملف كبير.' : 'تعذّر الحفظ: ' + (c || (e && e.message) || 'خطأ'); }
