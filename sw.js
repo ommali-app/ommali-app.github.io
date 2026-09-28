@@ -1,6 +1,6 @@
 // عمّالي — Service Worker (V60؛ V83: لا يعترض docs/ ولا يعيد التطبيق لفتح ملف): الصفحة تُفتح من الجهاز فورًا، والتحديث يُجلب في الخلفية ويُعرض شريط «نسخة أحدث جاهزة»
 // كان حتى V59 «الشبكة أولًا»: كل فتح ينتظر تنزيل الصفحة (نحو 1.35 ميغابايت مضغوطة) أو انقطاع الاتصال قبل الظهور.
-const CACHE = 'amali-v98';
+const CACHE = 'amali-v100';
 const CORE = ['./', './index.html', './manifest.json', './icon-180.png'];
 const FONTS_FILES = ['plex','naskh','cairo','tajawal','almarai','amiri','kufi','readex','markazi'].flatMap(f => ['./fonts/' + f + '-400.woff2', './fonts/' + f + '-700.woff2']).concat(['./fonts/plex-600.woff2', './fonts/kufi-600.woff2', './fonts/readex-600.woff2']);
 const FLAG = './__amali_update';
