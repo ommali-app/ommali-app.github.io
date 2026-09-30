@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260930112555">
+<meta name="amali-build" content="20260930133759">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2078,7 +2078,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V116 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V117 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -3212,11 +3212,13 @@ async function rlReadImage(blob, st) {
   } finally { try { await eng.terminate(); } catch (e) {} if (ara) try { await ara.terminate(); } catch (e) {} }
 }
 // ---- رول الجلسة (V47): مكيَّف لطريقة عمل الدائرة — كشف النظام ← مراجعة الجاهزية ← قرار الجلسة ← توزيع المحجوزة
-const RL_STAGES = ['قضية جديدة', 'للإعلان', 'لإحضار المتهم', 'للاطلاع والرد', 'للمذكرات', 'لدى الخبير', 'للتحقيق', 'لسماع الشهود', 'للمرافعة', 'محجوزة للحكم', 'محجوزة للحكم مع مذكرات', 'مد أجل النطق', 'صدر الحكم', 'شُطبت', 'موقوفة'];
+const RL_STAGES = ['قضية جديدة', 'للإعلان', 'لإحضار المتهم', 'للاطلاع والرد', 'للمذكرات', 'لدى الخبير', 'للتحقيق', 'للاستجواب', 'لحلف اليمين', 'لسماع الشهود', 'للمرافعة', 'محجوزة للحكم', 'محجوزة للحكم مع مذكرات', 'مد أجل النطق', 'صدر الحكم', 'شُطبت', 'موقوفة'];
 const RL_DONE = ['صدر الحكم', 'شُطبت'];
 const RL_RES = ['محجوزة للحكم', 'محجوزة للحكم مع مذكرات', 'مد أجل النطق'];
 // V67: المنطوق (نوع الحكم) — يُسجَّل عند «صدر الحكم». وقف الاستئناف/التعليقي مرحلتان في قرار الجلسة لا منطوقًا.
-let RL_VERDICTS = { 'موضوع': ['رفض وتأييد', 'تعديل', 'إلغاء', 'بطلان الحكم المستأنف والتصدّي', 'الإلغاء والإعادة', 'الإلغاء والإحالة'], 'شكل': ['عدم الجواز', 'عدم القبول شكلًا', 'بطلان صحيفة الاستئناف', 'سقوط الحق', 'اعتبار كأن لم يكن', 'الشطب'] };
+let RL_VERDICTS = { 'موضوع': ['رفض وتأييد', 'تعديل', 'إلغاء', 'بطلان الحكم المستأنف والتصدّي', 'الإلغاء والإعادة', 'الإلغاء والإحالة'], 'شكل': ['عدم الجواز', 'عدم القبول شكلًا', 'بطلان صحيفة الاستئناف', 'سقوط الحق', 'اعتبار كأن لم يكن', 'الشطب'] , 'قبل الفصل في الموضوع': ['إحالة للخبراء', 'إحالة للاستجواب', 'إحالة للتحقيق', 'حلف اليمين'] };
+// V117: أحكام قبل الفصل في الموضوع — لا تُنهي القضية؛ تُحدَّد لها جلسة وتنتقل إلى مرحلتها (بطلب القاضي 30/9)
+const RL_VD_PRE = { 'إحالة للخبراء': 'لدى الخبير', 'إحالة للاستجواب': 'للاستجواب', 'إحالة للتحقيق': 'للتحقيق', 'حلف اليمين': 'لحلف اليمين' };
 let RL_VD_ALL = Object.keys(RL_VERDICTS).reduce((a, g) => a.concat(RL_VERDICTS[g]), []);
 function rlVdGroup(v) { for (const g in RL_VERDICTS) if (RL_VERDICTS[g].includes(v)) return g; return ''; }
 function rlVdOpts(sel) { return '<option value="">— لم يُسجَّل —</option>' + Object.keys(RL_VERDICTS).map(g => '<optgroup label="' + g + '">' + RL_VERDICTS[g].map(v => '<option' + (v === sel ? ' selected' : '') + '>' + v + '</option>').join('') + '</optgroup>').join(''); }
@@ -3313,9 +3315,9 @@ function rlDecBox(c) {
   const sd = c.next || rlDaySel || rlToday();
   const b = el('div', 'rldec'), sibs = rlSibs(c).filter(x => !RL_DONE.includes(x.stage));
   b.innerHTML = '<div class="h">قرار جلسة ' + rlDay(sd) + ' ' + rlFmt(sd) + '</div><div class="acts2">' + RL_ACTS.map((a, i) => '<button type="button" class="chip" data-i="' + i + '">' + a[0] + '</button>').join('') + '</div>'
-    + '<div class="rw hidden" data-k="date"><span>إلى جلسة</span><input type="date" class="rdd"><div class="chips rdc"></div></div>'
     + '<div class="rw hidden" data-k="w"><span>كاتب الحكم</span><div class="chips">' + Object.keys(RL_W).filter(k => k !== 'd' || rlWCnt(sd, k)).map(k => '<button type="button" class="chip" data-w="' + k + '">' + RL_W[k] + ' <small class="wc" title="ما وُزّع عليه من محجوزات هذه الجلسة">' + rlWCnt(sd, k) + '</small></button>').join('') + '</div><p class="wnote">اختياري — يمكن تسجيل الحجز دون توزيع الآن. <span class="k">في هذه الجلسة: ' + Object.keys(RL_W).filter(k => k !== 'd' || rlWCnt(sd, k)).map(k => RL_W[k].replace(/^\((.)\).*/, '$1') + ' ' + rlWCnt(sd, k)).join(' · ') + (rlWCnt(sd, '') ? ' · غير موزّعة ' + rlWCnt(sd, '') : '') + '</span></p></div>'
     + '<div class="rw hidden" data-k="vd"><span>المنطوق' + (c.vdSuggested && !c.vd ? ' <small class="k">(مقترح من المسودة)</small>' : '') + '</span><select class="rvd">' + rlVdOpts(c.vd || c.vdSuggested) + '</select></div>'
+    + '<div class="rw hidden" data-k="date"><span>إلى جلسة</span><input type="date" class="rdd"><div class="chips rdc"></div></div>'
     + '<div class="rw"><span>ملاحظة</span><input type="text" class="rdn" placeholder="اختياري: المطلوب إعلانه، ما يُقدَّم…"></div>'
     + (sibs.length ? '<div class="rw rdsib"><span>المرتبطة</span><div class="sibl">' + sibs.map(s => '<label><input type="checkbox" data-sid="' + s.id + '"> تطبيق القرار نفسه على <b>' + esc(s.code) + '</b>' + (s.next !== c.next ? ' <span class="due soon">' + (s.next ? 'جلستها ' + rlFmt(s.next) : 'بلا جلسة') + '</span>' : '') + ' <span class="k">(' + esc(s.stage || '') + ')</span></label>').join('') + '<span class="k">لا يُطبَّق على المرتبطة إلا ما تؤشّر عليه.</span></div></div>' : '')
     + '<div class="row"><button type="button" class="btn primary rdok" disabled>تسجيل القرار</button><button type="button" class="btn rdx">إلغاء</button></div>';
@@ -3334,26 +3336,30 @@ function rlDecBox(c) {
     b.querySelector('[data-k=vd]').classList.toggle('hidden', act[1] !== 'صدر الحكم');
     setDate(act[2] > 0 ? ds[act[2] - 1] : ''); b.querySelector('.rdok').disabled = false;
   });
+  const rvd = b.querySelector('.rvd'), preSync = () => { const pre = act && act[1] === 'صدر الحكم' && RL_VD_PRE[rvd.value]; b.querySelector('[data-k=date]').classList.toggle('hidden', !(act && (act[2] >= 0 || pre))); const lb = b.querySelector('[data-k=date]>span'); if (lb) lb.textContent = pre ? 'جلسة نظر الاستئناف' : 'إلى جلسة'; if (pre && !dd.value) setDate(ds[0]); if (!pre && act && act[2] < 0) setDate(''); }; // V117
+  if (rvd) rvd.onchange = preSync;
+  b.querySelectorAll('[data-i]').forEach(x => x.addEventListener('click', preSync));
   b.querySelector('.rdx').onclick = () => { rlDecOpen = null; rlRender(); };
   b.querySelector('.rdok').onclick = () => {
-    if (!act) return; const to = act[2] < 0 ? '' : dd.value;
-    if (act[2] >= 0 && !to) { toast('اختر تاريخ الجلسة'); return; }
+    if (!act) return; const vd0 = b.querySelector('.rvd') ? b.querySelector('.rvd').value : '', pre = act[1] === 'صدر الحكم' && RL_VD_PRE[vd0] ? vd0 : ''; const to = act[2] < 0 && !pre ? '' : dd.value;
+    if ((act[2] >= 0 || pre) && !to) { toast(pre ? 'حدّد جلسة نظر الاستئناف' : 'اختر تاريخ الجلسة'); return; }
     if (to && !rlIsSession(to, RL.cal)) toast('تنبيه: ' + rlFmt(to) + ' ليس يوم جلسة في التقويم');
     const note = b.querySelector('.rdn').value.trim();
     const vd = b.querySelector('.rvd') ? b.querySelector('.rvd').value : '';
     // V58: القرار يُطبَّق على البطاقة، وعلى المرتبطة التي أشّر عليها القاضي فقط
-    const apply = (x, via) => { x.hist = x.hist || []; x.hist.push(Object.assign({ d: sd, a: act[0], to, n: note, prev: { stage: x.stage, next: x.next, writer: x.writer || '', exec: !!x.exec, await: x.await || '', vd: x.vd || '' } }, via ? { via } : {}));
+    const apply = (x, via) => { x.hist = x.hist || []; x.hist.push(Object.assign({ d: sd, a: pre ? 'صدر الحكم: ' + pre : act[0], to, n: note, prev: { stage: x.stage, next: x.next, writer: x.writer || '', exec: !!x.exec, await: x.await || '', vd: x.vd || '' } }, via ? { via } : {}, pre ? { pre: 1 } : {}));
+      if (pre) { x.stage = RL_VD_PRE[pre]; x.next = to; x.exec = false; x.await = 'صدر الحكم: ' + pre + (note ? ' — ' + note : ''); x.pre = (x.pre || []).concat([{ d: sd, v: pre, w: x.writer || w || '' }]); delete x.vdSuggested; x.updated = Date.now(); return; } // V117: حكم قبل الفصل في الموضوع
       x.stage = act[1]; x.next = to; x.exec = false; x.await = act[0] + (note ? ' — ' + note : '');
       if (RL_RES.includes(act[1])) { x.writer = w; if (act[1] !== 'مد أجل النطق') x.resAt = sd; } if (act[1] === 'صدر الحكم') { x.jst = x.jst || 'نُطق به'; x.vd = vd; delete x.vdSuggested; }
       x.updated = Date.now(); };
     apply(c);
     const also = [...b.querySelectorAll('[data-sid]:checked')].map(i => RL.cards.find(x => x.id === i.dataset.sid)).filter(Boolean); also.forEach(x => apply(x, c.code));
-    rlFocus = c.id; rlDecOpen = null; rlSave(); rlRender(); toast('سُجّل: ' + act[0] + (to ? ' — ' + rlFmt(to) : '') + (also.length ? ' — وعلى المرتبطة: ' + also.map(x => x.code).join('، ') : ''));
+    rlFocus = c.id; rlDecOpen = null; rlSave(); rlRender(); toast('سُجّل: ' + (pre ? 'صدر الحكم: ' + pre : act[0]) + (to ? ' — ' + rlFmt(to) : '') + (also.length ? ' — وعلى المرتبطة: ' + also.map(x => x.code).join('، ') : ''));
     if (typeof rlAfterDec === 'function' && rlAfterDec) rlAfterDec(c);
   };
   return b;
 }
-function rlUndo(c) { const h = (c.hist || []).pop(); if (!h) return; if (h.prev) Object.assign(c, { stage: h.prev.stage, next: h.prev.next, writer: h.prev.writer, exec: h.prev.exec, await: h.prev.await }, 'vd' in h.prev ? { vd: h.prev.vd } : {}); c.updated = Date.now(); rlFocus = c.id; rlSave(); rlRender(); toast('أُلغي آخر قرار'); }
+function rlUndo(c) { const h = (c.hist || []).pop(); if (!h) return; if (h.pre && c.pre && c.pre.length) c.pre.pop(); if (h.prev) Object.assign(c, { stage: h.prev.stage, next: h.prev.next, writer: h.prev.writer, exec: h.prev.exec, await: h.prev.await }, 'vd' in h.prev ? { vd: h.prev.vd } : {}); c.updated = Date.now(); rlFocus = c.id; rlSave(); rlRender(); toast('أُلغي آخر قرار'); }
 // ---- V82: ورقة الرول (وضع الجلسة) — نسخة رقمية من «قائمة الاستئناف»: الأطراف بصفاتهم وأرقامهم بلا أسماء،
 // الحضور والطلبات بلمسة، والقرار عبر «قرار الجلسة» نفسه؛ تُحفظ لكل جلسة في c.sheets[تاريخ] وتستمر من جلسة إلى أخرى.
 let RL_ROLES = { a: 'المستأنف', e: 'المستأنف ضده', x: 'الخصم المتدخل' };
@@ -3408,8 +3414,8 @@ function rlVocab() {
     : app ? [['حجز للحكم', 'محجوزة للحكم', 2], ['حجز للحكم مع مذكرات', 'محجوزة للحكم مع مذكرات', 2], ['تأجيل للإعلان', 'للإعلان', 1], ['تأجيل للاطلاع والرد', 'للاطلاع والرد', 1], ['تأجيل للمذكرات', 'للمذكرات', 1], ['إحالة للخبير', 'لدى الخبير', 0], ['للمرافعة', 'للمرافعة', 1], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['شطب', 'شُطبت', -1]]
     : [['تأجيل للإعلان', 'للإعلان', 1], ['تأجيل للاطلاع والرد', 'للاطلاع والرد', 1], ['تأجيل لتبادل المذكرات', 'للمذكرات', 1], ['إحالة للخبير', 'لدى الخبير', 0], ['إحالة للتحقيق', 'للتحقيق', 1], ['للمرافعة', 'للمرافعة', 1], ['حجز للحكم', 'محجوزة للحكم', 2], ['حجز للحكم مع مذكرات', 'محجوزة للحكم مع مذكرات', 2], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['وقف', 'موقوفة', -1], ['شطب', 'شُطبت', -1]];
   RL_VERDICTS = cri ? (app ? { 'موضوع': ['تأييد', 'تعديل', 'إلغاء والبراءة', 'إلغاء والإدانة', 'الامتناع عن النطق بالعقاب'], 'شكل': ['عدم الجواز', 'عدم القبول شكلًا', 'سقوط الاستئناف'] } : { 'موضوع': ['إدانة', 'براءة', 'الامتناع عن النطق بالعقاب', 'انقضاء الدعوى الجزائية'], 'شكل': ['عدم الاختصاص', 'عدم القبول'] })
-    : app ? { 'موضوع': ['رفض وتأييد', 'تعديل', 'إلغاء', 'بطلان الحكم المستأنف والتصدّي', 'الإلغاء والإعادة', 'الإلغاء والإحالة'], 'شكل': ['عدم الجواز', 'عدم القبول شكلًا', 'بطلان صحيفة الاستئناف', 'سقوط الحق', 'اعتبار كأن لم يكن', 'الشطب'] }
-    : { 'موضوع': ['إجابة الطلبات', 'إجابة جزئية', 'رفض الدعوى'], 'شكل': ['عدم الاختصاص والإحالة', 'عدم القبول', 'اعتبار الدعوى كأن لم تكن', 'سقوط الخصومة', 'ترك الخصومة', 'الشطب'] };
+    : app ? { 'موضوع': ['رفض وتأييد', 'تعديل', 'إلغاء', 'بطلان الحكم المستأنف والتصدّي', 'الإلغاء والإعادة', 'الإلغاء والإحالة'], 'شكل': ['عدم الجواز', 'عدم القبول شكلًا', 'بطلان صحيفة الاستئناف', 'سقوط الحق', 'اعتبار كأن لم يكن', 'الشطب'], 'قبل الفصل في الموضوع': ['إحالة للخبراء', 'إحالة للاستجواب', 'إحالة للتحقيق', 'حلف اليمين'] }
+    : { 'موضوع': ['إجابة الطلبات', 'إجابة جزئية', 'رفض الدعوى'], 'شكل': ['عدم الاختصاص والإحالة', 'عدم القبول', 'اعتبار الدعوى كأن لم تكن', 'سقوط الخصومة', 'ترك الخصومة', 'الشطب'], 'قبل الفصل في الموضوع': ['إحالة للخبراء', 'إحالة للاستجواب', 'إحالة للتحقيق', 'حلف اليمين'] };
   RL_VD_ALL = Object.keys(RL_VERDICTS).reduce((a, g) => a.concat(RL_VERDICTS[g]), []);
   if (P.n === 1) { RL_W = { p: 'القاضي' }; RL_LT = { p: 'ق' }; }
   else { RL_W = { p: '(أ) الرئيس', r: '(ب) العضو اليمين', l: '(ج) العضو اليسار', d: '(د)' }; RL_LT = { p: 'أ', r: 'ب', l: 'ج', d: 'د' }; }
