@@ -15,7 +15,11 @@
 :root{color-scheme:light}
 body{margin:0;background:#fff;color:#000;font-family:'Noto Naskh Arabic','Traditional Arabic',serif;line-height:1.9;font-size:17px}
 .bar{position:sticky;top:0;background:#0B1F3B;color:#fff;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 12px;font-family:'Cairo',Tahoma,sans-serif;display:flex;flex-direction:column;gap:8px;z-index:2}
-.bar button{font-family:inherit;font-size:17px;font-weight:700;border:0;border-radius:12px;background:#B8923A;color:#0B1F3B;min-height:48px;padding:0 18px}
+.bar .row{display:flex;gap:8px}
+.bar button{font-family:inherit;font-size:17px;font-weight:700;border:0;border-radius:12px;background:#B8923A;color:#0B1F3B;min-height:48px;padding:0 18px;flex:1}
+.bar button.back{flex:0 0 auto;background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.45);font-size:16px;padding:0 14px}
+.bar .hint{display:none;background:#12325E;border-radius:10px;padding:8px 10px;color:#fff;font-size:14px}
+.bar .hint.on{display:block}
 .bar p{margin:0;font-size:13.5px;line-height:1.7;color:#E6ECF5}
 main{padding:16px;max-width:900px;margin:0 auto}
 .pbx-h{font-family:'Cairo',Tahoma,sans-serif;font-size:18px;font-weight:700;border-bottom:1.5px solid #000;padding-bottom:6px;margin:0 0 10px}
@@ -31,7 +35,11 @@ details>summary::-webkit-details-marker{display:none}
 </head>
 <body>
 <div class="bar">
-  <button type="button" id="go">طباعة أو حفظ PDF</button>
+  <div class="row">
+    <button type="button" id="back" class="back" aria-label="رجوع إلى التطبيق">→ رجوع</button>
+    <button type="button" id="go">طباعة أو حفظ PDF</button>
+  </div>
+  <p class="hint" id="bh">للعودة إلى التطبيق اضغط «تم» (Done) أعلى الشاشة، أو اسحب الصفحة إلى الأسفل.</p>
   <p>لحفظه PDF: في نافذة الطباعة اضغط زر المشاركة ⬆ ثم «حفظ في الملفات». وإن لم تظهر نافذة الطباعة فاستعمل زر المشاركة أسفل هذه الصفحة ← «طباعة».</p>
 </div>
 <main id="m"></main>
@@ -48,6 +56,14 @@ details>summary::-webkit-details-marker{display:none}
   } catch (e) { m.innerHTML = '<div class="err">تعذّر فتح المحتوى — ارجع إلى التطبيق واضغط «طباعة» مرة أخرى.</div>'; } }
   show(); window.addEventListener('hashchange', show);
   document.getElementById('go').onclick = function () { window.print(); };
+  // V122: رجوع إلى المكان نفسه في التطبيق — إن فُتحت الصفحة في التبويب نفسه فالرجوع بالتاريخ (يعيد الحالة كما كانت)،
+  // وإن فُتحت نافذةً مستقلة فإغلاقها، وإن رفض المتصفح الإغلاق (نافذة Safari داخل التطبيق) فتلميح «تم».
+  document.getElementById('back').onclick = function () {
+    var same = false; try { same = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch (e) {}
+    if (history.length > 1 && same) { history.back(); return; }
+    try { window.close(); } catch (e) {}
+    setTimeout(function () { if (!window.closed) document.getElementById('bh').classList.add('on'); }, 300);
+  };
 })();
 </script>
 </body>
