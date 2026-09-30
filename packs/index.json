@@ -2,58 +2,72 @@
  "format": "amali-pack-index",
  "packs": {
   "administrative": {
-   "file": "mabadi-pack_administrative_v1.1.json",
-   "version": "1.1",
+   "file": "mabadi-pack_administrative_v1.4.json",
+   "version": "1.4",
    "pack": "إداري",
-   "schema": "1.1",
+   "schema": "1.4",
    "generated": "2026-09-29",
-   "items": 113,
-   "bytes": 1160888
+   "items": 2270,
+   "bytes": 7015166
   },
   "civil": {
-   "file": "mabadi-pack_civil_v1.1.json",
-   "version": "1.1",
+   "file": "mabadi-pack_civil_v1.4.json",
+   "version": "1.4",
    "pack": "مدني",
-   "schema": "1.1",
+   "schema": "1.4",
    "generated": "2026-09-29",
-   "items": 233,
-   "bytes": 2207707
+   "items": 5139,
+   "bytes": 13352963
   },
   "commercial": {
-   "file": "mabadi-pack_commercial_v1.1.json",
-   "version": "1.1",
+   "file": "mabadi-pack_commercial_v1.4_part1of3.json",
+   "version": "1.4",
    "pack": "تجاري",
-   "schema": "1.1",
+   "schema": "1.4",
    "generated": "2026-09-29",
-   "items": 616,
-   "bytes": 3102008
+   "items": 15631,
+   "bytes": 35290388,
+   "parts": [
+    "mabadi-pack_commercial_v1.4_part1of3.json",
+    "mabadi-pack_commercial_v1.4_part2of3.json",
+    "mabadi-pack_commercial_v1.4_part3of3.json"
+   ]
+  },
+  "criminal": {
+   "file": "mabadi-pack_criminal_v1.4.json",
+   "version": "1.4",
+   "pack": "جزائي",
+   "schema": "1.4",
+   "generated": "2026-09-29",
+   "items": 3853,
+   "bytes": 8641218
   },
   "judiciary": {
-   "file": "mabadi-pack_judiciary_v1.1.json",
-   "version": "1.1",
+   "file": "mabadi-pack_judiciary_v1.4.json",
+   "version": "1.4",
    "pack": "طلبات رجال القضاء",
-   "schema": "1.1",
+   "schema": "1.4",
    "generated": "2026-09-29",
-   "items": 16,
-   "bytes": 312493
+   "items": 55,
+   "bytes": 420963
   },
   "labour": {
-   "file": "mabadi-pack_labour_v1.1.json",
-   "version": "1.1",
+   "file": "mabadi-pack_labour_v1.4.json",
+   "version": "1.4",
    "pack": "عمالي",
-   "schema": "1.1",
+   "schema": "1.4",
    "generated": "2026-09-29",
-   "items": 1525,
-   "bytes": 6163744
+   "items": 3551,
+   "bytes": 13813420
   },
   "personal-status": {
-   "file": "mabadi-pack_personal-status_v1.1.json",
-   "version": "1.1",
+   "file": "mabadi-pack_personal-status_v1.4.json",
+   "version": "1.4",
    "pack": "أحوال شخصية",
-   "schema": "1.1",
+   "schema": "1.4",
    "generated": "2026-09-29",
-   "items": 46,
-   "bytes": 350475
+   "items": 2783,
+   "bytes": 6198298
   }
  }
 }
