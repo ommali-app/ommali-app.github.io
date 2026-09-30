@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260930073650">
+<meta name="amali-build" content="20260930095659">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -48,6 +48,8 @@
 @font-face{font-family:'Readex Pro';font-style:normal;font-weight:700;font-display:swap;src:url('../fonts/readex-700.woff2') format('woff2')}
 @font-face{font-family:'Markazi Text';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/markazi-400.woff2') format('woff2')}
 @font-face{font-family:'Markazi Text';font-style:normal;font-weight:700;font-display:swap;src:url('../fonts/markazi-700.woff2') format('woff2')}
+@font-face{font-family:'Reem Kufi';font-style:normal;font-weight:700;font-display:swap;src:url('../fonts/reem-700.woff2') format('woff2');unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0898-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+@font-face{font-family:'Reem Kufi';font-style:normal;font-weight:700;font-display:swap;src:url('../fonts/reem-700-lat.woff2') format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2212}
 .icsbox{margin-top:10px;padding:12px;border:1px solid var(--line,#ccc);border-radius:12px;background:var(--panel)}.icsbox h4{margin:0 0 8px;font-size:1rem}.icsbox ol{margin:0;padding-inline-start:20px}.icsbox li{margin-bottom:10px;line-height:1.8}.icsbox .row{margin-top:6px}
 .synote{font-size:13px;color:var(--ink2);line-height:1.8;margin:0 0 10px}.sybox{display:grid;gap:8px}.sybox label{display:grid;gap:4px;font-size:13px;color:var(--ink2)}.sybox input[type=password]{width:100%;padding:9px 12px;border:1px solid var(--line2);border-radius:10px;background:var(--bg);color:var(--ink);font-size:15px}.sybtns{display:flex;flex-wrap:wrap;gap:8px}.systat{font-size:13px;line-height:1.9;color:var(--ink2);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 12px}.systat b{color:var(--ink)}.systat .warn{color:var(--warn);font-weight:700}.sydot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--warn);margin-inline-start:6px;vertical-align:middle}.syhow{font-size:13px;color:var(--ink2);line-height:1.8;margin:0 0 10px}.syhow summary{cursor:pointer;font-weight:700;color:var(--ink)}.syhow ul{margin:6px 0;padding-right:18px}.syhow p{margin:4px 0 0}.systep{font-size:13px;line-height:1.8;color:var(--ink2);background:var(--bg);border:1px dashed var(--gold);border-radius:10px;padding:8px 12px;display:grid;gap:8px}.systep .btn{justify-self:start}.syrule{display:grid;gap:6px}.syrule p{margin:0;font-size:13px;color:var(--ink2);line-height:1.8}.syrule .btn.sybig{font-size:16px;padding:10px 26px;justify-self:start}.sy2 .btn{flex:1 1 150px}.syrl{margin:0;padding-right:18px;font-size:13px;color:var(--ink2);line-height:1.8}.symore summary{cursor:pointer;font-size:13px;color:var(--ink3);margin:2px 0 6px}.symore .sybtns{margin-bottom:6px}.rlprof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.rlprof label{display:grid;gap:4px;font-size:13px;color:var(--ink2)}.rlprof .sel{width:100%;min-width:0}.rlwd{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:10px 0 6px;font-size:13px;color:var(--ink2)}.rlexl{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--ink2);margin:4px 0}@media(max-width:560px){.rlprof{grid-template-columns:1fr 1fr}}.profnote{grid-column:1/-1;background:var(--panel);border:1px dashed var(--gold);border-radius:12px;padding:10px 14px;font-size:13.5px;line-height:1.8;color:var(--ink2);margin:0 0 12px}.profnote b{color:var(--ink)}#demobar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom,0px) + var(--bnh,0px));z-index:80;display:flex;gap:10px;align-items:center;background:#5B4210;color:#fff;border-radius:999px;padding:7px 8px 7px 16px;font-size:13px;box-shadow:0 6px 20px rgba(0,0,0,.25);max-width:calc(100vw - 24px)}#demobar span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}@media(max-width:700px){#demobar{bottom:calc(66px + env(safe-area-inset-bottom,0px) + var(--bnh,0px))}#demobar .dmx{display:none}}#demobar button{border:0;border-radius:999px;background:#fff;color:#5B4210;font-weight:700;padding:5px 12px;font-family:inherit;font-size:12.5px;white-space:nowrap}@media print{#demobar{display:none!important}}.demobox{margin-top:10px;border:1px dashed var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:8px;font-size:13px;color:var(--ink2)}.demobox .row2{display:flex;flex-wrap:wrap;gap:6px}.demobox .sel{flex:1 1 120px;min-width:0}.sydirtip{font-size:13px;line-height:1.8;color:var(--ink2);background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:8px 12px;display:grid;gap:8px}.sydirtip .btn{justify-self:start}.sylink{background:none;border:0;color:var(--ink3);font-size:12.5px;text-decoration:underline;cursor:pointer;padding:2px 0;font-family:inherit}
 .inhost{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;line-height:1.9}.inhost ol{margin:6px 0 10px;padding-inline-start:20px}.inhost textarea{width:100%;min-height:120px;border:1px solid var(--line2);border-radius:10px;padding:8px 10px;background:var(--bg);color:var(--ink);font:inherit;font-size:14px;margin-bottom:8px}
@@ -63,13 +65,13 @@
 </style>
 <style>
 :root{
-  --bg:#F5F3EE; --panel:#FFFFFF; --panel2:#ECE8DF; --line:#DDD6C8; --line2:#CCC3B1;
-  --ink:#1A1F29; --ink2:#4A505C; --ink3:#80868F;
-  --accent:#1C2E4A; --accent-ink:#FFFFFF; --accent-soft:#E3E8F0; --accent-soft-ink:#16253C;
+  --bg:#F4F1EA; --panel:#FFFFFF; --panel2:#ECE7DC; --line:#E4DDCC; --line2:#D2C8B2;
+  --ink:#10213B; --ink2:#3F4B5E; --ink3:#6A7588;
+  --accent:#0B1F3B; --accent-ink:#FFFFFF; --accent-soft:#E3E8F0; --accent-soft-ink:#16253C;
   --gold:#A67C2E; --gold-soft:#F5ECD9; --gold-ink:#7A5A1E;
   --ok:#2E7D4F; --ok-soft:#DDF0E4; --warn:#A8620C; --warn-soft:#FBEBD3; --bad:#A83A3A; --bad-soft:#F8DEDE; --mix:#5B5FA8; --mix-soft:#E4E4F6;
   --hl:#FFE79A; --shadow:0 10px 30px rgba(22,32,43,.12);
-  --ui:"IBM Plex Sans Arabic",Tahoma,Arial,sans-serif; --body:"Noto Naskh Arabic","Traditional Arabic",Tahoma,serif;
+  --ui:"IBM Plex Sans Arabic",Tahoma,Arial,sans-serif; --body:"Noto Naskh Arabic","Traditional Arabic",Tahoma,serif; --title:"Reem Kufi","Noto Kufi Arabic",var(--ui);
   --fs:17px; --r:10px;
   color-scheme:light;
 }
@@ -1323,6 +1325,49 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 }
 @media print{.bnav,.gs,.nav{display:none!important}body{padding-bottom:0}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ============ V114: هوية «منصة القاضي» — على هوية «مبادئ التمييز» (الكحلي والذهبي والعاجي، والسدو، وReem Kufi للعناوين) ============ */
+:root{--sadu:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='128'%3E%3Cg fill='none' stroke='%23C9A24B' stroke-width='.9'%3E%3Crect x='0.6' y='0.6' width='6.8' height='6.8'/%3E%3Crect x='8.6' y='0.6' width='6.8' height='6.8'/%3E%3Crect x='16.6' y='120.6' width='6.8' height='6.8'/%3E%3Crect x='24.6' y='120.6' width='6.8' height='6.8'/%3E%3Crect x='32.6' y='0.6' width='6.8' height='6.8'/%3E%3Crect x='40.6' y='0.6' width='6.8' height='6.8'/%3E%3Crect x='48.6' y='120.6' width='6.8' height='6.8'/%3E%3Crect x='56.6' y='120.6' width='6.8' height='6.8'/%3E%3Crect x='64.6' y='0.6' width='6.8' height='6.8'/%3E%3Crect x='72.6' y='0.6' width='6.8' height='6.8'/%3E%3Crect x='80.6' y='120.6' width='6.8' height='6.8'/%3E%3Crect x='88.6' y='120.6' width='6.8' height='6.8'/%3E%3Crect x='96.6' y='0.6' width='6.8' height='6.8'/%3E%3Crect x='104.6' y='0.6' width='6.8' height='6.8'/%3E%3Crect x='112.6' y='120.6' width='6.8' height='6.8'/%3E%3Crect x='120.6' y='120.6' width='6.8' height='6.8'/%3E%3Crect x='128.6' y='0.6' width='6.8' height='6.8'/%3E%3Crect x='136.6' y='0.6' width='6.8' height='6.8'/%3E%3Crect x='144.6' y='120.6' width='6.8' height='6.8'/%3E%3Crect x='152.6' y='120.6' width='6.8' height='6.8'/%3E%3Crect x='160.6' y='0.6' width='6.8' height='6.8'/%3E%3Crect x='168.6' y='0.6' width='6.8' height='6.8'/%3E%3Crect x='176.6' y='120.6' width='6.8' height='6.8'/%3E%3Crect x='184.6' y='120.6' width='6.8' height='6.8'/%3E%3Crect x='56.6' y='64.6' width='6.8' height='6.8'/%3E%3Crect x='64.6' y='56.6' width='6.8' height='6.8'/%3E%3Crect x='64.6' y='72.6' width='6.8' height='6.8'/%3E%3Crect x='72.6' y='48.6' width='6.8' height='6.8'/%3E%3Crect x='72.6' y='80.6' width='6.8' height='6.8'/%3E%3Crect x='80.6' y='40.6' width='6.8' height='6.8'/%3E%3Crect x='80.6' y='88.6' width='6.8' height='6.8'/%3E%3Crect x='88.6' y='32.6' width='6.8' height='6.8'/%3E%3Crect x='88.6' y='96.6' width='6.8' height='6.8'/%3E%3Crect x='96.6' y='24.6' width='6.8' height='6.8'/%3E%3Crect x='96.6' y='104.6' width='6.8' height='6.8'/%3E%3Crect x='104.6' y='32.6' width='6.8' height='6.8'/%3E%3Crect x='104.6' y='96.6' width='6.8' height='6.8'/%3E%3Crect x='112.6' y='40.6' width='6.8' height='6.8'/%3E%3Crect x='112.6' y='88.6' width='6.8' height='6.8'/%3E%3Crect x='120.6' y='48.6' width='6.8' height='6.8'/%3E%3Crect x='120.6' y='80.6' width='6.8' height='6.8'/%3E%3Crect x='128.6' y='56.6' width='6.8' height='6.8'/%3E%3Crect x='128.6' y='72.6' width='6.8' height='6.8'/%3E%3Crect x='136.6' y='64.6' width='6.8' height='6.8'/%3E%3Crect x='72.6' y='64.6' width='6.8' height='6.8'/%3E%3Crect x='80.6' y='56.6' width='6.8' height='6.8'/%3E%3Crect x='80.6' y='72.6' width='6.8' height='6.8'/%3E%3Crect x='88.6' y='48.6' width='6.8' height='6.8'/%3E%3Crect x='88.6' y='80.6' width='6.8' height='6.8'/%3E%3Crect x='96.6' y='40.6' width='6.8' height='6.8'/%3E%3Crect x='96.6' y='88.6' width='6.8' height='6.8'/%3E%3Crect x='104.6' y='48.6' width='6.8' height='6.8'/%3E%3Crect x='104.6' y='80.6' width='6.8' height='6.8'/%3E%3Crect x='112.6' y='56.6' width='6.8' height='6.8'/%3E%3Crect x='112.6' y='72.6' width='6.8' height='6.8'/%3E%3Crect x='120.6' y='64.6' width='6.8' height='6.8'/%3E%3Crect x='96.6' y='64.6' width='6.8' height='6.8'/%3E%3Crect x='24.6' y='64.6' width='6.8' height='6.8'/%3E%3Crect x='16.6' y='56.6' width='6.8' height='6.8'/%3E%3Crect x='8.6' y='48.6' width='6.8' height='6.8'/%3E%3Crect x='16.6' y='72.6' width='6.8' height='6.8'/%3E%3Crect x='8.6' y='80.6' width='6.8' height='6.8'/%3E%3Crect x='32.6' y='56.6' width='6.8' height='6.8'/%3E%3Crect x='40.6' y='48.6' width='6.8' height='6.8'/%3E%3Crect x='32.6' y='72.6' width='6.8' height='6.8'/%3E%3Crect x='40.6' y='80.6' width='6.8' height='6.8'/%3E%3Crect x='168.6' y='64.6' width='6.8' height='6.8'/%3E%3Crect x='160.6' y='56.6' width='6.8' height='6.8'/%3E%3Crect x='152.6' y='48.6' width='6.8' height='6.8'/%3E%3Crect x='160.6' y='72.6' width='6.8' height='6.8'/%3E%3Crect x='152.6' y='80.6' width='6.8' height='6.8'/%3E%3Crect x='176.6' y='56.6' width='6.8' height='6.8'/%3E%3Crect x='184.6' y='48.6' width='6.8' height='6.8'/%3E%3Crect x='176.6' y='72.6' width='6.8' height='6.8'/%3E%3Crect x='184.6' y='80.6' width='6.8' height='6.8'/%3E%3C/g%3E%3C/svg%3E");--navybar:#0B1F3B;--navybar2:#12325E;--goldfill:#B8923A}
+.bar{background:linear-gradient(90deg,rgba(11,31,59,.5) 0%,rgba(11,31,59,.84) 50%,rgba(11,31,59,.97) 100%),var(--sadu) 0 0/192px 128px repeat,linear-gradient(135deg,var(--navybar) 0%,var(--navybar2) 100%);border-bottom:0;color:#fff;box-shadow:0 6px 18px rgba(11,31,59,.18)}
+.brand h1{color:#fff;font-family:var(--title);font-weight:700;font-size:22px;letter-spacing:0}
+.brand small{color:#C9D4E6}
+.brand .seal{box-shadow:0 2px 8px rgba(0,0,0,.35)}
+.bar .search input{background:#fff;border-color:transparent;color:#10213B;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.bar .search input:focus{border-color:var(--goldfill);box-shadow:0 0 0 4px rgba(184,146,58,.28)}
+.bar .search .hint{background:#fff}
+.bar .ib{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff}
+.bar .ib:hover{background:rgba(255,255,255,.16);color:#fff}
+.bar .grp{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.2)}
+.bar .grp button{color:#E6ECF5}
+.bar .grp button+button{border-right-color:rgba(255,255,255,.14)}
+.bar .grp button:hover{background:rgba(255,255,255,.1);color:#fff}
+.bar .grp button.on{background:var(--goldfill);color:#0B1F3B}
+.bar .seg{background:transparent;border:0}
+.bar .seg button{color:#D5DEEB}
+.bar .seg button:hover{background:rgba(255,255,255,.1);color:#fff}
+.bar .seg button.on{background:rgba(255,255,255,.16);color:#fff}
+.bar .nav .sep{background:rgba(255,255,255,.25)}
+/* بطاقة الرول */
+.rlc{border-radius:16px;border-right-width:4px;box-shadow:0 1px 2px rgba(16,33,59,.04),0 6px 18px rgba(11,31,59,.05)}
+.rlc.cl{border-radius:14px}
+.rlc .h>b{font-family:var(--title);font-size:19px;font-weight:700;color:var(--accent);letter-spacing:.3px}
+:root[data-theme="dark"] .rlc .h>b{color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .rlc .h>b{color:var(--ink)}}
+.rlc .bds{margin-top:10px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:4px 10px 10px}
+.rlc .bds>.ln:first-child,.rlc .bds>.rlpath:first-child,.rlc .bds>details:first-child{margin-top:8px}
+.rlc .bds details.sec{background:var(--panel)}
+.rlc .bd>.acts{margin-top:12px}
+@media (min-width:1100px){
+  .rlc.op{padding:16px 18px}
+  .rlc.op .bd.two{display:grid;grid-template-columns:minmax(300px,440px) minmax(0,1fr);grid-template-areas:"m s" "a s";column-gap:22px;align-items:start}
+  .rlc.op .bd.two>.bdm{grid-area:m}
+  .rlc.op .bd.two>.bds{grid-area:s;margin-top:6px;align-self:start}
+  .rlc.op .bd.two>.acts{grid-area:a;align-self:end}
+  .rlc.op .bd.two>:not(.bdm):not(.bds):not(.acts){grid-column:1/-1}
+  .rlc .bds{padding:6px 14px 14px}
+}
+@media (max-width:1099px){.rlc .bds .rlpath{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;-webkit-overflow-scrolling:touch}.rlc .bds .rlpath::-webkit-scrollbar{display:none}.rlc .bds .rlpath>*{flex:none}}
+@media print{.bar{background:none!important;box-shadow:none!important;color:inherit}}
 </style>
 </head>
 <body>
@@ -1966,7 +2011,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>العرض</h3>
       <div class="drow"><span>الإضاءة</span><div class="dseg" id="themeseg"><button type="button" data-t="light">فاتح</button><button type="button" data-t="dark">داكن</button><button type="button" data-t="auto">تلقائي</button></div></div>
-      <div class="drow"><span>الخط</span><select class="fontsel" id="font" title="اختيار الخط"><option value="plex">IBM Plex</option><option value="naskh">نسخ (Noto Naskh)</option><option value="cairo">Cairo</option><option value="tajawal">Tajawal</option><option value="almarai">Almarai</option><option value="amiri">أميري</option><option value="kufi">كوفي (Noto Kufi)</option><option value="readex">Readex Pro</option><option value="markazi">Markazi</option></select></div>
+      <div class="drow"><span>الخط</span><select class="fontsel" id="font" title="اختيار الخط"><option value="hawiya">هوية المنصة (Cairo + النسخ)</option><option value="plex">IBM Plex</option><option value="naskh">نسخ (Noto Naskh)</option><option value="cairo">Cairo</option><option value="tajawal">Tajawal</option><option value="almarai">Almarai</option><option value="amiri">أميري</option><option value="kufi">كوفي (Noto Kufi)</option><option value="readex">Readex Pro</option><option value="markazi">Markazi</option></select></div>
       <div class="drow"><span>حجم الخط</span><div class="dsize"><button class="ib" id="fsm" title="تصغير الخط" type="button">أ-</button><b id="fsv">17</b><button class="ib" id="fsp" title="تكبير الخط" type="button">أ+</button></div></div>
       <p class="dsample">نموذج: لما كان من المقرر في قضاء هذه المحكمة أن العبرة بالطلبات الختامية.</p>
     </section>
@@ -2018,7 +2063,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V113 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V114 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -2554,14 +2599,14 @@ document.addEventListener('keydown', e => {
 });
 
 // ---- fonts
-const FONTS = { plex: ['"IBM Plex Sans Arabic"', '"Noto Naskh Arabic"'], naskh: ['"Noto Naskh Arabic"', '"Noto Naskh Arabic"'], cairo: ['"Cairo"', '"Cairo"'], tajawal: ['"Tajawal"', '"Tajawal"'], almarai: ['"Almarai"', '"Almarai"'], amiri: ['"IBM Plex Sans Arabic"', '"Amiri"'], kufi: ['"Noto Kufi Arabic"', '"Noto Kufi Arabic"'], readex: ['"Readex Pro"', '"Readex Pro"'], markazi: ['"IBM Plex Sans Arabic"', '"Markazi Text"'] };
+const FONTS = { hawiya: ['"Cairo"', '"Noto Naskh Arabic"'], plex: ['"IBM Plex Sans Arabic"', '"Noto Naskh Arabic"'], naskh: ['"Noto Naskh Arabic"', '"Noto Naskh Arabic"'], cairo: ['"Cairo"', '"Cairo"'], tajawal: ['"Tajawal"', '"Tajawal"'], almarai: ['"Almarai"', '"Almarai"'], amiri: ['"IBM Plex Sans Arabic"', '"Amiri"'], kufi: ['"Noto Kufi Arabic"', '"Noto Kufi Arabic"'], readex: ['"Readex Pro"', '"Readex Pro"'], markazi: ['"IBM Plex Sans Arabic"', '"Markazi Text"'] };
 function setFont(k) {
-  const f = FONTS[k] || FONTS.plex; const r = document.documentElement.style;
+  const f = FONTS[k] || FONTS.hawiya; const r = document.documentElement.style;
   r.setProperty('--ui', f[0] + ',Tahoma,Arial,sans-serif'); r.setProperty('--body', f[1] + ',"Traditional Arabic",Tahoma,serif');
-  $('#font').value = FONTS[k] ? k : 'plex'; try { localStorage.setItem('tm_font', k); } catch (e) {}
+  $('#font').value = FONTS[k] ? k : 'hawiya'; try { localStorage.setItem('tm_font', k); } catch (e) {}
 }
 $('#font').onchange = e => setFont(e.target.value);
-try { setFont(localStorage.getItem('tm_font') || 'plex'); } catch (e) {}
+try { setFont(localStorage.getItem('tm_font') || 'hawiya'); } catch (e) {}
 function clearAll() { Object.keys(LBL).forEach(k => state[k].clear()); $('#artq').value = ''; $('#hq').value = ''; run(); toast('أُلغيت كل المرشحات'); }
 $('#clearall').onclick = clearAll; $('#clearall2').onclick = clearAll;
 
@@ -3579,29 +3624,32 @@ function rlCard(c, mode, pos) {
       : (c.ann ? '<span class="f" title="الإعلان">' + rlIc('ann') + '<span class="ann ' + (ok ? 'ok' : 'no') + '">' + rlAnnTxt(c.ann) + (ok ? ' ✓' : ' ✗') + '</span></span>' : '') + (last ? '<span class="f lastc" title="آخر قرار">' + rlIc('dec') + esc(last.length > 48 ? last.slice(0, 48) + '…' : last) + '</span>' : ''))
     + '</div>';
   // التفاصيل (للمفتوحة)
+  let s = ''; // V114: الخلاصة (العمود الثاني على الشاشات العريضة)
   let b = '<div class="ln ic" title="' + whenT + '">' + rlIc('cal') + '<span class="k sr">' + whenT + ':</span> ' + when + '</div>';
   if (last) b += '<div class="ln ic" title="آخر قرار">' + rlIc('dec') + '<span>' + esc(last) + (adj >= 2 ? ' <span class="due ' + (adj >= 3 ? 'late' : 'soon') + '">أُجّلت للإعلان ' + adj + ' مرات</span>' : '') + '</span></div>';
-  if (c.vd || c.d1 || c.tm) b += '<div class="ln path2"><span class="k">مسار التقاضي:</span> <span class="pt">أول درجة: ' + (c.d1 ? esc(c.d1) : '—') + '</span><i>‹</i><span class="pt">الاستئناف: ' + (c.vd ? esc(c.vd) : '—') + '</span><i>‹</i><span class="pt">التمييز: ' + (c.tm ? esc(c.tm) : '—') + '</span></div>';
+  if (c.vd || c.d1 || c.tm) s += '<div class="ln path2"><span class="k">مسار التقاضي:</span> <span class="pt">أول درجة: ' + (c.d1 ? esc(c.d1) : '—') + '</span><i>‹</i><span class="pt">الاستئناف: ' + (c.vd ? esc(c.vd) : '—') + '</span><i>‹</i><span class="pt">التمييز: ' + (c.tm ? esc(c.tm) : '—') + '</span></div>';
   if (!done && !res) b += '<div class="ln rdy"><label><input type="checkbox" data-a="exec"' + (c.exec ? ' checked' : '') + '> نُفّذ قرار الجلسة السابقة</label>' + (c.ann ? '' : ' <span class="k">· حالة الإعلان غير مسجّلة</span>') + '</div>';
   if (res) b += '<div class="ln ic wjs"><span class="f" title="كاتب الحكم">' + rlIc('pen') + '<select class="mini" data-a="writer" aria-label="كاتب الحكم"><option value="">— غير موزّعة —</option>' + Object.keys(RL_W).map(k => '<option value="' + k + '"' + (c.writer === k ? ' selected' : '') + '>' + RL_W[k] + '</option>').join('') + '</select></span>'
     + (mine ? '<span class="f jsw" title="حالة الحكم">' + rlIc('st') + '<select class="mini" data-a="js" aria-label="حالة الحكم">' + RL_JS.map(s => '<option' + (s === (c.js || 'لم يبدأ') ? ' selected' : '') + '>' + s + '</option>').join('') + '</select>' + (rlJsIdx(c) < 3 && c.next ? ' ' + rlDue(c.next) : '') + '</span>' : '') + '</div>';
   if (res && sibs.some(x => RL_RES.includes(x.stage) && (x.writer || '') !== (c.writer || ''))) b += '<div class="ln"><span class="due soon">كاتب الحكم يختلف عن المرتبطة: ' + esc(sibs.filter(x => RL_RES.includes(x.stage) && (x.writer || '') !== (c.writer || '')).map(x => x.code + ' ' + (RL_W[x.writer] || 'غير موزّعة')).join('، ')) + '</span></div>';
-  if (mine) b += rlPath(c);
-  if (mine) { const nd = RL_DOCS.filter(x => (c.docs || {})[x]).length; b += '<details class="sec docsx" data-sec="docs"' + so('docs') + '><summary>' + rlIc('doc') + 'المستندات المحمّلة <span class="cnt">' + nd + '/' + RL_DOCS.length + '</span></summary><div class="ln docs">' + RL_DOCS.map(x => '<button type="button" class="chip' + ((c.docs || {})[x] ? ' on' : '') + '" data-doc="' + x + '">' + x + '</button>').join('') + '</div></details>'; }
-  if (c.chk || c.ms) b += '<div class="ln"><span class="k">محفوظ للحزمة:</span> ' + [c.chk ? 'نتيجة التحقق' : '', c.ms ? (c.ms.label || 'حساب المستحقات') : ''].filter(Boolean).join('، ') + ' <button type="button" class="linkbtn" data-a="unres">إزالة</button></div>';
-  if (c.an) b += '<div class="ln"><span class="k">التحليل:</span> مربوط بالقضية' + (c.an.form && c.an.form.ruling ? ' — حكم أول درجة ' + rlFmt(c.an.form.ruling) : '') + ' <button type="button" class="linkbtn" data-a="unan">فكّ الربط</button></div>';
-  if (c.dls && c.dls.length) b += '<div class="ln"><span class="k">مواعيد:</span><ul class="dls">' + c.dls.map(x => '<li>' + (x.d ? rlDue(x.d) + ' ' : '') + esc(x.t || '') + '</li>').join('') + '</ul></div>';
-  if (prs.length) b += '<details class="sec prsx" data-sec="prs"' + so('prs') + '><summary>' + rlIc('bk') + 'المبادئ المحفوظة <span class="cnt">' + prs.length + '</span></summary><div class="prs">' + prs.map(p => { const tt = (p.keywords || p.appeal || '').replace(/\s+/g, ' ').trim(), body = (p.summary && p.summary.length ? p.summary.join(' / ') : (p.reas || '').replace(/\s+/g, ' ').slice(0, 700) + ((p.reas || '').length > 700 ? ' …' : '')); return '<details class="it"><summary><span class="t">' + esc(tt) + '</span><span class="c">' + esc(p.cite_std) + '</span></summary><div class="px">' + '<p>' + esc(body) + '</p><div class="pa"><button type="button" class="mini" data-open="' + p.id + '">فتح المبدأ</button><button type="button" class="mini" data-rm="' + p.id + '" title="إزالة من البطاقة">✕ إزالة</button></div></div></details>'; }).join('') + '</div></details>';
-  else if (mode !== 'roll') b += '<div class="ln ic">' + rlIc('bk') + '<span class="k">لا مبادئ محفوظة — تُضاف من لوحة قراءة أي مبدأ بزر «＋ رول الجلسة».</span></div>';
-  { const sa = rlSheetAll(c).filter(x => rlSheetHasData(rlSheet(c, x.d))); if (sa.length) b += '<details class="sec shx" data-sec="sheet"' + so('sheet') + '><summary>' + rlIc('dec') + 'ورقة الرول <span class="cnt">' + sa.length + '</span></summary><div class="shl">' + sa.slice().reverse().map(x => '<div class="ssold"><b>' + rlFmt(x.d) + '</b><ul>' + x.lines.map(y => '<li>' + esc(y) + '</li>').join('') + '</ul></div>').join('') + '</div></details>'; }
-  if (c.note) b += '<div class="ln note2">' + esc(c.note) + '</div>';
-  if ((c.hist || []).length > 1) b += '<details class="sec hist" data-sec="hist"' + so('hist') + '><summary>' + rlIc('hist') + 'سجل الجلسات <span class="cnt">' + c.hist.length + '</span></summary><ol>' + c.hist.map(x => '<li>' + rlFmt(x.d) + ': ' + esc(x.a) + (x.to ? ' ← ' + rlFmt(x.to) : '') + (x.n ? ' — ' + esc(x.n) : '') + (x.via ? ' <span class="k">(طُبّق مع ' + esc(x.via) + ')</span>' : '') + '</li>').join('') + '</ol></details>';
+  if (mine) s += rlPath(c);
+  if (mine) { const nd = RL_DOCS.filter(x => (c.docs || {})[x]).length; s += '<details class="sec docsx" data-sec="docs"' + so('docs') + '><summary>' + rlIc('doc') + 'المستندات المحمّلة <span class="cnt">' + nd + '/' + RL_DOCS.length + '</span></summary><div class="ln docs">' + RL_DOCS.map(x => '<button type="button" class="chip' + ((c.docs || {})[x] ? ' on' : '') + '" data-doc="' + x + '">' + x + '</button>').join('') + '</div></details>'; }
+  if (c.chk || c.ms) s += '<div class="ln"><span class="k">محفوظ للحزمة:</span> ' + [c.chk ? 'نتيجة التحقق' : '', c.ms ? (c.ms.label || 'حساب المستحقات') : ''].filter(Boolean).join('، ') + ' <button type="button" class="linkbtn" data-a="unres">إزالة</button></div>';
+  if (c.an) s += '<div class="ln"><span class="k">التحليل:</span> مربوط بالقضية' + (c.an.form && c.an.form.ruling ? ' — حكم أول درجة ' + rlFmt(c.an.form.ruling) : '') + ' <button type="button" class="linkbtn" data-a="unan">فكّ الربط</button></div>';
+  if (c.dls && c.dls.length) s += '<div class="ln"><span class="k">مواعيد:</span><ul class="dls">' + c.dls.map(x => '<li>' + (x.d ? rlDue(x.d) + ' ' : '') + esc(x.t || '') + '</li>').join('') + '</ul></div>';
+  if (prs.length) s += '<details class="sec prsx" data-sec="prs"' + so('prs') + '><summary>' + rlIc('bk') + 'المبادئ المحفوظة <span class="cnt">' + prs.length + '</span></summary><div class="prs">' + prs.map(p => { const tt = (p.keywords || p.appeal || '').replace(/\s+/g, ' ').trim(), body = (p.summary && p.summary.length ? p.summary.join(' / ') : (p.reas || '').replace(/\s+/g, ' ').slice(0, 700) + ((p.reas || '').length > 700 ? ' …' : '')); return '<details class="it"><summary><span class="t">' + esc(tt) + '</span><span class="c">' + esc(p.cite_std) + '</span></summary><div class="px">' + '<p>' + esc(body) + '</p><div class="pa"><button type="button" class="mini" data-open="' + p.id + '">فتح المبدأ</button><button type="button" class="mini" data-rm="' + p.id + '" title="إزالة من البطاقة">✕ إزالة</button></div></div></details>'; }).join('') + '</div></details>';
+  let hint = ''; if (!prs.length && mode !== 'roll') hint = '<div class="ln ic">' + rlIc('bk') + '<span class="k">لا مبادئ محفوظة — تُضاف من لوحة قراءة أي مبدأ بزر «＋ رول الجلسة».</span></div>';
+  { const sa = rlSheetAll(c).filter(x => rlSheetHasData(rlSheet(c, x.d))); if (sa.length) s += '<details class="sec shx" data-sec="sheet"' + so('sheet') + '><summary>' + rlIc('dec') + 'ورقة الرول <span class="cnt">' + sa.length + '</span></summary><div class="shl">' + sa.slice().reverse().map(x => '<div class="ssold"><b>' + rlFmt(x.d) + '</b><ul>' + x.lines.map(y => '<li>' + esc(y) + '</li>').join('') + '</ul></div>').join('') + '</div></details>'; }
+  if (c.note) s += '<div class="ln note2">' + esc(c.note) + '</div>';
+  if ((c.hist || []).length > 1) s += '<details class="sec hist" data-sec="hist"' + so('hist') + '><summary>' + rlIc('hist') + 'سجل الجلسات <span class="cnt">' + c.hist.length + '</span></summary><ol>' + c.hist.map(x => '<li>' + rlFmt(x.d) + ': ' + esc(x.a) + (x.to ? ' ← ' + rlFmt(x.to) : '') + (x.n ? ' — ' + esc(x.n) : '') + (x.via ? ' <span class="k">(طُبّق مع ' + esc(x.via) + ')</span>' : '') + '</li>').join('') + '</ol></details>';
   const more = (res ? '<button type="button" data-a="prompt" title="ينسخ حزمة القضية: البيانات المعتّمة، وحساب الشكل، والمواعيد، والمبادئ المختارة بنصوصها — تلصقها في محادثة القضية في أداة الذكاء التي تستعملها">حزمة القضية</button><button type="button" data-a="folder" title="اسم موحّد لمجلد القضية في مجلدك السحابي">اسم المجلد</button>' : '')
     + (done ? '' : '<button type="button" data-a="link" title="ربط بقضية مضمومة أو مقابلة في الرول">ربط باستئناف</button>') + (sibs.length ? '<button type="button" data-a="unlink" title="فكّ ربط هذه القضية عن المرتبطة بها">فكّ الربط</button>' : '')
     + (prs.length ? '<button type="button" data-a="cites">نسخ الإحالات</button>' : '') + ((c.hist || []).length ? '<button type="button" data-a="undo" title="إلغاء آخر قرار مسجّل">تراجع عن آخر قرار</button>' : '')
     + (c.next && !done ? '<button type="button" data-a="sheet">ورقة الرول (وضع الجلسة)</button>' : '') + '<button type="button" data-a="edit">تعديل</button><hr><button type="button" data-a="del" class="dl">حذف</button>';
-  b += '<div class="acts">' + (done ? '' : '<button type="button" class="mini pri" data-a="dec">قرار الجلسة</button>') + '<details class="more"><summary class="mini" aria-label="المزيد من الإجراءات">⋯ المزيد</summary><div class="menu" role="menu">' + more + '</div></details></div>';
-  d.innerHTML = h + '<div class="bd">' + b + '</div>';
+  if (hint) { if (s) s += hint; else b += hint; } // V114: لا عمود خلاصة لتلميح وحده
+  const acts = '<div class="acts">' + (done ? '' : '<button type="button" class="mini pri" data-a="dec">قرار الجلسة</button>') + '<details class="more"><summary class="mini" aria-label="المزيد من الإجراءات">⋯ المزيد</summary><div class="menu" role="menu">' + more + '</div></details></div>';
+  d.innerHTML = h + '<div class="bd' + (s ? ' two' : '') + '"><div class="bdm">' + b + '</div>' + (s ? '<div class="bds">' + s + '</div>' : '') + acts + '</div>';
+  { const nx = d.querySelector('.bds .rlpath .nx'); if (nx) setTimeout(() => { try { const b = nx.parentElement, r = nx.getBoundingClientRect(), br = b.getBoundingClientRect(); if (b.scrollWidth > b.clientWidth && (r.left < br.left || r.right > br.right)) b.scrollLeft += (r.left + r.width / 2) - (br.left + br.width / 2); } catch (e) {} }, 0); } // V114: الخطوة التالية ظاهرة في شريط المسار على الجوال
   if (rlDecOpen === c.id) d.querySelector('.bd').appendChild(rlDecBox(c));
   if (rlLinkOpen === c.id) d.querySelector('.bd').appendChild(rlLinkBox(c));
   const hd = d.querySelector('.h');
