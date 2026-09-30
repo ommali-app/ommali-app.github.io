@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260930103556">
+<meta name="amali-build" content="20260930112555">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1365,7 +1365,17 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 .rlc .bds>.ln:first-child,.rlc .bds>.rlpath:first-child,.rlc .bds>details:first-child{margin-top:8px}
 .rlc .bds details.sec{background:var(--panel)}
 .rlc .bd>.acts{margin-top:12px}
-@media (min-width:1100px){
+/* V116: بطاقة بلا خلاصة — تتوزّع حقولها على العرض بدل عمود طويل وفراغ (≥900px، ومنها الآيباد أفقيًا) */
+@media (min-width:900px){
+  .rlc.op .bd:not(.two){display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:22px;align-items:end}
+  .rlc.op .bd:not(.two)>.bdm{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:26px;align-items:start}
+  .rlc.op .bd:not(.two)>.bdm>.ln{margin-top:8px}
+  .rlc.op .bd:not(.two)>.bdm>.ln.ic{flex-wrap:nowrap;align-items:flex-start}.rlc.op .bd:not(.two)>.bdm>.ln.ic>svg.i{margin-top:5px}.rlc.op .bd:not(.two)>.bdm>.ln.ic>.f{flex-wrap:wrap}
+  .rlc.op .bd:not(.two)>.acts{margin-top:8px;flex-wrap:nowrap}
+  .rlc.op .bd:not(.two)>.acts details.more{margin-inline-start:0}
+  .rlc.op .bd:not(.two)>:not(.bdm):not(.acts){grid-column:1/-1}
+}
+@media (min-width:900px){
   .rlc.op{padding:16px 18px}
   .rlc.op .bd.two{display:grid;grid-template-columns:minmax(300px,440px) minmax(0,1fr);grid-template-areas:"m s" "a s";column-gap:22px;align-items:start}
   .rlc.op .bd.two>.bdm{grid-area:m}
@@ -1374,7 +1384,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
   .rlc.op .bd.two>:not(.bdm):not(.bds):not(.acts){grid-column:1/-1}
   .rlc .bds{padding:6px 14px 14px}
 }
-@media (max-width:1099px){.rlc .bds .rlpath{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;-webkit-overflow-scrolling:touch}.rlc .bds .rlpath::-webkit-scrollbar{display:none}.rlc .bds .rlpath>*{flex:none}}
+@media (max-width:899px){.rlc .bds .rlpath{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;-webkit-overflow-scrolling:touch}.rlc .bds .rlpath::-webkit-scrollbar{display:none}.rlc .bds .rlpath>*{flex:none}}
 @media print{.bar{background:none!important;box-shadow:none!important;color:inherit}}
 </style>
 </head>
@@ -2068,7 +2078,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V115 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V116 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
