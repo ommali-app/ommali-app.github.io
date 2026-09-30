@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>طباعة — عمّالي</title>
+<style>
+/* V121: صفحة طباعة مستقلة لتطبيق الشاشة الرئيسية على الآيفون (لا تعمل فيه الطباعة) — تُفتح في نافذة Safari داخل التطبيق،
+   والمحتوى يصل في جزء الرابط بعد # فلا يُرسل إلى أي خادم، ولا يُحفظ. */
+@font-face{font-family:'Noto Naskh Arabic';font-weight:400;src:url('../fonts/naskh-400.woff2') format('woff2')}
+@font-face{font-family:'Noto Naskh Arabic';font-weight:700;src:url('../fonts/naskh-700.woff2') format('woff2')}
+@font-face{font-family:'Cairo';font-weight:400;src:url('../fonts/cairo-400.woff2') format('woff2')}
+@font-face{font-family:'Cairo';font-weight:700;src:url('../fonts/cairo-700.woff2') format('woff2')}
+:root{color-scheme:light}
+body{margin:0;background:#fff;color:#000;font-family:'Noto Naskh Arabic','Traditional Arabic',serif;line-height:1.9;font-size:17px}
+.bar{position:sticky;top:0;background:#0B1F3B;color:#fff;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 12px;font-family:'Cairo',Tahoma,sans-serif;display:flex;flex-direction:column;gap:8px;z-index:2}
+.bar button{font-family:inherit;font-size:17px;font-weight:700;border:0;border-radius:12px;background:#B8923A;color:#0B1F3B;min-height:48px;padding:0 18px}
+.bar p{margin:0;font-size:13.5px;line-height:1.7;color:#E6ECF5}
+main{padding:16px;max-width:900px;margin:0 auto}
+.pbx-h{font-family:'Cairo',Tahoma,sans-serif;font-size:18px;font-weight:700;border-bottom:1.5px solid #000;padding-bottom:6px;margin:0 0 10px}
+.pbx-s{font-family:'Cairo',Tahoma,sans-serif;font-size:12.5px;color:#444;border-top:1px solid #999;margin-top:14px;padding-top:6px}
+.tag{display:inline-block;border:1px solid #999;border-radius:4px;padding:0 6px;margin:2px;font-family:'Cairo',Tahoma,sans-serif;font-size:12px;background:none;color:#000}
+.top,.h{display:flex;flex-wrap:wrap;gap:4px 6px}
+h4{font-family:'Cairo',Tahoma,sans-serif;font-size:14px;margin:14px 0 4px}
+details>summary{list-style:none;font-weight:700;font-family:'Cairo',Tahoma,sans-serif;font-size:14px;margin-top:8px}
+details>summary::-webkit-details-marker{display:none}
+.err{padding:24px;font-family:'Cairo',Tahoma,sans-serif;text-align:center;color:#a33}
+@media print{.bar{display:none}main{padding:0}@page{margin:16mm 14mm}}
+</style>
+</head>
+<body>
+<div class="bar">
+  <button type="button" id="go">طباعة أو حفظ PDF</button>
+  <p>لحفظه PDF: في نافذة الطباعة اضغط زر المشاركة ⬆ ثم «حفظ في الملفات». وإن لم تظهر نافذة الطباعة فاستعمل زر المشاركة أسفل هذه الصفحة ← «طباعة».</p>
+</div>
+<main id="m"></main>
+<script>
+(function () {
+  var m = document.getElementById('m');
+  function show() { try {
+    var h = location.hash.replace(/^#/, ''), k = h.indexOf('='), v = k > 0 ? h.slice(k + 1) : '';
+    var b = v.replace(/-/g, '+').replace(/_/g, '/'); while (b.length % 4) b += '=';
+    var o = JSON.parse(decodeURIComponent(escape(atob(b))));
+    document.title = (o.t || 'طباعة') + ' — عمّالي';
+    m.innerHTML = o.h || '';
+    m.querySelectorAll('script,button,input,select,textarea').forEach(function (x) { x.remove(); });
+  } catch (e) { m.innerHTML = '<div class="err">تعذّر فتح المحتوى — ارجع إلى التطبيق واضغط «طباعة» مرة أخرى.</div>'; } }
+  show(); window.addEventListener('hashchange', show);
+  document.getElementById('go').onclick = function () { window.print(); };
+})();
+</script>
+</body>
+</html>
