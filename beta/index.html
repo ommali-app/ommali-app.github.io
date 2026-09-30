@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260930202915">
+<meta name="amali-build" content="20260930220032">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2096,7 +2096,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V120 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V121 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -2577,12 +2577,21 @@ $('#pcopyall').onclick = e => cur && guardCopy(cur, e.currentTarget, () => copy(
 // V118: طباعة عنصر واحد بدقة — نسخة نظيفة في #printbox (بلا أزرار)، وتُستدعى window.print() في النقرة نفسها
 function printCleanup(cls) { let done = false; const fin = () => { if (done) return; done = true; document.body.classList.remove(cls); window.removeEventListener('afterprint', fin); document.removeEventListener('pointerdown', fin, true); }; window.addEventListener('afterprint', fin); setTimeout(() => document.addEventListener('pointerdown', fin, true), 800); }
 const pdfHint = () => IS_IOS ? 'لحفظه PDF: في نافذة الطباعة (Options) اضغط زر المشاركة ⬆ أعلاها ثم «حفظ في الملفات»' : /Mac/.test(navigator.platform || '') && /Safari/.test(navigator.userAgent) && !/Chrome|Edg/.test(navigator.userAgent) ? 'لحفظه PDF: اضغط «PDF» أسفل نافذة الطباعة ثم «حفظ بتنسيق PDF»' : 'لحفظه PDF: اختر في نافذة الطباعة الوجهة «حفظ بتنسيق PDF»';
+// V121: تطبيق الشاشة الرئيسية على الآيفون لا يطبع (window.print لا تفعل شيئًا) — يُفتح المحتوى في صفحة طباعة مستقلة (../docs/amali-print.html)
+// داخل نافذة Safari فيها «طباعة» و«حفظ PDF». المحتوى في جزء الرابط بعد # (لا يُرسل إلى الخادم). الآيباد المثبّت يطبع مباشرة.
+const iphoneApp = () => /iPhone|iPod/.test(navigator.userAgent) && isStandalone();
+function printViaPage(title, html) {
+  const b = btoa(unescape(encodeURIComponent(JSON.stringify({ t: title, h: html })))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  const u = new URL('../docs/amali-print.html', location.href).href + '#z=' + b;
+  const w = window.open(u, '_blank'); if (!w) location.href = u;
+}
 function printNow(cls) { document.body.classList.add(cls); printCleanup(cls); try { syToast(pdfHint()); } catch (e) {} try { window.print(); } catch (e) { document.body.classList.remove(cls); } }   // V119: تلميح حفظ PDF مع كل طباعة
 function printClone(node) { const c = node.cloneNode(true); c.querySelectorAll('button,input,select,textarea,.acts,.rel,.linkbtn,[data-off],.pa,script,style').forEach(x => x.remove()); c.querySelectorAll('[id]').forEach(x => x.removeAttribute('id')); return c; }
 function printOnly(title, nodes, foot) {
   const box = document.getElementById('printbox'); box.innerHTML = ''; const h = document.createElement('div'); h.className = 'pbx-h'; h.textContent = title; box.appendChild(h);
   nodes.forEach(n => n && box.appendChild(printClone(n)));
   const f = document.createElement('div'); f.className = 'pbx-s'; f.textContent = (foot ? foot + ' · ' : '') + 'طُبع من «عمّالي» — ' + new Date().toLocaleDateString('ar-KW-u-nu-latn') + ' · مسودة عمل للمراجعة'; box.appendChild(f);
+  if (iphoneApp()) { printViaPage(title, box.innerHTML); return; }   // V121
   if (false) {   // V120: أُلغي — iPadOS/iOS الحديث يطبع من تطبيق الشاشة الرئيسية (ثبت على جهاز القاضي 30/9)، ومشاركة ملف HTML لا تعرض «طباعة». كان: تطبيق الشاشة الرئيسية على iPhone/iPad لا يطبع — تُفتح الصفحة عبر المشاركة
     const css = 'body{font-family:"Noto Naskh Arabic","Traditional Arabic",serif;margin:16px;color:#000;background:#fff;line-height:1.9;direction:rtl}.pbx-h{font-weight:700;font-size:17px;border-bottom:1.5px solid #000;padding-bottom:6px;margin-bottom:10px}.pbx-s{font-size:12px;color:#444;border-top:1px solid #999;margin-top:14px;padding-top:6px}.tag{border:1px solid #999;font-size:11px;padding:0 6px;border-radius:4px;margin:2px;display:inline-block}';
     const doc = '<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(title) + '</title><style>' + css + '</style></head><body>' + box.innerHTML + '</body></html>';
@@ -4552,6 +4561,7 @@ async function rlDistOpen() {
 
 // الطباعة: في المتصفح عادي؛ وفي تطبيق الشاشة الرئيسية على iPhone/iPad (حيث لا تعمل الطباعة) تُفتح الورقة صفحةً مستقلة عبر المشاركة
 function rlOut(h) {
+  if (iphoneApp()) { printViaPage('ورقة الجلسة', h); return; }   // V121
   { printNow('prl'); return; }   // V120: الطباعة مباشرة في كل الأحوال (تطبيق الشاشة الرئيسية يطبع في iOS الحديث). V118: في النقرة نفسها — Safari يحجب الطباعة المتأخرة
   const doc = '<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ورقة الجلسة</title><style>body{font-family:-apple-system,Arial,"Noto Naskh Arabic",sans-serif;margin:14px;color:#000;background:#fff}h2{text-align:center;font-size:18px}h3{font-size:15px;margin:14px 0 6px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #000;padding:5px;vertical-align:top;text-align:right}th{background:#eee}td.ck,td.dist{text-align:center}td.dist{font-size:14px;line-height:1.9}ul{margin:0;padding-right:14px}.nt{font-size:11px;color:#333;margin-top:3px}.ft{font-size:10px;margin-top:8px}.pb{text-align:center;margin:0 0 12px}.pb button{font-size:16px;padding:8px 22px;border-radius:10px;border:1px solid #1C2E4A;background:#1C2E4A;color:#fff}@media print{.pb{display:none}body{margin:0}}</style></head><body><div class="pb"><button onclick="window.print()">طباعة</button></div>' + h + '</body></html>';
   const f = new File([doc], 'ورقة الجلسة.html', { type: 'text/html' });
@@ -6349,7 +6359,7 @@ function initMst() {
   g('ms_form').addEventListener('input', run); g('ms_form').addEventListener('change', run);
   g('ms_copy').onclick = () => { const t = text(); if (!t) { toast('لا بيان مكتمل للنسخ'); return; } const done = () => toast('نُسخ البيان'); if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, () => mstFallbackCopy(t, done)); else mstFallbackCopy(t, done); };
   g('ms_save').onclick = () => rlSaveResult('ms', text(), 'حساب المستحقات (قانون العمل 6/2010)' + (g('ms_who').value.trim() ? ' — ' + g('ms_who').value.trim() : ''), g('ms_save').parentElement);
-  g('ms_print').onclick = () => { if (!mstLast || !mstLast.R.ok) { toast('لا بيان مكتمل للطباعة'); return; } printNow('pmst'); };
+  g('ms_print').onclick = () => { if (!mstLast || !mstLast.R.ok) { toast('لا بيان مكتمل للطباعة'); return; } if (iphoneApp()) { const w = document.getElementById('mstwrap').cloneNode(true); w.querySelectorAll('#ms_form,.note,button,input,select,textarea').forEach(x => x.remove()); printViaPage('بيان المستحقات', w.innerHTML); return; } printNow('pmst'); };
   g('ms_reset').onclick = () => { g('ms_form').querySelectorAll('input').forEach(i => { if (i.type === 'checkbox') i.checked = false; else i.value = ''; }); g('ms_pay').value = 'm'; g('ms_div').value = '26'; g('ms_contract').value = 'open'; g('ms_notice').value = 'none'; g('ms_xbase').value = 'b'; g('ms_restm').value = '1.5'; g('ms_holm').value = '2'; fillReasons(); g('ms_reason').value = ''; run(); };
   run();
 }
