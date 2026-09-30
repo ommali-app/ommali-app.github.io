@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260930133759">
+<meta name="amali-build" content="20260930195744">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1386,6 +1386,24 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 }
 @media (max-width:899px){.rlc .bds .rlpath{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;-webkit-overflow-scrolling:touch}.rlc .bds .rlpath::-webkit-scrollbar{display:none}.rlc .bds .rlpath>*{flex:none}}
 @media print{.bar{background:none!important;box-shadow:none!important;color:inherit}}
+
+/* V118: الطباعة الدقيقة — يُطبع العنصر المطلوب وحده (مبدأ، مادة) عبر #printbox؛ والطباعة تُستدعى مباشرة من النقر (Safari يحجب ما تأخّر) */
+#printbox{display:none}
+@media print{
+  body.pone>*:not(#printbox){display:none!important}
+  body.pone{background:#fff!important;padding:0!important}
+  body.pone #printbox{display:block!important;color:#000;font-family:"Noto Naskh Arabic","Traditional Arabic",serif;font-size:13pt;line-height:1.9;direction:rtl}
+  #printbox .pbx-h{font-family:var(--ui);font-size:14pt;font-weight:700;border-bottom:1.5px solid #000;padding-bottom:6px;margin:0 0 10px}
+  #printbox .pbx-s{font-family:var(--ui);font-size:9.5pt;color:#444;margin-top:14px;border-top:1px solid #999;padding-top:6px}
+  #printbox .tag{border:1px solid #999;background:none!important;color:#000!important;font-size:9pt;padding:0 6px;border-radius:4px;white-space:normal}
+  #printbox .top,#printbox .h{display:flex;flex-wrap:wrap;gap:4px 6px;font-family:var(--ui)}
+  #printbox details>summary{list-style:none;font-weight:700;font-family:var(--ui);font-size:11pt;margin-top:8px}
+  #printbox details>summary::-webkit-details-marker{display:none}
+  #printbox .revbox,#printbox .authbox,#printbox .unvbox{border:1px solid #999!important;background:none!important;color:#000!important}
+  #printbox a{color:#000;text-decoration:none}
+  #printbox .sec,#printbox .txt,#printbox p{break-inside:auto}
+  @page{margin:16mm 14mm}
+}
 </style>
 </head>
 <body>
@@ -2078,7 +2096,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V117 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V119 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -2093,7 +2111,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <button class="mini" id="pcopycite" type="button">نسخ الإحالة</button>
       <button class="mini" id="pcopysum" type="button">نسخ الموجز</button>
       <button class="mini" id="pcopyall" type="button">نسخ المبدأ كاملًا</button>
-      <button class="mini" id="pprint" type="button">طباعة</button>
+      <button class="mini" id="pprint" type="button" title="طباعة المبدأ وحده — ومن نافذة الطباعة يُحفظ PDF">طباعة</button>
     </div>
   </div>
   <div class="pb" id="pb"></div>
@@ -2556,7 +2574,25 @@ $('#pbm').onclick = () => { if (cur) { toggleBm(cur); $('#pbm').textContent = bo
 $('#pcopycite').onclick = e => cur && guardCopy(cur, e.currentTarget, () => copy(cur.pk ? cur.pk.citations.map(c => c.raw).join('\n') : cur.cite_std, 'نُسخت الإحالة'));
 $('#pcopysum').onclick = e => cur && guardCopy(cur, e.currentTarget, () => copy(cur.pk ? quoteText(cur, false) : (cur.keywords ? cur.keywords + '\n' : '') + cur.summary.map(s => '- ' + s).join('\n') + '\n' + cur.cite_std, cur.pk ? 'نُسخ النص مع إسناده ومصدره' : 'نُسخ الموجز مع الإحالة'));
 $('#pcopyall').onclick = e => cur && guardCopy(cur, e.currentTarget, () => copy(fullText(cur), 'نُسخ المبدأ كاملًا'));
-$('#pprint').onclick = () => window.print();
+// V118: طباعة عنصر واحد بدقة — نسخة نظيفة في #printbox (بلا أزرار)، وتُستدعى window.print() في النقرة نفسها
+function printCleanup(cls) { let done = false; const fin = () => { if (done) return; done = true; document.body.classList.remove(cls); window.removeEventListener('afterprint', fin); document.removeEventListener('pointerdown', fin, true); }; window.addEventListener('afterprint', fin); setTimeout(() => document.addEventListener('pointerdown', fin, true), 800); }
+const pdfHint = () => IS_IOS ? 'لحفظه PDF: في نافذة الطباعة اضغط زر المشاركة ⬆ ثم «حفظ في الملفات»' : /Mac/.test(navigator.platform || '') && /Safari/.test(navigator.userAgent) && !/Chrome|Edg/.test(navigator.userAgent) ? 'لحفظه PDF: اضغط «PDF» أسفل نافذة الطباعة ثم «حفظ بتنسيق PDF»' : 'لحفظه PDF: اختر في نافذة الطباعة الوجهة «حفظ بتنسيق PDF»';
+function printNow(cls) { document.body.classList.add(cls); printCleanup(cls); try { syToast(pdfHint()); } catch (e) {} try { window.print(); } catch (e) { document.body.classList.remove(cls); } }   // V119: تلميح حفظ PDF مع كل طباعة
+function printClone(node) { const c = node.cloneNode(true); c.querySelectorAll('button,input,select,textarea,.acts,.rel,.linkbtn,[data-off],.pa,script,style').forEach(x => x.remove()); c.querySelectorAll('[id]').forEach(x => x.removeAttribute('id')); return c; }
+function printOnly(title, nodes, foot) {
+  const box = document.getElementById('printbox'); box.innerHTML = ''; const h = document.createElement('div'); h.className = 'pbx-h'; h.textContent = title; box.appendChild(h);
+  nodes.forEach(n => n && box.appendChild(printClone(n)));
+  const f = document.createElement('div'); f.className = 'pbx-s'; f.textContent = (foot ? foot + ' · ' : '') + 'طُبع من «عمّالي» — ' + new Date().toLocaleDateString('ar-KW-u-nu-latn') + ' · مسودة عمل للمراجعة'; box.appendChild(f);
+  if (IS_IOS && isStandalone()) {   // تطبيق الشاشة الرئيسية على iPhone/iPad لا يطبع — تُفتح الصفحة عبر المشاركة
+    const css = 'body{font-family:"Noto Naskh Arabic","Traditional Arabic",serif;margin:16px;color:#000;background:#fff;line-height:1.9;direction:rtl}.pbx-h{font-weight:700;font-size:17px;border-bottom:1.5px solid #000;padding-bottom:6px;margin-bottom:10px}.pbx-s{font-size:12px;color:#444;border-top:1px solid #999;margin-top:14px;padding-top:6px}.tag{border:1px solid #999;font-size:11px;padding:0 6px;border-radius:4px;margin:2px;display:inline-block}';
+    const doc = '<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(title) + '</title><style>' + css + '</style></head><body>' + box.innerHTML + '</body></html>';
+    const fl = new File([doc], 'طباعة.html', { type: 'text/html' }); if (navigator.canShare && navigator.canShare({ files: [fl] })) { navigator.share({ files: [fl] }).catch(() => {}); toast('اختر «طباعة» من نافذة المشاركة، أو «حفظ في الملفات» لحفظه PDF'); return; }
+    const u = URL.createObjectURL(new Blob([doc], { type: 'text/html' })); window.open(u, '_blank'); setTimeout(() => URL.revokeObjectURL(u), 60000); return;
+  }
+  printNow('pone');
+}
+window.printOnly = printOnly;
+$('#pprint').onclick = () => { const pb = document.getElementById('pb'); if (!pb || !pb.children.length) return; const SKIP = /^(التصنيف|تصنيف آلي|الحكم نفسه في|مبادئ ذات صلة|ملفات القضايا|ملاحظاتي|وسومي)/; let skip = false; const keep = [...pb.children].filter(e => { if (e.tagName === 'H4') skip = SKIP.test((e.textContent || '').trim()); return !skip && !e.matches('.livebox,.sim,.notesbox'); }); printOnly(($('#pcite').textContent || 'مبدأ').trim(), keep); }; // V118: نص المبدأ ومصدره وتنبيهاته فقط — بلا التصنيف الآلي ولا الروابط ولا الملفات
 
 // ---- hash state
 function hashState() {
@@ -2808,11 +2844,12 @@ function renderLaws(focus) {
         + (a.memo ? '<details><summary>المذكرة الإيضاحية</summary><div class="sec">' + esc(a.memo) + '</div></details>' : '')
         + (a.comment ? '<details><summary>تعليق المحاضر (المستشار محمد أيمن عباس)</summary><div class="sec">' + esc(a.comment) + '</div></details>' : '')
         + (a.src ? '<div class="src">المصدر: ' + esc(a.src) + '</div>' : '')
-        + (isPre ? '' : '<div class="rel">' + (n ? '<button class="btn primary" type="button" data-rel="' + a.key + '">المبادئ المرتبطة بهذه المادة (' + n + ')</button>' : '<span class="tag">لا مبادئ موسومة بهذه المادة بعد</span>') + '<button class="btn" type="button" data-copyart="' + a.key + '">نسخ النص</button></div>');
+        + (isPre ? '' : '<div class="rel">' + (n ? '<button class="btn primary" type="button" data-rel="' + a.key + '">المبادئ المرتبطة بهذه المادة (' + n + ')</button>' : '<span class="tag">لا مبادئ موسومة بهذه المادة بعد</span>') + '<button class="btn" type="button" data-copyart="' + a.key + '">نسخ النص</button><button class="btn" type="button" data-printart="' + a.key + '" title="طباعة المادة — ومن نافذة الطباعة يُحفظ PDF">طباعة</button></div>');
       L.appendChild(c);
     });
   if (!shown) { const e = el('div', 'empty'); e.innerHTML = '<b>لا نتائج</b>جرّب رقم المادة فقط (مثال: 51) أو كلمة من نصها.'; L.appendChild(e); }
   L.querySelectorAll('[data-rel]').forEach(b => b.onclick = () => { const a = ARTS.find(x => x.key === b.dataset.rel); Object.keys(LBL).forEach(k => state[k].clear()); state.articles = new Set(relKeys(a).filter(k => P.some(p => p.articles.includes(k)))); setView('p'); run(); window.scrollTo({ top: 0 }); });
+  L.querySelectorAll('[data-printart]').forEach(b => b.onclick = () => { const a = ARTS.find(x => x.key === b.dataset.printart), card = b.closest('.artc'); printOnly((a.num === 'الديباجة' ? 'ديباجة ' : 'المادة (' + a.num + ') من ') + lawName(a.law), [card], 'الأقسام المفتوحة (المذكرات والتعليق) تُطبع كما هي ظاهرة'); }); // V118
   L.querySelectorAll('[data-copyart]').forEach(b => b.onclick = () => { const a = ARTS.find(x => x.key === b.dataset.copyart); copy((a.num === 'الديباجة' ? 'ديباجة ' : 'المادة (' + a.num + ') من ') + lawName(a.law) + ':\n' + a.text); });
   if (focus) { const e = document.getElementById('art-' + focus.replace(':', '-')); if (e) setTimeout(() => e.scrollIntoView({ block: 'start' }), 30); }
 }
@@ -4515,7 +4552,7 @@ async function rlDistOpen() {
 
 // الطباعة: في المتصفح عادي؛ وفي تطبيق الشاشة الرئيسية على iPhone/iPad (حيث لا تعمل الطباعة) تُفتح الورقة صفحةً مستقلة عبر المشاركة
 function rlOut(h) {
-  if (!(IS_IOS && isStandalone())) { document.body.classList.add('prl'); setTimeout(() => { window.print(); document.body.classList.remove('prl'); }, 60); return; }
+  if (!(IS_IOS && isStandalone())) { printNow('prl'); return; }   // V118: في النقرة نفسها — Safari يحجب الطباعة المتأخرة
   const doc = '<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ورقة الجلسة</title><style>body{font-family:-apple-system,Arial,"Noto Naskh Arabic",sans-serif;margin:14px;color:#000;background:#fff}h2{text-align:center;font-size:18px}h3{font-size:15px;margin:14px 0 6px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #000;padding:5px;vertical-align:top;text-align:right}th{background:#eee}td.ck,td.dist{text-align:center}td.dist{font-size:14px;line-height:1.9}ul{margin:0;padding-right:14px}.nt{font-size:11px;color:#333;margin-top:3px}.ft{font-size:10px;margin-top:8px}.pb{text-align:center;margin:0 0 12px}.pb button{font-size:16px;padding:8px 22px;border-radius:10px;border:1px solid #1C2E4A;background:#1C2E4A;color:#fff}@media print{.pb{display:none}body{margin:0}}</style></head><body><div class="pb"><button onclick="window.print()">طباعة</button></div>' + h + '</body></html>';
   const f = new File([doc], 'ورقة الجلسة.html', { type: 'text/html' });
   if (navigator.canShare && navigator.canShare({ files: [f] })) { navigator.share({ files: [f] }).catch(() => {}); toast('اختر «طباعة» من نافذة المشاركة، أو احفظه في الملفات'); return; }
@@ -6312,7 +6349,7 @@ function initMst() {
   g('ms_form').addEventListener('input', run); g('ms_form').addEventListener('change', run);
   g('ms_copy').onclick = () => { const t = text(); if (!t) { toast('لا بيان مكتمل للنسخ'); return; } const done = () => toast('نُسخ البيان'); if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, () => mstFallbackCopy(t, done)); else mstFallbackCopy(t, done); };
   g('ms_save').onclick = () => rlSaveResult('ms', text(), 'حساب المستحقات (قانون العمل 6/2010)' + (g('ms_who').value.trim() ? ' — ' + g('ms_who').value.trim() : ''), g('ms_save').parentElement);
-  g('ms_print').onclick = () => { if (!mstLast || !mstLast.R.ok) { toast('لا بيان مكتمل للطباعة'); return; } document.body.classList.add('pmst'); setTimeout(() => { window.print(); document.body.classList.remove('pmst'); }, 50); };
+  g('ms_print').onclick = () => { if (!mstLast || !mstLast.R.ok) { toast('لا بيان مكتمل للطباعة'); return; } printNow('pmst'); };
   g('ms_reset').onclick = () => { g('ms_form').querySelectorAll('input').forEach(i => { if (i.type === 'checkbox') i.checked = false; else i.value = ''; }); g('ms_pay').value = 'm'; g('ms_div').value = '26'; g('ms_contract').value = 'open'; g('ms_notice').value = 'none'; g('ms_xbase').value = 'b'; g('ms_restm').value = '1.5'; g('ms_holm').value = '2'; fillReasons(); g('ms_reason').value = ''; run(); };
   run();
 }
@@ -7220,5 +7257,6 @@ window.amaliLoadPacks = function (kind) {
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
 </script>
+<div id="printbox" aria-hidden="true"></div>
 </body>
 </html>
