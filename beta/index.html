@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261001095744">
+<meta name="amali-build" content="20261001112143">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -931,6 +931,7 @@ html.noscroll,html.noscroll body{overflow:hidden;overscroll-behavior:none;touch-
 .rlc{background:var(--panel);border:1px solid var(--line);border-right:5px solid var(--accent);border-radius:var(--r);padding:12px 14px;margin-bottom:10px}
 .rlc.late{border-right-color:var(--bad)}
 .rlc.done{opacity:.7;border-right-color:var(--line2)}
+.rlc:has(details.more[open]){position:relative;z-index:30;opacity:1}   /* V127: قائمة «⋯ المزيد» فوق البطاقة التالية (كانت البطاقة الباهتة تحجبها) */
 .rlc.hi{box-shadow:0 0 0 4px var(--accent-soft)}
 .rlc .h{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .rlc .h b{font-size:16px}
@@ -970,6 +971,11 @@ html.noscroll,html.noscroll body{overflow:hidden;overscroll-behavior:none;touch-
 .rlmodes button{flex:1 1 auto;border:0;background:transparent;padding:8px 12px;font-size:14px;font-weight:700;color:var(--ink2);white-space:nowrap;text-align:center}
 .rlmodes button+button{border-right:1px solid var(--line)}
 .rlmodes button.on{background:var(--accent);color:var(--accent-ink)}
+.rlph{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-4px 0 6px;padding-bottom:8px;border-bottom:1px solid var(--line)}.rlph b{font-size:15px;color:var(--accent)}
+#rl_cal.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.rldone{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;padding:10px 14px;border:1px dashed var(--line2);border-radius:12px;color:var(--ink2);font-size:14px}
+.archtbl tr.agh td{background:var(--bg);font-weight:700;color:var(--accent);font-size:13px}.archtbl tr.agh small{font-weight:400;color:var(--ink3);margin-inline-start:6px}
+.rlvd{margin-top:10px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .chip{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;color:var(--ink2);font-variant-numeric:tabular-nums}
 .chip small{background:var(--panel2);border-radius:999px;padding:0 6px;margin-right:4px;font-size:11px}
@@ -1446,6 +1452,12 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 .pacts #pmore{margin-inline-start:auto;min-width:44px;font-size:18px;line-height:1}
 .pmore{position:absolute;bottom:calc(100% + 6px);inset-inline-end:12px;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:6px;display:flex;flex-direction:column;gap:4px;min-width:170px;z-index:2}
 .pmore[hidden],.msheet[hidden]{display:none}
+.panel.rmode .pb{font-size:1.12em}.panel.rmode .pb .tag,.panel.rmode .pb .sim,.panel.rmode .pb .livebox,.panel.rmode .pb .aitag{display:none!important}
+.panel.rmode .pb .body,.panel.rmode .pb .pktext{font-size:calc(var(--fs) + 4px);line-height:2.15;max-width:68ch}
+.pmore a.mini{text-decoration:none;display:flex;align-items:center}
+.libcard{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px}
+.libcard .libic{flex:none;width:44px;height:44px;border-radius:12px;background:var(--accent);color:#E7C579;display:grid;place-items:center}.libcard .libic svg{width:24px;height:24px}
+.libcard p{margin:4px 0 8px;font-size:13.5px;color:var(--ink2);line-height:1.8}.libcard .btn{text-decoration:none;display:inline-flex}
 .pmore .mini{justify-content:flex-start;text-align:start;min-height:40px;width:100%}
 .ph{flex-wrap:nowrap}.ph .cite{min-width:0;flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .msheet{position:fixed;inset:0;z-index:60}
@@ -1837,6 +1849,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
   <div class="rlpanel hidden" id="rl_distbox"></div>
   <div class="rlpanel hidden rlwipebox" id="rl_wipebox"><h3>مسح الرول من هذا الجهاز</h3><p class="k">يحذف كل القضايا وأوراق الرول والقرارات المسجّلة <b>على هذا الجهاز</b>، ويُبقي التقويم وأسماء الأعضاء والمبادئ والإعدادات. إن كنت تستعمل المزامنة فسيُحذف الرول من أجهزتك الأخرى أيضًا عند المزامنة التالية. لا يمكن التراجع — نزّل نسخة أولًا إن أردت الرجوع إليها.</p><div class="row"><button type="button" class="btn" id="rl_wipebk">⬇︎ تنزيل نسخة أولًا</button><button type="button" class="btn rldanger" id="rl_wipego">مسح نهائي (<span id="rl_wipen">0</span> قضية)</button><button type="button" class="btn" id="rl_wipex">إلغاء</button></div></div>
   <div class="rlpanel hidden" id="rl_calbox">
+    <div class="rlph"><b>التقويم وملف الدائرة</b><button type="button" class="ib" id="rl_calx" aria-label="إغلاق التقويم والدائرة" title="إغلاق">✕</button></div>
     <h3>ملف الدائرة</h3>
     <div id="rl_profbox"></div>
     <h3 style="margin-top:14px">التقويم والدائرة</h3>
@@ -2192,9 +2205,14 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     <section class="ds dkeys"><h3>اختصارات لوحة المفاتيح</h3>
       <p><span class="kbd">Ctrl</span>+<span class="kbd">K</span> بحث شامل · <span class="kbd">/</span> البحث في المبادئ · <span class="kbd">Esc</span> إغلاق اللوحة أو القائمة · <span class="kbd">↑</span><span class="kbd">↓</span> و<span class="kbd">Enter</span> داخل نتائج البحث الشامل</p>
     </section>
+    <section class="ds" id="dlib"><h3>مرجع المبادئ والتشريعات</h3>
+      <div class="libcard"><span class="libic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20M8 7h8M8 10.5h6"/></svg></span>
+        <div><b>مبادئ التمييز</b><p>النص الحرفي لمبدأ التمييز وصورة صفحته، وتشريعات الكويت مادةً مادة، مجانًا ودون اتصال. ومنه تأتي حزم المبادئ والتشريعات في «عمّالي».</p>
+        <a class="btn" href="https://mabadi-kw.github.io/mabadi/" target="_blank" rel="noopener">افتح مبادئ التمييز ↗</a></div></div>
+    </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V126 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V127 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -2215,6 +2233,8 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <button class="mini" id="pcopycite" type="button">نسخ الإحالة</button>
       <button class="mini" id="pcopysum" type="button">نسخ الموجز</button>
       <button class="mini" id="pprint" type="button" title="طباعة المبدأ وحده — ومن نافذة الطباعة يُحفظ PDF">طباعة</button>
+      <button class="mini" id="pread" type="button" aria-pressed="false">وضع القراءة</button>
+      <a class="mini" id="plib" target="_blank" rel="noopener" hidden>عرض في مكتبة مبادئ التمييز ↗</a>
     </div>
   </div>
 </section>
@@ -2713,6 +2733,7 @@ function openPanel(p) {
   b.querySelectorAll('[data-off]').forEach(btn => btn.onclick = () => { const x = pById(btn.dataset.off); if (x) openPanel(x); else toast('العنصر ' + btn.dataset.off + ' في حزمة دائرة أخرى'); });
   b.querySelectorAll('[data-art]').forEach(t => t.onclick = () => { if (!openArticleByTag(t.dataset.art)) { closePanel(); Object.keys(LBL).forEach(k => state[k].clear()); state.articles = new Set([t.dataset.art]); run(); toast('تمت التصفية بالمادة ' + t.dataset.art); } });
   try { pnavSync(); } catch (e) {} $('#pmorebox').hidden = true;
+  { const a = $('#plib'); if (p.pk && p.pk.id) { a.href = 'https://mabadi-kw.github.io/mabadi/#/p/' + encodeURIComponent(p.pk.id); a.hidden = false; } else a.hidden = true; }   // V127: الرابط الثابت للمبدأ في المكتبة (يفتحه القاضي بنفسه)
   document.documentElement.classList.add('pv');
   closeDrawer(); { const rp = document.getElementById('rlpick'); if (rp) rp.remove(); } if (NAV.ready && !$('#panel').classList.contains('show')) navPush({ v: NAV.v, p: 1 }); $('#panel').classList.add('show'); $('#scrim').classList.add('show'); navUi();
   history.replaceState(history.state, '', location.pathname + location.search + '#p=' + p.id + (hashState() ? '&' + hashState() : ''));
@@ -2725,6 +2746,11 @@ function pnavSync() {
   $('#pprev').disabled = i === 0; $('#pnext').disabled = i === results.length - 1;
 }
 function pstep(d) { const i = results.indexOf(cur); const p = results[i + d]; if (!p) return; if (i + d >= state.shown) { state.shown = i + d + 20; renderList(); } openPanel(p); $('#pb').scrollTop = 0; }
+// V127: وضع القراءة — خط أكبر وبلا وسوم ولا قوائم جانبية، ويُحفظ على هذا الجهاز
+function preadSet(on) { $('#panel').classList.toggle('rmode', on); $('#pread').setAttribute('aria-pressed', String(on)); $('#pread').textContent = on ? 'إلغاء وضع القراءة' : 'وضع القراءة'; try { localStorage.setItem('tm_rmode', on ? '1' : ''); } catch (e) {} }
+$('#pread').onclick = () => { preadSet(!$('#panel').classList.contains('rmode')); $('#pmorebox').hidden = true; };
+try { if (localStorage.getItem('tm_rmode')) preadSet(true); } catch (e) {}
+$('#plib').onclick = () => { $('#pmorebox').hidden = true; };
 $('#pprev').onclick = () => pstep(-1); $('#pnext').onclick = () => pstep(1);
 $('#pmore').onclick = e => { e.stopPropagation(); const bx = $('#pmorebox'); bx.hidden = !bx.hidden; $('#pmore').setAttribute('aria-expanded', String(!bx.hidden)); };
 document.addEventListener('click', e => { const bx = $('#pmorebox'); if (!bx.hidden && !e.target.closest('#pmorebox')) { bx.hidden = true; $('#pmore').setAttribute('aria-expanded', 'false'); } });
@@ -3728,6 +3754,18 @@ function rlDecBox(c) {
   };
   return b;
 }
+// V127: تعديل المنطوق بعد صدوره (خطأ في الإدخال). يُسجَّل في سجل الجلسات «تصحيح المنطوق» بالقديم والجديد، ويُتراجع عنه كأي قرار
+let rlVdOpen = null;
+function rlVdBox(c) {
+  const b = el('div', 'rldec rlvd'), groups = Object.keys(RL_VERDICTS).filter(g => !/قبل الفصل/.test(g));
+  b.innerHTML = '<div class="rw"><span>المنطوق الصحيح</span><select class="rvd2">' + groups.map(g => '<optgroup label="' + g + '">' + RL_VERDICTS[g].map(v => '<option' + (v === c.vd ? ' selected' : '') + '>' + v + '</option>').join('') + '</optgroup>').join('') + '</select></div>'
+    + '<p class="k">المسجّل الآن: <b>' + esc(c.vd || '—') + '</b>. يُحفظ التصحيح في سجل الجلسات، ويمكن التراجع عنه.</p><div class="row"><button type="button" class="btn primary" data-v="ok">حفظ التصحيح</button><button type="button" class="btn" data-v="x">إلغاء</button></div>';
+  b.querySelector('[data-v=x]').onclick = () => { rlVdOpen = null; rlFocus = c.id; rlRender(); };
+  b.querySelector('[data-v=ok]').onclick = () => { const v = b.querySelector('.rvd2').value, old = c.vd || ''; if (!v || v === old) { rlVdOpen = null; rlRender(); return; }
+    c.hist = c.hist || []; c.hist.push({ d: rlToday(), a: 'تصحيح المنطوق', n: 'من «' + (old || '—') + '» إلى «' + v + '»', prev: { stage: c.stage, next: c.next, writer: c.writer, exec: c.exec, await: c.await, vd: old } });
+    c.vd = v; c.updated = Date.now(); rlVdOpen = null; rlFocus = c.id; rlSave(); rlRender(); toast('صُحّح المنطوق: ' + v); };
+  return b;
+}
 function rlUndo(c) { const h = (c.hist || []).pop(); if (!h) return; if (h.pre && c.pre && c.pre.length) c.pre.pop(); if (h.prev) Object.assign(c, { stage: h.prev.stage, next: h.prev.next, writer: h.prev.writer, exec: h.prev.exec, await: h.prev.await }, 'vd' in h.prev ? { vd: h.prev.vd } : {}); c.updated = Date.now(); rlFocus = c.id; rlSave(); rlRender(); toast('أُلغي آخر قرار'); }
 // ---- V82: ورقة الرول (وضع الجلسة) — نسخة رقمية من «قائمة الاستئناف»: الأطراف بصفاتهم وأرقامهم بلا أسماء،
 // الحضور والطلبات بلمسة، والقرار عبر «قرار الجلسة» نفسه؛ تُحفظ لكل جلسة في c.sheets[تاريخ] وتستمر من جلسة إلى أخرى.
@@ -4038,11 +4076,12 @@ function rlCard(c, mode, pos) {
     + (prs.length ? '<button type="button" data-a="cites">نسخ الإحالات</button>' : '') + ((c.hist || []).length ? '<button type="button" data-a="undo" title="إلغاء آخر قرار مسجّل">تراجع عن آخر قرار</button>' : '')
     + (c.next && !done ? '<button type="button" data-a="sheet">ورقة الرول (وضع الجلسة)</button>' : '') + '<button type="button" data-a="edit">تعديل</button><hr><button type="button" data-a="del" class="dl">حذف</button>';
   if (hint) { if (s) s += hint; else b += hint; } // V114: لا عمود خلاصة لتلميح وحده
-  const acts = '<div class="acts">' + (done ? '' : '<button type="button" class="mini pri" data-a="dec">قرار الجلسة</button>') + '<details class="more"><summary class="mini" aria-label="المزيد من الإجراءات">⋯ المزيد</summary><div class="menu" role="menu">' + more + '</div></details></div>';
+  const acts = '<div class="acts">' + (done ? (c.stage === 'صدر الحكم' ? '<button type="button" class="mini" data-a="vdedit">تعديل المنطوق</button>' : '') : '<button type="button" class="mini pri" data-a="dec">قرار الجلسة</button>') + '<details class="more"><summary class="mini" aria-label="المزيد من الإجراءات">⋯ المزيد</summary><div class="menu" role="menu">' + more + '</div></details></div>';
   d.innerHTML = h + '<div class="bd' + (s ? ' two' : '') + '"><div class="bdm">' + b + '</div>' + (s ? '<div class="bds">' + s + '</div>' : '') + acts + '</div>';
   { const nx = d.querySelector('.bds .rlpath .nx'); if (nx) setTimeout(() => { try { const b = nx.parentElement, r = nx.getBoundingClientRect(), br = b.getBoundingClientRect(); if (b.scrollWidth > b.clientWidth && (r.left < br.left || r.right > br.right)) b.scrollLeft += (r.left + r.width / 2) - (br.left + br.width / 2); } catch (e) {} }, 0); } // V114: الخطوة التالية ظاهرة في شريط المسار على الجوال
   if (rlDecOpen === c.id) d.querySelector('.bd').appendChild(rlDecBox(c));
   if (rlLinkOpen === c.id) d.querySelector('.bd').appendChild(rlLinkBox(c));
+  if (rlVdOpen === c.id) d.querySelector('.bd').appendChild(rlVdBox(c));
   const hd = d.querySelector('.h');
   const tog = () => { const on = !d.classList.contains('op'); d.classList.toggle('op', on); d.classList.toggle('cl', !on); hd.setAttribute('aria-expanded', on); hd.title = on ? 'طيّ البطاقة' : 'فتح التفاصيل'; rlxSet(c.id, on); if (!on && (rlDecOpen === c.id || rlLinkOpen === c.id)) { rlDecOpen = rlDecOpen === c.id ? null : rlDecOpen; rlLinkOpen = rlLinkOpen === c.id ? null : rlLinkOpen; rlRender(); } };
   hd.onclick = e => { if (e.target.closest('button,a,select,input,label')) return; tog(); };
@@ -4067,6 +4106,7 @@ function rlCard(c, mode, pos) {
   if (q('folder')) q('folder').onclick = () => { copy(rlFolder(c), 'نُسخ اسم المجلد: ' + rlFolder(c)); const m = d.querySelector('.more'); if (m) m.open = false; };
   if (q('dec')) q('dec').onclick = () => { rlDecOpen = rlDecOpen === c.id ? null : c.id; rlLinkOpen = null; rlFocus = c.id; rlRender(); };
   if (q('undo')) q('undo').onclick = () => rlUndo(c);
+  if (q('vdedit')) q('vdedit').onclick = () => { rlVdOpen = rlVdOpen === c.id ? null : c.id; rlDecOpen = null; rlFocus = c.id; rlRender(); };
   if (q('sheet')) q('sheet').onclick = () => rlSessOpen(c.next, c.id);
   q('edit').onclick = () => { const m = d.querySelector('.more'); if (m) m.open = false; rlOpenForm(c); };
   if (q('cites')) q('cites').onclick = () => { copy(prs.map(p => p.cite_std).join('\n'), 'نُسخت ' + prs.length + ' إحالة'); const m = d.querySelector('.more'); if (m) m.open = false; };
@@ -4077,6 +4117,8 @@ function rlCard(c, mode, pos) {
 document.addEventListener('click', e => document.querySelectorAll('.rlc details.more[open]').forEach(m => { if (!m.contains(e.target)) m.open = false; }));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.rlc details.more[open]').forEach(m => { m.open = false; }); });
 // ---- العرض
+// V127: لوحة «التقويم والدائرة» — حالتها ظاهرة على زرها، ولها زر إغلاق، وتُغلق عند الانتقال إلى شاشة أخرى من الرول
+function rlCalShow(on) { const b = $('#rl_calbox'); if (!b) return; b.classList.toggle('hidden', !on); const t = $('#rl_cal'); if (t) { t.classList.toggle('on', on); t.setAttribute('aria-pressed', String(on)); } if (on) { rlCalRender(); setTimeout(() => b.scrollIntoView({ block: 'start', behavior: 'smooth' }), 30); } }
 function rlDayList(day) { return RL.cards.filter(c => c.next === day && !RL_RES.includes(c.stage) && !RL_DONE.includes(c.stage)).sort((a, b) => (a.ordFor === day ? a.ord || 999 : 999) - (b.ordFor === day ? b.ord || 999 : 999) || a.code.localeCompare(b.code, 'ar', { numeric: true })); }
 function rlResList(day) { return RL.cards.filter(c => RL_RES.includes(c.stage) && (!day || c.next === day)); }
 function rlSummary() {
@@ -4147,20 +4189,22 @@ function rlRender() {
     const w = el('div', 'rlst'); w.innerHTML = rlStatHtml(rlStats(), false); L.appendChild(w);
     w.querySelectorAll('[data-card]').forEach(b => b.onclick = () => rlGoCard(b.dataset.card));
   } else if (rlMode === 'arch') {
-    const done = RL.cards.filter(c => c.stage === 'صدر الحكم');
+    const done = RL.cards.filter(c => RL_DONE.includes(c.stage));   // V127: الصادر فيها الحكم والمشطوبة، بتاريخ جلستها
     if (!done.length) { L.innerHTML = '<div class="empty"><b>لا أحكام صادرة بعد</b>عند تسجيل «صدر الحكم» لقضية تظهر هنا في أرشيف قابل للبحث والتصفية.</div>'; rlSummary(); return; }
-    const vds = RL_VD_ALL.filter(v => done.some(c => c.vd === v)), mons = [...new Set(done.map(c => (rlJudgedAt(c) || '').slice(0, 7)).filter(Boolean))].sort().reverse();
+    const vds = RL_VD_ALL.filter(v => done.some(c => c.vd === v)).concat(done.some(c => c.stage === 'شُطبت') ? ['شُطبت'] : []), mons = [...new Set(done.map(c => (rlEndAt(c) || '').slice(0, 7)).filter(Boolean))].sort().reverse();
     const wrap = el('div', 'rlarch');
     wrap.innerHTML = '<div class="rlbar archctl"><input type="search" id="arch_q" placeholder="ابحث برقم القضية أو الرقم الآلي…" autocomplete="off"><select class="sel" id="arch_w"><option value="">كل الكتّاب</option>' + Object.keys(RL_W).map(k => '<option value="' + k + '">' + RL_W[k] + '</option>').join('') + '</select><select class="sel" id="arch_vd"><option value="">كل المنطوق</option>' + vds.map(v => '<option>' + esc(v) + '</option>').join('') + '</select><select class="sel" id="arch_mon"><option value="">كل الأشهر</option>' + mons.map(m => '<option value="' + m + '">' + rlMonLabel(m) + '</option>').join('') + '</select></div><div id="rl_archlist"></div>';
     L.appendChild(wrap);
     const draw = () => {
       const q = norm($('#arch_q').value), w = $('#arch_w').value, vd = $('#arch_vd').value, mon = $('#arch_mon').value;
-      let list = done.filter(c => (!w || c.writer === w) && (!vd || c.vd === vd) && (!mon || (rlJudgedAt(c) || '').slice(0, 7) === mon) && (!q || norm(c.code + ' ' + (c.auto || '') + ' ' + (c.subj || '')).includes(q)));
-      list = rlAdj(list).sort((a, b) => (rlJudgedAt(b) || '').localeCompare(rlJudgedAt(a) || '') || a.code.localeCompare(b.code, 'ar', { numeric: true }));
+      let list = done.filter(c => (!w || c.writer === w) && (!vd || (vd === 'شُطبت' ? c.stage === 'شُطبت' : c.vd === vd)) && (!mon || (rlEndAt(c) || '').slice(0, 7) === mon) && (!q || norm(c.code + ' ' + (c.auto || '') + ' ' + (c.subj || '')).includes(q)));
+      list = rlAdj(list).sort((a, b) => (rlEndAt(b) || '').localeCompare(rlEndAt(a) || '') || a.code.localeCompare(b.code, 'ar', { numeric: true }));
       const box = $('#rl_archlist');
       if (!list.length) { box.innerHTML = '<div class="empty"><b>لا أحكام مطابقة</b>غيّر البحث أو المرشّحات.</div>'; return; }
-      box.innerHTML = '<p class="k arcount">' + list.length + ' حكمًا</p><div class="tblw"><table class="sttbl archtbl"><thead><tr><th>القضية</th><th>الآلي</th><th>تاريخ الصدور</th><th>الكاتب</th><th>المنطوق</th><th>مسار التقاضي</th></tr></thead><tbody>'
-        + list.map(c => { const sib = rlSibs(c), code = esc(c.code) + (sib.length ? ' <span class="k">+' + sib.map(s => esc(s.code)).join('،') + '</span>' : ''), path = [c.d1 ? 'أول درجة: ' + esc(c.d1) : '', c.tm ? 'تمييز: ' + esc(c.tm) : ''].filter(Boolean).join(' · '); return '<tr><td><button type="button" class="stgo" data-card="' + c.id + '">' + code + '</button></td><td class="num">' + esc(c.auto || '—') + '</td><td class="num">' + (rlJudgedAt(c) ? rlFmt(rlJudgedAt(c)) : '—') + '</td><td>' + (RL_W[c.writer] || '—') + '</td><td>' + (c.vd ? '<span class="tag vd">' + esc(c.vd) + '</span>' : '—') + '</td><td class="k">' + (path || '—') + '</td></tr>'; }).join('')
+      let lastD = null;   // V127: مجمّعة بتاريخ الجلسة، لكل جلسة سطر بعدد قضاياها
+      const perD = {}; list.forEach(c => { const d = rlEndAt(c) || ''; perD[d] = (perD[d] || 0) + 1; });
+      box.innerHTML = '<p class="k arcount">' + list.length + ' قضية منتهية في ' + Object.keys(perD).length + ' جلسة</p><div class="tblw"><table class="sttbl archtbl"><thead><tr><th>القضية</th><th>الآلي</th><th>تاريخ الجلسة</th><th>الكاتب</th><th>المنطوق</th><th>مسار التقاضي</th></tr></thead><tbody>'
+        + list.map(c => { const d0 = rlEndAt(c) || ''; const gh = d0 !== lastD ? (lastD = d0, '<tr class="agh"><td colspan="6">' + (d0 ? 'جلسة ' + rlDay(d0) + ' ' + rlFmt(d0) : 'بلا تاريخ') + ' <small>' + perD[d0] + '</small></td></tr>') : ''; return gh + (() => { const sib = rlSibs(c), code = esc(c.code) + (sib.length ? ' <span class="k">+' + sib.map(s => esc(s.code)).join('،') + '</span>' : ''), path = [c.d1 ? 'أول درجة: ' + esc(c.d1) : '', c.tm ? 'تمييز: ' + esc(c.tm) : ''].filter(Boolean).join(' · '); return '<tr><td><button type="button" class="stgo" data-card="' + c.id + '">' + code + '</button></td><td class="num">' + esc(c.auto || '—') + '</td><td class="num">' + (rlEndAt(c) ? rlFmt(rlEndAt(c)) : '—') + '</td><td>' + (RL_W[c.writer] || '—') + '</td><td>' + (c.stage === 'شُطبت' ? '<span class="tag">شُطبت</span>' : c.vd ? '<span class="tag vd">' + esc(c.vd) + '</span>' : '—') + '</td><td class="k">' + (path || '—') + '</td></tr>'; })(); }).join('')
         + '</tbody></table></div>';
       box.querySelectorAll('[data-card]').forEach(b => b.onclick = () => rlGoCard(b.dataset.card));
     };
@@ -4168,12 +4212,16 @@ function rlRender() {
     draw();
   } else {
     const q = rlQ(), st = $('#rl_stage').value;
-    const cards = RL.cards.filter(c => (!st || c.stage === st) && (!q || rlMatch(c, q)));
+    const doneN = RL.cards.filter(c => RL_DONE.includes(c.stage) && (!q || rlMatch(c, q))).length;   // V127: المنتهية في الأرشيف، لا في «كل القضايا» (إلا إن اختيرت مرحلتها)
+    const cards = RL.cards.filter(c => (!st || c.stage === st) && (!q || rlMatch(c, q)) && (st ? true : !RL_DONE.includes(c.stage)));
     if (!cards.length) L.innerHTML = '<div class="empty"><b>لا نتائج</b>غيّر البحث أو المرحلة.</div>';
     const t = rlToday(), key = c => RL_DONE.includes(c.stage) ? '~done' : !c.next ? '~none' : c.next < t ? '!late' : c.next;
-    cards.sort((a, b) => key(a).localeCompare(key(b)) || a.code.localeCompare(b.code, 'ar', { numeric: true }));
+    const kord = k => k === '!late' ? '0' : k === '~none' ? '8' : k === '~done' ? '9' : '1' + k;   // الترتيب صريحًا: فات موعدها، ثم الجلسات بتاريخها، ثم بلا جلسة، ثم المنتهية
+    cards.sort((a, b) => kord(key(a)).localeCompare(kord(key(b))) || a.code.localeCompare(b.code, 'ar', { numeric: true }));
     const G = new Map(); cards.forEach(c => { const k = key(c); if (!G.has(k)) G.set(k, []); G.get(k).push(c); });
     G.forEach((list, k) => (list = rlAdj(list), add(k === '!late' ? '<span class="bad">فات موعدها — سجّل قرار الجلسة أو حدّث الموعد</span>' : k === '~none' ? 'بلا جلسة محددة' : k === '~done' ? 'منتهية (صدر الحكم أو شُطبت)' : 'جلسة ' + rlDay(k) + ' ' + rlFmt(k) + ' <small>' + rlRel(rlDays(k)) + ' · ' + list.length + '</small>', list)));
+    if (!st && doneN) { const n = el('div', 'rldone'); n.innerHTML = '<span><b>' + doneN + '</b> قضية منتهية (صدر الحكم أو شُطبت) — في الأرشيف بتاريخ جلستها</span><button type="button" class="btn" id="rl_goarch">فتح الأرشيف ←</button>'; L.appendChild(n); n.querySelector('#rl_goarch').onclick = () => { rlMode = 'arch'; rlRender(); }; }
+    if (!cards.length && doneN && !st) L.querySelector('.empty') && L.querySelector('.empty').remove();
   }
   if (rlMovedId) { const e = document.getElementById('rl-' + rlMovedId); if (e) { e.classList.add('moved'); const r = e.getBoundingClientRect(); if (r.top < 90 || r.bottom > innerHeight - 90) e.scrollIntoView({ block: 'center' }); setTimeout(() => e.classList.remove('moved'), 700); } rlMovedId = null; }
   rlSummary();
@@ -4729,7 +4777,7 @@ function initRoll() {
     $('#rl_stage').innerHTML = rlStageOpts('', true);
     $('#rl_circ').value = RL.circuit || ''; rlProfForm(); { const h = document.getElementById('rl_calhint'); if (h) h.textContent = rlCalHint(); }
     ['p', 'r', 'l', 'd'].forEach(k => { const i = $('#rm_' + k); i.value = (RL.members || {})[k] || ''; i.onchange = () => { RL.members = RL.members || {}; RL.members[k] = i.value.trim(); rlSave(); toast('حُفظ على هذا الجهاز'); }; });
-    document.querySelectorAll('#rl_modes [data-m]').forEach(b => b.onclick = () => { rlMode = b.dataset.m; rlDecOpen = null; rlRender(); });
+    document.querySelectorAll('#rl_modes [data-m]').forEach(b => b.onclick = () => { rlMode = b.dataset.m; rlDecOpen = null; rlCalShow(false); rlRender(); });   // V127: تغيير الشاشة يغلق لوحة التقويم
     $('#rl_new').onclick = () => rlOpenForm(null);
     $('#rf_cancel').onclick = rlCloseForm;
     $('#rl_form').onsubmit = rlSubmit;
@@ -4758,7 +4806,8 @@ function initRoll() {
     { const ss = $('#rl_sort'); if (ss) { ss.value = rlSort; ss.onchange = e => { rlSort = e.target.value; try { localStorage.setItem('tm_rlsort', rlSort); } catch (_) {} rlRender(); }; } }
     $('#rl_circ').onchange = () => { RL.circuit = $('#rl_circ').value.trim(); rlSave(); };
     const dx = $('#rl_dayx'); const dxGo = () => { if (dx.value && dx.value !== rlDaySel) { rlDaySel = dx.value; rlRender(); } }; dx.addEventListener('change', dxGo); dx.addEventListener('blur', dxGo);
-    $('#rl_cal').onclick = () => { const b = $('#rl_calbox'); b.classList.toggle('hidden'); if (!b.classList.contains('hidden')) rlCalRender(); };
+    $('#rl_cal').onclick = () => rlCalShow($('#rl_calbox').classList.contains('hidden'));
+    $('#rl_calx').onclick = () => { rlCalShow(false); $('#rl_cal').focus(); };
     $('#rl_kashf').onclick = () => { const b = $('#rl_impbox'); b.classList.toggle('hidden'); $('#rl_imprev').innerHTML = ''; $('#rl_kst').textContent = ''; };
     $('#rl_kfile').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; const st = $('#rl_kst'); try { const res = await rlReadFile(f, st); st.textContent = ''; rlImpShow(res, 'الملف'); } catch (err) { st.textContent = ocrErrMsg(err, 'تعذّرت القراءة: ' + (err && err.message || err)); } };
     $('#rl_kgo').onclick = () => { const t = $('#rl_ktext').value; if (!t.trim()) { toast('الصق نص الكشف أولًا'); return; } rlImpShow({ rows: rlParseText(t, rlWho), meta: rlMeta(t) }, 'النص الملصوق'); $('#rl_ktext').value = ''; };
@@ -4999,7 +5048,7 @@ function rlGoCard(id) {
   if (!document.getElementById('rl-' + id)) {
     if (rlMode === 'roll' && x.next && !RL_DONE.includes(x.stage)) rlDaySel = x.next;
     else if (RL_RES.includes(x.stage)) { rlMode = 'res'; rlMine = false; }
-    else { rlMode = 'all'; const q = $('#rl_q'), st = $('#rl_stage'); if (q) q.value = ''; if (st) st.value = ''; }
+    else { rlMode = 'all'; const q = $('#rl_q'), st = $('#rl_stage'); if (q) q.value = ''; if (st) st.value = RL_DONE.includes(x.stage) && [...st.options].some(o => o.value === x.stage) ? x.stage : ''; }   // V127: المنتهية تُعرض بمرحلتها
   }
   rlRender();
 }
@@ -5027,6 +5076,8 @@ function rlFirst(c) { const L = [c.first, c.resAt].concat((c.hist || []).map(h =
 function rlReg(c) { return c.reg ? { d: c.reg, src: '' } : c.an && c.an.form && c.an.form.filed ? { d: c.an.form.filed, src: 'من تاريخ الصحيفة في التحليل' } : null; }
 function rlAgeD(iso) { const n = rlDays(iso); return n == null ? null : Math.max(0, -n); }
 function rlAgeTxt(d) { if (d == null) return '—'; const m = Math.floor(d / 30.44); if (m < 1) return d + (d > 2 && d <= 10 ? ' أيام' : d === 1 ? ' يوم' : d === 2 ? ' يومان' : ' يومًا'); if (m < 12) return m === 1 ? 'شهر' : m === 2 ? 'شهران' : m + (m <= 10 ? ' أشهر' : ' شهرًا'); const y = Math.floor(m / 12), r = m % 12; return (y === 1 ? 'سنة' : y === 2 ? 'سنتان' : y + ' سنوات') + (r ? ' و' + (r === 1 ? 'شهر' : r === 2 ? 'شهران' : r + (r <= 10 ? ' أشهر' : ' شهرًا')) : ''); }
+// V127: تاريخ انتهاء القضية (جلسة صدور الحكم أو الشطب)
+function rlEndAt(c) { const h = (c.hist || []).filter(x => RL_DONE.includes(x.a) || x.a === 'صدر الحكم' || /شطب/.test(x.a || '')).slice(-1)[0]; return h ? h.d : rlJudgedAt(c) || ((c.hist || []).slice(-1)[0] || {}).d || c.next || ''; }
 function rlJudgedAt(c) { const h = (c.hist || []).filter(x => x.a === 'صدر الحكم').slice(-1)[0]; return h ? h.d : c.stage === 'صدر الحكم' ? c.next || '' : ''; }
 function rlMonLabel(m) { const p = (m || '').split('-'); if (p.length < 2) return m || ''; try { return new Date(+p[0], +p[1] - 1, 1).toLocaleDateString('ar-KW-u-nu-latn', { month: 'long', year: 'numeric' }); } catch (e) { return m; } }
 const RL_AGEB = [[0, 90, 'أقل من 3 أشهر'], [90, 180, 'من 3 إلى 6 أشهر'], [180, 365, 'من 6 أشهر إلى سنة'], [365, 1e9, 'أكثر من سنة']];
