@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261001140003">
+<meta name="amali-build" content="20261001143151">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2236,7 +2236,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="synote">تنقل الرول وملفاتي والمفضلة بين أجهزتك <b>أنت</b> عبر ملف واحد مشفّر في خدمة تخزين تختارها (OneDrive أو Google Drive أو iCloud). لا يُرسل شيء إلى أي خادم.</p>
       <div id="sy_body"></div>
       <details class="syhow"><summary>أول مرة: تجهيز خدمة التخزين</summary><ul><li><b>OneDrive:</b> برنامج OneDrive على الحاسوب، وتطبيقه على الجوال (يظهر في «الملفات» على الآيفون).</li><li><b>Google Drive:</b> برنامج «Google Drive للكمبيوتر» فيظهر قرصًا (مثل G:)، وتطبيق Drive على الجوال؛ وعلى الآيفون فعّله من «الملفات» ← تصفّح ← ⋯ ← تعديل.</li><li><b>iCloud Drive:</b> مدمج في الآيفون والآيباد والماك؛ وعلى ويندوز ببرنامج iCloud.</li><li><b>Dropbox:</b> برنامجه على الحاسوب وتطبيقه على الجوال.</li></ul><p>أنشئ مجلدًا باسم «عمّالي» واستعمل <b>الخدمة نفسها على كل أجهزتك</b>. الملف amali-data.amali مشفّر فلا تقرؤه الخدمة. هذه مزامنة شخصية بين أجهزتك أنت؛ لا تشارك رمزها ولا مجلدها مع غيرك.</p></details>
-      <input type="file" id="sy_file" hidden>
+      <input type="file" id="sy_file" multiple hidden>
     </section>
     <section class="ds dkeys"><h3>اختصارات لوحة المفاتيح</h3>
       <p><span class="kbd">Ctrl</span>+<span class="kbd">K</span> بحث شامل · <span class="kbd">/</span> البحث في المبادئ · <span class="kbd">Esc</span> إغلاق اللوحة أو القائمة · <span class="kbd">↑</span><span class="kbd">↓</span> و<span class="kbd">Enter</span> داخل نتائج البحث الشامل</p>
@@ -2248,7 +2248,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V130 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V131 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -4704,6 +4704,27 @@ async function syApply(txt, handle) {
   syToast(tot ? 'دُمج: ' + r.add + ' جديدة، ' + r.upd + ' محدَّثة' + (r.del ? '، ' + r.del + ' محذوفة' : '') : 'لا جديد في الملف — محفوظ ' + syWhen(d.saved) + '. إن كان أقدم مما تتوقع فاختر الملف الأحدث أو «استبدال بيانات هذا الجهاز»');
   syRender();
 }
+// V131: اختيار عدة ملفات مزامنة معًا (Safari والآيفون — لا وصول للمجلد): تُفتح كلها وتُدمج بترتيب حفظها، فلا يهمّ أيها «amali-data» وأيها «amali-data 1»
+async function syApplyMany(files) {
+  const ok = [], bad = [];
+  for (const f of files) { const t = await f.text(), o = await syOpen(t); if (o.d) ok.push({ name: f.name, d: o.d }); else bad.push({ name: f.name, t, err: o.err }); }
+  if (!ok.length) { const k = bad.find(y => y.err === 'key') || bad[0]; if (k) { SY.fname = k.name; await syApply(k.t); } return; }
+  ok.sort((a, b) => (a.d.saved || 0) - (b.d.saved || 0)); const newest = ok[ok.length - 1];
+  if (SY.mode === 'replace') { SY.mode = ''; SY.last = { name: newest.name, saved: newest.d.saved || 0, n: ((newest.d.roll || {}).cards || []).length }; SY.rep = newest.d; syToast('اختير الأحدث: «' + newest.name + '» محفوظ ' + syWhen(newest.d.saved)); syRender(); return; }
+  const rp = syMeta().rep || 0, use = ok.filter(o => !rp || (o.d.saved || 0) >= rp), skip = ok.length - use.length;
+  let add = 0, upd = 0, del = 0; use.forEach(o => { const r = syMerge(o.d); add += r.add; upd += r.upd; del += r.del; });
+  SY.last = { name: newest.name, saved: newest.d.saved || 0, n: ((newest.d.roll || {}).cards || []).length };
+  if (use.length) { syMark('pulled'); SY.merged = true; }
+  const tot = add + upd + del;
+  syToast('دُمجت ' + use.length + ' نسخ — الأحدث «' + newest.name + '» محفوظة ' + syWhen(newest.d.saved) + ' · ' + (tot ? add + ' جديدة، ' + upd + ' محدَّثة' + (del ? '، ' + del + ' محذوفة' : '') : 'لا جديد') + (skip ? ' · تُجوهلت ' + skip + ' أقدم من الاستبدال' : '') + (bad.length ? ' · تُرك ' + bad.length + ' ملف لم يُفتح' : ''));
+  syRender();
+}
+// V131: على الحاسوب (Chrome/Edge) يُربط مجلد المزامنة لا ملف واحد — فيقرأ كل النسخ فيه («amali-data» و«amali-data 1»…) ويدمجها ويحذف المكرر. يُطلب مرة واحدة
+async function syAskDir() {
+  if (!(syCanFS() && window.showDirectoryPicker)) return null;
+  syToast('اختر مجلد المزامنة (مثل «عمّالي» في OneDrive) — مرة واحدة: فيقرأ التطبيق كل النسخ فيه، ومنها التي أضاف لها الآيفون رقمًا');
+  try { const d = await window.showDirectoryPicker({ id: 'amali-sync', mode: 'readwrite' }); if (!(await syPerm(d))) return null; SY.dir = d; await sySet('dir', d); syRender(); return d; } catch (e) { return null; }
+}
 function syToast(m) { toast(m); const t = $('#toast'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 6000); }
 function syReplace(d) {
   const r = d.roll || {};
@@ -4762,7 +4783,7 @@ async function syPickDir() {
 async function syDirOk() { const d = SY.dir || await syGet('dir'); if (!d) return null; if (!(await syPerm(d))) return null; SY.dir = d; return d; }
 async function syPull() {
   if (window.DEMO) { toast('المزامنة متوقفة في العرض التجريبي'); return false; }
-  if (syCanFS() && window.showDirectoryPicker) { const d = await syDirOk(); if (d) { try { return await syPullDir(d); } catch (e) { toast('تعذّرت قراءة المجلد'); return false; } } }
+  if (syCanFS() && window.showDirectoryPicker) { const d = (await syDirOk()) || (await syGet('dirno') ? null : await syAskDir()); if (d) { try { return await syPullDir(d); } catch (e) { toast('تعذّرت قراءة المجلد'); return false; } } else await sySet('dirno', 1); }
   if (syCanFS()) {
     let h = SY.handle || await syGet('handle');
     try { if (!h) { [h] = await window.showOpenFilePicker({ types: [{ description: 'بيانات عمّالي المشفّرة', accept: { 'application/octet-stream': ['.amali'] } }] }); } if (await syPerm(h)) { const f = await h.getFile(); await syApply(await f.text(), h); return true; } } catch (e) { if (e && e.name === 'AbortError') return false; }
@@ -4779,7 +4800,7 @@ async function syPush() {
       const w = await h.createWritable(); await w.write(txt); await w.close(); SY.handle = h; await sySet('handle', h); syMark('pushed'); SY.merged = false; syRender(); toast('حُفظت النسخة المشفّرة في «' + h.name + '»'); return; } catch (e) { if (e && e.name === 'AbortError') return; }
   }
   const f = new File([txt], SY_NAME, { type: 'application/octet-stream' });
-  if (IS_MOB && navigator.canShare && navigator.canShare({ files: [f] })) { try { await navigator.share({ files: [f] }); syMark('pushed'); SY.merged = false; syRender(); syToast(IS_IOS ? 'اختر «حفظ في الملفات» ثم مجلد المزامنة في خدمة التخزين (OneDrive أو Drive أو iCloud)' : 'اختر خدمة التخزين (OneDrive أو Drive) واحفظ في مجلد المزامنة'); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+  if (IS_MOB && navigator.canShare && navigator.canShare({ files: [f] })) { try { await navigator.share({ files: [f] }); syMark('pushed'); SY.merged = false; syRender(); syToast(IS_IOS ? 'اختر «حفظ في الملفات» ثم مجلد المزامنة — وإن سُئلت فاختر «استبدال» لا «الاحتفاظ بالاثنين»' : 'اختر خدمة التخزين (OneDrive أو Drive) واحفظ في مجلد المزامنة'); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
   const b = new Blob([txt], { type: 'application/octet-stream' });
   if (DLX) { try { await DLX.save({ filename: SY_NAME, data: b }); syMark('pushed'); syRender(); } catch (e) {} return; }
   const u = URL.createObjectURL(b); const a = document.createElement('a'); a.href = u; a.download = SY_NAME; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000); syMark('pushed'); SY.merged = false; syRender(); toast('نُزّل الملف — انقله إلى مجلد المزامنة في خدمة التخزين واستبدل القديم');
@@ -4819,7 +4840,7 @@ function syRender() {
     extra = '<button type="button" class="btn" id="sy_pull">جلب فقط</button><button type="button" class="btn" id="sy_push">حفظ فقط</button>';
   } else {
     main = '<div class="syrule"><div class="sybtns sy2"><button type="button" class="btn' + (SY.merged ? '' : ' primary') + '" id="sy_pull">① قبل العمل: جلب</button><button type="button" class="btn' + (SY.merged ? ' primary' : '') + '" id="sy_push">② بعد العمل: حفظ</button></div>'
-      + '<ul class="syrl"><li><b>جلب:</b> اختر الملف <b>' + SY_NAME + '</b> من مجلد المزامنة.</li><li><b>حفظ:</b> ' + (IS_IOS ? '«حفظ في الملفات» ← مجلد المزامنة' : IS_AND ? 'اختر OneDrive أو Drive ← مجلد المزامنة' : 'انقل الملف المنزَّل إلى مجلد المزامنة') + '. إن أُضيف رقم لاسم الملف فلا بأس.</li></ul></div>';
+      + '<ul class="syrl"><li><b>جلب:</b> افتح مجلد المزامنة واختر <b>كل ملفات amali فيه معًا</b>' + (IS_IOS || IS_MOB ? ' («تحديد» ثم الملفات)' : ' (⌘A أو Ctrl+A)') + ' — فتُدمج بترتيب حفظها ويغلب الأحدث، أيًّا كان اسمه («amali-data» أو «amali-data 1»).</li><li><b>حفظ:</b> ' + (IS_IOS ? '«حفظ في الملفات» ← مجلد المزامنة' : IS_AND ? 'اختر OneDrive أو Drive ← مجلد المزامنة' : 'انقل الملف المنزَّل إلى مجلد المزامنة') + '. إن أُضيف رقم لاسم الملف فلا بأس.</li></ul></div>';
   }
   b.innerHTML = '<div class="sybox">' + stat + main + '<details class="symore" id="sy_more"' + (SY.more ? ' open' : '') + '><summary>خيارات أخرى</summary>' + (extra ? '<div class="sybtns">' + extra + '</div>' : '')
     + '<div class="sybtns"><button type="button" class="sylink" id="sy_rep">استبدال بيانات هذا الجهاز من ملف…</button>' + (SY.dir ? '<button type="button" class="sylink" id="sy_undir">تغيير المجلد</button>' : SY.handle ? '<button type="button" class="sylink" id="sy_unh">اختيار ملف آخر</button>' : '') + '<button type="button" class="sylink" id="sy_chg">تغيير الرمز</button><button type="button" class="sylink" id="sy_forget">نسيان الرمز على هذا الجهاز</button></div>'
@@ -4834,7 +4855,7 @@ function syRender() {
 }
 { const m = document.querySelector('meta[name=amali-build]'), b = m && m.content; if (b && /^\d{14}$/.test(b) && $('#dbuild')) $('#dbuild').textContent = '· بناء ' + +b.slice(6, 8) + '/' + +b.slice(4, 6) + ' — ' + b.slice(8, 10) + ':' + b.slice(10, 12); }
 { const g = document.getElementById('dm_go'); if (g) g.onclick = () => rlDemoStart({ deg: $('#dm_deg').value, kind: $('#dm_kind').value, n: +$('#dm_n').value, days: [0, 1], exl: false }); }
-$('#sy_file').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (f) { SY.fname = f.name; await syApply(await f.text()); } else SY.mode = ''; };
+$('#sy_file').onchange = async e => { const fs = [...e.target.files]; e.target.value = ''; if (fs.length > 1) await syApplyMany(fs); else if (fs[0]) { SY.fname = fs[0].name; await syApply(await fs[0].text()); } else SY.mode = ''; };
 (async () => { SY.key = await syGet('key') || null; SY.salt = await syGet('salt') || null; SY.handle = await syGet('handle') || null; SY.dir = await syGet('dir') || null; if (!SY.key) SY.salt = null; syRender(); syDot(); })();
 
 function initRoll() {
