@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261001082014">
+<meta name="amali-build" content="20261001095744">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1495,6 +1495,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
   html.pv body[data-v="p"] .wrap{grid-template-columns:minmax(0,1fr)}
 }
 @media print{.pacts,.pnav,.msheet{display:none!important}}
+.empty .zs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}.empty .zs .chip{min-height:40px;padding:6px 14px;border:1px solid var(--line2);border-radius:999px;background:var(--panel);color:var(--accent);font:inherit;font-size:14px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -2193,7 +2194,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V125 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V126 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -2334,6 +2335,27 @@ const SYN_GENERIC = new Set(['العمل','العامل','الخدمه','الع�
 const SYN = (() => { const m = {}; SYN_GROUPS.forEach(g => { const phr = g.map(norm).filter(Boolean); phr.forEach(ph => { ph.split(' ').forEach(w => { if (w.length < 4 || SYN_GENERIC.has(w)) return; (m[w] = m[w] || new Set()); phr.forEach(x => m[w].add(x)); }); }); }); const o = {}; Object.keys(m).forEach(k => o[k] = [...m[k]]); return o; })();
 // جذر خفيف: إزالة أل التعريف واللواحق الشائعة لمطابقة صيغ الكلمة
 function stem(w) { w = w.replace(/^(وال|فال|بال|كال|لل|ال|و|ف|ب|ك|ل)/, ''); w = w.replace(/(اتها|اته|ينها|ونها|هما|كما|هم|هن|ها|هه|ية|يه|ات|ين|ون|وا|ان|تا|ه|ك|ي|ة)$/, ''); return w; }
+// V126: صيغ الكلمة من أصلها — «يستقيل» = «استقالة» = «استقال». الهيكل: الكلمة بلا زوائدها ولا حروف المد،
+// ويُبحث به في مفردات المبادئ نفسها (لا قاموس خارجي)، فلا تُقترح إلا صيغ واردة فعلًا.
+function skel(w) { let x = stem(w); if (x.length >= 5 && /^[يتن]/.test(x)) x = x.slice(1); return x.replace(/^ا/, '').replace(/(?!^)[اوي]/g, ''); }
+let VOC = null;
+function vocab() {
+  if (VOC && VOC.n === P.length) return VOC;
+  const f = new Map(), sk = new Map();
+  P.forEach(p => { (p.nk + ' ' + p.ns).split(' ').forEach(w => { if (w.length >= 3 && !/\d/.test(w)) f.set(w, (f.get(w) || 0) + 1); }); });
+  f.forEach((n, w) => { const k = skel(w); if (k.length < 3) return; let a = sk.get(k); if (!a) sk.set(k, a = []); a.push(w); });
+  return VOC = { f, sk, n: P.length };
+}
+function morphVariants(t) {
+  if (t.length < 4 || /\d/.test(t) || typeof P === 'undefined' || !P.length) return [];
+  const V = vocab(), k = skel(t); if (k.length < 3) return [];
+  return (V.sk.get(k) || []).filter(w => w !== t).sort((a, b) => V.f.get(b) - V.f.get(a)).slice(0, 24);
+}
+// الحروف التي يكثر الخلط بينها في الكتابة (ذ/ز، ض/ظ، س/ص، ت/ط، د/ذ، ق/ك) تكلّف نصف خطأ
+const CONF = new Set(['ذز', 'زذ', 'ضظ', 'ظض', 'سص', 'صس', 'تط', 'طت', 'دذ', 'ذد', 'قك', 'كق', 'هح', 'حه']);
+function lev(a, b) { if (Math.abs(a.length - b.length) > 2) return 9; let pr = Array.from({ length: b.length + 1 }, (_, i) => i); for (let i = 1; i <= a.length; i++) { const cu = [i]; for (let j = 1; j <= b.length; j++) { const x = a[i - 1], y = b[j - 1]; cu[j] = Math.min(pr[j] + 1, cu[j - 1] + 1, pr[j - 1] + (x === y ? 0 : CONF.has(x + y) ? 0.5 : 1)); } pr = cu; } return pr[b.length]; }
+function nearWord(t) { const V = vocab(); if (V.f.has(t) || t.length < 4) return null; const lim = t.length >= 7 ? 2 : 1; let best = null, bd = 9, bf = 0;
+  V.f.forEach((n, w) => { if (w[0] !== t[0] && w[1] !== t[1]) return; const d = lev(t, w); if (d <= lim && (d < bd || (d === bd && n > bf))) { best = w; bd = d; bf = n; } }); return best; }
 function synExpand(tok) { const set = new Set(SYN[tok] || []); const st = stem(tok); if (st !== tok && SYN[st]) SYN[st].forEach(x => set.add(x)); return [...set]; }
 
 const OUT = {'تمييز الحكم':'نقض','تمييز جزئي':'جزئي','رفض النعي':'رفض','مختلط':'مختلط'};
@@ -2387,7 +2409,7 @@ function parseQuery(q) {
   const STOP = new Set(['الذي', 'التي', 'الذين', 'اللذين', 'اللتين', 'اللاتي', 'في', 'من', 'على', 'علي', 'الي', 'الى', 'عن', 'او', 'ان', 'هل', 'ما', 'ماذا', 'كيف', 'متي', 'هو', 'هي', 'مع', 'عند', 'بين', 'كان', 'قد', 'لا', 'لم', 'لن', 'اذا', 'حتي', 'ثم', 'كل', 'بعد', 'قبل'].map(norm));
   const kept = rest.filter(t => !STOP.has(t)); if (kept.length) { rest.length = 0; kept.forEach(t => rest.push(t)); }
   const full = rest.length > 1 && !phrases.length && !arts.length ? rest.join(' ') : '';
-  const syn = {}; rest.forEach(t => { const e = (typeof synExpand === 'function') ? synExpand(t) : []; if (e.length) syn[t] = e; }); return { phrases, toks: rest, arts, syn: syn, full };
+  const syn = {}; rest.forEach(t => { const e = (typeof synExpand === 'function') ? synExpand(t) : []; let mv = []; try { mv = morphVariants(t); } catch (x) {} const all = [...new Set(e.concat(mv))]; if (all.length) syn[t] = all; }); return { phrases, toks: rest, arts, syn: syn, full };
 }
 function score(p, Q) {
   let s = 1;
@@ -2593,12 +2615,28 @@ function renderList() {
   if (PACK_ERR) L.appendChild(el('div', 'pkerr', '<b>تعذّر تحميل حزمة المبادئ</b> — ' + esc(PACK_ERR) + '. تُفتح الحزمة عند أول اتصال ثم تعمل دون اتصال.'));
   else if (pk !== 'lab' && !PACKS.length) L.appendChild(el('div', 'profnote', '<b>لا توجد حزمة مبادئ لهذه الدائرة بعد</b> — تُضاف حين تصدرها «مكتبة مبادئ التمييز».'));
   else if (pk !== 'lab') L.appendChild(el('div', 'profnote', '<b>حزمة ' + esc(packNames() || RL_KINDS[pk] || '') + '</b> — من «مكتبة مبادئ التمييز»، وتكتمل بإضافة المصادر. النصوص كما في المصدر، ولا تُعدَّل هنا.'));
-  if (!results.length) { L.appendChild(el('div', 'empty', '<b>لا نتائج مطابقة</b>جرّب كلمة أعم، أو ألغِ بعض المرشحات، أو ابحث برقم المادة مثل «م44».')); $('#more').innerHTML = ''; return; }
+  if (!results.length) { const zh = zeroHelp(); const e = el('div', 'empty', '<b>لا نتائج مطابقة</b>' + (zh || 'جرّب كلمة أعم، أو ألغِ بعض المرشحات، أو ابحث برقم المادة مثل «م44».')); L.appendChild(e);
+    e.querySelectorAll('[data-zq]').forEach(b => b.onclick = () => { q.value = b.dataset.zq; q.oninput(); });
+    e.querySelectorAll('[data-zc]').forEach(b => b.onclick = () => clearAll());
+    $('#more').innerHTML = ''; return; }
   const frag = document.createDocumentFragment();
   results.slice(0, state.shown).forEach(p => frag.appendChild(card(p)));
   L.appendChild(frag);
   const m = $('#more'); m.innerHTML = '';
   if (results.length > state.shown) { const b = el('button', 'btn', 'عرض المزيد (' + (results.length - state.shown) + ' متبقية)'); b.type = 'button'; b.onclick = () => { state.shown += 40; renderList(); }; m.appendChild(b); }
+}
+// V126: عند انعدام النتائج — إلغاء المرشحات، أو كلمة وحدها، أو «هل تقصد» لكلمة لا ترد في المبادئ؛ وكل اقتراح بعدد نتائجه
+function zeroHelp() {
+  const cnt = qq => { const Q2 = parseQuery(qq); return P.filter(p => score(p, Q2) > 0 && passFacets(p) && profPrin(p)).length; };
+  const out = [];
+  const facets = Object.keys(LBL).some(k => state[k] && state[k].size) || (state.misc && state.misc.size);
+  if (facets) { const n = P.filter(p => score(p, Q) > 0 && profPrin(p)).length; if (n) out.push('<button type="button" class="chip" data-zc="1">إلغاء المرشحات (' + n + ')</button>'); }
+  const toks = Q.toks || [];
+  try { toks.forEach(t => { const w = nearWord(t); if (w) { const qq = norm(state.q).split(' ').map(x => x === t ? w : x).join(' '), n = cnt(qq); if (n) out.push('<button type="button" class="chip" data-zq="' + esc(qq) + '">هل تقصد «' + esc(qq) + '»؟ (' + n + ')</button>'); } }); } catch (e) {}
+  if (toks.length > 1) { try { const V = vocab(), unk = toks.filter(t => !V.f.has(t) && !morphVariants(t).length && !(Q.syn && Q.syn[t])); if (unk.length && unk.length < toks.length) { const qq = toks.filter(t => !unk.includes(t)).join(' '), n = cnt(qq); if (n) out.push('<button type="button" class="chip" data-zq="' + esc(qq) + '">بلا «' + esc(unk.join(' ')) + '» (' + n + ')</button>'); } } catch (e) {} }
+  if (toks.length > 1) toks.forEach(t => { const n = cnt(t); if (n) out.push('<button type="button" class="chip" data-zq="' + esc(t) + '">«' + esc(t) + '» وحدها (' + n + ')</button>'); });
+  const seen = new Set(), uniq = out.filter(h => { const m = /data-z[qc]="([^"]*)"/.exec(h), k = m ? m[1] : h; if (seen.has(k)) return false; seen.add(k); return true; });
+  return uniq.length ? 'جرّب: <div class="zs">' + uniq.slice(0, 6).join('') + '</div>' : '';
 }
 function toggleBm(p, btn) {
   bookmarks.has(p.id) ? bookmarks.delete(p.id) : bookmarks.add(p.id); BMT[p.id] = [bookmarks.has(p.id) ? 1 : 0, Date.now()]; saveBm();
