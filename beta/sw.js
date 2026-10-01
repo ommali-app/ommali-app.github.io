@@ -3,7 +3,7 @@
 // V103b: قناتان على الموقع نفسه — الثابتة في الجذر (للزملاء) والتجريبية في beta/ (للمالك). لكل قناة ذاكرتها، ولا تمسّ إحداهما ذاكرة الأخرى،
 // والجذر لا يعترض صفحات beta/. الخطوط والأيقونات ومحرك القراءة والدليل في الجذر وحده تشترك فيها القناتان.
 const SCOPE = new URL(self.registration.scope).pathname, BETA = /\/beta\/$/.test(SCOPE), UP = BETA ? '../' : './';
-const CACHE = BETA ? 'amali-beta-v123' : 'amali-v123';   // يُرفع الرقمان معًا مع كل إصدار
+const CACHE = BETA ? 'amali-beta-v124' : 'amali-v124';   // يُرفع الرقمان معًا مع كل إصدار
 const CORE = ['./', './index.html', './manifest.json', './icon-180.png'];
 const FONTS_FILES = ['plex','naskh','cairo','tajawal','almarai','amiri','kufi','readex','markazi'].flatMap(f => [UP + 'fonts/' + f + '-400.woff2', UP + 'fonts/' + f + '-700.woff2']).concat([UP + 'fonts/reem-700.woff2', UP + 'fonts/reem-700-lat.woff2', UP + 'fonts/plex-600.woff2', UP + 'fonts/kufi-600.woff2', UP + 'fonts/readex-600.woff2']);
 const FLAG = './__amali_update';
@@ -71,6 +71,9 @@ async function packFetch(req, url) {
     // يُحذف ما في الذاكرة من إصدار أقدم للدائرة نفسها فقط (أجزاء الإصدار نفسه تبقى معًا)
     const R = /mabadi-pack_(.+?)_v([\d.]+?)(?:_part\d+of\d+)?\.json$/, m = R.exec(url.pathname);
     if (m) (await c.keys()).forEach(k => { const x = R.exec(new URL(k.url).pathname); if (x && x[1] === m[1] && x[2] !== m[2]) c.delete(k); });
+    // V124: حزم التشريعات (packs/legis/) — يُحذف الإصدار الأقدم من المجموعة نفسها
+    const RL = /mabadi-legis(?:_(.+?))?(?:-index)?_v([\d.]+)\.json$/, n = RL.exec(url.pathname);
+    if (n) (await c.keys()).forEach(k => { const x = RL.exec(new URL(k.url).pathname); if (x && (x[1] || '') === (n[1] || '') && x[2] !== n[2] && /-index_/.test(k.url) === /-index_/.test(url.pathname)) c.delete(k); });
   }
   return r;
 }
