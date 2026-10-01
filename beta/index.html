@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261001223123">
+<meta name="amali-build" content="20261001234613">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1214,7 +1214,7 @@ html,body{overscroll-behavior-y:none}
 .ssg .gl{flex:none;width:44px;font-size:13px;font-weight:700;color:var(--ink2)}
 .ssg .ssreq{flex:1;min-width:0}
 .ssreq .chip{min-height:36px!important;font-size:13px!important;padding:3px 11px!important}
-@media (max-width:700px){.ssg .ssreq{display:flex!important;grid-auto-flow:unset;grid-template-rows:none;flex-wrap:nowrap;overflow-x:auto}.ssatt button{font-size:12.5px!important}}
+@media (max-width:700px){.ssg .ssreq{display:flex!important;grid-auto-flow:unset;grid-template-rows:none;flex-wrap:wrap;overflow-x:visible;gap:6px}.ssatt button{font-size:12.5px!important}}
 .sspr2{min-height:40px;font-size:13px;white-space:nowrap}
 @media (max-width:520px){.sspr2 .lb{display:none}.sspr2{padding-inline:12px;font-size:17px}}
 .rldec .wc{display:inline-block;min-width:18px;border-radius:99px;background:var(--panel2);color:var(--ink2);font-size:11px;font-weight:700;padding:0 5px;margin-inline-start:3px}
@@ -2340,7 +2340,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V133 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V134 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -4118,13 +4118,15 @@ function rlSessList(day) {
   const on = RL.cards.filter(c => (c.next === day && !RL_DONE.includes(c.stage)) || rlDecOn(c, day) || rlSheetHasData(rlSheet(c, day)));
   return srt(on.filter(c => !wasRes(c))).concat(rlAdj(srt(on.filter(wasRes))));
 }
+// V134: السحب بين القضايا لا يبدأ من صف يُمرَّر أفقيًا ولا من زر أو خيار — حتى لا تتبدّل القضية وأنت تبحث عن خيار
+function rlSwX(t, stop) { for (let e = t; e && e !== stop; e = e.parentElement) { if (e.scrollWidth > e.clientWidth + 2) { const ox = getComputedStyle(e).overflowX; if (ox === 'auto' || ox === 'scroll') return true; } } return false; }
 function rlSessOpen(day, id) {
   const L = rlSessList(day); if (!L.length) { toast('لا قضايا لهذه الجلسة'); return; }
   let w = document.getElementById('sess'); if (!w) { w = el('div', 'sess'); w.id = 'sess'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-modal', 'true'); w.setAttribute('aria-label', 'ورقة الرول — وضع الجلسة'); document.body.appendChild(w); }
   SS = { day, ids: L.map(c => c.id), i: Math.max(0, L.findIndex(c => c.id === id)) };
   if (!w._swipe) { w._swipe = 1; let sx = 0, sy = 0, ok = false;   // V132: السحب بين القضايا على الآيباد والهاتف (لا يعمل فوق الحقول)
-    w.addEventListener('touchstart', e => { const t0 = e.touches[0]; ok = e.touches.length === 1 && !e.target.closest('input,textarea,select,.ssjump'); sx = t0.clientX; sy = t0.clientY; }, { passive: true });
-    w.addEventListener('touchend', e => { if (!ok || !SS) return; const t1 = e.changedTouches[0], dx = t1.clientX - sx, dy = t1.clientY - sy; if (Math.abs(dx) < 70 || Math.abs(dy) > Math.abs(dx) * 0.6) return; const ni = SS.i + (dx > 0 ? 1 : -1); if (ni < 0 || ni >= SS.ids.length) return; SS.i = ni; rlSessRender(true); }, { passive: true }); }
+    w.addEventListener('touchstart', e => { const t0 = e.touches[0]; ok = e.touches.length === 1 && !e.target.closest('input,textarea,select,button,a,label,.chip,.ssreq,.ssatt,.ssjump,[data-noswipe]') && !rlSwX(e.target, w); sx = t0.clientX; sy = t0.clientY; }, { passive: true });
+    w.addEventListener('touchend', e => { if (!ok || !SS) return; const t1 = e.changedTouches[0], dx = t1.clientX - sx, dy = t1.clientY - sy; if (Math.abs(dx) < 80 || Math.abs(dy) > Math.abs(dx) * 0.5) return; const ni = SS.i + (dx > 0 ? 1 : -1); if (ni < 0 || ni >= SS.ids.length) return; SS.i = ni; rlSessRender(true); }, { passive: true }); }
   w.classList.add('show'); document.documentElement.classList.add('noscroll');
   rlAfterDec = c => { rlxSet(c.id, false); rlRender(); rlSessRender(); if (rlSessAuto && SS && SS.i < SS.ids.length - 1) setTimeout(() => { if (SS) { SS.i++; rlSessRender(true); } }, 650); };
   rlSessRender(true);
