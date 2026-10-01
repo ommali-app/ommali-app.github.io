@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20260930223456">
+<meta name="amali-build" content="20260930235132">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -506,6 +506,8 @@ figcaption{font-size:13px;color:var(--ink2);margin-top:8px;line-height:1.7}
 }
 .homefoot{margin-top:22px;color:var(--ink3);font-size:12.5px;line-height:1.7}
 .brand{cursor:pointer}
+.navback{display:none;flex:0 0 auto;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--ink);align-items:center;justify-content:center;padding:0;cursor:pointer;margin-inline-end:-2px}
+.navback.on{display:inline-flex}.navback:active{background:var(--line)}
 body.home .search{visibility:hidden}
 @media (max-width:700px){body.home .search{display:none}}
 @media (max-width:700px){.homewrap{padding:18px 12px 90px}.tiles{grid-template-columns:1fr 1fr;gap:10px}.tile{padding:14px;min-height:130px}.tile b{font-size:15px}.tile p{font-size:12px}.homehead{padding:16px 16px}.heroline .hbrand{font-size:22px}.heroline .htag{font-size:15px}.heroq{font-size:13.5px;margin-top:10px;padding-top:9px}}
@@ -1345,6 +1347,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 .bar .search .hint{background:#fff}
 .bar .ib{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff}
 .bar .ib:hover{background:rgba(255,255,255,.16);color:#fff}
+.bar .navback{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.28);color:#fff}.bar .navback:active{background:rgba(255,255,255,.2)}
 .bar .grp{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.2)}
 .bar .grp button{color:#E6ECF5}
 .bar .grp button+button{border-right-color:rgba(255,255,255,.14)}
@@ -1456,6 +1459,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 
 <header class="bar">
   <div class="brand">
+    <button type="button" id="navback" class="navback" aria-label="رجوع" title="رجوع"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
     <div class="seal" aria-hidden="true"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512"><defs><linearGradient id="bsg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16396A"/><stop offset="1" stop-color="#0B1F3B"/></linearGradient><linearGradient id="bsa" gradientUnits="userSpaceOnUse" x1="0" y1="100" x2="0" y2="420"><stop offset="0" stop-color="#F0D48C"/><stop offset="1" stop-color="#B38B36"/></linearGradient></defs><rect width="512" height="512" rx="116" fill="url(#bsg)"/><rect x="136" y="352" width="240" height="56" rx="10" fill="url(#bsa)"/><rect x="244" y="168" width="24" height="190" rx="8" fill="url(#bsa)"/><rect x="112" y="186" width="288" height="20" rx="10" fill="url(#bsa)"/><path d="M134 206 L 100 292 M 134 206 L 168 292 M 378 206 L 344 292 M 378 206 L 412 292" stroke="url(#bsa)" stroke-width="9" stroke-linecap="round" fill="none"/><path d="M84 292 H 184 C 184 330, 84 330, 84 292 Z" fill="url(#bsa)"/><path d="M328 292 H 428 C 428 330, 328 330, 328 292 Z" fill="url(#bsa)"/></svg></div>
     <div><h1>عمّالي</h1><small>مبادئ محكمة التمييز · الدائرة العمالية · من حزم «مكتبة مبادئ التمييز»</small></div>
   </div>
@@ -2096,7 +2100,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V122 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V123 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -2565,10 +2569,10 @@ function openPanel(p) {
   b.querySelectorAll('[data-tw]').forEach(btn => btn.onclick = () => openPanel(tw[+btn.dataset.tw]));
   b.querySelectorAll('[data-off]').forEach(btn => btn.onclick = () => { const x = pById(btn.dataset.off); if (x) openPanel(x); else toast('العنصر ' + btn.dataset.off + ' في حزمة دائرة أخرى'); });
   b.querySelectorAll('[data-art]').forEach(t => t.onclick = () => { if (!openArticleByTag(t.dataset.art)) { closePanel(); Object.keys(LBL).forEach(k => state[k].clear()); state.articles = new Set([t.dataset.art]); run(); toast('تمت التصفية بالمادة ' + t.dataset.art); } });
-  closeDrawer(); { const rp = document.getElementById('rlpick'); if (rp) rp.remove(); } $('#panel').classList.add('show'); $('#scrim').classList.add('show');
-  history.replaceState(null, '', location.pathname + location.search + '#p=' + p.id + (hashState() ? '&' + hashState() : ''));
+  closeDrawer(); { const rp = document.getElementById('rlpick'); if (rp) rp.remove(); } if (NAV.ready && !$('#panel').classList.contains('show')) navPush({ v: NAV.v, p: 1 }); $('#panel').classList.add('show'); $('#scrim').classList.add('show'); navUi();
+  history.replaceState(history.state, '', location.pathname + location.search + '#p=' + p.id + (hashState() ? '&' + hashState() : ''));
 }
-function closePanel() { const rp = document.getElementById('rlpick'); if (rp) rp.remove(); $('#panel').classList.remove('show'); $('#scrim').classList.remove('show'); $('#side').classList.remove('show'); cur = null; saveHash(); }
+function closePanel() { const rp = document.getElementById('rlpick'); if (rp) rp.remove(); $('#panel').classList.remove('show'); $('#scrim').classList.remove('show'); $('#side').classList.remove('show'); cur = null; saveHash(); navUi(); if (!NAV.pop && history.state && history.state.p) { if (history.state.i > 0) { NAV.skip = true; history.back(); } else { const st = Object.assign({}, history.state); delete st.p; try { history.replaceState(st, '', location.href); } catch (e) {} } } }
 $('#pclose').onclick = closePanel; $('#scrim').onclick = closePanel;
 $('#pbm').onclick = () => { if (cur) { toggleBm(cur); $('#pbm').textContent = bookmarks.has(cur.id) ? '★ محفوظ' : '☆ حفظ'; renderList(); } };
 $('#pcopycite').onclick = e => cur && guardCopy(cur, e.currentTarget, () => copy(cur.pk ? cur.pk.citations.map(c => c.raw).join('\n') : cur.cite_std, 'نُسخت الإحالة'));
@@ -2611,7 +2615,7 @@ function hashState() {
   if (state.sort !== 'rel') parts.push('sort=' + state.sort);
   return parts.join('&');
 }
-function saveHash() { const h = hashState(); history.replaceState(null, '', location.pathname + location.search + (h ? '#' + h : '')); }
+function saveHash() { const h = hashState(); history.replaceState(history.state, '', location.pathname + location.search + (h ? '#' + h : '')); }
 function loadHash() {
   const h = location.hash.slice(1); if (!h) return null; let pid = null;
   h.split('&').forEach(kv => { const [k, v] = kv.split('='); const val = decodeURIComponent(v || '');
@@ -2742,8 +2746,19 @@ function setView(v) {
   if (v === 'h') renderHome();
   if (v === 'r') initRoll();
   try { sessionStorage.setItem('tm_view', v); } catch (e) {}
+  if (NAV.ready && !NAV.pop && v !== NAV.v) navPush({ v: v });
+  NAV.v = v; navUi();
   window.scrollTo(0, 0);
 }
+// V123: رجوع داخل التطبيق — كل قسم وكل مبدأ مفتوح خطوة في التاريخ، فيعمل السحب من حافة الشاشة (الآيفون) وزر الرجوع (أندرويد والمتصفح)،
+// وسهم «رجوع» في الشريط العلوي خارج الرئيسية. لا يغيّر الرابط، ويُرجع إلى الرئيسية إن لم يكن قبله شيء.
+const NAV = { ready: false, pop: false, skip: false, v: 'h' };
+function navPush(st) { const i = ((history.state && history.state.i) || 0) + 1; try { history.pushState(Object.assign({ am: 1, i: i }, st), '', location.href); } catch (e) {} }
+function navUi() { const b = document.getElementById('navback'); if (b) b.classList.toggle('on', NAV.v !== 'h' || $('#panel').classList.contains('show')); }
+function navBack() { if ($('#panel').classList.contains('show')) { closePanel(); return; } if (history.state && history.state.am && history.state.i > 0) history.back(); else setView('h'); }
+window.addEventListener('popstate', e => { if (NAV.skip) { NAV.skip = false; return; } const st = e.state; if (!st || !st.am) return; /* تغيير يدوي للرابط (#p=…) ليس رجوعًا */ NAV.pop = true;
+  try { if ($('#panel').classList.contains('show') && !st.p) closePanel(); if (st.v && st.v !== NAV.v) setView(st.v); } finally { NAV.pop = false; } navUi(); });
+document.getElementById('navback').onclick = e => { e.stopPropagation(); navBack(); };
 document.querySelectorAll('#seg button').forEach(b => b.onclick = () => setView(b.dataset.v));
 try { toolVisApply(); } catch (e) {}
 document.querySelectorAll('#grp button,#bnav button').forEach(b => b.onclick = () => goGroup(b.dataset.g));
@@ -6776,6 +6791,7 @@ q.value = state.q; $('#sort').value = state.sort; $('#qclr').classList.toggle('h
 run();
 if (pid) { const p = pById(pid); if (p) openPanel(p); }
 else if (!location.hash) { let lv = null; try { lv = sessionStorage.getItem('tm_view'); } catch (e) {} setView(lv && lv !== 'p' ? lv : 'h'); }
+try { history.replaceState(Object.assign({ am: 1, i: 0, v: NAV.v }, $('#panel').classList.contains('show') ? { p: 1 } : {}), '', location.href); } catch (e) {} NAV.ready = true; navUi();
 bootLive();
 warmIndex();
 // ---- PWA: تثبيت وعمل دون اتصال (يفعّل كاملًا عند الاستضافة على نطاقك؛ داخل claude.ai يبقى التطبيق قابلًا للاستخدام)
