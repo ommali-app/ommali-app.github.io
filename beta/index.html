@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261002093115">
+<meta name="amali-build" content="20261002105509">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1637,6 +1637,16 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 #sess .ssundo{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));z-index:5;display:flex;align-items:center;gap:12px;width:min(520px,calc(100% - 24px));box-sizing:border-box;padding:10px 12px 10px 16px;border-radius:14px;background:#0B1F3B;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.3);font-size:14px}
 #sess .ssundo b{color:#F2D48A}
 #sess .ssundo span{flex:1;min-width:0;line-height:1.6}#sess .ssundo .btn{background:#C9A24B;color:#0B1F3B;border:0;font-weight:700;min-height:40px;padding:0 18px;flex:none;white-space:nowrap}
+
+/* V139 — «دائرتك» */
+@media (min-width:900px){.psheet .msbox{inset:auto;top:50%;left:50%;transform:translate(-50%,-50%);width:560px;max-height:88vh;border-radius:18px}}
+#psbody{display:flex;flex-direction:column;gap:14px;padding:4px 2px 6px;overflow-y:auto}
+.psheet .pslead{margin:0;color:var(--ink2);font-size:14px;line-height:1.8}
+.psg{display:flex;flex-direction:column;gap:7px}.psg>b{font-size:14px;color:var(--ink)}.psg small{color:var(--ink3);font-size:12px}
+.pschips{display:flex;flex-wrap:wrap;gap:7px}.pschips .chip{min-height:42px;padding:6px 14px;font-size:14.5px;cursor:pointer}
+.pschips .chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.psg .seg2 button{min-height:44px;font-size:14.5px}
+.psgo{min-height:48px;font-size:16px;margin-top:4px}
 </style>
 </head>
 <body>
@@ -1707,6 +1717,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
   <nav class="nav" id="nav" aria-label="التنقل"><div class="grp" id="grp" role="tablist"><button type="button" data-g="home" title="الرئيسية" aria-label="الرئيسية"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg></button><button type="button" data-g="case">الجلسة</button><button type="button" data-g="write">الأحكام</button><button type="button" data-g="research">المراجع</button><button type="button" data-g="ai">المساعد</button></div><span class="sep" aria-hidden="true"></span><div class="seg" id="seg"><button type="button" data-v="p" data-g="research" class="on">المبادئ</button><button type="button" data-v="l" data-g="research">التشريعات</button><button type="button" data-v="m" data-g="research">الخرائط</button><button type="button" data-v="t" data-g="research">الخط الزمني</button><button type="button" data-v="r" data-g="case">رول الجلسة</button><button type="button" data-v="i" data-g="case">تحليل الملف</button><button type="button" data-v="x" data-g="case">إخفاء الهوية</button><button type="button" data-v="s" data-g="case">حاسبة المستحقات</button><button type="button" data-v="e" data-g="case">المواعيد الإجرائية</button><button type="button" data-v="f" data-g="case">ملفاتي</button><button type="button" data-v="d" data-g="write">فحص المسودة</button><button type="button" data-v="w" data-g="write">Word وصياغاتي</button><button type="button" data-v="a" data-g="ai">المساعد</button></div><button class="ib gsbtn gsnav" id="gsbtn2" title="بحث شامل: مادة، طعن، مبدأ، أداة (Ctrl+K)" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg><span>بحث شامل</span><span class="kbd gskbd">Ctrl K</span></button></nav>
 </header>
 <nav class="bnav" id="bnav" aria-label="التنقل السفلي"><button type="button" data-g="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg><span>اليوم</span></button><button type="button" data-g="roll"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7 14h4M7 17h7"/></svg><span>الجلسة</span></button><button type="button" data-g="research"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>البحث</span></button><button type="button" data-g="more" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>المزيد</span></button></nav>
+<div class="msheet psheet" id="psheet" hidden><div class="msbg" id="psbg"></div><div class="msbox" role="dialog" aria-modal="true" aria-labelledby="psh"><div class="msh"><b id="psh">دائرتك</b><button type="button" class="ib" id="psclose" aria-label="إغلاق">✕</button></div><div id="psbody"></div></div></div>
 <div class="msheet hsheet" id="hsheet" hidden><div class="msbg" id="hsbg"></div><div class="msbox" role="dialog" aria-modal="true" aria-labelledby="hsh"><div class="msh"><b id="hsh">طريقة الاستخدام</b><button type="button" class="ib" id="hsclose" aria-label="إغلاق">✕</button></div><div id="hsbody"></div><div class="hsft" id="hsft"></div></div></div>
 <div class="msheet" id="msheet" hidden><div class="msbg" id="msbg"></div><div class="msbox" role="dialog" aria-modal="true" aria-label="كل الأدوات"><div class="msh"><b>كل الأدوات</b><button type="button" class="ib" id="msclose" aria-label="إغلاق">✕</button></div><div id="mslist"></div></div></div>
 
@@ -2290,13 +2301,14 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <div class="drow"><span>حجم الخط</span><div class="dsize"><button class="ib" id="fsm" title="تصغير الخط" type="button">أ-</button><b id="fsv">17</b><button class="ib" id="fsp" title="تكبير الخط" type="button">أ+</button></div></div>
       <p class="dsample">نموذج: لما كان من المقرر في قضاء هذه المحكمة أن العبرة بالطلبات الختامية.</p>
     </section>
+    <section class="ds" id="dcprof"><h3>دائرتك</h3><p class="synote" id="dcp_sum"></p><button type="button" class="btn" id="dcp_go">تغيير الدائرة أو صفتي فيها</button></section>
     <section class="ds" id="dprof"><h3>الملف الشخصي <small>على هذا الجهاز فقط</small></h3>
       <div class="prof">
         <label class="profpic" for="pf_photo" title="إضافة صورة"><img id="pf_img" alt="" hidden><span id="pf_ph">＋<br>صورة</span><input type="file" id="pf_photo" accept="image/*" hidden></label>
         <div class="proffields">
           <label>الاسم الكامل<input id="pf_name" placeholder="مثال: القاضي فلان الفلاني" autocomplete="off"></label>
           <label>الدرجة الوظيفية<input id="pf_grade" placeholder="مثال: رئيس دائرة بمحكمة الاستئناف" autocomplete="off"></label>
-          <label>الدائرة<input id="pf_circ" placeholder="مثال: الدائرة العمالية الثانية" autocomplete="off"></label>
+          <label>اسم الدائرة <small>(للتحية فقط)</small><input id="pf_circ" placeholder="مثال: الدائرة العمالية الثانية" autocomplete="off"></label>
         </div>
       </div>
       <div class="profrow"><button type="button" class="btn" id="pf_clear">مسح الصورة</button><span class="synote" style="flex:1;margin:0">يظهر في التحية والإعدادات فقط — لا يظهر على الأوراق المطبوعة ولا يُرسل إلى أي جهة.</span></div>
@@ -2348,7 +2360,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V138 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V139 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -3562,7 +3574,7 @@ function drawerFill() {
 (function dgroups() {
   const db = $('#dbody'); if (!db) return; const secs = [...db.querySelectorAll(':scope > section.ds')];
   const byH = t => secs.find(x => { const h = x.querySelector('h3'); return h && h.textContent.trim().startsWith(t); });
-  const G = [['dg1', 'الدائرة وملفي', [$('#dprof')]], ['dg2', 'المزامنة', [$('#dsync'), $('#dcirc')]], ['dg3', 'العرض والأدوات', [byH('العرض'), byH('أدوات'), $('#dtools'), $('#dkn'), $('#dlock'), db.querySelector('section.dkeys')]], ['dg4', 'عن التطبيق', [$('#dguide'), $('#dlib'), $('#dfb'), byH('عن التطبيق')]]];
+  const G = [['dg1', 'الدائرة وملفي', [$('#dcprof'), $('#dprof')]], ['dg2', 'المزامنة', [$('#dsync'), $('#dcirc')]], ['dg3', 'العرض والأدوات', [byH('العرض'), byH('أدوات'), $('#dtools'), $('#dkn'), $('#dlock'), db.querySelector('section.dkeys')]], ['dg4', 'عن التطبيق', [$('#dguide'), $('#dlib'), $('#dfb'), byH('عن التطبيق')]]];
   const idx = el('nav', 'dgidx'); idx.setAttribute('aria-label', 'أقسام الإعدادات');
   idx.innerHTML = G.map(g => '<button type="button" data-dg="' + g[0] + '">' + g[1] + '</button>').join('');
   const help = $('#dhelp'); help.after(idx); let at = idx;
@@ -3575,7 +3587,7 @@ function vvReset() { if (!document.documentElement.classList.contains('noscroll'
 if (window.visualViewport) { visualViewport.addEventListener('resize', vvFix); visualViewport.addEventListener('scroll', vvFix); }
 document.addEventListener('focusout', vvReset); window.addEventListener('focus', vvReset); document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') vvReset(); });
 document.addEventListener('change', e => { if (e.target && e.target.type === 'file') vvReset(); }, true);
-function openDrawer(toHelp) { drawerFill(); try { sfStat(); } catch (e) {} try { scRender(); } catch (e) {} try { window.gdInit && window.gdInit(); } catch (e) {} document.documentElement.classList.add('noscroll'); $('#drawer').classList.add('show'); try { window.scrollTo(0, 0); } catch (e) {} vvFix(); $('#scrim').classList.add('show'); $('#menubtn').classList.add('on'); const b = $('#dbody'); b.scrollTop = 0; if (!toHelp) setTimeout(() => $('#dclose').focus(), 50); }
+function openDrawer(toHelp) { try { psSum(); } catch (e) {} drawerFill(); try { sfStat(); } catch (e) {} try { scRender(); } catch (e) {} try { window.gdInit && window.gdInit(); } catch (e) {} document.documentElement.classList.add('noscroll'); $('#drawer').classList.add('show'); try { window.scrollTo(0, 0); } catch (e) {} vvFix(); $('#scrim').classList.add('show'); $('#menubtn').classList.add('on'); const b = $('#dbody'); b.scrollTop = 0; if (!toHelp) setTimeout(() => $('#dclose').focus(), 50); }
 function closeDrawer() { if (!$('#drawer').classList.contains('show')) return; document.documentElement.classList.remove('noscroll'); $('#drawer').classList.remove('show'); vvFix(); $('#menubtn').classList.remove('on'); if (!$('#panel').classList.contains('show') && !$('#side').classList.contains('show')) $('#scrim').classList.remove('show'); }
 $('#menubtn').onclick = () => $('#drawer').classList.contains('show') ? closeDrawer() : openDrawer();
 $('#dclose').onclick = closeDrawer;
@@ -5011,7 +5023,7 @@ let SC = (() => { try { return JSON.parse(localStorage.getItem('tm_circ') || 'nu
 const SCK = { key: null, dir: null, busy: false, pass: '', soon: 0, seen: 0 };
 function scSave() { try { localStorage.setItem('tm_circ', JSON.stringify(SC)); } catch (e) {} }
 function scOn() { return !!(SC.role && SC.salt) && !window.DEMO; }
-function rlMe() { return scOn() && SC.role === 'm' ? (SC.me || 'r') : 'p'; }
+function rlMe() { if (scOn()) return SC.role === 'm' ? (SC.me || 'r') : 'p'; const m = rlProf().me; return m && m !== 'p' && RL_W[m] ? m : 'p'; }   // V139: صفة المستخدم في دائرته (الرئيس افتراضيًا)
 const scRoleT = () => SC.role === 'p' ? 'الرئيس' : (RL_W[SC.me] || 'عضو');
 const scPick = (c, F) => { const o = {}; F.forEach(k => { const v = c[k]; if (v !== undefined && v !== null && v !== '' && !(Array.isArray(v) && !v.length)) o[k] = v; }); return o; };
 const scH = o => { const s = JSON.stringify(o); let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return h; };
@@ -5119,7 +5131,7 @@ function scRender() {
   const b = $('#sc_body'); if (!b) return; const sec = $('#dcirc'); if (sec) sec.classList.toggle('hidden', rlProf().n === 1 || !!window.DEMO);
   const fs = syCanFS() && window.showDirectoryPicker;
   if (!scOn()) {
-    const role = SCK.role || 'p', me = SCK.me || 'r';
+    const pm = rlProf().me, role = SCK.role || (pm && pm !== 'p' ? 'm' : 'p'), me = SCK.me || (pm && pm !== 'p' ? pm : 'r');
     b.innerHTML = '<div class="scf"><div class="scl">دوري في الدائرة</div><div class="seg2" role="radiogroup"><button type="button" data-scr="p" class="' + (role === 'p' ? 'on' : '') + '">الرئيس</button><button type="button" data-scr="m" class="' + (role === 'm' ? 'on' : '') + '">عضو</button></div>'
       + (role === 'm' ? '<label class="scl">صفتي<select class="sel" id="sc_me">' + ['r', 'l', 'd'].filter(k => RL_W[k]).map(k => '<option value="' + k + '"' + (k === me ? ' selected' : '') + '>' + esc(RL_W[k]) + '</option>').join('') + '</select></label>' : '')
       + '<label class="scl">رمز الدائرة <small>(8 أحرف فأكثر — يُبلَّغ للأعضاء شفهيًا، ولا يُحفظ في أي ملف)</small><input type="password" id="sc_code" autocomplete="new-password" minlength="8"></label>'
@@ -7917,8 +7929,46 @@ function tourRender() {
     $('#tour_next').textContent = 'التالي'; $('#tour_next').classList.remove('hidden');
   } else { ex.innerHTML = ''; $('#tour_next').textContent = last ? 'ابدأ' : 'التالي'; $('#tour_next').classList.remove('hidden'); }
 }
+
+// V139: «دائرتك» — شاشة واحدة عند أول فتح (وبعد الافتتاحية) لاختيار المحكمة ونوع الدائرة والهيئة وصفة المستخدم وأيام الانعقاد. تُفتح بعدها من الإعدادات ← «دائرتك».
+const PS_ME = { p: 'الرئيس', r: 'العضو اليمين', l: 'العضو اليسار' };
+let PS = null;
+function psSumTxt() { const P = rlProf(); return rlProfName(P) + ' · ' + (P.n === 1 ? 'قاضٍ فرد' : (P.n === 4 ? 'أربعة أعضاء' : 'ثلاثة أعضاء') + ' · صفتي: ' + (PS_ME[P.me] || 'الرئيس')) + ' · ' + RL_WD.filter(w => P.days.includes(w[0])).map(w => w[1]).join('، '); }
+function psSum() { const e = document.getElementById('dcp_sum'); if (e) e.textContent = psSumTxt(); }
+function psOpen(first) {
+  const sh = $('#psheet'); if (!sh) return; PS = Object.assign({}, rlProf()); PS.first = !!first; if (!PS.me) PS.me = 'p';
+  sh.hidden = false; document.documentElement.classList.add('noscroll'); psRender();
+}
+function psClose(done) { const sh = $('#psheet'); if (!sh) return; sh.hidden = true; if (!$('#drawer').classList.contains('show')) document.documentElement.classList.remove('noscroll'); if (done || (PS && PS.first)) { try { localStorage.setItem('tm_profset', '1'); } catch (e) {} } PS = null; }
+function psRender() {
+  const b = $('#psbody'); if (!b || !PS) return;
+  const chips = (o, v, k) => Object.keys(o).map(x => '<button type="button" class="chip' + (String(x) === String(v) ? ' on' : '') + '" data-' + k + '="' + x + '">' + o[x] + '</button>').join('');
+  b.innerHTML = '<p class="pslead">' + (PS.first ? 'سؤال واحد قبل البدء: اختر دائرتك، فتتكيّف المسميات والقوائم والأدوات معها. تغيّره متى شئت من الإعدادات.' : 'تتغيّر المسميات والقوائم والأدوات مع الدائرة. بياناتك لا تتغيّر.') + '</p>'
+    + '<div class="psg"><b>المحكمة</b><div class="seg2">' + Object.keys(RL_DEGS).map(k => '<button type="button" data-deg="' + k + '" class="' + (PS.deg === k ? 'on' : '') + '">' + RL_DEGS[k] + '</button>').join('') + '</div></div>'
+    + '<div class="psg"><b>نوع الدائرة</b><div class="pschips">' + chips(RL_KINDS, PS.kind, 'kind') + '</div></div>'
+    + (PS.kind === 'cri' && PS.deg === 'f' ? '<div class="psg"><b>طبيعة الدائرة</b><div class="pschips">' + chips(RL_SUBS, PS.sub || 'jn', 'sub') + '</div></div>' : '')
+    + '<div class="psg"><b>الهيئة</b><div class="pschips">' + chips({ 1: 'قاضٍ فرد', 3: 'ثلاثة أعضاء', 4: 'أربعة أعضاء' }, PS.n, 'n') + '</div></div>'
+    + (PS.n === 1 ? '' : '<div class="psg"><b>صفتي في الدائرة</b><div class="pschips">' + chips(PS_ME, PS.me || 'p', 'me') + '</div><small>تُحسب «أحكامي» من القضايا الموزّعة عليك.</small></div>')
+    + '<div class="psg"><b>أيام الانعقاد</b><div class="pschips">' + RL_WD.map(w => '<button type="button" class="chip' + (PS.days.includes(w[0]) ? ' on' : '') + '" data-wd="' + w[0] + '">' + w[1] + '</button>').join('') + '</div></div>'
+    + '<button type="button" class="btn primary psgo" id="ps_go">' + (PS.first ? 'ابدأ' : 'حفظ') + '</button>';
+  b.querySelectorAll('[data-deg]').forEach(x => x.onclick = () => { PS.deg = x.dataset.deg; psRender(); });
+  b.querySelectorAll('[data-kind]').forEach(x => x.onclick = () => { PS.kind = x.dataset.kind; psRender(); });
+  b.querySelectorAll('[data-sub]').forEach(x => x.onclick = () => { PS.sub = x.dataset.sub; psRender(); });
+  b.querySelectorAll('[data-n]').forEach(x => x.onclick = () => { PS.n = +x.dataset.n; if (PS.n === 1) PS.me = 'p'; psRender(); });
+  b.querySelectorAll('[data-me]').forEach(x => x.onclick = () => { PS.me = x.dataset.me; psRender(); });
+  b.querySelectorAll('[data-wd]').forEach(x => x.onclick = () => { const d = +x.dataset.wd, i = PS.days.indexOf(d); if (i >= 0) { if (PS.days.length === 1) { toast('اختر يومًا واحدًا على الأقل'); return; } PS.days = PS.days.filter(v => v !== d); } else PS.days = PS.days.concat(d).sort(); psRender(); });
+  $('#ps_go').onclick = () => {
+    const patch = { deg: PS.deg, kind: PS.kind, n: PS.n, days: PS.days, me: PS.n === 1 ? 'p' : (PS.me || 'p') }; if (PS.kind === 'cri' && PS.deg === 'f') patch.sub = PS.sub || 'jn';
+    const cur = Object.assign({ me: 'p' }, rlProf()), same = JSON.stringify(Object.assign({}, cur, patch)) === JSON.stringify(cur);   // لا يُكتب شيء إن لم يتغيّر (ملف «استئناف عمالي» كما هو)
+    if (!same) { RL.prof = Object.assign(rlProf(), patch); rlSave(); rlVocab(); try { rlProfForm(); } catch (e) {} try { const h = document.getElementById('rl_calhint'); if (h) h.textContent = rlCalHint(); rlCalRender(); } catch (e) {} try { if (rlInit) rlRender(); } catch (e) {} try { packCheck(); } catch (e) {} try { if (document.body.classList.contains('home')) renderHome(); } catch (e) {} }
+    toast('دائرتك: ' + rlProfName()); psSum(); psClose(true);
+  };
+}
+$('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
+$('#dcp_go').onclick = () => psOpen(false);
+function psFirst() { try { if (localStorage.getItem('tm_profset') || navigator.webdriver || window.DEMO || lkIsLocked()) return; } catch (e) { return; } psOpen(true); }
 function tourShow(from) { tourI = 0; $('#tour').classList.remove('hidden'); tourRender(); if (from) try { closeDrawer(); } catch (e) {} }
-function tourEnd() { $('#tour').classList.add('hidden'); try { localStorage.setItem('tm_onboarded', '1'); } catch (e) {} }
+function tourEnd() { $('#tour').classList.add('hidden'); try { localStorage.setItem('tm_onboarded', '1'); } catch (e) {} setTimeout(psFirst, 350); }
 $('#tour_x').onclick = tourEnd;
 $('#tour_prev').onclick = function () { if (tourI) { tourI--; tourRender(); } };
 $('#tour_next').onclick = function () { if (tourI < TOUR.length - 1) { tourI++; tourRender(); } else tourEnd(); };
@@ -8018,7 +8068,7 @@ if ($('#fb_copy')) $('#fb_copy').onclick = function () { copy(fbText(), 'نُس�
 if ($('#fb_reset')) $('#fb_reset').onclick = function () { var b = $('#fb_reset'); if (b.dataset.s) { FB = { sec: {}, dev: '', stars: 0, best: '', imp: '', reco: '', name: '' }; fbSave(); fbBuilt = false; $('#fb_secs').innerHTML = ''; fbClose(); toast('فُرّغ النموذج'); } else { b.dataset.s = '1'; b.textContent = 'تأكيد؟'; setTimeout(function () { b.textContent = 'تفريغ'; delete b.dataset.s; }, 2600); } };
 
 (function () { try { var hh = document.getElementById('homehead'); if (!hh) return; var t = new Date(), k = t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate(); if (localStorage.getItem('tm_weave') === k) return; if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return; localStorage.setItem('tm_weave', k); hh.classList.add('weave'); setTimeout(function () { hh.classList.remove('weave'); }, 3000); } catch (e) {} })(); // V115: نسج السدو مرة في اليوم
-try { if (!localStorage.getItem('tm_onboarded') && !navigator.webdriver) setTimeout(function () { if (!lkIsLocked()) tourShow(false); }, 400); } catch (e) {}
+try { if (!localStorage.getItem('tm_onboarded') && !navigator.webdriver) setTimeout(function () { if (!lkIsLocked()) tourShow(false); }, 400); else setTimeout(psFirst, 900); } catch (e) {}
 
 
 (function(){
