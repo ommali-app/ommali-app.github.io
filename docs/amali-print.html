@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>طباعة — عمّالي</title>
+<title>طباعة — مداولة</title>
 <style>
 /* V121: صفحة طباعة مستقلة لتطبيق الشاشة الرئيسية على الآيفون (لا تعمل فيه الطباعة) — تُفتح في نافذة Safari داخل التطبيق،
    والمحتوى يصل في جزء الرابط بعد # فلا يُرسل إلى أي خادم، ولا يُحفظ. */
@@ -50,7 +50,7 @@ details>summary::-webkit-details-marker{display:none}
     var h = location.hash.replace(/^#/, ''), k = h.indexOf('='), v = k > 0 ? h.slice(k + 1) : '';
     var b = v.replace(/-/g, '+').replace(/_/g, '/'); while (b.length % 4) b += '=';
     var o = JSON.parse(decodeURIComponent(escape(atob(b))));
-    document.title = (o.t || 'طباعة') + ' — عمّالي';
+    document.title = (o.t || 'طباعة') + ' — مداولة';
     m.innerHTML = o.h || '';
     m.querySelectorAll('script,button,input,select,textarea').forEach(function (x) { x.remove(); });
   } catch (e) { m.innerHTML = '<div class="err">تعذّر فتح المحتوى — ارجع إلى التطبيق واضغط «طباعة» مرة أخرى.</div>'; } }
