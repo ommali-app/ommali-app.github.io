@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261001234613">
+<meta name="amali-build" content="20261002010446">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="manifest" href="manifest.json">
 <title>مداولة تجريبي</title>
-<meta name="description" content="مبادئ محكمة التمييز العمالية وأدوات مساعدة لقاضي الاستئناف — يعمل دون اتصال، وبياناتك على جهازك فقط.">
+<meta name="description" content="رول الجلسة وأدوات الدائرة ومبادئ محكمة التمييز — يعمل دون اتصال، وبياناتك على جهازك فقط.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="مداولة">
-<meta property="og:title" content="عمّالي — مبادئ التمييز العمالية وأدوات قاضي الاستئناف">
+<meta property="og:title" content="مداولة — رول الجلسة وأدوات الدائرة">
 <meta property="og:description" content="يعمل دون اتصال، وبياناتك على جهازك فقط.">
 <meta property="og:url" content="https://ommali-app.github.io/">
 <meta property="og:image" content="https://ommali-app.github.io/og.jpg">
@@ -1591,7 +1591,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 .empty .zs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}.empty .zs .chip{min-height:40px;padding:6px 14px;border:1px solid var(--line2);border-radius:999px;background:var(--panel);color:var(--accent);font:inherit;font-size:14px;cursor:pointer}
 
 /* ============ V128 ============ */
-/* شعار الاسم: «Reem Kufi» يُقرأ فيه «عمّالي» كأنه «عقالي» — Noto Kufi أوضح بالروح الكوفية نفسها */
+/* شعار الاسم: «Reem Kufi» يُقرأ فيه «مداولة» كأنه «عقالي» — Noto Kufi أوضح بالروح الكوفية نفسها */
 .brand h1{font-family:'Noto Kufi Arabic',var(--title);font-weight:700;letter-spacing:0}
 /* العودة إلى المبدأ السابق بعد فتح «ذي صلة» */
 .ptrail{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;margin:0 0 14px;padding:10px 14px;border:1px solid var(--accent);border-radius:12px;background:var(--accent-soft);color:var(--accent-soft-ink);font:inherit;font-size:14.5px;font-weight:700;cursor:pointer;text-align:start;min-height:48px}
@@ -1629,12 +1629,20 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 .seg2{display:flex;gap:3px;background:var(--panel2);border-radius:12px;padding:3px}.seg2 button{flex:1;min-height:38px;border:0;border-radius:9px;background:transparent;font:inherit;font-weight:700;color:var(--ink2);cursor:pointer}.seg2 button.on{background:var(--panel);color:var(--accent);box-shadow:0 1px 3px rgba(0,0,0,.12)}
 .scst{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--ink2)}
 .scf .row{display:flex;flex-wrap:wrap;gap:8px}
+
+/* V135 — التراجع عن القرار في وضع الجلسة */
+#sess .ssdh{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
+#sess .ssdtag{background:#E3F1E8;color:#2F7D4F;border-color:transparent;font-weight:700}
+#sess .ssdh .linkbtn{font-weight:700}
+#sess .ssundo{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));z-index:5;display:flex;align-items:center;gap:12px;width:min(520px,calc(100% - 24px));box-sizing:border-box;padding:10px 12px 10px 16px;border-radius:14px;background:#0B1F3B;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.3);font-size:14px}
+#sess .ssundo b{color:#F2D48A}
+#sess .ssundo span{flex:1;min-width:0;line-height:1.6}#sess .ssundo .btn{background:#C9A24B;color:#0B1F3B;border:0;font-weight:700;min-height:40px;padding:0 18px;flex:none;white-space:nowrap}
 </style>
 </head>
 <body>
 <script>try{if(localStorage.getItem('tm_lock'))document.documentElement.classList.add('locked')}catch(e){}</script>
-<div id="lockscr" role="dialog" aria-modal="true" aria-label="عمّالي مقفل"><div class="lkbox">
-  <div class="lkglow" aria-hidden="true"></div><div class="lkico lkseal" id="lk_seal" aria-hidden="true"></div><h2>عمّالي</h2><p class="lksub">منضدة عمل الدائرة العمالية</p><p class="lkdate" id="lk_date"></p>
+<div id="lockscr" role="dialog" aria-modal="true" aria-label="مداولة مقفل"><div class="lkbox">
+  <div class="lkglow" aria-hidden="true"></div><div class="lkico lkseal" id="lk_seal" aria-hidden="true"></div><h2>مداولة</h2><p class="lksub">منضدة عمل الدائرة العمالية</p><p class="lkdate" id="lk_date"></p>
   <form class="lkform" id="lk_form" autocomplete="off" onsubmit="return false"><p class="lkhint">اكتب رمز الفتح</p>
     <label class="lkpinw"><input type="password" id="lk_pin" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" aria-label="رمز الفتح"><span class="lkdots" id="lk_dots" aria-hidden="true"></span></label>
     <div class="lkmsg" id="lk_msg" role="alert"></div>
@@ -1646,7 +1654,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 </div></div>
 
 <div id="fbwrap" class="fbwrap hidden" role="dialog" aria-modal="true" aria-label="نموذج ملاحظات التطبيق">
-  <div class="fbhead"><b>رأيك في «عمّالي»</b><span class="fbprog"><b id="fb_prog">0</b> قسم قُيّم</span><button type="button" class="ib" id="fb_x" aria-label="إغلاق">✕</button></div>
+  <div class="fbhead"><b>رأيك في «مداولة»</b><span class="fbprog"><b id="fb_prog">0</b> قسم قُيّم</span><button type="button" class="ib" id="fb_x" aria-label="إغلاق">✕</button></div>
   <div class="fbbody" id="fb_body">
     <p class="fbintro">قيّم كل قسم: <span class="fbk g">سهل</span> / <span class="fbk m">مقبول</span> / <span class="fbk b">فيه خلل</span>. وإن أشرت إلى خلل تظهر مواضعه لتحدّدها وتكتب ملاحظتك. لا يُطلب أي بيان عن قضية.</p>
     <div id="fb_secs"></div>
@@ -2271,7 +2279,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
   <div class="db" id="dbody">
     <section class="ds" id="dhelp"><h3 id="dhelph">تعليمات</h3><div class="dhelp" id="dhelpb"></div></section>
     <section class="ds" id="dguide"><h3>الدليل والفيديو التعريفي</h3>
-      <div class="gvid"><video id="gd_vid" controls playsinline preload="none" data-poster="../docs/amali-tour.jpg" data-src="../docs/amali-tour.mp4" aria-label="الفيديو التعريفي بعمّالي"></video></div>
+      <div class="gvid"><video id="gd_vid" controls playsinline preload="none" data-poster="../docs/amali-tour.jpg" data-src="../docs/amali-tour.mp4" aria-label="الفيديو التعريفي بمداولة"></video></div>
       <div class="gbtns"><a class="btn" id="gd_pdf" href="../docs/amali-guide.pdf" target="_blank" rel="noopener">📘 عرض الدليل</a><a class="btn" id="gd_roll" href="../docs/amali-roll.mp4" target="_blank" rel="noopener">🎬 فيديو رول الجلسة (دقيقة)</a><button type="button" class="btn" id="gd_pdfdl">⬇︎ تنزيل الدليل (PDF)</button><button type="button" class="btn" id="gd_viddl">⬇︎ تنزيل الفيديو</button><button type="button" class="btn" id="gd_tour">جولة سريعة داخل التطبيق</button></div>
       <div class="demobox" id="demobox"><b>🧪 عرض تجريبي لدائرة أخرى</b><span>يملأ التطبيق مؤقتًا ببيانات وهمية لنوع الدائرة الذي تختاره — لعرضه على الزملاء. لا يمسّ بياناتك، ولا يُحفظ منه شيء، وينتهي بزر «إنهاء العرض».</span><div class="row2"><select class="sel" id="dm_deg"><option value="a">محكمة الاستئناف</option><option value="f">المحكمة الكلية</option></select><select class="sel" id="dm_kind"><option value="lab">عمالي</option><option value="civ">مدني</option><option value="com">تجاري</option><option value="gov">حكومي</option><option value="adm">إداري</option><option value="fam">أسرة</option><option value="cri">جزائي</option></select><select class="sel" id="dm_n"><option value="3">ثلاثة أعضاء</option><option value="4">أربعة أعضاء</option><option value="1">قاضٍ فرد</option></select><button type="button" class="btn primary" id="dm_go">ابدأ العرض</button></div></div>
       <p class="synote hidden" id="gd_miss">الدليل والفيديو غير متاحين في هذه النسخة؛ يُفتحان من الموقع المستضاف (مجلد docs/).</p>
@@ -2304,7 +2312,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <div class="toolvis" id="toolvis"></div>
     </section>
     <section class="ds" id="dkn"><h3>ملف المعرفة لأداة الذكاء</h3>
-      <p class="synote">ملف نصي بالمبادئ بإحالاتها الحرفية (ومعه نصوص القوانين إن شئت)، ترفعه مرة واحدة إلى ملفات المعرفة في أداة الذكاء الاصطناعي التي تستعملها (مثل «المشروع» في Claude أو ما يقابله في غيرها)؛ فتستند هناك إلى قاعدة عمّالي نفسها. إن كبر المحتوى قُسّم تلقائيًا إلى ملفات صغيرة داخل ملف مضغوط واحد؛ فكّه وارفع الملفات كلها.</p>
+      <p class="synote">ملف نصي بالمبادئ بإحالاتها الحرفية (ومعه نصوص القوانين إن شئت)، ترفعه مرة واحدة إلى ملفات المعرفة في أداة الذكاء الاصطناعي التي تستعملها (مثل «المشروع» في Claude أو ما يقابله في غيرها)؛ فتستند هناك إلى قاعدة مداولة نفسها. إن كبر المحتوى قُسّم تلقائيًا إلى ملفات صغيرة داخل ملف مضغوط واحد؛ فكّه وارفع الملفات كلها.</p>
       <div class="sybox"><label>المبادئ<select id="kn_scope" class="sel"><option value="all">كل المبادئ</option><option value="res">نتائج البحث الحالية</option><option value="bm">المحفوظات ★ فقط</option></select></label>
       <label>المحتوى<select id="kn_mode" class="sel"><option value="full">كامل: العنوان والموجز والقاعدة (نحو 3.9 م.ب)</option><option value="short">مختصر: العنوان والموجز والإحالة (نحو 1 م.ب)</option></select></label>
       <div class="knlaws"><label class="mskopt"><input type="checkbox" data-law="عمل 6/2010" checked> قانون العمل 6/2010</label><label class="mskopt"><input type="checkbox" data-law="مرافعات"> المرافعات</label><label class="mskopt"><input type="checkbox" data-law="إثبات"> الإثبات</label><label class="mskopt"><input type="checkbox" data-law="خبرة"> الخبرة</label><label class="mskopt"><input type="checkbox" data-law="عمالة منزلية 68/2015,قرار وزاري 22/2022,قرار وزاري 2302/2016,قرار وزاري 2194/2016" checked> العمالة المنزلية (68/2015 ولوائحه)</label><label class="mskopt"><input type="checkbox" data-law="قرار إداري 842/2015,قرار إداري 378/2016,قرار إداري 680/2026,قرار وزاري 3/2024"> قرارات الهيئة (842/2015 وتعديلاته، 3/2024)</label></div>
@@ -2322,7 +2330,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="synote sfstat" id="sf_stat"></p>
       <p class="synote">تنقل الرول وملفاتي والمفضلة بين أجهزتك <b>أنت</b> عبر ملف واحد مشفّر في خدمة تخزين تختارها (OneDrive أو Google Drive أو iCloud). لا يُرسل شيء إلى أي خادم.</p>
       <div id="sy_body"></div>
-      <details class="syhow"><summary>أول مرة: تجهيز خدمة التخزين</summary><ul><li><b>OneDrive:</b> برنامج OneDrive على الحاسوب، وتطبيقه على الجوال (يظهر في «الملفات» على الآيفون).</li><li><b>Google Drive:</b> برنامج «Google Drive للكمبيوتر» فيظهر قرصًا (مثل G:)، وتطبيق Drive على الجوال؛ وعلى الآيفون فعّله من «الملفات» ← تصفّح ← ⋯ ← تعديل.</li><li><b>iCloud Drive:</b> مدمج في الآيفون والآيباد والماك؛ وعلى ويندوز ببرنامج iCloud.</li><li><b>Dropbox:</b> برنامجه على الحاسوب وتطبيقه على الجوال.</li></ul><p>أنشئ مجلدًا باسم «عمّالي» واستعمل <b>الخدمة نفسها على كل أجهزتك</b>. الملف amali-data.amali مشفّر فلا تقرؤه الخدمة. هذه مزامنة شخصية بين أجهزتك أنت؛ لا تشارك رمزها ولا مجلدها مع غيرك.</p></details>
+      <details class="syhow"><summary>أول مرة: تجهيز خدمة التخزين</summary><ul><li><b>OneDrive:</b> برنامج OneDrive على الحاسوب، وتطبيقه على الجوال (يظهر في «الملفات» على الآيفون).</li><li><b>Google Drive:</b> برنامج «Google Drive للكمبيوتر» فيظهر قرصًا (مثل G:)، وتطبيق Drive على الجوال؛ وعلى الآيفون فعّله من «الملفات» ← تصفّح ← ⋯ ← تعديل.</li><li><b>iCloud Drive:</b> مدمج في الآيفون والآيباد والماك؛ وعلى ويندوز ببرنامج iCloud.</li><li><b>Dropbox:</b> برنامجه على الحاسوب وتطبيقه على الجوال.</li></ul><p>أنشئ مجلدًا باسم «مداولة» واستعمل <b>الخدمة نفسها على كل أجهزتك</b>. الملف amali-data.amali مشفّر فلا تقرؤه الخدمة. هذه مزامنة شخصية بين أجهزتك أنت؛ لا تشارك رمزها ولا مجلدها مع غيرك.</p></details>
       <input type="file" id="sy_file" multiple hidden>
     </section>
     <section class="ds" id="dcirc"><h3>ملف الدائرة المشترك <span class="scbeta">تجريبي</span></h3>
@@ -2335,12 +2343,12 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds" id="dlib"><h3>مرجع المبادئ والتشريعات</h3>
       <div class="libcard"><span class="libic" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" focusable="false" viewBox="0 0 512 512"><defs><linearGradient id="mbG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16396A"/><stop offset="1" stop-color="#0B1F3B"/></linearGradient><linearGradient id="mbA" gradientUnits="userSpaceOnUse" x1="0" y1="120" x2="0" y2="420"><stop offset="0" stop-color="#F0D48C"/><stop offset="1" stop-color="#B38B36"/></linearGradient></defs><rect width="512" height="512" rx="116" fill="url(#mbG)"/><rect x="18" y="18" width="476" height="476" rx="100" fill="none" stroke="#C9A24B" stroke-opacity=".35" stroke-width="3"/><rect x="96" y="336" width="320" height="68" rx="10" fill="url(#mbA)"/><rect x="130" y="258" width="252" height="68" rx="10" fill="url(#mbA)" opacity=".92"/><path d="M120 352 V 388 M 392 352 V 388 M 154 274 V 310 M 358 274 V 310" stroke="#0B1F3B" stroke-width="7" stroke-linecap="round"/><path d="M136 370 H 376" stroke="#0B1F3B" stroke-width="3" opacity=".35"/><path d="M170 292 H 342" stroke="#0B1F3B" stroke-width="3" opacity=".35"/><path d="M256 214 C 222 190, 176 184, 132 190 V 244 C 176 238, 222 244, 256 262 C 290 244, 336 238, 380 244 V 190 C 336 184, 290 190, 256 214 Z" fill="url(#mbA)"/><path d="M256 214 V 262" stroke="#0B1F3B" stroke-width="6"/><path d="M160 206 C 190 204, 222 210, 244 222 M 352 206 C 322 204, 290 210, 268 222" fill="none" stroke="#0B1F3B" stroke-width="3" opacity=".45"/><polygon points="256,110 274,136 256,162 238,136" fill="#F6E3A8"/></svg></span>
-        <div><b>مبادئ التمييز</b><p>النص الحرفي لمبادئ محكمة التمييز الكويتية مع صورة صفحة كل مبدأ، والتشريعات الكويتية مادةً مادة. مجاني، ويعمل دون اتصال. ومنه تأتي حزم المبادئ والتشريعات في «عمّالي».</p>
+        <div><b>مبادئ التمييز</b><p>النص الحرفي لمبادئ محكمة التمييز الكويتية مع صورة صفحة كل مبدأ، والتشريعات الكويتية مادةً مادة. مجاني، ويعمل دون اتصال. ومنه تأتي حزم المبادئ والتشريعات في «مداولة».</p>
         <a class="btn" href="https://mabadi-kw.github.io/mabadi/" target="_blank" rel="noopener">افتح مبادئ التمييز ↗</a></div></div>
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V134 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V136 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -2384,8 +2392,8 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 window.__amaliMain = function () {
 (function(){
 const DATA = JSON.parse(document.getElementById('data').textContent);
-// V108: المبادئ من حزم «مكتبة مبادئ التمييز» (packs/، ملف لكل دائرة، عقد البيانات 1.1). «عمّالي» يعرضها ويبحث فيها ويقتبس منها،
-// ولا يعدّل نصوصها ولا يُنشئ قاعدة موازية. ما عداها طبقة «عمّالي»: غير الموثّق من المكتبة (بنصه القديم، مؤقتًا)، وجدول المعرّف القديم ← الجديد،
+// V108: المبادئ من حزم «مكتبة مبادئ التمييز» (packs/، ملف لكل دائرة، عقد البيانات 1.1). «مداولة» يعرضها ويبحث فيها ويقتبس منها،
+// ولا يعدّل نصوصها ولا يُنشئ قاعدة موازية. ما عداها طبقة «مداولة»: غير الموثّق من المكتبة (بنصه القديم، مؤقتًا)، وجدول المعرّف القديم ← الجديد،
 // والتصنيف الآلي المؤقت (نتيجة الحكم وأسباب الطعن). ملاحظات القاضي وروابطه كلها بالمعرّف id.
 const P = [];
 const ALIAS = DATA.migr || {};   // المعرّف القديم (رقم) ← معرّف الحزمة؛ غير الموثّق يبقى بمعرّفه
@@ -2710,12 +2718,12 @@ function renderChips() {
 }
 
 // ---- list
-function outTag(p) { return p.outcome ? '<span class="out ' + OUT[p.outcome] + '"' + (p.pk ? ' title="تصنيف آلي مؤقت في «عمّالي» — ليس من الحزمة، يُراجع"' : '') + '>' + p.outcome + (p.pk ? '<small class="aitag">آلي</small>' : '') + '</span>' : ''; }
+function outTag(p) { return p.outcome ? '<span class="out ' + OUT[p.outcome] + '"' + (p.pk ? ' title="تصنيف آلي مؤقت في «مداولة» — ليس من الحزمة، يُراجع"' : '') + '>' + p.outcome + (p.pk ? '<small class="aitag">آلي</small>' : '') + '</span>' : ''; }
 // V108 — عناصر الحزمة: وسوم العقد (§3: المراجعة، غير الموثّق) وصيغة النسخ (§10)
 function revTag(p) { return p.pk && p.review ? '<span class="tag rev" title="' + esc((p.pk.review.reasons || []).join(' · ')) + '">⚠️ يحتاج مراجعة</span>' : ''; }
-// V113: المؤلفات الخاصة (دومه ومدكور وعباس) — يتولاها «عمّالي» ويميّز مصدرها عن عناصر الحزمة (العقد 1.5، §3/5)
+// V113: المؤلفات الخاصة (دومه ومدكور وعباس) — يتولاها «مداولة» ويميّز مصدرها عن عناصر الحزمة (العقد 1.5، §3/5)
 function authTag(p) { return p.author ? '<span class="tag auth" title="مؤلَّف خاص — نص قضاء التمييز كما نقله المؤلف؛ ليس من مجموعات المكتبة">مؤلَّف خاص</span>' : ''; }
-function unverTag(p) { return p.unver ? '<span class="tag unv" title="من قاعدة «عمّالي» السابقة — لم تتحقق منه المكتبة بعد، ونصه كما كان">غير موثّق من المكتبة</span>' : ''; }
+function unverTag(p) { return p.unver ? '<span class="tag unv" title="من قاعدة «مداولة» السابقة — لم تتحقق منه المكتبة بعد، ونصه كما كان">غير موثّق من المكتبة</span>' : ''; }
 function pagesTxt(pp) { return (pp || []).join('، '); }
 function srcLine(p) { if (!p.pk) return ''; const S = SRCS[p.src] || {}; const pp = p.pk.printed_pages || []; return '[المصدر: ' + (S.title || p.src) + (pp.length ? ' — ص ' + pagesTxt(pp) : '') + ']'; }
 // الفقرات حرفيًا، وكل إسناد بعد الفقرة التي يقع بعدها (citation_positions)، وما لا موضع له في الآخر
@@ -2814,7 +2822,7 @@ function packPanelHtml(p) {
   const lw = (x.laws || []).map(l => '<span class="tag' + (l.suspect ? ' rev' : '') + '" title="' + esc(l.label || '') + (l.suspect ? ' — رقم القانون كما ورد في المصدر، ويُرجَّح أنه خطأ مطبعي فيه (لم يُصحَّح)' : '') + '">' + (l.suspect ? '⚠️ ' : '') + esc(lawLbl(l)) + ((l.articles || []).length ? ': م ' + esc(l.articles.join('، ')) : '') + '</span>').join('');
   const arts = p.articles.filter(a => / /.test(a)).map(t => '<span class="tag art link" data-art="' + esc(t) + '" title="فتح نص المادة أو تصفية المبادئ بها">' + esc(t) + '</span>').join('');
   let h = '<div class="top" style="display:flex;flex-wrap:wrap;gap:6px">' + revTag(p) + '<span class="tag" style="background:var(--mix-soft);color:var(--mix)">' + esc(p.source) + '</span>' + (p.pkind ? '<span class="tag">' + esc(p.pkind) + '</span>' : '') + (p.court && p.court !== 'عمالي' ? '<span class="tag">' + esc(p.court) + '</span>' : '') + '</div>';
-  if (p.author) h += '<div class="authbox"><b>مؤلَّف خاص — ينشره «عمّالي»</b> — نص قضاء التمييز كما نقله المؤلف، بآخر نص صدر عن المكتبة له (الإصدار 1.4). ليس من مجموعات أحكام التمييز الرسمية، ويُتحقق منه على الحكم نفسه قبل الاستناد إليه.' + ((p.official && (p.official.same_text.length || p.official.same_ruling.length)) ? '<br>' + (p.official.same_text.length ? 'النص نفسه في المكتبة: ' + p.official.same_text.map(i => '<button type="button" class="linkbtn" data-off="' + esc(i) + '">' + esc(i) + '</button>').join(' ') + ' ' : '') + (p.official.same_ruling.length ? 'والحكم نفسه بنص آخر: ' + p.official.same_ruling.map(i => '<button type="button" class="linkbtn" data-off="' + esc(i) + '">' + esc(i) + '</button>').join(' ') : '') : '') + '</div>';
+  if (p.author) h += '<div class="authbox"><b>مؤلَّف خاص — ينشره «مداولة»</b> — نص قضاء التمييز كما نقله المؤلف، بآخر نص صدر عن المكتبة له (الإصدار 1.4). ليس من مجموعات أحكام التمييز الرسمية، ويُتحقق منه على الحكم نفسه قبل الاستناد إليه.' + ((p.official && (p.official.same_text.length || p.official.same_ruling.length)) ? '<br>' + (p.official.same_text.length ? 'النص نفسه في المكتبة: ' + p.official.same_text.map(i => '<button type="button" class="linkbtn" data-off="' + esc(i) + '">' + esc(i) + '</button>').join(' ') + ' ' : '') + (p.official.same_ruling.length ? 'والحكم نفسه بنص آخر: ' + p.official.same_ruling.map(i => '<button type="button" class="linkbtn" data-off="' + esc(i) + '">' + esc(i) + '</button>').join(' ') : '') : '') + '</div>';
   if (p.review) h += '<div class="revbox"><b>⚠️ يحتاج مراجعة</b> — علّمته المكتبة للمراجعة، ويُتحقق منه على الصفحة الأصلية قبل إدراجه في حكم:<ul>' + (x.review.reasons || []).map(r => '<li>' + esc(r) + '</li>').join('') + '</ul></div>';
   if (x.ruling_header) h += '<h4>عنوان الحكم في المصدر</h4><p class="kw">' + esc(x.ruling_header) + (x.number_in_ruling ? ' — المبدأ ' + esc(String(x.number_in_ruling)) : '') + '</p>';
   if (p.headings.length || x.title) h += '<h4>موضعه في المصدر</h4><p class="kw">' + esc(p.headings.join(' ← ')) + (x.title && !p.headings.length ? esc(x.title) : x.title ? '<br><b>' + esc(x.title) + '</b>' : '') + '</p>';
@@ -2824,7 +2832,7 @@ function packPanelHtml(p) {
   ['footnotes', 'see_also', 'notes'].forEach(k => { const v = x[k]; if (v && (Array.isArray(v) ? v.length : true)) h += '<h4>' + ({ footnotes: 'الحواشي', see_also: 'انظر أيضًا', notes: 'ملاحظات المصدر' })[k] + '</h4><div class="body">' + (Array.isArray(v) ? v : [v]).map(t => '<p>' + esc(typeof t === 'string' ? t : JSON.stringify(t)) + '</p>').join('') + '</div>'; });
   h += '<h4>المصدر</h4><p style="margin:0 0 4px">' + esc(S.title || p.src) + (S.publisher || S.author ? ' — ' + esc(S.publisher || S.author) : '') + '</p><p class="cite" style="font-size:13.5px">' + esc(srcLine(p)) + '</p><p style="color:var(--ink3);font-size:12px;margin:2px 0 0">المعرّف في المكتبة: ' + esc(x.id) + (x.number_printed != null ? ' · رقمه في الكتاب: ' + esc(String(x.number_printed)) : '') + '</p>';
   if (tp || lw) h += '<h4>التصنيف (من المكتبة)</h4><div style="display:flex;flex-wrap:wrap;gap:6px">' + tp + lw + '</div>' + (arts ? '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">' + arts + '</div>' : '');
-  if (p.autoCls) h += '<h4>تصنيف آلي مؤقت <small style="font-weight:400;color:var(--ink3)">— من «عمّالي» لا من الحزمة، يُراجع</small></h4><div style="display:flex;flex-wrap:wrap;gap:6px">' + outTag(p) + p.defects.map(t => '<span class="tag">' + esc(t) + '<small class="aitag">آلي</small></span>').join('') + '</div>';
+  if (p.autoCls) h += '<h4>تصنيف آلي مؤقت <small style="font-weight:400;color:var(--ink3)">— من «مداولة» لا من الحزمة، يُراجع</small></h4><div style="display:flex;flex-wrap:wrap;gap:6px">' + outTag(p) + p.defects.map(t => '<span class="tag">' + esc(t) + '<small class="aitag">آلي</small></span>').join('') + '</div>';
   // بطاقة الحكم (§6.5): ما ورد عن الحكم نفسه في المصادر الأخرى
   const ids = []; (x.citations || []).forEach(c => (RULINGS.get(c.ruling_key) || []).forEach(i => { if (i !== x.id && !ids.includes(i)) ids.push(i); })); (x.related || []).forEach(i => { if (i !== x.id && !ids.includes(i)) ids.push(i); });
   const tw = ids.map(pById).filter(Boolean);
@@ -2847,8 +2855,8 @@ function openPanel(p) {
   else {
   const tags = [...p.topics.map(t => '<span class="tag topic">' + esc(t) + '</span>'), ...p.articles.map(t => '<span class="tag art link" data-art="' + esc(t) + '" title="فتح نص المادة أو تصفية المبادئ بها">' + esc(t) + '</span>'), ...p.defects.map(t => '<span class="tag">' + esc(t) + '</span>'), ...p.laws.map(t => '<span class="tag">' + esc(t) + '</span>')].join('');
   h = '<div class="top" style="display:flex;flex-wrap:wrap;gap:6px">' + outTag(p) + tags + (p.kind !== 'حكم' ? '<span class="tag" style="background:var(--gold-soft);color:var(--gold-ink);font-weight:600">' + esc(p.kind) + '</span>' : '') + '<span class="tag" style="background:var(--mix-soft);color:var(--mix)">المصدر: ' + esc(p.source) + '</span>' + unverTag(p) + (p.kw_suggested ? '<span class="tag rev">العنوان مقترح آليًا — ليس من نص القرار</span>' : '') + (p.review ? '<span class="tag rev">الربط بين الموجز والقاعدة تقديري — يُراجع على المجموعة الأصلية</span>' : '') + '</div>';
-  if (p.author && !p.pk) { tw = (p.rel || []).map(pById).filter(Boolean); h += '<div class="authbox"><b>مؤلَّف خاص — ينشره «عمّالي»</b> — من «' + esc(p.source) + '»، بنصه كما كان في «عمّالي». ليس من مجموعات أحكام التمييز الرسمية، ويُتحقق منه على الحكم نفسه قبل الاستناد إليه.' + (tw.length ? '<br>الحكم نفسه في المكتبة بنص آخر — أدناه.' : '') + '</div>'; }
-  if (p.unver) { tw = (p.pend || []).map(pById).filter(Boolean); h += '<div class="unvbox"><b>غير موثّق من المكتبة</b> — هذا المبدأ من قاعدة «عمّالي» السابقة، ونصه كما كان. لم تتحقق منه «مكتبة مبادئ التمييز» بعد، وقائمته مرسلة إليها لتضمّه إلى الحزمة من الأصل، ثم يُستبدل بعنصر الحزمة.' + (p.xpack ? '<br>وثّقته المكتبة في حزمة دائرة أخرى (' + esc(p.xpack) + ')، وطُلب ضمّه إلى حزمة هذه الدائرة.' : '') + (tw.length ? '<br>الحكم نفسه موجود في الحزمة بنص آخر — بانتظار قرارك في صفحة المراجعة (الافتراضي: مبدأ آخر).' : '') + '</div>'; }
+  if (p.author && !p.pk) { tw = (p.rel || []).map(pById).filter(Boolean); h += '<div class="authbox"><b>مؤلَّف خاص — ينشره «مداولة»</b> — من «' + esc(p.source) + '»، بنصه كما كان في «مداولة». ليس من مجموعات أحكام التمييز الرسمية، ويُتحقق منه على الحكم نفسه قبل الاستناد إليه.' + (tw.length ? '<br>الحكم نفسه في المكتبة بنص آخر — أدناه.' : '') + '</div>'; }
+  if (p.unver) { tw = (p.pend || []).map(pById).filter(Boolean); h += '<div class="unvbox"><b>غير موثّق من المكتبة</b> — هذا المبدأ من قاعدة «مداولة» السابقة، ونصه كما كان. لم تتحقق منه «مكتبة مبادئ التمييز» بعد، وقائمته مرسلة إليها لتضمّه إلى الحزمة من الأصل، ثم يُستبدل بعنصر الحزمة.' + (p.xpack ? '<br>وثّقته المكتبة في حزمة دائرة أخرى (' + esc(p.xpack) + ')، وطُلب ضمّه إلى حزمة هذه الدائرة.' : '') + (tw.length ? '<br>الحكم نفسه موجود في الحزمة بنص آخر — بانتظار قرارك في صفحة المراجعة (الافتراضي: مبدأ آخر).' : '') + '</div>'; }
   if (p.keywords) h += '<h4>' + (p.source === 'المكتب الفني 2023' ? 'الموجز — عناوين الفهرس' : 'عنوان المبدأ') + '</h4><p class="kw">' + kwHtml(p) + '</p>';
   if (p.summary.length) h += '<h4>الموجز — القاعدة المستخلصة</h4><ul class="sumlist">' + p.summary.map(s => '<li>' + hl(s) + '</li>').join('') + '</ul>';
   if (p.reasoning.length) h += '<h4>القاعدة — من أسباب الحكم</h4><div class="body">' + p.reasoning.map(r => r.split('\n').map(x => '<p>' + hl(x) + '</p>').join('')).join('<hr style="border:0;border-top:1px dashed var(--line);margin:12px 0">') + '</div>';
@@ -3296,7 +3304,7 @@ function lgLoad(file) {
     .catch(e => { delete LG_PK[file]; throw e; });
   return LG_PK[file];
 }
-function lgSrcBadge(x) { return x.ver ? '<span class="lgb ok">✓ مطابق للجريدة الرسمية</span>' : x.sk === 'amali_contrib' ? '<span class="lgb">مساهمة «عمّالي» — لم تُطابَق مع الجريدة</span>' : x.sk === 'moj_edition' ? '<span class="lgb gold">طبعة وزارة العدل 2011</span>' : '<span class="lgb gold">لم يُراجع على الجريدة</span>'; }
+function lgSrcBadge(x) { return x.ver ? '<span class="lgb ok">✓ مطابق للجريدة الرسمية</span>' : x.sk === 'amali_contrib' ? '<span class="lgb">مساهمة «مداولة» — لم تُطابَق مع الجريدة</span>' : x.sk === 'moj_edition' ? '<span class="lgb gold">طبعة وزارة العدل 2011</span>' : '<span class="lgb gold">لم يُراجع على الجريدة</span>'; }
 function setLawMode(m) {
   lawMode = m; document.querySelectorAll('#lawmode button').forEach(b => b.classList.toggle('on', b.dataset.lm === m));
   $('#lawcirc').hidden = m !== 'c'; $('#lglib').hidden = m !== 'g';
@@ -4128,7 +4136,7 @@ function rlSessOpen(day, id) {
     w.addEventListener('touchstart', e => { const t0 = e.touches[0]; ok = e.touches.length === 1 && !e.target.closest('input,textarea,select,button,a,label,.chip,.ssreq,.ssatt,.ssjump,[data-noswipe]') && !rlSwX(e.target, w); sx = t0.clientX; sy = t0.clientY; }, { passive: true });
     w.addEventListener('touchend', e => { if (!ok || !SS) return; const t1 = e.changedTouches[0], dx = t1.clientX - sx, dy = t1.clientY - sy; if (Math.abs(dx) < 80 || Math.abs(dy) > Math.abs(dx) * 0.5) return; const ni = SS.i + (dx > 0 ? 1 : -1); if (ni < 0 || ni >= SS.ids.length) return; SS.i = ni; rlSessRender(true); }, { passive: true }); }
   w.classList.add('show'); document.documentElement.classList.add('noscroll');
-  rlAfterDec = c => { rlxSet(c.id, false); rlRender(); rlSessRender(); if (rlSessAuto && SS && SS.i < SS.ids.length - 1) setTimeout(() => { if (SS) { SS.i++; rlSessRender(true); } }, 650); };
+  rlAfterDec = c => { if (SS) SS.undo = { id: c.id, code: c.code, t: rlDecTxt(rlDecOn(c, SS.day)), at: Date.now() }; rlxSet(c.id, false); rlRender(); rlSessRender(); if (rlSessAuto && SS && SS.i < SS.ids.length - 1) setTimeout(() => { if (SS) { SS.i++; rlSessRender(true); } }, 650); };
   rlSessRender(true);
 }
 // V132: عند الخروج من وضع الجلسة — ملخص في سطر: صدر فيها، حُجزت، أُجّلت (بأسبابها)
@@ -4153,7 +4161,7 @@ function rlSessRender(top) {
     + '<select class="ssjump" aria-label="الانتقال إلى قضية">' + cards.map((x, k) => '<option value="' + k + '"' + (k === SS.i ? ' selected' : '') + '>' + (k + 1) + '. ' + esc(x.code) + (rlDecOn(x, d) ? ' ✓' : '') + '</option>').join('') + '</select>'
     + '<button type="button" class="btn sspr2" data-s="print" title="طباعة محاضر مختصرة لكل قضايا الجلسة" aria-label="طباعة المحاضر"><span aria-hidden="true">🖶</span><span class="lb"> طباعة المحاضر</span></button></div>';
   h += '<div class="ssbody">';
-  h += '<div class="sscase"><div class="ssn">' + (SS.i + 1) + '<small>/' + cards.length + '</small></div><div class="ssid"><b>' + esc(c.code) + '</b>' + (c.auto ? '<span class="auto">آلي ' + esc(c.auto) + '</span>' : '') + '<span class="tag stg">' + esc(c.stage || 'مؤجلة') + '</span>'
+  h += '<div class="sscase"><div class="ssn">' + (SS.i + 1) + '<small>/' + cards.length + '</small></div><div class="ssid"><b>' + esc(c.code) + '</b>' + (c.auto ? '<span class="auto">آلي ' + esc(c.auto) + '</span>' : '') + '<span class="tag stg">' + esc(c.stage || 'مؤجلة') + '</span>' + (dec ? '<span class="ssdh"><span class="tag ssdtag">✓ ' + esc(rlDecTxt(dec)) + '</span><button type="button" class="linkbtn" data-s="undoh">تراجع</button></span>' : '')
     + (c.ann ? '<span class="ann ' + (rlAnnOk(c) ? 'ok' : 'no') + '">الإعلان ' + rlAnnTxt(c.ann) + (rlAnnOk(c) ? ' ✓' : ' ✗') + '</span>' : '') + (rlPrepOf(c) === 'need' ? '<span class="tag" style="background:var(--bad);color:#fff">يحتاج إجراء</span>' : '') + (sibs.length ? '<span class="tag lnk">مضموم: ' + sibs.map(x => esc(x.code)).join('، ') + '</span>' : '') + '</div>'
     + (rlProf().deg === 'f' && rlPenSub() !== 'jm' ? '' : '<details class="ssfi"><summary>أول درجة' + (c.fi ? ': ' + esc(c.fi) + (c.fid ? ' · ' + rlFmt(c.fid) : '') : '') + '</summary><div class="ssfr"><label>رقم القضية<input type="text" data-f="fi" value="' + esc(c.fi || '') + '" inputmode="numeric" placeholder="مثال: 25/2103"></label><label>تاريخ الحكم<input type="date" data-f="fid" value="' + esc(c.fid || '') + '"></label></div></details>') + '</div>';
   // الجلسة السابقة
@@ -4174,6 +4182,8 @@ function rlSessRender(top) {
   // القرار
   h += '<section class="ssdec"><h4>القرار</h4>' + (dec ? '<div class="ssdone"><b>✓ ' + esc(rlDecTxt(dec)) + '</b><button type="button" class="btn" data-s="undo">تراجع عن القرار</button></div>' : '<div class="ssdecbox"></div>') + '</section>';
   h += '</div><div class="ssnav"><button type="button" class="btn" data-s="prev"' + (SS.i ? '' : ' disabled') + '>‹ السابقة</button><label class="ssauto"><input type="checkbox"' + (rlSessAuto ? ' checked' : '') + '> انتقال تلقائي بعد القرار</label><button type="button" class="btn primary" data-s="next"' + (SS.i < cards.length - 1 ? '' : ' disabled') + '>التالية ›</button></div>';
+  const un = SS.undo && Date.now() - SS.undo.at < 12000 ? SS.undo : null;   // V135: شريط «تراجع» بعد كل قرار، يبقى ثواني حتى بعد الانتقال التلقائي
+  if (un) h += '<div class="ssundo" role="status"><span>سُجّل لـ <b>' + esc(un.code) + '</b>: ' + esc(un.t) + '</span><button type="button" class="btn" data-s="undob">تراجع</button></div>';
   w.innerHTML = h;
   if (!dec) { const box = w.querySelector('.ssdecbox'); if (box) box.appendChild(rlDecBox(c)); }
   if (top) { const b = w.querySelector('.ssbody'); if (b) b.scrollTop = 0; }
@@ -4185,7 +4195,11 @@ function rlSessRender(top) {
   if (q('next')) q('next').onclick = () => { SS.i++; rlSessRender(true); };
   w.querySelector('.ssjump').onchange = e => { SS.i = +e.target.value; rlSessRender(true); };
   w.querySelector('.ssauto input').onchange = e => { rlSessAuto = e.target.checked; try { localStorage.setItem('tm_sessauto', rlSessAuto ? '1' : '0'); } catch (_) {} };
-  if (q('undo')) q('undo').onclick = () => { rlUndo(c); rlxSet(c.id, false); rlRender(); rlSessRender(); };
+  const undoC = id => { const k = RL.cards.find(x => x.id === id); if (!k) return; rlUndo(k); SS.undo = null; const j = SS.ids.indexOf(id); if (j >= 0) SS.i = j; rlxSet(id, false); rlRender(); rlSessRender(true); toast('أُلغي القرار — سجّل القرار الصحيح'); };
+  if (q('undo')) q('undo').onclick = () => undoC(c.id);
+  if (q('undoh')) q('undoh').onclick = () => undoC(c.id);
+  if (q('undob')) q('undob').onclick = () => undoC(un.id);
+  if (un) { clearTimeout(SS.ut); SS.ut = setTimeout(() => { const e = document.querySelector('#sess .ssundo'); if (e) e.remove(); if (SS) SS.undo = null; }, 12000 - (Date.now() - un.at)); }
   if (q('abbr')) q('abbr').onclick = () => rlAbbrEdit();
   w.querySelectorAll('[data-f]').forEach(x => x.onchange = () => { c[x.dataset.f] = x.value.trim(); rlSessSave(c, true); });
   w.querySelectorAll('.sspr').forEach(row => {
@@ -4627,7 +4641,7 @@ function rlImportBackup(file) {
   const r = new FileReader();
   r.onload = () => {
     let j; try { j = JSON.parse(r.result); } catch (e) { toast('الملف ليس JSON صالحًا'); return; }
-    if (!j || j.app !== 'amali-roll' || !Array.isArray(j.cards)) { toast('ليس ملف رول جلسة من عمّالي'); return; }
+    if (!j || j.app !== 'amali-roll' || !Array.isArray(j.cards)) { toast('ليس ملف رول جلسة من مداولة'); return; }
     let add = 0, upd = 0;
     j.cards.forEach(c => { if (!c || !c.id || !c.code) return; const cur = RL.cards.find(x => x.id === c.id) || rlCardOf(c.code); if (!cur) { RL.cards.push(c); add++; } else if ((c.updated || 0) > (cur.updated || 0)) { Object.assign(cur, c, { id: cur.id }); upd++; } });
     if (!RL.circuit && j.circuit) RL.circuit = j.circuit;
@@ -4640,17 +4654,17 @@ function rlImportBackup(file) {
 
 
 
-// ---- V52: ملف المعرفة لمشروع Claude (مبادئ عمّالي + نصوص القوانين المختارة) — نصوص القاعدة كما هي
+// ---- V52: ملف المعرفة لمشروع Claude (مبادئ مداولة + نصوص القوانين المختارة) — نصوص القاعدة كما هي
 const KN_MAX = 300 * 1024;   // حد حجم الجزء الواحد (بايت) — ليقبله «معرفة المشروع»
 const knBytes = t => new TextEncoder().encode(t).length;
-function knHead(n, extra) { return ['# مبادئ عمّالي — الدائرة العمالية' + (extra ? ' — ' + extra : ''), '', 'المصدر: ' + ((DATA.meta || {}).source || 'قاعدة تطبيق عمّالي') + ' — تاريخ الإنشاء: ' + rlFmt(rlToday()), '',
-  'تعليمات الاستعمال: كل مبدأ أدناه مقرون بإحالته الحرفية (رقم الطعن وتاريخ الجلسة). لا يُنسب إلى محكمة التمييز إلا ما ورد في ملفات «مبادئ عمّالي» أو في أوراق القضية بإحالته كما هي. وإن لم يوجد سند لمسألة فيُقال ذلك صراحة.', ''].join('\n'); }
+function knHead(n, extra) { return ['# مبادئ مداولة — الدائرة العمالية' + (extra ? ' — ' + extra : ''), '', 'المصدر: ' + ((DATA.meta || {}).source || 'قاعدة تطبيق مداولة') + ' — تاريخ الإنشاء: ' + rlFmt(rlToday()), '',
+  'تعليمات الاستعمال: كل مبدأ أدناه مقرون بإحالته الحرفية (رقم الطعن وتاريخ الجلسة). لا يُنسب إلى محكمة التمييز إلا ما ورد في ملفات «مبادئ مداولة» أو في أوراق القضية بإحالته كما هي. وإن لم يوجد سند لمسألة فيُقال ذلك صراحة.', ''].join('\n'); }
 function knPrin(p, short) {
   const L = ['## ' + p.cite_std];
   const meta = [p.topics && p.topics.length ? 'الموضوعات: ' + p.topics.join('، ') : '', p.articles && p.articles.length ? 'المواد: ' + p.articles.join('، ') : '', p.outcome ? 'النتيجة: ' + p.outcome : '', p.source ? 'المصدر: ' + p.source : ''].filter(Boolean);
   if (meta.length) L.push(meta.join(' | '));
   if (p.pk) { if (p.review) L.push('⚠️ يحتاج مراجعة (علّمته المكتبة): ' + (p.pk.review.reasons || []).join(' · ')); L.push('المعرّف: ' + p.id); L.push(quoteText(p, !short)); L.push(''); return L.join('\n'); }
-  if (p.unver) L.push('(غير موثّق من «مكتبة مبادئ التمييز» — من قاعدة «عمّالي» السابقة)');
+  if (p.unver) L.push('(غير موثّق من «مكتبة مبادئ التمييز» — من قاعدة «مداولة» السابقة)');
   if (p.keywords) L.push('العنوان: ' + p.keywords);
   if (p.summary && p.summary.length) { L.push('الموجز:'); p.summary.forEach(x => L.push('- ' + x)); }
   if (p.reas && !short) { L.push('القاعدة:'); L.push(p.reas); }
@@ -4862,9 +4876,9 @@ function syMerge(d) {
   return { add, upd, del, bm: bookmarks.size - bm0 };
 }
 async function syApply(txt, handle) {
-  let j; try { j = JSON.parse(txt); } catch (e) { toast('الملف ليس ملف بيانات من عمّالي'); return; }
+  let j; try { j = JSON.parse(txt); } catch (e) { toast('الملف ليس ملف بيانات من مداولة'); return; }
   if (j && j.app === 'amali-roll') { rlImportBackup(new File([txt], 'x.json')); return; }
-  if (!j || j.app !== 'amali-sync' || !j.kdf || !j.ct) { toast('الملف ليس ملف مزامنة من عمّالي'); return; }
+  if (!j || j.app !== 'amali-sync' || !j.kdf || !j.ct) { toast('الملف ليس ملف مزامنة من مداولة'); return; }
   const salt = syUnb64(j.kdf.salt); let key = null;
   if (SY.key && SY.salt && syB64(SY.salt) === j.kdf.salt) key = SY.key;
   else if (SY.pass) { try { key = await syDerive(SY.pass, salt); } catch (e) {} }
@@ -4899,7 +4913,7 @@ async function syApplyMany(files) {
 // V131: على الحاسوب (Chrome/Edge) يُربط مجلد المزامنة لا ملف واحد — فيقرأ كل النسخ فيه («amali-data» و«amali-data 1»…) ويدمجها ويحذف المكرر. يُطلب مرة واحدة
 async function syAskDir() {
   if (!(syCanFS() && window.showDirectoryPicker)) return null;
-  syToast('اختر مجلد المزامنة (مثل «عمّالي» في OneDrive) — مرة واحدة: فيقرأ التطبيق كل النسخ فيه، ومنها التي أضاف لها الآيفون رقمًا');
+  syToast('اختر مجلد المزامنة (مثل «مداولة» في OneDrive) — مرة واحدة: فيقرأ التطبيق كل النسخ فيه، ومنها التي أضاف لها الآيفون رقمًا');
   try { const d = await window.showDirectoryPicker({ id: 'amali-sync', mode: 'readwrite' }); if (!(await syPerm(d))) return null; SY.dir = d; await sySet('dir', d); syRender(); return d; } catch (e) { return null; }
 }
 function syToast(m) { toast(m); const t = $('#toast'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 6000); }
@@ -4922,7 +4936,7 @@ async function syAfterReplace() {
 }
 async function syPickReplace() {
   SY.mode = 'replace';
-  if (syCanFS()) { try { const o = { types: [{ description: 'بيانات عمّالي المشفّرة', accept: { 'application/octet-stream': ['.amali'] } }] }; if (SY.dir) o.startIn = SY.dir; const [h] = await window.showOpenFilePicker(o); const f = await h.getFile(); SY.fname = h.name; await syApply(await f.text()); return; } catch (e) { SY.mode = ''; if (e && e.name === 'AbortError') return; } SY.mode = 'replace'; }
+  if (syCanFS()) { try { const o = { types: [{ description: 'بيانات مداولة المشفّرة', accept: { 'application/octet-stream': ['.amali'] } }] }; if (SY.dir) o.startIn = SY.dir; const [h] = await window.showOpenFilePicker(o); const f = await h.getFile(); SY.fname = h.name; await syApply(await f.text()); return; } catch (e) { SY.mode = ''; if (e && e.name === 'AbortError') return; } SY.mode = 'replace'; }
   $('#sy_file').click();
 }
 async function syOpen(txt) {
@@ -4963,7 +4977,7 @@ async function syPull() {
   if (syCanFS() && window.showDirectoryPicker) { const d = (await syDirOk()) || (await syGet('dirno') ? null : await syAskDir()); if (d) { try { return await syPullDir(d); } catch (e) { toast('تعذّرت قراءة المجلد'); return false; } } else await sySet('dirno', 1); }
   if (syCanFS()) {
     let h = SY.handle || await syGet('handle');
-    try { if (!h) { [h] = await window.showOpenFilePicker({ types: [{ description: 'بيانات عمّالي المشفّرة', accept: { 'application/octet-stream': ['.amali'] } }] }); } if (await syPerm(h)) { const f = await h.getFile(); await syApply(await f.text(), h); return true; } } catch (e) { if (e && e.name === 'AbortError') return false; }
+    try { if (!h) { [h] = await window.showOpenFilePicker({ types: [{ description: 'بيانات مداولة المشفّرة', accept: { 'application/octet-stream': ['.amali'] } }] }); } if (await syPerm(h)) { const f = await h.getFile(); await syApply(await f.text(), h); return true; } } catch (e) { if (e && e.name === 'AbortError') return false; }
   }
   $('#sy_file').click(); return false;
 }
@@ -4973,7 +4987,7 @@ async function syPush() {
   const txt = await syEncrypt(syPayload());
   if (syCanFS() && window.showDirectoryPicker) { const d = await syDirOk(); if (d) { try { const h = await d.getFileHandle(SY_NAME, { create: true }); const w = await h.createWritable(); await w.write(txt); await w.close(); const n = await syCleanDir(d); syMark('pushed'); SY.merged = false; syRender(); syToast('حُفظ «' + SY_NAME + '» في المجلد' + (n ? ' وحُذفت ' + n + ' نسخة مكررة بعد دمجها' : '') + (SY.cleanBad ? ' · تعذّر حذف ' + SY.cleanBad + ' نسخة — احذفها يدويًا (كلها مدموجة)' : '')); return; } catch (e) { toast('تعذّر الحفظ في المجلد'); return; } } }
   if (syCanFS()) {
-    try { let h = SY.handle || await syGet('handle'); if (!h || !(await syPerm(h))) { h = await window.showSaveFilePicker({ suggestedName: SY_NAME, types: [{ description: 'بيانات عمّالي المشفّرة', accept: { 'application/octet-stream': ['.amali'] } }] }); }
+    try { let h = SY.handle || await syGet('handle'); if (!h || !(await syPerm(h))) { h = await window.showSaveFilePicker({ suggestedName: SY_NAME, types: [{ description: 'بيانات مداولة المشفّرة', accept: { 'application/octet-stream': ['.amali'] } }] }); }
       const w = await h.createWritable(); await w.write(txt); await w.close(); SY.handle = h; await sySet('handle', h); syMark('pushed'); SY.merged = false; syRender(); toast('حُفظت النسخة المشفّرة في «' + h.name + '»'); return; } catch (e) { if (e && e.name === 'AbortError') return; }
   }
   const f = new File([txt], SY_NAME, { type: 'application/octet-stream' });
@@ -5165,7 +5179,7 @@ function syRender() {
   const stat = '<div class="systat">' + (SY.dir ? 'المجلد: <b>' + esc(SY.dir.name) + '</b><br>' : SY.handle ? 'الملف: <b>' + esc(SY.handle.name) + '</b><br>' : '') + 'آخر حفظ: <b>' + syWhen(m.pushed) + '</b> · آخر جلب: <b>' + syWhen(m.pulled) + '</b>' + (SY.last ? '<br>آخر ملف فُتح: <b>' + esc(SY.last.name || '—') + '</b> — محفوظ ' + syWhen(SY.last.saved) + ' (' + SY.last.n + ' قضية)' : '') + (dirty ? '<br><span class="warn">⚠ تغييرات على هذا الجهاز لم تُحفظ بعد</span>' : '') + '</div>';
   let main = '', extra = '';
   if (dm && !SY.dir) {
-    main = '<div class="systep"><span><b>خطوة أخيرة:</b> اربط <b>مجلد المزامنة</b> الذي أنشأته في خدمة التخزين (مثل «عمّالي» داخل OneDrive أو Google Drive).</span><button type="button" class="btn primary" id="sy_dir">ربط مجلد المزامنة</button></div>';
+    main = '<div class="systep"><span><b>خطوة أخيرة:</b> اربط <b>مجلد المزامنة</b> الذي أنشأته في خدمة التخزين (مثل «مداولة» داخل OneDrive أو Google Drive).</span><button type="button" class="btn primary" id="sy_dir">ربط مجلد المزامنة</button></div>';
     extra = '<button type="button" class="btn" id="sy_pull">جلب من ملف</button><button type="button" class="btn" id="sy_push">حفظ في ملف</button>';
   } else if (fs) {
     main = '<div class="syrule"><button type="button" class="btn primary sybig" id="sy_now">مزامنة الآن</button><p>اضغطه <b>عند بدء العمل وعند الانتهاء</b>. يجلب ما حفظته أجهزتك الأخرى ويدمجه، ثم يحفظ.</p></div>';
@@ -5294,7 +5308,7 @@ async function rlDistCanvas(D) {
   const gr = g.createLinearGradient(0, 0, W, band); gr.addColorStop(0, '#223A5E'); gr.addColorStop(1, '#14233A'); g.fillStyle = gr; g.fillRect(0, 0, W, band);
   g.fillStyle = GOLD; g.fillRect(0, band, W, 5);
   const L = rlCircLines();
-  g.textAlign = 'right'; g.fillStyle = '#fff'; g.font = '700 36px ' + ff; g.fillText(L[0] || 'عمّالي', W - M, L[1] ? 58 : 75);
+  g.textAlign = 'right'; g.fillStyle = '#fff'; g.font = '700 36px ' + ff; g.fillText(L[0] || 'مداولة', W - M, L[1] ? 58 : 75);
   if (L[1]) { g.fillStyle = GL; g.font = '600 26px ' + ff; g.fillText(L[1], W - M, 104); }
   if (seal) g.drawImage(seal, M, 22, 106, 106);
   g.textAlign = 'center'; g.fillStyle = NAV; g.font = '700 38px ' + ff; g.fillText('توزيع القضايا المحجوزة للحكم', W / 2, 212);
@@ -5428,17 +5442,17 @@ function rlPrompt(c) {
   // V58: الاستئنافات المرتبطة تُذكر في الرأس، وتُضم بنود حزمها [1]–[6] كلٌّ باسم استئنافه، والمبادئ بلا تكرار
   const G = [c].concat(rlSibs(c)), multi = G.length > 1, lab = x => multi ? ' — الاستئناف ' + x.code : '';
   const prs = [...new Set(G.flatMap(x => (x.pids || []).map(cid)))].map(rlPrin).filter(Boolean), docs = RL_DOCS.filter(d => G.some(x => (x.docs || {})[d]));
-  let t = 'حزمة القضية — من تطبيق عمّالي\n\nقضية الاستئناف رقم ' + c.code.replace('/', ' لسنة ') + ' عمالي' + (RL.circuit ? ' — ' + RL.circuit : '') + (c.auto ? ' (الرقم الآلي ' + c.auto + ')' : '') + '، محجوزة للحكم' + (c.next ? ' لجلسة ' + rlFmt(c.next) : '') + (c.stage === 'محجوزة للحكم مع مذكرات' ? ' مع التصريح بمذكرات' : '') + '.\n';
+  let t = 'حزمة القضية — من تطبيق مداولة\n\nقضية الاستئناف رقم ' + c.code.replace('/', ' لسنة ') + ' عمالي' + (RL.circuit ? ' — ' + RL.circuit : '') + (c.auto ? ' (الرقم الآلي ' + c.auto + ')' : '') + '، محجوزة للحكم' + (c.next ? ' لجلسة ' + rlFmt(c.next) : '') + (c.stage === 'محجوزة للحكم مع مذكرات' ? ' مع التصريح بمذكرات' : '') + '.\n';
   if (multi) t += 'مرتبط بها في رول الجلسة (مضموم أو مقابل): ' + G.slice(1).map(x => 'الاستئناف رقم ' + x.code.replace('/', ' لسنة ') + (x.auto ? ' (الرقم الآلي ' + x.auto + ')' : '') + ' — ' + (x.stage || '') + (x.next ? ' ' + rlFmt(x.next) : '')).join('؛ ') + '.\n';
   t += 'المستندات المرفقة: ' + (docs.length ? docs.join('، ') : '(أرفقتها في هذه المحادثة)') + '.\n';
   G.forEach(x => { if (x.an && x.an.sum) t += '\n[1] بيانات مستخرجة في «تحليل الملف»' + lab(x) + ' (معتّمة، تُراجع على الأوراق):\n' + x.an.sum + '\n'; });
   G.forEach(x => { const form = rlForm(x.an && x.an.form); if (form) t += '\n[2] حساب الشكل' + lab(x) + ':\n' + form + '\n'; });
   G.forEach(x => { if (x.dls && x.dls.length) t += '\n[3] مواعيد مسجّلة في الرول' + lab(x) + ':\n' + x.dls.map(y => '- ' + (y.d ? rlFmt(y.d) + ': ' : '') + (y.t || '')).join('\n') + '\n'; });
-  if (prs.length) t += '\n[4] مبادئ اخترتها لهذه القضية' + (multi ? ' والمرتبطة بها' : '') + ' من قاعدة عمّالي (بإحالتها الحرفية):\n' + prs.map(rlPrinFull).join('\n') + '\n';
+  if (prs.length) t += '\n[4] مبادئ اخترتها لهذه القضية' + (multi ? ' والمرتبطة بها' : '') + ' من قاعدة مداولة (بإحالتها الحرفية):\n' + prs.map(rlPrinFull).join('\n') + '\n';
   G.forEach(x => { const sa = rlSheetAll(x); if (sa.length) t += '\n[4ب] ورقة الرول' + lab(x) + ' (الأطراف بصفاتهم بلا أسماء):\n' + sa.map(y => '- جلسة ' + rlFmt(y.d) + ': ' + y.lines.join(' · ')).join('\n') + '\n'; });
-  G.forEach(x => { if (x.chk && x.chk.text) t += '\n[5] نتيجة «التحقق» في عمّالي' + lab(x) + ' (حساب آلي يُراجع):\n' + x.chk.text + '\n'; });
-  G.forEach(x => { if (x.ms && x.ms.text) t += '\n[6] ' + (x.ms.label || 'حساب المستحقات') + ' في عمّالي' + lab(x) + ' (مسودة حساب تخضع لمراجعة المحكمة):\n' + x.ms.text + '\n'; });
-  t += '\nالمطلوب بالترتيب:\n1) تلخيص وقائع الدعوى وطلبات المدعي وحكم أول درجة ومنطوقه.\n2) تلخيص أسباب الاستئناف والطلبات الختامية للطرفين' + (multi ? '، مع فصل أسباب كل استئناف من الاستئنافات المرتبطة وطلباته على حدة' : '') + '.\n3) تحديد المسائل القانونية المطروحة، ولكل مسألة: النص القانوني ومبادئ محكمة التمييز المتصلة بها بإحالتها الحرفية — من المبادئ الواردة أعلاه أو من ملف المعرفة «مبادئ عمّالي» إن رُفع إليك فقط؛ وإن لم يوجد سند فقل ذلك صراحة، ولا تخترع مبدأً ولا رقم طعن.\n4) ثم نتناقش قبل كتابة المسودة.\n';
+  G.forEach(x => { if (x.chk && x.chk.text) t += '\n[5] نتيجة «التحقق» في مداولة' + lab(x) + ' (حساب آلي يُراجع):\n' + x.chk.text + '\n'; });
+  G.forEach(x => { if (x.ms && x.ms.text) t += '\n[6] ' + (x.ms.label || 'حساب المستحقات') + ' في مداولة' + lab(x) + ' (مسودة حساب تخضع لمراجعة المحكمة):\n' + x.ms.text + '\n'; });
+  t += '\nالمطلوب بالترتيب:\n1) تلخيص وقائع الدعوى وطلبات المدعي وحكم أول درجة ومنطوقه.\n2) تلخيص أسباب الاستئناف والطلبات الختامية للطرفين' + (multi ? '، مع فصل أسباب كل استئناف من الاستئنافات المرتبطة وطلباته على حدة' : '') + '.\n3) تحديد المسائل القانونية المطروحة، ولكل مسألة: النص القانوني ومبادئ محكمة التمييز المتصلة بها بإحالتها الحرفية — من المبادئ الواردة أعلاه أو من ملف المعرفة «مبادئ مداولة» إن رُفع إليك فقط؛ وإن لم يوجد سند فقل ذلك صراحة، ولا تخترع مبدأً ولا رقم طعن.\n4) ثم نتناقش قبل كتابة المسودة.\n';
   if (G.some(x => (x.docs || {})['تقرير الخبير'])) t += '\nعند كتابة المسودة: الوقائع حتى ورود تقرير الخبير تُنقل حرفيًا من الحكم التمهيدي بندب الخبير، وتبدأ الأسباب من ورود التقرير.\n';
   return t;
 }
@@ -5791,7 +5805,7 @@ function memoHtml(c) {
   const items = (c.pids || []).map(id => pById(id)).filter(Boolean);
   const esc2 = esc;
   return '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word"><head><meta charset="utf-8"><style>body{font-family:Arial;font-size:14pt;direction:rtl}h1{font-size:16pt;text-align:center;text-decoration:underline}h2{font-size:14pt;color:#1C2E4A}p{text-align:justify;line-height:1.6}.c{color:#9A7218;font-weight:bold}.n{background:#FFF2CC}</style></head><body dir="rtl">'
-    + '<h1>مذكرة إسناد — ' + esc2(c.name) + '</h1><p>أُعدت من تطبيق «عمّالي» بتاريخ ' + new Date().toLocaleDateString('ar-KW') + '. مسودة عمل داخلية تخضع للتحقق من سندها في الأوراق.</p>'
+    + '<h1>مذكرة إسناد — ' + esc2(c.name) + '</h1><p>أُعدت من تطبيق «مداولة» بتاريخ ' + new Date().toLocaleDateString('ar-KW') + '. مسودة عمل داخلية تخضع للتحقق من سندها في الأوراق.</p>'
     + (c.note ? '<p class="n">' + esc2(c.note) + '</p>' : '')
     + items.map((p, i) => '<h2>' + (i + 1) + '. ' + esc2(p.keywords || p.appeal) + '</h2>' + (p.summary.length ? '<ul>' + p.summary.map(s => '<li>' + esc2(s) + '</li>').join('') + '</ul>' : '') + (p.reas ? '<p>' + esc2(p.reas).replace(/\n/g, '<br>') + '</p>' : '') + '<p class="c">' + esc2(p.cite_std) + '</p>' + (p.articles.length ? '<p>المواد: ' + esc2(p.articles.join('، ')) + '</p>' : '') + (NOTES[p.id] ? '<p class="n">ملاحظتي: ' + esc2(NOTES[p.id].text) + '</p>' : '')).join('')
     + '</body></html>';
@@ -6739,7 +6753,7 @@ function askTools() {
 function addMsg(cls, text) { const m = el('div', 'msg ' + cls); m.textContent = text; $('#chat').appendChild(m); m.scrollIntoView({ block: 'end' }); return m; }
 function linkCites(m) { m.innerHTML = esc(m.textContent).replace(/\((?:قرار غرفة المشورة في )?الطعن(?:ان|ون)?[^)]{5,90}\)/g, s => '<span class="cite-link">' + s + '</span>'); m.querySelectorAll('.cite-link').forEach(s => s.onclick = () => { const t = norm(s.textContent); const p = P.find(x => norm(x.cite_std) === t) || P.find(x => t.includes(norm(x.appeal_nums.join(' ') + ' ' + x.year))); if (p) openPanel(p); else toast('لم يُعثر على المبدأ'); }); }
 // V53: المساعد خارج claude.ai — بحث محلي في القاعدة، ثم نسخ السؤال مع المبادئ ليُلصق في Claude، وفحص إحالات الرد
-const ASK_HOST_RULES = 'أنت مساعد بحثي لقاضٍ في الدائرة العمالية بمحكمة الاستئناف الكويتية. أجب بالعربية الفصحى بإيجاز ودقة. مصدرك الوحيد هو المبادئ والنصوص المرفقة أدناه من قاعدة تطبيق «عمّالي» (أو ملف المعرفة «مبادئ عمّالي» إن رُفع إليك). لا تستند إلى غيرها ولا تخترع مبدأً أو نصًا أو رقم طعن. ضع بعد كل قاعدة تذكرها إحالتها بين قوسين كما وردت حرفيًا. إن لم تجد سندًا فقل صراحة: «لا يوجد سند في قاعدة التطبيق». لا ترجّح نتيجة القضية.';
+const ASK_HOST_RULES = 'أنت مساعد بحثي لقاضٍ في الدائرة العمالية بمحكمة الاستئناف الكويتية. أجب بالعربية الفصحى بإيجاز ودقة. مصدرك الوحيد هو المبادئ والنصوص المرفقة أدناه من قاعدة تطبيق «مداولة» (أو ملف المعرفة «مبادئ مداولة» إن رُفع إليك). لا تستند إلى غيرها ولا تخترع مبدأً أو نصًا أو رقم طعن. ضع بعد كل قاعدة تذكرها إحالتها بين قوسين كما وردت حرفيًا. إن لم تجد سندًا فقل صراحة: «لا يوجد سند في قاعدة التطبيق». لا ترجّح نتيجة القضية.';
 function askFind(q) {
   const out = new Map(); try { const pq = parseQuery(q); P.map(p => [p, score(p, pq)]).filter(x => x[1] > 0).sort((a, b) => b[1] - a[1]).slice(0, 8).forEach(([p]) => out.set(p.id, p)); } catch (e) {}
   let arts = []; try { const r = inSuggest(q, 8); (r.hits || []).forEach(p => { if (out.size < 12) out.set(p.id, p); }); arts = r.arts || []; } catch (e) {}
@@ -7613,7 +7627,7 @@ async function lkTry(pin) {
 }
 async function lkBioAvail() { try { return !!(window.PublicKeyCredential && await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()); } catch (e) { return false; } }
 async function lkBioGet(cred) { const r = await navigator.credentials.get({ publicKey: { challenge: crypto.getRandomValues(new Uint8Array(32)), allowCredentials: [{ type: 'public-key', id: lkUnb(cred) }], userVerification: 'required', timeout: 60000 } }); return !!r; }
-async function lkBioNew() { const r = await navigator.credentials.create({ publicKey: { challenge: crypto.getRandomValues(new Uint8Array(32)), rp: { name: 'عمّالي' }, user: { id: crypto.getRandomValues(new Uint8Array(16)), name: 'amali', displayName: 'عمّالي' }, pubKeyCredParams: [{ type: 'public-key', alg: -7 }, { type: 'public-key', alg: -257 }], authenticatorSelection: { authenticatorAttachment: 'platform', userVerification: 'required', residentKey: 'discouraged' }, timeout: 60000 } }); return r ? lkB64(r.rawId) : ''; }
+async function lkBioNew() { const r = await navigator.credentials.create({ publicKey: { challenge: crypto.getRandomValues(new Uint8Array(32)), rp: { name: 'مداولة' }, user: { id: crypto.getRandomValues(new Uint8Array(16)), name: 'amali', displayName: 'مداولة' }, pubKeyCredParams: [{ type: 'public-key', alg: -7 }, { type: 'public-key', alg: -257 }], authenticatorSelection: { authenticatorAttachment: 'platform', userVerification: 'required', residentKey: 'discouraged' }, timeout: 60000 } }); return r ? lkB64(r.rawId) : ''; }
 async function lkWipe() {
   try { localStorage.removeItem(RL_KEY); localStorage.removeItem(LK_KEY); localStorage.removeItem(LK_WAIT); localStorage.removeItem('tm_sync'); } catch (e) {}
   try { await new Promise(r => { const q = indexedDB.deleteDatabase('amali_sync'); q.onsuccess = q.onerror = q.onblocked = () => r(); }); } catch (e) {}
@@ -7782,7 +7796,7 @@ var STOURS = {
   ]
 };
 // V98: صفحة فصل كل قسم في ../docs/amali-guide.pdf — يتحقق منها media_src/makeguide.py وtest/v98.py
-const GUIDE_PAGES = {r: 3, p: 9, t: 9, l: 10, m: 10, s: 11, c: 11, e: 12, x: 13, i: 14, d: 15, w: 16, f: 17, a: 17};
+const GUIDE_PAGES = {h: 3, r: 4, p: 10, t: 10, l: 11, m: 11, s: 12, c: 12, e: 13, x: 14, i: 15, d: 16, w: 17, f: 18, a: 18};
 var ST = null;
 function stVis(e) { if (!e) return null; const r = e.getBoundingClientRect(); return (r.width > 0 && r.height > 0 && getComputedStyle(e).visibility !== 'hidden') ? e : null; }
 function stFind(st) { for (const q of st.s) { let e = null; try { e = document.querySelector(q); } catch (x) { e = null; } if (e && !stVis(e) && e.closest('label')) e = e.closest('label'); if (stVis(e)) return e; } return null; }
@@ -7872,11 +7886,11 @@ window.hsOpen = hsOpen;
 window.stShow = stShow;
 
 var TOUR = [
-  { ico: 'home', t: 'مرحبًا بك في «عمّالي»', p: 'منضدة عمل الدائرة العمالية: مبادئ محكمة التمييز، والتشريعات، وإدارة رول الجلسة، وحساب المستحقات والمواعيد، وإخراج الحكم — كلها على جهازك وتعمل دون اتصال. حجم الخط والإضاءة من زر القائمة ☰.' },
+  { ico: 'home', t: 'مرحبًا بك في «مداولة»', p: 'منضدة عمل الدائرة العمالية: مبادئ محكمة التمييز، والتشريعات، وإدارة رول الجلسة، وحساب المستحقات والمواعيد، وإخراج الحكم — كلها على جهازك وتعمل دون اتصال. حجم الخط والإضاءة من زر القائمة ☰.' },
   { ico: 'roll', t: 'رول الجلسة — قلب التطبيق', p: 'اختر الجلسة من شريط الأيام (اسحبه أفقيًا، أو 📅 ليوم آخر)، واستورد كشفها. كل قضية بطاقة مطويّة في سطرين: الرقم والمرحلة والموعد وكاتب الحكم ومؤشّر المسار ●●●○ — اضغطها لتفتح. «قرار الجلسة» ظاهر، وبقية الإجراءات في «⋯ المزيد». لا يُحفظ اسم خصم.' },
   { ico: 'search', t: 'البحث والتشريعات', p: 'ابحث في المبادئ بالكلمة أو رقم الطعن، واطّلع على قانون العمل والمرافعات بنصهما. و«بحث شامل» (⌘K) يجمع المادة والطعن والأداة في نافذة واحدة.' },
   { ico: 'calc', t: 'الحسابات والمواعيد', p: 'حاسبة المستحقات بثلاثة تبويبات (فحص سريع، وحساب تفصيلي، وعامل منزلي) تحسب المكافأة والإجازات وبدل الإخطار خطوة بخطوة، وحاسبة المواعيد الإجرائية تحسب الميعاد بحساب م17 وامتداد العطلة. كلها مسودات تُراجَع.' },
-  { ico: 'sync', t: 'المزامنة بين أجهزتك', p: 'مرة واحدة: أنشئ مجلدًا «عمّالي» في خدمة التخزين (OneDrive أو Google Drive أو iCloud)، ثم الإعدادات ☰ ← «المزامنة»: اختر رمزًا واحدًا لكل أجهزتك. بعدها قاعدة واحدة: «اجلب قبل أن تعمل، واحفظ بعد أن تنتهي». على الحاسوب زر واحد «مزامنة الآن» في البداية والنهاية؛ وعلى الجوال «① جلب» ثم «② حفظ». الملف مشفّر، ولا يصل إلى أحد غيرك.' },
+  { ico: 'sync', t: 'المزامنة بين أجهزتك', p: 'مرة واحدة: أنشئ مجلدًا «مداولة» في خدمة التخزين (OneDrive أو Google Drive أو iCloud)، ثم الإعدادات ☰ ← «المزامنة»: اختر رمزًا واحدًا لكل أجهزتك. بعدها قاعدة واحدة: «اجلب قبل أن تعمل، واحفظ بعد أن تنتهي». على الحاسوب زر واحد «مزامنة الآن» في البداية والنهاية؛ وعلى الجوال «① جلب» ثم «② حفظ». الملف مشفّر، ولا يصل إلى أحد غيرك.' },
   { ico: 'ai', t: 'أدوات الذكاء الاصطناعي (اختيارية)', p: 'تحليل الملف وفحص المسودة المعمّق والمساعد والخط الزمني موسومة «✦ ذكاء». تعمل مع أي أداة ذكاء اصطناعي تستعملها (Claude أو غيرها) بالنسخ واللصق، ومباشرة إن فتحت التطبيق داخل claude.ai. تُرسل النص معتّمًا، وتبقى مقيّدة بمبادئ التطبيق. إن لم تستعمل أداة ذكاء فاختر «بلا أدوات الذكاء» ويبقى جوهر التطبيق كاملًا:', mode: true }
 ];
 var tourI = 0;
@@ -7934,8 +7948,8 @@ async function gdSave(path, name, type, btn) {
   finally { btn.disabled = false; btn.textContent = lb; }
 }
 { const b1 = document.getElementById('gd_pdfdl'), b2 = document.getElementById('gd_viddl');
-  if (b1) b1.onclick = () => gdSave('../docs/amali-guide.pdf', 'عمّالي — دليل الاستخدام.pdf', 'application/pdf', b1);
-  if (b2) b2.onclick = () => gdSave('../docs/amali-tour.mp4', 'عمّالي — جولة تعريفية.mp4', 'video/mp4', b2); }
+  if (b1) b1.onclick = () => gdSave('../docs/amali-guide.pdf', 'مداولة — دليل الاستخدام.pdf', 'application/pdf', b1);
+  if (b2) b2.onclick = () => gdSave('../docs/amali-tour.mp4', 'مداولة — جولة تعريفية.mp4', 'video/mp4', b2); }
 
 // ---- V62: نموذج الملاحظات داخل التطبيق (في الإعدادات ← «رأيك في التطبيق»)
 var FB_TO_WA = '', FB_TO_MAIL = '';   // ضع رقم واتساب القاضي (دوليًا بلا +) أو بريده ليصل بلمسة؛ وإلا يفتح واتساب ليختار المرسِل الوجهة
@@ -8004,7 +8018,7 @@ try { if (!localStorage.getItem('tm_onboarded') && !navigator.webdriver) setTime
 (function(){
   try {
     if (!document.querySelector('link[rel=manifest]')) {
-    var mani = { name: 'عمّالي — مبادئ الدائرة العمالية', short_name: 'عمّالي', lang: 'ar', dir: 'rtl', start_url: '.', scope: '.', display: 'standalone', background_color: '#F5F3EE', theme_color: '#1C2E4A', icons: [{ src: document.querySelector('link[rel=icon]') ? document.querySelector('link[rel=icon]').href : '', sizes: '180x180', type: 'image/png', purpose: 'any maskable' }] };
+    var mani = { name: 'مداولة — مبادئ الدائرة العمالية', short_name: 'مداولة', lang: 'ar', dir: 'rtl', start_url: '.', scope: '.', display: 'standalone', background_color: '#F5F3EE', theme_color: '#1C2E4A', icons: [{ src: document.querySelector('link[rel=icon]') ? document.querySelector('link[rel=icon]').href : '', sizes: '180x180', type: 'image/png', purpose: 'any maskable' }] };
     var blob = new Blob([JSON.stringify(mani)], { type: 'application/manifest+json' });
     var l = document.createElement('link'); l.rel = 'manifest'; l.href = URL.createObjectURL(blob); document.head.appendChild(l);
     }
