@@ -4,7 +4,7 @@
 // والجذر لا يعترض صفحات beta/. الخطوط والأيقونات ومحرك القراءة والدليل في الجذر وحده تشترك فيها القناتان.
 const SCOPE = new URL(self.registration.scope).pathname, BETA = /\/beta\/$/.test(SCOPE), UP = BETA ? '../' : './';
 const CACHE = BETA ? 'amali-beta-v142' : 'amali-v142';   // يُرفع الرقمان معًا مع كل إصدار
-const CORE = ['./', './index.html', './manifest.json', './icon-180.png'];
+const CORE = ['./', './index.html', './manifest.json', UP + 'icon-180.png'];
 const FONTS_FILES = ['plex','naskh','cairo','tajawal','almarai','amiri','kufi','readex','markazi'].flatMap(f => [UP + 'fonts/' + f + '-400.woff2', UP + 'fonts/' + f + '-700.woff2']).concat([UP + 'fonts/reem-700.woff2', UP + 'fonts/reem-700-lat.woff2', UP + 'fonts/plex-600.woff2', UP + 'fonts/kufi-600.woff2', UP + 'fonts/readex-600.woff2']);
 const FLAG = './__amali_update';
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(CACHE).then(c => c.addAll(CORE.concat(FONTS_FILES)).catch(() => {}))); });
