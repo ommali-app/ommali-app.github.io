@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261002161837">
+<meta name="amali-build" content="20261002174806">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1048,6 +1048,7 @@ table.imp select{padding:4px;border:1px solid var(--line2);border-radius:6px;bac
 .rlprog i.ok{background:var(--ok)}
 .rlprog i.nx{background:transparent;box-shadow:inset 0 0 0 2px var(--accent)}
 .rlprog bdi{margin-inline-start:5px;font-size:12px;font-weight:700;color:var(--ink2);font-variant-numeric:tabular-nums}
+.pcbox{padding:8px 10px;display:grid;gap:8px}.pcbox .pct{display:inline-flex;flex-wrap:wrap;gap:6px}.pcbox .pcl{display:grid;gap:3px;font-size:13px;color:var(--ink2)}.pcbox .pcl input{width:100%;box-sizing:border-box}.pcbox .row2{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.pcbox .why{font-size:12.5px;color:var(--ink3)}.pcsim{padding:8px 10px}.pcsim ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}.pcsim .pcl1{font-size:13px;color:var(--ink2);margin-top:2px}.pctags{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.pctags .tag{font-size:11.5px}
 .rlc details.sec{margin-top:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
 .rlc details.sec>summary{cursor:pointer;display:flex;align-items:center;gap:6px;padding:7px 10px;font-size:13.5px;font-weight:600;color:var(--ink2);list-style:none;min-height:36px}
 .rlc details.sec>summary::-webkit-details-marker,.rlc details.it>summary::-webkit-details-marker,.rlc details.more>summary::-webkit-details-marker{display:none}
@@ -1641,7 +1642,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 
 /* V139 — «دائرتك» */
 @media (min-width:900px){.wnsheet .msbox{inset:auto;top:50%;left:50%;transform:translate(-50%,-50%);width:520px;max-height:84vh;border-radius:18px}}
-.wnsheet .wnv{margin:10px 0 4px;font-weight:700;color:var(--ink)}.wnsheet ul{margin:0 0 6px;padding-inline-start:20px;line-height:1.9;font-size:14.5px}.wnsheet .wnlead{margin:4px 0 8px;color:var(--ink2);font-size:13px}.wnsheet .row{margin-top:12px}
+.wnsheet .wnv{margin:10px 0 4px;font-weight:700;color:var(--ink)}.wnsheet ul{margin:0 0 6px;padding-inline-start:20px;line-height:1.9;font-size:14.5px}.wnsheet .wnlead{margin:4px 0 8px;color:var(--ink2);font-size:13px}.wnsheet .row{margin-top:12px;position:sticky;bottom:0;background:var(--panel);padding:10px 0 6px}
 @media (min-width:900px){.psheet .msbox{inset:auto;top:50%;left:50%;transform:translate(-50%,-50%);width:560px;max-height:88vh;border-radius:18px}}
 #psbody{display:flex;flex-direction:column;gap:14px;padding:4px 2px 6px;overflow-y:auto}
 .psheet .pslead{margin:0;color:var(--ink2);font-size:14px;line-height:1.8}
@@ -2363,8 +2364,11 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
         <a class="btn" href="https://mabadi-kw.github.io/mabadi/" target="_blank" rel="noopener">افتح مبادئ التمييز ↗</a></div></div>
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
+      <p class="abt"><b>مداولة</b> — رول الجلسة وأدوات الدائرة. عمل شخصي مجاني، صمّمه وبناه من يعرف تفاصيل العمل القضائي وإجراءاته وصعوباته العملية أثناء نظر الجلسة وإدارتها؛ وُجد ليعين القضاة على نظر الجلسات وكتابة الأحكام، فتُنجَز القضايا أسرع وتجود الأحكام.</p>
+      <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
+      <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V141 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V142 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -4328,6 +4332,88 @@ function rlPrep(c) { return c.prep && c.prep.d === c.next ? c.prep : {}; }
 function rlPrepOf(c) { if (RL_DONE.includes(c.stage) || RL_RES.includes(c.stage)) return ''; if (rlPrep(c).need) return 'need'; return c.exec ? 'ok' : 'no'; }
 function rlPrepSet(c, k, on) { const p = Object.assign({}, rlPrep(c), { d: c.next }); if (on) p[k] = 1; else delete p[k]; c.prep = p; if (c.stage === 'لدى الخبير' && (k === 'rep' || k === 'ntf')) c.exec = !!(p.rep && p.ntf); c.updated = Date.now(); }
 let rlPrepF = '';
+// V142: سوابق الدائرة — تصنيف مقترح تلقائيًا (موضوع + مواد) من بيانات البطاقة، يؤكده القاضي بلمسة. يُحفظ التصنيف وحده (c.pc): بلا نص ولا أسماء. المنطوق من البطاقة نفسها.
+const PC_TOPICS = [
+  ['الفصل التعسفي وإنهاء الخدمة', ['فصل تعسفي', 'الفصل التعسفي', 'فصل العامل', 'فصله', 'الفصل من العمل', 'تعسف', 'إنهاء الخدمة', 'إنهاء العقد', 'إنهاء علاقة العمل', 'فسخ العقد', 'تسريح', 'الاستغناء عن', 'غير مبرر', 'بغير مبرر', 'غير مشروع', 'بلا مبرر']],
+  ['مكافأة نهاية الخدمة', ['مكافأة نهاية الخدمة', 'مكافأة الخدمة', 'مكافأة', 'بدل الخدمة', 'مستحقات نهاية الخدمة', 'نهاية الخدمة']],
+  ['بدل الإنذار (مهلة الإخطار)', ['بدل الإنذار', 'بدل الإخطار', 'مهلة الإخطار', 'مهلة الإنذار', 'مدة الإخطار', 'مدة الإنذار']],
+  ['الأجر وفروقه', ['الأجر', 'أجر', 'أجور', 'راتب', 'مرتب', 'رواتب', 'فروق الأجر', 'فروق راتب', 'الأجر الشامل', 'الأجر الأساسي']],
+  ['الإجازات', ['إجازة', 'إجازات', 'رصيد الإجازات', 'رصيد إجازات', 'الإجازة السنوية', 'بدل الإجازة']],
+  ['الاستقالة وترك العمل', ['استقالة', 'استقال', 'يستقيل', 'المستقيل', 'ترك العمل', 'ترك الخدمة']],
+  ['التقادم وسقوط الحق', ['تقادم', 'التقادم الحولي', 'سقوط الحق', 'مضي المدة', 'مضي سنة', 'سقوط الدعوى']],
+  ['الخبرة', ['خبرة', 'خبير', 'خبراء', 'تقرير الخبير', 'أهل الخبرة', 'إدارة الخبراء']],
+  ['الاختصاص والنصاب', ['اختصاص', 'ولاية المحكمة', 'نصاب', 'انتهائي', 'قابل للاستئناف']],
+  ['الصفة والمصلحة', ['الصفة', 'انتفاء الصفة', 'الصفة في الدعوى', 'المصلحة']],
+  ['الإثبات (شهود ويمين)', ['شهادة', 'شهود', 'أقوال الشهود', 'بينة', 'اليمين الحاسمة', 'اليمين المتممة', 'حلف اليمين']],
+  ['العمولات', ['عمولة', 'عمولات', 'نسبة مئوية']],
+  ['العمل الإضافي', ['ساعات إضافية', 'العمل الإضافي', 'أجر إضافي', 'عمل إضافي', 'ساعات العمل الإضافية']],
+  ['إصابة العمل', ['إصابة عمل', 'حادث عمل', 'إصابة', 'عجز']],
+  ['التأمينات الاجتماعية', ['التأمينات الاجتماعية', 'التأمينات', 'معاش', 'تقاعد']],
+  ['مدة العقد (محدد/غير محدد)', ['عقد محدد المدة', 'عقد غير محدد المدة', 'محدد المدة', 'غير محدد المدة', 'مدة العقد', 'تجديد العقد']],
+  ['الجزاء التأديبي', ['جزاء تأديبي', 'عقوبة تأديبية', 'تأديب', 'تأديبي']],
+  ['جواز السفر والإقامة وإذن العمل', ['جواز السفر', 'حجز جواز', 'تحويل الإقامة', 'إذن العمل', 'تصريح العمل', 'انتقال العمالة', 'الإقامة']],
+  ['المخالصة والإبراء', ['مخالصة', 'تخالص', 'إبراء', 'براءة الذمة']],
+  ['عيوب التسبيب والدفاع', ['الإخلال بحق الدفاع', 'حق الدفاع', 'قصور في التسبيب', 'قصور التسبيب', 'القصور في التسبيب', 'فساد في الاستدلال', 'الفساد في الاستدلال', 'مخالفة الثابت']],
+  ['الشكل والميعاد', ['ميعاد الاستئناف', 'ميعاد', 'عدم القبول شكلا', 'سقوط حق الاستئناف']]
+];
+const PC_RX = PC_TOPICS.map(t => t[1].map(ph => { const n = norm(ph); return { ph: ph, rx: new RegExp('(?:^|\\s)(?:[وفبلك]?(?:ال)?)' + n.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?:ه|ها|هم|ات|ان|ين|ون|ا|ي|ك)?(?=\\s|$)') }; }));
+function pcArts(text) {
+  const t = AR2EN(String(text || '')), out = [];
+  (t.match(/(?:م|المادة|مادة)\s*\(?\s*(\d{1,3})\s*\)?(?:\s*(?:من\s*)?(?:قانون\s*)?(مرافعات|المرافعات))?/g) || []).forEach(m => { const mm = m.match(/(\d{1,3})/); if (mm) out.push('م' + mm[1] + (/مرافعات/.test(m) ? ' مرافعات' : '')); });
+  return out;
+}
+// يقترح تصنيف البطاقة: الموضوع من الموضوع المختصر والملاحظات والطلب المنتظر (وزنها أكبر) وملخص التحليل، والمواد من النص ومن المبادئ المربوطة. يقترح فقط، ولا يحفظ.
+function pcSuggest(c) {
+  const near = norm([c.subj, c.note, c.await].filter(Boolean).join(' ')), far = norm((c.an && c.an.sum) || '');
+  const prs = (c.pids || []).map(rlPrin).filter(Boolean);
+  const topics = PC_TOPICS.map((t, i) => { const hit = new Set(), hf = new Set(); PC_RX[i].forEach(r => { if (r.rx.test(near)) hit.add(r.ph); else if (far && r.rx.test(far)) hf.add(r.ph); }); const sc = hit.size * 2 + hf.size; const all = [...hit, ...hf], w = all.filter(a => !all.some(b => b !== a && norm(b).includes(norm(a)))); return { i, k: t[0], sc, why: w.slice(0, 3) }; }).filter(x => x.sc >= 2).sort((a, b) => b.sc - a.sc).slice(0, 3);
+  const cnt = {}, from = {}; const add = (a, w) => { if (!a) return; cnt[a] = (cnt[a] || 0) + 1; if (!from[a]) from[a] = w; };
+  pcArts([c.subj, c.note, c.await].join(' ') + ' ' + ((c.an && c.an.sum) || '')).forEach(a => add(a, 'ورد في البطاقة'));
+  prs.forEach(p => (p.articles || []).forEach(a => { if (/^م\d/.test(String(a))) add(String(a), 'من مبدأ مربوط'); }));
+  const arts = Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a]).slice(0, 8).map(a => ({ k: a, why: from[a] }));
+  return { topics, arts };
+}
+function pcTxt(c) { const q = c.pc; return q && q.ok ? (q.t || []).concat(q.a || [], [q.l || '']).join(' ') : ''; }
+function pcSimilar(c) {
+  const q = c.pc && c.pc.ok ? c.pc : null, sg = q ? null : pcSuggest(c);
+  const T = q ? q.t || [] : sg.topics.map(x => x.k), A = q ? q.a || [] : sg.arts.map(x => x.k);
+  if (!T.length && !A.length) return [];
+  const sib = new Set(rlSibs(c).map(x => x.id));
+  return RL.cards.filter(x => x.id !== c.id && !sib.has(x.id) && x.stage === 'صدر الحكم' && x.pc && x.pc.ok).map(x => { const st = (x.pc.t || []).filter(t => T.includes(t)), sa = (x.pc.a || []).filter(a => A.includes(a)); return { c: x, st, sa, sc: st.length * 2 + sa.length }; }).filter(r => r.st.length).sort((a, b) => b.sc - a.sc || (rlJudgedAt(b.c) || '').localeCompare(rlJudgedAt(a.c) || '')).slice(0, 6);
+}
+function pcSec(c, done, so) {
+  if (done) {
+    if (c.stage !== 'صدر الحكم') return '';
+    const q = c.pc && c.pc.ok ? c.pc : null, sg = pcSuggest(c), on = new Set(q ? q.t || [] : sg.topics.map(x => x.k));
+    const shown = []; (q ? q.t || [] : []).forEach(k => shown.push(k)); sg.topics.forEach(x => { if (!shown.includes(x.k)) shown.push(x.k); });
+    const idx = k => PC_TOPICS.findIndex(t => t[0] === k);
+    const why = sg.topics.length ? sg.topics.map(x => '«' + esc(PC_TOPICS[x.i][0]) + '»: ' + x.why.map(esc).join('، ')).join(' — ') : '';
+    const arts = (q ? q.a || [] : sg.arts.map(x => x.k)).join('، ');
+    return '<details class="sec pcx" data-sec="pc"' + so('pc') + '><summary>' + rlIc('bk') + 'سوابق الدائرة <span class="cnt">' + (q ? 'مصنّفة' : sg.topics.length ? 'مقترح' : 'غير مصنّفة') + '</span></summary><div class="pcbox">'
+      + '<div class="ln"><span class="k">الموضوع:</span> <span class="chips pct">' + shown.map(k => '<button type="button" class="chip' + (on.has(k) ? ' on' : '') + '" data-pt="' + idx(k) + '" aria-pressed="' + on.has(k) + '">' + esc(k) + '</button>').join('') + '</span> <select class="mini pcadd" aria-label="إضافة موضوع"><option value="">＋ موضوع</option>' + PC_TOPICS.map((t, i) => '<option value="' + i + '">' + esc(t[0]) + '</option>').join('') + '</select></div>'
+      + (why && !q ? '<div class="ln why">' + '<span class="k">سبب الاقتراح:</span> ' + why + (sg.arts.length ? ' · المواد: ' + sg.arts.map(x => esc(x.k) + ' (' + esc(x.why) + ')').join('، ') : '') + '</div>' : '')
+      + '<label class="pcl">المواد <input class="pca" value="' + esc(arts) + '" placeholder="م51، م61 — اختياري"></label>'
+      + '<label class="pcl">ما قررته الدائرة <small>(سطر واحد بصياغتك، بلا أسماء — اختياري)</small><input class="pcline" maxlength="300" value="' + esc(q ? q.l || '' : '') + '"></label>'
+      + '<div class="row2"><button type="button" class="btn primary mini pcok">' + (q ? 'تحديث التصنيف' : 'اعتماد التصنيف') + '</button>' + (q ? '<button type="button" class="btn mini pcclr">إزالة التصنيف</button>' : '') + '<span class="k">المنطوق: ' + esc(c.vd || 'لم يُسجَّل') + (q ? '' : ' — المقترح لا يُحفظ حتى تعتمده') + '</span></div></div></details>';
+  }
+  const sm = pcSimilar(c); if (!sm.length) return '';
+  return '<details class="sec pcx" data-sec="pcs"' + so('pcs') + '><summary>' + rlIc('bk') + 'سوابق الدائرة المشابهة <span class="cnt">' + sm.length + '</span></summary><div class="pcsim"><ul>' + sm.map(r => '<li><button type="button" class="linkbtn" data-pcg="' + r.c.id + '">' + esc(r.c.code) + '</button> <span class="tag vd">' + esc(r.c.vd || '—') + '</span> <span class="k">' + esc(r.st.join('، ') + (r.sa.length ? ' · ' + r.sa.join('، ') : '')) + '</span>' + (r.c.pc.l ? '<div class="pcl1">' + esc(r.c.pc.l) + '</div>' : '') + '</li>').join('') + '</ul><p class="k">مشابهة بالموضوع والمواد فقط. اقرأ حكمها قبل الاستئناس بها؛ لا يُرجَّح بها نتيجة.</p></div></details>';
+}
+function pcBind(d, c) {
+  d.querySelectorAll('[data-pcg]').forEach(x => x.onclick = e => { e.stopPropagation(); rlGoCard(x.dataset.pcg); });
+  const bx = d.querySelector('.pcbox'); if (!bx) return;
+  const tog = b => { b.onclick = () => { b.classList.toggle('on'); b.setAttribute('aria-pressed', b.classList.contains('on')); }; };
+  bx.querySelectorAll('[data-pt]').forEach(tog);
+  const sel = bx.querySelector('.pcadd'); sel.onchange = () => { const i = sel.value; if (i === '') return; let b = bx.querySelector('[data-pt="' + i + '"]'); if (!b) { b = el('button', 'chip on'); b.type = 'button'; b.dataset.pt = i; b.textContent = PC_TOPICS[i][0]; b.setAttribute('aria-pressed', 'true'); tog(b); bx.querySelector('.pct').appendChild(b); } else { b.classList.add('on'); b.setAttribute('aria-pressed', 'true'); } sel.value = ''; };
+  bx.querySelector('.pcok').onclick = () => {
+    const t = [...bx.querySelectorAll('[data-pt].on')].map(b => PC_TOPICS[+b.dataset.pt][0]);
+    const a = [...new Set(AR2EN(bx.querySelector('.pca').value).split(/[،,;\n]+/).map(x => x.trim()).filter(Boolean))].slice(0, 12), l = bx.querySelector('.pcline').value.trim();
+    if (!t.length) { toast('اختر موضوعًا واحدًا على الأقل'); return; }
+    const lk = rlLeak(l); if (lk.length) { toast('السطر يحوي ' + lk.join(' و') + ' — اكتبه بلا أسماء أو أرقام مدنية'); return; }
+    c.pc = { t: t, a: a, l: l, ok: 1, at: Date.now() }; c.updated = Date.now(); rlFocus = c.id; rlxSet(c.id + '#pc', true); rlSave(); rlRender(); toast('اعتُمد تصنيف ' + c.code + ' في سوابق الدائرة');
+  };
+  const cl = bx.querySelector('.pcclr'); if (cl) cl.onclick = () => { delete c.pc; c.updated = Date.now(); rlFocus = c.id; rlSave(); rlRender(); toast('أُزيل التصنيف'); };
+}
 function rlCard(c, mode, pos) {
   const n = rlDays(c.next), done = RL_DONE.includes(c.stage), late = !done && n != null && n < 0;
   const prs = (c.pids || []).map(rlPrin).filter(Boolean), ok = rlAnnOk(c), adj = rlAnnAdj(c);
@@ -4367,6 +4453,7 @@ function rlCard(c, mode, pos) {
   if (c.an) s += '<div class="ln"><span class="k">التحليل:</span> مربوط بالقضية' + (c.an.form && c.an.form.ruling ? ' — حكم أول درجة ' + rlFmt(c.an.form.ruling) : '') + ' <button type="button" class="linkbtn" data-a="unan">فكّ الربط</button></div>';
   if (c.dls && c.dls.length) s += '<div class="ln"><span class="k">مواعيد:</span><ul class="dls">' + c.dls.map(x => '<li>' + (x.d ? rlDue(x.d) + ' ' : '') + esc(x.t || '') + '</li>').join('') + '</ul></div>';
   if (prs.length) s += '<details class="sec prsx" data-sec="prs"' + so('prs') + '><summary>' + rlIc('bk') + 'المبادئ المحفوظة <span class="cnt">' + prs.length + '</span></summary><div class="prs">' + prs.map(p => { const tt = (p.keywords || p.appeal || '').replace(/\s+/g, ' ').trim(), body = (p.summary && p.summary.length ? p.summary.join(' / ') : (p.reas || '').replace(/\s+/g, ' ').slice(0, 700) + ((p.reas || '').length > 700 ? ' …' : '')); return '<details class="it"><summary><span class="t">' + esc(tt) + '</span><span class="c">' + esc(p.cite_std) + '</span></summary><div class="px">' + '<p>' + esc(body) + '</p><div class="pa"><button type="button" class="mini" data-open="' + p.id + '">فتح المبدأ</button><button type="button" class="mini" data-rm="' + p.id + '" title="إزالة من البطاقة">✕ إزالة</button></div></div></details>'; }).join('') + '</div></details>';
+  s += pcSec(c, done, so);
   let hint = ''; if (!prs.length && mode !== 'roll') hint = '<div class="ln ic">' + rlIc('bk') + '<span class="k">لا مبادئ محفوظة — تُضاف من لوحة قراءة أي مبدأ بزر «＋ رول الجلسة».</span></div>';
   { const sa = rlSheetAll(c).filter(x => rlSheetHasData(rlSheet(c, x.d))); if (sa.length) s += '<details class="sec shx" data-sec="sheet"' + so('sheet') + '><summary>' + rlIc('dec') + 'ورقة الرول <span class="cnt">' + sa.length + '</span></summary><div class="shl">' + sa.slice().reverse().map(x => '<div class="ssold"><b>' + rlFmt(x.d) + '</b><ul>' + x.lines.map(y => '<li>' + esc(y) + '</li>').join('') + '</ul></div>').join('') + '</div></details>'; }
   if (c.note) s += '<div class="ln note2">' + esc(c.note) + '</div>';
@@ -4387,6 +4474,7 @@ function rlCard(c, mode, pos) {
   hd.onclick = e => { if (e.target.closest('button,a,select,input,label')) return; tog(); };
   hd.onkeydown = e => { if ((e.key === 'Enter' || e.key === ' ') && e.target === hd) { e.preventDefault(); tog(); } };
   d.querySelectorAll('details[data-sec]').forEach(x => x.addEventListener('toggle', () => rlxSet(c.id + '#' + x.dataset.sec, x.open)));
+  pcBind(d, c);
   d.querySelectorAll('.more .menu button').forEach(x => x.setAttribute('role', 'menuitem'));
   d.querySelectorAll('[data-sib]').forEach(x => x.onclick = e => { e.stopPropagation(); rlGoCard(x.dataset.sib); });
   if (pos) d.querySelectorAll('[data-mv]').forEach(x => x.onclick = e => { e.stopPropagation(); rlMove(pos.day, c.id, +x.dataset.mv); });
@@ -4457,7 +4545,7 @@ function rlMatch(c, q) {
 }
 const RLDIST = document.getElementById('rl_dist');
 // V130: منفذ للاختبارات الآلية فقط (لا يغيّر شيئًا بذاته)
-window.__rl = { get RL() { return RL; }, get RLX() { return RLX; }, autoLink: () => rlAutoLink(), prepOf: c => rlPrepOf(c), prepSet: (c, k, on) => rlPrepSet(c, k, on), sessList: d => rlSessList(d), sortList: d => rlSortList(rlDayList(d)), unlink: c => rlUnlink(c), parse: (it) => rlParseItems(it), meta: t => rlMeta(t), multi: (r, e) => rlImpMulti(r, e), groups: r => rlImpGroups(r), clerkParse: it => rlClerkParse(it), impShow: (r, h) => rlImpShow(r, h), readFile: (f, st) => rlReadFile(f, st), save: () => rlSave(), render: () => rlRender() };
+window.__rl = { get RL() { return RL; }, pcSuggest: c => pcSuggest(c), pcSimilar: c => pcSimilar(c), goCard: id => rlGoCard(id), get RLX() { return RLX; }, autoLink: () => rlAutoLink(), prepOf: c => rlPrepOf(c), prepSet: (c, k, on) => rlPrepSet(c, k, on), sessList: d => rlSessList(d), sortList: d => rlSortList(rlDayList(d)), unlink: c => rlUnlink(c), parse: (it) => rlParseItems(it), meta: t => rlMeta(t), multi: (r, e) => rlImpMulti(r, e), groups: r => rlImpGroups(r), clerkParse: it => rlClerkParse(it), impShow: (r, h) => rlImpShow(r, h), readFile: (f, st) => rlReadFile(f, st), save: () => rlSave(), render: () => rlRender() };
 // V130: بعد أول استيراد للكشف — ثلاث خطوات قصيرة تقول ماذا بعد (تظهر مرة واحدة حتى يُغلقها المستخدم)
 let rlGuide = false;
 function rlGuideHtml() { const P = rlProf(), one = P.n === 1;
@@ -4510,22 +4598,22 @@ function rlRender() {
     if (!done.length) { L.innerHTML = '<div class="empty"><b>لا أحكام صادرة بعد</b>عند تسجيل «صدر الحكم» لقضية تظهر هنا في أرشيف قابل للبحث والتصفية.</div>'; rlSummary(); return; }
     const vds = RL_VD_ALL.filter(v => done.some(c => c.vd === v)).concat(done.some(c => c.stage === 'شُطبت') ? ['شُطبت'] : []), mons = [...new Set(done.map(c => (rlEndAt(c) || '').slice(0, 7)).filter(Boolean))].sort().reverse();
     const wrap = el('div', 'rlarch');
-    wrap.innerHTML = '<div class="rlbar archctl"><input type="search" id="arch_q" placeholder="ابحث برقم القضية أو الرقم الآلي…" autocomplete="off"><select class="sel" id="arch_w"><option value="">كل الكتّاب</option>' + Object.keys(RL_W).map(k => '<option value="' + k + '">' + RL_W[k] + '</option>').join('') + '</select><select class="sel" id="arch_vd"><option value="">كل المنطوق</option>' + vds.map(v => '<option>' + esc(v) + '</option>').join('') + '</select><select class="sel" id="arch_mon"><option value="">كل الأشهر</option>' + mons.map(m => '<option value="' + m + '">' + rlMonLabel(m) + '</option>').join('') + '</select></div><div id="rl_archlist"></div>';
+    wrap.innerHTML = '<div class="rlbar archctl"><input type="search" id="arch_q" placeholder="ابحث برقم القضية أو الرقم الآلي أو الموضوع أو المادة…" autocomplete="off"><select class="sel" id="arch_w"><option value="">كل الكتّاب</option>' + Object.keys(RL_W).map(k => '<option value="' + k + '">' + RL_W[k] + '</option>').join('') + '</select><select class="sel" id="arch_vd"><option value="">كل المنطوق</option>' + vds.map(v => '<option>' + esc(v) + '</option>').join('') + '</select><select class="sel" id="arch_mon"><option value="">كل الأشهر</option>' + mons.map(m => '<option value="' + m + '">' + rlMonLabel(m) + '</option>').join('') + '</select><select class="sel" id="arch_pc" aria-label="سوابق الدائرة"><option value="">كل المواضيع</option><option value="un">غير مصنّفة (' + done.filter(c => c.stage === 'صدر الحكم' && !(c.pc && c.pc.ok)).length + ')</option>' + PC_TOPICS.filter(t => done.some(c => c.pc && c.pc.ok && (c.pc.t || []).includes(t[0]))).map(t => '<option value="' + esc(t[0]) + '">' + esc(t[0]) + '</option>').join('') + '</select></div><div id="rl_archlist"></div>';
     L.appendChild(wrap);
     const draw = () => {
-      const q = norm($('#arch_q').value), w = $('#arch_w').value, vd = $('#arch_vd').value, mon = $('#arch_mon').value;
-      let list = done.filter(c => (!w || c.writer === w) && (!vd || (vd === 'شُطبت' ? c.stage === 'شُطبت' : c.vd === vd)) && (!mon || (rlEndAt(c) || '').slice(0, 7) === mon) && (!q || norm(c.code + ' ' + (c.auto || '') + ' ' + (c.subj || '')).includes(q)));
+      const q = norm($('#arch_q').value), w = $('#arch_w').value, vd = $('#arch_vd').value, mon = $('#arch_mon').value, pcf = $('#arch_pc').value;
+      let list = done.filter(c => (!w || c.writer === w) && (!vd || (vd === 'شُطبت' ? c.stage === 'شُطبت' : c.vd === vd)) && (!mon || (rlEndAt(c) || '').slice(0, 7) === mon) && (!pcf || (pcf === 'un' ? c.stage === 'صدر الحكم' && !(c.pc && c.pc.ok) : !!(c.pc && c.pc.ok && (c.pc.t || []).includes(pcf)))) && (!q || norm(c.code + ' ' + (c.auto || '') + ' ' + (c.subj || '') + ' ' + pcTxt(c)).includes(q)));
       list = rlAdj(list).sort((a, b) => (rlEndAt(b) || '').localeCompare(rlEndAt(a) || '') || a.code.localeCompare(b.code, 'ar', { numeric: true }));
       const box = $('#rl_archlist');
       if (!list.length) { box.innerHTML = '<div class="empty"><b>لا أحكام مطابقة</b>غيّر البحث أو المرشّحات.</div>'; return; }
       let lastD = null;   // V127: مجمّعة بتاريخ الجلسة، لكل جلسة سطر بعدد قضاياها
       const perD = {}; list.forEach(c => { const d = rlEndAt(c) || ''; perD[d] = (perD[d] || 0) + 1; });
-      box.innerHTML = '<p class="k arcount">' + list.length + ' قضية منتهية في ' + Object.keys(perD).length + ' جلسة</p><div class="tblw"><table class="sttbl archtbl"><thead><tr><th>القضية</th><th>الآلي</th><th>تاريخ الجلسة</th><th>الكاتب</th><th>المنطوق</th><th>مسار التقاضي</th></tr></thead><tbody>'
-        + list.map(c => { const d0 = rlEndAt(c) || ''; const gh = d0 !== lastD ? (lastD = d0, '<tr class="agh"><td colspan="6">' + (d0 ? 'جلسة ' + rlDay(d0) + ' ' + rlFmt(d0) : 'بلا تاريخ') + ' <small>' + perD[d0] + '</small></td></tr>') : ''; return gh + (() => { const sib = rlSibs(c), code = esc(c.code) + (sib.length ? ' <span class="k">+' + sib.map(s => esc(s.code)).join('،') + '</span>' : ''), path = [c.d1 ? 'أول درجة: ' + esc(c.d1) : '', c.tm ? 'تمييز: ' + esc(c.tm) : ''].filter(Boolean).join(' · '); return '<tr><td><button type="button" class="stgo" data-card="' + c.id + '">' + code + '</button></td><td class="num">' + esc(c.auto || '—') + '</td><td class="num">' + (rlEndAt(c) ? rlFmt(rlEndAt(c)) : '—') + '</td><td>' + (RL_W[c.writer] || '—') + '</td><td>' + (c.stage === 'شُطبت' ? '<span class="tag">شُطبت</span>' : c.vd ? '<span class="tag vd">' + esc(c.vd) + '</span>' : '—') + '</td><td class="k">' + (path || '—') + '</td></tr>'; })(); }).join('')
+      box.innerHTML = '<p class="k arcount">' + list.length + ' قضية منتهية في ' + Object.keys(perD).length + ' جلسة · مصنّفة في سوابق الدائرة ' + list.filter(c => c.pc && c.pc.ok).length + '</p><div class="tblw"><table class="sttbl archtbl"><thead><tr><th>القضية</th><th>الآلي</th><th>تاريخ الجلسة</th><th>الكاتب</th><th>المنطوق</th><th>مسار التقاضي</th></tr></thead><tbody>'
+        + list.map(c => { const d0 = rlEndAt(c) || ''; const gh = d0 !== lastD ? (lastD = d0, '<tr class="agh"><td colspan="6">' + (d0 ? 'جلسة ' + rlDay(d0) + ' ' + rlFmt(d0) : 'بلا تاريخ') + ' <small>' + perD[d0] + '</small></td></tr>') : ''; return gh + (() => { const sib = rlSibs(c), code = esc(c.code) + (sib.length ? ' <span class="k">+' + sib.map(s => esc(s.code)).join('،') + '</span>' : ''), path = [c.d1 ? 'أول درجة: ' + esc(c.d1) : '', c.tm ? 'تمييز: ' + esc(c.tm) : ''].filter(Boolean).join(' · '); return '<tr><td><button type="button" class="stgo" data-card="' + c.id + '">' + code + '</button>' + (c.pc && c.pc.ok ? '<div class="pctags">' + (c.pc.t || []).map(t => '<span class="tag">' + esc(t) + '</span>').join('') + '</div>' : '') + '</td><td class="num">' + esc(c.auto || '—') + '</td><td class="num">' + (rlEndAt(c) ? rlFmt(rlEndAt(c)) : '—') + '</td><td>' + (RL_W[c.writer] || '—') + '</td><td>' + (c.stage === 'شُطبت' ? '<span class="tag">شُطبت</span>' : c.vd ? '<span class="tag vd">' + esc(c.vd) + '</span>' : '—') + '</td><td class="k">' + (path || '—') + '</td></tr>'; })(); }).join('')
         + '</tbody></table></div>';
       box.querySelectorAll('[data-card]').forEach(b => b.onclick = () => rlGoCard(b.dataset.card));
     };
-    ['#arch_q', '#arch_w', '#arch_vd', '#arch_mon'].forEach(id => { const e = $(id); e.oninput = draw; e.onchange = draw; });
+    ['#arch_q', '#arch_w', '#arch_vd', '#arch_mon', '#arch_pc'].forEach(id => { const e = $(id); e.oninput = draw; e.onchange = draw; });
     draw();
   } else {
     const q = rlQ(), st = $('#rl_stage').value;
@@ -8090,7 +8178,7 @@ function psClose(done) { const sh = $('#psheet'); if (!sh) return; sh.hidden = t
 function psRender() {
   const b = $('#psbody'); if (!b || !PS) return;
   const chips = (o, v, k) => Object.keys(o).map(x => '<button type="button" class="chip' + (String(x) === String(v) ? ' on' : '') + '" data-' + k + '="' + x + '">' + o[x] + '</button>').join('');
-  b.innerHTML = '<p class="pslead">' + (PS.first ? 'سؤال واحد قبل البدء: اختر دائرتك، فتتكيّف المسميات والقوائم والأدوات معها. تغيّره متى شئت من الإعدادات.' : 'تتغيّر المسميات والقوائم والأدوات مع الدائرة. بياناتك لا تتغيّر.') + '</p>'
+  b.innerHTML = '<p class="pslead">' + (PS.first ? '<span class="psabout"><b>مداولة</b> عمل شخصي مجاني لمعاونة القضاة في نظر الجلسات وكتابة الأحكام. يعمل على جهازك وحده، ولا يحفظ أسماء الأطراف ولا نصوص الملفات.</span><br>سؤال واحد قبل البدء: اختر دائرتك، فتتكيّف المسميات والقوائم والأدوات معها. تغيّره متى شئت من الإعدادات.' : 'تتغيّر المسميات والقوائم والأدوات مع الدائرة. بياناتك لا تتغيّر.') + '</p>'
     + '<div class="psg"><b>المحكمة</b><div class="seg2">' + Object.keys(RL_DEGS).map(k => '<button type="button" data-deg="' + k + '" class="' + (PS.deg === k ? 'on' : '') + '">' + RL_DEGS[k] + '</button>').join('') + '</div></div>'
     + '<div class="psg"><b>نوع الدائرة</b><div class="pschips">' + chips(RL_KINDS, PS.kind, 'kind') + '</div></div>'
     + (PS.kind === 'cri' && PS.deg === 'f' ? '<div class="psg"><b>طبيعة الدائرة</b><div class="pschips">' + chips(RL_SUBS, PS.sub || 'jn', 'sub') + '</div></div>' : '')
@@ -8114,8 +8202,9 @@ function psRender() {
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
-const WN_V = 141;
+const WN_V = 142;
 const WN_LOG = [
+  [142, 'الإصدار 142', ['«سوابق الدائرة»: كل حكم صادر يقترح التطبيق تصنيفه (الموضوع والمواد) تلقائيًا، وتعتمده بلمسة. يُحفظ التصنيف وحده بلا نص ولا أسماء.', 'ابحث في أرشيف الأحكام بالموضوع أو المادة، وصفِّ «غير المصنّفة» لمراجعتها.', 'في قضية قيد النظر يظهر «سوابق الدائرة المشابهة» إن وُجدت لها سوابق بالموضوع نفسه.', 'نص «عن التطبيق» أوضح في السرّية والغاية، مع رسالة تعريف جاهزة للنسخ.']],
   [141, 'الإصدار 141', ['الطباعة من آيفون وآيباد: لا تظهر رسالة «حُجبت الطباعة التلقائية» — الطباعة الأولى مباشرة وما بعدها في صفحة طباعة جاهزة.', 'شعار «مداولة» على كل الأوراق المطبوعة وملفات Word بدل الشعار القديم.', 'نافذة «ما الجديد» هذه تظهر بعد كل تحديث.']],
   [140, 'الإصدار 140', ['استيراد عدة كشوف معًا: يوزّعها التطبيق على تواريخ جلساتها المكتوبة فيها، وتراجعها قبل الإضافة.', 'قراءة قائمة أمين السر (صورة أو PDF ممسوح) ودمجها مع كشف النظام لليوم نفسه، مع تعليم الفروق.']],
   [139, 'الإصدار 139', ['شاشة «دائرتك» عند أول فتح: المحكمة ونوع الدائرة والهيئة وصفتك فيها وأيام الانعقاد.']],
@@ -8131,6 +8220,9 @@ function wnOpen(all) {
 function wnClose() { const sh = $('#wnsheet'); if (!sh) return; sh.hidden = true; if (!$('#drawer').classList.contains('show')) document.documentElement.classList.remove('noscroll'); try { localStorage.setItem('tm_wn', String(WN_V)); } catch (e) {} }
 function wnMaybe() { try { if (navigator.webdriver || window.DEMO || lkIsLocked()) return; if (!localStorage.getItem('tm_profset')) { localStorage.setItem('tm_wn', String(WN_V)); return; } if ((+localStorage.getItem('tm_wn') || 0) >= WN_V) return; const ps = $('#psheet'); if (ps && !ps.hidden) return; wnOpen(false); } catch (e) {} }
 $('#wnok').onclick = wnClose; $('#wnclose').onclick = wnClose; $('#wnbg').onclick = wnClose; if ($('#dwn')) $('#dwn').onclick = () => wnOpen(true);
+// V142: رسالة تعريف جاهزة تُنسخ مع الرابط
+const ABT_MSG = 'مداولة — رول الجلسة وأدوات الدائرة. عمل شخصي مجاني صمّمه وبناه من يعرف تفاصيل العمل القضائي وصعوباته العملية، لمعاونة القضاة في نظر الجلسات وكتابة الأحكام: إنجاز أسرع للقضايا وجودة أعلى للأحكام.\nيعمل على جهازك وحده، ولا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ولا يتصل بأي جهة خارجية. كل مخرجاته مسودات عمل تراجعها بنفسك.\nhttps://ommali-app.github.io';
+if ($('#dabtmsg')) $('#dabtmsg').onclick = () => copy(ABT_MSG, 'نُسخت رسالة التعريف');
 function psFirst() { try { if (localStorage.getItem('tm_profset') || navigator.webdriver || window.DEMO || lkIsLocked()) return; } catch (e) { return; } psOpen(true); }
 function tourShow(from) { tourI = 0; $('#tour').classList.remove('hidden'); tourRender(); if (from) try { closeDrawer(); } catch (e) {} }
 function tourEnd() { $('#tour').classList.add('hidden'); try { localStorage.setItem('tm_onboarded', '1'); } catch (e) {} setTimeout(psFirst, 350); }
