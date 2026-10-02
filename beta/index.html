@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261002084850">
+<meta name="amali-build" content="20261002093115">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1642,7 +1642,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 <body>
 <script>try{if(localStorage.getItem('tm_lock'))document.documentElement.classList.add('locked')}catch(e){}</script>
 <div id="lockscr" role="dialog" aria-modal="true" aria-label="مداولة مقفل"><div class="lkbox">
-  <div class="lkglow" aria-hidden="true"></div><div class="lkico lkseal" id="lk_seal" aria-hidden="true"></div><h2>مداولة</h2><p class="lksub">منضدة عمل الدائرة العمالية</p><p class="lkdate" id="lk_date"></p>
+  <div class="lkglow" aria-hidden="true"></div><div class="lkico lkseal" id="lk_seal" aria-hidden="true"></div><h2>مداولة</h2><p class="lksub">رول الجلسة وأدوات الدائرة</p><p class="lkdate" id="lk_date"></p>
   <form class="lkform" id="lk_form" autocomplete="off" onsubmit="return false"><p class="lkhint">اكتب رمز الفتح</p>
     <label class="lkpinw"><input type="password" id="lk_pin" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" aria-label="رمز الفتح"><span class="lkdots" id="lk_dots" aria-hidden="true"></span></label>
     <div class="lkmsg" id="lk_msg" role="alert"></div>
@@ -2348,7 +2348,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V137 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V138 <span id="dbuild"></span></p>
     </section>
   </div>
 </div>
@@ -3569,8 +3569,14 @@ function drawerFill() {
   G.forEach(g => { const h = el('h2', 'dgh'); h.id = g[0]; h.textContent = g[1]; at.after(h); at = h; g[2].filter(Boolean).forEach(sx => { at.after(sx); at = sx; }); });
   idx.querySelectorAll('[data-dg]').forEach(b => b.onclick = () => { const t = document.getElementById(b.dataset.dg); if (t) db.scrollTo({ top: t.offsetTop - idx.offsetHeight - 8, behavior: 'smooth' }); });
 })();
-function openDrawer(toHelp) { drawerFill(); try { sfStat(); } catch (e) {} try { scRender(); } catch (e) {} try { window.gdInit && window.gdInit(); } catch (e) {} document.documentElement.classList.add('noscroll'); $('#drawer').classList.add('show'); $('#scrim').classList.add('show'); $('#menubtn').classList.add('on'); const b = $('#dbody'); b.scrollTop = 0; if (!toHelp) setTimeout(() => $('#dclose').focus(), 50); }
-function closeDrawer() { if (!$('#drawer').classList.contains('show')) return; document.documentElement.classList.remove('noscroll'); $('#drawer').classList.remove('show'); $('#menubtn').classList.remove('on'); if (!$('#panel').classList.contains('show') && !$('#side').classList.contains('show')) $('#scrim').classList.remove('show'); }
+// V138: الآيفون المثبّت — بعد لوحة المفاتيح أو منتقي الملفات (رمز المزامنة، «جلب») قد تبقى الشاشة منزاحة فيختفي رأس الإعدادات وزر ✕. نثبّت اللوحة على الجزء الظاهر من الشاشة ونعيد الصفحة إلى أعلاها.
+function vvFix() { const d = $('#drawer'), v = window.visualViewport; if (!d) return; if (!d.classList.contains('show') || !v) { d.style.top = ''; d.style.height = ''; d.style.bottom = ''; return; } d.style.top = Math.max(0, v.offsetTop) + 'px'; d.style.height = v.height + 'px'; d.style.bottom = 'auto'; }
+function vvReset() { if (!document.documentElement.classList.contains('noscroll')) return; setTimeout(() => { try { if (!document.activeElement || !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) window.scrollTo(0, 0); } catch (e) {} vvFix(); }, 120); }
+if (window.visualViewport) { visualViewport.addEventListener('resize', vvFix); visualViewport.addEventListener('scroll', vvFix); }
+document.addEventListener('focusout', vvReset); window.addEventListener('focus', vvReset); document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') vvReset(); });
+document.addEventListener('change', e => { if (e.target && e.target.type === 'file') vvReset(); }, true);
+function openDrawer(toHelp) { drawerFill(); try { sfStat(); } catch (e) {} try { scRender(); } catch (e) {} try { window.gdInit && window.gdInit(); } catch (e) {} document.documentElement.classList.add('noscroll'); $('#drawer').classList.add('show'); try { window.scrollTo(0, 0); } catch (e) {} vvFix(); $('#scrim').classList.add('show'); $('#menubtn').classList.add('on'); const b = $('#dbody'); b.scrollTop = 0; if (!toHelp) setTimeout(() => $('#dclose').focus(), 50); }
+function closeDrawer() { if (!$('#drawer').classList.contains('show')) return; document.documentElement.classList.remove('noscroll'); $('#drawer').classList.remove('show'); vvFix(); $('#menubtn').classList.remove('on'); if (!$('#panel').classList.contains('show') && !$('#side').classList.contains('show')) $('#scrim').classList.remove('show'); }
 $('#menubtn').onclick = () => $('#drawer').classList.contains('show') ? closeDrawer() : openDrawer();
 $('#dclose').onclick = closeDrawer;
 $('#scrim').addEventListener('click', closeDrawer);
@@ -7886,7 +7892,7 @@ window.hsOpen = hsOpen;
 window.stShow = stShow;
 
 var TOUR = [
-  { ico: 'home', t: 'مرحبًا بك في «مداولة»', p: 'منضدة عمل الدائرة العمالية: مبادئ محكمة التمييز، والتشريعات، وإدارة رول الجلسة، وحساب المستحقات والمواعيد، وإخراج الحكم — كلها على جهازك وتعمل دون اتصال. حجم الخط والإضاءة من زر القائمة ☰.' },
+  { ico: 'home', t: 'مرحبًا بك في «مداولة»', p: 'رول الجلسة وأدوات الدائرة: إدارة رول الجلسة ووضع الجلسة والمحجوزة، ومبادئ محكمة التمييز والتشريعات، والمواعيد والحسابات، وإخراج الحكم — كلها على جهازك وتعمل دون اتصال. حجم الخط والإضاءة من زر القائمة ☰.' },
   { ico: 'roll', t: 'رول الجلسة — قلب التطبيق', p: 'اختر الجلسة من شريط الأيام (اسحبه أفقيًا، أو 📅 ليوم آخر)، واستورد كشفها. كل قضية بطاقة مطويّة في سطرين: الرقم والمرحلة والموعد وكاتب الحكم ومؤشّر المسار ●●●○ — اضغطها لتفتح. «قرار الجلسة» ظاهر، وبقية الإجراءات في «⋯ المزيد». لا يُحفظ اسم خصم.' },
   { ico: 'search', t: 'البحث والتشريعات', p: 'ابحث في المبادئ بالكلمة أو رقم الطعن، واطّلع على قانون العمل والمرافعات بنصهما. و«بحث شامل» (⌘K) يجمع المادة والطعن والأداة في نافذة واحدة.' },
   { ico: 'calc', t: 'الحسابات والمواعيد', p: 'حاسبة المستحقات بثلاثة تبويبات (فحص سريع، وحساب تفصيلي، وعامل منزلي) تحسب المكافأة والإجازات وبدل الإخطار خطوة بخطوة، وحاسبة المواعيد الإجرائية تحسب الميعاد بحساب م17 وامتداد العطلة. كلها مسودات تُراجَع.' },
@@ -8018,7 +8024,7 @@ try { if (!localStorage.getItem('tm_onboarded') && !navigator.webdriver) setTime
 (function(){
   try {
     if (!document.querySelector('link[rel=manifest]')) {
-    var mani = { name: 'مداولة — مبادئ الدائرة العمالية', short_name: 'مداولة', lang: 'ar', dir: 'rtl', start_url: '.', scope: '.', display: 'standalone', background_color: '#F5F3EE', theme_color: '#1C2E4A', icons: [{ src: document.querySelector('link[rel=icon]') ? document.querySelector('link[rel=icon]').href : '', sizes: '180x180', type: 'image/png', purpose: 'any maskable' }] };
+    var mani = { name: 'مداولة — رول الجلسة وأدوات الدائرة', short_name: 'مداولة', lang: 'ar', dir: 'rtl', start_url: '.', scope: '.', display: 'standalone', background_color: '#F5F3EE', theme_color: '#1C2E4A', icons: [{ src: document.querySelector('link[rel=icon]') ? document.querySelector('link[rel=icon]').href : '', sizes: '180x180', type: 'image/png', purpose: 'any maskable' }] };
     var blob = new Blob([JSON.stringify(mani)], { type: 'application/manifest+json' });
     var l = document.createElement('link'); l.rel = 'manifest'; l.href = URL.createObjectURL(blob); document.head.appendChild(l);
     }
