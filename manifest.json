@@ -1,6 +1,6 @@
 {
-  "name": "عمّالي — مبادئ الدائرة العمالية",
-  "short_name": "عمّالي",
+  "name": "مداولة — رول الجلسة وأدوات الدائرة",
+  "short_name": "مداولة",
   "lang": "ar",
   "dir": "rtl",
   "id": "./",
@@ -8,12 +8,32 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#F5F3EE",
-  "theme_color": "#1C2E4A",
+  "background_color": "#F4F1EA",
+  "theme_color": "#0B1F3B",
   "icons": [
-    { "src": "icon-180.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
