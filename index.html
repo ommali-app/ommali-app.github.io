@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261002105509">
+<meta name="amali-build" content="20261002161837">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1001,6 +1001,7 @@ html.noscroll,html.noscroll body{overflow:hidden;overscroll-behavior:none;touch-
 .rw input[type=date],.rw input[type=text]{padding:6px 10px;border:1px solid var(--line2);border-radius:8px;background:var(--bg);font-size:14px;color:var(--ink);min-width:0;flex:1 1 160px;max-width:100%}
 .rw input[type=date]{flex:0 0 auto}
 .tblw{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:8px}
+.tag.no{background:var(--bad-soft);color:var(--bad)}.impg{border:1px solid var(--line);border-radius:10px;margin:8px 0;background:var(--panel)}.impg>summary{padding:10px 12px;cursor:pointer;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:14px}.impg[open]>summary{border-bottom:1px solid var(--line)}.impg>.rw,.impg>.rlwarn,.impg>.tblw{margin:8px 10px}.impg .rlwarn.okw{background:var(--ok-soft,#e7f4ec);color:var(--ok,#1c6b3c)}
 table.imp{width:100%;border-collapse:collapse;font-size:13px}
 table.imp th,table.imp td{padding:5px 6px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
 table.imp th{background:var(--panel2);font-size:12px;color:var(--ink2)}
@@ -1639,6 +1640,8 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 #sess .ssundo span{flex:1;min-width:0;line-height:1.6}#sess .ssundo .btn{background:#C9A24B;color:#0B1F3B;border:0;font-weight:700;min-height:40px;padding:0 18px;flex:none;white-space:nowrap}
 
 /* V139 — «دائرتك» */
+@media (min-width:900px){.wnsheet .msbox{inset:auto;top:50%;left:50%;transform:translate(-50%,-50%);width:520px;max-height:84vh;border-radius:18px}}
+.wnsheet .wnv{margin:10px 0 4px;font-weight:700;color:var(--ink)}.wnsheet ul{margin:0 0 6px;padding-inline-start:20px;line-height:1.9;font-size:14.5px}.wnsheet .wnlead{margin:4px 0 8px;color:var(--ink2);font-size:13px}.wnsheet .row{margin-top:12px}
 @media (min-width:900px){.psheet .msbox{inset:auto;top:50%;left:50%;transform:translate(-50%,-50%);width:560px;max-height:88vh;border-radius:18px}}
 #psbody{display:flex;flex-direction:column;gap:14px;padding:4px 2px 6px;overflow-y:auto}
 .psheet .pslead{margin:0;color:var(--ink2);font-size:14px;line-height:1.8}
@@ -1717,6 +1720,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
   <nav class="nav" id="nav" aria-label="التنقل"><div class="grp" id="grp" role="tablist"><button type="button" data-g="home" title="الرئيسية" aria-label="الرئيسية"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg></button><button type="button" data-g="case">الجلسة</button><button type="button" data-g="write">الأحكام</button><button type="button" data-g="research">المراجع</button><button type="button" data-g="ai">المساعد</button></div><span class="sep" aria-hidden="true"></span><div class="seg" id="seg"><button type="button" data-v="p" data-g="research" class="on">المبادئ</button><button type="button" data-v="l" data-g="research">التشريعات</button><button type="button" data-v="m" data-g="research">الخرائط</button><button type="button" data-v="t" data-g="research">الخط الزمني</button><button type="button" data-v="r" data-g="case">رول الجلسة</button><button type="button" data-v="i" data-g="case">تحليل الملف</button><button type="button" data-v="x" data-g="case">إخفاء الهوية</button><button type="button" data-v="s" data-g="case">حاسبة المستحقات</button><button type="button" data-v="e" data-g="case">المواعيد الإجرائية</button><button type="button" data-v="f" data-g="case">ملفاتي</button><button type="button" data-v="d" data-g="write">فحص المسودة</button><button type="button" data-v="w" data-g="write">Word وصياغاتي</button><button type="button" data-v="a" data-g="ai">المساعد</button></div><button class="ib gsbtn gsnav" id="gsbtn2" title="بحث شامل: مادة، طعن، مبدأ، أداة (Ctrl+K)" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg><span>بحث شامل</span><span class="kbd gskbd">Ctrl K</span></button></nav>
 </header>
 <nav class="bnav" id="bnav" aria-label="التنقل السفلي"><button type="button" data-g="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1z"/></svg><span>اليوم</span></button><button type="button" data-g="roll"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M7 14h4M7 17h7"/></svg><span>الجلسة</span></button><button type="button" data-g="research"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>البحث</span></button><button type="button" data-g="more" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>المزيد</span></button></nav>
+<div class="msheet wnsheet" id="wnsheet" hidden><div class="msbg" id="wnbg"></div><div class="msbox" role="dialog" aria-modal="true" aria-labelledby="wnh"><div class="msh"><b id="wnh">ما الجديد</b><button type="button" class="ib" id="wnclose" aria-label="إغلاق">✕</button></div><div id="wnbody"></div><div class="row"><button type="button" class="btn primary" id="wnok">حسنًا</button></div></div></div>
 <div class="msheet psheet" id="psheet" hidden><div class="msbg" id="psbg"></div><div class="msbox" role="dialog" aria-modal="true" aria-labelledby="psh"><div class="msh"><b id="psh">دائرتك</b><button type="button" class="ib" id="psclose" aria-label="إغلاق">✕</button></div><div id="psbody"></div></div></div>
 <div class="msheet hsheet" id="hsheet" hidden><div class="msbg" id="hsbg"></div><div class="msbox" role="dialog" aria-modal="true" aria-labelledby="hsh"><div class="msh"><b id="hsh">طريقة الاستخدام</b><button type="button" class="ib" id="hsclose" aria-label="إغلاق">✕</button></div><div id="hsbody"></div><div class="hsft" id="hsft"></div></div></div>
 <div class="msheet" id="msheet" hidden><div class="msbg" id="msbg"></div><div class="msbox" role="dialog" aria-modal="true" aria-label="كل الأدوات"><div class="msh"><b>كل الأدوات</b><button type="button" class="ib" id="msclose" aria-label="إغلاق">✕</button></div><div id="mslist"></div></div></div>
@@ -1981,8 +1985,8 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
   </div>
   <div class="rlpanel hidden" id="rl_impbox">
     <h3>استيراد كشف الجلسة من نظام الاطلاع</h3>
-    <p class="k">اختر ملف الكشف (PDF محفوظ من الطباعة، أو صورة)، أو انسخ جدول الكشف من الصفحة والصقه. القراءة على جهازك، ويُؤخذ منها رقم القضية والرقم الآلي وحالة الإعلان والقرار فقط.</p>
-    <div class="row"><label class="btn"><input type="file" id="rl_kfile" accept="application/pdf,.pdf,image/*" hidden>اختيار ملف أو صورة</label><span class="help" id="rl_kst"></span></div>
+    <p class="k">اختر ملف الكشف (PDF محفوظ من الطباعة، أو صورة)، أو <b>عدة كشوف معًا</b> فيوزّعها التطبيق على تواريخ جلساتها المكتوبة فيها، وتراجعها قبل الإضافة. يقبل أيضًا قائمة أمين السر (صورة أو PDF ممسوح). أو انسخ جدول الكشف من الصفحة والصقه. القراءة على جهازك، ويُؤخذ منها رقم القضية والرقم الآلي وحالة الإعلان والقرار فقط.</p>
+    <div class="row"><label class="btn"><input type="file" id="rl_kfile" accept="application/pdf,.pdf,image/*" multiple hidden>اختيار ملف أو أكثر</label><span class="help" id="rl_kst"></span></div>
     <textarea id="rl_ktext" placeholder="أو الصق هنا جدول الكشف المنسوخ من صفحة النظام…"></textarea>
     <div class="row"><button type="button" class="btn" id="rl_kgo">قراءة النص الملصوق</button></div>
     <div id="rl_imprev"></div>
@@ -2360,7 +2364,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     </section>
     <section class="ds"><h3>عن التطبيق</h3>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V139 <span id="dbuild"></span></p>
+      <p class="dver">الإصدار V141 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -2921,18 +2925,21 @@ const pdfHint = () => IS_IOS ? 'لحفظه PDF: في نافذة الطباعة (
 // V121: تطبيق الشاشة الرئيسية على الآيفون لا يطبع (window.print لا تفعل شيئًا) — يُفتح المحتوى في صفحة طباعة مستقلة (docs/amali-print.html)
 // داخل نافذة Safari فيها «طباعة» و«حفظ PDF». المحتوى في جزء الرابط بعد # (لا يُرسل إلى الخادم). الآيباد المثبّت يطبع مباشرة.
 const iphoneApp = () => /iPhone|iPod/.test(navigator.userAgent) && isStandalone();
+// V141: Safari على iOS/iPadOS يسمح بطباعة واحدة فقط لكل صفحة؛ ما بعدها يُظهر «حُجبت الطباعة التلقائية» (Ignore/Allow). فالطباعة الأولى مباشرة، وما بعدها تُفتح في صفحة طباعة مستقلة (أولى في تبويبها) فلا تظهر الرسالة.
+let PRN_N = 0;
+const printByPage = () => iphoneApp() || (IS_IOS && PRN_N >= 1);
 function printViaPage(title, html) {
   const b = btoa(unescape(encodeURIComponent(JSON.stringify({ t: title, h: html })))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   const u = new URL('docs/amali-print.html', location.href).href + '#z=' + b;
   const w = window.open(u, '_blank'); if (!w) location.href = u;
 }
-function printNow(cls) { document.body.classList.add(cls); printCleanup(cls); try { syToast(pdfHint()); } catch (e) {} try { window.print(); } catch (e) { document.body.classList.remove(cls); } }   // V119: تلميح حفظ PDF مع كل طباعة
+function printNow(cls) { PRN_N++; document.body.classList.add(cls); printCleanup(cls); try { syToast(pdfHint()); } catch (e) {} try { window.print(); } catch (e) { document.body.classList.remove(cls); } }   // V119: تلميح حفظ PDF مع كل طباعة
 function printClone(node) { const c = node.cloneNode(true); c.querySelectorAll('button,input,select,textarea,.acts,.rel,.linkbtn,[data-off],.pa,script,style').forEach(x => x.remove()); c.querySelectorAll('[id]').forEach(x => x.removeAttribute('id')); return c; }
 function printOnly(title, nodes, foot) {
   const box = document.getElementById('printbox'); box.innerHTML = ''; const h = document.createElement('div'); h.className = 'pbx-h'; h.textContent = title; box.appendChild(h);
   nodes.forEach(n => n && box.appendChild(printClone(n)));
   const f = document.createElement('div'); f.className = 'pbx-s'; f.textContent = (foot ? foot + ' · ' : '') + 'طُبع من «مداولة» — ' + new Date().toLocaleDateString('ar-KW-u-nu-latn') + ' · مسودة عمل للمراجعة'; box.appendChild(f);
-  if (iphoneApp()) { printViaPage(title, box.innerHTML); return; }   // V121
+  if (printByPage()) { printViaPage(title, box.innerHTML); return; }   // V121/V141
   if (false) {   // V120: أُلغي — iPadOS/iOS الحديث يطبع من تطبيق الشاشة الرئيسية (ثبت على جهاز القاضي 30/9)، ومشاركة ملف HTML لا تعرض «طباعة». كان: تطبيق الشاشة الرئيسية على iPhone/iPad لا يطبع — تُفتح الصفحة عبر المشاركة
     const css = 'body{font-family:"Noto Naskh Arabic","Traditional Arabic",serif;margin:16px;color:#000;background:#fff;line-height:1.9;direction:rtl}.pbx-h{font-weight:700;font-size:17px;border-bottom:1.5px solid #000;padding-bottom:6px;margin-bottom:10px}.pbx-s{font-size:12px;color:#444;border-top:1px solid #999;margin-top:14px;padding-top:6px}.tag{border:1px solid #999;font-size:11px;padding:0 6px;border-radius:4px;margin:2px;display:inline-block}';
     const doc = '<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(title) + '</title><style>' + css + '</style></head><body>' + box.innerHTML + '</body></html>';
@@ -3812,6 +3819,7 @@ async function rlReadImage(blob, st) {
     const items = rlSplitGlued((data.words || []).filter(w => w.confidence >= 40 || /\//.test(w.text)).map(w => ({ s: w.text, x: (w.bbox.x0 + w.bbox.x1) / 2, y: (w.bbox.y0 + w.bbox.y1) / 2, h: w.bbox.y1 - w.bbox.y0 })));
     const rows = rlParseItems(items).filter(r => r.auto || rows0Ok(r));
     function rows0Ok(r) { return /^\d{2,4}\/20\d{2}$/.test(r.code); }
+    if (!rows.length) return await rlReadClerk(cv, eng, st);   // V140: ليس كشف النظام (لا «سنة/رقم») — قائمة أمين السر: أرقام القضايا بصيغة ٨ خانات
     const ys = rows.map(r => r.y);
     for (let i = 0; i < rows.length; i++) {
       const r = rows[i]; const rh = ys.length > 1 ? Math.abs((ys[i + 1] != null ? ys[i + 1] : ys[i - 1]) - ys[i]) : r.h * 4;
@@ -3835,6 +3843,41 @@ async function rlReadImage(blob, st) {
     }
     return { rows, meta: {} };
   } finally { try { await eng.terminate(); } catch (e) {} if (ara) try { await ara.terminate(); } catch (e) {} }
+}
+// V140 — قائمة أمين السر (صورة ممسوحة): تاريخ الجلسة «جلسة : 2026-10-07» (السنة أولًا)، ورقم القضية ٨ خانات «26000173» = 173/2026، ولا قرار ولا إعلان.
+// في الصفحة تاريخ آخر هو تاريخ الطباعة (بجانب الوقت) — لا يُؤخذ تاريخًا للجلسة. الحكم على الصف بتسلسله 001..N: إن نقص رقم نُبّه المستخدم.
+function rlClerkTokens(words) {
+  const it = [];
+  words.forEach(w => { const t = String(w.text || '').replace(/\s+/g, ''); if (!t) return; it.push({ s: t, x: (w.bbox.x0 + w.bbox.x1) / 2, y: (w.bbox.y0 + w.bbox.y1) / 2, h: Math.max(8, w.bbox.y1 - w.bbox.y0) }); });
+  return it;
+}
+function rlClerkParse(it) {
+  const out = { rows: [], meta: {}, seq: 0, seen: 0 };
+  // التواريخ: السنة أولًا؛ تاريخ الطباعة هو القريب من خانة الوقت hh:mm:ss
+  const times = it.filter(t => /^\d{1,2}:\d{2}(:\d{2})?$/.test(t.s));
+  const dates = []; it.forEach(t => { const m = t.s.match(/(?<!\d)(20\d{2})-(\d{1,2})-(\d{1,2})(?!\d)/); if (m && +m[2] >= 1 && +m[2] <= 12 && +m[3] >= 1 && +m[3] <= 31) dates.push({ d: rlIso(+m[1], +m[2], +m[3]), t, print: times.some(k => Math.abs(k.y - t.y) < t.h * 4 && Math.abs(k.x - t.x) < t.h * 14) }); });
+  const sess = dates.filter(d => !d.print); const pr = dates.filter(d => d.print);
+  if (sess.length) out.meta.sess = sess.sort((a, b) => (a.d < b.d ? 1 : -1))[0].d;   // إن تعدّدت: الأحدث
+  else if (pr.length) out.meta.printed = pr[0].d;
+  if (pr.length) out.meta.printed = pr[0].d;
+  // أرقام القضايا: ٢ خانة للسنة + ٦ للرقم (الصفران الأولان دائمًا في الواقع)
+  const cases = []; it.forEach(t => { const m = t.s.match(/(?<!\d)(2\d)(\d{6})(?!\d)/); if (m && +m[2] > 0) cases.push({ code: (+m[2]) + '/20' + m[1], t }); });
+  cases.sort((a, b) => a.t.y - b.t.y);
+  // التسلسل (001…N) في العمود الأيمن: يُقارَن بعدد ما قُرئ لكشف الصف الناقص. الرقم الآلي لا يُؤخذ من الصورة (تُخطئ القراءة الضوئية فيه أحيانًا) — يأتي من كشف النظام أو يُكتب.
+  const xs = cases.map(c => c.t.x).sort((p, q) => p - q), mx = xs.length ? xs[xs.length >> 1] : 0, hh = cases.length ? cases[0].t.h : 10;
+  const sq = it.filter(t => /^0\d{2}$/.test(t.s) && t.x > mx + hh * 2 && +t.s <= 300), lastC = cases.length ? cases[cases.length - 1].t : null;
+  const lastSeq = lastC ? sq.filter(t => Math.abs(t.y - lastC.y) < hh * 1.6).sort((p, q) => Math.abs(p.y - lastC.y) - Math.abs(q.y - lastC.y))[0] : null;   // تسلسل آخر صف فقط: قراءته أوثق من أعلى رقم في العمود
+  const seen = new Set();
+  cases.forEach(c => { if (seen.has(c.code)) return; seen.add(c.code); out.rows.push({ code: c.code, auto: '', ann: null, dec: '', writer: '', sure: false, y: c.t.y, h: c.t.h }); });
+  out.seq = lastSeq ? +lastSeq.s : 0; out.seen = out.rows.length;
+  return out;
+}
+async function rlReadClerk(cv, eng, st) {
+  st.textContent = 'قراءة قائمة أمين السر…';
+  await eng.setParameters({ tessedit_pageseg_mode: '11', tessedit_char_whitelist: '0123456789-:/' });
+  const { data } = await eng.recognize(cv);
+  const r = rlClerkParse(rlClerkTokens(data.words || []));
+  return { rows: r.rows, meta: r.meta, clerk: { seq: r.seq, seen: r.seen } };
 }
 // ---- رول الجلسة (V47): مكيَّف لطريقة عمل الدائرة — كشف النظام ← مراجعة الجاهزية ← قرار الجلسة ← توزيع المحجوزة
 const RL_STAGES = ['قضية جديدة', 'للإعلان', 'لإحضار المتهم', 'للاطلاع والرد', 'للمذكرات', 'لدى الخبير', 'للتحقيق', 'للاستجواب', 'لحلف اليمين', 'لسماع الشهود', 'للمرافعة', 'محجوزة للحكم', 'محجوزة للحكم مع مذكرات', 'مد أجل النطق', 'صدر الحكم', 'شُطبت', 'موقوفة'];
@@ -4414,7 +4457,7 @@ function rlMatch(c, q) {
 }
 const RLDIST = document.getElementById('rl_dist');
 // V130: منفذ للاختبارات الآلية فقط (لا يغيّر شيئًا بذاته)
-window.__rl = { get RL() { return RL; }, get RLX() { return RLX; }, autoLink: () => rlAutoLink(), prepOf: c => rlPrepOf(c), prepSet: (c, k, on) => rlPrepSet(c, k, on), sessList: d => rlSessList(d), sortList: d => rlSortList(rlDayList(d)), unlink: c => rlUnlink(c), parse: (it) => rlParseItems(it), meta: t => rlMeta(t), impShow: (r, h) => rlImpShow(r, h), save: () => rlSave(), render: () => rlRender() };
+window.__rl = { get RL() { return RL; }, get RLX() { return RLX; }, autoLink: () => rlAutoLink(), prepOf: c => rlPrepOf(c), prepSet: (c, k, on) => rlPrepSet(c, k, on), sessList: d => rlSessList(d), sortList: d => rlSortList(rlDayList(d)), unlink: c => rlUnlink(c), parse: (it) => rlParseItems(it), meta: t => rlMeta(t), multi: (r, e) => rlImpMulti(r, e), groups: r => rlImpGroups(r), clerkParse: it => rlClerkParse(it), impShow: (r, h) => rlImpShow(r, h), readFile: (f, st) => rlReadFile(f, st), save: () => rlSave(), render: () => rlRender() };
 // V130: بعد أول استيراد للكشف — ثلاث خطوات قصيرة تقول ماذا بعد (تظهر مرة واحدة حتى يُغلقها المستخدم)
 let rlGuide = false;
 function rlGuideHtml() { const P = rlProf(), one = P.n === 1;
@@ -4505,7 +4548,7 @@ function rlRender() {
 
 // V89 — ترويسة موحّدة لأوراق الرول المطبوعة
 const RL_DOC_CSS = ':is(#rl_sheetout,body) .rdoc.rdoc{font-family:"IBM Plex Sans Arabic","Noto Naskh Arabic",-apple-system,Tahoma,Arial,sans-serif;color:#111;direction:rtl;-webkit-print-color-adjust:exact;print-color-adjust:exact}:is(#rl_sheetout,body) .rdoc.rdoc .rdh{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;padding:0 0 10px;border-bottom:3px double #1C2E4A;margin:0 0 12px}:is(#rl_sheetout,body) .rdoc.rdoc .rdc b{display:block;font-size:15pt;color:#1C2E4A;line-height:1.35}:is(#rl_sheetout,body) .rdoc.rdoc .rdc span{display:block;font-size:11pt;color:#8A6A2A;font-weight:600}:is(#rl_sheetout,body) .rdoc.rdoc .rdm svg{width:52px;height:52px;display:block}:is(#rl_sheetout,body) .rdoc.rdoc .rdd{text-align:left;font-size:8.5pt;color:#666}:is(#rl_sheetout,body) .rdoc.rdoc .rdd b{display:block;font-size:10.5pt;color:#111}:is(#rl_sheetout,body) .rdoc.rdoc h2.rdt{text-align:center;font-size:17pt;margin:2px 0 8px;color:#1C2E4A;border:0}:is(#rl_sheetout,body) .rdoc.rdoc .rdchips{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:0 0 12px}:is(#rl_sheetout,body) .rdoc.rdoc .rdchip{display:inline-flex;align-items:baseline;gap:8px;border:1.5px solid #1C2E4A;border-radius:999px;padding:3px 14px;font-size:11pt;background:#fff}:is(#rl_sheetout,body) .rdoc.rdoc .rdchip i{font-style:normal;color:#555;font-size:9pt}:is(#rl_sheetout,body) .rdoc.rdoc .rdchip.j{border-color:#B8893A;background:#FBF3E2}:is(#rl_sheetout,body) .rdoc.rdoc .rdchip.j i{color:#8A6A2A}:is(#rl_sheetout,body) .rdoc.rdoc .rdchip.g{border-color:#9AA3AE}:is(#rl_sheetout,body) .rdoc.rdoc table{width:100%;border-collapse:collapse;font-size:10.5pt;margin:0}:is(#rl_sheetout,body) .rdoc.rdoc th{background:#1C2E4A;color:#fff;font-weight:700;padding:6px 7px;border:1px solid #1C2E4A;text-align:right;vertical-align:middle}:is(#rl_sheetout,body) .rdoc.rdoc td{border:1px solid #AAB2BC;padding:6px 7px;vertical-align:top;text-align:right}:is(#rl_sheetout,body) .rdoc.rdoc tbody tr:nth-child(even) td{background:#F4F6F8}:is(#rl_sheetout,body) .rdoc.rdoc tr{break-inside:avoid}:is(#rl_sheetout,body) .rdoc.rdoc td.num{text-align:center;color:#1C2E4A;font-weight:700;width:4%}:is(#rl_sheetout,body) .rdoc.rdoc td.code b{font-size:11.5pt}:is(#rl_sheetout,body) .rdoc.rdoc td.ck{text-align:center;width:5%}:is(#rl_sheetout,body) .rdoc.rdoc td.dec,:is(#rl_sheetout,body) .rdoc.rdoc th.dec{width:22%}:is(#rl_sheetout,body) .rdoc.rdoc tbody tr td.dec{background:#fff}:is(#rl_sheetout,body) .rdoc.rdoc td.no{font-weight:700;color:#8B1E1E}:is(#rl_sheetout,body) .rdoc.rdoc tr.lk td{border-right:3px solid #B8893A}:is(#rl_sheetout,body) .rdoc.rdoc h3{font-size:12.5pt;color:#1C2E4A;margin:14px 0 6px;padding-right:8px;border-right:4px solid #B8893A}:is(#rl_sheetout,body) .rdoc.rdoc .nt{font-size:9pt;color:#444;margin-top:3px}:is(#rl_sheetout,body) .rdoc.rdoc ul{margin:0;padding-right:14px}:is(#rl_sheetout,body) .rdoc.rdoc .rdist{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:10px;margin:0 0 14px}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol{border:1.5px solid #1C2E4A;border-radius:10px;overflow:hidden;break-inside:avoid;background:#fff}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol h4{margin:0;background:#1C2E4A;color:#fff;text-align:center;padding:7px 4px;font-size:11pt;font-weight:700}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol h4 b{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#B8893A;color:#fff;margin-left:6px;font-size:12pt}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol h4 small{display:block;font-weight:400;font-size:9pt;color:#E9D6AE}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol ol{list-style:none;margin:0;padding:6px 8px;text-align:center;font-size:13pt;font-weight:700;line-height:1.9}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol li+li{border-top:1px dashed #D5DAE0}:is(#rl_sheetout,body) .rdoc.rdoc .rdcol li.e{color:#999;font-weight:400}:is(#rl_sheetout,body) .rdoc.rdoc .rdblk{break-inside:avoid;margin:0 0 10px}:is(#rl_sheetout,body) .rdoc.rdoc .rdwarn{color:#8B1E1E;font-size:10pt;text-align:center;margin:0 0 10px}:is(#rl_sheetout,body) .rdoc.rdoc .sspg{break-inside:avoid;margin:0 0 12px}:is(#rl_sheetout,body) .rdoc.rdoc .dq{margin:5px 0 0;font-size:10.5pt}:is(#rl_sheetout,body) .rdoc.rdoc .rdf{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #1C2E4A;margin-top:12px;padding-top:6px;font-size:8.5pt;color:#555}';
-const RL_SEAL = '<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#1C2E4A"/><circle cx="32" cy="32" r="26.5" fill="none" stroke="#B8893A" stroke-width="1.2"/><g stroke="#E9C77B" stroke-width="2.2" stroke-linecap="round" fill="none"><path d="M32 16v30M22 47h20M18 22h28"/><path d="M18 22l-6 12h12zM46 22l-6 12h12z"/></g><circle cx="32" cy="15" r="2.4" fill="#E9C77B"/></svg>';
+const RL_SEAL = '<svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="13" fill="#0B1F3B"/><g fill="none" stroke="#C9A24B" stroke-opacity=".55" stroke-width="1"><rect x="4" y="4" width="5" height="5"/><rect x="10" y="4" width="5" height="5"/><rect x="49" y="55" width="5" height="5"/><rect x="55" y="55" width="5" height="5"/></g><path d="M22 22 l9 10 -9 10 -9 -10z" fill="#F2D48A"/><path d="M42 22 l9 10 -9 10 -9 -10z" fill="#C9A24B"/></svg>';
 function rlCircLines() { const c = (RL.circuit || '').trim(); if (!c) return []; return c.split(/\s*[—–|]\s*|\s+[-\/]\s+/).map(x => x.trim()).filter(Boolean).slice(0, 2); }
 function rlRole(k) { return ({ p: 'الرئيس', r: 'العضو اليمين', l: 'العضو اليسار', d: 'العضو (د)' })[k] || RL_W[k] || ''; }
 function rlChip(label, val, cls) { return '<span class="rdchip' + (cls ? ' ' + cls : '') + '"><i>' + label + '</i><b>' + val + '</b></span>'; }
@@ -4593,7 +4636,7 @@ function rlGlyphWords(its) {
 }
 function rlLines(items) { const L = []; items.slice().sort((a, b) => a.y - b.y).forEach(it => { const l = L.find(z => Math.abs(z.y - it.y) < Math.max(3, it.h * 0.5)); if (l) l.a.push(it); else L.push({ y: it.y, a: [it] }); }); return L.map(l => l.a.sort((p, q) => q.x - p.x).map(p => p.s).join(' ')); }
 async function rlReadFile(file, st) {
-  let items = [], text = '', scanned = [], pOff = 0;
+  let items = [], text = '', scanned = [], pOff = 0, smeta = {}, sclerk = null;
   if (/pdf/i.test(file.type) || /\.pdf$/i.test(file.name)) {
     st.textContent = 'قراءة ملف PDF…'; await rlLoadPdfjs();
     const pdf = await window.pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
@@ -4603,12 +4646,14 @@ async function rlReadFile(file, st) {
       const its = tc.items.filter(x => x.str && x.str.trim()).map(x => ({ s: x.str, x: x.transform[4] + (x.width || 0) / 2, w: x.width || 0, y: off + vp.height - x.transform[5], h: Math.abs(x.transform[3]) || x.height || 10, pg: i }));
       text += tc.items.map(x => x.str).join(' ') + '\n';
       if (its.filter(x => /\d/.test(x.s)).length >= 3) items = items.concat(rlGlyphWords(its));
-      else { st.textContent = 'الصفحة ' + i + ' ممسوحة — قراءة ضوئية على جهازك…'; const v2 = page.getViewport({ scale: 3 }); const cv = document.createElement('canvas'); cv.width = v2.width; cv.height = v2.height; await page.render({ canvasContext: cv.getContext('2d'), viewport: v2 }).promise; const blob = await new Promise(r => cv.toBlob(r, 'image/png')); const R = await rlReadImage(blob, st); scanned = scanned.concat(R.rows); }
+      else { st.textContent = 'الصفحة ' + i + ' ممسوحة — قراءة ضوئية على جهازك…'; const v2 = page.getViewport({ scale: 3 }); const cv = document.createElement('canvas'); cv.width = v2.width; cv.height = v2.height; await page.render({ canvasContext: cv.getContext('2d'), viewport: v2 }).promise; const blob = await new Promise(r => cv.toBlob(r, 'image/png')); const R = await rlReadImage(blob, st); scanned = scanned.concat(R.rows); if (R.meta) smeta = Object.assign(smeta, R.meta); if (R.clerk) sclerk = { seq: R.clerk.seq, seen: scanned.length }; }
     }
   } else if (/^image\//.test(file.type)) { st.textContent = 'قراءة ضوئية للصورة على جهازك…'; return await rlReadImage(file, st); }
   else { text = await file.text(); return { rows: rlParseText(text, rlWho), meta: rlMeta(text) }; }
   const lines = rlLines(items); const meta = rlMeta(lines.join('\n'));
-  return { rows: rlParseItems(items, rlWho).concat(scanned), meta };
+  Object.keys(smeta).forEach(k => { if (!meta[k]) meta[k] = smeta[k]; });
+  const out = { rows: rlParseItems(items, rlWho).concat(scanned), meta }; if (sclerk && !items.length) out.clerk = sclerk;   // V140
+  return out;
 }
 function rlImpShow(res, how) {
   const box = $('#rl_imprev'); const rows = res.rows;
@@ -4617,6 +4662,7 @@ function rlImpShow(res, how) {
   rlImp = { rows, sd, meta: res.meta };
   const decs = RL_STAGES;
   box.innerHTML = '<div class="h">قُرئ ' + rows.length + ' قضية من ' + how + (res.meta.sess ? ' — رول جلسة ' + rlDay(res.meta.sess) + ' ' + rlFmt(res.meta.sess) : res.meta.date ? ' (تاريخ التقرير ' + rlFmt(res.meta.date) + ')' : '') + '. راجع الأرقام قبل الإضافة — لا يُحفظ أي اسم.</div>'
+    + (res.clerk ? '<div class="rlwarn">قائمة أمين السر تحمل أرقام القضايا فقط — بلا قرارات ولا حالة إعلان ولا رقم آلي؛ أكملها من كشف النظام أو بيدك.' + (res.clerk.seq && res.clerk.seq !== res.clerk.seen ? ' آخر تسلسل في القائمة ' + res.clerk.seq + ' وقُرئ ' + res.clerk.seen + ' — قارن بالورقة.' : '') + '</div>' : '')
     + (rows.some(r => RL_RES.includes(r.dec)) && !Object.values(RL.members || {}).some(Boolean) ? '<div class="rlwarn">لتحديد كاتب الحكم تلقائيًا من الكشف: اكتب أسماء أعضاء الدائرة مرة واحدة في «التقويم والدائرة».</div>' : '')
     + (rows.some(r => !r.auto || !r.ann || !r.dec) ? '<div class="rlwarn">الخانات المعلَّمة بـ«؟» لم تُقرأ؛ أكملها من الكشف قبل الإضافة، أو اتركها فارغة.</div>' : rows.some(r => !r.sure) ? '<div class="rlwarn">راجع عمود القرار.</div>' : '')
     + '<div class="rw"><span>جلسة</span><input type="date" id="rl_impd" value="' + sd + '"><div class="chips" id="rl_impdc"></div></div>'
@@ -4646,6 +4692,100 @@ function rlImpShow(res, how) {
     if (!RL.circuit && rlImp.meta.circuit) RL.circuit = 'الدائرة ' + rlImp.meta.circuit; $('#rl_circ').value = RL.circuit;
     rlAutoLink(); try { if (!localStorage.getItem('tm_rlguide')) rlGuide = true; } catch (e) {}
     rlSave(); const wasRes = !!($('#rl_impjm') && $('#rl_impjm').value === 'res'); rlImp = null; $('#rl_impbox').classList.add('hidden'); rlMode = wasRes ? 'res' : 'roll'; rlDaySel = day; rlRender(); toast('أُضيف ' + add + ' وحُدّث ' + upd + ' لجلسة ' + rlFmt(day));
+  };
+}
+// ---- V140: استيراد عدة كشوف معًا — يُوزَّع كل كشف على تاريخ جلسته المقروء منه؛ كشف النظام وقائمة أمين السر لليوم نفسه يُدمجان
+const rlN = (n, one, two, few, many) => n === 1 ? one : n === 2 ? two : n >= 3 && n <= 10 ? n + ' ' + few : n + ' ' + many;   // أعداد العربية: جلسة واحدة / جلستان / ٣–١٠ جلسات / ١١ جلسة
+function rlImpGroups(results) {
+  const G = new Map(); let u = 0;
+  results.forEach(({ name, res }) => {
+    const m = res.meta || {}, key = m.sess || ('u' + (u++));
+    let g = G.get(key); if (!g) { g = { key, sd: m.sess || '', parts: [], circuits: new Set(), printed: '' }; G.set(key, g); }
+    if (m.circuit) g.circuits.add(m.circuit); if (m.printed) g.printed = m.printed;
+    g.parts.push({ kind: res.clerk ? 'c' : 's', name, rows: res.rows || [], clerk: res.clerk || null });
+  });
+  const out = [...G.values()].sort((a, b) => (a.sd && b.sd ? (a.sd < b.sd ? -1 : a.sd > b.sd ? 1 : 0) : a.sd ? -1 : b.sd ? 1 : 0));
+  out.forEach(g => {
+    const S = g.parts.filter(p => p.kind === 's'), C = g.parts.filter(p => p.kind === 'c'), seen = new Set(); g.rows = [];
+    S.forEach(p => p.rows.forEach(r => { if (!seen.has(r.code)) { seen.add(r.code); g.rows.push(Object.assign({}, r, { only: '' })); } }));
+    const cc = new Set(); C.forEach(p => p.rows.forEach(r => cc.add(r.code)));
+    const sc = new Set(g.rows.map(r => r.code));
+    C.forEach(p => p.rows.forEach(r => { if (!seen.has(r.code)) { seen.add(r.code); g.rows.push(Object.assign({}, r, { only: S.length ? 'c' : '' })); } }));
+    if (S.length && C.length) g.rows.forEach(r => { if (sc.has(r.code) && !cc.has(r.code)) r.only = 's'; });
+    g.hasS = !!S.length; g.hasC = !!C.length; g.dup = S.length > 1 || C.length > 1;
+    g.cnt = C.map(p => p.clerk).filter(Boolean).map(k => k.seq && k.seq !== k.seen ? k : null).find(Boolean) || null;   // تسلسل قائمة أمين السر لا يطابق ما قُرئ
+  });
+  return out;
+}
+function rlImpMulti(results, errs) {
+  const box = $('#rl_imprev'), groups = rlImpGroups(results);
+  const total = groups.reduce((n, g) => n + g.rows.length, 0);
+  if (!total) { box.innerHTML = '<div class="rlwarn">لم يُعثر على أرقام قضايا في الملفات.' + (errs && errs.length ? '<br>' + errs.map(esc).join('<br>') : '') + '</div>'; return; }
+  const myC = (String(RL.circuit || '').match(/\d+/) || [''])[0], cnt = {}; groups.forEach(g => g.circuits.forEach(c => cnt[+c] = (cnt[+c] || 0) + 1));
+  const ref = myC ? String(+myC) : (Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a])[0] || '');
+  const inGroups = {}; groups.forEach(g => g.rows.forEach(r => { (inGroups[r.code] = inGroups[r.code] || new Set()).add(g.key); }));
+  rlImp = { multi: true, groups, ref };
+  const decs = RL_STAGES;
+  const gh = (g, gi) => {
+    const foreign = !!(ref && g.circuits.size && ![...g.circuits].some(c => String(+c) === ref));
+    const warns = [];
+    if (!g.sd) warns.push('لم يُقرأ تاريخ الجلسة من هذا الكشف — اختر التاريخ بنفسك.');
+    else if (!rlIsSession(g.sd, RL.cal)) warns.push('التاريخ المقروء (' + rlFmt(g.sd) + ') ليس يوم انعقاد في تقويم دائرتك — تأكد منه.');
+    if (foreign) warns.push('رقم الدائرة في هذا الكشف (' + [...g.circuits].map(c => +c).join('، ') + ') يختلف عن دائرتك (' + ref + ') — لم تُعلَّم قضاياه؛ علّمها إن كان الكشف لدائرتك.');
+    if (g.hasC && !g.hasS) warns.push('قائمة أمين السر تحمل أرقام القضايا فقط — بلا قرارات ولا حالة إعلان ولا رقم آلي؛ أكملها من كشف النظام أو بيدك.');
+    if (g.cnt) warns.push('آخر تسلسل في قائمة أمين السر ' + g.cnt.seq + ' وقُرئ ' + g.cnt.seen + ' — قد تكون قضية لم تُقرأ؛ قارن بالورقة.');
+    const oS = g.rows.filter(r => r.only === 's').length, oC = g.rows.filter(r => r.only === 'c').length;
+    if (oS || oC) warns.push('اختلاف بين الكشفين: ' + (oS ? oS + ' في كشف النظام فقط' : '') + (oS && oC ? '، ' : '') + (oC ? oC + ' في قائمة أمين السر فقط' : '') + ' — الصفوف معلَّمة.');
+    else if (g.hasS && g.hasC) warns.push('كشف النظام وقائمة أمين السر متطابقان في أرقام القضايا ✓');
+    if (g.dup) warns.push('وصل أكثر من ملف من النوع نفسه لهذه الجلسة — دُمجت القضايا ولم تتكرر.');
+    const multiS = g.rows.filter(r => inGroups[r.code].size > 1).length; if (multiS) warns.push(multiS + ' قضية تظهر في أكثر من جلسة بين هذه الكشوف — تُسجَّل في الأحدث.');
+    const attn = !g.sd || foreign || g.cnt || warns.some(w => /ليس يوم|اختلاف/.test(w));
+    const resv = g.rows.some(r => RL_RES.includes(r.dec) && r.dec !== 'مد أجل النطق');
+    return '<details class="impg" data-g="' + gi + '"' + (attn || groups.length === 1 ? ' open' : '') + '><summary><b class="gt">' + (g.sd ? rlDay(g.sd) + ' ' + rlFmt(g.sd) : 'بلا تاريخ') + '</b><span class="tag stg">' + rlN(g.rows.length, 'قضية واحدة', 'قضيتان', 'قضايا', 'قضية') + '</span><span class="tag">' + (g.hasS && g.hasC ? 'كشف النظام + أمين السر' : g.hasC ? 'قائمة أمين السر' : 'كشف النظام') + '</span>' + (attn ? '<span class="tag no">يحتاج مراجعتك</span>' : '') + '</summary>'
+      + warns.map(w => '<div class="rlwarn' + (/✓/.test(w) ? ' okw' : '') + '">' + esc(w) + '</div>').join('')
+      + '<div class="rw"><span>جلسة</span><input type="date" class="gd" value="' + (g.sd || '') + '"></div>'
+      + (resv ? '<div class="rw"><span>المحجوزة</span><select class="sel jm"><option value="res">حُجزت في هذه الجلسة — النطق في:</option><option value="pron">النطق في هذه الجلسة</option></select><input type="date" class="gj" value="' + (g.sd ? (rlNextSessions(g.sd, 2, RL.cal, false)[1] || '') : '') + '"></div>' : '')
+      + '<div class="tblw"><table class="imp"><thead><tr><th></th><th>م</th><th>رقم القضية</th><th>الرقم الآلي</th><th>الإعلان</th><th>القرار</th><th>الكاتب</th><th>الحالة</th></tr></thead><tbody>'
+      + g.rows.map((r, i) => { const ex = rlCardOf(r.code); r.annS = r.ann ? (r.ann.prev ? 'سابق' : r.ann.d + '/' + r.ann.t) : ''; return '<tr data-i="' + i + '"><td><input type="checkbox"' + (foreign ? '' : ' checked') + '></td><td>' + (i + 1) + '</td><td><input class="c" value="' + esc(r.code) + '">' + (r.only === 's' ? '<div class="tag no">في النظام فقط</div>' : r.only === 'c' ? '<div class="tag no">في أمين السر فقط</div>' : '') + '</td><td><input class="a" value="' + esc(r.auto) + '" inputmode="numeric" placeholder="؟"></td><td><input class="n' + (r.ann && r.ann.d < r.ann.t ? ' no' : '') + '" value="' + r.annS + '" placeholder="؟"></td><td><select class="d"><option value="">—</option>' + decs.map(x => '<option' + (x === r.dec ? ' selected' : '') + '>' + x + '</option>').join('') + '</select></td><td><select class="w"><option value="">—</option>' + Object.keys(RL_W).map(k => '<option value="' + k + '"' + (r.writer === k ? ' selected' : '') + '>' + RL_W[k] + '</option>').join('') + '</select></td><td>' + (ex ? '<span class="tag">تحديث</span>' : '<span class="tag stg">جديدة</span>') + '' + '</td></tr>'; }).join('')
+      + '</tbody></table></div></details>';
+  };
+  box.innerHTML = '<div class="h">قُرئ ' + rlN(total, 'قضية واحدة', 'قضيتان', 'قضايا', 'قضية') + ' من ' + rlN(results.length, 'ملف واحد', 'ملفين', 'ملفات', 'ملفًا') + ' — موزَّعة على ' + rlN(groups.length, 'جلسة واحدة', 'جلستين', 'جلسات', 'جلسة') + ' بحسب التاريخ المكتوب في كل كشف. راجع كل جلسة قبل الإضافة — لا يُحفظ أي اسم.</div>'
+    + (errs && errs.length ? '<div class="rlwarn">تعذّرت قراءة: ' + errs.map(esc).join('، ') + '</div>' : '')
+    + groups.map(gh).join('')
+    + '<div class="row"><button type="button" class="btn primary" id="rl_impok">إضافة الجلسات إلى الرول</button><button type="button" class="btn" id="rl_impx">إلغاء</button></div>';
+  box.querySelectorAll('details.impg').forEach(d => {
+    const gd = d.querySelector('.gd'), gj = d.querySelector('.gj');
+    gd.onchange = () => { d.querySelector('.gt').textContent = gd.value ? rlDay(gd.value) + ' ' + rlFmt(gd.value) : 'بلا تاريخ'; if (gj && gd.value) gj.value = rlNextSessions(gd.value, 2, RL.cal, false)[1] || ''; };
+    const jm = d.querySelector('.jm'); if (jm) jm.onchange = () => { gj.disabled = jm.value === 'pron'; };
+  });
+  $('#rl_impx').onclick = () => { rlImp = null; $('#rl_impbox').classList.add('hidden'); };
+  $('#rl_impok').onclick = () => {
+    const ds = [...box.querySelectorAll('details.impg')]; let bad = null;
+    ds.forEach(d => { const on = d.querySelectorAll('tbody input[type=checkbox]:checked').length; const v = d.querySelector('.gd').value; if (on && !/^\d{4}-\d{2}-\d{2}$/.test(v) && !bad) bad = d; });
+    if (bad) { bad.open = true; bad.scrollIntoView({ block: 'center' }); toast('اختر تاريخ الجلسة لكل كشف قبل الإضافة'); return; }
+    let add = 0, upd = 0, sess = new Set(); const now = Date.now(), days = [];
+    ds.slice().sort((p, q) => (p.querySelector('.gd').value || '9').localeCompare(q.querySelector('.gd').value || '9')).forEach(d => {
+      const day = d.querySelector('.gd').value, jm = d.querySelector('.jm'), gj = d.querySelector('.gj'); let k = 0;
+      d.querySelectorAll('tbody tr').forEach(tr => {
+        if (!tr.querySelector('input[type=checkbox]').checked) return; k++;
+        const pc = rlCaseOf(tr.querySelector('.c').value); if (!pc) return;
+        const nv = tr.querySelector('.n').value.trim(); const auto = AR2EN(tr.querySelector('.a').value.trim()).replace(/\D/g, ''), ann = /سابق/.test(nv) ? { d: 1, t: 1, prev: 1 } : rlAnnOf(nv), dec = tr.querySelector('.d').value;
+        let c = rlCardOf(pc.code);
+        if (!c) { c = { id: rlId(), code: pc.code, pids: [], hist: [], created: now, stage: dec || (rlProf().deg === 'f' ? '' : 'قضية جديدة') }; RL.cards.push(c); add++; } else upd++;
+        const resv = RL_RES.includes(dec) && dec !== 'مد أجل النطق' && jm && jm.value === 'res';
+        Object.assign(c, { auto: auto || c.auto || '', ann: ann || c.ann || null, next: resv ? ((gj && gj.value) || day) : day, ord: k, ordFor: day, updated: now, src: 'kashf' });
+        if (resv) c.resAt = day;
+        if (!c.first || day < c.first) c.first = day;
+        if (dec) { c.why = dec; if (!RL_RES.includes(c.stage) || RL_RES.includes(dec)) c.stage = dec; }
+        const wv = tr.querySelector('.w').value; if (wv) c.writer = wv;
+      });
+      if (k) { sess.add(day); days.push(day); }
+    });
+    const cir = rlImp && rlImp.groups.flatMap(g => [...g.circuits])[0];
+    if (!RL.circuit && cir) RL.circuit = 'الدائرة ' + (+cir); $('#rl_circ').value = RL.circuit;
+    rlAutoLink(); try { if (!localStorage.getItem('tm_rlguide')) rlGuide = true; } catch (e) {}
+    const t0 = rlToday(), first = days.slice().sort().find(x => x >= t0) || days.slice().sort()[0];
+    rlSave(); rlImp = null; $('#rl_impbox').classList.add('hidden'); rlMode = 'roll'; rlDaySel = first || ''; rlRender(); toast('أُضيف ' + add + ' وحُدّث ' + upd + ' في ' + rlN(sess.size, 'جلسة واحدة', 'جلستين', 'جلسات', 'جلسة'));
   };
 }
 // ---- تصدير/استيراد نسخة
@@ -5260,7 +5400,13 @@ function initRoll() {
     $('#rl_cal').onclick = () => rlCalShow($('#rl_calbox').classList.contains('hidden'));
     $('#rl_calx').onclick = () => { rlCalShow(false); $('#rl_cal').focus(); };
     $('#rl_kashf').onclick = () => { const b = $('#rl_impbox'); b.classList.toggle('hidden'); $('#rl_imprev').innerHTML = ''; $('#rl_kst').textContent = ''; };
-    $('#rl_kfile').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; const st = $('#rl_kst'); try { const res = await rlReadFile(f, st); st.textContent = ''; rlImpShow(res, 'الملف'); } catch (err) { st.textContent = ocrErrMsg(err, 'تعذّرت القراءة: ' + (err && err.message || err)); } };
+    $('#rl_kfile').onchange = async e => {
+      const fs = [...e.target.files]; e.target.value = ''; if (!fs.length) return; const st = $('#rl_kst');
+      if (fs.length === 1) { try { const res = await rlReadFile(fs[0], st); st.textContent = ''; rlImpShow(res, 'الملف'); } catch (err) { st.textContent = ocrErrMsg(err, 'تعذّرت القراءة: ' + (err && err.message || err)); } return; }   // ملف واحد: السلوك كما كان
+      const results = [], errs = [];
+      for (let i = 0; i < fs.length; i++) { const lab = 'ملف ' + (i + 1) + ' من ' + fs.length + ' — '; const st2 = { set textContent(v) { st.textContent = lab + v; } }; try { results.push({ name: fs[i].name, res: await rlReadFile(fs[i], st2) }); } catch (err) { errs.push((fs[i].name || 'ملف') + ' (' + ocrErrMsg(err, err && err.message || 'تعذّرت القراءة') + ')'); } }
+      st.textContent = ''; rlImpMulti(results, errs);
+    };
     $('#rl_kgo').onclick = () => { const t = $('#rl_ktext').value; if (!t.trim()) { toast('الصق نص الكشف أولًا'); return; } rlImpShow({ rows: rlParseText(t, rlWho), meta: rlMeta(t) }, 'النص الملصوق'); $('#rl_ktext').value = ''; };
   }
   rlRender();
@@ -5384,7 +5530,7 @@ async function rlDistOpen() {
 
 // الطباعة: في المتصفح عادي؛ وفي تطبيق الشاشة الرئيسية على iPhone/iPad (حيث لا تعمل الطباعة) تُفتح الورقة صفحةً مستقلة عبر المشاركة
 function rlOut(h) {
-  if (iphoneApp()) { printViaPage('ورقة الجلسة', h); return; }   // V121
+  if (printByPage()) { printViaPage('ورقة الجلسة', h); return; }   // V121/V141
   { printNow('prl'); return; }   // V120: الطباعة مباشرة في كل الأحوال (تطبيق الشاشة الرئيسية يطبع في iOS الحديث). V118: في النقرة نفسها — Safari يحجب الطباعة المتأخرة
   const doc = '<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ورقة الجلسة</title><style>body{font-family:-apple-system,Arial,"Noto Naskh Arabic",sans-serif;margin:14px;color:#000;background:#fff}h2{text-align:center;font-size:18px}h3{font-size:15px;margin:14px 0 6px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{border:1px solid #000;padding:5px;vertical-align:top;text-align:right}th{background:#eee}td.ck,td.dist{text-align:center}td.dist{font-size:14px;line-height:1.9}ul{margin:0;padding-right:14px}.nt{font-size:11px;color:#333;margin-top:3px}.ft{font-size:10px;margin-top:8px}.pb{text-align:center;margin:0 0 12px}.pb button{font-size:16px;padding:8px 22px;border-radius:10px;border:1px solid #1C2E4A;background:#1C2E4A;color:#fff}@media print{.pb{display:none}body{margin:0}}</style></head><body><div class="pb"><button onclick="window.print()">طباعة</button></div>' + h + '</body></html>';
   const f = new File([doc], 'ورقة الجلسة.html', { type: 'text/html' });
@@ -7203,7 +7349,7 @@ function initMst() {
   g('ms_form').addEventListener('input', run); g('ms_form').addEventListener('change', run);
   g('ms_copy').onclick = () => { const t = text(); if (!t) { toast('لا بيان مكتمل للنسخ'); return; } const done = () => toast('نُسخ البيان'); if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, () => mstFallbackCopy(t, done)); else mstFallbackCopy(t, done); };
   g('ms_save').onclick = () => rlSaveResult('ms', text(), 'حساب المستحقات (قانون العمل 6/2010)' + (g('ms_who').value.trim() ? ' — ' + g('ms_who').value.trim() : ''), g('ms_save').parentElement);
-  g('ms_print').onclick = () => { if (!mstLast || !mstLast.R.ok) { toast('لا بيان مكتمل للطباعة'); return; } if (iphoneApp()) { const w = document.getElementById('mstwrap').cloneNode(true); w.querySelectorAll('#ms_form,.note,button,input,select,textarea').forEach(x => x.remove()); printViaPage('بيان المستحقات', w.innerHTML); return; } printNow('pmst'); };
+  g('ms_print').onclick = () => { if (!mstLast || !mstLast.R.ok) { toast('لا بيان مكتمل للطباعة'); return; } if (printByPage()) { const w = document.getElementById('mstwrap').cloneNode(true); w.querySelectorAll('#ms_form,.note,button,input,select,textarea').forEach(x => x.remove()); printViaPage('بيان المستحقات', w.innerHTML); return; } printNow('pmst'); };
   g('ms_reset').onclick = () => { g('ms_form').querySelectorAll('input').forEach(i => { if (i.type === 'checkbox') i.checked = false; else i.value = ''; }); g('ms_pay').value = 'm'; g('ms_div').value = '26'; g('ms_contract').value = 'open'; g('ms_notice').value = 'none'; g('ms_xbase').value = 'b'; g('ms_restm').value = '1.5'; g('ms_holm').value = '2'; fillReasons(); g('ms_reason').value = ''; run(); };
   run();
 }
@@ -7939,7 +8085,8 @@ function psOpen(first) {
   const sh = $('#psheet'); if (!sh) return; PS = Object.assign({}, rlProf()); PS.first = !!first; if (!PS.me) PS.me = 'p';
   sh.hidden = false; document.documentElement.classList.add('noscroll'); psRender();
 }
-function psClose(done) { const sh = $('#psheet'); if (!sh) return; sh.hidden = true; if (!$('#drawer').classList.contains('show')) document.documentElement.classList.remove('noscroll'); if (done || (PS && PS.first)) { try { localStorage.setItem('tm_profset', '1'); } catch (e) {} } PS = null; }
+// V141: مستخدم جديد (أول اختيار للدائرة) لا تظهر له «ما الجديد»
+function psClose(done) { const sh = $('#psheet'); if (!sh) return; sh.hidden = true; if (!$('#drawer').classList.contains('show')) document.documentElement.classList.remove('noscroll'); if (done || (PS && PS.first)) { try { localStorage.setItem('tm_profset', '1'); if (PS && PS.first && !localStorage.getItem('tm_wn')) localStorage.setItem('tm_wn', String(WN_V)); } catch (e) {} } PS = null; }
 function psRender() {
   const b = $('#psbody'); if (!b || !PS) return;
   const chips = (o, v, k) => Object.keys(o).map(x => '<button type="button" class="chip' + (String(x) === String(v) ? ' on' : '') + '" data-' + k + '="' + x + '">' + o[x] + '</button>').join('');
@@ -7966,6 +8113,24 @@ function psRender() {
 }
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
+// V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
+const WN_V = 141;
+const WN_LOG = [
+  [141, 'الإصدار 141', ['الطباعة من آيفون وآيباد: لا تظهر رسالة «حُجبت الطباعة التلقائية» — الطباعة الأولى مباشرة وما بعدها في صفحة طباعة جاهزة.', 'شعار «مداولة» على كل الأوراق المطبوعة وملفات Word بدل الشعار القديم.', 'نافذة «ما الجديد» هذه تظهر بعد كل تحديث.']],
+  [140, 'الإصدار 140', ['استيراد عدة كشوف معًا: يوزّعها التطبيق على تواريخ جلساتها المكتوبة فيها، وتراجعها قبل الإضافة.', 'قراءة قائمة أمين السر (صورة أو PDF ممسوح) ودمجها مع كشف النظام لليوم نفسه، مع تعليم الفروق.']],
+  [139, 'الإصدار 139', ['شاشة «دائرتك» عند أول فتح: المحكمة ونوع الدائرة والهيئة وصفتك فيها وأيام الانعقاد.']],
+  [136, 'الإصدار 136', ['الاسم الجديد «مداولة»، وشعاره الجديد، وصفحة «طريقة الاستخدام».']]
+];
+function wnOpen(all) {
+  const sh = $('#wnsheet'); if (!sh) return; let seen = 0; try { seen = +localStorage.getItem('tm_wn') || 0; } catch (e) {}
+  const L = all ? WN_LOG : WN_LOG.filter(x => x[0] > (seen || 138));
+  const list = (L.length ? L : WN_LOG.slice(0, 1));
+  $('#wnbody').innerHTML = '<p class="wnlead">' + (all ? 'أبرز ما أُضيف في الإصدارات الأخيرة:' : 'ما تغيّر منذ آخر مرة فتحت فيها التطبيق:') + '</p>' + list.map(x => '<div class="wnv">' + x[1] + '</div><ul>' + x[2].map(t => '<li>' + esc(t) + '</li>').join('') + '</ul>').join('');
+  sh.hidden = false; document.documentElement.classList.add('noscroll');
+}
+function wnClose() { const sh = $('#wnsheet'); if (!sh) return; sh.hidden = true; if (!$('#drawer').classList.contains('show')) document.documentElement.classList.remove('noscroll'); try { localStorage.setItem('tm_wn', String(WN_V)); } catch (e) {} }
+function wnMaybe() { try { if (navigator.webdriver || window.DEMO || lkIsLocked()) return; if (!localStorage.getItem('tm_profset')) { localStorage.setItem('tm_wn', String(WN_V)); return; } if ((+localStorage.getItem('tm_wn') || 0) >= WN_V) return; const ps = $('#psheet'); if (ps && !ps.hidden) return; wnOpen(false); } catch (e) {} }
+$('#wnok').onclick = wnClose; $('#wnclose').onclick = wnClose; $('#wnbg').onclick = wnClose; if ($('#dwn')) $('#dwn').onclick = () => wnOpen(true);
 function psFirst() { try { if (localStorage.getItem('tm_profset') || navigator.webdriver || window.DEMO || lkIsLocked()) return; } catch (e) { return; } psOpen(true); }
 function tourShow(from) { tourI = 0; $('#tour').classList.remove('hidden'); tourRender(); if (from) try { closeDrawer(); } catch (e) {} }
 function tourEnd() { $('#tour').classList.add('hidden'); try { localStorage.setItem('tm_onboarded', '1'); } catch (e) {} setTimeout(psFirst, 350); }
@@ -8068,7 +8233,7 @@ if ($('#fb_copy')) $('#fb_copy').onclick = function () { copy(fbText(), 'نُس�
 if ($('#fb_reset')) $('#fb_reset').onclick = function () { var b = $('#fb_reset'); if (b.dataset.s) { FB = { sec: {}, dev: '', stars: 0, best: '', imp: '', reco: '', name: '' }; fbSave(); fbBuilt = false; $('#fb_secs').innerHTML = ''; fbClose(); toast('فُرّغ النموذج'); } else { b.dataset.s = '1'; b.textContent = 'تأكيد؟'; setTimeout(function () { b.textContent = 'تفريغ'; delete b.dataset.s; }, 2600); } };
 
 (function () { try { var hh = document.getElementById('homehead'); if (!hh) return; var t = new Date(), k = t.getFullYear() + '-' + (t.getMonth() + 1) + '-' + t.getDate(); if (localStorage.getItem('tm_weave') === k) return; if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return; localStorage.setItem('tm_weave', k); hh.classList.add('weave'); setTimeout(function () { hh.classList.remove('weave'); }, 3000); } catch (e) {} })(); // V115: نسج السدو مرة في اليوم
-try { if (!localStorage.getItem('tm_onboarded') && !navigator.webdriver) setTimeout(function () { if (!lkIsLocked()) tourShow(false); }, 400); else setTimeout(psFirst, 900); } catch (e) {}
+try { if (!localStorage.getItem('tm_onboarded') && !navigator.webdriver) setTimeout(function () { if (!lkIsLocked()) tourShow(false); }, 400); else { setTimeout(psFirst, 900); setTimeout(wnMaybe, 2200); } } catch (e) {}
 
 
 (function(){
