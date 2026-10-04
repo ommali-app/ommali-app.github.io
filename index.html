@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261005015528">
+<meta name="amali-build" content="20261005022011">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -430,7 +430,7 @@ figcaption{font-size:13px;color:var(--ink2);margin-top:8px;line-height:1.7}
 .homewrap{max-width:1150px;margin:0 auto;padding:26px 16px 80px;display:none}
 .homewrap.show{display:block}
 .homehead{margin:2px 0 16px;padding:16px 18px;border-radius:18px;background:linear-gradient(135deg,#182842 0%,#22375a 60%,#2B4674 100%);color:#fff;box-shadow:var(--shadow);position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent}
-.homehead:before{content:"";position:absolute;inset-block:0;inset-inline-end:-40px;width:150px;background:radial-gradient(circle at 70% 30%,rgba(214,175,88,.20),transparent 70%);pointer-events:none;z-index:0}
+.homehead:before{content:"";position:absolute;top:-90px;inset-inline-end:-90px;width:300px;height:300px;background:radial-gradient(closest-side,rgba(214,175,88,.17),rgba(214,175,88,.06) 55%,transparent);pointer-events:none;z-index:0}   /* V158: توهّج دائري يتلاشى داخل حدوده — كان شريطًا بحافة حادة على الجوال */
 .homehead:after{content:"";position:absolute;top:-20%;bottom:-20%;width:38%;left:-55%;background:linear-gradient(100deg,transparent,rgba(231,197,121,.14),transparent);transform:skewX(-12deg);pointer-events:none;z-index:0;animation:heroSheen 12s ease-in-out infinite}
 @keyframes heroSheen{0%,8%{left:-55%}60%,100%{left:155%}}
 .homehead>*{position:relative;z-index:1}
@@ -1183,7 +1183,7 @@ table.imp select{padding:4px;border:1px solid var(--line2);border-radius:6px;bac
 .pxk{font-size:12.5px;color:var(--ink3);font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .pxk:before{content:"";width:6px;height:6px;border-radius:2px;background:var(--gold);transform:rotate(45deg);flex:none}
 .pxk small{font-weight:400}.px .nw{white-space:nowrap;display:inline-block}.pxleg{flex-wrap:wrap}.pxleg span{white-space:nowrap}.pxring .up,.pxring .dn{display:block}
-@media (max-width:360px){.px .pxc.pxring{flex-direction:column!important;align-items:flex-start!important;gap:6px!important}.px .pxc{padding:11px 11px}.px .pxv b{font-size:23px}.px .pxring svg{width:44px;height:44px}.pxk,.pxs,.pxleg{font-size:11.5px}.pxgo{font-size:12px}}
+@media (max-width:360px){.px .pxc{padding:11px 11px}.px .pxv b{font-size:23px}.px .pxring svg{width:44px;height:44px}.pxk,.pxs,.pxleg{font-size:11.5px}.pxgo{font-size:12px}}
 .pxv{display:flex;align-items:baseline;gap:8px}.pxv b{font-size:30px;line-height:1.05;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.5px}
 .pxv small{font-size:12.5px;color:var(--ink2)}
 .pxs{font-size:12px;color:var(--ink3)}
@@ -1195,7 +1195,7 @@ table.imp select{padding:4px;border:1px solid var(--line2);border-radius:6px;bac
 .pxring .up{color:var(--ok);font-weight:700;font-size:12px}.pxring .dn{color:var(--warn);font-weight:700;font-size:12px}
 .pxgo{font:inherit;background:var(--gold-soft);color:var(--gold-ink);border:0;border-inline-start:1px solid var(--line);cursor:pointer;align-items:center;font-weight:700;font-size:13px;gap:6px}
 .pxgo svg{width:22px;height:22px}
-@media (max-width:760px){.px{grid-template-columns:1fr 1fr}.pxc{padding:12px 14px}.pxc.pxring{border-inline-start:0;border-top:1px solid var(--line)}.pxgo{border-top:1px solid var(--line);padding:10px}.pxv b{font-size:26px}.pxring svg{width:52px;height:52px}}
+@media (max-width:760px){.px{grid-template-columns:1fr 1fr}.pxc{padding:12px 14px;justify-content:flex-start}.px .pxc.pxring{grid-column:1/-1;border-inline-start:0;border-top:1px solid var(--line);padding:10px 14px}.px .pxgo{grid-column:1/-1;flex-direction:row;border-inline-start:0;border-top:1px solid var(--line);padding:9px;font-size:13px}.px .pxgo svg{width:18px;height:18px}.pxv b{font-size:26px}.pxring svg{width:52px;height:52px}.pxleg{gap:4px 10px}}   /* V159: على الجوال الإنجاز صف كامل والإحصاءات شريط رفيع — لا خانات فارغة */
 .sxarc{animation:sxarc 1s cubic-bezier(.3,.7,.2,1) both}
 @keyframes sxarc{from{stroke-dasharray:0 999}}
 /* صفحة الإحصاءات */
@@ -2548,7 +2548,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V157 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V159 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -9630,8 +9630,10 @@ function psRender() {
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
-const WN_V = 157;
+const WN_V = 159;
 const WN_LOG = [
+  [159, 'الإصدار 159', ['«نبض الدائرة» على الجوال بلا فراغات: المنظورة والمفصول فيها جنبًا إلى جنب، والإنجاز صف كامل، و«الإحصاءات» شريط رفيع تحته.']],
+  [158, 'الإصدار 158', ['بطاقة الرئيسية: التوهّج الذهبي في زاويتها صار دائرة تتلاشى بنعومة، بدل الشريط الفاتح ذي الحافة الحادة الذي كان يظهر على الجوال.']],
   [157, 'الإصدار 157', ['شريط «نبض الدائرة» على الشاشات الضيقة (الآيفون بوضع التكبير): لا نص مقطوع — الشهر تحت العنوان، والتواريخ لا تنكسر، والحلقة أصغر.']],
   [156, 'الإصدار 156', ['الإحصاءات على الآيفون: نموذج إدخال أرقام الإحصائية الرسمية يظهر كاملًا (كانت الخانات بعد الثانية تُقطع)، والخانات في عمودين.']],
   [155, 'الإصدار 155', ['«نبض الدائرة» في الرئيسية تحت بطاقة الجلسة: القضايا المنظورة في الرول، والمفصول فيها هذا الشهر (قطعي/تمهيدي)، ونسبة الإنجاز — والضغط يفتح الإحصاءات.', 'الإحصاءات بمصطلحات الإحصائية الشهرية الرسمية: المقدّمة (جديدة + مؤجلة)، المحجوزة من سابقة، المفصول فيها، المؤجلة خارج الفترة، ونسبة الإنجاز — مع رسوم للأشهر والأحكام والأعضاء والجلسات القادمة وعمر القضايا، و«الدائرة | أحكامي».', 'أدخل أرقام الإحصائية الرسمية للشهر لتُطابَق بالرول ويظهر متوسط الدوائر؛ وعلى الآيفون: أربعة تبويبات تُسحب بالإصبع.', 'القضايا التي حُلّل ملفها قبل V154 تُعلَّم «روجعت» لجلستها القادمة.']],
