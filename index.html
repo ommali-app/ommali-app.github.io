@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261004114539">
+<meta name="amali-build" content="20261004125326">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1281,6 +1281,15 @@ html,body{overscroll-behavior-y:none}
 .vkempty{background:var(--panel);border:1px dashed var(--line2);border-radius:12px;padding:14px;color:var(--ink2);font-size:14px;line-height:1.8}.vkempty b{color:var(--ink);font-size:15.5px}.vkempty p{margin:6px 0 0}
 .vkmng{margin-top:12px}.vkmng summary{cursor:pointer;min-height:36px;display:flex;align-items:center;font-weight:600;color:var(--ink2)}
 .vkgl{list-style:none;margin:6px 0;padding:0}.vkgl li{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
+.vkff{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.vkff:empty{display:none}
+.vkfl{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink3);flex:1 1 200px;min-width:0}.vkfl select{flex:1;min-width:0;min-height:38px;border:1px solid var(--line2);border-radius:10px;background:var(--bg);color:var(--ink);font-family:inherit;font-size:14px;padding:0 6px}
+.vkcs{display:flex;flex-wrap:wrap;gap:4px}.vkc{font-style:normal;font-size:12px;border-radius:99px;padding:1px 9px;background:var(--panel2,var(--line));color:var(--ink2);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vkc.o{background:var(--accent-soft);color:var(--accent-soft-ink);font-weight:600}
+.vkrd{font-size:13.5px;color:var(--ink2);font-weight:600;overflow-wrap:anywhere}.vkrm strong{color:var(--accent);font-weight:700}
+.vkmeta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 12px;background:var(--panel);border-bottom:1px solid var(--line);flex:none}
+.vkver{max-width:46vw}
+.vked{display:flex;flex-direction:column;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:12px}.vked label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--ink2)}.vked p{margin:0}
+.vkskips{margin-top:8px;display:flex;flex-direction:column;gap:4px}.vkskip{font-size:13px;color:var(--ink2)}.vkskip summary{cursor:pointer;min-height:30px;display:flex;align-items:center}
+.vkskip ul{list-style:none;margin:0;padding:0 8px;max-height:220px;overflow:auto}.vkskip li{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px solid var(--line)}.vkskip li span{min-width:0;overflow-wrap:anywhere}.vkskip li.done span{color:var(--ok)}
 .vkdelb{color:var(--bad)!important;border-color:var(--bad)!important}
 .vksheet .vktabs{display:flex;gap:4px;padding:8px 12px 0;background:var(--panel);border-bottom:1px solid var(--line);flex:none;overflow-x:auto}
 .vktabs button{border:0;background:transparent;color:var(--ink3);font-family:inherit;font-size:15px;font-weight:600;min-height:40px;padding:0 12px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
@@ -2278,13 +2287,15 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <label class="btn" for="vk_dir" id="vk_dirb">📁 مجلد</label><input id="vk_dir" type="file" webkitdirectory multiple hidden>
       <input id="vk_group" class="vkgin" type="text" maxlength="40" placeholder="اسم المجموعة (اختياري): مسوداتي، نماذج زميل…" aria-label="اسم المجموعة">
     </div>
-    <p class="k vkhint">ملفات Word بصيغة docx، أو ملف مضغوط zip يضم المجلد كله. وعلى الحاسوب: اسحب الملفات أو المجلد إلى هنا.</p>
+    <p class="k vkhint">ملفات Word بصيغة docx أو doc القديمة، أو ملف مضغوط zip يضم المجلد كله. وعلى الحاسوب: اسحب الملفات أو المجلد إلى هنا. ما ليس نموذج حكم (مذكرات، صحف، تقارير، أحكام تمييز) يُتخطى ولا يُحفظ.</p>
     <div id="vk_prog" class="vkprog hidden" role="status"></div>
   </section>
   <section class="inbox vksrch hidden" id="vk_srch">
     <input type="search" id="vk_q" class="vkq" placeholder="ابحث في الأسباب: كلمة، عبارة، أو الصق فقرة من وقائع قضيتك" aria-label="البحث في الخزانة" autocomplete="off">
     <div class="vkfilt" id="vk_groups"></div>
+    <div class="vkff" id="vk_ff"></div>
   </section>
+  <div class="rlwarn hidden" id="vk_legacy"></div>
   <div id="vk_res" class="vkres"></div>
   <details class="inbox vkmng hidden" id="vk_mng"><summary>إدارة الخزانة</summary><ul class="vkgl" id="vk_gl"></ul><p class="k" id="vk_size"></p><p class="k">الخزانة على هذا الجهاز وحده: لا تُزامَن ولا تُرفع. والمحفوظ نص معتَّم مشفّر — لا الملفات الأصلية.</p><button type="button" class="btn vkdelb" id="vk_wipe">احذف كل الخزانة</button></details>
 </div>
@@ -2420,7 +2431,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V145 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V146 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -7975,7 +7986,7 @@ async function lkTry(pin) {
 async function lkBioAvail() { try { return !!(window.PublicKeyCredential && await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()); } catch (e) { return false; } }
 async function lkBioGet(cred) { const r = await navigator.credentials.get({ publicKey: { challenge: crypto.getRandomValues(new Uint8Array(32)), allowCredentials: [{ type: 'public-key', id: lkUnb(cred) }], userVerification: 'required', timeout: 60000 } }); return !!r; }
 async function lkBioNew() { const r = await navigator.credentials.create({ publicKey: { challenge: crypto.getRandomValues(new Uint8Array(32)), rp: { name: 'مداولة' }, user: { id: crypto.getRandomValues(new Uint8Array(16)), name: 'amali', displayName: 'مداولة' }, pubKeyCredParams: [{ type: 'public-key', alg: -7 }, { type: 'public-key', alg: -257 }], authenticatorSelection: { authenticatorAttachment: 'platform', userVerification: 'required', residentKey: 'discouraged' }, timeout: 60000 } }); return r ? lkB64(r.rawId) : ''; }
-// ---- V145: خزانة الأحكام (المرحلة 1) — نماذج الأحكام على جهازك
+// ---- V145: خزانة الأحكام (المرحلة 1) — نماذج الأحكام على جهازك؛ V146: doc، الفرز، الرقم والنسخ، النتيجة، وسومك، تعتيم أشمل لأسطر الأطراف وأسماء الملفات
 // تُقرأ ملفات Word ‏(docx) أو ملف مضغوط (zip) على الجهاز، وتُعتَّم أسماء الأطراف قبل أي حفظ (لا يُخزَّن إلا النص المعتَّم)، ويُقسَّم الحكم (الديباجة/الوقائع/الأسباب/المنطوق)،
 // ويُحفظ مشفّرًا (AES-GCM بمفتاح عشوائي غير قابل للاستخراج خاص بالخزانة) في IndexedDB «amali_vault»، ويُبحث فيه بترتيب BM25 مع وزن أعلى للأسباب. لا شبكة ولا مكتبات.
 const VK = { db: null, key: null, docs: [], inv: new Map(), N: 0, avg: 1, ready: false, busy: false, stop: false, init: false, grp: '', q: '', open: null, tab: 'r' };
@@ -8002,7 +8013,8 @@ function vkZip(buf) {
     if (dv.getUint32(p, true) !== 0x02014b50) break;
     const flag = dv.getUint16(p + 8, true), meth = dv.getUint16(p + 10, true), csz = dv.getUint32(p + 20, true), nl = dv.getUint16(p + 28, true), xl = dv.getUint16(p + 30, true), cl = dv.getUint16(p + 32, true), lo = dv.getUint32(p + 42, true);
     const nb = u8.subarray(p + 46, p + 46 + nl); let name; try { name = new TextDecoder('utf-8', { fatal: true }).decode(nb); } catch (x) { name = new TextDecoder('utf-8').decode(nb); if (!(flag & 0x800)) name = name.replace(/\uFFFD+/g, '_'); }
-    list.push({ name, meth, csz, lo }); p += 46 + nl + xl + cl;
+    const tm = dv.getUint16(p + 12, true), dt = dv.getUint16(p + 14, true), mt = dt ? Date.UTC((dt >> 9) + 1980, ((dt >> 5) & 15) - 1, dt & 31, tm >> 11, (tm >> 5) & 63) : 0;
+    list.push({ name, meth, csz, lo, mt }); p += 46 + nl + xl + cl;
   }
   return { u8, dv, list };
 }
@@ -8021,6 +8033,41 @@ async function vkDocx(bytes) {
   return { paras: vkXml(main), hf };
 }
 
+// V146: قراءة ملفات Word القديمة (doc — Word 97–2003) على الجهاز: الملف المركّب (CFB) ثم جدول القطع (Clx/PlcPcd) في WordDocument — بلا مكتبات
+function vkCfb(u8) {
+  const dv = new DataView(u8.buffer, u8.byteOffset, u8.byteLength), E = 0xFFFFFFFA;
+  if (u8.length < 512 || dv.getUint32(0, true) !== 0xE011CFD0 || dv.getUint32(4, true) !== 0xE11AB1A1) throw new Error('notcfb');
+  const ss = 1 << dv.getUint16(30, true), mss = 1 << dv.getUint16(32, true), nFat = dv.getUint32(44, true), dirStart = dv.getUint32(48, true), miniCut = dv.getUint32(56, true), mfStart = dv.getUint32(60, true), difStart = dv.getUint32(68, true);
+  const off = s => (s + 1) * ss, fatSecs = [];
+  for (let i = 0; i < 109 && fatSecs.length < nFat; i++) { const v = dv.getUint32(76 + i * 4, true); if (v < E) fatSecs.push(v); }
+  for (let d = difStart, g = 0; fatSecs.length < nFat && d < E && g < 100000; g++) { const o = off(d); if (o + ss > u8.length) break; for (let i = 0; i < ss / 4 - 1 && fatSecs.length < nFat; i++) { const v = dv.getUint32(o + i * 4, true); if (v < E) fatSecs.push(v); } d = dv.getUint32(o + ss - 4, true); }
+  const per = ss / 4, fat = new Uint32Array(fatSecs.length * per); fatSecs.forEach((s, k) => { const o = off(s); for (let i = 0; i < per && o + i * 4 + 4 <= u8.length; i++) fat[k * per + i] = dv.getUint32(o + i * 4, true); });
+  const read = (s, size) => { const c = []; for (let g = 0; s < E && s < fat.length && g < 1e6; g++) { c.push(s); s = fat[s]; } const buf = new Uint8Array(c.length * ss); c.forEach((x, i) => buf.set(u8.subarray(off(x), Math.min(u8.length, off(x) + ss)), i * ss)); return size != null ? buf.subarray(0, size) : buf; };
+  const dir = read(dirStart), dd = new DataView(dir.buffer, dir.byteOffset, dir.byteLength), ents = [];
+  for (let o = 0; o + 128 <= dir.length; o += 128) { const nl = dd.getUint16(o + 64, true); if (!nl || nl > 64) { ents.push(null); continue; } let name = ''; for (let i = 0; i < nl / 2 - 1; i++) name += String.fromCharCode(dd.getUint16(o + i * 2, true)); ents.push({ name, type: dir[o + 66], start: dd.getUint32(o + 116, true), size: dd.getUint32(o + 120, true) }); }
+  const root = ents[0], mini = root && root.start < E ? read(root.start, root.size) : new Uint8Array(0);
+  let mfat = new Uint32Array(0); if (mfStart < E) { const b = read(mfStart), v = new DataView(b.buffer, b.byteOffset, b.byteLength); mfat = new Uint32Array(b.length / 4); for (let i = 0; i < mfat.length; i++) mfat[i] = v.getUint32(i * 4, true); }
+  return { get: name => { const e = ents.find(x => x && x.name === name && x.type === 2); if (!e) return null;
+    if (e.size < miniCut) { const out = new Uint8Array(e.size); for (let s = e.start, p = 0, g = 0; s < E && p < e.size && g < 1e6; g++) { const n = Math.min(mss, e.size - p); out.set(mini.subarray(s * mss, s * mss + n), p); p += n; s = mfat[s]; } return out; }
+    return read(e.start, e.size); } };
+}
+function vkDoc(u8) {
+  const C = vkCfb(u8), W = C.get('WordDocument'); if (!W) throw new Error('notdoc');
+  const dv = new DataView(W.buffer, W.byteOffset, W.byteLength); if (dv.getUint16(0, true) !== 0xA5EC) throw new Error('notdoc');
+  const fl = dv.getUint16(10, true); if (fl & 0x0100) throw new Error('encrypted');
+  const T = C.get(fl & 0x0200 ? '1Table' : '0Table'); if (!T) throw new Error('notable');
+  let p = 32; const csw = dv.getUint16(p, true); p += 2 + csw * 2; const cslw = dv.getUint16(p, true), lw = p + 2; p += 2 + cslw * 4 + 2;
+  const ccpText = dv.getUint32(lw + 12, true), ccpFtn = dv.getUint32(lw + 16, true), ccpHdd = dv.getUint32(lw + 20, true), fcClx = dv.getUint32(p + 33 * 8, true), lcbClx = dv.getUint32(p + 33 * 8 + 4, true);
+  const tv = new DataView(T.buffer, T.byteOffset, T.byteLength); let q = fcClx;
+  while (q < fcClx + lcbClx && T[q] === 1) q += 3 + tv.getUint16(q + 1, true);
+  if (T[q] !== 2) throw new Error('clx'); const lcb = tv.getUint32(q + 1, true); q += 5; const n = Math.floor((lcb - 4) / 12), cps = []; for (let i = 0; i <= n; i++) cps.push(tv.getUint32(q + i * 4, true)); const pq = q + (n + 1) * 4;
+  const d8 = new TextDecoder('windows-1252'), d16 = new TextDecoder('utf-16le'); let txt = '';
+  for (let i = 0; i < n; i++) { const fv = tv.getUint32(pq + i * 8 + 2, true), comp = !!(fv & 0x40000000), fc = fv & 0x3FFFFFFF, len = cps[i + 1] - cps[i]; if (len <= 0) continue; txt += comp ? d8.decode(W.subarray(fc / 2, fc / 2 + len)) : d16.decode(W.subarray(fc, fc + len * 2)); }
+  const clean = s => { let t = s, k; do { k = t; t = t.replace(/\x13[^\x13\x14\x15]*\x14([^\x13\x15]*)\x15/g, '$1').replace(/\x13[^\x13\x15]*\x15/g, ''); } while (t !== k); return t.replace(/[\x07\r]/g, '\n').replace(/[\x0b]/g, ' ').replace(/\x1e/g, '-').replace(/[\x00-\x08\x0c\x0e-\x1f]/g, '').split('\n').map(x => x.replace(/[\s ​]+/g, ' ').trim()).filter(Boolean); };
+  return { paras: clean(txt.slice(0, ccpText)), hf: clean(txt.slice(ccpText + ccpFtn, ccpText + ccpFtn + ccpHdd)) };
+}
+async function vkRead(u8) { if (u8[0] === 0xD0 && u8[1] === 0xCF) return vkDoc(u8); return vkDocx(u8); }
+
 // ---- التقسيم والبيانات الوصفية (على النص المطبَّع)
 const VK_OPEN = /^(بعد|وبعد) (الاطلاع|سماع|المداوله)/;
 const VK_FACTS = /^(و?حيث ان (وقائع|الوقائع|واقعات|النزاع|الدعوي تتحصل|الدعوي تخلص|الواقعات)|(تتحصل|تخلص|تجمل) (وقائع|الوقائع|واقعات)|الوقائع( |$)|و?حيث ان الدعوي (تتحصل|تخلص))/;
@@ -8033,34 +8080,59 @@ function vkSplit(paras) {
   let op = -1; if (f >= 0) { for (let i = f + 1; i < N.length; i++) if (/^(ف?لهذه الاسباب|لذلك)( |$)/.test(N[i])) { op = i; break; } if (op < 0) for (let i = N.length - 1; i > f; i--) if (/^(حكمت المحكمه|لذلك حكمت)/.test(N[i])) { op = i; break; } }
   let r = -1; if (f >= 0) for (let i = f + 1; i < (op >= 0 ? op : N.length); i++) if (VK_REAS.test(N[i]) && !VK_FACTS.test(N[i])) { r = i; break; }
   const hEnd = f < 0 ? 0 : (o >= 0 && o < f ? o + 1 : f), end = op >= 0 ? op : paras.length;
-  const S = { h: paras.slice(0, hEnd), f: [], r: [], o: op >= 0 ? paras.slice(op) : [], ok: f >= 0 && r >= 0 && op >= 0 };
+  const S = { h: paras.slice(0, hEnd), f: [], r: [], o: op >= 0 ? paras.slice(op) : [], ok: f >= 0 && r >= 0, ff: f >= 0, rf: r >= 0, of: op >= 0 };   // V146: «أسباب» بلا منطوق ليست خللًا
   if (r >= 0) { S.f = paras.slice(hEnd, r); S.r = paras.slice(r, end); } else S.r = paras.slice(hEnd, end);
   return S;
 }
-function vkMeta(paras, hf) {
-  const hd = paras.slice(0, 8), ti = hd.findIndex(p => /(الاستئناف|بالاستئناف|الدعوى|الطعن)[^\d٠-٩]{0,20}[\d٠-٩]+\s*\/\s*[\d٠-٩]{4}/.test(p)), top = AR2EN(ti >= 0 ? hd[ti] + ' ' + (hd[ti + 1] || '') : paras.slice(0, 3).join(' ')), m = {}; let x;
-  if ((x = top.match(/(?:رقم|رقمي|بالاستئناف|بالاستئنافين|الاستئناف|الدعوى|الدعوي|الطعن)\D{0,12}?((?:\d{1,6}\s*[،,و\-]\s*)*\d{1,6})\s*\/\s*(\d{4})/))) { m.nums = x[1].split(/\s*[،,و\-]\s*/).filter(Boolean); m.y = x[2]; }
-  if ((x = top.match(/بجلس[ةه][^\d]{0,30}?(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{4})/))) m.d = x[3] + '-' + String(x[2]).padStart(2, '0') + '-' + String(x[1]).padStart(2, '0');
-  if (/الاستئناف|بالاستئناف|استئناف/.test(top)) m.k = 'استئناف'; else if (/الدعو[ىي]/.test(top)) m.k = 'دعوى';
-  const hft = AR2EN(hf.join(' ')); if ((x = hft.match(/الرقم\s*الآلي\s*:?\s*(\d{6,})/)) || (x = AR2EN(paras.join(' ')).match(/الرقم\s*الآلي\s*:?\s*(\d{6,})/))) m.auto = x[1];
+// V146: رقم القضية مفتاح النسخ — من العنوان (قبل الوقائع)، ثم اسم الملف، ثم المجلدات (السنة من مجلد الجلسة أو الشهر)
+const VK_NRX = /(الاستئنافين|الاستئناف|الإستئنافين|الإستئناف|بالاستئنافين|بالاستئناف|القضي[ةه]|الدعو[ىي]|الطعن)\s*(?:رقمي|رقم)?\s*((?:[0-9]{1,6}\s*(?:[،,و\-\/\\_]|لسن[ةه])\s*)+[0-9]{2,4})/;
+function vkYear(y) { y = String(y); if (y.length === 2) return +y <= 40 ? '20' + y : '19' + y; return /^(19|20)\d\d$/.test(y) ? y : ''; }
+function vkNumsOf(t) { const x = AR2EN(t).match(VK_NRX); if (!x) return null; const parts = x[2].split(/[^0-9]+/).filter(Boolean), y = vkYear(parts.pop()); if (!y || !parts.length) return null; return { nums: [...new Set(parts.map(n => String(+n)))], y, w: x[1] }; }
+function vkKindOf(w) { w = norm(w || ''); return /قضي/.test(w) ? 'قضية' : /دعو/.test(w) ? 'دعوى' : /طعن/.test(w) ? 'طعن' : 'استئناف'; }
+function vkMeta(paras, hf, path) {
+  const m = {}; let x; const N = paras.map(p => norm(p)); let fe = N.findIndex(n => VK_FACTS.test(n)); if (fe < 0) fe = Math.min(paras.length, 30);
+  const hd = paras.slice(0, Math.min(fe, 30));
+  let r = null, ti = -1; for (let i = 0; i < hd.length; i++) { const c = vkNumsOf(hd[i]); if (c && !/دعو|قضي/.test(c.w)) { r = c; ti = i; break; } }
+  if (!r) for (let i = 0; i < Math.min(4, hd.length); i++) { const c = vkNumsOf(hd[i]); if (c) { r = c; ti = i; break; } }
+  if (r) { m.nums = r.nums; m.y = r.y; m.k = vkKindOf(r.w); m.ns = 'h'; }
+  const top = AR2EN(ti >= 0 ? hd[ti] + ' ' + (hd[ti + 1] || '') : hd.slice(0, 3).join(' ')), top2 = AR2EN(hd.slice(0, 10).join(' '));   // V146: تاريخ الجلسة من سطر العنوان («بجلسة») أو «الموافق» في الترويسة — لا من جلسات أول درجة
+  if ((x = top.match(/بجلس[ةه][^\d]{0,30}?(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{4})/)) || (x = top2.match(/الموافق\s*(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{4})/))) m.d = x[3] + '-' + String(x[2]).padStart(2, '0') + '-' + String(x[1]).padStart(2, '0');
+  const hft = AR2EN((hf || []).join(' ')); if ((x = hft.match(/الرقم\s*الآلي\s*:?\s*(\d{6,})/)) || (x = AR2EN(paras.join(' ')).match(/الرقم\s*الآلي\s*:?\s*(\d{6,})/))) m.auto = x[1];
+  if (path) { const segs = AR2EN(path).split(/[\/\\]/), fn = segs.pop() || '', dirs = segs;
+    if (!m.nums) { let c = fn.match(/([0-9]{1,6}(?:\s*[،,و\-]\s*[0-9]{1,6})*)\s*(?:لسن[ةه]\s*|\/\s*)([0-9]{2,4})(?![0-9])/);
+      if (c && vkYear(c[2])) { m.nums = [...new Set(c[1].split(/[^0-9]+/).filter(Boolean).map(n => String(+n)))]; m.y = vkYear(c[2]); m.ns = 'f'; }
+      else if ((c = fn.match(/(?:^|[^0-9\/])([0-9]{2,6})(?![0-9\/])/))) { m.nums = [String(+c[1])]; m.ns = 'f'; } }
+    if (!m.d) for (let i = dirs.length - 1; i >= 0; i--) { const c = dirs[i].match(/(20\d\d)-(\d\d)-(\d\d)/); if (c) { m.d = c[0]; break; } }
+    if (m.nums && !m.y) { if (m.d) m.y = m.d.slice(0, 4); else for (let i = dirs.length - 1; i >= 0; i--) { const c = dirs[i].match(/(?:^|[^0-9])(20\d\d)(?![0-9-])/); if (c) { m.y = c[1]; m.yg = 1; break; } } } }
+  if (!m.k) m.k = 'استئناف';
+  if (m.nums && m.y) m.key = m.nums.slice().sort((a, b) => a - b).join('-') + '/' + m.y;
   return m;
 }
-function vkTitle(d) { const m = d.m || {}; return m.nums ? (m.k === 'دعوى' ? 'الدعوى ' : m.nums.length > 1 ? 'الاستئنافان ' : 'الاستئناف ') + m.nums.join(' و') + '/' + m.y : (d.fn || 'حكم بلا رقم'); }
+function vkTitle(d) { const m = d.m || {}; if (!m.nums) return d.desc || d.fn || 'حكم بلا رقم'; const k = m.k || 'استئناف', pl = m.nums.length > 1; return (k === 'دعوى' ? (pl ? 'الدعويان ' : 'الدعوى ') : k === 'قضية' ? (pl ? 'القضيتان ' : 'القضية ') : k === 'طعن' ? 'الطعن ' : (pl ? 'الاستئنافان ' : 'الاستئناف ')) + m.nums.join(' و') + '/' + (m.y || '؟'); }
 
 // ---- التعتيم عند الفهرسة: الأسماء من كتلة الأطراف (قبل «بعد الاطلاع/حيث»)، ثم تتبّعها في كل الحكم؛ ثم محرك التعتيم العام (العلامات والأرقام الشخصية)
 const VK_JUDGE = /(برئاسه|وعضويه|وحضور|امين السر|المستشار|المستشارين|القاضي)/;
-const VK_CO = /^(شركه|الشركه|مؤسسه|المؤسسه|مجموعه|مكتب|مصنع|مطعم|مركز|مستشفي|معهد|فندق|صيدليه|مختبر|عياده|محل|محلات|بقاله|جمعيه|ورشه|مكتبه|دار|اكاديميه|مدرسه|مدارس|نادي|مصرف|بنك)$/;
+const VK_CO = /^(شركه|الشركه|مؤسسه|المؤسسه|مجموعه|المجموعه|مكتب|مصنع|مطعم|مركز|مستشفي|معهد|فندق|صيدليه|مختبر|عياده|محل|محلات|بقاله|جمعيه|ورشه|مكتبه|دار|اكاديميه|مدرسه|مدارس|نادي|مصرف|بنك|البنك)$/;
+const VK_FORM = /^(ذمم|شمك|شمكع|شمكم|ذم|شذو|شمم)$/;   // ذ.م.م، ش.م.ك… بعد mskNorm
+const vkIsCo = n => VK_CO.test(n) || VK_CO.test(n.replace(/^[لوبف]/, '')) || VK_CO.test(n.replace(/^(ول|وال)/, 'ال'));
 const VK_GOV0 = /^(وزاره|الهيئه|هيئه|اداره|الاداره|بلديه|ديوان|الجهاز|مجلس|جامعه|النيابه|المؤسسه العامه|الامانه العامه|محافظ|مدير عام|الوكيل)/;
 const VK_GOV = /(وزاره|الهيئه|هيئه|الاداره|اداره|بلديه|ديوان|الجهاز|مجلس|جامعه|النيابه|المؤسسه العامه|الامانه العامه|بنك الكويت المركزي|المحافظ|الحكومه|الدوله|العامه للقوي|التامينات|الداخليه|العدل)/;
-const VK_KEEPW = new Set(['ويمثلها', 'ويمثله', 'ويمثلهم', 'قانونا', 'قانون', 'بصفته', 'بصفتها', 'بصفتهم', 'وبصفته', 'وبصفتها', 'الاول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'الاولي', 'الثانيه', 'الثالثه', 'المقام', 'المقامه', 'من', 'ضد', 'و', 'المرفوع', 'المرفوعه', 'الممثل', 'القانوني', 'لها', 'له', 'المدير', 'مدير', 'مديرها', 'مديره', 'العام', 'ورئيس', 'رئيس', 'مجلس', 'الاداره', 'السيد', 'السيده', 'الاستاذ', 'المستشار', 'المحامي', 'المحاميه', 'والمستشار', 'وعضويه', 'برئاسه', 'المستشارين', 'وحضور', 'امين', 'السر', 'القاضي'].map(mskNorm));
-const VK_PMARK = new Set(['المحامي', 'المحاميه', 'للمحامي', 'والمحامي', 'المحاميين', 'الشاهد', 'الشاهده', 'شاهد', 'وشاهد', 'للشاهد', 'والشاهد', 'الشاهدين', 'المدعو', 'المدعوه', 'السيد', 'السيده', 'للسيد', 'والسيد', 'الاستاذ', 'الاستاذه', 'الخبير', 'الخبيره', 'للخبير', 'المترجم', 'الطبيب', 'الدكتور'].map(mskNorm));
+const VK_KEEPW = new Set(['ويمثلها', 'ويمثله', 'ويمثلهم', 'قانونا', 'قانون', 'بصفته', 'بصفتها', 'بصفتهم', 'وبصفته', 'وبصفتها', 'الاول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'الاولي', 'الثانيه', 'الثالثه', 'المقام', 'المقامه', 'من', 'ضد', 'و', 'المرفوع', 'المرفوعه', 'الممثل', 'القانوني', 'لها', 'له', 'المدير', 'مدير', 'مديرها', 'مديره', 'العام', 'ورئيس', 'رئيس', 'مجلس', 'الاداره', 'السيد', 'السيده', 'الاستاذ', 'المستشار', 'المحامي', 'المحاميه', 'والمستشار', 'وعضويه', 'برئاسه', 'المستشارين', 'وحضور', 'امين', 'السر', 'القاضي', 'عن', 'نفسه', 'نفسها', 'وبصفته', 'وبصفتها', 'بشخصه', 'وعن', 'والممثل', 'الشرعي', 'وكيل', 'وكيلا'].map(mskNorm));
+const VK_PMARK = new Set(['المالك', 'المالكه', 'الكفيل', 'كفيله', 'كفيلها', 'زوجته', 'زوجها', 'شقيقه', 'شقيقها', 'والده', 'والدته', 'ابنه', 'ابنته', 'المدعوه', 'المحامي', 'المحاميه', 'للمحامي', 'والمحامي', 'المحاميين', 'الشاهد', 'الشاهده', 'شاهد', 'وشاهد', 'للشاهد', 'والشاهد', 'الشاهدين', 'المدعو', 'المدعوه', 'السيد', 'السيده', 'للسيد', 'والسيد', 'الاستاذ', 'الاستاذه', 'الخبير', 'الخبيره', 'للخبير', 'المترجم', 'الطبيب', 'الدكتور'].map(mskNorm));
 const VK_NAMEP = new Set(['عبد', 'ابو', 'بو', 'بن', 'بنت', 'ام', 'ال'].map(mskNorm));
+// V146: أسماء شائعة تكون كلماتٍ عادية أيضًا («وفاء»، «سعد»…) — لا تُعتَّم إلا بعد علامة شخص (المالك، الكفيل، الشاهد…) أو بجوار اسم معتَّم
+const VK_FIRST = new Set(('محمد احمد أحمد علي حسن حسين خالد سعد سعود فهد ناصر حمد حمود بدر عبدالله عبدالرحمن عبدالعزيز عبدالله يوسف ابراهيم إبراهيم اسماعيل عمر عثمان سالم سليمان مبارك جاسم يعقوب عيسى موسى طارق وليد نواف مشعل فيصل راشد صالح منصور سامي ماجد مجدي محمود مصطفى عادل عماد هشام وائل ايمن أيمن اسامه أسامة كريم رامي شريف عمرو هاني فاطمه فاطمة مريم نوره نورة وفاء امل أمل هدى منى سعاد ليلى سارة ساره زينب عائشه دانه شيخه حصه لطيفه جميله نادية ناديه سميره رانيا هند').split(' ').map(mskNorm));
+const VK_FNKEEP = new Set(('مستحقات ق ر ت رت قرت رفض تاييد تأييد الغاء إلغاء تعديل صفه صفة دفع قله النصاب نصاب شكل اعاده قرار جواز عدم وقف نسخه نسخة copy اصل قديم قديمه جديد جديده مسوده باقي بها دعوي دعوى فرعيه اصليه مكافاه مكافأة انذار إنذار اقامه إقامة تحويل اجازات إجازات تعويض فصل مواطن احاله للاداري تجار ورفض وتاييد والغاء وتعديل وانذار ومكافاه حكم احكام اسباب منطوق').split(' ').map(mskNorm));
 let VK_KNOWN = null;   // كلمات وردت 3 مرات فأكثر في نصوص المبادئ — كلمات لغة لا أسماء؛ لا تُتتبَّع من أسماء الشركات (كانت «خدمات» من اسم شركة تُعتَّم في «إنهاء خدمات»)
 function vkKnown() { if (VK_KNOWN) return VK_KNOWN; const c = new Map(); if (typeof P !== 'undefined') P.forEach(p => (p.summary.join(' ') + ' ' + p.reasoning.join(' ')).split(/\s+/).forEach(w => { const n = mskNorm(w); if (n.length > 2) c.set(n, (c.get(n) || 0) + 1); })); VK_KNOWN = new Set([...c].filter(([, k]) => k >= 3).map(([w]) => w)); return VK_KNOWN; }
 function vkCore(w) { const n = mskNorm(w); if (!n) return ''; return n; }
 function vkCores(n) { const a = [n]; const s = n.replace(/^(وال|بال|فال|كال|لل)/, ''); if (s !== n && s.length >= 2) a.push(s, 'ال' + s); const t = n.replace(/^[وفبلك]/, ''); if (t !== n && t.length >= 3) a.push(t); return a; }
-function vkPartyText(p) { const n = norm(p); if (/^ضد$/.test(n)) return { ctl: 'vs' }; if (VK_OPEN.test(n) || VK_FACTS.test(n)) return { ctl: 'end' };
-  const mf = p.match(/^(.*?(?:المقام[ةه]?|المقامين|المرفوع[ةه]?|المقدم[ةه]?)\s+(?:من|ضد))\s*[:：]?\s*/); if (mf) return { pre: mf[0], body: p.slice(mf[0].length), from: 1 };
+function vkPartyText(p) { p = p.replace(/ـ+/g, ''); const n = norm(p); if (/^ضد$/.test(n)) return { ctl: 'vs' }; if (VK_OPEN.test(n) || VK_FACTS.test(n)) return { ctl: 'end' };
+  // V146: «مقام من» بلا «ال»، و«المرفوع من»، و«ضد / فلان» في أول السطر
+  const mf = p.match(/^(.*?(?:ال)?(?:مقام[ةه]?|مقامين|مرفوع[ةه]?|مرفوعين|مقدم[ةه]?)\s*(?:من|ضد)\s*[:：\/]?\s*)/); if (mf) return { pre: mf[0], body: p.slice(mf[0].length), from: 1 };
+  const ms = p.match(/^(\s*ضد\s*[:：\/]?\s*)(?=\S)/); if (ms) return { pre: ms[0], body: p.slice(ms[0].length), from: 1, vs: 1 };
+  const mo = p.match(/^(\s*من\s*[:：\/]\s*)(?=\S)/); if (mo) return { pre: mo[0], body: p.slice(mo[0].length), from: 1 };
+  if (/(مقام|مرفوع|مقدم)[ةه]?\s*(من)?\s*[:：]?\s*$/.test(n)) return { ctl: 'pre' };
   const mr = p.match(/^\s*((?:ال)?(?:مستأنف|مستانف|مدع|طاعن|مطعون)[^:：\n]{0,25}[:：])\s*/); if (mr) return { pre: mr[0], body: p.slice(mr[0].length), from: 1 };
   const mj = norm(p).match(VK_JUDGE); if (mj) return { judge: 1, body: p };
   return { body: p }; }
@@ -8072,31 +8144,43 @@ function vkMask(paras, opt) {
     const parts = seg.split(/(\s+)/), seq = [];
     const res = parts.map(t => { if (/^\s*$/.test(t)) return t; const n = mskNorm(t); if (!n || /^[0-9٠-٩]+$/.test(n)) return t;
       if (VK_KEEPW.has(n) || MSK_ROLE.has(n.replace(/^ال/, '')) || /^(ال)?(مستانف|مدعي|طاعن|مطعون)/.test(n)) return t;
-      if (isCo && (MSK_GENERIC.has(n) || VK_CO.test(n) || /^(لل|وال|ول)/.test(n) && n.length > 4)) return t;
-      seq.push(n); if (!common.has(n) && n.length >= 3 && !MSK_GENERIC.has(n) && !MSK_STOP.has(n) && !(isCo && vkKnown().has(n))) STRONG.add(n); if (!(isCo && vkKnown().has(n))) WEAK.add(n); nMask++; return VK_MASK; });
+      if (isCo && (vkIsCo(n) || VK_FORM.test(n))) return t;   // V146: اسم الشركة يُعتَّم كله (كان «الشركة الكويتية الأولى…» يبقى لأن كلماته عامة) — يبقى نوع الكيان وشكله القانوني
+      seq.push(n); if (!common.has(n) && n.length >= 3 && !MSK_GENERIC.has(n) && !MSK_STOP.has(n) && !(isCo && vkKnown().has(n))) STRONG.add(n); if (!(isCo && (vkKnown().has(n) || MSK_GENERIC.has(n)))) WEAK.add(n); nMask++; return VK_MASK; });
     if (seq.length) NAMES.push(seq); return res.join(''); };
-  const segMask = body => body.split(/(\s*[-–—\/،,:]\s*|\s+ويمثل(?:ها|ه|هم)\s+قانون[اًا]*\s*\/?\s*|\s+ويمثل(?:ها|ه|هم)\s+)/).map((s, i) => {
+  const segMask = body => body.replace(/((?:^|[\s\/:])(?:ل|و)?(?:ال)?(?:شرك[ةه]|مؤسس[ةه]|مجموع[ةه]))(?=[ء-ي])/g, '$1 ').split(/(\s*[-–—\/،,:]\s*|\s+ويمثل(?:ها|ه|هم)\s+قانون[اًا]*\s*\/?\s*|\s+ويمثل(?:ها|ه|هم)\s+)/).map((s, i) => {
     if (i % 2 === 1 || !s.trim()) return s; const n = norm(s); if (!n) return s;
-    const w0 = n.split(' ')[0]; const gov = (VK_GOV0.test(n) || /^(مدير|وكيل|وزير|رئيس|امين|محافظ|المدير|الوكيل)( |$)/.test(n) && VK_GOV.test(n)) && !VK_CO.test(w0);
-    if (gov || /^بصفت/.test(n)) return s; return tokMask(s, VK_CO.test(w0)); }).join('');
+    const ws = n.split(' '), w0 = ws[0], co = ws.slice(0, 4).some(w => vkIsCo(mskNorm(w))); const gov = (VK_GOV0.test(n) || /^(مدير|وكيل|وزير|رئيس|امين|محافظ|المدير|الوكيل)( |$)/.test(n) && VK_GOV.test(n)) && !co;
+    if (gov || /^بصفت/.test(n)) return s; return tokMask(s, co); }).join('');
+  // V146: الطرفان في سطر واحد («… من / س ضد / ص»)
+  const lineMask = body => body.split(/((?:^|\s)ضد\s*[:：\/]?\s*)/).map((x, i) => i % 2 ? x : segMask(x)).join('');
   for (let i = 0; i < end; i++) {
-    const T = vkPartyText(paras[i]); if (T.ctl === 'vs') { mode = 'vs'; continue; } if (T.ctl === 'end') break;
-    if (T.from) { mode = 'from'; nParty++; out[i] = T.pre + segMask(T.body); continue; }
+    if (!VK_JUDGE.test(N[i]) && (/[0-9٠-٩]{2,}\s*\/\s*[0-9٠-٩]{2,4}/.test(paras[i]) || /^(و?المقيد|المحكمه$|تابع|ف?اسباب|صدر الحكم|باسم|بسم|محكمه|الدائره|بالجلسه)/.test(N[i]))) { if (!/(مقام|مرفوع|مقدم)[ةه]? *(من|ضد)|^ضد/.test(N[i])) { mode = ''; continue; } }   // V146: سطر القيد والعناوين وترويسة الصفحات ليست أسماء
+    const T = vkPartyText(paras[i]); if (T.ctl === 'vs') { mode = 'vs'; continue; } if (T.ctl === 'end') break; if (T.ctl === 'pre') { mode = 'vs'; continue; }
+    if (T.from) { mode = T.vs ? 'vs2' : 'from'; nParty++; out[i] = T.pre + lineMask(T.body); continue; }
     if (T.judge) { const mm = paras[i].match(/^(.*?(?:برئاس[ةه]|وعضوي[ةه]|وحضور|أمين السر|امين السر|المستشار(?:ين)?|القاضي)\s*[:：\/]?\s*)/); out[i] = mm ? mm[0] + tokMask(paras[i].slice(mm[0].length), false) : paras[i]; continue; }
     const wc = N[i].split(' ').filter(Boolean).length;
-    if (mode === 'vs' || (mode === 'from' && wc <= 12)) { if (mode === 'vs') nParty++; out[i] = segMask(paras[i]); mode = mode === 'vs' ? 'vs2' : mode; continue; }
+    if (mode === 'vs') { nParty++; out[i] = lineMask(paras[i]); mode = 'vs2'; continue; }
+    if (mode === 'from') mode = 'vs2';   // V146: ما بعد سطر «المقام من» يُعامل معاملة ما بعد اسم الخصم (قصير وغالب كلماته نادرة)
+    if (/[0-9٠-٩]{2,}\s*\/\s*[0-9٠-٩]{2,4}/.test(paras[i]) || /^(و?المقيد|المحكمه$)/.test(N[i])) { mode = ''; continue; }   // سطر القيد أو «المحكمة» — ليس اسمًا
     if (mode === 'vs2' && wc <= 12) { const rare = N[i].split(' ').filter(w => !common.has(mskNorm(w))).length; if (rare * 2 >= wc || VK_GOV0.test(N[i]) || /بصفت/.test(N[i])) { out[i] = segMask(paras[i]); continue; } }
     mode = mode === 'vs2' ? '' : mode;
   }
+  // V146: احتياط نادر — لا كتلة أطراف: ما بين شرطتين بعد صفة الخصم («المستأنف الثاني - … -») إن كان فيه كلمة غير معروفة في لغة الأحكام؛ يُجمع اسمًا فيُتتبَّع
+  if (!nParty) paras.forEach(p => { const rx = /((?:ال)?(?:مستأنف|مستانف|مدع[يى]|طاعن|مطعون)[^\-–—]{0,40}?)\s[-–—]\s([^\-–—]{2,90}?)\s[-–—]/g; let x;
+    while ((x = rx.exec(p))) { const seg = x[2], ws = seg.split(/\s+/).filter(Boolean); if (ws.length < 1 || ws.length > 8) continue; if (!ws.some(w => { const n = mskNorm(w); return n.length >= 3 && !vkKnown().has(n) && !common.has(n); })) continue; tokMask(seg, ws.slice(0, 3).some(w => vkIsCo(mskNorm(w)))); } });
   // تتبّع الأسماء في بقية الحكم (وفي اسم الملف)
-  const STR = [...STRONG].filter(w => w.length >= 5);
+  const STR = [...STRONG].filter(w => w.length >= 5), JOIN = new Set(); NAMES.forEach(L => { for (let a = 0; a < L.length; a++) { let c = L[a]; for (let b = a + 1; b < L.length && b < a + 4; b++) { c += L[b]; if (L.slice(a, b + 1).some(w => STRONG.has(w))) JOIN.add(c); } } });
   const isName = (n, strong) => { for (const c of vkCores(n)) { if (strong ? STRONG.has(c) : WEAK.has(c)) return true; } if (strong && n.length >= 5 && !common.has(n)) for (const w of STR) if (mskLev(n, w, 1) <= 1) return true; return false; };
   const track = p => { const parts = p.split(/(\s+)/), W = []; parts.forEach((t, i) => { if (!/^\s*$/.test(t)) { const n = mskNorm(t); if (n && !/^[0-9٠-٩]+$/.test(n) && t !== VK_MASK) W.push({ i, n }); } });
     const m = new Array(W.length).fill(false);
-    W.forEach((w, k) => { if (isName(w.n, true)) m[k] = true; });
-    for (let k = 0; k < W.length; k++) for (const L of NAMES) { if (L.length < 2) continue; for (let j = 0; j < L.length - 1; j++) { let len = 0; while (k + len < W.length && j + len < L.length && vkCores(W[k + len].n).includes(L[j + len])) len++; if (len >= 2) for (let z = 0; z < len; z++) m[k + z] = true; } }
+    W.forEach((w, k) => { if (isName(w.n, true) || (w.n.length >= 6 && JOIN.has(w.n))) m[k] = true; });
+    // V146: اسم ملتصق في الصدر («بدرحمود…») ومفرّق في المتن أو العكس
+    for (let k = 0; k < W.length; k++) { let c = W[k].n; for (let j = 1; j <= 3 && k + j < W.length; j++) { c += W[k + j].n; if (c.length >= 6 && (STRONG.has(c) || JOIN.has(c))) { for (let z = 0; z <= j; z++) m[k + z] = true; break; } } }
+    for (let k = 0; k < W.length; k++) for (const L of NAMES) { if (L.length < 2) continue; for (let j = 0; j < L.length - 1; j++) { let len = 0; while (k + len < W.length && j + len < L.length && vkCores(W[k + len].n).includes(L[j + len])) len++; if (len >= 2 && (len >= 3 || L.slice(j, j + len).some(w => !MSK_GENERIC.has(w)))) for (let z = 0; z < len; z++) m[k + z] = true; } }
     // علامات الأشخاص في المتن (المحامي، الشاهد، الخبير، المدعو، السيد…): ما يليها من كلمات غير معروفة في لغة المبادئ اسمٌ — حتى 4 كلمات
-    for (let k = 0; k < W.length - 1; k++) if (VK_PMARK.has(W[k].n)) for (let j = k + 1; j < Math.min(W.length, k + 5); j++) { const n = W[j].n; if (VK_NAMEP.has(n) || (n.length >= 3 && !vkKnown().has(n) && !common.has(n) && !MSK_STOP.has(n) && !VK_STOP.has(n) && !MSK_ROLE.has(n.replace(/^ال/, '')))) m[j] = true; else break; }
+    for (let k = 0; k < W.length - 1; k++) if (VK_PMARK.has(W[k].n)) for (let j = k + 1; j < Math.min(W.length, k + 5); j++) { const n = W[j].n; if (VK_NAMEP.has(n) || VK_FIRST.has(n) || VK_FIRST.has(n.replace(/^ال/, '')) || (n.length >= 3 && !vkKnown().has(n) && !common.has(n) && !(/^[وف]/.test(n) && (vkKnown().has(n.slice(1)) || common.has(n.slice(1)) || /^[وف](ا|ت|ي|ن)/.test(n))) && !MSK_STOP.has(n) && !VK_STOP.has(n) && !MSK_ROLE.has(n.replace(/^ال/, '')))) m[j] = true; else break; }
+    // V146: أسماء شركات في المتن لم ترد في الصدر (صاحب عمل سابق، كفيل…): ما بعد «شركة/مؤسسة…» من كلمات غير معروفة في لغة الأحكام، حتى 5
+    for (let k = 0; k < W.length - 1; k++) if (/^[وبلف]?(شركه|مؤسسه|مجموعه|مكتب|مصنع|مطعم|مركز|محل|ورشه)$/.test(W[k].n)) for (let j = k + 1; j < Math.min(W.length, k + 6); j++) { const n = W[j].n; if (n.length >= 2 && !vkKnown().has(n) && !common.has(n) && !MSK_GENERIC.has(n) && !VK_STOP.has(n) && !/^(لل|ل)/.test(n)) m[j] = true; else break; }
     const adj = (a, b) => b - a === 1 && /^\s+$/.test(parts.slice(W[a].i + 1, W[b].i).join('') || ' ');
     let ch = true; while (ch) { ch = false; for (let k = 0; k < W.length; k++) if (!m[k] && isName(W[k].n, false)) { if ((k > 0 && m[k - 1] && adj(k - 1, k)) || (k < W.length - 1 && m[k + 1] && adj(k, k + 1))) { m[k] = true; ch = true; } } }
     let c = 0; W.forEach((w, k) => { if (m[k]) { parts[w.i] = parts[w.i].replace(/[ء-ي0-9A-Za-zً-ٰـ]+/, VK_MASK).replace(/[ء-يً-ٰـ]+/g, ''); c++; } });
@@ -8105,19 +8189,43 @@ function vkMask(paras, opt) {
   // محرك التعتيم العام (V40–V43): أسماء بعد العلامات (الشاهد، المحامي، المدعو…) والأرقام الشخصية — فقرة فقرة
   const gen = t => { try { return mskMaskText(t).replace(/■+/g, VK_MASK); } catch (e) { return t; } };
   for (let i = 0; i < out.length; i++) { const g = gen(out[i]); if (g !== out[i]) { nMask += (g.split(VK_MASK).length - out[i].split(VK_MASK).length); out[i] = g; } }
+  // V146: العناوين الشخصية — اسم الشارع، ورقم القسيمة والمنزل والشقة
+  const addr = t => t.replace(/((?:^|[\s\-–])(?:شارع|جاد[ةه]|ش\.?))\s+(?![0-9٠-٩])[^\-–—،,.\n]{2,40}/g, '$1 ' + VK_MASK).replace(/((?:قسيم[ةه]|منزل|بناي[ةه]|شق[ةه]|قطع[ةه]|مبنى|مبني)\s*(?:رقم)?\s*[:\-]?\s*)[0-9٠-٩]+/g, '$1' + VK_MASK);
+  for (let i = 0; i < out.length; i++) { const g = addr(out[i]); if (g !== out[i]) { nMask++; out[i] = g; } }
   // أرقام شخصية طويلة (≥8 أرقام متتالية: مدني، هاتف، حساب) — عدا الرقم الآلي والمبالغ
   const longn = t => t.replace(/(?<![0-9٠-٩.,٫])[0-9٠-٩]{8,}(?![0-9٠-٩]*[.,٫][0-9٠-٩])/g, (d, at, all) => /(الآلي|الالي|مبلغ|بمبلغ|دينار|د\.ك)[^0-9٠-٩]{0,6}$/.test(all.slice(Math.max(0, at - 24), at)) ? d : VK_MASK);
   for (let i = 0; i < out.length; i++) { const g = longn(out[i]); if (g !== out[i]) { nMask++; out[i] = g; } }
   const tidy = s => s.replace(/\[…\](?:[\s\-–—\/،,]*\[…\])+/g, VK_MASK);
-  const fn = opt.fn ? tidy(gen(track(opt.fn))) : '';
-  return { paras: out.map(tidy), n: nMask, parties: nParty, fn };
+  // V146: أسماء الملفات والمجلدات: تتبّع أسماء الحكم + ما بعد «شركة/بنك/مؤسسة…» حتى 3 كلمات (عدا كلمات الوصف المعتادة)
+  const ent = t => { const parts = t.replace(/([0-9٠-٩]+)/g, ' $1 ').replace(/(شرك[ةه]|مؤسس[ةه]|مجموع[ةه])(?=[^\s\/\\.،,ـ\-])/g, '$1 ').split(/(\s+)/); let k = -1;
+    for (let i = 0; i < parts.length; i++) { const n = mskNorm(parts[i]); if (!n) continue; if (vkIsCo(n)) { k = 3; continue; } if (k > 0) { if (VK_FNKEEP.has(n) || /^[0-9]+$/.test(n) || n.length < 2) { k = -1; continue; } parts[i] = parts[i].replace(/[ء-ي0-9A-Za-zً-ٰـ()]+/g, '').replace(/^/, VK_MASK); k--; } }
+    return parts.join(''); };
+  const pth = t => tidy(gen(track(ent(t))));
+  return { paras: out.map(tidy), n: nMask, parties: nParty, fn: opt.fn ? pth(opt.fn) : '', dirs: (opt.dirs || []).map(pth) };
 }
+
+// V146: الفرز — هل الملف نموذج حكم؟ (بنيته لا اسمه): منطوق أو (وقائع وأسباب). أحكام التمييز ومستندات القضية (مذكرات، صحف، تقارير…) تُتخطى ولا يُخزَّن منها شيء
+function vkKind(paras, S) {
+  const head8 = norm(paras.slice(0, 8).join(' ')), head = norm(paras.slice(0, 20).join(' ')), all = norm(paras.join(' '));
+  if (/محكمه التمييز/.test(head) && /(الطاعن|المطعون ضد|الطعن رقم|حيث ان الطعن)/.test(all) && !/المستانف/.test(head8)) return 'cass';
+  const oper = /(حكمت المحكمه|ف?لهذه الاسباب|قررت المحكمه)/.test(all);
+  if (/^(مذكره|صحيفه|لائحه|تقرير|حافظه|كشف|بيان|عقد|محضر|طلب)( |$)/.test(norm(paras[0] || '')) && !/حكمت المحكمه/.test(all)) return 'other';
+  return oper || (S.ff && S.rf) ? 'model' : 'other';
+}
+// V146: النتيجة من المنطوق (صيغ ثابتة) — وسوم آلية مؤكدة؛ قد تجتمع (أصلية/فرعية، تأييد جزئي)
+const VK_OUT = [['عدم جواز', /بعدم جواز (الاستيناف|نظر)/], ['عدم قبول', /بعدم قبول (الاستيناف|الدعوي)/], ['سقوط', /بسقوط (الحق|الاستيناف|الخصومه)/],
+  ['إلغاء', /(^| )(ب|و|وب)?الغاء الحكم/], ['تأييد', /(^| )(ب|و|وب)?تاييد (الحكم|ه)|(^| )(ب|و|وب)?تاييده/], ['تعديل', /(^| )(ب|و|وب)?تعديل الحكم/],
+  ['رفض الدعوى', /(ب|و|وب)رفض الدعوي/], ['إعادة لأول درجة', /(اعاده|باعاده|واعاده|باعادتها|واعادتها)[^|]{0,40}(محكمه اول درجه|الي اول درجه|لاول درجه|المحكمه الكليه)/],
+  ['إعادة للمرافعة', /(اعاده|باعاده|واعاده) (الاستيناف|الدعوي|القضيه) (الي المرافعه|للمرافعه)/], ['ندب خبير', /بندب (اداره الخبراء|خبير|لجنه)/], ['إحالة للتحقيق', /(باحاله|احاله)[^|]{0,30}للتحقيق/],
+  ['وقف', /(بوقف|وقف) (الاستيناف|الدعوي|السير)|وقفا تعليقيا/], ['عدم اختصاص', /بعدم اختصاص/], ['كأن لم يكن', /كان لم (يكن|تكن)/], ['انقطاع', /بانقطاع/], ['شطب', /بشطب/]];
+function vkOutcome(o) { const t = norm((o || []).join(' | ')); return VK_OUT.filter(x => x[1].test(t)).map(x => x[0]); }
+function vkDesc(fn) { return String(fn || '').replace(/\.(docx?|DOCX?)$/, '').replace(/[_()\[\]]/g, ' ').replace(/[0-9٠-٩]+/g, ' ').replace(/لسن[ةه]/g, ' ').replace(/(^|\s)(نسخ[ةه]|copy|Copy|COPY|اصل|أصل)(?=\s|$)/gi, ' ').replace(/(^|\s)(نسخ[ةه]|copy|اصل|أصل)(?=\s|$)/gi, ' ').replace(/[()\[\]_]/g, ' ').replace(/(^[\s\-–—.،,\/]+|[\s\-–—.،,\/]+$)/g, '').replace(/\s*[-–—]\s*$/, '').replace(/\s+/g, ' ').trim(); }
 
 // ---- الفهرس والبحث
 const VK_STOP = new Set('في من علي على الي الى عن او ان انه انها ما لا لم لن قد كان كانت هو هي هذا هذه ذلك تلك التي الذي الذين مع عند بين ثم كما و ف ب ل اذ اذا حيث وحيث فان بان لان كل غير قبل بعد منذ حتي اي ايه وان وقد وكان ولا ولم وما'.split(' '));
 function vkStem(w) { if (/^[0-9]+$/.test(w)) return w; let s = w.replace(/^(وال|بال|فال|كال|لل)/, ''); if (s !== w) return s.length >= 2 ? s : w; s = w.replace(/^ال/, ''); if (s !== w) return s.length >= 2 ? s : w; if (/^و/.test(w) && w.length >= 5) { s = w.slice(1).replace(/^ال/, ''); return s; } return w; }
 function vkTerms(t) { return norm(t).split(' ').filter(w => w && !VK_STOP.has(w)).map(vkStem).filter(w => w.length > 1 && !VK_STOP.has(w)); }
-function vkTf(D) { const tf = new Map(); const add = (arr, k) => arr.forEach(p => vkTerms(p).forEach(t => { const v = tf.get(t) || [0, 0, 0]; v[k]++; tf.set(t, v); })); add(D.h, 1); add(D.f, 1); add(D.r, 0); add(D.o, 2);
+function vkTf(D) { const tf = new Map(); const add = (arr, k) => arr.forEach(p => vkTerms(p).forEach(t => { const v = tf.get(t) || [0, 0, 0]; v[k]++; tf.set(t, v); })); add(D.h, 1); add(D.f, 1); add(D.r, 0); add(D.o, 2); add(D.u || [], 0);   // V146: وصفك ومجلداتك بوزن الأسباب
   const t = [...tf.keys()]; return { t: t.join(' '), c: t.map(k => tf.get(k).join(',')).join(' ') }; }
 const VK_W = [1, 0.35, 0.6];
 function vkAddDoc(meta, tf) {
@@ -8132,14 +8240,14 @@ async function vkLoad0() {
   for (const r of recs) { try { const x = await vkDec(r); vkAddDoc(x.m, x.tf); } catch (e) {} }
   VK.ready = true;
 }
-function vkSearch(q, grp) {
+function vkSearch(q, pred) {
   let qt = [...new Set(vkTerms(q))]; if (!qt.length) return [];
   const idf = t => { const L = VK.inv.get(t); const df = L ? L.length / 2 : 0; return Math.log(1 + (VK.N - df + 0.5) / (df + 0.5)); };
   const longQ = qt.length > 10; if (longQ) qt = qt.filter(t => VK.inv.has(t)).sort((a, b) => idf(b) - idf(a)).slice(0, 20);   // فقرة وقائع: أكثر كلماتها تمييزًا
   const groups = qt.map(t => { const g = [[t, 1]]; if (!longQ) { try { synExpand(t).forEach(s => { const n = norm(s); if (n && !n.includes(' ')) { const st = vkStem(n); if (st !== t) g.push([st, 0.5]); } }); } catch (e) {} } return g; });
   const S = new Map(), H = new Map(), k1 = 1.2, b = 0.75;
   groups.forEach((g, gi) => g.forEach(([t, wq]) => { const L = VK.inv.get(t); if (!L) return; const id = idf(t);
-    for (let i = 0; i < L.length; i += 2) { const d = L[i], doc = VK.docs[d]; if (!doc || (grp && doc.g !== grp)) continue; const w = L[i + 1], s = wq * id * (w * (k1 + 1)) / (w + k1 * (1 - b + b * doc.len / VK.avg)); S.set(d, (S.get(d) || 0) + s); const h = H.get(d) || new Set(); h.add(gi); H.set(d, h); } }));
+    for (let i = 0; i < L.length; i += 2) { const d = L[i], doc = VK.docs[d]; if (!doc || (pred && !(typeof pred === 'function' ? pred(doc) : doc.g === pred))) continue; const w = L[i + 1], s = wq * id * (w * (k1 + 1)) / (w + k1 * (1 - b + b * doc.len / VK.avg)); S.set(d, (S.get(d) || 0) + s); const h = H.get(d) || new Set(); h.add(gi); H.set(d, h); } }));
   const out = [...S].map(([d, s]) => { const cov = H.get(d).size / groups.length; return { d, s: s * (0.5 + cov), cov }; });
   const strict = !longQ && groups.length <= 3 ? out.filter(x => x.cov === 1) : out;
   return (strict.length ? strict : out).sort((a, b) => b.s - a.s).slice(0, 300);
@@ -8153,28 +8261,32 @@ function vkSnip(paras, qs, hit) {   // hit: مقطع فيه كلمة من الب
 
 // ---- إضافة الملفات (دفعات، كل حكم يُحفظ فور انتهائه، والمكرر يُتخطى بالبصمة)
 async function vkHash(u8) { const h = new Uint8Array(await crypto.subtle.digest('SHA-256', u8)); return [...h.slice(0, 12)].map(x => x.toString(16).padStart(2, '0')).join(''); }
-async function vkIngest(bytes, fn, grp) {
-  const u8 = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes), id = await vkHash(u8);
+async function vkIngest(bytes, path, grp, opt) {
+  opt = opt || {}; const u8 = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes), id = await vkHash(u8);
   if (VK.docs.some(d => d && d.id === id)) return 'dup';
-  const X = await vkDocx(u8); if (!X.paras.length) throw new Error('empty');
-  const M = vkMask(X.paras, { fn: String(fn || '').replace(/\.docx$/i, '').replace(/^.*[\/\\]/, '') });
-  const S = vkSplit(M.paras), m = vkMeta(M.paras, X.hf);
-  const flags = []; if (!S.ok) flags.push('split'); if (!M.parties) flags.push('parties');
-  const meta = { id, g: grp || 'مجموعتي', m, fn: M.fn, at: Date.now(), fl: flags, mk: M.n, sz: { f: S.f.length, r: S.r.length, o: S.o.length } };
-  const D = { h: S.h, f: S.f, r: S.r, o: S.o, ok: S.ok }, tf = vkTf(D);
+  const X = await vkRead(u8); if (!X.paras.length) throw new Error('empty');
+  const segs = String(path || '').split(/[\/\\]/).filter(Boolean), fn = (segs.pop() || '').replace(/\.docx?$/i, ''), dirs = segs.filter(x => !/^__MACOSX$/.test(x));
+  const M = vkMask(X.paras, { fn, dirs });
+  const S = vkSplit(M.paras), kind = vkKind(M.paras, S);
+  if (kind !== 'model' && !opt.force) return kind;   // لا يُخزَّن شيء
+  const m = vkMeta(M.paras, X.hf, dirs.join('/') + '/' + fn);
+  const flags = []; if (!S.ok && !(S.ff && S.rf)) flags.push('split'); if (!M.parties) flags.push('parties');
+  const desc = vkDesc(M.fn), tags = [...new Set(M.dirs.map(x => x.trim()).filter(x => x && x !== VK_MASK))], out = vkOutcome(S.o);
+  const meta = { v: 2, id, g: grp || 'مجموعتي', m, fn: M.fn, desc, tags, out, kind: opt.force ? kind : 'model', src: u8[0] === 0xD0 ? 'doc' : 'docx', mt: opt.mt || 0, at: Date.now(), fl: flags, mk: M.n, sz: { f: S.f.length, r: S.r.length, o: S.o.length } };
+  const D = { h: S.h, f: S.f, r: S.r, o: S.o, ok: S.ok, u: [desc].concat(tags) }, tf = vkTf(D);
   const a = await vkEnc({ m: meta, tf }), b2 = await vkEnc(D);
   const db = await vkIdb(); await new Promise((res, rej) => { const t = db.transaction(['idx', 'txt'], 'readwrite'); t.objectStore('idx').put(a, id); t.objectStore('txt').put(b2, id); t.oncomplete = res; t.onerror = () => rej(t.error); t.onabort = () => rej(t.error); });
   vkAddDoc(meta, tf); return 'ok';
 }
-async function vkExpand(files) {   // ملفات + مضغوطات ← قائمة {name, get()}
-  const L = [], bad = [];
+async function vkExpand(files) {   // ملفات + مضغوطات ← قائمة {name, get(), mt}
+  const L = [], bad = [], skip = /(^|\/)(~\$|\._|__MACOSX)/;
   for (const f of files) {
     const nm = f.relPath || f.webkitRelativePath || f.name || '';
     if (/\.zip$/i.test(nm) || f.type === 'application/zip' || f.type === 'application/x-zip-compressed') {
-      try { const Z = vkZip(new Uint8Array(await f.arrayBuffer())); Z.list.filter(e => /\.docx$/i.test(e.name) && !/(^|\/)(~\$|\._|__MACOSX)/.test(e.name)).forEach(e => L.push({ name: e.name, get: () => vkZipGet(Z, e) })); Z.list.filter(e => /\.doc$/i.test(e.name)).forEach(e => bad.push({ name: e.name, why: 'doc' })); } catch (e) { bad.push({ name: nm, why: 'zip' }); }
-    } else if (/\.docx$/i.test(nm)) { if (!/(^|\/)(~\$|\._)/.test(nm)) L.push({ name: nm, get: async () => new Uint8Array(await f.arrayBuffer()) }); }
-    else if (/\.doc$/i.test(nm)) bad.push({ name: nm, why: 'doc' });
-    else if (nm) bad.push({ name: nm, why: 'type' });
+      try { const Z = vkZip(new Uint8Array(await f.arrayBuffer())); Z.list.forEach(e => { if (skip.test(e.name) || /\/$/.test(e.name)) return; if (/\.docx?$/i.test(e.name)) L.push({ name: e.name, get: () => vkZipGet(Z, e), mt: e.mt }); else if (/\.pdf$/i.test(e.name)) bad.push({ name: e.name, why: 'pdf' }); else if (!/\.(db|ini|tmp|lnk|DS_Store)$/i.test(e.name)) bad.push({ name: e.name, why: 'type' }); }); } catch (e) { bad.push({ name: nm, why: 'zip' }); }
+    } else if (/\.docx?$/i.test(nm)) { if (!skip.test(nm)) L.push({ name: nm, get: async () => new Uint8Array(await f.arrayBuffer()), mt: f.lastModified || 0 }); }
+    else if (/\.pdf$/i.test(nm)) bad.push({ name: nm, why: 'pdf' });
+    else if (nm && !/\.(db|ini|tmp|lnk|DS_Store)$/i.test(nm)) bad.push({ name: nm, why: 'type' });
   }
   return { L, bad };
 }
@@ -8184,26 +8296,30 @@ async function vkAdd(files) {
   if (!VK.ready) { try { await vkLoad(); } catch (e) { toast('تعذّر فتح التخزين على هذا الجهاز'); return; } }
   VK.busy = true; VK.stop = false; const grp = ($('#vk_group').value || '').trim().slice(0, 40) || 'مجموعتي';
   try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {}); } catch (e) {}
-  const st = { done: 0, ok: 0, dup: 0, err: 0, doc: 0, t0: Date.now() };
+  const st = { done: 0, ok: 0, dup: 0, err: 0, t0: Date.now(), skip: [], grp };
   vkProg(st, 0, 'تجهيز الملفات…');
   try {
-    const { L, bad } = await vkExpand(files); st.doc = bad.filter(x => x.why === 'doc').length; st.err = bad.filter(x => x.why !== 'doc').length;
+    const { L, bad } = await vkExpand(files); bad.forEach(x => st.skip.push(x));
     for (let i = 0; i < L.length; i++) {
       if (VK.stop) break;
-      try { const r = await vkIngest(await L[i].get(), L[i].name, grp); if (r === 'dup') st.dup++; else st.ok++; } catch (e) { st.err++; }
+      try { const r = await vkIngest(await L[i].get(), L[i].name, grp, { mt: L[i].mt }); if (r === 'dup') st.dup++; else if (r === 'ok') st.ok++; else st.skip.push({ name: L[i].name, why: r, get: L[i].get, mt: L[i].mt }); }
+      catch (e) { st.err++; st.skip.push({ name: L[i].name, why: /encrypted/.test(String(e)) ? 'enc' : 'err' }); }
       st.done = i + 1; if (i % 3 === 2 || i === L.length - 1) { vkProg(st, L.length); await new Promise(r => setTimeout(r, 0)); }
     }
     if (!L.length) vkProg(st, 0);
   } finally { VK.busy = false; }
-  vkProg(st, -1); vkRender();
+  VK.last = st; vkProg(st, -1); vkRender();
 }
+const VK_WHY = { other: 'ليست نماذج أحكام (مذكرات، صحف، تقارير، نصوص…)', cass: 'أحكام تمييز', pdf: 'ملفات PDF (غير مدعومة الآن)', type: 'أنواع ملفات أخرى', err: 'تعذّرت قراءتها', enc: 'محمية بكلمة سر', zip: 'ملف مضغوط تالف' };
 function vkProg(st, tot, msg) {
   const b = $('#vk_prog'); if (!b) return; b.classList.remove('hidden');
-  if (tot > 0) { b.innerHTML = '<div class="vkbar"><i style="width:' + Math.round(100 * st.done / tot) + '%"></i></div><div class="vkpt"><span>قُرئ ' + st.done + ' من ' + tot + ' · أُضيف ' + st.ok + (st.dup ? ' · مكرر ' + st.dup : '') + (st.err ? ' · تعذّر ' + st.err : '') + '</span><button type="button" class="btn" id="vk_stop">إيقاف</button></div>'; const s = $('#vk_stop'); if (s) s.onclick = () => { VK.stop = true; s.disabled = true; s.textContent = 'يتوقف…'; }; return; }
+  if (tot > 0) { b.innerHTML = '<div class="vkbar"><i style="width:' + Math.round(100 * st.done / tot) + '%"></i></div><div class="vkpt"><span>قُرئ ' + st.done + ' من ' + tot + ' · أُضيف ' + st.ok + (st.dup ? ' · مكرر ' + st.dup : '') + (st.skip.length ? ' · تُخطي ' + st.skip.length : '') + '</span><button type="button" class="btn" id="vk_stop">إيقاف</button></div>'; const s = $('#vk_stop'); if (s) s.onclick = () => { VK.stop = true; s.disabled = true; s.textContent = 'يتوقف…'; }; return; }
   if (msg) { b.innerHTML = '<div class="vkpt"><span>' + esc(msg) + '</span></div>'; return; }
-  const secs = Math.max(1, Math.round((Date.now() - st.t0) / 1000));
-  b.innerHTML = '<div class="vkpt vkdone"><span>' + (VK.stop ? 'أُوقفت الإضافة. ' : '') + 'أُضيف ' + (st.ok ? vkNum(st.ok) : 'لا شيء') + (st.dup ? '، وتُخطي المكرر (' + st.dup + ')' : '') + (st.err ? '، وتعذّر ' + st.err : '') + (st.doc ? '، وبقي ' + st.doc + ' بصيغة doc القديمة: حوّلها إلى docx من Word ثم أضفها' : '') + ' — في ' + secs + ' ث.' + (VK.stop ? ' أضف الملفات نفسها لاحقًا فيُستأنف من حيث وقف (المضاف يُتخطى).' : '') + '</span><button type="button" class="ib" id="vk_progx" aria-label="إغلاق">✕</button></div>';
+  const secs = Math.max(1, Math.round((Date.now() - st.t0) / 1000)), by = {}; st.skip.forEach(x => (by[x.why] = by[x.why] || []).push(x));
+  const sk = Object.keys(by).map(k => '<details class="vkskip"><summary>' + esc(VK_WHY[k] || k) + ' (' + by[k].length + ')</summary><ul>' + by[k].map((x, i) => '<li><span><bdi>' + esc(x.name.split('/').pop()) + '</bdi></span>' + (x.get && (k === 'other' || k === 'cass') ? '<button type="button" class="linkbtn" data-vkforce="' + st.skip.indexOf(x) + '">أضفه نموذجًا</button>' : '') + '</li>').join('') + '</ul></details>').join('');
+  b.innerHTML = '<div class="vkpt vkdone"><span>' + (VK.stop ? 'أُوقفت الإضافة. ' : '') + 'أُضيف ' + (st.ok ? vkNum(st.ok) : 'لا شيء') + (st.dup ? '، وتُخطي المكرر (' + st.dup + ')' : '') + (st.skip.length ? '، وتُخطي ' + st.skip.length + ' ملفًا لا يُخزَّن منه شيء' : '') + ' — في ' + secs + ' ث.' + (VK.stop ? ' أضف الملفات نفسها لاحقًا فيُستأنف من حيث وقف (المضاف يُتخطى).' : '') + '</span><button type="button" class="ib" id="vk_progx" aria-label="إغلاق">✕</button></div>' + (sk ? '<div class="vkskips">' + sk + '</div>' : '');
   const x = $('#vk_progx'); if (x) x.onclick = () => b.classList.add('hidden');
+  b.querySelectorAll('[data-vkforce]').forEach(btn => btn.onclick = async () => { const it = st.skip[+btn.dataset.vkforce]; if (!it || !it.get) return; btn.disabled = true; try { const r = await vkIngest(await it.get(), it.name, st.grp, { mt: it.mt, force: true }); btn.textContent = r === 'ok' ? 'أُضيف ✓' : 'موجود'; btn.parentElement.classList.add('done'); vkRender(); } catch (e) { btn.textContent = 'تعذّر'; } });
 }
 async function vkDel(ids) {
   const db = await vkIdb(); await new Promise((res, rej) => { const t = db.transaction(['idx', 'txt'], 'readwrite'); ids.forEach(id => { t.objectStore('idx').delete(id); t.objectStore('txt').delete(id); }); t.oncomplete = res; t.onerror = () => rej(t.error); });
@@ -8214,7 +8330,11 @@ async function vkWipe() { try { if (VK.db) { VK.db.close(); VK.db = null; } awai
 // ---- الواجهة
 function vkNum(n, adj) { return n === 1 ? 'حكم واحد' + (adj ? ' ' + adj[0] : '') : n === 2 ? 'حكمان' + (adj ? ' ' + adj[1] : '') : n <= 10 ? n + ' أحكام' + (adj ? ' ' + adj[2] : '') : n + ' حكمًا' + (adj ? ' ' + adj[3] : ''); }
 function vkGroups() { const g = new Map(); VK.docs.forEach(d => { if (d) g.set(d.g, (g.get(d.g) || 0) + 1); }); return [...g]; }
-function vkMetaLine(d) { const m = d.m || {}; return [m.d ? 'جلسة ' + rlFmt(m.d) : '', m.auto ? 'آلي ' + m.auto : '', d.g].filter(Boolean).map(esc).join(' · '); }
+function vkMetaLine(d) { const m = d.m || {}; return [m.d ? 'جلسة ' + rlFmt(m.d) : '', m.auto ? 'آلي ' + m.auto : '', d.g, d.src === 'doc' ? 'doc' : ''].filter(Boolean).map(esc).join(' · '); }
+function vkGK(d) { return d.m && d.m.key ? 'k:' + d.m.key : 'i:' + d.id; }
+function vkVersions(d) { const k = vkGK(d); return VK.docs.filter(x => x && vkGK(x) === k).sort((a, b) => (b.mt || b.at) - (a.mt || a.at)); }
+function vkPass(d) { return d && (!VK.grp || d.g === VK.grp) && (!VK.fo || (d.out || []).includes(VK.fo)) && (!VK.ft || (d.tags || []).includes(VK.ft) || d.desc === VK.ft); }
+function vkChips(d) { return (d.out || []).map(o => '<i class="vkc o">' + esc(o) + '</i>').join('') + (d.tags || []).slice(-2).map(t => '<i class="vkc">' + esc(t) + '</i>').join(''); }
 async function vkInit() {
   const w = $('#vkwrap'); if (!w) return;
   if (!VK.init) { VK.init = true;
@@ -8244,19 +8364,33 @@ function vkRender() {
   $('#vk_gl').innerHTML = G.map(([g, c]) => '<li><span>' + esc(g) + ' <small>(' + c + ')</small></span><button type="button" class="linkbtn" data-vkgd="' + esc(g) + '">احذف المجموعة</button></li>').join('');
   $('#vk_gl').querySelectorAll('[data-vkgd]').forEach(b => b.onclick = () => { if (!b.dataset.sure) { b.dataset.sure = '1'; b.textContent = 'تأكيد الحذف؟'; setTimeout(() => { if (b.isConnected) { delete b.dataset.sure; b.textContent = 'احذف المجموعة'; } }, 3500); return; } const ids = VK.docs.filter(d => d && d.g === b.dataset.vkgd).map(d => d.id); if (VK.grp === b.dataset.vkgd) VK.grp = ''; vkDel(ids).then(() => { vkRender(); toast('حُذفت المجموعة'); }); });
   const nb = document.querySelector('#vk_sub [data-vkneed]'); if (nb) nb.onclick = () => { VK.q = ''; $('#vk_q').value = ''; VK.need = true; vkResults(); };
+  // V146: مرشحات النتيجة ووسومك (المجلدات)
+  const oc = new Map(), tc = new Map(); VK.docs.forEach(d => { if (!d) return; (d.out || []).forEach(o => oc.set(o, (oc.get(o) || 0) + 1)); (d.tags || []).forEach(t => tc.set(t, (tc.get(t) || 0) + 1)); });
+  const ff = $('#vk_ff'); if (ff) { const T = [...tc].sort((a, b) => b[1] - a[1]).slice(0, 60);
+    ff.innerHTML = (oc.size ? '<label class="vkfl"><span>النتيجة</span><select id="vk_fo"><option value="">الكل</option>' + [...oc].sort((a, b) => b[1] - a[1]).map(([o, c]) => '<option value="' + esc(o) + '"' + (VK.fo === o ? ' selected' : '') + '>' + esc(o) + ' (' + c + ')</option>').join('') + '</select></label>' : '')
+      + (T.length ? '<label class="vkfl"><span>وسومك</span><select id="vk_ft"><option value="">الكل</option>' + T.map(([t, c]) => '<option value="' + esc(t) + '"' + (VK.ft === t ? ' selected' : '') + '>' + esc(t) + ' (' + c + ')</option>').join('') + '</select></label>' : '');
+    const fo = $('#vk_fo'), ft = $('#vk_ft'); if (fo) fo.onchange = () => { VK.fo = fo.value; vkResults(); }; if (ft) ft.onchange = () => { VK.ft = ft.value; vkResults(); }; }
+  const old = VK.docs.filter(d => d && !d.v); const lg = $('#vk_legacy'); if (lg) { lg.classList.toggle('hidden', !old.length); if (old.length) { lg.innerHTML = '<b>' + vkNum(old.length) + ' أُضيفت بمحرك تعتيم أقدم (V145).</b> احذفها وأعد إضافتها ليُعاد تعتيمها بالمحرك الجديد. <button type="button" class="btn vkdelb" id="vk_legdel">احذفها الآن</button>'; $('#vk_legdel').onclick = () => vkDel(old.map(d => d.id)).then(() => { vkRender(); toast('حُذفت — أعد إضافة ملفاتها'); }); } }
   vkResults();
 }
 async function vkResults() {
-  const box = $('#vk_res'); if (!VK.N) { box.innerHTML = '<div class="vkempty"><b>ابدأ بإضافة نماذج أحكامك</b><p>اسحب ملفات Word أو مجلدًا إلى هنا (على الحاسوب)، أو اضغط «أضف أحكامًا» واختر ملفات docx أو ملفًا مضغوطًا (zip) يضم المجلد كله — وهو الأسهل على الآيباد والآيفون.</p><p>تُقرأ الملفات على جهازك، وتُعتَّم أسماء الأطراف قبل الحفظ، ويبقى الأصل في مجلدك.</p></div>'; return; }
+  const box = $('#vk_res'); if (!VK.N) { box.innerHTML = '<div class="vkempty"><b>ابدأ بإضافة نماذج أحكامك</b><p>اسحب ملفات Word أو مجلدًا إلى هنا (على الحاسوب)، أو اضغط «أضف أحكامًا» واختر ملفات Word أو ملفًا مضغوطًا (zip) يضم المجلد كله — وهو الأسهل على الآيباد والآيفون.</p><p>تُقرأ الملفات على جهازك، ويُتخطى ما ليس نموذج حكم، وتُعتَّم أسماء الأطراف قبل الحفظ، ويبقى الأصل في مجلدك.</p></div>'; return; }
   const q = (VK.q || '').trim(); let L, qs = new Set();
-  if (q) { const R = vkSearch(q, VK.grp); qs = new Set(vkTerms(q)); L = R.map(x => Object.assign({ doc: VK.docs[x.d], s: x.s }, x)); VK.need = false; }
-  else L = VK.docs.filter(d => d && (!VK.grp || d.g === VK.grp) && (!VK.need || (d.fl && d.fl.length))).sort((a, b) => b.at - a.at).slice(0, 30).map(d => ({ doc: d }));
-  const head = q ? (L.length ? vkNum(L.length, ['مطابق', 'مطابقان', 'مطابقة', 'مطابقًا']) + (L.length >= 300 ? ' (أول 300)' : '') : 'لا نتائج — جرّب كلمة أخرى أو عبارة أقصر') : VK.need ? 'الأحكام التي تحتاج مراجعة: لم يُتعرّف على أقسامها أو على كتلة الأطراف فيها — افتحها وتأكد من التعتيم' : 'آخر ما أُضيف';
-  const top = L.slice(0, 40), mx = L.length && L[0].s ? L[0].s : 1;
+  if (q) { const R = vkSearch(q, vkPass); qs = new Set(vkTerms(q)); L = R.map(x => Object.assign({ doc: VK.docs[x.d], s: x.s }, x)); VK.need = false; }
+  else L = VK.docs.filter(d => vkPass(d) && (!VK.need || (d.fl && d.fl.length))).sort((a, b) => (b.mt || b.at) - (a.mt || a.at)).map(d => ({ doc: d }));
+  // V146: نسخ القضية الواحدة (الرقم نفسه) نتيجة واحدة — الأعلى ترتيبًا (أو الأحدث) ظاهر، والباقي «نسخ أخرى»
+  const seen = new Set(), G = []; L.forEach(x => { const k = vkGK(x.doc); if (seen.has(k)) return; seen.add(k); G.push(x); });
+  const nv = d => vkVersions(d).length;
+  const head = q ? (G.length ? vkNum(G.length, ['مطابق', 'مطابقان', 'مطابقة', 'مطابقًا']) + (L.length >= 300 ? ' (أول 300)' : '') : 'لا نتائج — جرّب كلمة أخرى أو عبارة أقصر') : VK.need ? 'الأحكام التي تحتاج مراجعة: لم يُتعرّف على أقسامها أو على كتلة الأطراف فيها — افتحها وتأكد من التعتيم' : (VK.fo || VK.ft ? vkNum(G.length) : 'آخر ما أُضيف');
+  const top = G.slice(0, 40), mx = G.length && G[0].s ? G[0].s : 1;
   const tx = q ? await Promise.all(top.map(x => vkText(x.doc.id).catch(() => null))) : [];
-  box.innerHTML = '<p class="vkrh">' + head + '</p>' + top.map((x, i) => { const d = x.doc, t = tx[i];
-    return '<button type="button" class="vkr" data-vk="' + d.id + '"><span class="vkrt"><b>' + esc(vkTitle(d)) + '</b>' + (x.s ? '<i class="vkrel" title="قرب النتيجة من البحث (ترتيب لا نسبة)"><i style="width:' + Math.max(8, Math.round(100 * x.s / mx)) + '%"></i></i>' : '') + '</span><span class="vkrm">' + vkMetaLine(d) + (d.fl && d.fl.length ? ' · <em>يحتاج مراجعة</em>' : '') + '</span>' + (t ? '<span class="vkrs">' + (vkSnip(t.r, qs, true) || vkSnip(t.f, qs, true) || vkSnip(t.o, qs, true) || vkSnip(t.r.length ? t.r : t.f, qs)) + '</span>' : '') + '</button>'; }).join('')
-    + (L.length > top.length ? '<p class="k">تظهر أول ' + top.length + ' نتيجة — ضيّق البحث بكلمة أخرى.</p>' : '');
+  box.innerHTML = '<p class="vkrh">' + head + '</p>' + top.map((x, i) => { const d = x.doc, t = tx[i], v = nv(d);
+    return '<button type="button" class="vkr" data-vk="' + d.id + '"><span class="vkrt"><b>' + esc(vkTitle(d)) + '</b>' + (x.s ? '<i class="vkrel" title="قرب النتيجة من البحث (ترتيب لا نسبة)"><i style="width:' + Math.max(8, Math.round(100 * x.s / mx)) + '%"></i></i>' : '') + '</span>'
+      + (d.desc && d.m && d.m.nums ? '<span class="vkrd">' + esc(d.desc) + '</span>' : '')
+      + '<span class="vkrm">' + vkMetaLine(d) + (v > 1 ? ' · <strong>' + v + ' نسخ</strong>' : '') + (d.fl && d.fl.length ? ' · <em>يحتاج مراجعة</em>' : '') + '</span>'
+      + ((d.out || []).length || (d.tags || []).length ? '<span class="vkcs">' + vkChips(d) + '</span>' : '')
+      + (t ? '<span class="vkrs">' + (vkSnip(t.r, qs, true) || vkSnip(t.f, qs, true) || vkSnip(t.o, qs, true) || vkSnip(t.u, qs, true) || vkSnip(t.r.length ? t.r : t.f, qs)) + '</span>' : '') + '</button>'; }).join('')
+    + (G.length > top.length ? '<p class="k">تظهر أول ' + top.length + ' نتيجة' + (q ? ' — ضيّق البحث بكلمة أخرى.' : ' — ابحث أو صفِّ بالنتيجة أو بوسومك.') + '</p>' : '');
   box.querySelectorAll('[data-vk]').forEach(b => b.onclick = () => vkOpen(b.dataset.vk, qs));
 }
 const VK_TXT = new Map();
@@ -8267,23 +8401,41 @@ async function vkOpen(id, qs) {
   VK.open = id; VK.tab = T.r.length ? 'r' : 'f'; const has = k => (T[k] || []).length;
   const draw = () => {
     const tabs = [['r', 'الأسباب'], ['f', 'الوقائع'], ['o', 'المنطوق'], ['h', 'الديباجة']].filter(t => has(t[0]));
-    w.innerHTML = '<div class="sstop"><button type="button" class="ib" data-v="x" aria-label="إغلاق">✕</button><div class="stt"><b>' + esc(vkTitle(d)) + '</b><span>' + vkMetaLine(d) + '</span></div></div>'
+    const V = vkVersions(d);
+    w.innerHTML = '<div class="sstop"><button type="button" class="ib" data-v="x" aria-label="إغلاق">✕</button><div class="stt"><b>' + esc(vkTitle(d)) + '</b><span>' + vkMetaLine(d) + '</span></div>' + (V.length > 1 ? '<select class="ssjump vkver" aria-label="النسخ">' + V.map((x, i) => '<option value="' + x.id + '"' + (x.id === d.id ? ' selected' : '') + '>نسخة ' + (i + 1) + ': ' + esc((x.desc || x.fn || '').slice(0, 40) + ((x.tags || []).length ? ' — ' + x.tags[x.tags.length - 1] : '')) + '</option>').join('') + '</select>' : '') + '</div>'
+      + ((d.out || []).length || (d.tags || []).length || d.desc ? '<div class="vkmeta">' + (d.desc ? '<span class="vkrd">' + esc(d.desc) + '</span>' : '') + vkChips(Object.assign({}, d, { tags: d.tags })) + '</div>' : '')
       + '<div class="vktabs" role="tablist">' + tabs.map(t => '<button type="button" role="tab" aria-selected="' + (VK.tab === t[0]) + '" class="' + (VK.tab === t[0] ? 'on' : '') + '" data-t="' + t[0] + '">' + t[1] + '</button>').join('') + '</div>'
       + '<div class="ssbody vkbody">' + (!T.ok ? '<div class="rlwarn">لم يُتعرّف على أقسام هذا الحكم كاملة — النص محفوظ كله تحت «' + (has('r') ? 'الأسباب' : 'الوقائع') + '».</div>' : '') + (d.fl && d.fl.includes('parties') ? '<div class="rlwarn">لم يُتعرّف على كتلة الأطراف في صدر الحكم — تأكد من التعتيم قبل النسخ.</div>' : '')
       + (T[VK.tab] || []).map(p => '<p>' + (qs && qs.size ? vkHl(p, qs) : esc(p)) + '</p>').join('') + '</div>'
-      + '<div class="ssnav vknav"><p class="vkwarn">التعتيم آلي ولا يضمن الإخفاء الكامل — راجع ما تنسخه، فأنت مسؤول عنه.</p><div class="row"><button type="button" class="btn primary" data-v="cr">انسخ الأسباب</button><button type="button" class="btn" data-v="ca">انسخ الحكم</button><button type="button" class="btn vkdelb" data-v="del">احذف</button></div></div>';
+      + '<div class="ssnav vknav"><p class="vkwarn">التعتيم آلي ولا يضمن الإخفاء الكامل — راجع ما تنسخه، فأنت مسؤول عنه.</p><div class="row"><button type="button" class="btn" data-v="ed">✎ الوصف والوسوم</button><button type="button" class="btn primary" data-v="cr">انسخ الأسباب</button><button type="button" class="btn" data-v="ca">انسخ الحكم</button><button type="button" class="btn vkdelb" data-v="del">احذف</button></div></div>';
     const q = k => w.querySelector('[data-v=' + k + ']');
     q('x').onclick = vkClose;
+    const vs = w.querySelector('.vkver'); if (vs) vs.onchange = () => vkOpen(vs.value, qs);
     w.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { VK.tab = b.dataset.t; draw(); });
+    q('ed').onclick = () => { const b = w.querySelector('.vkbody'); if (b.querySelector('.vked')) return; const f = el('div', 'vked'); f.innerHTML = '<label>الوصف<input type="text" class="vkgin" data-e="d" maxlength="160"></label><label>الوسوم (افصل بينها بفاصلة)<input type="text" class="vkgin" data-e="t" maxlength="300"></label><p class="k">بلا أسماء خصوم.</p><div class="row"><button type="button" class="btn primary" data-e="ok">احفظ</button><button type="button" class="btn" data-e="no">إلغاء</button></div>';
+      f.querySelector('[data-e=d]').value = d.desc || ''; f.querySelector('[data-e=t]').value = (d.tags || []).join('، '); b.prepend(f); b.scrollTop = 0;
+      f.querySelector('[data-e=no]').onclick = () => f.remove();
+      f.querySelector('[data-e=ok]').onclick = async e => { const dv = f.querySelector('[data-e=d]').value.trim(), tv = f.querySelector('[data-e=t]').value.split(/[،,]/).map(x => x.trim()).filter(Boolean), lk = rlLeak(dv + ' ' + tv.join(' '));
+        if (lk.length && !e.currentTarget.dataset.sure) { e.currentTarget.dataset.sure = '1'; e.currentTarget.textContent = 'احفظ رغم ذلك'; toast('تنبيه: يبدو أن فيه ' + lk.join(' و') + ' — راجعه'); return; }
+        await vkSetUser(id, dv, [...new Set(tv)]); toast('حُفظ'); vkOpen(id, qs); vkRender(); }; };
     q('cr').onclick = () => copy((T.r.length ? T.r : T.f).join('\n\n'), 'نُسخت الأسباب');
     q('ca').onclick = () => copy([].concat(T.h, T.f, T.r, T.o).join('\n\n'), 'نُسخ الحكم كاملًا');
     q('del').onclick = e => { const b = e.currentTarget; if (!b.dataset.sure) { b.dataset.sure = '1'; b.textContent = 'تأكيد الحذف؟'; setTimeout(() => { if (b.isConnected) { delete b.dataset.sure; b.textContent = 'احذف'; } }, 3500); return; } vkDel([id]).then(() => { vkClose(); vkRender(); toast('حُذف الحكم من الخزانة'); }); };
   };
   draw(); w.classList.add('show'); document.documentElement.classList.add('noscroll');
 }
+// V146: تعديلك يغلب — الوصف والوسوم تُحفظ مشفّرة ويُعاد فهرسة الحكم بها
+async function vkSetUser(id, desc, tags) {
+  const d = VK.docs.find(x => x && x.id === id); if (!d) return; const T = await vkText(id);
+  d.desc = desc; d.tags = tags; d.ed = 1; T.u = [desc].concat(tags); VK_TXT.set(id, T);
+  const meta = Object.assign({}, d); delete meta.len; delete meta.di; const tf = vkTf(T);
+  const a = await vkEnc({ m: meta, tf }), b2 = await vkEnc(T); const db = await vkIdb();
+  await new Promise((res, rej) => { const t = db.transaction(['idx', 'txt'], 'readwrite'); t.objectStore('idx').put(a, id); t.objectStore('txt').put(b2, id); t.oncomplete = res; t.onerror = () => rej(t.error); });
+  await vkLoad();
+}
 function vkClose() { const w = $('#vksheet'); if (w) w.classList.remove('show'); document.documentElement.classList.remove('noscroll'); VK.open = null; }
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && VK.open) vkClose(); });
-window.__vk = { known: () => vkKnown(), add: f => vkAdd(f), ingest: (b, fn, g) => vkIngest(b, fn, g), mask: (p, o) => vkMask(p, o), split: p => vkSplit(p), meta: (p, h) => vkMeta(p, h), docx: b => vkDocx(b), search: (q, g) => vkSearch(q, g), text: id => vkText(id), load: () => vkLoad(), wipe: () => vkWipe(), get VK() { return VK; } };
+window.__vk = { known: () => vkKnown(), add: f => vkAdd(f), ingest: (b, fn, g, o) => vkIngest(b, fn, g, o), read: b => vkRead(b), doc: b => vkDoc(b), kind: (p, S) => vkKind(p, S), outcome: o => vkOutcome(o), desc: f => vkDesc(f), versions: d => vkVersions(d), setUser: (i, d, t) => vkSetUser(i, d, t), mask: (p, o) => vkMask(p, o), split: p => vkSplit(p), meta: (p, h, path) => vkMeta(p, h, path), docx: b => vkDocx(b), search: (q, g) => vkSearch(q, g), text: id => vkText(id), load: () => vkLoad(), wipe: () => vkWipe(), get VK() { return VK; } };
 
 async function lkWipe() {
   try { localStorage.removeItem(RL_KEY); localStorage.removeItem(LK_KEY); localStorage.removeItem(LK_WAIT); localStorage.removeItem('tm_sync'); } catch (e) {}
@@ -8609,8 +8761,9 @@ function psRender() {
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
-const WN_V = 145;
+const WN_V = 146;
 const WN_LOG = [
+  [146, 'الإصدار 146', ['«خزانة الأحكام»: تقرأ ملفات Word القديمة (doc)، وتتخطى ما ليس نموذج حكم (مذكرات، صحف، تقارير، أحكام تمييز) ولا تحفظ منه شيئًا.', 'تجمع نسخ القضية الواحدة برقمها، وتستخرج النتيجة من المنطوق، وتجعل مجلداتك ووصف الملف وسومًا تصفّي بها.', 'تعتيم أشمل: «مقام من» بلا «ال»، والطرفان في سطر واحد، واسم الشركة كله، وأسماء الملفات والمجلدات.']],
   [145, 'الإصدار 145', ['«خزانة الأحكام» (في «الأحكام»): أضف نماذج أحكامك ملفات Word أو مجلدًا مضغوطًا، فتُعتَّم أسماء الأطراف على جهازك قبل الحفظ، ويُحفظ النص مشفّرًا، وتبحث في الأسباب وتنسخ منها.']],
   [144, 'الإصدار 144', ['وضع الجلسة: سطر صغير في رأس كل قضية «قرار الجلسة الماضية» مع زر «نُفّذ» — هو نفسه خانة «نُفّذ قرار الجلسة السابقة» في بطاقة الرول، فما تؤشّره هنا يظهر هناك.']],
   [143, 'الإصدار 143', ['حزم مكتبة المبادئ 1.6: مجلة القضاء والقانون (2003–2006) ومجموعة القواعد (2002–2006) مع نص القاعدة كاملًا، وحذف المكرر.', 'ما حفظته من مبادئ (في الرول وملفاتي والمحفوظات) يُقرأ بمعرّفه الجديد تلقائيًا فلا يضيع منه شيء.', 'المبدأ نفسه من الحكم نفسه يُعرض نتيجة واحدة، وفي لوحة المبدأ «تكرّر بنصه في أحكام أخرى» (التواتر)، والكلمات المفتاحية الرسمية تُحسّن اقتراح المبادئ.']],
