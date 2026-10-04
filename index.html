@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261004225433">
+<meta name="amali-build" content="20261005002149">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -65,7 +65,7 @@
 </style>
 <style>
 :root{
-  --bg:#F4F1EA; --panel:#FFFFFF; --panel2:#ECE7DC; --line:#E4DDCC; --line2:#D2C8B2;
+  --bg:#F4F1EA; --panel:#FFFFFF; --panel2:#ECE7DC; --line:#E4DDCC; --line2:#D2C8B2; --c1:#2F5DB5; --c2:#B8801A; --c3:#0F9488; --grid:#E9E3D6;
   --ink:#10213B; --ink2:#3F4B5E; --ink3:#6A7588;
   --accent:#0B1F3B; --accent-ink:#FFFFFF; --accent-soft:#E3E8F0; --accent-soft-ink:#16253C;
   --gold:#A67C2E; --gold-soft:#F5ECD9; --gold-ink:#7A5A1E;
@@ -76,7 +76,7 @@
   color-scheme:light;
 }
 @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
-  --bg:#0D1220; --panel:#141B2B; --panel2:#1C2538; --line:#28324A; --line2:#34405A;
+  --bg:#0D1220; --panel:#141B2B; --panel2:#1C2538; --line:#28324A; --line2:#34405A; --c1:#5A86DA; --c2:#B88424; --c3:#1F9C8E; --grid:#28324A;
   --ink:#E8EAF0; --ink2:#B5BCCB; --ink3:#7F889B;
   --accent:#D4B06A; --accent-ink:#141004; --accent-soft:#332B18; --accent-soft-ink:#EBD3A0;
   --gold:#D4AF63; --gold-soft:#33290F; --gold-ink:#EBCF8E;
@@ -84,7 +84,7 @@
   --hl:#6B5A12; --shadow:0 10px 30px rgba(0,0,0,.5); color-scheme:dark;
 }}
 :root[data-theme="dark"]{
-  --bg:#0D1220; --panel:#141B2B; --panel2:#1C2538; --line:#28324A; --line2:#34405A;
+  --bg:#0D1220; --panel:#141B2B; --panel2:#1C2538; --line:#28324A; --line2:#34405A; --c1:#5A86DA; --c2:#B88424; --c3:#1F9C8E; --grid:#28324A;
   --ink:#E8EAF0; --ink2:#B5BCCB; --ink3:#7F889B;
   --accent:#D4B06A; --accent-ink:#141004; --accent-soft:#332B18; --accent-soft-ink:#EBD3A0;
   --gold:#D4AF63; --gold-soft:#33290F; --gold-ink:#EBCF8E;
@@ -1174,6 +1174,90 @@ table.imp select{padding:4px;border:1px solid var(--line2);border-radius:6px;bac
 .tgroup[data-g=write],.tgroup[data-g=ai]{max-width:none}
 @media (max-width:620px){.tgroup .tiles{grid-template-columns:repeat(4,minmax(0,1fr))}.tgroup[data-g=write] .tiles{grid-template-columns:repeat(3,minmax(0,1fr))}.tgroup[data-g=ai] .tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:760px){.homehead .h2main,.homehead .h2body{display:contents}.homehead .h2{display:flex;flex-direction:column;gap:12px}.h2who{order:1}.h2k{order:2}.h2t{order:3;margin-top:-10px}.h2p{order:4}.h2stats{order:5}.h2bar{order:6}.h2btns{order:7}.h2x{order:8}}
+/* V155: «نبض الدائرة» في الرئيسية وصفحة الإحصاءات — الألوان الفئوية مفحوصة لعمى الألوان (فاتح وداكن) */
+.px{margin:-4px 0 16px;background:var(--panel);border:1px solid var(--line);border-radius:18px;display:grid;grid-template-columns:1.1fr 1.2fr 1.15fr auto;align-items:stretch;overflow:hidden;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.px:hover{border-color:var(--line2);box-shadow:0 4px 14px rgba(16,33,59,.06)}
+.px[hidden]{display:none}
+.pxc,.pxgo{padding:14px 18px;display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0}
+.pxc+.pxc,.pxgo{border-inline-start:1px solid var(--line)}
+.pxk{font-size:12.5px;color:var(--ink3);font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.pxk:before{content:"";width:6px;height:6px;border-radius:2px;background:var(--gold);transform:rotate(45deg);flex:none}
+.pxk small{font-weight:400}.pxring .pxk{flex-wrap:nowrap;white-space:nowrap}
+.pxv{display:flex;align-items:baseline;gap:8px}.pxv b{font-size:30px;line-height:1.05;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.5px}
+.pxv small{font-size:12.5px;color:var(--ink2)}
+.pxs{font-size:12px;color:var(--ink3)}
+.pxsplit{display:flex;height:6px;border-radius:4px;overflow:hidden;gap:2px;margin-top:2px;max-width:220px}.pxsplit i{display:block;border-radius:3px}
+.pxleg{display:flex;gap:12px;font-size:12px;color:var(--ink2)}.pxleg span:before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;margin-inline-end:5px;background:var(--k)}
+.pxring{flex-direction:row!important;align-items:center;justify-content:flex-start!important;gap:12px!important}
+.pxring>div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.pxring svg{width:60px;height:60px;flex:none}.pxring svg text{font:800 13px inherit;font-family:inherit;fill:var(--ink)}
+.pxring .up{color:var(--ok);font-weight:700;font-size:12px}.pxring .dn{color:var(--warn);font-weight:700;font-size:12px}
+.pxgo{font:inherit;background:var(--gold-soft);color:var(--gold-ink);border:0;border-inline-start:1px solid var(--line);cursor:pointer;align-items:center;font-weight:700;font-size:13px;gap:6px}
+.pxgo svg{width:22px;height:22px}
+@media (max-width:760px){.px{grid-template-columns:1fr 1fr}.pxc{padding:12px 14px}.pxc.pxring{border-inline-start:0;border-top:1px solid var(--line)}.pxgo{border-top:1px solid var(--line);padding:10px}.pxv b{font-size:26px}.pxring svg{width:52px;height:52px}}
+.sxarc{animation:sxarc 1s cubic-bezier(.3,.7,.2,1) both}
+@keyframes sxarc{from{stroke-dasharray:0 999}}
+/* صفحة الإحصاءات */
+.sx{margin:4px 0 18px}
+.sxh{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between;margin-bottom:14px}
+.sxh h2{margin:0;font-size:22px;color:var(--ink)}.sxsrc{margin:3px 0 0;color:var(--ink3);font-size:13px}
+.sxctl{display:flex;gap:8px;flex-wrap:wrap}
+.sxseg{display:inline-flex;background:var(--panel2);border-radius:12px;padding:3px}.sxseg button{font:inherit;font-size:13.5px;border:0;background:none;padding:7px 14px;border-radius:9px;color:var(--ink2);cursor:pointer;min-height:36px}.sxseg button.on{background:var(--panel);color:var(--ink);font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.msel{font:inherit;font-size:13.5px;border:1px solid var(--line2);background:var(--panel);border-radius:12px;padding:7px 10px;color:var(--ink);min-height:40px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:12px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px;min-width:0}
+.kpi .l{font-size:13px;color:var(--ink3);font-weight:600}.kpi .v{font-size:32px;font-weight:800;color:var(--ink);line-height:1.15;font-variant-numeric:tabular-nums}
+.kpi .s{font-size:12.5px;color:var(--ink2)}
+.kpi.hero{background:linear-gradient(135deg,var(--navybar,#0B1F3B),var(--navybar2,#12325E));border:0;color:#fff;display:flex;align-items:center;gap:14px}
+.kpi.hero .l{color:#E7C579}.kpi.hero .v{color:#fff}.kpi.hero .s{color:rgba(255,255,255,.78)}
+.kpi.hero svg{width:72px;height:72px;flex:none}
+.sxtabs{display:none}
+.sxp{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
+.sxpane{display:contents}
+.sxcd{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px 12px;min-width:0}
+.sxcd h3{margin:0 0 2px;font-size:15.5px;color:var(--ink)}.sxcd .sub{margin:0 0 8px;font-size:12.5px;color:var(--ink3)}
+.sxcd.w7{grid-column:span 7}.sxcd.w5{grid-column:span 5}.sxcd.w12{grid-column:span 12}
+.sxcd.o1{order:1}.sxcd.o2{order:2}.sxcd.o3{order:3}.sxcd.o4{order:4}.sxcd.o5{order:5}.sxcd.o6{order:6}.sxcd.o7{order:7}
+.sx .lg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--ink2);margin:2px 0 6px}.sx .lg span{display:inline-flex;align-items:center;gap:6px}.sx .lg i{width:10px;height:10px;border-radius:3px;background:var(--k);display:inline-block}.sx .lg i.ln{height:2px;border-radius:0;width:14px}.sx .lg i.dash{height:0;border-top:2px dashed var(--ink3);background:none;width:14px;border-radius:0}
+.sxch{width:100%;height:auto;display:block;overflow:visible}
+.sxch text{font-family:inherit;fill:var(--ink3);font-size:11px}.sxch .val{fill:var(--ink2);font-weight:700}.sxch .offl{fill:var(--ink2)}.sxch .gl{stroke:var(--grid);stroke-width:1}
+.sxch .hit{fill:transparent;cursor:pointer}.sxch .hit:hover{fill:rgba(166,124,46,.07)}
+.sxb{transform-box:fill-box;transform-origin:bottom;animation:sxgrow .7s cubic-bezier(.3,.7,.2,1) both}
+@keyframes sxgrow{from{transform:scaleY(0)}}
+.sxdon{display:flex;align-items:center;gap:16px}.sxdon svg{width:150px;height:150px;flex:none}
+.sxdon .dn1{font-weight:800;font-size:30px;fill:var(--ink);font-family:inherit}.sxdon .dn2{font-size:12px;fill:var(--ink3);font-family:inherit}.sxdon .hitd{cursor:pointer}
+.sxdl{display:flex;flex-direction:column;gap:9px;flex:1;min-width:0}.sxdl div{display:grid;grid-template-columns:12px 1fr auto 40px;gap:8px;align-items:center;font-size:13.5px;color:var(--ink2)}.sxdl i{width:12px;height:12px;border-radius:3px;background:var(--k)}.sxdl b{color:var(--ink);font-variant-numeric:tabular-nums}.sxdl small{color:var(--ink3);font-size:12px;text-align:end}
+.sxmb{display:flex;flex-direction:column;gap:11px;margin-top:6px}.sxmr{display:grid;grid-template-columns:132px minmax(0,1fr) 112px;gap:10px;align-items:center;font-size:13px;color:var(--ink2)}
+.sxmr .tr{display:flex;gap:2px;height:14px;min-width:0}.sxmr .tr i{border-radius:4px;display:block;min-width:0}.sxmr b{color:var(--ink);font-variant-numeric:tabular-nums}
+.sxwk .nx{color:var(--ink);font-weight:700}.sxwk small{color:var(--ink3)}
+.sxag.old b{color:var(--warn)}
+.sxpk{display:inline-flex;align-items:center;font-size:12px;font-weight:700;border-radius:999px;padding:1px 8px;background:var(--gold-soft);color:var(--gold-ink)}
+.sxrec{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px}.sxrec th{font-size:12px;color:var(--ink3);font-weight:600;text-align:start;padding:6px 8px;border-bottom:1px solid var(--line)}.sxrec td{padding:8px;border-bottom:1px solid var(--line);color:var(--ink2)}.sxrec td.n{text-align:center;font-variant-numeric:tabular-nums;color:var(--ink);font-weight:700;white-space:nowrap}
+.sxrec tr.bad td{background:var(--warn-soft)}
+.sxchip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;white-space:nowrap}.sxchip.ok{background:var(--ok-soft);color:var(--ok)}.sxchip.wr{background:var(--warn-soft);color:var(--warn)}
+.sxlate{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.sxoff{margin-top:10px;border-top:1px dashed var(--line2);padding-top:10px}.sxog{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}.sxog label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--ink2)}.sxog input{font:inherit;font-size:16px;padding:8px 10px;border:1px solid var(--line2);border-radius:10px;background:var(--panel);color:var(--ink);min-height:42px}
+.sxob{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.sx .note{font-size:12px;color:var(--ink3);margin:8px 0 0}.sxempty{color:var(--ink3);font-size:13.5px;margin:6px 0 10px}.sxwarn{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:8px 12px;font-size:13px;margin:0 0 10px}
+.sxdet{margin:22px 0 8px;font-size:16px;color:var(--ink2);border-top:1px solid var(--line);padding-top:16px}
+.sxtip{position:fixed;z-index:9999;background:var(--ink);color:var(--panel);font-size:12.5px;padding:7px 10px;border-radius:9px;pointer-events:none;box-shadow:0 6px 18px rgba(0,0,0,.18);max-width:min(320px,90vw)}
+@media (max-width:900px){.kpis{grid-template-columns:1fr 1fr}.sxcd.w7,.sxcd.w5{grid-column:span 12}}
+@media (max-width:600px){
+  .sxsrc{font-size:12px}
+  .kpis{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.kpi{padding:11px 12px}.kpi .l{font-size:12px}.kpi .s{font-size:11.5px}.kpi .v{font-size:25px}.kpi.hero{grid-column:1/-1;order:-1}
+  .sxtabs{display:flex;position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;margin:0 0 4px;gap:6px}
+  .sxtabs button{flex:1;font:inherit;font-size:13.5px;border:1px solid var(--line);background:var(--panel);color:var(--ink2);border-radius:999px;padding:8px 4px;cursor:pointer;white-space:nowrap;min-height:38px}
+  .sxtabs button.on{background:var(--ink);color:var(--panel);border-color:var(--ink);font-weight:700}
+  .sxtabs i{font-style:normal;display:inline-grid;place-items:center;min-width:17px;height:17px;border-radius:9px;background:var(--warn);color:#fff;font-size:11px;margin-inline-start:3px}
+  .sxp{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;gap:16px;align-items:flex-start;scrollbar-width:none;overscroll-behavior-x:contain;transition:height .25s}
+  .sxp::-webkit-scrollbar{display:none}
+  .sxpane{display:flex;flex-direction:column;gap:12px;flex:0 0 100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always}
+  .sxdon{flex-direction:column;align-items:stretch}.sxdon svg{margin:0 auto}
+  .sxrec{font-size:13px}.sxrec td,.sxrec th{padding:8px 5px}.cht{display:none}
+  .sxmr{grid-template-columns:96px minmax(0,1fr) 92px;gap:8px}
+}
+@media (prefers-reduced-motion:reduce){.sxb,.sxarc{animation:none}.sxp{scroll-behavior:auto;transition:none}}
+@media print{.px,.sxtabs{display:none!important}}
 @media (max-width:620px){.tgroup .tiles{grid-template-columns:repeat(4,minmax(0,1fr))!important}.tgroup[data-g=write] .tiles{grid-template-columns:repeat(3,minmax(0,1fr))!important}.tgroup .tile.app{min-height:88px;padding:10px 4px 8px}.tgroup .tile.app .ic{width:42px;height:42px}.tgroup .tile.app b{font-size:12.5px}}
 @media (min-width:900px){.tgroups .tgroup[data-g=case]{flex:5 1 55%}.tgroups .tgroup[data-g=write]{flex:3 1 33%}.tgroups .tgroup[data-g=research]{flex:4 1 60%}.tgroups .tgroup[data-g=ai]{flex:1 1 14%}}
 .hsheet .msh b{font-family:inherit;font-size:17px}
@@ -2030,6 +2114,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 
 <div class="homewrap" id="homewrap">
   <div class="homehead" id="homehead"><svg class="herodeco" aria-hidden="true"><defs><pattern id="hpat" width="168" height="112" patternUnits="userSpaceOnUse"><g fill="none" stroke="currentColor" stroke-width=".9"><rect x="0.6" y="0.6" width="5.8" height="5.8"></rect><rect x="7.6" y="0.6" width="5.8" height="5.8"></rect><rect x="14.6" y="105.6" width="5.8" height="5.8"></rect><rect x="21.6" y="105.6" width="5.8" height="5.8"></rect><rect x="28.6" y="0.6" width="5.8" height="5.8"></rect><rect x="35.6" y="0.6" width="5.8" height="5.8"></rect><rect x="42.6" y="105.6" width="5.8" height="5.8"></rect><rect x="49.6" y="105.6" width="5.8" height="5.8"></rect><rect x="56.6" y="0.6" width="5.8" height="5.8"></rect><rect x="63.6" y="0.6" width="5.8" height="5.8"></rect><rect x="70.6" y="105.6" width="5.8" height="5.8"></rect><rect x="77.6" y="105.6" width="5.8" height="5.8"></rect><rect x="84.6" y="0.6" width="5.8" height="5.8"></rect><rect x="91.6" y="0.6" width="5.8" height="5.8"></rect><rect x="98.6" y="105.6" width="5.8" height="5.8"></rect><rect x="105.6" y="105.6" width="5.8" height="5.8"></rect><rect x="112.6" y="0.6" width="5.8" height="5.8"></rect><rect x="119.6" y="0.6" width="5.8" height="5.8"></rect><rect x="126.6" y="105.6" width="5.8" height="5.8"></rect><rect x="133.6" y="105.6" width="5.8" height="5.8"></rect><rect x="140.6" y="0.6" width="5.8" height="5.8"></rect><rect x="147.6" y="0.6" width="5.8" height="5.8"></rect><rect x="154.6" y="105.6" width="5.8" height="5.8"></rect><rect x="161.6" y="105.6" width="5.8" height="5.8"></rect><rect x="49.6" y="56.6" width="5.8" height="5.8"></rect><rect x="56.6" y="49.6" width="5.8" height="5.8"></rect><rect x="56.6" y="63.6" width="5.8" height="5.8"></rect><rect x="63.6" y="42.6" width="5.8" height="5.8"></rect><rect x="63.6" y="70.6" width="5.8" height="5.8"></rect><rect x="70.6" y="35.6" width="5.8" height="5.8"></rect><rect x="70.6" y="77.6" width="5.8" height="5.8"></rect><rect x="77.6" y="28.6" width="5.8" height="5.8"></rect><rect x="77.6" y="84.6" width="5.8" height="5.8"></rect><rect x="84.6" y="21.6" width="5.8" height="5.8"></rect><rect x="84.6" y="91.6" width="5.8" height="5.8"></rect><rect x="91.6" y="28.6" width="5.8" height="5.8"></rect><rect x="91.6" y="84.6" width="5.8" height="5.8"></rect><rect x="98.6" y="35.6" width="5.8" height="5.8"></rect><rect x="98.6" y="77.6" width="5.8" height="5.8"></rect><rect x="105.6" y="42.6" width="5.8" height="5.8"></rect><rect x="105.6" y="70.6" width="5.8" height="5.8"></rect><rect x="112.6" y="49.6" width="5.8" height="5.8"></rect><rect x="112.6" y="63.6" width="5.8" height="5.8"></rect><rect x="119.6" y="56.6" width="5.8" height="5.8"></rect><rect x="63.6" y="56.6" width="5.8" height="5.8"></rect><rect x="70.6" y="49.6" width="5.8" height="5.8"></rect><rect x="70.6" y="63.6" width="5.8" height="5.8"></rect><rect x="77.6" y="42.6" width="5.8" height="5.8"></rect><rect x="77.6" y="70.6" width="5.8" height="5.8"></rect><rect x="84.6" y="35.6" width="5.8" height="5.8"></rect><rect x="84.6" y="77.6" width="5.8" height="5.8"></rect><rect x="91.6" y="42.6" width="5.8" height="5.8"></rect><rect x="91.6" y="70.6" width="5.8" height="5.8"></rect><rect x="98.6" y="49.6" width="5.8" height="5.8"></rect><rect x="98.6" y="63.6" width="5.8" height="5.8"></rect><rect x="105.6" y="56.6" width="5.8" height="5.8"></rect><rect x="84.6" y="56.6" width="5.8" height="5.8"></rect><rect x="21.6" y="56.6" width="5.8" height="5.8"></rect><rect x="14.6" y="49.6" width="5.8" height="5.8"></rect><rect x="7.6" y="42.6" width="5.8" height="5.8"></rect><rect x="14.6" y="63.6" width="5.8" height="5.8"></rect><rect x="7.6" y="70.6" width="5.8" height="5.8"></rect><rect x="28.6" y="49.6" width="5.8" height="5.8"></rect><rect x="35.6" y="42.6" width="5.8" height="5.8"></rect><rect x="28.6" y="63.6" width="5.8" height="5.8"></rect><rect x="35.6" y="70.6" width="5.8" height="5.8"></rect><rect x="147.6" y="56.6" width="5.8" height="5.8"></rect><rect x="140.6" y="49.6" width="5.8" height="5.8"></rect><rect x="133.6" y="42.6" width="5.8" height="5.8"></rect><rect x="140.6" y="63.6" width="5.8" height="5.8"></rect><rect x="133.6" y="70.6" width="5.8" height="5.8"></rect><rect x="154.6" y="49.6" width="5.8" height="5.8"></rect><rect x="161.6" y="42.6" width="5.8" height="5.8"></rect><rect x="154.6" y="63.6" width="5.8" height="5.8"></rect><rect x="161.6" y="70.6" width="5.8" height="5.8"></rect></g></pattern><linearGradient id="hfl" x1="0" x2="1"><stop offset="0" stop-color="#fff"></stop><stop offset=".5" stop-color="#fff" stop-opacity=".6"></stop><stop offset="1" stop-color="#fff" stop-opacity=".25"></stop></linearGradient><linearGradient id="hfr" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".25"></stop><stop offset=".7" stop-color="#fff" stop-opacity=".12"></stop><stop offset="1" stop-color="#fff" stop-opacity=".35"></stop></linearGradient><mask id="hmask" maskContentUnits="objectBoundingBox"><rect class="rev l" x="0" y="0" width=".5" height="1" fill="url(#hfl)"></rect><rect class="rev r" x=".5" y="0" width=".5" height="1" fill="url(#hfr)"></rect></mask><linearGradient id="hshine" x1="0" x2="1"><stop offset="0" stop-color="#FFE7A6" stop-opacity="0"></stop><stop offset=".5" stop-color="#FFE7A6" stop-opacity=".9"></stop><stop offset="1" stop-color="#FFE7A6" stop-opacity="0"></stop></linearGradient></defs><g mask="url(#hmask)"><rect width="100%" height="100%" fill="url(#hpat)"></rect><rect class="shine" x="0" y="0" width="30%" height="100%" fill="url(#hshine)"></rect></g></svg><div class="h2"><div class="h2main"><div class="h2who"><img id="heroav" class="heroav" alt="" hidden><div class="herogreet" id="herogreet"></div></div><div class="h2body" id="herobrief"></div></div><div class="h2stats" id="h2stats" hidden></div></div></div>
+  <div id="hpulse" class="px" hidden role="button" tabindex="0" aria-label="نبض الدائرة — افتح الإحصاءات"></div>
   <div class="homesearch"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span><input id="homeq" type="search" placeholder="ابحث عن قضية أو مبدأ أو مادة: 783/2026 · م44 · مكافأة نهاية الخدمة…" autocomplete="off" enterkeyhint="go"><div class="gslist homegs hidden" id="homegs" role="listbox"></div></div>
   <div id="homealert" class="homealert"></div><div class="tgroups" id="tiles"></div>
   <div class="homefoot">كل ما يُنتجه التطبيق مسودة عمل تُراجع على الأوراق. البحث والفحص يجريان على الجهاز؛ وما وُسم «✦ ذكاء» يُرسل النص المعتّم إلى أداة الذكاء التي تختارها.</div>
@@ -2462,7 +2547,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V154 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V155 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -3388,7 +3473,7 @@ function heroWire(day) {
     if (k === 'sync') { const mb = $('#menubtn'); if (mb) mb.click(); setTimeout(() => { const d = $('#dsync'); if (d) d.scrollIntoView({ block: 'start' }); }, 300); return; }
     rlMode = 'roll'; if (day) rlDaySel = day; if (k === 'need') rlPrepF = 'need'; setView('r'); });
 }
-window.amaliHero = () => { try { heroRender(); } catch (e) {} };
+window.amaliHero = () => { try { heroRender(); } catch (e) {} try { sxPulse(); } catch (e) {} };
 let HOME_ANIMED = false;
 function searchPrinciples(v) { v = (v || '').trim(); state.q = v; q.value = v; setView('p'); run(); $('#qclr').classList.toggle('hidden', !v); $('#qhint').classList.toggle('hidden', !!v); }
 document.querySelector('.brand').onclick = () => setView('h');
@@ -4052,10 +4137,213 @@ function rlSortList(list) {
   else if (rlSort === 'exec') a.sort((x, y) => (x.exec ? 1 : 0) - (y.exec ? 1 : 0));
   return rlAdj(a);
 }
-(function rlLoad() { try { const s = localStorage.getItem(RL_KEY); if (s) { const j = JSON.parse(s); if (j && Array.isArray(j.cards)) RL = { v: 2, circuit: j.circuit || '', cards: j.cards, cal: j.cal || { off: [], on: [] }, members: j.members || {}, del: j.del || {}, st: j.st || 0, hol: j.hol || [], fm: j.fm || [], prof: j.prof || null }; } localStorage.setItem(RL_KEY + '_t', '1'); localStorage.removeItem(RL_KEY + '_t'); } catch (e) { RL_MEM = true; } })();
+(function rlLoad() { try { const s = localStorage.getItem(RL_KEY); if (s) { const j = JSON.parse(s); if (j && Array.isArray(j.cards)) RL = { v: 2, circuit: j.circuit || '', cards: j.cards, cal: j.cal || { off: [], on: [] }, members: j.members || {}, del: j.del || {}, st: j.st || 0, hol: j.hol || [], fm: j.fm || [], prof: j.prof || null, off: j.off || {} }; } localStorage.setItem(RL_KEY + '_t', '1'); localStorage.removeItem(RL_KEY + '_t'); } catch (e) { RL_MEM = true; } })();
 { let mg = 0; RL.cards.forEach(c => { if (RL_RES.includes(c.stage) && !c.resAt && c.src === 'kashf' && !(c.hist || []).length && c.next && c.stage !== 'مد أجل النطق') { c.resAt = c.next; c.next = rlNextSessions(c.next, 2, RL.cal, false)[1] || c.next; mg++; } }); if (mg) rlSave(); }
 rlCHAll();
-var RL_SH = null; function rlSetHash() { return JSON.stringify([RL.circuit || '', RL.members || {}, RL.cal || {}, RL.hol || [], RL.fm || [], RL.prof || null]); }
+// ==== V155: «نبض الدائرة» في الرئيسية + إحصاءات الدائرة بمصطلحات الإحصائية الشهرية الرسمية ====
+// المقدّمة = جديدة + مؤجلة من فترة سابقة (قضايا لها جلسة في الشهر، عدا المحجوزة من قبله) · المفصول فيها = قطعي + تمهيدي
+// نسبة الإنجاز = المفصول فيها ÷ المقدّمة · RL.off[شهر] = أرقام الإحصائية الرسمية التي يُدخلها القاضي (أرقام فقط)
+let SX_M = '', SX_MINE = false, SX_TAB = 1;
+function sxMonOf(d) { return /^\d{4}-\d{2}/.test(d || '') ? d.slice(0, 7) : ''; }
+function sxMonAdd(m, k) { const p = m.split('-'); const d = new Date(+p[0], +p[1] - 1 + k, 1); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); }
+function sxMonName(m, sh) { const p = (m || '').split('-'); try { const n = new Date(+p[0], +p[1] - 1, 1).toLocaleDateString('ar-KW-u-nu-latn', { month: 'long' }); return sh && n.length > 5 ? n.slice(0, 3) : n; } catch (e) { return m; } }
+function sxPct(a, b) { return b ? Math.round(a * 1000 / b) / 10 : null; }
+function sxFmtP(v) { return v == null ? '—' : (Math.round(v * 10) / 10) + '%'; }
+function sxHear(c) { const s = new Set(); (c.hist || []).forEach(h => { if (h && h.d && !/^تصحيح/.test(h.a || '')) s.add(h.d); }); if (c.first) s.add(c.first); if (c.next && !RL_DONE.includes(c.stage) && !RL_RES.includes(c.stage)) s.add(c.next); return s; }
+function sxResAtStart(c, ms) {
+  const H = (c.hist || []).filter(h => h && h.d && h.d < ms && !/^تصحيح/.test(h.a || ''));
+  if (H.length) { const a = H[H.length - 1].a || ''; return /^حجز للحكم/.test(a) || a === 'مد أجل النطق'; }
+  return !!(c.resAt && c.resAt < ms && (RL_RES.includes(c.stage) || (RL_DONE.includes(c.stage) && rlEndAt(c) >= ms)));
+}
+function sxEnd(c) { return RL_DONE.includes(c.stage) ? rlEndAt(c) : ''; }
+function sxPre(c) { const L = (c.pre || []).map(p => ({ d: p.d, w: p.w || '' })); (c.hist || []).forEach(h => { if (h && h.a === 'إحالة للخبير') L.push({ d: h.d, w: '' }); }); return L; }
+function sxVdG(c) { if (c.stage === 'شُطبت') return 's'; const v = c.vd || ''; if ((RL_VERDICTS['موضوع'] || []).includes(v)) return 'm'; if ((RL_VERDICTS['شكل'] || []).includes(v)) return 's'; return 'x'; }
+function sxCover() { let t = Infinity; RL.cards.forEach(c => { if (c.created && c.created < t) t = c.created; }); if (t !== Infinity) return rlIsoOf(t); const f = RL.cards.map(c => rlFirst(c)).filter(Boolean).sort()[0]; return f || ''; }   // بلا تاريخ إدخال: أقدم جلسة معروفة   // أول يوم دخلت فيه قضايا الرول
+function sxMonth(m, mine) {
+  const ms = m + '-01', me = sxMonAdd(m, 1) + '-01', inM = d => !!d && d >= ms && d < me, who = rlMe();
+  const r = { m, nw: 0, pp: 0, rs: 0, q: 0, qm: 0, qs: 0, qx: 0, t: 0, out: 0, W: {} };
+  RL.cards.forEach(c => {
+    const rp = sxResAtStart(c, ms), pres = !rp && [...sxHear(c)].some(inM), end = sxEnd(c), fin = inM(end), mineC = c.writer === who;
+    if (pres) { if (inM(rlFirst(c))) r.nw++; else r.pp++; }
+    if (rp) r.rs++;
+    if (fin && (!mine || mineC)) { r.q++; const g = sxVdG(c); r['q' + g]++; const w = c.writer && RL_W[c.writer] ? c.writer : ''; r.W[w] = (r.W[w] || 0) + 1; }
+    sxPre(c).forEach(p => { if (inM(p.d) && (!mine || (p.w || c.writer) === who)) r.t++; });
+    if ((pres || rp) && !fin) r.out++;
+  });
+  r.pr = r.nw + r.pp; r.rate = sxPct(r.q + r.t, r.pr);
+  const cov = sxCover(); r.part = !cov || cov > ms; r.cur = m === sxMonOf(rlToday());
+  const o = (RL.off || {})[m]; if (o) { r.off = Object.assign({}, o); r.off.pr = (+o.nw || 0) + (+o.pp || 0); r.off.rate = sxPct((+o.q || 0) + (+o.t || 0), r.off.pr); }
+  return r;
+}
+// الشهر المعروض: الماضي المكتمل افتراضيًا، أو الجاري إن لم يكن للماضي بيانات
+function sxDefMonth() { const cur = sxMonOf(rlToday()), prev = sxMonAdd(cur, -1), P = sxMonth(prev); return (P.off || (!P.part && P.pr)) ? prev : cur; }
+// قيمة الشهر للرسوم: الرول إن غطّى الشهر كاملًا، وإلا الرسمي إن أُدخل، وإلا الرول جزئيًا
+function sxVal(r) { if (!r.part || r.cur) return { pr: r.pr, d: r.q + r.t, q: r.q, t: r.t, rate: r.rate, src: r.part ? 'part' : 'roll' }; if (r.off) return { pr: r.off.pr, d: (+r.off.q || 0) + (+r.off.t || 0), q: +r.off.q || 0, t: +r.off.t || 0, rate: r.off.rate, src: 'off' }; return { pr: r.pr, d: r.q + r.t, q: r.q, t: r.t, rate: r.rate, src: 'part' }; }
+// ---- الرئيسية: شريط «نبض الدائرة»
+function sxPulse() {
+  const P = $('#hpulse'); if (!P) return;
+  if (!RL.cards.length || isHid('r')) { P.hidden = true; P.innerHTML = ''; return; }
+  const T = rlToday(), open = RL.cards.filter(c => !RL_DONE.includes(c.stage) && !RL_RES.includes(c.stage)), ds = [...new Set(open.map(c => c.next).filter(d => d && d >= T))].sort();
+  const cur = sxMonOf(T), C = sxMonth(cur), prev = sxMonAdd(cur, -1), Pv = sxMonth(prev), Pp = sxMonth(sxMonAdd(cur, -2));
+  const vp = sxVal(Pv), vpp = sxVal(Pp), useP = vp.src !== 'part' && vp.rate != null, R = useP ? vp : sxVal(C), Rm = useP ? prev : cur;
+  const ring = (p, txt) => { const sz = 60, w = 7, r = (sz - w) / 2, L = 2 * Math.PI * r, v = Math.max(0, Math.min(100, p || 0)); return '<svg viewBox="0 0 ' + sz + ' ' + sz + '" aria-hidden="true"><circle cx="30" cy="30" r="' + r + '" fill="none" stroke="var(--panel2)" stroke-width="' + w + '"/>' + (v ? '<circle class="sxarc" cx="30" cy="30" r="' + r + '" fill="none" stroke="var(--ok)" stroke-width="' + w + '" stroke-linecap="round" stroke-dasharray="' + (L * v / 100).toFixed(1) + ' ' + L.toFixed(1) + '" transform="rotate(-90 30 30)"/>' : '') + '<text x="30" y="31" text-anchor="middle" dominant-baseline="middle">' + txt + '</text></svg>'; };
+  let cmp = ''; if (useP && vpp.src !== 'part' && vpp.rate) {   /* لا مقارنة بشهر بلا أحكام */ const d = Math.round((vp.rate - vpp.rate) * 10) / 10; cmp = '<span class="' + (d >= 0 ? 'up' : 'dn') + '">' + (d >= 0 ? '▲' : '▼') + ' من ' + sxFmtP(vpp.rate) + ' في ' + sxMonName(sxMonAdd(cur, -2)) + '</span>'; }
+  const tq = C.q + C.t;
+  P.innerHTML = '<div class="pxc"><span class="pxk">القضايا المنظورة</span><div class="pxv"><b>' + open.length + '</b><small>قضية</small></div><span class="pxs">' + (ds.length ? 'في ' + (ds.length === 1 ? 'جلسة واحدة' : ds.length === 2 ? 'جلستين' : ds.length + ' ' + (ds.length <= 10 ? 'جلسات' : 'جلسة')) + ' · ' + rlFmt(ds[0]).replace(/\/\d{4}$/, '') + (ds.length > 1 ? ' – ' + rlFmt(ds[ds.length - 1]).replace(/\/\d{4}$/, '') : '') : 'لا جلسات قادمة مسجّلة') + '</span></div>'
+    + '<div class="pxc"><span class="pxk">المفصول فيها — ' + sxMonName(cur) + '</span><div class="pxv"><b>' + tq + '</b><small>حتى اليوم</small></div>' + (tq ? '<div class="pxsplit"><i style="flex:' + C.q + ';background:var(--c2)"></i><i style="flex:' + C.t + ';background:var(--c3)"></i></div>' : '') + '<div class="pxleg"><span style="--k:var(--c2)">قطعي ' + C.q + '</span><span style="--k:var(--c3)">تمهيدي ' + C.t + '</span></div></div>'
+    + '<div class="pxc pxring">' + ring(R.rate, R.rate == null ? '—' : String(Math.round(R.rate * 10) / 10)) + '<div><span class="pxk">الإنجاز · ' + sxMonName(Rm) + (useP ? (vp.src === 'off' ? ' <small>(رسمي)</small>' : '') : ' <small>حتى اليوم</small>') + '</span><span class="pxs">' + (R.pr ? R.d + ' من ' + R.pr : 'لا جلسات بعد') + '</span>' + cmp + '</div></div>'
+    + '<button type="button" class="pxgo" data-h="stat" aria-label="إحصاءات الدائرة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 20h18M6 16v-4M11 16V8M16 16v-6M21 16V5"/></svg><span>الإحصاءات</span></button>';
+  P.hidden = false;
+  P.onclick = e => { rlPrepF = ''; rlMine = false; rlMode = 'stat'; SX_M = ''; setView('r'); };
+}
+// ---- رسوم SVG (بلا مكتبات) — الزمن من اليمين إلى اليسار
+function sxNice(mx) { if (mx <= 5) return 5; const p = Math.pow(10, Math.floor(Math.log10(mx))), n = mx / p; return (n <= 1 ? 1 : n <= 2 ? 2 : n <= 2.5 ? 2.5 : n <= 5 ? 5 : 10) * p; }
+function sxTip(t) { return ' data-tip="' + esc(t) + '"'; }
+function sxBars(S, mob) {   // S: [{lab, a, b, src, tip}]
+  const W = mob ? 340 : 640, H = mob ? 200 : 230, L = 34, B = 26, T = 20, n = S.length, gw = (W - L) / n, bw = Math.min(26, gw * .27), mx = sxNice(Math.max(1, ...S.map(x => Math.max(x.a, x.b)))), y = v => T + (H - T - B) * (1 - v / mx);
+  const bar = (x, v, c, op) => v ? '<path class="sxb" d="M' + x.toFixed(1) + ' ' + y(0) + 'V' + (y(v) + 4).toFixed(1) + 'q0-4 4-4h' + (bw - 8).toFixed(1) + 'q4 0 4 4V' + y(0) + 'z" fill="' + c + '"' + (op ? ' fill-opacity="' + op + '"' : '') + '/>' : '';
+  let s = '<svg class="sxch" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="المقدّمة والمفصول فيها شهريًا"><defs><pattern id="sxhatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="var(--line2)" stroke-width="2"/></pattern></defs>';
+  [0, .5, 1].forEach(f => { const v = Math.round(mx * f); s += '<line class="gl" x1="' + L + '" x2="' + W + '" y1="' + y(v) + '" y2="' + y(v) + '"/><text x="' + (L - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + v + '</text>'; });
+  S.forEach((x, i) => { const cx = W - gw * (i + .5), op = x.src === 'part' ? .35 : 0;
+    s += bar(cx + 1, x.a, 'var(--c1)', op) + bar(cx - bw - 1, x.b, 'var(--c2)', op);
+    if (x.src === 'part' && !x.a && !x.b) s += '<rect x="' + (cx - bw) + '" y="' + y(mx * .25) + '" width="' + (bw * 2) + '" height="' + (y(0) - y(mx * .25)) + '" rx="4" fill="url(#sxhatch)"/>';
+    if ((i === n - 1 || i === 0) && (x.a || x.b)) s += '<text class="val" x="' + (cx + 1 + bw / 2) + '" y="' + (y(x.a) - 5) + '" text-anchor="middle">' + x.a + '</text><text class="val" x="' + (cx - 1 - bw / 2) + '" y="' + (y(x.b) - 5) + '" text-anchor="middle">' + x.b + '</text>';
+    s += '<text x="' + cx + '" y="' + (H - 6) + '" text-anchor="middle"' + (x.src === 'off' ? ' class="offl"' : '') + '>' + esc(x.lab) + (x.src === 'off' ? '*' : '') + '</text><rect class="hit" x="' + (cx - gw / 2) + '" y="' + T + '" width="' + gw + '" height="' + (H - T - B) + '"' + sxTip(x.tip) + '/>'; });
+  return s + '</svg>';
+}
+function sxBars1(S, mob, lab) {   // سلسلة واحدة: [{lab, v, tip}]
+  const W = mob ? 340 : 640, H = mob ? 190 : 210, L = 30, B = 26, T = 20, n = S.length, gw = (W - L) / n, bw = Math.min(34, gw * .4), mx = sxNice(Math.max(1, ...S.map(x => x.v))), y = v => T + (H - T - B) * (1 - v / mx);
+  let s = '<svg class="sxch" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(lab) + '">';
+  [0, .5, 1].forEach(f => { const v = Math.round(mx * f); s += '<line class="gl" x1="' + L + '" x2="' + W + '" y1="' + y(v) + '" y2="' + y(v) + '"/><text x="' + (L - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + v + '</text>'; });
+  S.forEach((x, i) => { const cx = W - gw * (i + .5); if (x.v) s += '<path class="sxb" d="M' + (cx - bw / 2) + ' ' + y(0) + 'V' + (y(x.v) + 4) + 'q0-4 4-4h' + (bw - 8) + 'q4 0 4 4V' + y(0) + 'z" fill="var(--c2)"/><text class="val" x="' + cx + '" y="' + (y(x.v) - 5) + '" text-anchor="middle">' + x.v + '</text>';
+    s += '<text x="' + cx + '" y="' + (H - 6) + '" text-anchor="middle">' + esc(x.lab) + '</text><rect class="hit" x="' + (cx - gw / 2) + '" y="' + T + '" width="' + gw + '" height="' + (H - T - B) + '"' + sxTip(x.tip) + '/>'; });
+  return s + '</svg>';
+}
+function sxLine(S, mob) {   // S: [{lab, r, avg, src}]
+  const W = mob ? 340 : 640, H = mob ? 190 : 200, L = 36, B = 26, T = 24, n = S.length, gw = (W - L) / n, all = S.map(x => x.r).concat(S.map(x => x.avg)).filter(v => v != null), mx = Math.max(20, Math.min(100, Math.ceil((Math.max(0, ...all) + 5) / 20) * 20)), y = v => T + (H - T - B) * (1 - v / mx), X = i => W - gw * (i + .5);
+  let s = '<svg class="sxch" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="نسبة الإنجاز شهريًا">';
+  for (let v = 0; v <= mx; v += 20) s += '<line class="gl" x1="' + L + '" x2="' + W + '" y1="' + y(v) + '" y2="' + y(v) + '"/><text x="' + (L - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + v + '%</text>';
+  const path = k => { let d = '', on = false; S.forEach((x, i) => { if (x[k] == null) { on = false; return; } d += (on ? 'L' : 'M') + X(i).toFixed(1) + ' ' + y(x[k]).toFixed(1); on = true; }); return d; };
+  const pa = path('avg'); if (pa) s += '<path d="' + pa + '" fill="none" stroke="var(--ink3)" stroke-width="2" stroke-dasharray="5 5"/>';
+  const pr = path('r'); if (pr) s += '<path d="' + pr + '" fill="none" stroke="var(--ok)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+  let lastI = -1; S.forEach((x, i) => { if (x.r != null) { lastI = i; s += '<circle cx="' + X(i) + '" cy="' + y(x.r) + '" r="' + (i === n - 1 ? 6 : 4) + '" fill="' + (x.src === 'part' ? 'var(--panel)' : 'var(--ok)') + '" stroke="' + (x.src === 'part' ? 'var(--ok)' : 'var(--panel)') + '" stroke-width="2"/>'; } });
+  if (lastI >= 0) s += '<text class="val" x="' + X(lastI) + '" y="' + (y(S[lastI].r) - 12) + '" text-anchor="middle" style="fill:var(--ok);font-size:13px">' + sxFmtP(S[lastI].r) + '</text>';
+  S.forEach((x, i) => s += '<text x="' + X(i) + '" y="' + (H - 6) + '" text-anchor="middle">' + esc(x.lab) + '</text><rect class="hit" x="' + (X(i) - gw / 2) + '" y="' + T + '" width="' + gw + '" height="' + (H - T - B) + '"' + sxTip(x.lab + ': ' + (x.r == null ? 'لا بيانات' : 'دائرتك ' + sxFmtP(x.r) + (x.src === 'part' ? ' (الرول لا يغطي الشهر كاملًا)' : x.src === 'off' ? ' (رسمي)' : '')) + (x.avg != null ? ' · متوسط الدوائر ' + sxFmtP(x.avg) : '')) + '/>');
+  return s + '</svg>';
+}
+function sxDonut(parts, tot, unit) {
+  const sz = 150, w = 20, r = (sz - w) / 2, L = 2 * Math.PI * r; let off = 0, s = '<svg viewBox="0 0 ' + sz + ' ' + sz + '" role="img" aria-label="توزيع الأحكام"><circle cx="75" cy="75" r="' + r + '" fill="none" stroke="var(--panel2)" stroke-width="' + w + '"/>';
+  const P = parts.filter(p => p[1]); P.forEach(p => { const len = Math.max(1, L * p[1] / tot - (P.length > 1 ? 3 : 0)); s += '<circle cx="75" cy="75" r="' + r + '" fill="none" stroke="' + p[2] + '" stroke-width="' + w + '" stroke-dasharray="' + len.toFixed(1) + ' ' + L.toFixed(1) + '" stroke-dashoffset="' + (-off).toFixed(1) + '" transform="rotate(-90 75 75)"' + sxTip(p[0] + ': ' + p[1]) + ' class="hitd"/>'; off += L * p[1] / tot; });
+  s += '<text x="75" y="70" text-anchor="middle" class="dn1">' + tot + '</text><text x="75" y="93" text-anchor="middle" class="dn2">' + unit + '</text></svg>';
+  return '<div class="sxdon">' + s + '<div class="sxdl">' + parts.map(p => '<div><i style="--k:' + p[2] + '"></i><span>' + p[0] + '</span><b>' + p[1] + '</b><small>' + (tot ? Math.round(p[1] * 100 / tot) : 0) + '%</small></div>').join('') + '</div></div>';
+}
+// ---- صفحة الإحصاءات
+function sxHtml() {
+  const mob = innerWidth < 600, T = rlToday(), cur = sxMonOf(T), mine = SX_MINE, me = rlMe();
+  if (!SX_M) SX_M = sxDefMonth();
+  const M = SX_M, R = sxMonth(M, mine), V = sxVal(R), ser = []; for (let i = 5; i >= 0; i--) ser.push(sxMonth(sxMonAdd(M, -i), mine));
+  const opts = []; { let m = cur; for (let i = 0; i < 12; i++) { opts.push(m); m = sxMonAdd(m, -1); } Object.keys(RL.off || {}).forEach(k => { if (!opts.includes(k)) opts.push(k); }); opts.sort().reverse(); if (!opts.includes(M)) opts.unshift(M); }
+  const card = (tb, cls, title, sub, body) => '<section class="sxcd ' + cls + '" data-tb="' + tb + '"><h3>' + title + '</h3>' + (sub ? '<p class="sub">' + sub + '</p>' : '') + body + '</section>';
+  const mName = sxMonName(M) + ' ' + M.slice(0, 4) + (M === cur ? ' (الجاري)' : '');
+  let h = '<div class="sx"><div class="sxh"><div><h2>' + (mine ? 'أحكامي' : 'إحصاءات الدائرة') + '</h2><p class="sxsrc">' + (V.src === 'off' ? 'أرقام الإحصائية الرسمية لهذا الشهر — الرول لا يغطيه كاملًا' : 'محسوبة من الرول' + (R.part && !R.cur ? ' — <b>الرول لا يغطي هذا الشهر كاملًا</b> (أول إدخال ' + rlFmt(sxCover()) + ')' : '') + ' — بمصطلحات الإحصائية الشهرية') + '</p></div>'
+    + '<div class="sxctl"><div class="sxseg" role="group" aria-label="نطاق الإحصاءات"><button type="button" data-sxm="0" class="' + (mine ? '' : 'on') + '">الدائرة</button><button type="button" data-sxm="1" class="' + (mine ? 'on' : '') + '">أحكامي</button></div><select class="msel" id="sx_m" aria-label="الشهر">' + opts.map(m => '<option value="' + m + '"' + (m === M ? ' selected' : '') + '>' + sxMonName(m) + ' ' + m.slice(0, 4) + (m === cur ? ' (الجاري)' : '') + ((RL.off || {})[m] ? ' ✓' : '') + '</option>').join('') + '</select></div></div>';
+  const ring = (p) => { const sz = 76, w = 8, r = (sz - w) / 2, L = 2 * Math.PI * r, v = Math.max(0, Math.min(100, p || 0)); return '<svg viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="' + r + '" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="' + w + '"/>' + (v ? '<circle class="sxarc" cx="38" cy="38" r="' + r + '" fill="none" stroke="#5CC48A" stroke-width="' + w + '" stroke-linecap="round" stroke-dasharray="' + (L * v / 100).toFixed(1) + ' ' + L.toFixed(1) + '" transform="rotate(-90 38 38)"/>' : '') + '</svg>'; };
+  const resNow = RL.cards.filter(c => RL_RES.includes(c.stage)), resMine = resNow.filter(c => c.writer === me), pend = rlMinePending();
+  if (!mine) {
+    const avg = R.off && R.off.avg != null && R.off.avg !== '' ? +R.off.avg : null;
+    h += '<div class="kpis"><div class="kpi"><div class="l">المقدّمة</div><div class="v">' + V.pr + '</div><div class="s">' + (V.src === 'off' ? 'جديدة ' + (+R.off.nw || 0) + ' · مؤجلة ' + (+R.off.pp || 0) : 'جديدة ' + R.nw + ' · مؤجلة ' + R.pp) + '</div></div>'
+      + '<div class="kpi"><div class="l">المفصول فيها</div><div class="v">' + V.d + '</div><div class="s">قطعي ' + V.q + ' · تمهيدي ' + V.t + '</div></div>'
+      + '<div class="kpi hero">' + ring(V.rate) + '<div><div class="l">نسبة الإنجاز</div><div class="v">' + sxFmtP(V.rate) + '</div><div class="s">' + (avg != null ? 'متوسط الدوائر ' + sxFmtP(avg) : R.cur ? 'الشهر الجاري — حتى اليوم' : 'المفصول فيها ÷ المقدّمة') + '</div></div></div>'
+      + '<div class="kpi"><div class="l">المؤجلة خارج الفترة</div><div class="v">' + (V.src === 'off' ? (+R.off.out || 0) : R.out) + '</div><div class="s">محجوزة من سابقة ' + (V.src === 'off' ? (+R.off.rs || 0) : R.rs) + '</div></div></div>';
+  } else {
+    h += '<div class="kpis"><div class="kpi"><div class="l">أحكامي القطعية</div><div class="v">' + R.q + '</div><div class="s">' + esc(sxMonName(M)) + '</div></div><div class="kpi"><div class="l">أحكامي التمهيدية</div><div class="v">' + R.t + '</div><div class="s">' + esc(sxMonName(M)) + '</div></div>'
+      + '<div class="kpi hero">' + ring(rlUnits(resMine) ? (rlUnits(resMine) - rlUnits(pend)) * 100 / rlUnits(resMine) : 0) + '<div><div class="l">المحجوزة لي الآن</div><div class="v">' + rlUnits(resMine) + '</div><div class="s">' + (rlUnits(pend) ? rlUnits(pend) + ' لم تجهز' : 'كلها جاهزة') + '</div></div></div>'
+      + '<div class="kpi"><div class="l">أقرب نطق</div><div class="v">' + (pend[0] && pend[0].next ? rlFmt(pend[0].next).replace(/\/\d{4}$/, '') : '—') + '</div><div class="s">' + (pend[0] && pend[0].next ? rlRel(rlDays(pend[0].next)) : 'لا أحكام معلّقة') + '</div></div></div>';
+  }
+  const tabs = mine ? [[1, 'الشهر'], [2, 'عبر الأشهر'], [3, 'المواعيد']] : [[1, 'الشهر'], [2, 'عبر الأشهر'], [3, 'الرول'], [4, 'المطابقة']];
+  // المطابقة
+  const rec = sxRec(R);
+  if (SX_TAB > tabs.length) SX_TAB = 1;
+  h += '<div class="sxtabs" role="tablist">' + tabs.map(t => '<button type="button" role="tab" data-t="' + t[0] + '" class="' + (t[0] === SX_TAB ? 'on' : '') + '">' + t[1] + (t[0] === 4 && rec.bad ? ' <i>' + rec.bad + '</i>' : '') + '</button>').join('') + '</div><div class="sxp" id="sx_p">';
+  const P = { 1: [], 2: [], 3: [], 4: [] };
+  // الشهر: توزيع الأحكام + الأعضاء
+  if (V.src === 'off' && !mine) P[1].push(card(1, 'w5 o2', 'الأحكام المفصولة', esc(mName) + ' — من الإحصائية الرسمية', sxDonut([['قطعي', V.q, 'var(--c2)'], ['تمهيدي', V.t, 'var(--c3)']], V.d, 'حكمًا') + '<p class="note">تفصيل الموضوع والشكل يظهر حين يغطي الرول الشهر.</p>'));
+  else { const pp = [['قطعي — موضوع', R.qm, 'var(--c1)'], ['قطعي — شكل', R.qs, 'var(--c2)']].concat(R.qx ? [['قطعي — بلا منطوق مسجّل', R.qx, 'var(--ink3)']] : []).concat([['تمهيدي', R.t, 'var(--c3)']]);
+    P[1].push(card(1, 'w5 o2', mine ? 'أحكامي المفصولة' : 'الأحكام المفصولة', esc(mName), (R.q + R.t ? sxDonut(pp, R.q + R.t, 'حكمًا') : '<p class="sxempty">لا أحكام مسجّلة في هذا الشهر بعد.</p>') + '<p class="note">التمهيدي: الإحالة للخبراء أو للتحقيق أو للاستجواب، وحلف اليمين — ويُعدّ في الإنجاز كما في الإحصائية الرسمية.</p>')); }
+  if (!mine && Object.keys(RL_W).length > 1) {
+    const ks = Object.keys(RL_W).filter(k => k !== 'd' || R.W.d || resNow.some(c => c.writer === 'd')), mx = Math.max(1, ...ks.map(k => (R.W[k] || 0) + resNow.filter(c => c.writer === k).length));
+    P[1].push(card(1, 'w5 o4', 'أحكام الأعضاء', esc(sxMonName(M)) + ' — والمحجوزة الآن لكل عضو', '<div class="lg"><span><i style="--k:var(--c2)"></i>صدرت في الشهر</span><span><i style="--k:var(--line2)"></i>محجوزة الآن</span></div><div class="sxmb">' + ks.map(k => { const a = R.W[k] || 0, b = resNow.filter(c => c.writer === k).length; return '<div class="sxmr"' + sxTip(RL_W[k] + ': ' + a + ' صدرت · ' + b + ' محجوزة') + '><span>' + esc(RL_W[k]) + '</span><span class="tr">' + (a ? '<i style="flex:' + a + ';background:var(--c2)"></i>' : '') + (b ? '<i style="flex:' + b + ';background:var(--line2)"></i>' : '') + '<i style="flex:' + Math.max(0, mx - a - b) + '"></i></span><span><b>' + a + '</b> · ' + b + ' محجوزة</span></div>'; }).join('') + '</div><p class="note">بعدد القضايا. تفصيل المنطوق لكل عضو في الجداول التفصيلية أسفل الصفحة.</p>'));
+  }
+  // عبر الأشهر
+  if (!mine) {
+    const S = ser.map(r => { const v = sxVal(r); return { lab: sxMonName(r.m, mob), a: v.pr, b: v.d, src: v.src, tip: sxMonName(r.m) + ': المقدّمة ' + v.pr + ' · المفصول فيها ' + v.d + (v.src === 'part' ? ' — الرول لا يغطي الشهر كاملًا' : v.src === 'off' ? ' — رسمي' : '') }; });
+    P[2].push(card(2, 'w7 o1', 'المقدّمة والمفصول فيها', 'آخر 6 أشهر حتى ' + esc(sxMonName(M)), '<div class="lg"><span><i style="--k:var(--c1)"></i>المقدّمة</span><span><i style="--k:var(--c2)"></i>المفصول فيها</span>' + (S.some(x => x.src === 'part') ? '<span><i style="--k:var(--line2);opacity:.6"></i>شهر لا يغطيه الرول كاملًا</span>' : '') + (S.some(x => x.src === 'off') ? '<span>* من الإحصائية الرسمية</span>' : '') + '</div>' + sxBars(S, mob)));
+    const L = ser.map(r => { const v = sxVal(r); return { lab: sxMonName(r.m, mob), r: v.pr ? v.rate : null, src: v.src, avg: r.off && r.off.avg != null && r.off.avg !== '' ? +r.off.avg : null }; });
+    P[2].push(card(2, 'w7 o3', 'نسبة الإنجاز', L.some(x => x.avg != null) ? 'دائرتك مقابل متوسط الدوائر (من الإحصائية الرسمية)' : 'المفصول فيها ÷ المقدّمة — أدخل الإحصائية الرسمية لتظهر مقارنة بمتوسط الدوائر', '<div class="lg"><span><i class="ln" style="--k:var(--ok)"></i>دائرتك</span>' + (L.some(x => x.avg != null) ? '<span><i class="dash"></i>متوسط الدوائر</span>' : '') + '</div>' + sxLine(L, mob)));
+  } else {
+    P[2].push(card(2, 'w7 o1', 'أحكامي عبر الأشهر', 'القطعية والتمهيدية — آخر 6 أشهر', sxBars1(ser.map(r => ({ lab: sxMonName(r.m, mob), v: r.q + r.t, tip: sxMonName(r.m) + ': قطعي ' + r.q + ' · تمهيدي ' + r.t })), mob, 'أحكامي شهريًا')));
+  }
+  // الرول: الجلسات القادمة + عمر القضايا · أو مواعيدي
+  { const open = RL.cards.filter(c => !RL_DONE.includes(c.stage) && !RL_RES.includes(c.stage)), resL = mine ? resMine : resNow;
+    const ds = [...new Set(open.filter(c => c.next >= T).map(c => c.next).concat(resL.filter(c => c.next >= T).map(c => c.next)))].sort().slice(0, 8);
+    const rows = ds.map(d => ({ d, n: mine ? 0 : open.filter(c => c.next === d).length, p: rlUnits(resL.filter(c => c.next === d)) })).filter(x => x.n || x.p), mx = Math.max(1, ...rows.map(x => x.n));
+    const body = rows.length ? '<div class="sxmb">' + rows.map((x, i) => '<div class="sxmr sxwk"' + sxTip(rlDay(x.d) + ' ' + rlFmt(x.d) + (x.n ? ': ' + x.n + ' قضية للنظر' : '') + (x.p ? ' · ' + x.p + ' للنطق' : '')) + '><span' + (i ? '' : ' class="nx"') + '>' + rlDay(x.d) + ' <small>' + rlFmt(x.d).replace(/\/\d{4}$/, '') + '</small></span><span class="tr">' + (x.n ? '<i style="flex:' + x.n + ';background:var(--c1)' + (i ? ';opacity:.55' : '') + '"></i><i style="flex:' + (mx - x.n) + '"></i>' : '') + '</span><span>' + (x.n ? '<b>' + x.n + '</b>' : '') + (x.p ? ' <span class="sxpk">⚖ ' + x.p + '</span>' : '') + '</span></div>').join('') + '</div>' : '<p class="sxempty">لا جلسات قادمة مسجّلة — استورد كشف الجلسة.</p>';
+    P[3].push(card(3, 'w7 o5', mine ? 'مواعيد النطق في أحكامي' : 'الجلسات القادمة', mine ? 'المحجوزة لي بحسب موعد النطق' : 'عدد القضايا في كل جلسة مستوردة · ⚖ أحكام للنطق', body));
+    if (!mine) { const ages = open.map(c => rlAgeD(rlFirst(c)) || 0), B = RL_AGEB.map(b => ({ lab: b[2], n: ages.filter(a => a >= b[0] && a < b[1]).length })), bm = Math.max(1, ...B.map(b => b.n));
+      P[3].push(card(3, 'w5 o6', 'عمر القضايا المنظورة', 'منذ أول تاريخ معروف للقضية في الرول', '<div class="sxmb">' + B.map((b, i) => '<div class="sxmr sxag' + (i === 3 && b.n ? ' old' : '') + '"' + sxTip(b.lab + ': ' + b.n + ' قضية') + '><span>' + b.lab + '</span><span class="tr">' + (b.n ? '<i style="flex:' + b.n + ';background:' + (i === 3 ? 'var(--warn)' : 'var(--c1)') + ';opacity:' + (i === 3 ? 1 : .4 + i * .2) + '"></i>' : '') + '<i style="flex:' + (bm - b.n) + '"></i></span><span><b>' + (i === 3 && b.n ? '⚠ ' : '') + b.n + '</b></span></div>').join('') + '</div>')); }
+  }
+  if (!mine) P[4].push(card(4, 'w12 o7', 'مطابقة مع الإحصائية الرسمية', esc(mName) + (R.off ? ' — الأرقام كما أدخلتها من الكشف' : ' — أدخل أرقام دائرتك من الكشف الشهري (أرقام فقط)'), rec.html));
+  tabs.forEach(t => h += '<div class="sxpane" data-t="' + t[0] + '">' + P[t[0]].join('') + '</div>');
+  return h + '</div></div>';
+}
+function sxRec(R) {
+  const o = R.off, F = [['nw', 'القضايا الجديدة خلال الفترة'], ['pp', 'المؤجلة من فترة سابقة'], ['rs', 'المحجوزة من فترة سابقة'], ['q', 'المفصول فيها — قطعي'], ['t', 'المفصول فيها — تمهيدي'], ['out', 'المؤجلة خارج الفترة']];
+  const form = '<form class="sxoff" id="sx_off"><p class="k">من «الإحصائية الشاملة» الشهرية — صف دائرتك، وصف «المجموع» لنسبة الإنجاز.</p><div class="sxog">' + F.map(f => '<label><span>' + f[1] + '</span><input type="number" inputmode="numeric" min="0" step="1" name="' + f[0] + '" value="' + (o && o[f[0]] != null ? esc(String(o[f[0]])) : '') + '"></label>').join('') + '<label><span>نسبة إنجاز الدوائر (المجموع) %</span><input type="number" inputmode="decimal" min="0" max="100" step="0.1" name="avg" value="' + (o && o.avg != null ? esc(String(o.avg)) : '') + '"></label></div><div class="sxob"><button type="submit" class="btn primary">حفظ أرقام الشهر</button>' + (o ? '<button type="button" class="btn" id="sx_offdel">حذفها</button>' : '') + '<button type="button" class="btn" id="sx_offx">إلغاء</button></div></form>';
+  if (!o) return { bad: 0, html: '<p class="sxempty">لم تُدخل الإحصائية الرسمية لهذا الشهر. أدخلها لتُطابَق بالرول، ويظهر موقع دائرتك من متوسط الدوائر عبر الأشهر.</p><button type="button" class="btn primary" id="sx_offgo">إدخال أرقام الإحصائية الرسمية</button><div id="sx_offbox" hidden>' + form + '</div>' };
+  const rows = [['nw', 'الجديدة خلال الفترة', R.nw], ['pp', 'المؤجلة من فترة سابقة', R.pp], ['pr', 'إجمالي المقدّمة', R.pr], ['rs', 'المحجوزة من فترة سابقة', R.rs], ['q', 'المفصول فيها — قطعي', R.q], ['t', 'المفصول فيها — تمهيدي', R.t], ['out', 'المؤجلة خارج الفترة', R.out]];
+  let bad = 0; const late = RL.cards.filter(c => RL_RES.includes(c.stage) && c.next && c.next < rlToday()).concat(RL.cards.filter(c => !RL_DONE.includes(c.stage) && !RL_RES.includes(c.stage) && c.next && c.next < rlToday()));
+  const part = R.part && !R.cur;
+  const tr = rows.map(r => { const ov = r[0] === 'pr' ? o.pr : o[r[0]]; if (ov == null || ov === '') return ''; const d = r[2] - (+ov); if (d && !part && r[0] !== 'out') bad++;
+    return '<tr' + (d && !part && r[0] !== 'out' ? ' class="bad"' : '') + '><td>' + r[1] + '</td><td class="n">' + r[2] + '</td><td class="n">' + ov + '</td><td>' + (!d ? '<span class="sxchip ok">✓<span class="cht"> مطابق</span></span>' : '<span class="sxchip wr">' + (d < 0 ? 'ينقص ' + (-d) : 'يزيد ' + d) + '</span>' + (r[0] === 'q' && d < 0 && late.length ? ' <button type="button" class="linkbtn" id="sx_late">اعرض المرشّحة</button>' : '')) + '</td></tr>'; }).join('');
+  const html = (part ? '<p class="sxwarn">الرول لا يغطي هذا الشهر كاملًا (أول إدخال ' + rlFmt(sxCover()) + ') — الفروق متوقعة، والأرقام الرسمية هي المعتمدة في الرسوم.</p>' : '')
+    + '<div class="tblw"><table class="sxrec"><thead><tr><th>بند الإحصائية</th><th>الرول</th><th>الرسمي</th><th></th></tr></thead><tbody>' + tr + '<tr><td>نسبة الإنجاز</td><td class="n">' + sxFmtP(R.rate) + '</td><td class="n">' + sxFmtP(o.rate) + '</td><td>' + (o.avg != null && o.avg !== '' ? '<small>متوسط الدوائر ' + sxFmtP(+o.avg) + '</small>' : '') + '</td></tr></tbody></table></div>'
+    + (bad && !part ? '<p class="note">الفرق يعني غالبًا قرارًا أو جلسة لم تُسجَّل في الرول. «اعرض المرشّحة» تعرض المحجوزة التي فات موعد نطقها، والقضايا التي فات موعد جلستها دون قرار.</p><div id="sx_latebox" hidden><div class="sxlate">' + late.slice(0, 40).map(c => '<button type="button" class="stgo" data-card="' + c.id + '">' + esc(c.code) + ' <small>' + esc(c.stage) + ' · ' + rlFmt(c.next) + '</small></button>').join('') + '</div></div>' : '')
+    + '<div class="sxob"><button type="button" class="btn" id="sx_offgo">تعديل الأرقام الرسمية</button></div><div id="sx_offbox" hidden>' + form + '</div>';
+  return { bad, html };
+}
+function sxWire(w) {
+  w.querySelectorAll('[data-sxm]').forEach(b => b.onclick = () => { SX_MINE = b.dataset.sxm === '1'; SX_TAB = 1; rlRender(); });
+  const ms = w.querySelector('#sx_m'); if (ms) ms.onchange = () => { SX_M = ms.value; rlRender(); };
+  const og = w.querySelector('#sx_offgo'), ob = w.querySelector('#sx_offbox'); if (og && ob) og.onclick = () => { ob.hidden = !ob.hidden; if (!ob.hidden) { const i = ob.querySelector('input'); if (i) i.focus(); } };
+  const ox = w.querySelector('#sx_offx'); if (ox) ox.onclick = () => { ob.hidden = true; };
+  const f = w.querySelector('#sx_off'); if (f) f.onsubmit = e => { e.preventDefault(); const o = {}; let any = false; [...f.querySelectorAll('input')].forEach(i => { const v = i.value.trim(); if (v !== '' && !isNaN(+v) && +v >= 0) { o[i.name] = i.name === 'avg' ? Math.min(100, +v) : Math.round(+v); any = true; } }); if (!any) { toast('أدخل رقمًا واحدًا على الأقل'); return; } RL.off = RL.off || {}; RL.off[SX_M] = o; RL.st = Date.now(); rlSave(); toast('حُفظت أرقام ' + sxMonName(SX_M)); SX_TAB = 4; rlRender(); };
+  const od = w.querySelector('#sx_offdel'); if (od) od.onclick = () => { if (!confirm('حذف الأرقام الرسمية لشهر ' + sxMonName(SX_M) + '؟')) return; delete RL.off[SX_M]; RL.st = Date.now(); rlSave(); rlRender(); };
+  const lt = w.querySelector('#sx_late'), lb = w.querySelector('#sx_latebox'); if (lt && lb) lt.onclick = () => { lb.hidden = !lb.hidden; };
+  // تلميحات الرسوم: تمرير الفأرة، ولمسة على الجوال
+  let tip = document.getElementById('sxtip'); if (!tip) { tip = document.createElement('div'); tip.id = 'sxtip'; tip.className = 'sxtip'; tip.hidden = true; document.body.appendChild(tip); }
+  const show = (el, x, y) => { tip.textContent = el.dataset.tip; tip.hidden = false; const r = tip.getBoundingClientRect(); tip.style.left = Math.max(8, Math.min(innerWidth - r.width - 8, x - r.width / 2)) + 'px'; tip.style.top = Math.max(8, y - r.height - 12) + 'px'; };
+  w.querySelectorAll('.sx [data-tip]').forEach(el => { el.addEventListener('pointermove', e => { if (e.pointerType === 'mouse') show(el, e.clientX, e.clientY); }); el.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') tip.hidden = true; }); el.addEventListener('click', e => { show(el, e.clientX, e.clientY); clearTimeout(tip._t); tip._t = setTimeout(() => tip.hidden = true, 2600); }); });
+  // التبويبات والسحب (الآيفون): الأجزاء متجاورة أفقيًا داخل إطار، والصفحة نفسها لا تتحرك أفقيًا
+  const P = w.querySelector('#sx_p'), tabs = [...w.querySelectorAll('.sxtabs [data-t]')], panes = [...w.querySelectorAll('.sxpane')];
+  if (!P || !tabs.length) return;
+  const setOn = t => { SX_TAB = t; tabs.forEach(b => { const on = +b.dataset.t === t; b.classList.toggle('on', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); }); const pn = panes.find(x => +x.dataset.t === t); if (pn && getComputedStyle(P).display === 'flex') P.style.height = pn.scrollHeight + 'px'; };
+  tabs.forEach(b => b.onclick = () => { const pn = panes.find(x => x.dataset.t === b.dataset.t); if (!pn) return; setOn(+b.dataset.t); if (getComputedStyle(P).display === 'flex') P.scrollTo({ left: pn.offsetLeft - P.offsetLeft - (P.scrollWidth > P.clientWidth ? 0 : 0), behavior: 'smooth' }); });
+  if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting && e.intersectionRatio > .6 && getComputedStyle(P).display === 'flex') setOn(+e.target.dataset.t); }); }, { root: P, threshold: [.6] }); panes.forEach(x => io.observe(x)); }
+  requestAnimationFrame(() => { const pn = panes.find(x => +x.dataset.t === SX_TAB); if (pn && getComputedStyle(P).display === 'flex') { P.scrollLeft = pn.offsetLeft - P.offsetLeft; } setOn(SX_TAB); });
+}
+// جدول الإحصائية بأعمدتها الرسمية للطباعة
+function sxPrintTable() {
+  if (!SX_M) SX_M = sxDefMonth(); const R = sxMonth(SX_M), o = R.off;
+  const cell = (k, v) => '<td>' + v + (o && o[k] != null && o[k] !== '' && +o[k] !== v ? ' <small>(رسمي ' + o[k] + ')</small>' : '') + '</td>';
+  return '<h3>الإحصائية الشهرية — ' + esc(rlMonLabel(SX_M)) + (R.part && !R.cur ? ' <small>(الرول لا يغطي الشهر كاملًا)</small>' : '') + '</h3><table><thead><tr><th>الجديدة خلال الفترة</th><th>المؤجلة من فترة سابقة</th><th>إجمالي المقدّمة</th><th>المحجوزة من فترة سابقة</th><th>المفصول فيها</th><th>قطعي</th><th>تمهيدي</th><th>المؤجلة خارج الفترة</th><th>نسبة الإنجاز</th></tr></thead><tbody><tr>'
+    + cell('nw', R.nw) + cell('pp', R.pp) + '<td><b>' + R.pr + '</b></td>' + cell('rs', R.rs) + '<td><b>' + (R.q + R.t) + '</b></td>' + cell('q', R.q) + cell('t', R.t) + cell('out', R.out) + '<td><b>' + sxFmtP(R.rate) + '</b></td></tr></tbody></table>';
+}
+// V155: ترحيل «روجعت» — تحليلٌ حُفظ بعد آخر جلسة للقضية يعني أنها روجعت لجلستها القادمة (لما رُبط قبل V154)
+(function sxRvMig() { try { if (localStorage.getItem('tm_rv155')) return; let n = 0; const T = rlToday();
+  RL.cards.forEach(c => { if (c.rv || !c.an || !c.an.at || !c.next || c.next < T || RL_DONE.includes(c.stage) || RL_RES.includes(c.stage)) return; const at = rlIsoOf(c.an.at), last = (c.hist || []).map(h => h && h.d).filter(d => d && d < c.next).sort().pop() || ''; if (at >= last) { c.rv = c.next; n++; } });
+  localStorage.setItem('tm_rv155', '1'); if (n && !window.DEMO) localStorage.setItem(RL_KEY, JSON.stringify(RL)); } catch (e) {} })();
+window.__sx = { month: (m, mine) => sxMonth(m, mine), print: () => sxPrintTable(), payload: () => syPayload(), get mode() { return rlMode; }, get RL() { return RL; } };
+var RL_SH = null; function rlSetHash() { return JSON.stringify([RL.circuit || '', RL.members || {}, RL.cal || {}, RL.hol || [], RL.fm || [], RL.prof || null, RL.off || {}]); }
 var RL_CH = {}; function rlCHash(c) { const o = Object.assign({}, c); delete o.updated; return JSON.stringify(o); }
 function rlCHAll() { RL_CH = {}; RL.cards.forEach(c => { RL_CH[c.id] = rlCHash(c); }); }
 function rlSave() { if (window.DEMO) { try { syDot(); } catch (e) {} return; } if (!SF_ASKED) { SF_ASKED = true; sfPersist(true); } try { const now = Date.now(), nx = {}; RL.cards.forEach(c => { const hh = rlCHash(c); if (RL_CH[c.id] !== undefined && RL_CH[c.id] !== hh && (c.updated || 0) < now - 50) c.updated = now; nx[c.id] = hh; }); RL_CH = nx; } catch (e) {} const h = rlSetHash(); if (RL_SH !== null && h !== RL_SH) RL.st = Date.now(); RL_SH = h; try { localStorage.setItem('tm_chg', String(Date.now())); } catch (e) {} try { syDot(); } catch (e) {} if (RL_MEM) return; try { localStorage.setItem(RL_KEY, JSON.stringify(RL)); } catch (e) { RL_MEM = true; rlStoreNote(); toast('تعذّر الحفظ على الجهاز — صدّر البطاقات'); } }
@@ -4761,8 +5049,8 @@ function rlRender() {
     ds.forEach(d => { const list = rlAdj(R.filter(c => (c.next || '') === d).sort((a, b) => (a.writer || 'z').localeCompare(b.writer || 'z') || a.code.localeCompare(b.code, 'ar', { numeric: true }))); const u = rlUnits(list); add(d ? 'النطق ' + rlDay(d) + ' ' + rlFmt(d) + ' <small>' + rlRel(rlDays(d)) + ' · ' + list.length + (u < list.length ? ' (' + u + ' حكمًا)' : '') + '</small>' : 'بلا موعد نطق', list); });
     if (!R.length) L.insertAdjacentHTML('beforeend', '<div class="empty"><b>' + (rlMine ? 'لا أحكام لك' : 'لا قضايا محجوزة للحكم') + '</b>عند تسجيل «حجز للحكم» أو استيراد كشف المحجوزة تظهر هنا مع كاتب الحكم.</div>');
   } else if (rlMode === 'stat') {
-    const w = el('div', 'rlst'); w.innerHTML = rlStatHtml(rlStats(), false); L.appendChild(w);
-    w.querySelectorAll('[data-card]').forEach(b => b.onclick = () => rlGoCard(b.dataset.card));
+    const w = el('div', 'rlst'); w.innerHTML = sxHtml() + '<h3 class="sxdet">الجداول التفصيلية</h3>' + rlStatHtml(rlStats(), false); L.appendChild(w);   // V155: لوحة الإحصاءات فوق الجداول
+    w.querySelectorAll('[data-card]').forEach(b => b.onclick = () => rlGoCard(b.dataset.card)); sxWire(w);
   } else if (rlMode === 'arch') {
     const done = RL.cards.filter(c => RL_DONE.includes(c.stage));   // V127: الصادر فيها الحكم والمشطوبة، بتاريخ جلستها
     if (!done.length) { L.innerHTML = '<div class="empty"><b>لا أحكام صادرة بعد</b>عند تسجيل «صدر الحكم» لقضية تظهر هنا في أرشيف قابل للبحث والتصفية.</div>'; rlSummary(); return; }
@@ -4823,7 +5111,7 @@ function rlPrint() {
   const circ = RL.circuit ? ' — ' + cell(RL.circuit) : '';
   if (rlMode === 'stat') {
     if (!RL.cards.length) { toast('لا قضايا في الرول'); return; }
-    h = rlDoc('إحصاءات الدائرة', rlChip('حتى', rlFmt(rlToday())), rlStatHtml(rlStats(), true), 'من بيانات رول الجلسة على هذا الجهاز');
+    h = rlDoc('إحصاءات الدائرة', rlChip('حتى', rlFmt(rlToday())), sxPrintTable() + rlStatHtml(rlStats(), true), 'من بيانات رول الجلسة على هذا الجهاز');
   } else if (rlMode === 'arch') {
     const done = RL.cards.filter(c => c.stage === 'صدر الحكم'); if (!done.length) { toast('لا أحكام صادرة'); return; }
     const q = norm(($('#arch_q') || {}).value || ''), w = ($('#arch_w') || {}).value || '', vd = ($('#arch_vd') || {}).value || '', mon = ($('#arch_mon') || {}).value || '';
@@ -5283,7 +5571,7 @@ function syMerge(d) {
   const n0 = RL.cards.length; RL.cards = RL.cards.filter(c => !(RL.del[c.id] && RL.del[c.id] >= (c.updated || 0))); let del = n0 - RL.cards.length;
   const best = {}; RL.cards.forEach(c => { const b = best[c.code]; if (!b || (c.updated || 0) > (b.updated || 0)) best[c.code] = c; });
   RL.cards = RL.cards.filter(c => { if (best[c.code] === c) return true; RL.del[c.id] = Math.max(Date.now(), c.updated || 0); if (add) add--; return false; });
-  if ((r.st || 0) > (RL.st || 0)) { RL.circuit = r.circuit || ''; RL.members = r.members || {}; RL.cal = r.cal || { off: [], on: [] }; RL.hol = r.hol || []; RL.fm = r.fm || []; RL.prof = r.prof || null; RL.st = r.st; rlVocab(); if (rlInit) { $('#rl_circ').value = RL.circuit; ['p', 'r', 'l', 'd'].forEach(k => { const i = $('#rm_' + k); if (i) i.value = RL.members[k] || ''; }); } }
+  if ((r.st || 0) > (RL.st || 0)) { RL.circuit = r.circuit || ''; RL.members = r.members || {}; RL.cal = r.cal || { off: [], on: [] }; RL.hol = r.hol || []; RL.fm = r.fm || []; RL.prof = r.prof || null; RL.off = r.off || {}; RL.st = r.st; rlVocab(); if (rlInit) { $('#rl_circ').value = RL.circuit; ['p', 'r', 'l', 'd'].forEach(k => { const i = $('#rm_' + k); if (i) i.value = RL.members[k] || ''; }); } }
   const T = d.bmt || {}; (d.bm || []).forEach(id => { if (!T[id]) T[id] = [1, 0]; }); bookmarks.forEach(id => { if (!BMT[id]) BMT[id] = [1, 0]; });
   Object.keys(T).forEach(id => { if (!BMT[id] || T[id][1] > BMT[id][1]) BMT[id] = T[id]; });
   const bm0 = bookmarks.size; bookmarks.clear(); const LT = {}; Object.keys(BMT).forEach(id => { const k = cid(id); if (!LT[k] || BMT[id][1] >= LT[k][1]) LT[k] = BMT[id]; }); Object.keys(LT).forEach(k => { if (LT[k][0]) bookmarks.add(k); });
@@ -9339,8 +9627,9 @@ function psRender() {
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
-const WN_V = 154;
+const WN_V = 155;
 const WN_LOG = [
+  [155, 'الإصدار 155', ['«نبض الدائرة» في الرئيسية تحت بطاقة الجلسة: القضايا المنظورة في الرول، والمفصول فيها هذا الشهر (قطعي/تمهيدي)، ونسبة الإنجاز — والضغط يفتح الإحصاءات.', 'الإحصاءات بمصطلحات الإحصائية الشهرية الرسمية: المقدّمة (جديدة + مؤجلة)، المحجوزة من سابقة، المفصول فيها، المؤجلة خارج الفترة، ونسبة الإنجاز — مع رسوم للأشهر والأحكام والأعضاء والجلسات القادمة وعمر القضايا، و«الدائرة | أحكامي».', 'أدخل أرقام الإحصائية الرسمية للشهر لتُطابَق بالرول ويظهر متوسط الدوائر؛ وعلى الآيفون: أربعة تبويبات تُسحب بالإصبع.', 'القضايا التي حُلّل ملفها قبل V154 تُعلَّم «روجعت» لجلستها القادمة.']],
   [154, 'الإصدار 154', ['«روجعت» غير «نُفّذ»: القضية الجديدة تجهز بـ«روجعت» ويظهر معها الإعلان (في البطاقة ووضع الجلسة)، وحفظ تحليل الملف يعلّم القضية «روجعت» لجلستها.', 'القراءة الضوئية أدق لملفات نظام الاطلاع: الصفحة بدقة مسحها بلا ضغط، وتُنظَّف من النقاط والإطارات والباركود، ويُستبدل السطر المشوّه بـ[سطر غير مقروء]، ونموذج الخط العربي إن رُفع (أدق في الأرقام الهندية وبطاقة القيد).', '«تعديل» البطاقة يعلّم نوع القضية المقترح من ملخصها، و«📁 انقل إلى ملفاتي» للقضايا المحلَّلة سابقًا، وتنبيه في «ملفاتي» لتنظيف الملفات القديمة التي قد تحمل أسماء.']],
   [153, 'الإصدار 153', ['«تحليل الملف» — تأكيد الأرقام: رقم الدعوى أو الاستئناف يُفهم رقمًا (627/2025) والتاريخ تاريخًا، ولا يُعرض كل شيء مبلغًا بالدينار.']],
   [152, 'الإصدار 152', ['«خزانة الأحكام»: بعد عرض «يحتاج مراجعة» تعود إلى كل الأحكام من الرابط نفسه («✕ عرض كل الأحكام»)، وزر «✕ مسح» بجانب المرشحات يلغي البحث والنتيجة والوسوم بلمسة.']],
