@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261002183259">
+<meta name="amali-build" content="20261004095217">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1278,6 +1278,10 @@ html,body{overscroll-behavior-y:none}
 .ssid .auto{font-size:12.5px;color:var(--ink3)}
 .ssid .stg{background:var(--accent-soft);color:var(--accent-soft-ink);font-weight:600}
 .ssid .ann{font-size:12px;font-weight:700;border-radius:6px;padding:1px 8px}.ssid .ann.ok{background:var(--ok-soft);color:var(--ok)}.ssid .ann.no{background:var(--bad-soft);color:var(--bad)}
+.sspd{flex-basis:100%;min-width:0;display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink3);line-height:1.4}
+.sspdt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sspdk{font-weight:700;color:var(--ink2)}
+.sspdb{flex:none;min-height:30px;padding:0 12px;border:1px solid var(--line2);border-radius:999px;background:var(--panel);color:var(--ink2);font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer}
+.sspdb.on{background:var(--ok-soft);border-color:transparent;color:var(--ok)}
 .ssfi{flex-basis:100%;font-size:13px;color:var(--ink2)}
 .ssfi summary{cursor:pointer;min-height:32px;display:flex;align-items:center}
 .ssfr{display:flex;flex-wrap:wrap;gap:8px 12px}.ssfr label{display:flex;flex-direction:column;gap:3px;font-size:12px;flex:1 1 150px;min-width:0}
@@ -2368,7 +2372,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V143 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V144 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -4260,12 +4264,12 @@ function rlSessRender(top) {
     + '<button type="button" class="btn sspr2" data-s="print" title="طباعة محاضر مختصرة لكل قضايا الجلسة" aria-label="طباعة المحاضر"><span aria-hidden="true">🖶</span><span class="lb"> طباعة المحاضر</span></button></div>';
   h += '<div class="ssbody">';
   h += '<div class="sscase"><div class="ssn">' + (SS.i + 1) + '<small>/' + cards.length + '</small></div><div class="ssid"><b>' + esc(c.code) + '</b>' + (c.auto ? '<span class="auto">آلي ' + esc(c.auto) + '</span>' : '') + '<span class="tag stg">' + esc(c.stage || 'مؤجلة') + '</span>' + (dec ? '<span class="ssdh"><span class="tag ssdtag">✓ ' + esc(rlDecTxt(dec)) + '</span><button type="button" class="linkbtn" data-s="undoh">تراجع</button></span>' : '')
-    + (c.ann ? '<span class="ann ' + (rlAnnOk(c) ? 'ok' : 'no') + '">الإعلان ' + rlAnnTxt(c.ann) + (rlAnnOk(c) ? ' ✓' : ' ✗') + '</span>' : '') + (rlPrepOf(c) === 'need' ? '<span class="tag" style="background:var(--bad);color:#fff">يحتاج إجراء</span>' : '') + (sibs.length ? '<span class="tag lnk">مضموم: ' + sibs.map(x => esc(x.code)).join('، ') + '</span>' : '') + '</div>'
+    + (c.ann ? '<span class="ann ' + (rlAnnOk(c) ? 'ok' : 'no') + '">الإعلان ' + rlAnnTxt(c.ann) + (rlAnnOk(c) ? ' ✓' : ' ✗') + '</span>' : '') + (rlPrepOf(c) === 'need' ? '<span class="tag" style="background:var(--bad);color:#fff">يحتاج إجراء</span>' : '') + (sibs.length ? '<span class="tag lnk">مضموم: ' + sibs.map(x => esc(x.code)).join('، ') + '</span>' : '') + rlPrevLine(c, d) + '</div>'
     + (rlProf().deg === 'f' && rlPenSub() !== 'jm' ? '' : '<details class="ssfi"><summary>أول درجة' + (c.fi ? ': ' + esc(c.fi) + (c.fid ? ' · ' + rlFmt(c.fid) : '') : '') + '</summary><div class="ssfr"><label>رقم القضية<input type="text" data-f="fi" value="' + esc(c.fi || '') + '" inputmode="numeric" placeholder="مثال: 25/2103"></label><label>تاريخ الحكم<input type="date" data-f="fid" value="' + esc(c.fid || '') + '"></label></div></details>') + '</div>';
   // الجلسة السابقة
   if (prev.length) { const lp = prev[prev.length - 1]; h += '<section class="ssprev"><h4>الجلسة السابقة <span>' + rlDay(lp.d) + ' ' + rlFmt(lp.d) + '</span></h4><ul>' + lp.lines.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>'
     + (prev.length > 1 ? '<details><summary>كل الجلسات السابقة (' + prev.length + ')</summary>' + prev.slice(0, -1).reverse().map(x => '<div class="ssold"><b>' + rlFmt(x.d) + '</b><ul>' + x.lines.map(y => '<li>' + esc(y) + '</li>').join('') + '</ul></div>').join('') + '</details>' : '') + '</section>'; }
-  else h += '<p class="ssfirst">لا شيء مسجّل من جلسات سابقة لهذه القضية' + (rlLast(c) ? ' — آخر قرار: ' + esc(rlLast(c)) : '') + '.</p>';
+  else h += '<p class="ssfirst">لا شيء مسجّل من جلسات سابقة لهذه القضية' + (rlLast(c) && !rlPrevLine(c, d) ? ' — آخر قرار: ' + esc(rlLast(c)) : '') + '.</p>';
   // الأطراف
   h += '<section class="ssparts"><h4>الأطراف <small>بصفاتهم كما في القائمة — بلا أسماء</small></h4>' + P.map(p => {
     const at = rlAttOf(s, p.id), rq = (s.req || {})[p.id] || [];
@@ -4294,6 +4298,7 @@ function rlSessRender(top) {
   w.querySelector('.ssjump').onchange = e => { SS.i = +e.target.value; rlSessRender(true); };
   w.querySelector('.ssauto input').onchange = e => { rlSessAuto = e.target.checked; try { localStorage.setItem('tm_sessauto', rlSessAuto ? '1' : '0'); } catch (_) {} };
   const undoC = id => { const k = RL.cards.find(x => x.id === id); if (!k) return; rlUndo(k); SS.undo = null; const j = SS.ids.indexOf(id); if (j >= 0) SS.i = j; rlxSet(id, false); rlRender(); rlSessRender(true); toast('أُلغي القرار — سجّل القرار الصحيح'); };
+  if (q('exec')) q('exec').onclick = () => { rlExecSet(c, !rlExecOn(c)); rlSessSave(c, true); rlRender(); const b = w.querySelector('.ssbody'), y = b ? b.scrollTop : 0; rlSessRender(); const b2 = w.querySelector('.ssbody'); if (b2) b2.scrollTop = y; };   // V144
   if (q('undo')) q('undo').onclick = () => undoC(c.id);
   if (q('undoh')) q('undoh').onclick = () => undoC(c.id);
   if (q('undob')) q('undob').onclick = () => undoC(un.id);
@@ -4363,7 +4368,13 @@ function rlProg(c) {
 // V130: تحضير الجلسة — حالة كل قضية قبل جلستها بلمسة: «نُفّذ قرار الجلسة السابقة» (وفي «لدى الخبير»: ورد التقرير + أُخطر الخصوم) أو «يحتاج إجراء». مربوطة بموعد الجلسة (c.prep.d) فتسقط حين يُسجَّل قرار ويتغيّر الموعد
 function rlPrep(c) { return c.prep && c.prep.d === c.next ? c.prep : {}; }
 function rlPrepOf(c) { if (RL_DONE.includes(c.stage) || RL_RES.includes(c.stage)) return ''; if (rlPrep(c).need) return 'need'; return c.exec ? 'ok' : 'no'; }
-function rlPrepSet(c, k, on) { const p = Object.assign({}, rlPrep(c), { d: c.next }); if (on) p[k] = 1; else delete p[k]; c.prep = p; if (c.stage === 'لدى الخبير' && (k === 'rep' || k === 'ntf')) c.exec = !!(p.rep && p.ntf); c.updated = Date.now(); }
+function rlPrepSet(c, k, on) { if (k === 'exec') { c.exec = !!on; c.updated = Date.now(); return; } /* V144: «نُفّذ» من وضع الجلسة — الحقل نفسه في خانة الرول (c.exec) */ const p = Object.assign({}, rlPrep(c), { d: c.next }); if (on) p[k] = 1; else delete p[k]; c.prep = p; if (c.stage === 'لدى الخبير' && (k === 'rep' || k === 'ntf')) c.exec = !!(p.rep && p.ntf); c.updated = Date.now(); }
+// V144: قرار الجلسة الماضية في رأس القضية بوضع الجلسة — يُقرأ من سجل القضية (قبل يوم الجلسة) أو من عمود القرار في الكشف؛ ولا يظهر للمحجوزة والمنتهية ولا بعد تسجيل قرار اليوم
+function rlPrevDec(c, d) { const h = (c.hist || []).filter(x => x.d && x.d < d).slice(-1)[0]; if (h) return { t: h.a + (h.n ? ' — ' + h.n : ''), d: h.d }; return c.why ? { t: c.why, d: '' } : null; }
+function rlExecOn(c) { return c.stage === 'لدى الخبير' ? !!(rlPrep(c).rep && rlPrep(c).ntf) : !!c.exec; }
+function rlExecSet(c, on) { if (c.stage === 'لدى الخبير') { rlPrepSet(c, 'rep', on); rlPrepSet(c, 'ntf', on); } else rlPrepSet(c, 'exec', on); }
+function rlPrevLine(c, d) { if (rlDecOn(c, d) || !rlPrepOf(c)) return ''; const x = rlPrevDec(c, d); if (!x || !x.t) return ''; const on = rlExecOn(c), ex = c.stage === 'لدى الخبير';
+  return '<div class="sspd"><span class="sspdt" title="' + esc(x.t + (x.d ? ' (' + rlFmt(x.d) + ')' : ' (من الكشف)')) + '"><span class="sspdk">قرار الجلسة الماضية:</span> ' + esc(x.t) + '</span><button type="button" class="sspdb' + (on ? ' on' : '') + '" data-s="exec" aria-pressed="' + on + '" title="' + (ex ? 'ورد التقرير وأُخطر الخصوم — الخانة نفسها في بطاقة الرول' : 'نُفّذ قرار الجلسة السابقة — الخانة نفسها في بطاقة الرول') + '">' + (on ? '✓ نُفّذ' : 'نُفّذ') + '</button></div>'; }
 let rlPrepF = '';
 // V142: سوابق الدائرة — تصنيف مقترح تلقائيًا (موضوع + مواد) من بيانات البطاقة، يؤكده القاضي بلمسة. يُحفظ التصنيف وحده (c.pc): بلا نص ولا أسماء. المنطوق من البطاقة نفسها.
 const PC_TOPICS = [
@@ -4578,7 +4589,7 @@ function rlMatch(c, q) {
 }
 const RLDIST = document.getElementById('rl_dist');
 // V130: منفذ للاختبارات الآلية فقط (لا يغيّر شيئًا بذاته)
-window.__rl = { get RL() { return RL; }, get collapsed() { return COLLAPSED; }, pkAudit: () => pkAudit(), cid: x => cid(x), pById: x => pById(x), get P() { return P; }, collapseSame: l => collapseSame(l), pcSuggest: c => pcSuggest(c), pcSimilar: c => pcSimilar(c), goCard: id => rlGoCard(id), get RLX() { return RLX; }, autoLink: () => rlAutoLink(), prepOf: c => rlPrepOf(c), prepSet: (c, k, on) => rlPrepSet(c, k, on), sessList: d => rlSessList(d), sortList: d => rlSortList(rlDayList(d)), unlink: c => rlUnlink(c), parse: (it) => rlParseItems(it), meta: t => rlMeta(t), multi: (r, e) => rlImpMulti(r, e), groups: r => rlImpGroups(r), clerkParse: it => rlClerkParse(it), impShow: (r, h) => rlImpShow(r, h), readFile: (f, st) => rlReadFile(f, st), save: () => rlSave(), render: () => rlRender() };
+window.__rl = { get RL() { return RL; }, sessOpen: (d, id) => rlSessOpen(d, id), prevDec: (c, d) => rlPrevDec(c, d), get collapsed() { return COLLAPSED; }, pkAudit: () => pkAudit(), cid: x => cid(x), pById: x => pById(x), get P() { return P; }, collapseSame: l => collapseSame(l), pcSuggest: c => pcSuggest(c), pcSimilar: c => pcSimilar(c), goCard: id => rlGoCard(id), get RLX() { return RLX; }, autoLink: () => rlAutoLink(), prepOf: c => rlPrepOf(c), prepSet: (c, k, on) => rlPrepSet(c, k, on), sessList: d => rlSessList(d), sortList: d => rlSortList(rlDayList(d)), unlink: c => rlUnlink(c), parse: (it) => rlParseItems(it), meta: t => rlMeta(t), multi: (r, e) => rlImpMulti(r, e), groups: r => rlImpGroups(r), clerkParse: it => rlClerkParse(it), impShow: (r, h) => rlImpShow(r, h), readFile: (f, st) => rlReadFile(f, st), save: () => rlSave(), render: () => rlRender() };
 // V130: بعد أول استيراد للكشف — ثلاث خطوات قصيرة تقول ماذا بعد (تظهر مرة واحدة حتى يُغلقها المستخدم)
 let rlGuide = false;
 function rlGuideHtml() { const P = rlProf(), one = P.n === 1;
@@ -8235,8 +8246,9 @@ function psRender() {
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
-const WN_V = 143;
+const WN_V = 144;
 const WN_LOG = [
+  [144, 'الإصدار 144', ['وضع الجلسة: سطر صغير في رأس كل قضية «قرار الجلسة الماضية» مع زر «نُفّذ» — هو نفسه خانة «نُفّذ قرار الجلسة السابقة» في بطاقة الرول، فما تؤشّره هنا يظهر هناك.']],
   [143, 'الإصدار 143', ['حزم مكتبة المبادئ 1.6: مجلة القضاء والقانون (2003–2006) ومجموعة القواعد (2002–2006) مع نص القاعدة كاملًا، وحذف المكرر.', 'ما حفظته من مبادئ (في الرول وملفاتي والمحفوظات) يُقرأ بمعرّفه الجديد تلقائيًا فلا يضيع منه شيء.', 'المبدأ نفسه من الحكم نفسه يُعرض نتيجة واحدة، وفي لوحة المبدأ «تكرّر بنصه في أحكام أخرى» (التواتر)، والكلمات المفتاحية الرسمية تُحسّن اقتراح المبادئ.']],
   [142, 'الإصدار 142', ['«سوابق الدائرة»: كل حكم صادر يقترح التطبيق تصنيفه (الموضوع والمواد) تلقائيًا، وتعتمده بلمسة. يُحفظ التصنيف وحده بلا نص ولا أسماء.', 'ابحث في أرشيف الأحكام بالموضوع أو المادة، وصفِّ «غير المصنّفة» لمراجعتها.', 'في قضية قيد النظر يظهر «سوابق الدائرة المشابهة» إن وُجدت لها سوابق بالموضوع نفسه.', 'نص «عن التطبيق» أوضح في السرّية والغاية، مع رسالة تعريف جاهزة للنسخ.']],
   [141, 'الإصدار 141', ['الطباعة من آيفون وآيباد: لا تظهر رسالة «حُجبت الطباعة التلقائية» — الطباعة الأولى مباشرة وما بعدها في صفحة طباعة جاهزة.', 'شعار «مداولة» على كل الأوراق المطبوعة وملفات Word بدل الشعار القديم.', 'نافذة «ما الجديد» هذه تظهر بعد كل تحديث.']],
