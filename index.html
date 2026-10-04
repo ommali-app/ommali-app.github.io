@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261005002149">
+<meta name="amali-build" content="20261005014540">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1236,7 +1236,7 @@ table.imp select{padding:4px;border:1px solid var(--line2);border-radius:6px;bac
 .sxrec tr.bad td{background:var(--warn-soft)}
 .sxchip{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;white-space:nowrap}.sxchip.ok{background:var(--ok-soft);color:var(--ok)}.sxchip.wr{background:var(--warn-soft);color:var(--warn)}
 .sxlate{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.sxoff{margin-top:10px;border-top:1px dashed var(--line2);padding-top:10px}.sxog{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}.sxog label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--ink2)}.sxog input{font:inherit;font-size:16px;padding:8px 10px;border:1px solid var(--line2);border-radius:10px;background:var(--panel);color:var(--ink);min-height:42px}
+.sxoff{margin-top:10px;border-top:1px dashed var(--line2);padding-top:10px}.sxog{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.sxog label span{min-height:2.6em;display:flex;align-items:flex-end}.sxog label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--ink2)}.sxog input{font:inherit;font-size:16px;padding:8px 10px;border:1px solid var(--line2);border-radius:10px;background:var(--panel);color:var(--ink);min-height:42px}
 .sxob{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .sx .note{font-size:12px;color:var(--ink3);margin:8px 0 0}.sxempty{color:var(--ink3);font-size:13.5px;margin:6px 0 10px}.sxwarn{background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:8px 12px;font-size:13px;margin:0 0 10px}
 .sxdet{margin:22px 0 8px;font-size:16px;color:var(--ink2);border-top:1px solid var(--line);padding-top:16px}
@@ -2547,7 +2547,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V155 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V156 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -4314,8 +4314,8 @@ function sxRec(R) {
 function sxWire(w) {
   w.querySelectorAll('[data-sxm]').forEach(b => b.onclick = () => { SX_MINE = b.dataset.sxm === '1'; SX_TAB = 1; rlRender(); });
   const ms = w.querySelector('#sx_m'); if (ms) ms.onchange = () => { SX_M = ms.value; rlRender(); };
-  const og = w.querySelector('#sx_offgo'), ob = w.querySelector('#sx_offbox'); if (og && ob) og.onclick = () => { ob.hidden = !ob.hidden; if (!ob.hidden) { const i = ob.querySelector('input'); if (i) i.focus(); } };
-  const ox = w.querySelector('#sx_offx'); if (ox) ox.onclick = () => { ob.hidden = true; };
+  const og = w.querySelector('#sx_offgo'), ob = w.querySelector('#sx_offbox'); if (og && ob) og.onclick = () => { ob.hidden = !ob.hidden; const P = w.querySelector('#sx_p'), pn = ob.closest('.sxpane'); if (P && pn && getComputedStyle(P).display === 'flex') P.style.height = pn.scrollHeight + 'px'; if (!ob.hidden) { const i = ob.querySelector('input'); if (i) i.focus({ preventScroll: true }); ob.scrollIntoView({ block: 'start', behavior: 'smooth' }); } };
+  const ox = w.querySelector('#sx_offx'); if (ox) ox.onclick = () => { ob.hidden = true; const P = w.querySelector('#sx_p'), pn = ob.closest('.sxpane'); if (P && pn && getComputedStyle(P).display === 'flex') P.style.height = pn.scrollHeight + 'px'; };
   const f = w.querySelector('#sx_off'); if (f) f.onsubmit = e => { e.preventDefault(); const o = {}; let any = false; [...f.querySelectorAll('input')].forEach(i => { const v = i.value.trim(); if (v !== '' && !isNaN(+v) && +v >= 0) { o[i.name] = i.name === 'avg' ? Math.min(100, +v) : Math.round(+v); any = true; } }); if (!any) { toast('أدخل رقمًا واحدًا على الأقل'); return; } RL.off = RL.off || {}; RL.off[SX_M] = o; RL.st = Date.now(); rlSave(); toast('حُفظت أرقام ' + sxMonName(SX_M)); SX_TAB = 4; rlRender(); };
   const od = w.querySelector('#sx_offdel'); if (od) od.onclick = () => { if (!confirm('حذف الأرقام الرسمية لشهر ' + sxMonName(SX_M) + '؟')) return; delete RL.off[SX_M]; RL.st = Date.now(); rlSave(); rlRender(); };
   const lt = w.querySelector('#sx_late'), lb = w.querySelector('#sx_latebox'); if (lt && lb) lt.onclick = () => { lb.hidden = !lb.hidden; };
@@ -4326,7 +4326,9 @@ function sxWire(w) {
   // التبويبات والسحب (الآيفون): الأجزاء متجاورة أفقيًا داخل إطار، والصفحة نفسها لا تتحرك أفقيًا
   const P = w.querySelector('#sx_p'), tabs = [...w.querySelectorAll('.sxtabs [data-t]')], panes = [...w.querySelectorAll('.sxpane')];
   if (!P || !tabs.length) return;
-  const setOn = t => { SX_TAB = t; tabs.forEach(b => { const on = +b.dataset.t === t; b.classList.toggle('on', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); }); const pn = panes.find(x => +x.dataset.t === t); if (pn && getComputedStyle(P).display === 'flex') P.style.height = pn.scrollHeight + 'px'; };
+  const fit = () => { const pn = panes.find(x => +x.dataset.t === SX_TAB); if (pn && getComputedStyle(P).display === 'flex') P.style.height = pn.scrollHeight + 'px'; else P.style.height = ''; };   /* V156: الإطار يتبع طول الجزء النشط إذا كبر (فتح نموذج الأرقام) */
+  const setOn = t => { SX_TAB = t; tabs.forEach(b => { const on = +b.dataset.t === t; b.classList.toggle('on', on); b.setAttribute('aria-selected', on ? 'true' : 'false'); }); fit(); };
+  if ('ResizeObserver' in window) { const ro = new ResizeObserver(() => fit()); panes.forEach(x => ro.observe(x)); }
   tabs.forEach(b => b.onclick = () => { const pn = panes.find(x => x.dataset.t === b.dataset.t); if (!pn) return; setOn(+b.dataset.t); if (getComputedStyle(P).display === 'flex') P.scrollTo({ left: pn.offsetLeft - P.offsetLeft - (P.scrollWidth > P.clientWidth ? 0 : 0), behavior: 'smooth' }); });
   if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => { es.forEach(e => { if (e.isIntersecting && e.intersectionRatio > .6 && getComputedStyle(P).display === 'flex') setOn(+e.target.dataset.t); }); }, { root: P, threshold: [.6] }); panes.forEach(x => io.observe(x)); }
   requestAnimationFrame(() => { const pn = panes.find(x => +x.dataset.t === SX_TAB); if (pn && getComputedStyle(P).display === 'flex') { P.scrollLeft = pn.offsetLeft - P.offsetLeft; } setOn(SX_TAB); });
@@ -9627,8 +9629,9 @@ function psRender() {
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
-const WN_V = 155;
+const WN_V = 156;
 const WN_LOG = [
+  [156, 'الإصدار 156', ['الإحصاءات على الآيفون: نموذج إدخال أرقام الإحصائية الرسمية يظهر كاملًا (كانت الخانات بعد الثانية تُقطع)، والخانات في عمودين.']],
   [155, 'الإصدار 155', ['«نبض الدائرة» في الرئيسية تحت بطاقة الجلسة: القضايا المنظورة في الرول، والمفصول فيها هذا الشهر (قطعي/تمهيدي)، ونسبة الإنجاز — والضغط يفتح الإحصاءات.', 'الإحصاءات بمصطلحات الإحصائية الشهرية الرسمية: المقدّمة (جديدة + مؤجلة)، المحجوزة من سابقة، المفصول فيها، المؤجلة خارج الفترة، ونسبة الإنجاز — مع رسوم للأشهر والأحكام والأعضاء والجلسات القادمة وعمر القضايا، و«الدائرة | أحكامي».', 'أدخل أرقام الإحصائية الرسمية للشهر لتُطابَق بالرول ويظهر متوسط الدوائر؛ وعلى الآيفون: أربعة تبويبات تُسحب بالإصبع.', 'القضايا التي حُلّل ملفها قبل V154 تُعلَّم «روجعت» لجلستها القادمة.']],
   [154, 'الإصدار 154', ['«روجعت» غير «نُفّذ»: القضية الجديدة تجهز بـ«روجعت» ويظهر معها الإعلان (في البطاقة ووضع الجلسة)، وحفظ تحليل الملف يعلّم القضية «روجعت» لجلستها.', 'القراءة الضوئية أدق لملفات نظام الاطلاع: الصفحة بدقة مسحها بلا ضغط، وتُنظَّف من النقاط والإطارات والباركود، ويُستبدل السطر المشوّه بـ[سطر غير مقروء]، ونموذج الخط العربي إن رُفع (أدق في الأرقام الهندية وبطاقة القيد).', '«تعديل» البطاقة يعلّم نوع القضية المقترح من ملخصها، و«📁 انقل إلى ملفاتي» للقضايا المحلَّلة سابقًا، وتنبيه في «ملفاتي» لتنظيف الملفات القديمة التي قد تحمل أسماء.']],
   [153, 'الإصدار 153', ['«تحليل الملف» — تأكيد الأرقام: رقم الدعوى أو الاستئناف يُفهم رقمًا (627/2025) والتاريخ تاريخًا، ولا يُعرض كل شيء مبلغًا بالدينار.']],
