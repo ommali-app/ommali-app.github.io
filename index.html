@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261005014540">
+<meta name="amali-build" content="20261005015528">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1182,7 +1182,8 @@ table.imp select{padding:4px;border:1px solid var(--line2);border-radius:6px;bac
 .pxc+.pxc,.pxgo{border-inline-start:1px solid var(--line)}
 .pxk{font-size:12.5px;color:var(--ink3);font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .pxk:before{content:"";width:6px;height:6px;border-radius:2px;background:var(--gold);transform:rotate(45deg);flex:none}
-.pxk small{font-weight:400}.pxring .pxk{flex-wrap:nowrap;white-space:nowrap}
+.pxk small{font-weight:400}.px .nw{white-space:nowrap;display:inline-block}.pxleg{flex-wrap:wrap}.pxleg span{white-space:nowrap}.pxring .up,.pxring .dn{display:block}
+@media (max-width:360px){.px .pxc.pxring{flex-direction:column!important;align-items:flex-start!important;gap:6px!important}.px .pxc{padding:11px 11px}.px .pxv b{font-size:23px}.px .pxring svg{width:44px;height:44px}.pxk,.pxs,.pxleg{font-size:11.5px}.pxgo{font-size:12px}}
 .pxv{display:flex;align-items:baseline;gap:8px}.pxv b{font-size:30px;line-height:1.05;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.5px}
 .pxv small{font-size:12.5px;color:var(--ink2)}
 .pxs{font-size:12px;color:var(--ink3)}
@@ -2547,7 +2548,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V156 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V157 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -4189,9 +4190,9 @@ function sxPulse() {
   const ring = (p, txt) => { const sz = 60, w = 7, r = (sz - w) / 2, L = 2 * Math.PI * r, v = Math.max(0, Math.min(100, p || 0)); return '<svg viewBox="0 0 ' + sz + ' ' + sz + '" aria-hidden="true"><circle cx="30" cy="30" r="' + r + '" fill="none" stroke="var(--panel2)" stroke-width="' + w + '"/>' + (v ? '<circle class="sxarc" cx="30" cy="30" r="' + r + '" fill="none" stroke="var(--ok)" stroke-width="' + w + '" stroke-linecap="round" stroke-dasharray="' + (L * v / 100).toFixed(1) + ' ' + L.toFixed(1) + '" transform="rotate(-90 30 30)"/>' : '') + '<text x="30" y="31" text-anchor="middle" dominant-baseline="middle">' + txt + '</text></svg>'; };
   let cmp = ''; if (useP && vpp.src !== 'part' && vpp.rate) {   /* لا مقارنة بشهر بلا أحكام */ const d = Math.round((vp.rate - vpp.rate) * 10) / 10; cmp = '<span class="' + (d >= 0 ? 'up' : 'dn') + '">' + (d >= 0 ? '▲' : '▼') + ' من ' + sxFmtP(vpp.rate) + ' في ' + sxMonName(sxMonAdd(cur, -2)) + '</span>'; }
   const tq = C.q + C.t;
-  P.innerHTML = '<div class="pxc"><span class="pxk">القضايا المنظورة</span><div class="pxv"><b>' + open.length + '</b><small>قضية</small></div><span class="pxs">' + (ds.length ? 'في ' + (ds.length === 1 ? 'جلسة واحدة' : ds.length === 2 ? 'جلستين' : ds.length + ' ' + (ds.length <= 10 ? 'جلسات' : 'جلسة')) + ' · ' + rlFmt(ds[0]).replace(/\/\d{4}$/, '') + (ds.length > 1 ? ' – ' + rlFmt(ds[ds.length - 1]).replace(/\/\d{4}$/, '') : '') : 'لا جلسات قادمة مسجّلة') + '</span></div>'
-    + '<div class="pxc"><span class="pxk">المفصول فيها — ' + sxMonName(cur) + '</span><div class="pxv"><b>' + tq + '</b><small>حتى اليوم</small></div>' + (tq ? '<div class="pxsplit"><i style="flex:' + C.q + ';background:var(--c2)"></i><i style="flex:' + C.t + ';background:var(--c3)"></i></div>' : '') + '<div class="pxleg"><span style="--k:var(--c2)">قطعي ' + C.q + '</span><span style="--k:var(--c3)">تمهيدي ' + C.t + '</span></div></div>'
-    + '<div class="pxc pxring">' + ring(R.rate, R.rate == null ? '—' : String(Math.round(R.rate * 10) / 10)) + '<div><span class="pxk">الإنجاز · ' + sxMonName(Rm) + (useP ? (vp.src === 'off' ? ' <small>(رسمي)</small>' : '') : ' <small>حتى اليوم</small>') + '</span><span class="pxs">' + (R.pr ? R.d + ' من ' + R.pr : 'لا جلسات بعد') + '</span>' + cmp + '</div></div>'
+  P.innerHTML = '<div class="pxc"><span class="pxk">القضايا المنظورة</span><div class="pxv"><b>' + open.length + '</b><small>قضية</small></div><span class="pxs">' + (ds.length ? '<span class="nw">في ' + (ds.length === 1 ? 'جلسة واحدة' : ds.length === 2 ? 'جلستين' : ds.length + ' ' + (ds.length <= 10 ? 'جلسات' : 'جلسة')) + ' ·</span> <span class="nw">' + rlFmt(ds[0]).replace(/\/\d{4}$/, '') + (ds.length > 1 ? ' – ' + rlFmt(ds[ds.length - 1]).replace(/\/\d{4}$/, '') : '') + '</span>' : 'لا جلسات قادمة مسجّلة') + '</span></div>'
+    + '<div class="pxc"><span class="pxk">المفصول فيها</span><div class="pxv"><b>' + tq + '</b><small>' + sxMonName(cur) + ' حتى اليوم</small></div>' + (tq ? '<div class="pxsplit"><i style="flex:' + C.q + ';background:var(--c2)"></i><i style="flex:' + C.t + ';background:var(--c3)"></i></div>' : '') + '<div class="pxleg"><span style="--k:var(--c2)">قطعي ' + C.q + '</span><span style="--k:var(--c3)">تمهيدي ' + C.t + '</span></div></div>'
+    + '<div class="pxc pxring">' + ring(R.rate, R.rate == null ? '—' : String(Math.round(R.rate * 10) / 10)) + '<div><span class="pxk">الإنجاز</span><span class="pxs"><span class="nw">' + sxMonName(Rm) + (useP ? (vp.src === 'off' ? ' (رسمي)' : '') : ' حتى اليوم') + ' ·</span> <span class="nw">' + (R.pr ? R.d + ' من ' + R.pr : 'لا جلسات بعد') + '</span></span>' + cmp + '</div></div>'
     + '<button type="button" class="pxgo" data-h="stat" aria-label="إحصاءات الدائرة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 20h18M6 16v-4M11 16V8M16 16v-6M21 16V5"/></svg><span>الإحصاءات</span></button>';
   P.hidden = false;
   P.onclick = e => { rlPrepF = ''; rlMine = false; rlMode = 'stat'; SX_M = ''; setView('r'); };
@@ -9629,8 +9630,9 @@ function psRender() {
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
-const WN_V = 156;
+const WN_V = 157;
 const WN_LOG = [
+  [157, 'الإصدار 157', ['شريط «نبض الدائرة» على الشاشات الضيقة (الآيفون بوضع التكبير): لا نص مقطوع — الشهر تحت العنوان، والتواريخ لا تنكسر، والحلقة أصغر.']],
   [156, 'الإصدار 156', ['الإحصاءات على الآيفون: نموذج إدخال أرقام الإحصائية الرسمية يظهر كاملًا (كانت الخانات بعد الثانية تُقطع)، والخانات في عمودين.']],
   [155, 'الإصدار 155', ['«نبض الدائرة» في الرئيسية تحت بطاقة الجلسة: القضايا المنظورة في الرول، والمفصول فيها هذا الشهر (قطعي/تمهيدي)، ونسبة الإنجاز — والضغط يفتح الإحصاءات.', 'الإحصاءات بمصطلحات الإحصائية الشهرية الرسمية: المقدّمة (جديدة + مؤجلة)، المحجوزة من سابقة، المفصول فيها، المؤجلة خارج الفترة، ونسبة الإنجاز — مع رسوم للأشهر والأحكام والأعضاء والجلسات القادمة وعمر القضايا، و«الدائرة | أحكامي».', 'أدخل أرقام الإحصائية الرسمية للشهر لتُطابَق بالرول ويظهر متوسط الدوائر؛ وعلى الآيفون: أربعة تبويبات تُسحب بالإصبع.', 'القضايا التي حُلّل ملفها قبل V154 تُعلَّم «روجعت» لجلستها القادمة.']],
   [154, 'الإصدار 154', ['«روجعت» غير «نُفّذ»: القضية الجديدة تجهز بـ«روجعت» ويظهر معها الإعلان (في البطاقة ووضع الجلسة)، وحفظ تحليل الملف يعلّم القضية «روجعت» لجلستها.', 'القراءة الضوئية أدق لملفات نظام الاطلاع: الصفحة بدقة مسحها بلا ضغط، وتُنظَّف من النقاط والإطارات والباركود، ويُستبدل السطر المشوّه بـ[سطر غير مقروء]، ونموذج الخط العربي إن رُفع (أدق في الأرقام الهندية وبطاقة القيد).', '«تعديل» البطاقة يعلّم نوع القضية المقترح من ملخصها، و«📁 انقل إلى ملفاتي» للقضايا المحلَّلة سابقًا، وتنبيه في «ملفاتي» لتنظيف الملفات القديمة التي قد تحمل أسماء.']],
