@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261004201543">
+<meta name="amali-build" content="20261004202752">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1281,7 +1281,7 @@ html,body{overscroll-behavior-y:none}
 .vkempty{background:var(--panel);border:1px dashed var(--line2);border-radius:12px;padding:14px;color:var(--ink2);font-size:14px;line-height:1.8}.vkempty b{color:var(--ink);font-size:15.5px}.vkempty p{margin:6px 0 0}
 .vkmng{margin-top:12px}.vkmng summary{cursor:pointer;min-height:36px;display:flex;align-items:center;font-weight:600;color:var(--ink2)}
 .vkgl{list-style:none;margin:6px 0;padding:0}.vkgl li{display:flex;justify-content:space-between;gap:8px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px}
-.vkff{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.vkff:empty{display:none}
+.vkff{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;align-items:center}.vkff:empty{display:none}.vkclr{flex:none;min-height:38px}.vkclr:disabled{opacity:.45}
 .vkfl{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink3);flex:1 1 200px;min-width:0}.vkfl select{flex:1;min-width:0;min-height:38px;border:1px solid var(--line2);border-radius:10px;background:var(--bg);color:var(--ink);font-family:inherit;font-size:14px;padding:0 6px}
 .vkcs{display:flex;flex-wrap:wrap;gap:4px}.vkc{font-style:normal;font-size:12px;border-radius:99px;padding:1px 9px;background:var(--panel2,var(--line));color:var(--ink2);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.vkc.o{background:var(--accent-soft);color:var(--accent-soft-ink);font-weight:600}
 .vkrd{font-size:13.5px;color:var(--ink2);font-weight:600;overflow-wrap:anywhere}.vkrm strong{color:var(--accent);font-weight:700}
@@ -2462,7 +2462,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V151 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V152 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -8843,24 +8843,27 @@ async function vkInit() {
 function vkRender() {
   const n = VK.N, G = vkGroups(), need = VK.docs.filter(d => d && d.fl && d.fl.length).length;
   $('#vk_count').textContent = n ? vkNum(n) + ' في الخزانة' : 'الخزانة فارغة';
-  $('#vk_sub').innerHTML = n ? (G.length > 1 ? G.length + ' مجموعات' : '') + (need ? (G.length > 1 ? ' · ' : '') + '<button type="button" class="linkbtn" data-vkneed>' + need + ' يحتاج مراجعة</button>' : '') : '';
+  $('#vk_sub').innerHTML = n ? (G.length > 1 ? G.length + ' مجموعات' : '') + (need ? (G.length > 1 ? ' · ' : '') + '<button type="button" class="linkbtn" data-vkneed>' + (VK.need ? '✕ عرض كل الأحكام' : need + ' يحتاج مراجعة') + '</button>' : '') : '';
   try { if (navigator.storage && navigator.storage.estimate) navigator.storage.estimate().then(e => { const s = $('#vk_size'); if (s && e && e.usage != null) s.textContent = 'المساحة المستعملة على الجهاز (كل التطبيق): ' + (e.usage / 1048576).toFixed(1) + ' م.ب'; }); } catch (e) {}
   $('#vk_mng').classList.toggle('hidden', !n); { let t = 0; try { t = +localStorage.getItem('tm_vkx') || 0; } catch (e) {} const xl = $('#vk_xlast'); if (xl && t) xl.textContent = 'آخر تصدير: ' + rlFmt(new Date(t).toISOString().slice(0, 10)) + ' — صدّر من جديد بعد كل إضافة كبيرة.'; } $('#vk_srch').classList.toggle('hidden', !n);
   const gb = $('#vk_groups'); gb.innerHTML = G.length > 1 ? '<button type="button" class="chip' + (!VK.grp ? ' on' : '') + '" data-vkg="">الكل</button>' + G.map(([g, c]) => '<button type="button" class="chip' + (VK.grp === g ? ' on' : '') + '" data-vkg="' + esc(g) + '">' + esc(g) + ' <small>' + c + '</small></button>').join('') : '';
   gb.querySelectorAll('[data-vkg]').forEach(b => b.onclick = () => { VK.grp = b.dataset.vkg; vkRender(); });
   $('#vk_gl').innerHTML = G.map(([g, c]) => '<li><span>' + esc(g) + ' <small>(' + c + ')</small></span><button type="button" class="linkbtn" data-vkgd="' + esc(g) + '">احذف المجموعة</button></li>').join('');
   $('#vk_gl').querySelectorAll('[data-vkgd]').forEach(b => b.onclick = () => { if (!b.dataset.sure) { b.dataset.sure = '1'; b.textContent = 'تأكيد الحذف؟'; setTimeout(() => { if (b.isConnected) { delete b.dataset.sure; b.textContent = 'احذف المجموعة'; } }, 3500); return; } const ids = VK.docs.filter(d => d && d.g === b.dataset.vkgd).map(d => d.id); if (VK.grp === b.dataset.vkgd) VK.grp = ''; vkDel(ids).then(() => { vkRender(); toast('حُذفت المجموعة'); }); });
-  const nb = document.querySelector('#vk_sub [data-vkneed]'); if (nb) nb.onclick = () => { VK.q = ''; $('#vk_q').value = ''; VK.need = true; vkResults(); };
+  const nb = document.querySelector('#vk_sub [data-vkneed]'); if (nb) nb.onclick = () => { VK.q = ''; $('#vk_q').value = ''; VK.need = !VK.need; vkRender(); };   // V152: الرابط نفسه يعيد إلى الكل
   // V146: مرشحات النتيجة ووسومك (المجلدات)
   const oc = new Map(), tc = new Map(); VK.docs.forEach(d => { if (!d) return; (d.out || []).forEach(o => oc.set(o, (oc.get(o) || 0) + 1)); (d.tags || []).forEach(t => tc.set(t, (tc.get(t) || 0) + 1)); });
   const ff = $('#vk_ff'); if (ff) { const T = [...tc].sort((a, b) => b[1] - a[1]).slice(0, 60);
     ff.innerHTML = (oc.size ? '<label class="vkfl"><span>النتيجة</span><select id="vk_fo"><option value="">الكل</option>' + [...oc].sort((a, b) => b[1] - a[1]).map(([o, c]) => '<option value="' + esc(o) + '"' + (VK.fo === o ? ' selected' : '') + '>' + esc(o) + ' (' + c + ')</option>').join('') + '</select></label>' : '')
-      + (T.length ? '<label class="vkfl"><span>وسومك</span><select id="vk_ft"><option value="">الكل</option>' + T.map(([t, c]) => '<option value="' + esc(t) + '"' + (VK.ft === t ? ' selected' : '') + '>' + esc(t) + ' (' + c + ')</option>').join('') + '</select></label>' : '');
-    const fo = $('#vk_fo'), ft = $('#vk_ft'); if (fo) fo.onchange = () => { VK.fo = fo.value; vkResults(); }; if (ft) ft.onchange = () => { VK.ft = ft.value; vkResults(); }; }
+      + (T.length ? '<label class="vkfl"><span>وسومك</span><select id="vk_ft"><option value="">الكل</option>' + T.map(([t, c]) => '<option value="' + esc(t) + '"' + (VK.ft === t ? ' selected' : '') + '>' + esc(t) + ' (' + c + ')</option>').join('') + '</select></label>' : '') + '<button type="button" class="btn vkclr" id="vk_clr" title="إلغاء البحث والمرشحات وعرض كل الأحكام">✕ مسح</button>';
+    const fo = $('#vk_fo'), ft = $('#vk_ft'); if (fo) fo.onchange = () => { VK.fo = fo.value; vkResults(); }; if (ft) ft.onchange = () => { VK.ft = ft.value; vkResults(); };
+    $('#vk_clr').onclick = vkClear; }
   const old = VK.docs.filter(d => d && !d.v); const lg = $('#vk_legacy'); if (lg) { lg.classList.toggle('hidden', !old.length); if (old.length) { lg.innerHTML = '<b>' + vkNum(old.length) + ' أُضيفت بمحرك تعتيم أقدم (V145).</b> احذفها وأعد إضافتها ليُعاد تعتيمها بالمحرك الجديد. <button type="button" class="btn vkdelb" id="vk_legdel">احذفها الآن</button>'; $('#vk_legdel').onclick = () => vkDel(old.map(d => d.id)).then(() => { vkRender(); toast('حُذفت — أعد إضافة ملفاتها'); }); } }
   vkResults();
 }
+function vkClear() { VK.fo = ''; VK.ft = ''; VK.need = false; VK.q = ''; const q = $('#vk_q'); if (q) q.value = ''; vkRender(); }   // V152: «مسح» يعيد الخزانة إلى صفحتها الأولى
 async function vkResults() {
+  { const c = $('#vk_clr'); if (c) c.disabled = !(VK.fo || VK.ft || VK.need || (VK.q || '').trim()); }
   const box = $('#vk_res'); if (!VK.N) { box.innerHTML = '<div class="vkempty"><b>ابدأ بإضافة نماذج أحكامك</b><p>اسحب ملفات Word أو مجلدًا إلى هنا (على الحاسوب)، أو اضغط «أضف أحكامًا» واختر ملفات Word أو ملفًا مضغوطًا (zip) يضم المجلد كله — وهو الأسهل على الآيباد والآيفون.</p><p>تُقرأ الملفات على جهازك، ويُتخطى ما ليس نموذج حكم، وتُعتَّم أسماء الأطراف قبل الحفظ، ويبقى الأصل في مجلدك.</p><p>أضفتها على جهاز آخر؟ <label class="linkbtn" for="vk_impf">استورد الخزانة من ملفها المصدَّر (.amalik)</label> بدل إعادة المعالجة.</p></div>'; return; }
   const q = (VK.q || '').trim(); let L, qs = new Set();
   if (q) { const R = vkSearch(q, vkPass); qs = new Set(vkTerms(q)); L = R.map(x => Object.assign({ doc: VK.docs[x.d], s: x.s }, x)); VK.need = false; }
@@ -8868,7 +8871,7 @@ async function vkResults() {
   // V146: نسخ القضية الواحدة (الرقم نفسه) نتيجة واحدة — الأعلى ترتيبًا (أو الأحدث) ظاهر، والباقي «نسخ أخرى»
   const seen = new Set(), G = []; L.forEach(x => { const k = vkGK(x.doc); if (seen.has(k)) return; seen.add(k); G.push(x); });
   const nv = d => vkVersions(d).length;
-  const head = q ? (G.length ? vkNum(G.length, ['مطابق', 'مطابقان', 'مطابقة', 'مطابقًا']) + (L.length >= 300 ? ' (أول 300)' : '') : 'لا نتائج — جرّب كلمة أخرى أو عبارة أقصر') : VK.need ? 'الأحكام التي تحتاج مراجعة: لم يُتعرّف على أقسامها أو على كتلة الأطراف فيها — افتحها وتأكد من التعتيم' : (VK.fo || VK.ft ? vkNum(G.length) : 'آخر ما أُضيف');
+  const head = q ? (G.length ? vkNum(G.length, ['مطابق', 'مطابقان', 'مطابقة', 'مطابقًا']) + (L.length >= 300 ? ' (أول 300)' : '') : 'لا نتائج — جرّب كلمة أخرى أو عبارة أقصر') : VK.need ? 'الأحكام التي تحتاج مراجعة: لم يُتعرّف على أقسامها أو على كتلة الأطراف فيها — افتحها وتأكد من التعتيم. <button type="button" class="linkbtn" data-vkall>عرض كل الأحكام</button>' : (VK.fo || VK.ft ? vkNum(G.length) : 'آخر ما أُضيف');
   const top = G.slice(0, 40), mx = G.length && G[0].s ? G[0].s : 1;
   const tx = q ? await Promise.all(top.map(x => vkText(x.doc.id).catch(() => null))) : [];
   box.innerHTML = '<p class="vkrh">' + head + '</p>' + top.map((x, i) => { const d = x.doc, t = tx[i], v = nv(d);
@@ -8879,6 +8882,7 @@ async function vkResults() {
       + (t ? '<span class="vkrs">' + (vkSnip(t.r, qs, true) || vkSnip(t.f, qs, true) || vkSnip(t.o, qs, true) || vkSnip(t.u, qs, true) || vkSnip(t.r.length ? t.r : t.f, qs)) + '</span>' : '') + '</button>'; }).join('')
     + (G.length > top.length ? '<p class="k">تظهر أول ' + top.length + ' نتيجة' + (q ? ' — ضيّق البحث بكلمة أخرى.' : ' — ابحث أو صفِّ بالنتيجة أو بوسومك.') + '</p>' : '');
   box.querySelectorAll('[data-vk]').forEach(b => b.onclick = () => vkOpen(b.dataset.vk, qs));
+  { const al = box.querySelector('[data-vkall]'); if (al) al.onclick = () => { VK.need = false; vkRender(); }; }
 }
 const VK_TXT = new Map();
 async function vkText(id) { if (VK_TXT.has(id)) return VK_TXT.get(id); const r = await vkTx('txt', 'readonly', s => s.get(id)); if (!r) throw new Error('missing'); const x = await vkDec(r); if (VK_TXT.size > 60) VK_TXT.delete(VK_TXT.keys().next().value); VK_TXT.set(id, x); return x; }
@@ -8923,7 +8927,7 @@ async function vkSetUser(id, desc, tags) {
 function vkClose() { const w = $('#vksheet'); if (w) w.classList.remove('show'); document.documentElement.classList.remove('noscroll'); VK.open = null; }
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && VK.open) vkClose(); });
 window.__an = { match: r => anMatch(r), build: r => anBuild(r), nos: s => anNos(s), sticker: r => anSticker(r), lines: c => anLines(c), get INX() { return INX; }, set INX(v) { INX = v; } };
-window.__vk = { export: p => vkExport(p), import: (u, p) => vkImport(u, p), known: () => vkKnown(), add: f => vkAdd(f), ingest: (b, fn, g, o) => vkIngest(b, fn, g, o), read: b => vkRead(b), doc: b => vkDoc(b), kind: (p, S) => vkKind(p, S), outcome: o => vkOutcome(o), desc: f => vkDesc(f), versions: d => vkVersions(d), setUser: (i, d, t) => vkSetUser(i, d, t), mask: (p, o) => vkMask(p, o), split: p => vkSplit(p), meta: (p, h, path) => vkMeta(p, h, path), docx: b => vkDocx(b), search: (q, g) => vkSearch(q, g), text: id => vkText(id), load: () => vkLoad(), wipe: () => vkWipe(), get VK() { return VK; } };
+window.__vk = { render: () => vkRender(), export: p => vkExport(p), import: (u, p) => vkImport(u, p), known: () => vkKnown(), add: f => vkAdd(f), ingest: (b, fn, g, o) => vkIngest(b, fn, g, o), read: b => vkRead(b), doc: b => vkDoc(b), kind: (p, S) => vkKind(p, S), outcome: o => vkOutcome(o), desc: f => vkDesc(f), versions: d => vkVersions(d), setUser: (i, d, t) => vkSetUser(i, d, t), mask: (p, o) => vkMask(p, o), split: p => vkSplit(p), meta: (p, h, path) => vkMeta(p, h, path), docx: b => vkDocx(b), search: (q, g) => vkSearch(q, g), text: id => vkText(id), load: () => vkLoad(), wipe: () => vkWipe(), get VK() { return VK; } };
 
 async function lkWipe() {
   try { localStorage.removeItem(RL_KEY); localStorage.removeItem(LK_KEY); localStorage.removeItem(LK_WAIT); localStorage.removeItem('tm_sync'); } catch (e) {}
@@ -9254,8 +9258,9 @@ function psRender() {
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
-const WN_V = 151;
+const WN_V = 152;
 const WN_LOG = [
+  [152, 'الإصدار 152', ['«خزانة الأحكام»: بعد عرض «يحتاج مراجعة» تعود إلى كل الأحكام من الرابط نفسه («✕ عرض كل الأحكام»)، وزر «✕ مسح» بجانب المرشحات يلغي البحث والنتيجة والوسوم بلمسة.']],
   [151, 'الإصدار 151', ['«تحليل الملف» بثلاث خطوات واضحة وزر واحد: اقرأ الصفحات ← راجع التعتيم (يجري وحده) ← النتيجة والحفظ.', '«نوع القضية» (مستحقات، إقامة، جواز سفر، نصاب، التماس…) يُقترح من الأوراق وتختاره بلمسة، فيظهر وسمًا بجانب رقم القضية في الرول ووضع الجلسة؛ و«التماس» يُعرف أيضًا من الكشف.', 'الأرقام: تظهر المختلفة بين الأوراق وحدها وتختار الصحيح بلمسة؛ والتفاصيل مطوية.', 'الحفظ في القضية يحفظ نسخة في «ملفاتي» مربوطة بها، بلا أسماء.']],
   [150, 'الإصدار 150', ['لغير الدوائر العمالية: «المساعد» و«الخط الزمني» يعملان على حزمة مبادئ دائرتك.', 'و«تحليل الملف» للمدني والتجاري والحكومي والإداري (استئنافًا وكلية): من بطاقة القضية في الرول والعودة إليها، و«ملخص الملف» في البطاقة وسطراه في وضع الجلسة — بنموذج بلا مسميات عمالية، وبوابة شكل بحسب الدائرة. مبدئي حتى يراجعه قاضٍ من تلك الدوائر.', 'الدائرة العمالية كما هي دون تغيير.']],
   [149, 'الإصدار 149', ['الدليل المصوّر: فصل جديد «خزانة الأحكام ونقلها بين أجهزتك»، وتحديث فصول «تحليل الملف» (من بطاقة القضية والعودة إليها) و«ورقة الرول» (قرار الجلسة الماضية وسطرا الملخص) و«المزامنة». ورابط «الدليل» في قسم الخزانة.', 'إصلاح: خانة رمز التصدير في «خزانة الأحكام» كانت تظهر طويلة جدًا.']],
