@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261004135641">
+<meta name="amali-build" content="20261004155348">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1291,6 +1291,7 @@ html,body{overscroll-behavior-y:none}
 .vkskips{margin-top:8px;display:flex;flex-direction:column;gap:4px}.vkskip{font-size:13px;color:var(--ink2)}.vkskip summary{cursor:pointer;min-height:30px;display:flex;align-items:center}
 .vkskip ul{list-style:none;margin:0;padding:0 8px;max-height:220px;overflow:auto}.vkskip li{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px solid var(--line)}.vkskip li span{min-width:0;overflow-wrap:anywhere}.vkskip li.done span{color:var(--ok)}
 .vkdelb{color:var(--bad)!important;border-color:var(--bad)!important}
+.vkxrow{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}.vkxp{margin-top:10px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px}.vkxp p{margin:0 0 6px;font-size:14px;line-height:1.7}.vkxf{display:flex;flex-direction:column;gap:8px}.vkxf .row{display:flex;gap:8px}.vkxok{color:var(--ok)}
 .vksheet .vktabs{display:flex;gap:4px;padding:8px 12px 0;background:var(--panel);border-bottom:1px solid var(--line);flex:none;overflow-x:auto}
 .vktabs button{border:0;background:transparent;color:var(--ink3);font-family:inherit;font-size:15px;font-weight:600;min-height:40px;padding:0 12px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
 .vktabs button.on{color:var(--ink);border-bottom-color:var(--accent)}
@@ -2297,7 +2298,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     <div class="vkhead"><b id="vk_count">الخزانة فارغة</b><span class="k" id="vk_sub"></span></div>
     <div class="row vkrow">
       <label class="btn primary" for="vk_files">＋ أضف أحكامًا</label><input id="vk_files" type="file" accept=".docx,.zip,.doc,application/zip,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple hidden>
-      <label class="btn" for="vk_dir" id="vk_dirb">📁 مجلد</label><input id="vk_dir" type="file" webkitdirectory multiple hidden>
+      <label class="btn" for="vk_dir" id="vk_dirb">📁 مجلد</label><input id="vk_dir" type="file" webkitdirectory multiple hidden><input id="vk_impf" type="file" hidden>
       <input id="vk_group" class="vkgin" type="text" maxlength="40" placeholder="اسم المجموعة (اختياري): مسوداتي، نماذج زميل…" aria-label="اسم المجموعة">
     </div>
     <p class="k vkhint">ملفات Word بصيغة docx أو doc القديمة، أو ملف مضغوط zip يضم المجلد كله. وعلى الحاسوب: اسحب الملفات أو المجلد إلى هنا. ما ليس نموذج حكم (مذكرات، صحف، تقارير، أحكام تمييز) يُتخطى ولا يُحفظ.</p>
@@ -2310,7 +2311,8 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
   </section>
   <div class="rlwarn hidden" id="vk_legacy"></div>
   <div id="vk_res" class="vkres"></div>
-  <details class="inbox vkmng hidden" id="vk_mng"><summary>إدارة الخزانة</summary><ul class="vkgl" id="vk_gl"></ul><p class="k" id="vk_size"></p><p class="k">الخزانة على هذا الجهاز وحده: لا تُزامَن ولا تُرفع. والمحفوظ نص معتَّم مشفّر — لا الملفات الأصلية.</p><button type="button" class="btn vkdelb" id="vk_wipe">احذف كل الخزانة</button></details>
+  <div class="vkxp hidden" id="vk_xp" role="status"></div>
+  <details class="inbox vkmng hidden" id="vk_mng"><summary>إدارة الخزانة</summary><div class="vkxrow"><button type="button" class="btn" id="vk_exp">⇪ صدّر الخزانة (ملف مشفّر)</button><label class="btn" for="vk_impf">⇩ استورد خزانة من ملف</label></div><p class="k" id="vk_xlast">للنقل إلى جهاز آخر وللنسخة الاحتياطية: ملف واحد مشفّر برمز المزامنة، منفصل عن ملف المزامنة.</p><ul class="vkgl" id="vk_gl"></ul><p class="k" id="vk_size"></p><p class="k">الخزانة على هذا الجهاز وحده: لا تُزامَن ولا تُرفع. والمحفوظ نص معتَّم مشفّر — لا الملفات الأصلية.</p><button type="button" class="btn vkdelb" id="vk_wipe">احذف كل الخزانة</button></details>
 </div>
 <div class="intakewrap" id="wewrap">
   <div class="note">أداة تنسيق لنص كتبتَه — لا تصوغ. ما يحتاج قرارك ضعه بين [[ ]]. <button type="button" class="more" data-help>المزيد</button></div>
@@ -2444,7 +2446,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V147 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V148 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -3257,7 +3259,7 @@ const HOME_TILES = [
   ['d', 'فحص المسودة', 'يتحقق من الإحالات والمواد، ويقترح سند كل قاعدة، ويطابق الأرقام، ويعيد قائمة التحقق والوصلات.', () => 'مرحلة 5–8', 'warn', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M13 7l3 3M3 21h18"/></svg>', 'محلي + ذكاء'],
   ['t', 'الخط الزمني', 'تتبّع قاعدة عبر السنين: أحكامك المتصلة بها مرتبة زمنيًا مع رصد الاستقرار والتطور.', () => 'استقرار المبدأ', 'gold', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>', 'محلي + ذكاء'],
   ['w', 'Word وصياغاتي', 'صياغاتك المعتادة (الشكل، المصاريف، المنطوق) تُدرج بلمسة، ثم أخرج نص الحكم بملف Word مطابق لقالبك تمامًا: Arial 14، بلا ترويسة، «الأسباب» تحتها خط، الرقم الآلي في التذييل.', () => 'قالبك', 'warn', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13l1.5 4 1.5-4 1.5 4 1.5-4"/></svg>'],
-  ['k', 'خزانة الأحكام', 'نماذج أحكامك على جهازك: أضف ملفات Word أو مجلدًا مضغوطًا، فتُعتَّم الأسماء قبل الحفظ ويُبحث في الأسباب.', () => (window.__vk && window.__vk.VK.N ? window.__vk.VK.N + ' حكمًا' : 'على جهازك'), '', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 12h18M10 8h4M10 16h4"/></svg>'],
+  ['k', 'خزانة الأحكام', 'نماذج أحكامك على جهازك: أضف ملفات Word أو مجلدًا مضغوطًا، فتُعتَّم الأسماء قبل الحفظ ويُبحث في الأسباب. وتنقلها إلى جهاز آخر بملف مشفّر.', () => (window.__vk && window.__vk.VK.N ? window.__vk.VK.N + ' حكمًا' : 'على جهازك'), '', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 12h18M10 8h4M10 16h4"/></svg>'],
   ['f', 'ملفاتي', 'قضاياك المحفوظة مع المبادئ المختارة لكل منها وملاحظاتك.', () => (Object.keys(CASES).length ? Object.keys(CASES).length + ' ملف' : 'محفوظات'), '', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>'],
   ['a', 'المساعد', 'اسأل بالعربية فيبحث في المبادئ والمواد داخل التطبيق ويجيب بإحالة، أو يقول: لا يوجد سند.', () => 'بحث موجَّه', 'mix', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4z"/><path d="M8 8h8M8 11.5h5"/></svg>', 'ذكاء اصطناعي'],
 ];
@@ -8487,6 +8489,55 @@ async function vkDel(ids) {
 }
 async function vkWipe() { try { if (VK.db) { VK.db.close(); VK.db = null; } await new Promise(r => { const q = indexedDB.deleteDatabase(VK_DB); q.onsuccess = q.onerror = q.onblocked = () => r(); }); } catch (e) {} VK.key = null; VK.docs = []; VK.inv = new Map(); VK.N = 0; }
 
+// ---- V148: نقل الخزانة بين أجهزتك ونسختها الاحتياطية — ملف واحد مشفّر (AES-GCM) برمز المزامنة، مضغوط، منفصل عن ملف المزامنة (امتداده .amalik فلا يلتقطه «جلب»)
+const VK_MAGIC = 'AMALIVK1';
+async function vkGz(u8, de) { const s = new Blob([u8]).stream().pipeThrough(de ? new DecompressionStream('gzip') : new CompressionStream('gzip')); return new Uint8Array(await new Response(s).arrayBuffer()); }
+async function vkXKey(pass, salt) { return syDerive(pass, salt); }
+async function vkExport(pass) {
+  if (!VK.ready) await vkLoad(); if (!VK.N) { toast('الخزانة فارغة'); return; }
+  let key, salt; if (pass) { salt = crypto.getRandomValues(new Uint8Array(16)); key = await vkXKey(pass, salt); } else if (SY.key && SY.salt) { key = SY.key; salt = SY.salt; } else throw new Error('nopass');
+  const db = await vkIdb(), all = s => new Promise((res, rej) => { const out = []; const q = db.transaction(s).objectStore(s).openCursor(); q.onsuccess = () => { const c = q.result; if (c) { out.push([c.key, c.value]); c.continue(); } else res(out); }; q.onerror = () => rej(q.error); });
+  const I = await all('idx'), Tm = new Map(await all('txt')), docs = [];
+  for (const [id, rec] of I) { try { const t = Tm.get(id); if (!t) continue; docs.push({ id, i: await vkDec(rec), t: await vkDec(t) }); } catch (e) {} }
+  const plain = await vkGz(new TextEncoder().encode(JSON.stringify({ app: 'amali-vault', v: 1, at: Date.now(), n: docs.length, docs })));
+  const iv = crypto.getRandomValues(new Uint8Array(12)), ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, plain));
+  const head = new TextEncoder().encode(JSON.stringify({ kdf: { name: 'PBKDF2', hash: 'SHA-256', iter: SY_ITER, salt: syB64(salt) }, iv: syB64(iv), n: docs.length, sync: !pass })), hl = new Uint8Array(4); new DataView(hl.buffer).setUint32(0, head.length);
+  const blob = new Blob([new TextEncoder().encode(VK_MAGIC), hl, head, ct], { type: 'application/octet-stream' });
+  await knSave('خزانة-الأحكام-' + rlToday() + '.amalik', blob, 'application/octet-stream');
+  try { localStorage.setItem('tm_vkx', String(Date.now())); } catch (e) {}
+  return docs.length;
+}
+function vkXHead(u8) { if (new TextDecoder().decode(u8.subarray(0, 8)) !== VK_MAGIC) throw new Error('fmt'); const hl = new DataView(u8.buffer, u8.byteOffset + 8, 4).getUint32(0); const head = JSON.parse(new TextDecoder().decode(u8.subarray(12, 12 + hl))); return { head, ct: u8.subarray(12 + hl) }; }
+async function vkImport(u8, pass) {
+  const { head, ct } = vkXHead(u8), salt = syUnb64(head.kdf.salt); let key = null;
+  if (!pass && SY.key && SY.salt && syB64(SY.salt) === head.kdf.salt) key = SY.key; else if (pass) key = await vkXKey(pass, salt);
+  if (!key) throw new Error('needpass');
+  let plain; try { plain = new Uint8Array(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: syUnb64(head.iv) }, key, ct)); } catch (e) { throw new Error('badpass'); }
+  const d = JSON.parse(new TextDecoder().decode(await vkGz(plain, true))); if (!d || d.app !== 'amali-vault' || !Array.isArray(d.docs)) throw new Error('fmt');
+  if (!VK.ready) await vkLoad(); const have = new Set(VK.docs.filter(Boolean).map(x => x.id)); let n = 0, dup = 0; const db = await vkIdb();
+  for (let k = 0; k < d.docs.length; k += 25) { const part = d.docs.slice(k, k + 25), recs = [];
+    for (const x of part) { if (!x || !x.id || !x.i || !x.t) continue; if (have.has(x.id)) { dup++; continue; } recs.push([x.id, await vkEnc(x.i), await vkEnc(x.t)]); }
+    await new Promise((res, rej) => { const t = db.transaction(['idx', 'txt'], 'readwrite'); recs.forEach(([id, a, b]) => { t.objectStore('idx').put(a, id); t.objectStore('txt').put(b, id); }); t.oncomplete = res; t.onerror = () => rej(t.error); });
+    n += recs.length; recs.forEach(r => have.add(r[0])); vkXMsg('استيراد… ' + Math.min(d.docs.length, k + 25) + ' من ' + d.docs.length); await new Promise(r => setTimeout(r, 0)); }
+  await vkLoad(); return { n, dup, total: d.docs.length };
+}
+function vkXMsg(t, html) { const b = $('#vk_xp'); if (!b) return; b.classList.remove('hidden'); b.innerHTML = html || '<p class="k">' + esc(t) + '</p>'; }
+function vkXPass(mode, onOk) {   // نموذج الرمز (حين لا مزامنة على هذا الجهاز أو اختلف الرمز)
+  vkXMsg('', '<div class="vkxf"><p>' + (mode === 'exp' ? 'لا رمز مزامنة على هذا الجهاز — اختر رمزًا لتشفير الملف، واكتبه نفسه عند الاستيراد.' : 'اكتب الرمز الذي صُدّر به الملف (رمز المزامنة على الجهاز الآخر).') + '</p><input type="password" class="vkgin" id="vk_xpw" autocomplete="off" placeholder="الرمز"><div class="row"><button type="button" class="btn primary" id="vk_xok">' + (mode === 'exp' ? 'صدّر' : 'استورد') + '</button><button type="button" class="btn" id="vk_xno">إلغاء</button></div></div>');
+  $('#vk_xno').onclick = () => $('#vk_xp').classList.add('hidden');
+  $('#vk_xok').onclick = () => { const p = $('#vk_xpw').value; if ((p || '').length < 4) { toast('الرمز 4 أحرف على الأقل'); return; } onOk(p); };
+}
+async function vkDoExport(pass) {
+  if (!pass && !(SY.key && SY.salt)) { vkXPass('exp', p => vkDoExport(p)); return; }
+  vkXMsg('تجهيز الملف المشفّر…'); try { const n = await vkExport(pass); vkXMsg('', '<p class="vkxok">✓ صُدّر ' + vkNum(n) + ' في ملف «خزانة-الأحكام-' + rlToday() + '.amalik» مشفّرًا ' + (pass ? 'بالرمز الذي اخترته' : 'برمز المزامنة') + '. احفظه في OneDrive، ثم من الجهاز الآخر: «استورد خزانة من ملف».</p>'); vkRender(); }
+  catch (e) { vkXMsg('تعذّر التصدير: ' + (e.message === 'nopass' ? 'لا رمز' : e.message)); }
+}
+async function vkDoImport(file, pass) {
+  vkXMsg('قراءة الملف…'); let u8; try { u8 = new Uint8Array(await file.arrayBuffer()); vkXHead(u8); } catch (e) { vkXMsg('هذا ليس ملف خزانة مصدَّرًا من «مداولة» (.amalik).'); return; }
+  try { const r = await vkImport(u8, pass); vkXMsg('', '<p class="vkxok">✓ استُورد ' + (r.n ? vkNum(r.n) : 'لا شيء جديد') + (r.dup ? '، وتُخطي الموجود (' + r.dup + ')' : '') + '. الخزانة على هذا الجهاز الآن ' + vkNum(VK.N) + '.</p>'); vkRender(); }
+  catch (e) { if (e.message === 'needpass' || e.message === 'badpass') vkXPass('imp', p => vkDoImport(file, p)); if (e.message === 'badpass' && pass) toast('الرمز غير صحيح'); else if (e.message === 'fmt') vkXMsg('الملف تالف أو ليس ملف خزانة.'); }
+}
+
 // ---- الواجهة
 function vkNum(n, adj) { return n === 1 ? 'حكم واحد' + (adj ? ' ' + adj[0] : '') : n === 2 ? 'حكمان' + (adj ? ' ' + adj[1] : '') : n <= 10 ? n + ' أحكام' + (adj ? ' ' + adj[2] : '') : n + ' حكمًا' + (adj ? ' ' + adj[3] : ''); }
 function vkGroups() { const g = new Map(); VK.docs.forEach(d => { if (d) g.set(d.g, (g.get(d.g) || 0) + 1); }); return [...g]; }
@@ -8508,6 +8559,8 @@ async function vkInit() {
       const out = []; const walk = async (en, path) => { if (en.isFile) { const f = await new Promise((res, rej) => en.file(res, rej)); f.relPath = path + f.name; out.push(f); } else if (en.isDirectory) { const rd = en.createReader(); let batch; do { batch = await new Promise((res, rej) => rd.readEntries(res, rej)); for (const x of batch) await walk(x, path + en.name + '/'); } while (batch.length); } };
       for (const en of items) await walk(en, ''); vkAdd(out); });
     let qt = 0; $('#vk_q').oninput = e => { clearTimeout(qt); qt = setTimeout(() => { VK.q = e.target.value; vkRender(); }, 220); };
+    $('#vk_exp').onclick = () => vkDoExport();   // V148
+    $('#vk_impf').onchange = e => { const f = e.target.files[0]; e.target.value = ''; if (f) vkDoImport(f); };
     $('#vk_wipe').onclick = e => { const b = e.currentTarget; if (!b.dataset.sure) { b.dataset.sure = '1'; b.textContent = 'تأكيد: احذف كل الخزانة؟'; setTimeout(() => { if (b.isConnected) { delete b.dataset.sure; b.textContent = 'احذف كل الخزانة'; } }, 3500); return; } delete b.dataset.sure; b.textContent = 'احذف كل الخزانة'; vkWipe().then(() => { VK.ready = true; vkRender(); toast('حُذفت الخزانة من هذا الجهاز'); }); };
   }
   if (!VK.ready) { $('#vk_res').innerHTML = '<p class="k">فتح الخزانة…</p>'; try { await vkLoad(); } catch (e) { $('#vk_res').innerHTML = '<div class="rlwarn">تعذّر فتح التخزين على هذا الجهاز (قد يكون التصفح خاصًا). الخزانة تحتاج تخزينًا محليًا دائمًا.</div>'; return; } }
@@ -8518,7 +8571,7 @@ function vkRender() {
   $('#vk_count').textContent = n ? vkNum(n) + ' في الخزانة' : 'الخزانة فارغة';
   $('#vk_sub').innerHTML = n ? (G.length > 1 ? G.length + ' مجموعات' : '') + (need ? (G.length > 1 ? ' · ' : '') + '<button type="button" class="linkbtn" data-vkneed>' + need + ' يحتاج مراجعة</button>' : '') : '';
   try { if (navigator.storage && navigator.storage.estimate) navigator.storage.estimate().then(e => { const s = $('#vk_size'); if (s && e && e.usage != null) s.textContent = 'المساحة المستعملة على الجهاز (كل التطبيق): ' + (e.usage / 1048576).toFixed(1) + ' م.ب'; }); } catch (e) {}
-  $('#vk_mng').classList.toggle('hidden', !n); $('#vk_srch').classList.toggle('hidden', !n);
+  $('#vk_mng').classList.toggle('hidden', !n); { let t = 0; try { t = +localStorage.getItem('tm_vkx') || 0; } catch (e) {} const xl = $('#vk_xlast'); if (xl && t) xl.textContent = 'آخر تصدير: ' + rlFmt(new Date(t).toISOString().slice(0, 10)) + ' — صدّر من جديد بعد كل إضافة كبيرة.'; } $('#vk_srch').classList.toggle('hidden', !n);
   const gb = $('#vk_groups'); gb.innerHTML = G.length > 1 ? '<button type="button" class="chip' + (!VK.grp ? ' on' : '') + '" data-vkg="">الكل</button>' + G.map(([g, c]) => '<button type="button" class="chip' + (VK.grp === g ? ' on' : '') + '" data-vkg="' + esc(g) + '">' + esc(g) + ' <small>' + c + '</small></button>').join('') : '';
   gb.querySelectorAll('[data-vkg]').forEach(b => b.onclick = () => { VK.grp = b.dataset.vkg; vkRender(); });
   $('#vk_gl').innerHTML = G.map(([g, c]) => '<li><span>' + esc(g) + ' <small>(' + c + ')</small></span><button type="button" class="linkbtn" data-vkgd="' + esc(g) + '">احذف المجموعة</button></li>').join('');
@@ -8534,7 +8587,7 @@ function vkRender() {
   vkResults();
 }
 async function vkResults() {
-  const box = $('#vk_res'); if (!VK.N) { box.innerHTML = '<div class="vkempty"><b>ابدأ بإضافة نماذج أحكامك</b><p>اسحب ملفات Word أو مجلدًا إلى هنا (على الحاسوب)، أو اضغط «أضف أحكامًا» واختر ملفات Word أو ملفًا مضغوطًا (zip) يضم المجلد كله — وهو الأسهل على الآيباد والآيفون.</p><p>تُقرأ الملفات على جهازك، ويُتخطى ما ليس نموذج حكم، وتُعتَّم أسماء الأطراف قبل الحفظ، ويبقى الأصل في مجلدك.</p></div>'; return; }
+  const box = $('#vk_res'); if (!VK.N) { box.innerHTML = '<div class="vkempty"><b>ابدأ بإضافة نماذج أحكامك</b><p>اسحب ملفات Word أو مجلدًا إلى هنا (على الحاسوب)، أو اضغط «أضف أحكامًا» واختر ملفات Word أو ملفًا مضغوطًا (zip) يضم المجلد كله — وهو الأسهل على الآيباد والآيفون.</p><p>تُقرأ الملفات على جهازك، ويُتخطى ما ليس نموذج حكم، وتُعتَّم أسماء الأطراف قبل الحفظ، ويبقى الأصل في مجلدك.</p><p>أضفتها على جهاز آخر؟ <label class="linkbtn" for="vk_impf">استورد الخزانة من ملفها المصدَّر (.amalik)</label> بدل إعادة المعالجة.</p></div>'; return; }
   const q = (VK.q || '').trim(); let L, qs = new Set();
   if (q) { const R = vkSearch(q, vkPass); qs = new Set(vkTerms(q)); L = R.map(x => Object.assign({ doc: VK.docs[x.d], s: x.s }, x)); VK.need = false; }
   else L = VK.docs.filter(d => vkPass(d) && (!VK.need || (d.fl && d.fl.length))).sort((a, b) => (b.mt || b.at) - (a.mt || a.at)).map(d => ({ doc: d }));
@@ -8596,7 +8649,7 @@ async function vkSetUser(id, desc, tags) {
 function vkClose() { const w = $('#vksheet'); if (w) w.classList.remove('show'); document.documentElement.classList.remove('noscroll'); VK.open = null; }
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && VK.open) vkClose(); });
 window.__an = { match: r => anMatch(r), build: r => anBuild(r), nos: s => anNos(s), sticker: r => anSticker(r), lines: c => anLines(c), get INX() { return INX; }, set INX(v) { INX = v; } };
-window.__vk = { known: () => vkKnown(), add: f => vkAdd(f), ingest: (b, fn, g, o) => vkIngest(b, fn, g, o), read: b => vkRead(b), doc: b => vkDoc(b), kind: (p, S) => vkKind(p, S), outcome: o => vkOutcome(o), desc: f => vkDesc(f), versions: d => vkVersions(d), setUser: (i, d, t) => vkSetUser(i, d, t), mask: (p, o) => vkMask(p, o), split: p => vkSplit(p), meta: (p, h, path) => vkMeta(p, h, path), docx: b => vkDocx(b), search: (q, g) => vkSearch(q, g), text: id => vkText(id), load: () => vkLoad(), wipe: () => vkWipe(), get VK() { return VK; } };
+window.__vk = { export: p => vkExport(p), import: (u, p) => vkImport(u, p), known: () => vkKnown(), add: f => vkAdd(f), ingest: (b, fn, g, o) => vkIngest(b, fn, g, o), read: b => vkRead(b), doc: b => vkDoc(b), kind: (p, S) => vkKind(p, S), outcome: o => vkOutcome(o), desc: f => vkDesc(f), versions: d => vkVersions(d), setUser: (i, d, t) => vkSetUser(i, d, t), mask: (p, o) => vkMask(p, o), split: p => vkSplit(p), meta: (p, h, path) => vkMeta(p, h, path), docx: b => vkDocx(b), search: (q, g) => vkSearch(q, g), text: id => vkText(id), load: () => vkLoad(), wipe: () => vkWipe(), get VK() { return VK; } };
 
 async function lkWipe() {
   try { localStorage.removeItem(RL_KEY); localStorage.removeItem(LK_KEY); localStorage.removeItem(LK_WAIT); localStorage.removeItem('tm_sync'); } catch (e) {}
@@ -8922,8 +8975,9 @@ function psRender() {
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
-const WN_V = 147;
+const WN_V = 148;
 const WN_LOG = [
+  [148, 'الإصدار 148', ['«خزانة الأحكام»: «صدّر الخزانة» في ملف واحد مشفّر برمز المزامنة، و«استورد خزانة من ملف» على الآيفون أو أي جهاز — بلا إعادة معالجة. وهو نسختك الاحتياطية أيضًا.']],
   [147, 'الإصدار 147', ['«حلّل ملف هذه القضية» من بطاقتها: التحليل يعرف القضية، ويطابق الأوراق بالرقم الآلي ورقم الاستئناف، وزر واحد «احفظ وارجع إلى الرول».', 'بطاقة القيد على الصحيفة تُقرأ وتُفحص: الرقم الآلي، والإيداع والميعاد، والجلسة.', '«ملخص الملف» في بطاقة القضية (حكم أول درجة، الخبير، الطلبات، أوجه النعي، التنبيهات) بلا أسماء ولا نص، وسطران في وضع الجلسة.']],
   [146, 'الإصدار 146', ['«خزانة الأحكام»: تقرأ ملفات Word القديمة (doc)، وتتخطى ما ليس نموذج حكم (مذكرات، صحف، تقارير، أحكام تمييز) ولا تحفظ منه شيئًا.', 'تجمع نسخ القضية الواحدة برقمها، وتستخرج النتيجة من المنطوق، وتجعل مجلداتك ووصف الملف وسومًا تصفّي بها.', 'تعتيم أشمل: «مقام من» بلا «ال»، والطرفان في سطر واحد، واسم الشركة كله، وأسماء الملفات والمجلدات.']],
   [145, 'الإصدار 145', ['«خزانة الأحكام» (في «الأحكام»): أضف نماذج أحكامك ملفات Word أو مجلدًا مضغوطًا، فتُعتَّم أسماء الأطراف على جهازك قبل الحفظ، ويُحفظ النص مشفّرًا، وتبحث في الأسباب وتنسخ منها.']],
