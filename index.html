@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261005022011">
+<meta name="amali-build" content="20261005111820">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1282,8 +1282,30 @@ table.imp select{padding:4px;border:1px solid var(--line2);border-radius:6px;bac
 .rlstats button.st{font:inherit;text-align:start;border:0;cursor:pointer;color:inherit}.rlstats button.st:hover{background:var(--bg)}.rlstats button.st.on{box-shadow:inset 0 -3px 0 var(--accent);background:var(--bg)}
 .rlc .rdy{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .pchip{font:inherit;font-size:13px;min-height:36px;padding:4px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink2);cursor:pointer}
-.pchip.on{background:var(--ok);border-color:var(--ok);color:#fff}.pchip.need.on{background:var(--bad);border-color:var(--bad);color:#fff}
+.pchip.on{background:var(--ok);border-color:var(--ok);color:#fff}.prepx{color:var(--warn)}.rdyw{color:var(--warn)!important}.pchip.need.on{background:var(--bad);border-color:var(--bad);color:#fff}
 .pchip:not(.on)::before{content:'○ ';opacity:.6}.pchip.on::before{content:'✓ '}
+/* V161: المراجعة والجاهزية للحكم — أزرار واضحة تدل على الحالة */
+.rlc .ln.rdy2{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.rvb{font:inherit;font-size:13.5px;font-weight:600;min-height:36px;padding:4px 14px;border-radius:999px;border:1.5px solid var(--line2);background:var(--panel);color:var(--ink2);cursor:pointer}
+.rvb.on{background:var(--mix);border-color:var(--mix);color:#fff}
+.rdseg{display:inline-flex;background:var(--panel2);border-radius:12px;padding:3px;gap:2px}
+.rdseg button{font:inherit;font-size:13.5px;min-height:32px;padding:3px 13px;border:0;border-radius:9px;background:none;color:var(--ink2);cursor:pointer}
+.rdseg button.on.ok{background:var(--ok);color:#fff;font-weight:700}.rdseg button.on.no{background:var(--warn);color:#fff;font-weight:700}
+.rdsug{font-size:12px;color:var(--mix);background:var(--mix-soft);border-radius:8px;padding:2px 8px}
+.rep2{font-size:12px;font-weight:700;color:var(--bad);background:var(--bad-soft);border-radius:999px;padding:2px 10px}
+.rlc .ln.rdw{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.rlc .ln.rdw>.k{min-width:62px;font-size:12.5px}
+.rwc{display:flex;flex-wrap:wrap;gap:6px}.rwchip{font:inherit;font-size:13px;min-height:32px;padding:3px 11px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);color:var(--ink2);cursor:pointer}
+.rwchip.on{background:var(--warn-soft);border-color:var(--warn);color:var(--warn);font-weight:700}.rwchip small{font-weight:400;opacity:.8}
+.rlc .ln.rdw .rdn{font:inherit;font-size:14px;flex:1;min-width:180px;border:1px solid var(--line2);border-radius:9px;padding:6px 10px;background:var(--panel);color:var(--ink)}
+.rlc .sm .bdg{font-size:12.5px;font-weight:700;border-radius:999px;padding:1px 9px}
+.rlc .sm .bdg.rv{background:var(--mix-soft);color:var(--mix)}.rlc .sm .bdg.un{background:none;color:var(--ink3);font-weight:400;padding:1px 2px}.rlc .sm .bdg.ok{background:var(--ok-soft);color:var(--ok)}.rlc .sm .bdg.no{background:var(--warn-soft);color:var(--warn)}.rlc .sm .bdg.rp{background:var(--bad-soft);color:var(--bad)}.rlc .sm .bdg.af{background:var(--mix);color:#fff}
+.rlstats .st.rv b{color:var(--mix)}.rlstats .st.rv.all b{color:var(--ok)}.rlstats .st.ok b{color:var(--ok)}.rlstats .st.un b{color:var(--ink3)}.rlstats .st small{display:block;font-size:11px;color:var(--warn);line-height:1.4;margin-top:1px}
+.rldec .acg{display:flex;gap:10px;align-items:flex-start;margin:6px 0}.rldec .acgh{font-size:12px;color:var(--ink3);min-width:62px;padding-top:7px}.rldec .acg .acts2{flex:1;margin:0}
+.rldec .chip.sug{border-color:var(--ok);box-shadow:0 0 0 2px var(--ok-soft)}.rldec .chip.sug::after{content:' ✓';color:var(--ok);font-weight:700}
+.afbar{background:var(--mix-soft);border:1px dashed var(--mix);border-radius:14px;padding:10px 12px;margin:0 0 12px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}.afbar>b{color:var(--mix)}.afbar .k{font-size:12.5px}
+.afl{display:flex;flex-wrap:wrap;gap:6px;width:100%}.afi{font:inherit;display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 10px;cursor:pointer;color:var(--ink)}.afi small{color:var(--ink3)}.afi span{color:var(--mix);font-weight:700;font-size:13px}
+.ssrd{flex-wrap:wrap}.ssrdb{display:inline-flex;gap:6px;flex-wrap:wrap}.sspdb.rk.on{background:var(--ok);border-color:var(--ok);color:#fff}.sspdb.rn.on{background:var(--warn);border-color:var(--warn);color:#fff}
+@media (max-width:600px){.rldec .acg{flex-direction:column;gap:4px}.rldec .acgh{padding-top:0}.rlc .ln.rdw>.k{min-width:0;width:100%}}
 .rlc .sm .prepn{color:var(--bad);font-weight:600}.rlc .sm .prepo{color:var(--ok);font-weight:600}
 .rlwarn.alink{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}.rlwarn.alink .linkbtn{font-size:13px}
 .rlguide{border:1px solid var(--line);border-inline-start:4px solid var(--accent);background:var(--panel);border-radius:12px;padding:10px 14px;margin:8px 0;font-size:14px;line-height:1.9}.rlguide ol{margin:4px 0;padding-inline-start:22px}.rlguide .x{float:inline-end;font:inherit;font-size:13px;border:0;background:none;color:var(--ink3);cursor:pointer;text-decoration:underline}
@@ -2548,7 +2570,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V159 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V161 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -3432,7 +3454,7 @@ function heroRender() {
   const open = RL.cards.filter(c => !RL_DONE.includes(c.stage));
   const days = [...new Set(open.filter(c => !RL_RES.includes(c.stage)).map(c => c.next).filter(x => x && x >= t))].sort(), day = days[0] || '';
   const L = day ? rlDayList(day) : [], dd = day ? rlDays(day) : null;
-  const rp = { ok: 0, need: 0, no: 0 }; L.forEach(c => { const k = rlPrepOf(c); if (k) rp[k]++; });
+  const rp = { ok: 0, no: 0, rv: L.filter(rlRevOn).length }; L.forEach(c => { const k = rlPrepOf(c); if (k) rp[k]++; });   // V161: التحضير = المراجعة، ومعه الجاهزية للحكم
   const bad = L.filter(c => rlAnnOk(c) === false).length, resAll = rlResList(''), resU = rlUnits(resAll), mine = rlMinePending(), mineU = rlUnits(mine);
   const isToday = dd === 0, sl = isToday ? rlSessList(day) : [], rec = sl.filter(c => rlDecOn(c, day)).length;
   const stat = (k, v, l, cls, sub) => '<button type="button" class="h2s' + (cls ? ' ' + cls : '') + '" data-h="' + k + '"><b>' + v + '</b><span>' + l + '</span>' + (sub ? '<small>' + sub + '</small>' : '') + '</button>';
@@ -3442,18 +3464,19 @@ function heroRender() {
     body += '<span class="h2k">' + kick + '</span><b class="h2t">' + rlDay(day) + ' ' + rlFmt(day) + (dd > 1 ? ' <small>· ' + rlRel(dd) + '</small>' : '') + '</b>';
     if (isToday && sl.length) body += '<div class="h2bar"><div class="h2bh"><span>سُجّل في الجلسة</span><b>' + rec + ' من ' + sl.length + '</b></div><div class="h2track"><i class="ok" style="width:' + Math.round(rec * 100 / sl.length) + '%"></i></div></div>';
     else if (L.length) {
-      const all = rp.ok === L.length;
-      body += '<div class="h2bar' + (all ? ' done' : '') + '"><div class="h2bh"><span>' + (all ? 'الجلسة جاهزة ✓' : 'تحضير الجلسة') + '</span><b>' + Math.round(rp.ok * 100 / L.length) + '%</b></div><div class="h2track"><i class="ok" style="width:' + (rp.ok * 100 / L.length) + '%"></i><i class="nd" style="width:' + (rp.need * 100 / L.length) + '%"></i></div>'
-        + (all ? '' : '<div class="h2lg"><span>● جاهزة ' + rp.ok + '</span>' + (rp.need ? '<span class="nd">● تحتاج إجراء ' + rp.need + '</span>' : '') + (rp.no ? '<span>○ غير جاهزة ' + rp.no + '</span>' : '') + '</div>') + '</div>';
+      const all = rp.rv === L.length;
+      body += '<div class="h2bar' + (all ? ' done' : '') + '"><div class="h2bh"><span>' + (all ? 'روجعت كل قضايا الجلسة ✓' : 'تحضير الجلسة') + '</span><b>' + Math.round(rp.rv * 100 / L.length) + '%</b></div><div class="h2track"><i class="ok" style="width:' + (rp.rv * 100 / L.length) + '%"></i></div>'
+        + '<div class="h2lg"><span>✓ روجعت ' + rp.rv + ' من ' + L.length + '</span>' + (rp.ok ? '<span>● جاهزة للحكم ' + rp.ok + '</span>' : '') + (rp.no ? '<span class="nd">○ غير جاهزة ' + rp.no + '</span>' : '') + '</div></div>';
     }
     body += '<div class="h2btns">' + (isToday ? btn('sess', icPlay + (rec ? ' تابع الجلسة' : ' ابدأ الجلسة'), 'pri') + btn('roll', icRoll + ' افتح الرول') : btn('roll', icRoll + ' افتح الرول', 'pri') + btn('sess', icPlay + ' وضع الجلسة')) + '</div>';
-    stats = stat('day', L.length, 'قضية للنظر') + (isToday ? stat('sess', rec + '/' + sl.length, 'سُجّل', 'ok') : stat('need', rp.need, 'تحتاج إجراء', rp.need ? 'bad' : '')) + stat('ann', bad, 'إعلان غير تام', bad ? 'warn' : '') + stat('res', resU, 'محجوزة للحكم', '', mineU ? 'أحكامي: ' + mineU + ' لم تجهز' : '');
+    stats = stat('day', L.length, 'قضية للنظر') + (isToday ? stat('sess', rec + '/' + sl.length, 'سُجّل', 'ok') : stat('ok', rp.ok, 'جاهزة للحكم', rp.ok ? 'ok' : '')) + stat('ann', bad, 'إعلان غير تام', bad ? 'warn' : '') + stat('res', resU, 'محجوزة للحكم', '', mineU ? 'أحكامي: ' + mineU + ' لم تجهز' : '');
   } else {
     body += '<span class="h2k">رول الجلسة</span><b class="h2t">لا جلسة قادمة مسجّلة</b><p class="h2p">استورد كشف الجلسة القادمة، أو تابع المحجوزة للحكم.</p><div class="h2btns">' + btn('imp', 'استيراد كشف الجلسة', 'pri') + btn('roll', icRoll + ' افتح الرول') + '</div>';
     stats = stat('res', resU, 'محجوزة للحكم', '', mineU ? 'أحكامي: ' + mineU + ' لم تجهز' : '') + stat('mine', mineU, 'أحكامي لم تجهز', mineU ? 'warn' : '', mine[0] && mine[0].next ? 'أقربها ' + rlFmt(mine[0].next) : '');
   }
   // سطر واحد للتنبيهات: المتعثّرة، والمزامنة
-  const stuck = open.filter(c => rlAnnAdj(c) >= 3).length, xs = [];
+  const stuck = open.filter(c => rlAnnAdj(c) >= 3).length, xs = [], aft = rlAfterList().length;
+  if (aft) xs.push('<button type="button" data-h="after">' + aft + ' ' + (aft === 1 ? 'قضية تنتظر' : 'قضايا تنتظر') + ' «القرار بعد الجلسة»</button>');
   if (stuck) xs.push('<button type="button" data-h="stat">' + stuck + ' ' + (stuck === 1 ? 'قضية أُجّلت' : 'قضايا أُجّلت') + ' للإعلان 3 مرات فأكثر</button>');
   try { if (syDirty()) { const m = syMeta(); if (!m.pushed || Date.now() - m.pushed > 864e5) xs.push('<button type="button" data-h="sync">تغييرات لم تُحفظ في مجلد المزامنة</button>'); } } catch (e) {}
   if (xs.length) body += '<div class="h2x">' + xs.join('') + '</div>';
@@ -3472,7 +3495,7 @@ function heroWire(day) {
     if (k === 'res' || k === 'mine') { rlMode = 'res'; rlMine = k === 'mine'; setView('r'); return; }
     if (k === 'stat') { rlMode = 'stat'; setView('r'); return; }
     if (k === 'sync') { const mb = $('#menubtn'); if (mb) mb.click(); setTimeout(() => { const d = $('#dsync'); if (d) d.scrollIntoView({ block: 'start' }); }, 300); return; }
-    rlMode = 'roll'; if (day) rlDaySel = day; if (k === 'need') rlPrepF = 'need'; setView('r'); });
+    rlMode = 'roll'; if (day) rlDaySel = day; if (k === 'ok') rlPrepF = 'ok'; if (k === 'after') { const a = rlAfterList()[0]; if (a) { rlDaySel = a.after; rlFocus = a.id; } } setView('r'); });
 }
 window.amaliHero = () => { try { heroRender(); } catch (e) {} try { sxPulse(); } catch (e) {} };
 let HOME_ANIMED = false;
@@ -3700,7 +3723,7 @@ function gsSearch(raw) {
     const hit = c => { const [n, y] = String(c.code || '').split('/'); if (c.auto && nums.includes(String(c.auto))) return 2; if (nums.length && nums.includes(n) && (nums.length === 1 || nums.includes(y))) return 2; return qw.length && gsWordsMatch(qw, norm(c.code + ' ' + (c.auto || '') + ' ' + (c.subj || ''))) ? 1 : 0; };
     RL.cards.map(c => [hit(c), c]).filter(x => x[0]).sort((a, b) => b[0] - a[0] || (RL_DONE.includes(a[1].stage) ? 1 : 0) - (RL_DONE.includes(b[1].stage) ? 1 : 0)).slice(0, 8).forEach(([, c]) => {
       const done = RL_DONE.includes(c.stage), pf = (() => { try { return rlPrepOf(c); } catch (e) { return ''; } })();
-      push('قضاياك', done ? 'منتهية' : 'قضية', c.code + (c.auto ? ' · آلي ' + c.auto : ''), done ? (c.stage === 'صدر الحكم' ? 'صدر الحكم' + (c.vd ? ': ' + c.vd : '') : c.stage) + ' · في الأرشيف' : (c.stage || 'مؤجلة') + (c.next ? ' · ' + rlDay(c.next) + ' ' + rlFmt(c.next) : '') + (pf === 'need' ? ' · تحتاج إجراء' : ''), () => { gsClose(); rlFocus = c.id; rlMode = 'roll'; setView('r'); setTimeout(() => { const q2 = $('#rl_q'); if (q2) { q2.value = c.code; rlRender(); } }, 60); }); }); }
+      push('قضاياك', done ? 'منتهية' : 'قضية', c.code + (c.auto ? ' · آلي ' + c.auto : ''), done ? (c.stage === 'صدر الحكم' ? 'صدر الحكم' + (c.vd ? ': ' + c.vd : '') : c.stage) + ' · في الأرشيف' : (c.stage || 'مؤجلة') + (c.next ? ' · ' + rlDay(c.next) + ' ' + rlFmt(c.next) : '') + (pf === 'no' ? ' · غير جاهزة' : pf === 'ok' ? ' · جاهزة للحكم' : ''), () => { gsClose(); rlFocus = c.id; rlMode = 'roll'; setView('r'); setTimeout(() => { const q2 = $('#rl_q'); if (q2) { q2.value = c.code; rlRender(); } }, 60); }); }); }
   Object.entries(CASES || {}).forEach(([id, c]) => { if (qw.length && c && c.name && gsWordsMatch(qw, norm(c.name))) push('ملفاتي', 'ملف', c.name, (c.pids || []).length + ' مبدأ', () => { gsClose(); setView('f'); }); });
   // 4) مبادئ بالنص
   if (!ap && !apOnly && nq.replace(/\d/g, '').trim().length >= 2) {
@@ -3850,7 +3873,7 @@ function rlNextSessions(fromIso, n, cal, inclusive) {
   return out;
 }
 // ---- قارئ الكشف: يستخرج رقم القضية والرقم الآلي وحالة الإعلان والقرار فقط؛ لا يحتفظ بأي نص آخر (الأسماء تُهمل)
-const RL_DEC = [[/(?:حكم|حجز|محجوز)[\s\S]*مذكر|مذكر[\s\S]*(?:حكم|حجز|محجوز)/, 'محجوزة للحكم مع مذكرات'], [/مد\s*اجل|مد\s*أجل/, 'مد أجل النطق'], [/حجز|محجوز|للحكم|النطق/, 'محجوزة للحكم'], [/جديد/, 'قضية جديدة'], [/اعلان|إعلان/, 'للإعلان'], [/اطلاع|الرد/, 'للاطلاع والرد'], [/مذكر/, 'للمذكرات'], [/خبير|خبره|خبرة|تقرير/, 'لدى الخبير'], [/مرافع/, 'للمرافعة'], [/شطب/, 'شُطبت'], [/وقف/, 'موقوفة']];
+const RL_DEC = [[/(?:حكم|حجز|محجوز)[\s\S]*مذكر|مذكر[\s\S]*(?:حكم|حجز|محجوز)/, 'محجوزة للحكم مع مذكرات'], [/مد\s*اجل|مد\s*أجل/, 'مد أجل النطق'], [/حجز|محجوز|للحكم|النطق/, 'محجوزة للحكم'], [/جديد/, 'قضية جديدة'], [/اعلان|إعلان/, 'للإعلان'], [/اطلاع|الرد/, 'للاطلاع والرد'], [/مذكر/, 'للمذكرات'], [/رئيس\s*المحكم|استشعار|الحرج/, 'أُحيلت'], [/خبير|خبره|خبرة|تقرير/, 'لدى الخبير'], [/مفردات|ضم\s*(?:ال)?ملف/, 'لضم المفردات'], [/مستند/, 'لتقديم مستندات'], [/مرافع/, 'للمرافعة'], [/شطب/, 'شُطبت'], [/وقف/, 'موقوفة']];
 function rlDecOf(t) { t = String(t || ''); for (const [re, lab] of RL_DEC) if (re.test(t)) return lab; return ''; }
 const RL_CASE_RE = /(?<![\d\/])(?:(20\d{2})\s*\/\s*(\d{1,5})|(\d{1,5})\s*\/\s*(20\d{2}))(?![\d\/])/;
 function rlCaseOf(s) { const m = RL_AR(s).match(RL_CASE_RE); if (!m) return null; const y = m[1] || m[4], n = String(+(m[2] || m[3])); return { code: n + '/' + y, raw: m[0] }; }
@@ -4100,8 +4123,8 @@ async function rlReadClerk(cv, eng, st) {
   return { rows: r.rows, meta: r.meta, clerk: { seq: r.seq, seen: r.seen } };
 }
 // ---- رول الجلسة (V47): مكيَّف لطريقة عمل الدائرة — كشف النظام ← مراجعة الجاهزية ← قرار الجلسة ← توزيع المحجوزة
-const RL_STAGES = ['قضية جديدة', 'للإعلان', 'لإحضار المتهم', 'للاطلاع والرد', 'للمذكرات', 'لدى الخبير', 'للتحقيق', 'للاستجواب', 'لحلف اليمين', 'لسماع الشهود', 'للمرافعة', 'محجوزة للحكم', 'محجوزة للحكم مع مذكرات', 'مد أجل النطق', 'صدر الحكم', 'شُطبت', 'موقوفة'];
-const RL_DONE = ['صدر الحكم', 'شُطبت'];
+const RL_STAGES = ['قضية جديدة', 'للإعلان', 'لإحضار المتهم', 'للاطلاع والرد', 'للمذكرات', 'لدى الخبير', 'لضم المفردات', 'لتقديم مستندات', 'للتحقيق', 'للاستجواب', 'لحلف اليمين', 'لسماع الشهود', 'للمرافعة', 'محجوزة للحكم', 'محجوزة للحكم مع مذكرات', 'مد أجل النطق', 'صدر الحكم', 'شُطبت', 'موقوفة', 'أُحيلت'];
+const RL_DONE = ['صدر الحكم', 'شُطبت', 'موقوفة', 'أُحيلت'];   // V161: الوقف والإحالة لرئيس المحكمة يُخرجان القضية من الرول
 const RL_RES = ['محجوزة للحكم', 'محجوزة للحكم مع مذكرات', 'مد أجل النطق'];
 // V67: المنطوق (نوع الحكم) — يُسجَّل عند «صدر الحكم». وقف الاستئناف/التعليقي مرحلتان في قرار الجلسة لا منطوقًا.
 let RL_VERDICTS = { 'موضوع': ['رفض وتأييد', 'تعديل', 'إلغاء', 'بطلان الحكم المستأنف والتصدّي', 'الإلغاء والإعادة', 'الإلغاء والإحالة'], 'شكل': ['عدم الجواز', 'عدم القبول شكلًا', 'بطلان صحيفة الاستئناف', 'سقوط الحق', 'اعتبار كأن لم يكن', 'الشطب'] , 'قبل الفصل في الموضوع': ['إحالة للخبراء', 'إحالة للاستجواب', 'إحالة للتحقيق', 'حلف اليمين'] };
@@ -4158,37 +4181,40 @@ function sxResAtStart(c, ms) {
 }
 function sxEnd(c) { return RL_DONE.includes(c.stage) ? rlEndAt(c) : ''; }
 function sxPre(c) { const L = (c.pre || []).map(p => ({ d: p.d, w: p.w || '' })); (c.hist || []).forEach(h => { if (h && h.a === 'إحالة للخبير') L.push({ d: h.d, w: '' }); }); return L; }
-function sxVdG(c) { if (c.stage === 'شُطبت') return 's'; const v = c.vd || ''; if ((RL_VERDICTS['موضوع'] || []).includes(v)) return 'm'; if ((RL_VERDICTS['شكل'] || []).includes(v)) return 's'; return 'x'; }
+function sxVdG(c) { if (c.stage === 'موقوفة') return 'x'; const v = c.vd || ''; if ((RL_VERDICTS['موضوع'] || []).includes(v)) return 'm'; if ((RL_VERDICTS['شكل'] || []).includes(v)) return 's'; return 'x'; }
 function sxCover() { let t = Infinity; RL.cards.forEach(c => { if (c.created && c.created < t) t = c.created; }); if (t !== Infinity) return rlIsoOf(t); const f = RL.cards.map(c => rlFirst(c)).filter(Boolean).sort()[0]; return f || ''; }   // بلا تاريخ إدخال: أقدم جلسة معروفة   // أول يوم دخلت فيه قضايا الرول
 function sxMonth(m, mine) {
   const ms = m + '-01', me = sxMonAdd(m, 1) + '-01', inM = d => !!d && d >= ms && d < me, who = rlMe();
-  const r = { m, nw: 0, pp: 0, rs: 0, q: 0, qm: 0, qs: 0, qx: 0, t: 0, out: 0, W: {} };
-  RL.cards.forEach(c => {
-    const rp = sxResAtStart(c, ms), pres = !rp && [...sxHear(c)].some(inM), end = sxEnd(c), fin = inM(end), mineC = c.writer === who;
+  const r = { m, nw: 0, pp: 0, rs: 0, q: 0, qm: 0, qs: 0, qx: 0, t: 0, out: 0, sh: 0, ref: 0, W: {} };
+  RL.cards.forEach(c => {   // V161: الحكم = صدر الحكم أو الوقف؛ الشطب والإحالة لرئيس المحكمة ليسا حكمًا ولا يُرحَّلان
+    const rp = sxResAtStart(c, ms), pres = !rp && [...sxHear(c)].some(inM), end = sxEnd(c), judged = c.stage === 'صدر الحكم' || c.stage === 'موقوفة', fin = judged && inM(end), left = !judged && inM(end), mineC = c.writer === who;
+    if (left && !mine) { if (c.stage === 'شُطبت') r.sh++; else if (c.stage === 'أُحيلت') r.ref++; }
     if (pres) { if (inM(rlFirst(c))) r.nw++; else r.pp++; }
     if (rp) r.rs++;
     if (fin && (!mine || mineC)) { r.q++; const g = sxVdG(c); r['q' + g]++; const w = c.writer && RL_W[c.writer] ? c.writer : ''; r.W[w] = (r.W[w] || 0) + 1; }
     sxPre(c).forEach(p => { if (inM(p.d) && (!mine || (p.w || c.writer) === who)) r.t++; });
-    if ((pres || rp) && !fin) r.out++;
+    if ((pres || rp) && !fin && !left) r.out++;
   });
   r.pr = r.nw + r.pp; r.rate = sxPct(r.q + r.t, r.pr);
   const cov = sxCover(); r.part = !cov || cov > ms; r.cur = m === sxMonOf(rlToday());
-  const o = (RL.off || {})[m]; if (o) { r.off = Object.assign({}, o); r.off.pr = (+o.nw || 0) + (+o.pp || 0); r.off.rate = sxPct((+o.q || 0) + (+o.t || 0), r.off.pr); }
+  const o = (RL.off || {})[m]; r.hol = !!(o && o.hol); if (o && !o.hol) { r.off = Object.assign({}, o); r.off.pr = (+o.nw || 0) + (+o.pp || 0); r.off.rate = sxPct((+o.q || 0) + (+o.t || 0), r.off.pr); }
   return r;
 }
 // الشهر المعروض: الماضي المكتمل افتراضيًا، أو الجاري إن لم يكن للماضي بيانات
-function sxDefMonth() { const cur = sxMonOf(rlToday()), prev = sxMonAdd(cur, -1), P = sxMonth(prev); return (P.off || (!P.part && P.pr)) ? prev : cur; }
+function sxPrevW(m, k) { let x = m; for (let i = 0, n = 0; i < 24; i++) { x = sxMonAdd(x, -1); if ((RL.off || {})[x] && RL.off[x].hol) continue; if (++n === k) return x; } return sxMonAdd(m, -k); }   // V161: الشهر السابق بلا إجازة
+function sxSeries(M, n, mine) { const out = []; let x = M; for (let i = 0; i < 24 && out.length < n; i++) { if (!((RL.off || {})[x] && RL.off[x].hol)) out.unshift(sxMonth(x, mine)); x = sxMonAdd(x, -1); } return out; }
+function sxDefMonth() { const cur = sxMonOf(rlToday()), prev = sxPrevW(cur, 1), P = sxMonth(prev); return (P.off || (!P.part && P.pr)) ? prev : cur; }
 // قيمة الشهر للرسوم: الرول إن غطّى الشهر كاملًا، وإلا الرسمي إن أُدخل، وإلا الرول جزئيًا
-function sxVal(r) { if (!r.part || r.cur) return { pr: r.pr, d: r.q + r.t, q: r.q, t: r.t, rate: r.rate, src: r.part ? 'part' : 'roll' }; if (r.off) return { pr: r.off.pr, d: (+r.off.q || 0) + (+r.off.t || 0), q: +r.off.q || 0, t: +r.off.t || 0, rate: r.off.rate, src: 'off' }; return { pr: r.pr, d: r.q + r.t, q: r.q, t: r.t, rate: r.rate, src: 'part' }; }
+function sxVal(r) { if (r.hol) return { pr: 0, d: 0, q: 0, t: 0, rate: null, src: 'hol' }; if (!r.part || r.cur) return { pr: r.pr, d: r.q + r.t, q: r.q, t: r.t, rate: r.rate, src: r.part ? 'part' : 'roll' }; if (r.off) return { pr: r.off.pr, d: (+r.off.q || 0) + (+r.off.t || 0), q: +r.off.q || 0, t: +r.off.t || 0, rate: r.off.rate, src: 'off' }; return { pr: r.pr, d: r.q + r.t, q: r.q, t: r.t, rate: r.rate, src: 'part' }; }
 // ---- الرئيسية: شريط «نبض الدائرة»
 function sxPulse() {
   const P = $('#hpulse'); if (!P) return;
   if (!RL.cards.length || isHid('r')) { P.hidden = true; P.innerHTML = ''; return; }
   const T = rlToday(), open = RL.cards.filter(c => !RL_DONE.includes(c.stage) && !RL_RES.includes(c.stage)), ds = [...new Set(open.map(c => c.next).filter(d => d && d >= T))].sort();
-  const cur = sxMonOf(T), C = sxMonth(cur), prev = sxMonAdd(cur, -1), Pv = sxMonth(prev), Pp = sxMonth(sxMonAdd(cur, -2));
+  const cur = sxMonOf(T), C = sxMonth(cur), prev = sxPrevW(cur, 1), Pv = sxMonth(prev), Pp = sxMonth(sxPrevW(cur, 2));
   const vp = sxVal(Pv), vpp = sxVal(Pp), useP = vp.src !== 'part' && vp.rate != null, R = useP ? vp : sxVal(C), Rm = useP ? prev : cur;
   const ring = (p, txt) => { const sz = 60, w = 7, r = (sz - w) / 2, L = 2 * Math.PI * r, v = Math.max(0, Math.min(100, p || 0)); return '<svg viewBox="0 0 ' + sz + ' ' + sz + '" aria-hidden="true"><circle cx="30" cy="30" r="' + r + '" fill="none" stroke="var(--panel2)" stroke-width="' + w + '"/>' + (v ? '<circle class="sxarc" cx="30" cy="30" r="' + r + '" fill="none" stroke="var(--ok)" stroke-width="' + w + '" stroke-linecap="round" stroke-dasharray="' + (L * v / 100).toFixed(1) + ' ' + L.toFixed(1) + '" transform="rotate(-90 30 30)"/>' : '') + '<text x="30" y="31" text-anchor="middle" dominant-baseline="middle">' + txt + '</text></svg>'; };
-  let cmp = ''; if (useP && vpp.src !== 'part' && vpp.rate) {   /* لا مقارنة بشهر بلا أحكام */ const d = Math.round((vp.rate - vpp.rate) * 10) / 10; cmp = '<span class="' + (d >= 0 ? 'up' : 'dn') + '">' + (d >= 0 ? '▲' : '▼') + ' من ' + sxFmtP(vpp.rate) + ' في ' + sxMonName(sxMonAdd(cur, -2)) + '</span>'; }
+  let cmp = ''; if (useP && vpp.src !== 'part' && vpp.rate) {   /* لا مقارنة بشهر بلا أحكام */ const d = Math.round((vp.rate - vpp.rate) * 10) / 10; cmp = '<span class="' + (d >= 0 ? 'up' : 'dn') + '">' + (d >= 0 ? '▲' : '▼') + ' من ' + sxFmtP(vpp.rate) + ' في ' + sxMonName(sxPrevW(cur, 2)) + '</span>'; }
   const tq = C.q + C.t;
   P.innerHTML = '<div class="pxc"><span class="pxk">القضايا المنظورة</span><div class="pxv"><b>' + open.length + '</b><small>قضية</small></div><span class="pxs">' + (ds.length ? '<span class="nw">في ' + (ds.length === 1 ? 'جلسة واحدة' : ds.length === 2 ? 'جلستين' : ds.length + ' ' + (ds.length <= 10 ? 'جلسات' : 'جلسة')) + ' ·</span> <span class="nw">' + rlFmt(ds[0]).replace(/\/\d{4}$/, '') + (ds.length > 1 ? ' – ' + rlFmt(ds[ds.length - 1]).replace(/\/\d{4}$/, '') : '') + '</span>' : 'لا جلسات قادمة مسجّلة') + '</span></div>'
     + '<div class="pxc"><span class="pxk">المفصول فيها</span><div class="pxv"><b>' + tq + '</b><small>' + sxMonName(cur) + ' حتى اليوم</small></div>' + (tq ? '<div class="pxsplit"><i style="flex:' + C.q + ';background:var(--c2)"></i><i style="flex:' + C.t + ';background:var(--c3)"></i></div>' : '') + '<div class="pxleg"><span style="--k:var(--c2)">قطعي ' + C.q + '</span><span style="--k:var(--c3)">تمهيدي ' + C.t + '</span></div></div>'
@@ -4242,20 +4268,21 @@ function sxDonut(parts, tot, unit) {
 function sxHtml() {
   const mob = innerWidth < 600, T = rlToday(), cur = sxMonOf(T), mine = SX_MINE, me = rlMe();
   if (!SX_M) SX_M = sxDefMonth();
-  const M = SX_M, R = sxMonth(M, mine), V = sxVal(R), ser = []; for (let i = 5; i >= 0; i--) ser.push(sxMonth(sxMonAdd(M, -i), mine));
+  const M = SX_M, R = sxMonth(M, mine), V = sxVal(R), ser = sxSeries(M, 6, mine);
   const opts = []; { let m = cur; for (let i = 0; i < 12; i++) { opts.push(m); m = sxMonAdd(m, -1); } Object.keys(RL.off || {}).forEach(k => { if (!opts.includes(k)) opts.push(k); }); opts.sort().reverse(); if (!opts.includes(M)) opts.unshift(M); }
   const card = (tb, cls, title, sub, body) => '<section class="sxcd ' + cls + '" data-tb="' + tb + '"><h3>' + title + '</h3>' + (sub ? '<p class="sub">' + sub + '</p>' : '') + body + '</section>';
   const mName = sxMonName(M) + ' ' + M.slice(0, 4) + (M === cur ? ' (الجاري)' : '');
   let h = '<div class="sx"><div class="sxh"><div><h2>' + (mine ? 'أحكامي' : 'إحصاءات الدائرة') + '</h2><p class="sxsrc">' + (V.src === 'off' ? 'أرقام الإحصائية الرسمية لهذا الشهر — الرول لا يغطيه كاملًا' : 'محسوبة من الرول' + (R.part && !R.cur ? ' — <b>الرول لا يغطي هذا الشهر كاملًا</b> (أول إدخال ' + rlFmt(sxCover()) + ')' : '') + ' — بمصطلحات الإحصائية الشهرية') + '</p></div>'
-    + '<div class="sxctl"><div class="sxseg" role="group" aria-label="نطاق الإحصاءات"><button type="button" data-sxm="0" class="' + (mine ? '' : 'on') + '">الدائرة</button><button type="button" data-sxm="1" class="' + (mine ? 'on' : '') + '">أحكامي</button></div><select class="msel" id="sx_m" aria-label="الشهر">' + opts.map(m => '<option value="' + m + '"' + (m === M ? ' selected' : '') + '>' + sxMonName(m) + ' ' + m.slice(0, 4) + (m === cur ? ' (الجاري)' : '') + ((RL.off || {})[m] ? ' ✓' : '') + '</option>').join('') + '</select></div></div>';
+    + '<div class="sxctl"><div class="sxseg" role="group" aria-label="نطاق الإحصاءات"><button type="button" data-sxm="0" class="' + (mine ? '' : 'on') + '">الدائرة</button><button type="button" data-sxm="1" class="' + (mine ? 'on' : '') + '">أحكامي</button></div><select class="msel" id="sx_m" aria-label="الشهر">' + opts.map(m => '<option value="' + m + '"' + (m === M ? ' selected' : '') + '>' + sxMonName(m) + ' ' + m.slice(0, 4) + (m === cur ? ' (الجاري)' : '') + ((RL.off || {})[m] ? (RL.off[m].hol ? ' — إجازة' : ' ✓') : '') + '</option>').join('') + '</select></div></div>';
   const ring = (p) => { const sz = 76, w = 8, r = (sz - w) / 2, L = 2 * Math.PI * r, v = Math.max(0, Math.min(100, p || 0)); return '<svg viewBox="0 0 76 76" aria-hidden="true"><circle cx="38" cy="38" r="' + r + '" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="' + w + '"/>' + (v ? '<circle class="sxarc" cx="38" cy="38" r="' + r + '" fill="none" stroke="#5CC48A" stroke-width="' + w + '" stroke-linecap="round" stroke-dasharray="' + (L * v / 100).toFixed(1) + ' ' + L.toFixed(1) + '" transform="rotate(-90 38 38)"/>' : '') + '</svg>'; };
   const resNow = RL.cards.filter(c => RL_RES.includes(c.stage)), resMine = resNow.filter(c => c.writer === me), pend = rlMinePending();
+  if (R.hol) h += '<p class="sxwarn">' + esc(sxMonName(M)) + ' شهر إجازة للدائرة — لا يدخل الرسوم ولا المقارنات. <button type="button" class="linkbtn" id="sx_holx">ليس إجازة</button></p>';
   if (!mine) {
     const avg = R.off && R.off.avg != null && R.off.avg !== '' ? +R.off.avg : null;
     h += '<div class="kpis"><div class="kpi"><div class="l">المقدّمة</div><div class="v">' + V.pr + '</div><div class="s">' + (V.src === 'off' ? 'جديدة ' + (+R.off.nw || 0) + ' · مؤجلة ' + (+R.off.pp || 0) : 'جديدة ' + R.nw + ' · مؤجلة ' + R.pp) + '</div></div>'
       + '<div class="kpi"><div class="l">المفصول فيها</div><div class="v">' + V.d + '</div><div class="s">قطعي ' + V.q + ' · تمهيدي ' + V.t + '</div></div>'
       + '<div class="kpi hero">' + ring(V.rate) + '<div><div class="l">نسبة الإنجاز</div><div class="v">' + sxFmtP(V.rate) + '</div><div class="s">' + (avg != null ? 'متوسط الدوائر ' + sxFmtP(avg) : R.cur ? 'الشهر الجاري — حتى اليوم' : 'المفصول فيها ÷ المقدّمة') + '</div></div></div>'
-      + '<div class="kpi"><div class="l">المؤجلة خارج الفترة</div><div class="v">' + (V.src === 'off' ? (+R.off.out || 0) : R.out) + '</div><div class="s">محجوزة من سابقة ' + (V.src === 'off' ? (+R.off.rs || 0) : R.rs) + '</div></div></div>';
+      + '<div class="kpi"><div class="l">المؤجلة خارج الفترة</div><div class="v">' + (V.src === 'off' ? (+R.off.out || 0) : R.out) + '</div><div class="s">محجوزة من سابقة ' + (V.src === 'off' ? (+R.off.rs || 0) : R.rs) + (R.sh ? ' · شُطبت ' + R.sh : '') + (R.ref ? ' · أُحيلت ' + R.ref : '') + '</div></div></div>';
   } else {
     h += '<div class="kpis"><div class="kpi"><div class="l">أحكامي القطعية</div><div class="v">' + R.q + '</div><div class="s">' + esc(sxMonName(M)) + '</div></div><div class="kpi"><div class="l">أحكامي التمهيدية</div><div class="v">' + R.t + '</div><div class="s">' + esc(sxMonName(M)) + '</div></div>'
       + '<div class="kpi hero">' + ring(rlUnits(resMine) ? (rlUnits(resMine) - rlUnits(pend)) * 100 / rlUnits(resMine) : 0) + '<div><div class="l">المحجوزة لي الآن</div><div class="v">' + rlUnits(resMine) + '</div><div class="s">' + (rlUnits(pend) ? rlUnits(pend) + ' لم تجهز' : 'كلها جاهزة') + '</div></div></div>'
@@ -4269,7 +4296,7 @@ function sxHtml() {
   const P = { 1: [], 2: [], 3: [], 4: [] };
   // الشهر: توزيع الأحكام + الأعضاء
   if (V.src === 'off' && !mine) P[1].push(card(1, 'w5 o2', 'الأحكام المفصولة', esc(mName) + ' — من الإحصائية الرسمية', sxDonut([['قطعي', V.q, 'var(--c2)'], ['تمهيدي', V.t, 'var(--c3)']], V.d, 'حكمًا') + '<p class="note">تفصيل الموضوع والشكل يظهر حين يغطي الرول الشهر.</p>'));
-  else { const pp = [['قطعي — موضوع', R.qm, 'var(--c1)'], ['قطعي — شكل', R.qs, 'var(--c2)']].concat(R.qx ? [['قطعي — بلا منطوق مسجّل', R.qx, 'var(--ink3)']] : []).concat([['تمهيدي', R.t, 'var(--c3)']]);
+  else { const pp = [['قطعي — موضوع', R.qm, 'var(--c1)'], ['قطعي — شكل', R.qs, 'var(--c2)']].concat(R.qx ? [['قطعي — وقف وأخرى', R.qx, 'var(--ink3)']] : []).concat([['تمهيدي', R.t, 'var(--c3)']]);
     P[1].push(card(1, 'w5 o2', mine ? 'أحكامي المفصولة' : 'الأحكام المفصولة', esc(mName), (R.q + R.t ? sxDonut(pp, R.q + R.t, 'حكمًا') : '<p class="sxempty">لا أحكام مسجّلة في هذا الشهر بعد.</p>') + '<p class="note">التمهيدي: الإحالة للخبراء أو للتحقيق أو للاستجواب، وحلف اليمين — ويُعدّ في الإنجاز كما في الإحصائية الرسمية.</p>')); }
   if (!mine && Object.keys(RL_W).length > 1) {
     const ks = Object.keys(RL_W).filter(k => k !== 'd' || R.W.d || resNow.some(c => c.writer === 'd')), mx = Math.max(1, ...ks.map(k => (R.W[k] || 0) + resNow.filter(c => c.writer === k).length));
@@ -4300,7 +4327,7 @@ function sxHtml() {
 function sxRec(R) {
   const o = R.off, F = [['nw', 'القضايا الجديدة خلال الفترة'], ['pp', 'المؤجلة من فترة سابقة'], ['rs', 'المحجوزة من فترة سابقة'], ['q', 'المفصول فيها — قطعي'], ['t', 'المفصول فيها — تمهيدي'], ['out', 'المؤجلة خارج الفترة']];
   const form = '<form class="sxoff" id="sx_off"><p class="k">من «الإحصائية الشاملة» الشهرية — صف دائرتك، وصف «المجموع» لنسبة الإنجاز.</p><div class="sxog">' + F.map(f => '<label><span>' + f[1] + '</span><input type="number" inputmode="numeric" min="0" step="1" name="' + f[0] + '" value="' + (o && o[f[0]] != null ? esc(String(o[f[0]])) : '') + '"></label>').join('') + '<label><span>نسبة إنجاز الدوائر (المجموع) %</span><input type="number" inputmode="decimal" min="0" max="100" step="0.1" name="avg" value="' + (o && o.avg != null ? esc(String(o.avg)) : '') + '"></label></div><div class="sxob"><button type="submit" class="btn primary">حفظ أرقام الشهر</button>' + (o ? '<button type="button" class="btn" id="sx_offdel">حذفها</button>' : '') + '<button type="button" class="btn" id="sx_offx">إلغاء</button></div></form>';
-  if (!o) return { bad: 0, html: '<p class="sxempty">لم تُدخل الإحصائية الرسمية لهذا الشهر. أدخلها لتُطابَق بالرول، ويظهر موقع دائرتك من متوسط الدوائر عبر الأشهر.</p><button type="button" class="btn primary" id="sx_offgo">إدخال أرقام الإحصائية الرسمية</button><div id="sx_offbox" hidden>' + form + '</div>' };
+  if (!o) return { bad: 0, html: '<p class="sxempty">لم تُدخل الإحصائية الرسمية لهذا الشهر. أدخلها لتُطابَق بالرول، ويظهر موقع دائرتك من متوسط الدوائر عبر الأشهر.</p><button type="button" class="btn primary" id="sx_offgo">إدخال أرقام الإحصائية الرسمية</button> <button type="button" class="btn" id="sx_hol">الدائرة في إجازة هذا الشهر</button><div id="sx_offbox" hidden>' + form + '</div>' };
   const rows = [['nw', 'الجديدة خلال الفترة', R.nw], ['pp', 'المؤجلة من فترة سابقة', R.pp], ['pr', 'إجمالي المقدّمة', R.pr], ['rs', 'المحجوزة من فترة سابقة', R.rs], ['q', 'المفصول فيها — قطعي', R.q], ['t', 'المفصول فيها — تمهيدي', R.t], ['out', 'المؤجلة خارج الفترة', R.out]];
   let bad = 0; const late = RL.cards.filter(c => RL_RES.includes(c.stage) && c.next && c.next < rlToday()).concat(RL.cards.filter(c => !RL_DONE.includes(c.stage) && !RL_RES.includes(c.stage) && c.next && c.next < rlToday()));
   const part = R.part && !R.cur;
@@ -4318,6 +4345,8 @@ function sxWire(w) {
   const og = w.querySelector('#sx_offgo'), ob = w.querySelector('#sx_offbox'); if (og && ob) og.onclick = () => { ob.hidden = !ob.hidden; const P = w.querySelector('#sx_p'), pn = ob.closest('.sxpane'); if (P && pn && getComputedStyle(P).display === 'flex') P.style.height = pn.scrollHeight + 'px'; if (!ob.hidden) { const i = ob.querySelector('input'); if (i) i.focus({ preventScroll: true }); ob.scrollIntoView({ block: 'start', behavior: 'smooth' }); } };
   const ox = w.querySelector('#sx_offx'); if (ox) ox.onclick = () => { ob.hidden = true; const P = w.querySelector('#sx_p'), pn = ob.closest('.sxpane'); if (P && pn && getComputedStyle(P).display === 'flex') P.style.height = pn.scrollHeight + 'px'; };
   const f = w.querySelector('#sx_off'); if (f) f.onsubmit = e => { e.preventDefault(); const o = {}; let any = false; [...f.querySelectorAll('input')].forEach(i => { const v = i.value.trim(); if (v !== '' && !isNaN(+v) && +v >= 0) { o[i.name] = i.name === 'avg' ? Math.min(100, +v) : Math.round(+v); any = true; } }); if (!any) { toast('أدخل رقمًا واحدًا على الأقل'); return; } RL.off = RL.off || {}; RL.off[SX_M] = o; RL.st = Date.now(); rlSave(); toast('حُفظت أرقام ' + sxMonName(SX_M)); SX_TAB = 4; rlRender(); };
+  const hb = w.querySelector('#sx_hol'); if (hb) hb.onclick = () => { RL.off = RL.off || {}; RL.off[SX_M] = { hol: 1 }; RL.st = Date.now(); rlSave(); toast(sxMonName(SX_M) + ': إجازة — يُستثنى من الرسوم والمقارنات'); rlRender(); };   // V161
+  const hx = w.querySelector('#sx_holx'); if (hx) hx.onclick = () => { delete RL.off[SX_M]; RL.st = Date.now(); rlSave(); rlRender(); };
   const od = w.querySelector('#sx_offdel'); if (od) od.onclick = () => { if (!confirm('حذف الأرقام الرسمية لشهر ' + sxMonName(SX_M) + '؟')) return; delete RL.off[SX_M]; RL.st = Date.now(); rlSave(); rlRender(); };
   const lt = w.querySelector('#sx_late'), lb = w.querySelector('#sx_latebox'); if (lt && lb) lt.onclick = () => { lb.hidden = !lb.hidden; };
   // تلميحات الرسوم: تمرير الفأرة، ولمسة على الجوال
@@ -4407,7 +4436,7 @@ function rlWCnt(sd, k) { return rlUnits(RL.cards.filter(x => RL_RES.includes(x.s
 function rlDecBox(c) {
   const sd = c.next || rlDaySel || rlToday();
   const b = el('div', 'rldec'), sibs = rlSibs(c).filter(x => !RL_DONE.includes(x.stage));
-  b.innerHTML = '<div class="h">قرار جلسة ' + rlDay(sd) + ' ' + rlFmt(sd) + '</div><div class="acts2">' + RL_ACTS.map((a, i) => '<button type="button" class="chip" data-i="' + i + '">' + a[0] + '</button>').join('') + '</div>'
+  b.innerHTML = '<div class="h">قرار جلسة ' + rlDay(sd) + ' ' + rlFmt(sd) + '</div>' + rlActsHtml(c)
     + '<div class="rw hidden" data-k="w"><span>كاتب الحكم</span><div class="chips">' + Object.keys(RL_W).filter(k => k !== 'd' || rlWCnt(sd, k)).map(k => '<button type="button" class="chip" data-w="' + k + '">' + RL_W[k] + ' <small class="wc" title="ما وُزّع عليه من محجوزات هذه الجلسة">' + rlWCnt(sd, k) + '</small></button>').join('') + '</div><p class="wnote">اختياري — يمكن تسجيل الحجز دون توزيع الآن. <span class="k">في هذه الجلسة: ' + Object.keys(RL_W).filter(k => k !== 'd' || rlWCnt(sd, k)).map(k => RL_W[k].replace(/^\((.)\).*/, '$1') + ' ' + rlWCnt(sd, k)).join(' · ') + (rlWCnt(sd, '') ? ' · غير موزّعة ' + rlWCnt(sd, '') : '') + '</span></p></div>'
     + '<div class="rw hidden" data-k="vd"><span>المنطوق' + (c.vdSuggested && !c.vd ? ' <small class="k">(مقترح من المسودة)</small>' : '') + '</span><select class="rvd">' + rlVdOpts(c.vd || c.vdSuggested) + '</select></div>'
     + '<div class="rw hidden" data-k="date"><span>إلى جلسة</span><input type="date" class="rdd"><div class="chips rdc"></div></div>'
@@ -4440,9 +4469,11 @@ function rlDecBox(c) {
     const note = b.querySelector('.rdn').value.trim();
     const vd = b.querySelector('.rvd') ? b.querySelector('.rvd').value : '';
     // V58: القرار يُطبَّق على البطاقة، وعلى المرتبطة التي أشّر عليها القاضي فقط
-    const apply = (x, via) => { x.hist = x.hist || []; x.hist.push(Object.assign({ d: sd, a: pre ? 'صدر الحكم: ' + pre : act[0], to, n: note, prev: { stage: x.stage, next: x.next, writer: x.writer || '', exec: !!x.exec, await: x.await || '', vd: x.vd || '' } }, via ? { via } : {}, pre ? { pre: 1 } : {}));
-      if (pre) { x.stage = RL_VD_PRE[pre]; x.next = to; x.exec = false; x.await = 'صدر الحكم: ' + pre + (note ? ' — ' + note : ''); x.pre = (x.pre || []).concat([{ d: sd, v: pre, w: x.writer || w || '' }]); delete x.vdSuggested; x.updated = Date.now(); return; } // V117: حكم قبل الفصل في الموضوع
-      x.stage = act[1]; x.next = to; x.exec = false; x.await = act[0] + (note ? ' — ' + note : '');
+    if (act[2] === -2) { const af = x => { x.hist = x.hist || []; x.hist.push({ d: sd, a: act[0], n: note, pend: 1 }); x.after = sd; x.updated = Date.now(); }; af(c); [...b.querySelectorAll('[data-sid]:checked')].map(i => RL.cards.find(x => x.id === i.dataset.sid)).filter(Boolean).forEach(af);   // V161: القرار بعد الجلسة — تبقى في جلستها حتى يُحسم
+      rlFocus = c.id; rlDecOpen = null; rlSave(); rlRender(); toast('القرار بعد الجلسة — تظهر في «قرارات بعد الجلسة» حتى تحسمها'); if (typeof rlAfterDec === 'function' && rlAfterDec) rlAfterDec(c); return; }
+    const apply = (x, via) => { x.hist = x.hist || []; x.hist.push(Object.assign({ d: sd, a: pre ? 'صدر الحكم: ' + pre : act[0], to, n: note, prev: { stage: x.stage, next: x.next, writer: x.writer || '', exec: !!x.exec, await: x.await || '', vd: x.vd || '', after: x.after || '' } }, via ? { via } : {}, pre ? { pre: 1 } : {}));
+      if (pre) { delete x.after; x.stage = RL_VD_PRE[pre]; x.next = to; x.exec = false; x.await = 'صدر الحكم: ' + pre + (note ? ' — ' + note : ''); x.pre = (x.pre || []).concat([{ d: sd, v: pre, w: x.writer || w || '' }]); delete x.vdSuggested; x.updated = Date.now(); return; } // V117: حكم قبل الفصل في الموضوع
+      x.stage = act[1]; x.next = to; x.exec = false; x.await = act[0] + (note ? ' — ' + note : ''); delete x.after;
       if (RL_RES.includes(act[1])) { x.writer = w; if (act[1] !== 'مد أجل النطق') x.resAt = sd; } if (act[1] === 'صدر الحكم') { x.jst = x.jst || 'نُطق به'; x.vd = vd; delete x.vdSuggested; }
       x.updated = Date.now(); };
     apply(c);
@@ -4464,7 +4495,7 @@ function rlVdBox(c) {
     c.vd = v; c.updated = Date.now(); rlVdOpen = null; rlFocus = c.id; rlSave(); rlRender(); toast('صُحّح المنطوق: ' + v); };
   return b;
 }
-function rlUndo(c) { const h = (c.hist || []).pop(); if (!h) return; if (h.pre && c.pre && c.pre.length) c.pre.pop(); if (h.prev) Object.assign(c, { stage: h.prev.stage, next: h.prev.next, writer: h.prev.writer, exec: h.prev.exec, await: h.prev.await }, 'vd' in h.prev ? { vd: h.prev.vd } : {}); c.updated = Date.now(); rlFocus = c.id; rlSave(); rlRender(); toast('أُلغي آخر قرار'); }
+function rlUndo(c) { const h = (c.hist || []).pop(); if (!h) return; if (h.pre && c.pre && c.pre.length) c.pre.pop(); if (h.pend) delete c.after; else if (h.prev && 'after' in h.prev) { if (h.prev.after) c.after = h.prev.after; else delete c.after; } if (h.prev) Object.assign(c, { stage: h.prev.stage, next: h.prev.next, writer: h.prev.writer, exec: h.prev.exec, await: h.prev.await }, 'vd' in h.prev ? { vd: h.prev.vd } : {}); c.updated = Date.now(); rlFocus = c.id; rlSave(); rlRender(); toast('أُلغي آخر قرار'); }
 // ---- V82: ورقة الرول (وضع الجلسة) — نسخة رقمية من «قائمة الاستئناف»: الأطراف بصفاتهم وأرقامهم بلا أسماء،
 // الحضور والطلبات بلمسة، والقرار عبر «قرار الجلسة» نفسه؛ تُحفظ لكل جلسة في c.sheets[تاريخ] وتستمر من جلسة إلى أخرى.
 let RL_ROLES = { a: 'المستأنف', e: 'المستأنف ضده', x: 'الخصم المتدخل' };
@@ -4515,9 +4546,9 @@ function rlVocab() {
   RL_REQ = RL_RQG.flatMap(g => g[1].map(x => [x[0], x[2], x[1], g[0]]));
   Object.keys(RL_RQ_ALL).forEach(k => { if (!RL_REQ.some(r => r[0] === k)) RL_REQ.push([k, RL_RQ_ALL[k][1], RL_RQ_ALL[k][0], '']); });
   if (!RL_REQ.some(r => r[0] === 'tm')) RL_REQ.push(['tm', RL_RQG_TM[2], RL_RQG_TM[1], '']);
-  RL_ACTS = cri ? [['حجز للحكم', 'محجوزة للحكم', 2], ['تأجيل لإعلان المتهم', 'للإعلان', 1], ['تأجيل لإحضار المتهم', 'لإحضار المتهم', 1], ['تأجيل للاطلاع', 'للاطلاع والرد', 1], ['تأجيل لسماع الشهود', 'لسماع الشهود', 1], ['للمرافعة', 'للمرافعة', 1], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1]]
-    : app ? [['حجز للحكم', 'محجوزة للحكم', 2], ['حجز للحكم مع مذكرات', 'محجوزة للحكم مع مذكرات', 2], ['تأجيل للإعلان', 'للإعلان', 1], ['تأجيل للاطلاع والرد', 'للاطلاع والرد', 1], ['تأجيل للمذكرات', 'للمذكرات', 1], ['إحالة للخبير', 'لدى الخبير', 0], ['للمرافعة', 'للمرافعة', 1], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['شطب', 'شُطبت', -1]]
-    : [['تأجيل للإعلان', 'للإعلان', 1], ['تأجيل للاطلاع والرد', 'للاطلاع والرد', 1], ['تأجيل لتبادل المذكرات', 'للمذكرات', 1], ['إحالة للخبير', 'لدى الخبير', 0], ['إحالة للتحقيق', 'للتحقيق', 1], ['للمرافعة', 'للمرافعة', 1], ['حجز للحكم', 'محجوزة للحكم', 2], ['حجز للحكم مع مذكرات', 'محجوزة للحكم مع مذكرات', 2], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['وقف', 'موقوفة', -1], ['شطب', 'شُطبت', -1]];
+  RL_ACTS = cri ? [['حجز للحكم', 'محجوزة للحكم', 2], ['تأجيل لإعلان المتهم', 'للإعلان', 1], ['تأجيل لإحضار المتهم', 'لإحضار المتهم', 1], ['تأجيل للاطلاع', 'للاطلاع والرد', 1], ['تأجيل لسماع الشهود', 'لسماع الشهود', 1], ['للمرافعة', 'للمرافعة', 1], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['القرار بعد الجلسة', '', -2], ['إعادة للمرافعة', 'للمرافعة', 1], ['إحالة لرئيس المحكمة', 'أُحيلت', -1]]
+    : app ? [['حجز للحكم', 'محجوزة للحكم', 2], ['حجز للحكم مع مذكرات', 'محجوزة للحكم مع مذكرات', 2], ['تأجيل للإعلان', 'للإعلان', 1], ['تأجيل لورود التقرير', 'لدى الخبير', 1], ['تأجيل لضم المفردات', 'لضم المفردات', 1], ['تأجيل لتقديم مستندات', 'لتقديم مستندات', 1], ['تأجيل للاطلاع والرد', 'للاطلاع والرد', 1], ['تأجيل للمذكرات', 'للمذكرات', 1], ['إحالة للخبير', 'لدى الخبير', 0], ['للمرافعة', 'للمرافعة', 1], ['القرار بعد الجلسة', '', -2], ['إعادة للمرافعة', 'للمرافعة', 1], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['وقف', 'موقوفة', -1], ['شطب', 'شُطبت', -1], ['إحالة لرئيس المحكمة', 'أُحيلت', -1]]   /* V161 */
+    : [['تأجيل للإعلان', 'للإعلان', 1], ['تأجيل للاطلاع والرد', 'للاطلاع والرد', 1], ['تأجيل لتبادل المذكرات', 'للمذكرات', 1], ['إحالة للخبير', 'لدى الخبير', 0], ['إحالة للتحقيق', 'للتحقيق', 1], ['للمرافعة', 'للمرافعة', 1], ['حجز للحكم', 'محجوزة للحكم', 2], ['حجز للحكم مع مذكرات', 'محجوزة للحكم مع مذكرات', 2], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['وقف', 'موقوفة', -1], ['شطب', 'شُطبت', -1], ['تأجيل لورود التقرير', 'لدى الخبير', 1], ['تأجيل لتقديم مستندات', 'لتقديم مستندات', 1], ['القرار بعد الجلسة', '', -2], ['إعادة للمرافعة', 'للمرافعة', 1], ['إحالة لرئيس المحكمة', 'أُحيلت', -1]];
   RL_VERDICTS = cri ? (app ? { 'موضوع': ['تأييد', 'تعديل', 'إلغاء والبراءة', 'إلغاء والإدانة', 'الامتناع عن النطق بالعقاب'], 'شكل': ['عدم الجواز', 'عدم القبول شكلًا', 'سقوط الاستئناف'] } : { 'موضوع': ['إدانة', 'براءة', 'الامتناع عن النطق بالعقاب', 'انقضاء الدعوى الجزائية'], 'شكل': ['عدم الاختصاص', 'عدم القبول'] })
     : app ? { 'موضوع': ['رفض وتأييد', 'تعديل', 'إلغاء', 'بطلان الحكم المستأنف والتصدّي', 'الإلغاء والإعادة', 'الإلغاء والإحالة'], 'شكل': ['عدم الجواز', 'عدم القبول شكلًا', 'بطلان صحيفة الاستئناف', 'سقوط الحق', 'اعتبار كأن لم يكن', 'الشطب'], 'قبل الفصل في الموضوع': ['إحالة للخبراء', 'إحالة للاستجواب', 'إحالة للتحقيق', 'حلف اليمين'] }
     : { 'موضوع': ['إجابة الطلبات', 'إجابة جزئية', 'رفض الدعوى'], 'شكل': ['عدم الاختصاص والإحالة', 'عدم القبول', 'اعتبار الدعوى كأن لم تكن', 'سقوط الخصومة', 'ترك الخصومة', 'الشطب'], 'قبل الفصل في الموضوع': ['إحالة للخبراء', 'إحالة للاستجواب', 'إحالة للتحقيق', 'حلف اليمين'] };
@@ -4612,7 +4643,7 @@ function rlParties(c) { if (!Array.isArray(c.parties) || !c.parties.length) c.pa
 function rlPLabel(c, p) { const same = rlParties(c).filter(x => x.r === p.r); return (RL_ROLES[p.r] || '') + ' ' + String(same.indexOf(p) + 1).padStart(3, '0'); }
 function rlSheet(c, d, make) { c.sheets = c.sheets || {}; if (!c.sheets[d] && make) c.sheets[d] = { att: {}, req: {}, oth: {}, note: '' }; return c.sheets[d] || null; }
 function rlSheetHasData(s) { return !!s && (Object.keys(s.att || {}).length || Object.values(s.req || {}).some(a => a && a.length) || Object.values(s.oth || {}).some(Boolean) || (s.note || '').trim()); }
-function rlDecOn(c, d) { return (c.hist || []).filter(x => x.d === d && !x.via).slice(-1)[0] || null; }
+function rlDecOn(c, d) { return (c.hist || []).filter(x => x.d === d && !x.via && !x.pend).slice(-1)[0] || null; }   // V161: «القرار بعد الجلسة» ليس قرارًا بعد
 function rlDecTxt(h) { return h ? h.a + (h.to ? ' ← ' + rlFmt(h.to) : '') + (h.n ? ' — ' + h.n : '') : ''; }
 // نص الجلسة: سطر لكل طرف + الملاحظة + القرار
 function rlSheetLines(c, d) {
@@ -4705,7 +4736,7 @@ function rlSessRender(top) {
   const undoC = id => { const k = RL.cards.find(x => x.id === id); if (!k) return; rlUndo(k); SS.undo = null; const j = SS.ids.indexOf(id); if (j >= 0) SS.i = j; rlxSet(id, false); rlRender(); rlSessRender(true); toast('أُلغي القرار — سجّل القرار الصحيح'); };
   if (q('anx')) q('anx').onclick = () => { SS.anx = SS.anx || {}; SS.anx[c.id] = !SS.anx[c.id]; const b = w.querySelector('.ssbody'), y = b ? b.scrollTop : 0; rlSessRender(); const b2 = w.querySelector('.ssbody'); if (b2) b2.scrollTop = y; };   // V147
   if (q('rv')) q('rv').onclick = () => { rlRevSet(c, !rlRevOn(c)); rlSessSave(c, true); rlRender(); const b = w.querySelector('.ssbody'), y = b ? b.scrollTop : 0; rlSessRender(); const b2 = w.querySelector('.ssbody'); if (b2) b2.scrollTop = y; };   // V154
-  if (q('exec')) q('exec').onclick = () => { rlExecSet(c, !rlExecOn(c)); rlSessSave(c, true); rlRender(); const b = w.querySelector('.ssbody'), y = b ? b.scrollTop : 0; rlSessRender(); const b2 = w.querySelector('.ssbody'); if (b2) b2.scrollTop = y; };   // V144
+  ['rdok', 'rdno'].forEach(k => { if (q(k)) q(k).onclick = () => { const v = k === 'rdok' ? 'ok' : 'no'; rlRdSet(c, rlPrepOf(c) === v ? '' : v); rlSessSave(c, true); rlRender(); const b = w.querySelector('.ssbody'), y = b ? b.scrollTop : 0; rlSessRender(); const b2 = w.querySelector('.ssbody'); if (b2) b2.scrollTop = y; }; });   // V161
   if (q('undo')) q('undo').onclick = () => undoC(c.id);
   if (q('undoh')) q('undoh').onclick = () => undoC(c.id);
   if (q('undob')) q('undob').onclick = () => undoC(un.id);
@@ -4774,7 +4805,29 @@ function rlProg(c) {
 }
 // V130: تحضير الجلسة — حالة كل قضية قبل جلستها بلمسة: «نُفّذ قرار الجلسة السابقة» (وفي «لدى الخبير»: ورد التقرير + أُخطر الخصوم) أو «يحتاج إجراء». مربوطة بموعد الجلسة (c.prep.d) فتسقط حين يُسجَّل قرار ويتغيّر الموعد
 function rlPrep(c) { return c.prep && c.prep.d === c.next ? c.prep : {}; }
-function rlPrepOf(c) { if (RL_DONE.includes(c.stage) || RL_RES.includes(c.stage)) return ''; if (rlPrep(c).need) return 'need'; return (rlIsNew(c) ? rlRevOn(c) || c.exec : c.exec) ? 'ok' : 'no'; }   // V154: الجديدة جاهزة بـ«روجعت»
+// V161: سؤالان منفصلان — «روجعت» (c.rv لجلستها) و«الجاهزية للحكم» (c.rd = {d: جلستها, s: ok|no, w: أسباب، pa: أطراف لم تُعلن، n: ملاحظة}). الأسباب يقترحها التطبيق، والقاضي يعتمدها
+const RD_W = [['ann', 'الإعلان'], ['rep', 'التقرير'], ['mf', 'ضم المفردات'], ['doc', 'مستندات'], ['oth', 'أخرى']];
+function rlRdSug(c) { if (rlAnnOk(c) === false) return { s: 'no', w: ['ann'] }; if (c.stage === 'لدى الخبير') return { s: 'no', w: ['rep'] }; if (c.stage === 'لضم المفردات') return { s: 'no', w: ['mf'] }; if (c.stage === 'لتقديم مستندات') return { s: 'no', w: ['doc'] }; return null; }
+function rlRd(c) { if (c.rd && c.rd.d === c.next) return c.rd; if (c.exec) return { s: 'ok', legacy: 1 }; const p = rlPrep(c); if (p.need) return { s: 'no', w: ['oth'], legacy: 1 }; if (c.stage === 'لدى الخبير' && p.rep && p.ntf) return { s: 'ok', legacy: 1 }; return null; }
+function rlRdSet(c, st) { if (!st) delete c.rd; else { const cur = c.rd && c.rd.d === c.next ? c.rd : {}; const sg = rlRdSug(c); c.rd = st === 'ok' ? { d: c.next || rlToday(), s: 'ok' } : { d: c.next || rlToday(), s: 'no', w: cur.s === 'no' && (cur.w || []).length ? cur.w : sg && sg.s === 'no' ? sg.w.slice() : [], pa: cur.pa || [], n: cur.n || '' }; } c.exec = false; if (c.prep) delete c.prep.need; c.updated = Date.now(); }
+function rlRdW(c) { const r = rlRd(c); return r && r.s === 'no' ? (r.w || []) : []; }
+function rlRdTxt(c) { const w = rlRdW(c); return w.map(k => (RD_W.find(x => x[0] === k) || [k, k])[1]).join('، '); }
+function rlPrepOf(c) { if (RL_DONE.includes(c.stage) || RL_RES.includes(c.stage)) return ''; const r = rlRd(c); return r ? r.s : ''; }   // ok = جاهزة للحكم · no = غير جاهزة · '' = لم تُحدَّد
+function rlRep(c) { const H = (c.hist || []).filter(h => h && !h.pend && !h.via && h.a); let n = 0, a = '', d = ''; for (let i = H.length - 1; i >= 0; i--) { const x = H[i].a; if (!/^تأجيل/.test(x)) break; if (!a) a = x; if (x !== a) break; n++; d = H[i].d; } return { a, n, d }; }   // تكرار التأجيل لذات السبب
+function rlRepTxt(r) { return 'أُجّلت ' + r.a.replace(/^تأجيل\s*/, '') + ' ' + (r.n === 2 ? 'مرتين' : r.n + ' مرات'); }
+function rlAfterList() { return RL.cards.filter(c => c.after && !RL_DONE.includes(c.stage) && c.next === c.after && !rlDecOn(c, c.after)); }   // «القرار بعد الجلسة» لم يُحسم
+function rlPtLbl(c, p) { const same = (c.parties || []).filter(x => x.r === p.r), k = same.indexOf(p), ord = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس']; return (RL_ROLES[p.r] || 'طرف') + (same.length > 1 ? ' ' + (ord[k] || k + 1) : ''); }
+function rlActSug(c) { const r = rlRd(c) || rlRdSug(c); if (!r) return ''; if (r.s === 'ok') return RL_RES.includes(c.stage) ? '' : 'حجز للحكم'; const w = (r.w || [])[0], has = n => RL_ACTS.some(a => a[0] === n) ? n : ''; return w === 'ann' ? (has('تأجيل للإعلان') || has('تأجيل لإعلان المتهم')) : w === 'rep' ? has('تأجيل لورود التقرير') : w === 'mf' ? has('تأجيل لضم المفردات') : w === 'doc' ? has('تأجيل لتقديم مستندات') : ''; }
+function rlActsHtml(c) {
+  const res = RL_RES.includes(c.stage), sug = rlActSug(c), g = { h: [], t: [], o: [] };
+  RL_ACTS.forEach((a, i) => {
+    if (res && !['مد أجل النطق', 'صدر الحكم', 'إعادة للمرافعة', 'إحالة لرئيس المحكمة', 'القرار بعد الجلسة'].includes(a[0])) return;
+    if (!res && ['مد أجل النطق', 'إعادة للمرافعة'].includes(a[0])) return;
+    const k = RL_RES.includes(a[1]) || a[1] === 'صدر الحكم' ? 'h' : a[2] >= 0 && a[0] !== 'إعادة للمرافعة' ? 't' : 'o';
+    g[k].push('<button type="button" class="chip' + (a[0] === sug ? ' sug' : '') + '" data-i="' + i + '"' + (a[0] === sug ? ' title="مقترح من حالة الجاهزية"' : '') + '>' + a[0] + '</button>');
+  });
+  return [['h', res ? 'النطق' : 'الحجز والحكم'], ['t', 'تأجيل'], ['o', 'أخرى']].filter(x => g[x[0]].length).map(x => '<div class="acg"><span class="acgh">' + x[1] + '</span><div class="acts2">' + g[x[0]].join('') + '</div></div>').join('');
+}
 // V154: «روجعت» — مراجعة القضية لجلستها (c.rv = تاريخ الجلسة التي رُوجعت لها)، غير «نُفّذ قرار الجلسة السابقة». القضية الجديدة لا قرار سابق لها، فجاهزيتها بالمراجعة، وأهم ما فيها الإعلان.
 function rlIsNew(c) { return c.stage === 'قضية جديدة' || (c.why === 'قضية جديدة' && !(c.hist || []).some(h => h && h.d && h.d < (c.next || '9'))); }   // «قضية جديدة» في الكشف أو المرحلة
 function rlRevOn(c) { return !!c.rv && c.rv === c.next; }
@@ -4786,11 +4839,12 @@ function anSessHtml(c) { const L = anLines(c); if (!L) return ''; const op = !!(
 function rlPrevDec(c, d) { const h = (c.hist || []).filter(x => x.d && x.d < d).slice(-1)[0]; if (h) return { t: h.a + (h.n ? ' — ' + h.n : ''), d: h.d }; return c.why ? { t: c.why, d: '' } : null; }
 function rlExecOn(c) { return c.stage === 'لدى الخبير' ? !!(rlPrep(c).rep && rlPrep(c).ntf) : !!c.exec; }
 function rlExecSet(c, on) { if (c.stage === 'لدى الخبير') { rlPrepSet(c, 'rep', on); rlPrepSet(c, 'ntf', on); } else rlPrepSet(c, 'exec', on); }
-function rlPrevLine(c, d) { if (rlDecOn(c, d) || !rlPrepOf(c)) return '';
-  if (rlIsNew(c)) { const on = rlRevOn(c), an = c.ann ? '<span class="ann ' + (rlAnnOk(c) ? 'ok' : 'no') + '">الإعلان ' + rlAnnTxt(c.ann) + (rlAnnOk(c) ? ' ✓' : ' ✗') + '</span>' : '<span class="k">حالة الإعلان غير مسجّلة</span>';   // V154: القضية الجديدة — الإعلان و«روجعت»
-    return '<div class="sspd"><span class="sspdt"><span class="sspdk">قضية جديدة:</span> ' + an + '</span><button type="button" class="sspdb' + (on ? ' on' : '') + '" data-s="rv" aria-pressed="' + on + '" title="روجعت القضية لهذه الجلسة — الخانة نفسها في بطاقة الرول">' + (on ? '✓ روجعت' : 'روجعت') + '</button></div>'; }
-  const x = rlPrevDec(c, d); if (!x || !x.t) return ''; const on = rlExecOn(c), ex = c.stage === 'لدى الخبير';
-  return '<div class="sspd"><span class="sspdt" title="' + esc(x.t + (x.d ? ' (' + rlFmt(x.d) + ')' : ' (من الكشف)')) + '"><span class="sspdk">قرار الجلسة الماضية:</span> ' + esc(x.t) + '</span><button type="button" class="sspdb' + (on ? ' on' : '') + '" data-s="exec" aria-pressed="' + on + '" title="' + (ex ? 'ورد التقرير وأُخطر الخصوم — الخانة نفسها في بطاقة الرول' : 'نُفّذ قرار الجلسة السابقة — الخانة نفسها في بطاقة الرول') + '">' + (on ? '✓ نُفّذ' : 'نُفّذ') + '</button></div>'; }
+function rlPrevLine(c, d) { if (rlDecOn(c, d) || RL_DONE.includes(c.stage) || RL_RES.includes(c.stage)) return '';   // V161: قرار الجلسة الماضية + «روجعت» + الجاهزية للحكم
+  const rv = rlRevOn(c), st = rlPrepOf(c), an = c.ann ? '<span class="ann ' + (rlAnnOk(c) ? 'ok' : 'no') + '">الإعلان ' + rlAnnTxt(c.ann) + (rlAnnOk(c) ? ' ✓' : ' ✗') + '</span>' : '';
+  let lab = '';
+  if (rlIsNew(c)) lab = '<span class="sspdk">قضية جديدة:</span> ' + (an || '<span class="k">حالة الإعلان غير مسجّلة</span>');
+  else { const x = rlPrevDec(c, d); if (x && x.t) lab = '<span class="sspdk" title="' + esc(x.d ? rlFmt(x.d) : 'من الكشف') + '">قرار الجلسة الماضية:</span> ' + esc(x.t); }
+  return '<div class="sspd ssrd"><span class="sspdt">' + lab + '</span><span class="ssrdb"><button type="button" class="sspdb' + (rv ? ' on' : '') + '" data-s="rv" aria-pressed="' + rv + '" title="روجعت القضية لهذه الجلسة">' + (rv ? '✓ روجعت' : 'روجعت') + '</button><button type="button" class="sspdb rk' + (st === 'ok' ? ' on' : '') + '" data-s="rdok" aria-pressed="' + (st === 'ok') + '">جاهزة للحكم</button><button type="button" class="sspdb rn' + (st === 'no' ? ' on' : '') + '" data-s="rdno" aria-pressed="' + (st === 'no') + '">غير جاهزة' + (st === 'no' && rlRdTxt(c) ? ': ' + esc(rlRdTxt(c)) : '') + '</button></span></div>'; }
 let rlPrepF = '';
 // V142: سوابق الدائرة — تصنيف مقترح تلقائيًا (موضوع + مواد) من بيانات البطاقة، يؤكده القاضي بلمسة. يُحفظ التصنيف وحده (c.pc): بلا نص ولا أسماء. المنطوق من البطاقة نفسها.
 const PC_TOPICS = [
@@ -4895,15 +4949,19 @@ function rlCard(c, mode, pos) {
   // السطر المضغوط (للمطويّة)
   h += '<div class="sm"><span class="f" title="' + whenT + '">' + rlIc('cal') + when + '</span>'
     + (res ? '<span class="f" title="كاتب الحكم">' + rlIc('pen') + (c.writer ? esc(RL_W[c.writer]) : '<span class="bad">غير موزّعة</span>') + '</span>' + rlProg(c) + (scOn() && c.writer && !mine ? '<span class="f jsr" title="حالة الحكم كما سجّلها كاتبه">' + esc(c.js || 'لم يبدأ') + '</span>' : '')
-      : (rlPrepOf(c) === 'need' ? '<span class="f prepn">يحتاج إجراء</span>' : rlPrepOf(c) === 'ok' ? '<span class="f prepo">✓ جاهزة</span>' : '') + (c.ann ? '<span class="f" title="الإعلان">' + rlIc('ann') + '<span class="ann ' + (ok ? 'ok' : 'no') + '">' + rlAnnTxt(c.ann) + (ok ? ' ✓' : ' ✗') + '</span></span>' : '') + (last ? '<span class="f lastc" title="آخر قرار">' + rlIc('dec') + esc(last.length > 48 ? last.slice(0, 48) + '…' : last) + '</span>' : ''))
+      : (done ? '' : (rlRevOn(c) ? '<span class="f bdg rv">✓ روجعت</span>' : '<span class="f bdg un">○ لم تُراجع</span>') + (rlPrepOf(c) === 'ok' ? '<span class="f bdg ok">● جاهزة للحكم</span>' : rlPrepOf(c) === 'no' ? '<span class="f bdg no">○ غير جاهزة' + (rlRdTxt(c) ? ': ' + esc(rlRdTxt(c)) : '') + '</span>' : '') + (c.after && rlAfterList().includes(c) ? '<span class="f bdg af">القرار بعد الجلسة</span>' : '') + (rlRep(c).n >= 2 ? '<span class="f bdg rp">⚠ ' + esc(rlRepTxt(rlRep(c))) + '</span>' : '')) + (c.ann ? '<span class="f" title="الإعلان">' + rlIc('ann') + '<span class="ann ' + (ok ? 'ok' : 'no') + '">' + rlAnnTxt(c.ann) + (ok ? ' ✓' : ' ✗') + '</span></span>' : '') + (last ? '<span class="f lastc" title="آخر قرار">' + rlIc('dec') + esc(last.length > 48 ? last.slice(0, 48) + '…' : last) + '</span>' : ''))
     + '</div>';
   // التفاصيل (للمفتوحة)
   let s = ''; // V114: الخلاصة (العمود الثاني على الشاشات العريضة)
   let b = '<div class="ln ic" title="' + whenT + '">' + rlIc('cal') + '<span class="k sr">' + whenT + ':</span> ' + when + '</div>';
   if (last) b += '<div class="ln ic" title="آخر قرار">' + rlIc('dec') + '<span>' + esc(last) + (adj >= 2 ? ' <span class="due ' + (adj >= 3 ? 'late' : 'soon') + '">أُجّلت للإعلان ' + adj + ' مرات</span>' : '') + '</span></div>';
   if (c.vd || c.d1 || c.tm) s += '<div class="ln path2"><span class="k">مسار التقاضي:</span> <span class="pt">أول درجة: ' + (c.d1 ? esc(c.d1) : '—') + '</span><i>‹</i><span class="pt">الاستئناف: ' + (c.vd ? esc(c.vd) : '—') + '</span><i>‹</i><span class="pt">التمييز: ' + (c.tm ? esc(c.tm) : '—') + '</span></div>';
-  if (!done && !res) { const pp = rlPrep(c), ch = (k, l) => '<button type="button" class="pchip' + (pp[k] ? ' on' : '') + (k === 'need' ? ' need' : '') + '" data-prep="' + k + '" aria-pressed="' + !!pp[k] + '">' + l + '</button>';
-    b += '<div class="ln rdy">' + (c.stage === 'لدى الخبير' ? ch('rep', 'ورد التقرير') + ch('ntf', 'أُخطر الخصوم') : (rlIsNew(c) ? '' : '<label><input type="checkbox" data-a="exec"' + (c.exec ? ' checked' : '') + '> نُفّذ قرار الجلسة السابقة</label>')) + '<label><input type="checkbox" data-a="rv"' + (rlRevOn(c) ? ' checked' : '') + '> روجعت' + (rlIsNew(c) ? ' <span class="k">(قضية جديدة)</span>' : '') + '</label>' + ch('need', 'يحتاج إجراء') + (c.ann ? (rlIsNew(c) ? ' <span class="ann ' + (rlAnnOk(c) ? 'ok' : 'no') + '">الإعلان ' + rlAnnTxt(c.ann) + (rlAnnOk(c) ? ' ✓' : ' ✗') + '</span>' : '') : ' <span class="k">· حالة الإعلان غير مسجّلة</span>') + '</div>'; }
+  if (!done && !res) { const rv = rlRevOn(c), r = rlRd(c), sg = r ? null : rlRdSug(c), st = r ? r.s : '', rp = rlRep(c);   // V161: «روجعت» ثم «جاهزة للحكم / غير جاهزة» وسببها
+    b += '<div class="ln rdy2"><button type="button" class="rvb' + (rv ? ' on' : '') + '" data-a="rv" aria-pressed="' + rv + '">' + (rv ? '✓ روجعت' : 'روجعت') + '</button>' + '<span class="rdseg" role="group" aria-label="الجاهزية للحكم"><button type="button" data-rd="ok" class="' + (st === 'ok' ? 'on ok' : '') + '" aria-pressed="' + (st === 'ok') + '">جاهزة للحكم</button><button type="button" data-rd="no" class="' + (st === 'no' ? 'on no' : '') + '" aria-pressed="' + (st === 'no') + '">غير جاهزة</button></span>' + (sg ? '<span class="rdsug" title="اقتراح من بيانات القضية — اعتمده بلمسة «غير جاهزة»">مقترح: ' + esc(sg.w.map(k => (RD_W.find(x => x[0] === k) || [k, k])[1]).join('، ')) + (sg.w[0] === 'ann' && c.ann ? ' ' + rlAnnTxt(c.ann) : '') + '</span>' : '') + (rp.n >= 2 ? '<span class="rep2" title="منذ ' + rlFmt(rp.d) + '">⚠ ' + esc(rlRepTxt(rp)) + '</span>' : '') + '</div>';
+    if (st === 'no') { const w = r.w || [], pa = r.pa || [], pts = (c.parties || []);
+      b += '<div class="ln rdw"><span class="k">بانتظار</span><span class="rwc">' + RD_W.map(x => '<button type="button" class="rwchip' + (w.includes(x[0]) ? ' on' : '') + '" data-rw="' + x[0] + '" aria-pressed="' + w.includes(x[0]) + '">' + x[1] + (x[0] === 'ann' && c.ann ? ' <small>' + rlAnnTxt(c.ann) + '</small>' : '') + '</button>').join('') + '</span></div>'
+        + (w.includes('ann') && pts.length ? '<div class="ln rdw"><span class="k">لم يُعلن</span><span class="rwc">' + pts.map(pt => '<button type="button" class="rwchip' + (pa.includes(pt.id) ? ' on' : '') + '" data-rp="' + pt.id + '">' + esc(rlPtLbl(c, pt)) + '</button>').join('') + '</span></div>' : '')
+        + '<div class="ln rdw"><span class="k">ملاحظة</span><input type="text" class="rdn" data-a="rdn" value="' + esc(r.n || '') + '" placeholder="اختياري: ما يُنتظر تحديدًا"></div>'; } }
   if (res) b += '<div class="ln ic wjs"><span class="f" title="كاتب الحكم">' + rlIc('pen') + '<select class="mini" data-a="writer" aria-label="كاتب الحكم"><option value="">— غير موزّعة —</option>' + Object.keys(RL_W).map(k => '<option value="' + k + '"' + (c.writer === k ? ' selected' : '') + '>' + RL_W[k] + '</option>').join('') + '</select></span>'
     + (mine ? '<span class="f jsw" title="حالة الحكم">' + rlIc('st') + '<select class="mini" data-a="js" aria-label="حالة الحكم">' + RL_JS.map(s => '<option' + (s === (c.js || 'لم يبدأ') ? ' selected' : '') + '>' + s + '</option>').join('') + '</select>' + (rlJsIdx(c) < 3 && c.next ? ' ' + rlDue(c.next) : '') + '</span>' : '') + '</div>';
   if (res && sibs.some(x => RL_RES.includes(x.stage) && (x.writer || '') !== (c.writer || ''))) b += '<div class="ln"><span class="due soon">كاتب الحكم يختلف عن المرتبطة: ' + esc(sibs.filter(x => RL_RES.includes(x.stage) && (x.writer || '') !== (c.writer || '')).map(x => x.code + ' ' + (RL_W[x.writer] || 'غير موزّعة')).join('، ')) + '</span></div>';
@@ -4941,8 +4999,11 @@ function rlCard(c, mode, pos) {
   d.querySelectorAll('[data-open]').forEach(t => t.onclick = () => { const p = rlPrin(t.dataset.open); if (p) openPanel(p); });
   d.querySelectorAll('[data-rm]').forEach(x => x.onclick = () => { c.pids = (c.pids || []).filter(i => cid(i) !== cid(x.dataset.rm)); c.updated = Date.now(); rlFocus = c.id; rlSave(); rlRender(); });
   const q = s => d.querySelector('[data-a=' + s + ']');
-  if (q('exec')) q('exec').onchange = e => { c.exec = e.target.checked; c.updated = Date.now(); rlSave(); rlRender(); };
-  if (q('rv')) q('rv').onchange = e => { rlRevSet(c, e.target.checked); rlSave(); rlRender(); };   // V154
+  d.querySelectorAll('[data-rd]').forEach(x => x.onclick = () => { const v = x.dataset.rd; rlRdSet(c, rlPrepOf(c) === v ? '' : v); rlFocus = c.id; rlSave(); rlRender(); });   // V161
+  d.querySelectorAll('[data-rw]').forEach(x => x.onclick = () => { const r = c.rd; if (!r || r.s !== 'no') return; const k = x.dataset.rw; r.w = (r.w || []).includes(k) ? r.w.filter(y => y !== k) : (r.w || []).concat(k); c.updated = Date.now(); rlFocus = c.id; rlSave(); rlRender(); });
+  d.querySelectorAll('[data-rp]').forEach(x => x.onclick = () => { const r = c.rd; if (!r) return; const k = x.dataset.rp; r.pa = (r.pa || []).includes(k) ? r.pa.filter(y => y !== k) : (r.pa || []).concat(k); c.updated = Date.now(); rlFocus = c.id; rlSave(); rlRender(); });
+  if (q('rdn')) q('rdn').onchange = e => { if (c.rd) { c.rd.n = e.target.value.trim().slice(0, 200); c.updated = Date.now(); rlSave(); } };
+  if (q('rv')) q('rv').onclick = () => { rlRevSet(c, !rlRevOn(c)); rlFocus = c.id; rlSave(); rlRender(); };   // V154/V161: زر
   d.querySelectorAll('[data-prep]').forEach(x => x.onclick = () => { rlPrepSet(c, x.dataset.prep, !rlPrep(c)[x.dataset.prep]); rlFocus = c.id; rlSave(); rlRender(); });
   if (q('writer')) q('writer').onchange = e => { c.writer = e.target.value; c.updated = Date.now(); const sw = sibs.filter(x => RL_RES.includes(x.stage)); sw.forEach(x => { x.writer = c.writer; x.updated = Date.now(); }); rlFocus = c.id; rlSave(); rlRender(); if (sw.length) toast('وُزّعت معها المرتبطة: ' + sw.map(x => x.code).join('، ')); };
   if (q('js')) q('js').onchange = e => { rlJsSet(c, e.target.value); rlFocus = c.id; rlSave(); rlRender(); };
@@ -4975,9 +5036,11 @@ function rlDayList(day) { return RL.cards.filter(c => c.next === day && !RL_RES.
 function rlResList(day) { return RL.cards.filter(c => RL_RES.includes(c.stage) && (!day || c.next === day)); }
 function rlSummary() {
   const s = $('#rl_sum'); if (!s) return;
-  if (rlMode === 'roll') { const L = rlDayList(rlDaySel), R = rlResList(rlDaySel); const bad = L.filter(c => rlAnnOk(c) === false).length, un = L.filter(c => c.ann == null).length, ex = L.filter(c => c.exec).length, rp = { ok: 0, need: 0, no: 0 }; L.forEach(c => { const k = rlPrepOf(c); if (k) rp[k]++; });
-    const tile = (v, l, c, f) => f !== undefined ? '<button type="button" class="st' + (c ? ' ' + c : '') + (f && rlPrepF === f ? ' on' : '') + '" data-prepf="' + f + '" aria-pressed="' + (!!f && rlPrepF === f) + '" title="' + (f ? 'اعرض هذه وحدها — واضغط ثانية للكل' : 'اعرض الكل') + '"><b>' + v + '</b><span>' + l + '</span></button>' : '<div class="st' + (c ? ' ' + c : '') + '"><b>' + v + '</b><span>' + l + '</span></div>';
-    s.innerHTML = L.length || R.length ? '<div class="rlstats">' + tile(L.length, 'قضية للنظر') + (R.length ? tile(R.length, 'للنطق') : '') + tile(bad, 'إعلان غير تام', bad ? 'bad' : '') + (un ? tile(un, 'إعلان غير مسجّل', 'warn') : '') + tile(rp.ok + '/' + L.length, 'جاهزة', L.length && rp.ok === L.length ? 'ok' : '', '') + (rp.need ? tile(rp.need, 'تحتاج إجراء', 'bad', 'need') : '') + (rp.no && rp.no < L.length ? tile(rp.no, 'غير جاهزة', 'warn', 'no') : '')   /* V154: الجديدة تجهز بـ«روجعت»، والمستمرة بـ«نُفّذ قرار الجلسة السابقة» */ + '</div>' : 'لا قضايا مسجّلة لهذه الجلسة — استورد كشف الجلسة من النظام.';
+  if (rlMode === 'roll') { const L = rlDayList(rlDaySel), R = rlResList(rlDaySel), rv = L.filter(rlRevOn).length, ok = L.filter(c => rlPrepOf(c) === 'ok').length, NO = L.filter(c => rlPrepOf(c) === 'no'), wc = {};   // V161: روجعت · جاهزة للحكم · غير جاهزة (بأسبابها) · لم تُراجع
+    NO.forEach(c => rlRdW(c).forEach(k => wc[k] = (wc[k] || 0) + 1));
+    const tile = (v, l, c, f, sub) => '<button type="button" class="st' + (c ? ' ' + c : '') + (rlPrepF === f ? ' on' : '') + '" data-prepf="' + f + '" aria-pressed="' + (rlPrepF === f) + '" title="اعرض هذه وحدها — واضغط ثانية للكل"><b>' + v + '</b><span>' + l + '</span>' + (sub ? '<small>' + sub + '</small>' : '') + '</button>';
+    const st0 = (v, l, c) => '<div class="st' + (c ? ' ' + c : '') + '"><b>' + v + '</b><span>' + l + '</span></div>';
+    s.innerHTML = L.length || R.length ? '<div class="rlstats">' + st0(L.length, 'قضية للنظر') + (R.length ? st0(R.length, 'للنطق') : '') + (L.length ? tile(rv + '/' + L.length, 'روجعت', 'rv' + (rv === L.length ? ' all' : ''), 'rv') + tile(ok, 'جاهزة للحكم', 'ok', 'ok') + tile(NO.length, 'غير جاهزة', 'warn', 'no', RD_W.filter(x => wc[x[0]]).map(x => x[1] + ' ' + wc[x[0]]).join(' · ')) + (L.length - rv ? tile(L.length - rv, 'لم تُراجع', 'un', 'un') : '') : '') + '</div>' : 'لا قضايا مسجّلة لهذه الجلسة — استورد كشف الجلسة من النظام.';
     s.querySelectorAll('[data-prepf]').forEach(x => x.onclick = () => { rlPrepF = rlPrepF === x.dataset.prepf ? '' : x.dataset.prepf; rlRender(); }); }
   else if (rlMode === 'res') { const R = rlResList(''), U = rlUnits(R); const cnt = k => rlUnits(R.filter(c => (c.writer || '') === k)); const tile = (v, l, c) => '<div class="st' + (c ? ' ' + c : '') + '"><b>' + v + '</b><span>' + l + '</span></div>';
     s.innerHTML = '<div class="rlstats">' + tile(R.length, 'محجوزة للحكم' + (U < R.length ? ' (' + U + ' حكمًا — المرتبطة حكم واحد)' : '')) + Object.keys(RL_W).filter(k => k !== 'd' || cnt(k)).map(k => tile(cnt(k), RL_W[k])).join('') + (cnt('') ? tile(cnt(''), 'غير موزّعة', 'bad') : '') + '</div>'; }
@@ -5011,7 +5074,7 @@ window.__rl = { get RL() { return RL; }, sessOpen: (d, id) => rlSessOpen(d, id),
 let rlGuide = false;
 function rlGuideHtml() { const P = rlProf(), one = P.n === 1;
   return '<div class="rlguide"><button type="button" class="x" id="rl_gx">فهمت، أخفِ</button><b>أُضيف الكشف — الخطوات التالية:</b><ol>'
-    + '<li><b>قبل الجلسة:</b> افتح كل قضية وعلّم «نُفّذ قرار الجلسة السابقة»، والقضية الجديدة «روجعت» (وأهم ما فيها الإعلان)، أو «يحتاج إجراء» إن نقصها شيء. وحفظ تحليل الملف يعلّمها «روجعت». الأعلى يجمع: جاهزة · تحتاج إجراء · غير جاهزة.</li>'
+    + '<li><b>قبل الجلسة:</b> افتح كل قضية علّم «روجعت» حين تراجعها لجلستها (وحفظ تحليل الملف يعلّمها). ثم حدّد: «جاهزة للحكم» إن نُفّذ كل ما يمنع حجزها، أو «غير جاهزة» وسببها (الإعلان، التقرير، ضم المفردات، مستندات، أخرى) — والتطبيق يقترح السبب من الكشف والمرحلة. الأعلى يجمع: روجعت · جاهزة للحكم · غير جاهزة · لم تُراجع، وكلٌّ يُضغط لعرض قضاياه.</li>'
     + '<li><b>يوم الجلسة:</b> «▶ وضع الجلسة» — قضية قضية بالترتيب: الحضور والطلبات والقرار بلمسة، فتنتقل القضية إلى جلستها التالية وحدها.</li>'
     + '<li><b>بعد الجلسة:</b> ' + (one ? 'المحجوزة للحكم تظهر في «المحجوزة» بموعد النطق وحالة المسودة.' : 'المحجوزة للحكم تظهر في «المحجوزة» لتوزيعها على الأعضاء ومتابعة المسودات.') + ' والكشف التالي يُستورد بالطريقة نفسها فيُحدّث البطاقات ولا يكررها.</li></ol></div>'; }
 function rlRender() {
@@ -5037,13 +5100,14 @@ function rlRender() {
     if (!hits.length) L.innerHTML = '<div class="empty"><b>لا قضية بهذا الرقم في الرول</b>ابحث برقم القضية (783/2026 أو 783) أو بالرقم الآلي. <button type="button" class="linkbtn" id="rl_qx">مسح البحث</button></div>';
     const qx = $('#rl_qx'); if (qx) qx.onclick = () => { $('#rl_q').value = ''; rlRender(); };
   } else if (rlMode === 'roll') {
-    const D0 = rlSortList(rlDayList(rlDaySel)), D = rlPrepF ? D0.filter(c => rlPrepOf(c) === rlPrepF) : D0, R = rlPrepF ? [] : rlAdj(rlResList(rlDaySel));
-    add('للنظر في جلسة ' + rlDay(rlDaySel) + ' ' + rlFmt(rlDaySel) + ' <small>' + (rlPrepF ? D.length + ' من ' + D0.length + ' — ' + (rlPrepF === 'need' ? 'تحتاج إجراء' : 'غير جاهزة') + ' <button type="button" class="linkbtn" id="rl_prepx">عرض الكل</button>' : D.length + ' قضية') + '</small>', D, '', rlPrepF ? '' : rlDaySel);
+    const D0 = rlSortList(rlDayList(rlDaySel)), D = rlPrepF ? D0.filter(c => rlPrepF === 'rv' ? rlRevOn(c) : rlPrepF === 'un' ? !rlRevOn(c) : rlPrepOf(c) === rlPrepF) : D0, R = rlPrepF ? [] : rlAdj(rlResList(rlDaySel));
+    add('للنظر في جلسة ' + rlDay(rlDaySel) + ' ' + rlFmt(rlDaySel) + ' <small>' + (rlPrepF ? D.length + ' من ' + D0.length + ' — ' + ({ rv: 'روجعت', un: 'لم تُراجع', ok: 'جاهزة للحكم', no: 'غير جاهزة' }[rlPrepF] || '') + ' <button type="button" class="linkbtn" id="rl_prepx">عرض الكل</button>' : D.length + ' قضية') + '</small>', D, '', rlPrepF ? '' : rlDaySel);
     if ($('#rl_prepx')) $('#rl_prepx').onclick = () => { rlPrepF = ''; rlRender(); };
     add('للنطق بالحكم في الجلسة نفسها <small>' + R.length + '</small>', R);
     if (!D.length && !R.length) L.innerHTML = '<div class="empty"><b>لا قضايا لجلسة ' + rlFmt(rlDaySel) + '</b>استورد كشف هذه الجلسة من النظام، أو اختر جلسة أخرى.</div>';
     { const ah = rlAlinkHtml(); if (ah) { L.insertAdjacentHTML('afterbegin', ah); const S = RL_ALINK.sugg; L.querySelectorAll('[data-alk]').forEach(b => b.onclick = () => { const g = S[+b.dataset.alk].map(i => RL.cards.find(x => x.id === i)).filter(Boolean); if (g.length > 1) { rlLink(g[0], g.slice(1)); RL_ALINK.sugg.splice(+b.dataset.alk, 1); rlSave(); rlRender(); toast('رُبطت: ' + g.map(x => x.code).join(' + ')); } }); $('#rl_alx').onclick = () => { RL_ALINK = null; rlRender(); }; } }
     if (RL_SSUM && !rlPrepF) { L.insertAdjacentHTML('afterbegin', rlSsumHtml()); const S0 = RL_SSUM; $('#rl_ssx').onclick = () => { RL_SSUM = null; rlRender(); }; $('#rl_ssp').onclick = () => rlSessPrint(S0.day); if ($('#rl_ssr')) $('#rl_ssr').onclick = () => { RL_SSUM = null; rlMode = 'res'; rlRender(); }; }
+    { const AF = rlAfterList(); if (AF.length && !rlPrepF) { L.insertAdjacentHTML('afterbegin', '<div class="afbar"><b>قرارات بعد الجلسة (' + AF.length + ')</b><span class="k">تبقى هنا حتى تحسمها</span><div class="afl">' + AF.map(c => '<button type="button" class="afi" data-afid="' + c.id + '"><b>' + esc(c.code) + '</b><small>' + rlFmt(c.after).replace(/\/\d{4}$/, '') + (ctChips ? '' : '') + '</small><span>قرّر ←</span></button>').join('') + '</div></div>'); L.querySelectorAll('[data-afid]').forEach(x => x.onclick = () => { const c = RL.cards.find(y => y.id === x.dataset.afid); if (!c) return; rlDaySel = c.after; rlDecOpen = c.id; rlFocus = c.id; rlRender(); }); } }   // V161
     if (rlGuide && D.length) { L.insertAdjacentHTML('afterbegin', rlGuideHtml()); $('#rl_gx').onclick = () => { rlGuide = false; try { localStorage.setItem('tm_rlguide', '1'); } catch (e) {} rlRender(); }; }
     const late = RL.cards.filter(c => c.next && c.next < rlToday() && !RL_DONE.includes(c.stage)); if (late.length && rlDaySel >= rlToday()) { const n = el('div', 'rlwarn'); n.innerHTML = late.length + ' قضية فات موعدها دون تسجيل قرار — <button type="button" class="more" id="rl_golate">اعرضها</button>'; L.prepend(n); n.querySelector('#rl_golate').onclick = () => { rlMode = 'all'; rlRender(); }; }
   } else if (rlMode === 'res') {
@@ -6242,7 +6306,7 @@ function rlReg(c) { return c.reg ? { d: c.reg, src: '' } : c.an && c.an.form && 
 function rlAgeD(iso) { const n = rlDays(iso); return n == null ? null : Math.max(0, -n); }
 function rlAgeTxt(d) { if (d == null) return '—'; const m = Math.floor(d / 30.44); if (m < 1) return d + (d > 2 && d <= 10 ? ' أيام' : d === 1 ? ' يوم' : d === 2 ? ' يومان' : ' يومًا'); if (m < 12) return m === 1 ? 'شهر' : m === 2 ? 'شهران' : m + (m <= 10 ? ' أشهر' : ' شهرًا'); const y = Math.floor(m / 12), r = m % 12; return (y === 1 ? 'سنة' : y === 2 ? 'سنتان' : y + ' سنوات') + (r ? ' و' + (r === 1 ? 'شهر' : r === 2 ? 'شهران' : r + (r <= 10 ? ' أشهر' : ' شهرًا')) : ''); }
 // V127: تاريخ انتهاء القضية (جلسة صدور الحكم أو الشطب)
-function rlEndAt(c) { const h = (c.hist || []).filter(x => RL_DONE.includes(x.a) || x.a === 'صدر الحكم' || /شطب/.test(x.a || '')).slice(-1)[0]; return h ? h.d : rlJudgedAt(c) || ((c.hist || []).slice(-1)[0] || {}).d || c.next || ''; }
+function rlEndAt(c) { const h = (c.hist || []).filter(x => RL_DONE.includes(x.a) || x.a === 'صدر الحكم' || /شطب|^وقف$|إحالة لرئيس/.test(x.a || '')).slice(-1)[0]; return h ? h.d : rlJudgedAt(c) || ((c.hist || []).slice(-1)[0] || {}).d || c.next || ''; }
 function rlJudgedAt(c) { const h = (c.hist || []).filter(x => x.a === 'صدر الحكم').slice(-1)[0]; return h ? h.d : c.stage === 'صدر الحكم' ? c.next || '' : ''; }
 function rlMonLabel(m) { const p = (m || '').split('-'); if (p.length < 2) return m || ''; try { return new Date(+p[0], +p[1] - 1, 1).toLocaleDateString('ar-KW-u-nu-latn', { month: 'long', year: 'numeric' }); } catch (e) { return m; } }
 const RL_AGEB = [[0, 90, 'أقل من 3 أشهر'], [90, 180, 'من 3 إلى 6 أشهر'], [180, 365, 'من 6 أشهر إلى سنة'], [365, 1e9, 'أكثر من سنة']];
@@ -9630,8 +9694,10 @@ function psRender() {
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
-const WN_V = 159;
+const WN_V = 161;
 const WN_LOG = [
+  [161, 'الإصدار 161', ['سؤالان منفصلان لكل قضية: «روجعت» لجلستها، و«جاهزة للحكم / غير جاهزة» وسببها (الإعلان، التقرير، ضم المفردات، مستندات، أخرى) — يقترح التطبيق السبب من الكشف والمرحلة وأنت تعتمده. أعلى الرول: روجعت · جاهزة للحكم · غير جاهزة · لم تُراجع.', 'قرارات جديدة: القرار بعد الجلسة (تبقى في «قرارات بعد الجلسة» حتى تحسمها)، إعادة للمرافعة، وقف، إحالة لرئيس المحكمة، وتأجيل لورود التقرير أو لضم المفردات أو لتقديم مستندات — مرتبة في مجموعات، والمقترح منها معلَّم.', 'الإحصاءات: الوقف حكم قطعي، والشطب والإحالة لا يُعدّان حكمًا؛ وعلامة «إجازة» للشهر تُخرجه من الرسوم والمقارنات. وتنبيه حين تُؤجَّل القضية لذات السبب مرتين فأكثر.']],
+  [160, 'الإصدار 160', ['الجاهزية = المراجعة: كل قضية تعلّمها «روجعت» لجلستها جاهزة، جديدة أو مستمرة؛ و«نُفّذ قرار الجلسة السابقة» معلومة تبقى على البطاقة ولا تمنع الجاهزية، وما يحتاج عملًا يُعلَّم «يحتاج إجراء».', 'سبب «غير جاهزة» يظهر على البطاقة («○ لم تُراجع»)، ومربع «جاهزة» في أعلى الرول صار يعرض القضايا الجاهزة وحدها.']],
   [159, 'الإصدار 159', ['«نبض الدائرة» على الجوال بلا فراغات: المنظورة والمفصول فيها جنبًا إلى جنب، والإنجاز صف كامل، و«الإحصاءات» شريط رفيع تحته.']],
   [158, 'الإصدار 158', ['بطاقة الرئيسية: التوهّج الذهبي في زاويتها صار دائرة تتلاشى بنعومة، بدل الشريط الفاتح ذي الحافة الحادة الذي كان يظهر على الجوال.']],
   [157, 'الإصدار 157', ['شريط «نبض الدائرة» على الشاشات الضيقة (الآيفون بوضع التكبير): لا نص مقطوع — الشهر تحت العنوان، والتواريخ لا تنكسر، والحلقة أصغر.']],
