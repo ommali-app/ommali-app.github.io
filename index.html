@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261005174500">
+<meta name="amali-build" content="20261005175948">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1334,8 +1334,8 @@ table.imp select{padding:4px;border:1px solid var(--line2);border-radius:6px;bac
 .baln{white-space:nowrap;color:var(--ink2)}.baln b{color:var(--ink)}.balnew{color:var(--ok);font-weight:700}
 .balf{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
 .balrows{display:flex;flex-direction:column;gap:6px}
-.balr{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:6px 8px;border:1px solid var(--line);border-radius:12px;padding:7px 10px}
-.balc{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-width:0}.balc b{font-size:15px;white-space:nowrap}.balc small{color:var(--ink3);font-size:12px}
+.balr{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;border:1px solid var(--line);border-radius:12px;padding:7px 10px}
+.balc{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;flex:1 0 auto;min-width:min(100%,130px)}.balr .balt,.balr .balw{flex:0 0 auto}.balr .balseg{flex:0 0 auto}.balc b{font-size:15px;white-space:nowrap}.balc small{color:var(--ink3);font-size:12px}
 .balc .tag.ok{background:var(--ok-soft,#E3F3EA);color:var(--ok)}.balc .tag.no{background:var(--warn-soft);color:var(--warn)}
 .balr select.mini{max-width:120px}
 .balseg{display:inline-flex;background:var(--panel2);border-radius:11px;padding:3px;gap:2px}
@@ -1347,7 +1347,7 @@ table.imp select{padding:4px;border:1px solid var(--line2);border-radius:6px;bac
 .rlc .f.wpre{font-weight:700;color:var(--accent)}.wsub{font-style:normal;font-size:12px;color:var(--warn)}
 .rlc .ln.fbq{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .kc.grdrop{border-style:dashed}.tag.grlate{background:var(--bad-soft);color:var(--bad)}
-@media (max-width:700px){.balr{grid-template-columns:1fr 1fr;}.balc{grid-column:1/-1}.balseg{grid-column:1/-1;justify-self:stretch;display:flex}.balseg button{flex:1}.balr select.mini{max-width:none;width:100%}.balm{grid-template-columns:1fr auto}.balm .balbar{grid-column:1/-1;order:3}.rlsumrow .rlbalb{flex:0 0 auto}}
+@media (max-width:700px){.balc{flex:1 1 100%}.balr .balt,.balr .balw{flex:1 1 40%}.balr .balseg{flex:1 1 100%;display:flex}.balseg button{flex:1}.balr select.mini{max-width:none;width:100%}.balm{grid-template-columns:1fr auto}.balm .balbar{grid-column:1/-1;order:3}.rlsumrow .rlbalb{flex:0 0 auto}}
 /* V162: هيئة الجلسة */
 .pnov{position:fixed;inset:0;z-index:9000;background:rgba(10,18,32,.45);display:flex;align-items:center;justify-content:center;padding:16px}
 .pnbox{background:var(--panel);color:var(--ink);border-radius:18px;padding:18px;width:min(440px,100%);box-shadow:0 18px 50px rgba(0,0,0,.25);display:flex;flex-direction:column;gap:10px}
@@ -2658,7 +2658,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V167 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V168 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -10088,8 +10088,9 @@ function psRender() {
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
-const WN_V = 167;
+const WN_V = 168;
 const WN_LOG = [
+  [168, 'الإصدار 168', ['لوحة التوزيع: صفوف القضايا تلتف حسب عرض اللوحة نفسها، فلا يتداخل رقم القضية مع القوائم على الآيباد بأي عرض.']],
   [167, 'الإصدار 167', ['«📋 خلاصتي» في المحجوزة: قضاياك (المحجوزة لك والمسندة إليك قبل الجلسة) بخلاصة كل منها — الحكم المستأنف والطلبات وأوجه النعي — مع «ابدأ بالأسهل» و«اطبع».', '«تعرّف على قضيتك» في بطاقة حكمك غير المحلل: «حلّل ملفها» بلمسة.', '«⇢ حلّل ملفات الجلسة»: التحليل لقضايا الجلسة غير المحللة واحدة بعد أخرى — بعد «احفظ وارجع» تنتقل إلى التالية، مع «تخطَّ» و«أنهِ الدفعة».', '«⚙ ما يظهر» في ملخص البطاقة: تختار أقسام الملخص التي تظهر (الموضوع، حكم أول درجة، الخبير، الطلبات، أوجه النعي، التنبيهات، بيانات القيد).', 'شاشة التعديل منظّمة: البطاقة · القضية · المواعيد والملاحظات · «بعد الحكم» مطويًا، وسطر يبيّن الغرض منها.']],
   [166, 'الإصدار 166', ['«نماذج من خزانتك» في بطاقة القضية المحجوزة لكاتب الحكم: أقرب أحكام خزانتك بنوع القضية وموضوعها وطلباتها وأوجه النعي، مع «افتح» و📌 لتثبيت ما اخترته لهذه القضية، و«ابحث في الخزانة».', 'من خزانتك على جهازك وحده — لا تصل إلى الأعضاء ولا تدخل ملف الدائرة؛ والترتيب بالتشابه يُراجع، والتطبيق لا يصوغ.']],
   [165, 'الإصدار 165', ['الشطب والتجديد: عند «شطب» يُحسب ميعاد التجديد (م59 — تسعون يومًا، وتدخل فيها مدة شطب سابق، ويمتد إن صادف عطلة)، ويظهر على البطاقة وفي الرول والرئيسية؛ و«تجديد من الشطب» يعيدها إلى الرول بجلستها.', 'الوقف والتعجيل: نوع الوقف عند القرار (جزائي م70 بمدته، أو تعليقي)؛ ومهلة التعجيل ثلاثون يومًا بعد انتهاء الوقف الجزائي؛ و«تعجيل من الوقف».', 'الإحصاءات: شهر الشطب أو الوقف يبقى كما هو بعد التجديد أو التعجيل.', 'خزانة الأحكام: «إدارة الخزانة» (النقل والنسخة الاحتياطية والمجموعات والحذف) أعلى الصفحة تحت الإضافة.', 'التوزيع: صفوف اللوحة لا تتداخل على الشاشات المتوسطة.']],
