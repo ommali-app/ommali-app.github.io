@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261006124423">
+<meta name="amali-build" content="20261006155753">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2043,6 +2043,103 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
 .pschips .chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .psg .seg2 button{min-height:44px;font-size:14.5px}
 .psgo{min-height:48px;font-size:16px;margin-top:4px}
+
+/* V174 — كل قسم قابل للطي زرٌّ واضح: إطار، ومساحة لمس، وسهم «›» يدور إلى الأسفل عند الفتح.
+   الأساس بخصوصية صفرية (:where) فتبقى القواعد الخاصة بكل قسم كما هي؛ ثم صنفان: زر حرّ (إطار) وقسم داخل إطار (الإطار للحاوية). */
+details>summary{list-style:none}
+details>summary::-webkit-details-marker{display:none}
+:where(details:not(.more))>summary{display:flex;align-items:center;gap:8px;width:fit-content;max-width:100%;box-sizing:border-box;min-height:40px;padding:7px 14px;border:1px solid var(--line2);border-radius:10px;background:var(--panel);color:var(--ink2);font-weight:600;line-height:1.5;cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;transition:background-color .15s,border-color .15s,box-shadow .15s}
+:where(details:not(.more))>summary::after{content:'';flex:none;width:7px;height:7px;margin-inline-start:auto;margin-inline-end:2px;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateX(1px) rotate(45deg);opacity:.75;transition:transform .2s ease}
+:where(details[open]:not(.more))>summary::after{transform:translateY(-2px) rotate(-45deg)}
+:where(details:not(.more))>summary:hover{background:var(--bg);border-color:var(--gold)}
+:where(details:not(.more))>summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+:where(details[open]:not(.more))>summary{border-color:color-mix(in srgb,var(--gold) 55%,var(--line2));margin-bottom:8px;color:var(--ink)}
+:where(details:not(.more))>summary small{font-weight:400}
+/* أقسام كاملة العرض (صف كامل لا زر صغير) */
+.vkiscd>summary,.vkissd>summary,.balset>summary,.rlfx>summary,.ssfi>summary,.vkskip>summary,.artc details>summary,.ssprev details>summary{width:100%}
+.vkiscd>summary small,.vkmng>summary small{margin-inline-start:4px}
+.vkiscd{margin:8px 0}
+/* قسم داخل حاوية مؤطّرة: الإطار للحاوية، والعنوان صف كامل بسهمه */
+.rlc details.sec>summary,details.indet>summary,.impg>summary,.prs .it>summary,.vkmng>summary{width:100%;border:0;border-radius:inherit;background:transparent;margin:0}
+.rlc details.sec>summary:hover,details.indet>summary:hover,.impg>summary:hover,.prs .it>summary:hover,.vkmng>summary:hover{background:color-mix(in srgb,var(--gold) 7%,transparent)}
+.rlc details.sec[open]>summary,details.indet[open]>summary,.impg[open]>summary,.prs .it[open]>summary,.vkmng[open]>summary{margin:0;border-bottom:1px solid var(--line);border-radius:inherit;border-bottom-left-radius:0;border-bottom-right-radius:0}
+.rlc details.sec>summary::after{width:7px;height:7px;border-inline-start:0;border-left:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateX(1px) rotate(45deg);opacity:.75}
+.rlc details.sec[open]>summary::after{transform:translateY(-2px) rotate(-45deg)}
+.rlc details.sec[open]>summary{margin-bottom:6px}
+details.indet>summary{padding:10px 2px}
+.prs .it>summary::after{align-self:center}
+.vkmng{padding:4px 14px}.vkmng[open]{padding-bottom:14px}.vkmng>summary{padding:10px 2px;min-height:46px;flex-wrap:wrap}
+.vkmng>summary small{flex:1 1 auto}
+.impg>summary{padding:10px 12px}
+/* «⋯ المزيد» في البطاقة قائمة لا قسم — تبقى كما هي */
+@media print{details>summary::after{display:none!important}details>summary{border:0!important;padding:0!important;min-height:0!important;background:none!important}}
+/* V174 — زر «ملف التحضير» ظاهر على بطاقة حكمك المحجوز */
+.prepb{font:inherit;display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:3px 12px;border:1px solid color-mix(in srgb,var(--gold) 60%,var(--line2));border-radius:999px;background:var(--gold-soft);color:var(--gold-ink);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.prepb:hover{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 22%,var(--panel))}
+.prepb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.prepb .i{width:15px;height:15px}
+.rlc .acts .mini.prepb{min-height:32px;padding:3px 12px;font-size:12.5px;border-radius:999px}
+.rlc .sm .prepb{order:-1}
+.mna{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:flex-end;align-items:center}
+.rlc details.sec.flash{box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 55%,transparent);transition:box-shadow .3s}
+@media print{.prepb{display:none!important}}
+
+/* V174 — شارة المزامنة الموحّدة (الشريط العلوي) ولوحتها */
+.bar .ib.sybadge{width:auto;min-width:36px;padding:0 11px;gap:7px;display:inline-flex;align-items:center;font:inherit;font-size:12.5px;font-weight:700;white-space:nowrap;position:relative;cursor:pointer;transition:background-color .2s,border-color .2s,color .2s}
+.sybadge .sbi{width:17px;height:17px;flex:none}
+.sybadge .sbn{display:none;min-width:18px;height:18px;padding:0 5px;border-radius:999px;font-size:11px;line-height:18px;text-align:center;font-variant-numeric:tabular-nums}
+.bar .ib.sybadge.s-ok{color:#9BE3BA;border-color:rgba(92,196,138,.55);background:rgba(92,196,138,.14)}
+.bar .ib.sybadge.s-dirty{color:#FFD9A0;border-color:rgba(229,164,76,.75);background:rgba(229,164,76,.2)}
+.bar .ib.sybadge.s-dirty .sbn{background:#E5A44C;color:#1E1405}
+.bar .ib.sybadge.s-run{color:#BFDDFF;border-color:rgba(122,184,255,.7);background:rgba(122,184,255,.18)}
+.bar .ib.sybadge.s-run .sbi{animation:sbspin 1s linear infinite}
+.bar .ib.sybadge.s-late{color:#FFC4C4;border-color:rgba(255,128,128,.8);background:rgba(226,114,114,.24)}
+.bar .ib.sybadge.s-late .sbn{background:#E27272;color:#fff}
+.bar .ib.sybadge.s-off{color:rgba(255,255,255,.75)}
+.sybadge.pulse{animation:sbpulse 1.1s ease-in-out 5}
+@keyframes sbspin{to{transform:rotate(360deg)}}
+@keyframes sbpulse{50%{box-shadow:0 0 0 6px rgba(229,164,76,.35)}}
+@media (prefers-reduced-motion:reduce){.sybadge .sbi,.sybadge.pulse{animation:none!important}}
+.bar .tools .ib.sybadge{width:auto;flex:0 0 auto}
+@media (max-width:700px){.bar .tools .ib.sybadge{padding:0;width:42px;height:42px;flex:0 0 42px;justify-content:center}.sybadge .sbt{display:none}.sybadge .sbn{display:block;position:absolute;top:-7px;right:-7px;box-shadow:0 0 0 2px var(--navybar,#0B1F3B)}
+  .bar .ib.sybadge::after{content:'';position:absolute;bottom:4px;left:4px;width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 2px var(--navybar,#0B1F3B)}.bar .ib.sybadge.s-off::after{display:none}}
+#sypop{position:fixed;inset:0;z-index:58;display:none}
+#sypop.show{display:block}
+#sypop .sbbk{position:absolute;inset:0;background:rgba(8,14,28,.22)}
+#sypop .sbx{position:absolute;top:var(--sbtop,70px);left:var(--sbleft,12px);width:min(390px,calc(100vw - 24px));max-height:calc(100vh - var(--sbtop,70px) - 16px);overflow:auto;box-sizing:border-box;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 48px rgba(11,31,59,.28);padding:14px 16px 16px;display:flex;flex-direction:column;gap:12px;animation:sbin .16s ease-out}
+@keyframes sbin{from{opacity:0;transform:translateY(-6px)}}
+@media (max-width:700px){#sypop .sbx{top:auto;left:0;right:0;bottom:0;width:auto;max-height:86vh;border-radius:20px 20px 0 0;padding-bottom:calc(18px + env(safe-area-inset-bottom,0px));animation:sbup .2s ease-out}#sypop .sbx::before{content:'';align-self:center;width:38px;height:4px;border-radius:4px;background:var(--line2);margin:-4px 0 2px}}
+@keyframes sbup{from{transform:translateY(30px);opacity:.4}}
+.sbh{display:flex;align-items:center;gap:10px}
+.sbh .sbhi{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none}
+.sbh .sbhi svg{width:20px;height:20px}
+.sbh .sbht{flex:1;min-width:0;display:flex;flex-direction:column}
+.sbh .sbht b{font-size:16px}
+.sbh .sbht span{font-size:13px;color:var(--ink2)}
+.sbh .ib{flex:none}
+.sbs-ok{background:var(--ok-soft);color:var(--ok)}.sbs-dirty{background:var(--warn-soft);color:var(--warn)}.sbs-run{background:var(--accent-soft);color:var(--c1)}.sbs-late{background:var(--bad-soft);color:var(--bad)}.sbs-off{background:var(--panel2);color:var(--ink3)}
+.sbrows{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.sbr{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg)}
+.sbr+.sbr{border-top:1px solid var(--line)}
+.sbr .sbd{width:10px;height:10px;border-radius:50%;flex:none;background:var(--ink3)}
+.sbr .sbd.ok{background:var(--ok)}.sbr .sbd.dirty{background:var(--warn)}.sbr .sbd.run{background:var(--c1)}.sbr .sbd.late{background:var(--bad)}.sbr .sbd.off{background:transparent;border:2px solid var(--line2)}
+.sbr .sbrt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.5}
+.sbr .sbrt b{font-size:14px}
+.sbr .sbrt small{font-size:12.5px;color:var(--ink2)}
+.sbr .sylink{flex:none}
+.sbgo{min-height:48px;font-size:15.5px;font-weight:700;width:100%;justify-content:center}
+.sbsteps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.sbsteps li{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink2);min-height:40px}
+.sbsteps li .sbk{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:12.5px;font-weight:700;flex:none;border:1.5px solid var(--line2);color:var(--ink3);background:var(--panel)}
+.sbsteps li.done .sbk{background:var(--ok);border-color:var(--ok);color:#fff}
+.sbsteps li.cur{color:var(--ink);font-weight:700}
+.sbsteps li.cur .sbk{border-color:var(--gold);color:var(--gold-ink);background:var(--gold-soft)}
+.sbsteps li .btn{margin-inline-start:auto}
+.sbsteps li .sylink{margin-inline-start:auto}
+.sbfoot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;font-size:12.5px;color:var(--ink3)}
+.sbfoot .sylink{font-size:13px;color:var(--accent);font-weight:700;text-decoration:none}
+:root[data-theme="dark"] .sbfoot .sylink{color:var(--gold)}
+@media print{#sypop,.sybadge{display:none!important}}
 </style>
 </head>
 <body>
@@ -2106,6 +2203,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
     <button class="clr hidden" id="qclr" type="button">مسح</button>
   </div>
   <div class="tools">
+    <button class="ib sybadge s-off hidden" id="sybadge" type="button" aria-haspopup="dialog" aria-controls="sypop" aria-expanded="false" title="المزامنة"><svg class="sbi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-14.3 4.9"/><path d="M4 12A8 8 0 0 1 18.3 7.1"/><path d="M18.5 3v4.3h-4.3"/><path d="M5.5 21v-4.3h4.3"/></svg><span class="sbt" id="sbt">المزامنة</span><span class="sbn hidden" id="sbn"></span></button>
     <button class="ib gsbtn" id="gsbtn" title="بحث شامل: مادة، طعن، مبدأ، أداة (Ctrl+K)" aria-label="بحث شامل" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg><span>بحث شامل</span><span class="kbd" id="gskbd">Ctrl K</span></button>
     <button class="ib hidden" id="lockbtn" title="اقفل التطبيق الآن" aria-label="اقفل التطبيق الآن" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></button>
     <button class="ib" id="menubtn" title="الإعدادات والتعليمات" aria-label="الإعدادات والتعليمات" aria-haspopup="dialog" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -2796,7 +2894,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V173 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V174 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -3656,9 +3754,11 @@ function toolVisRender() {
 }
 // V132: الرئيسية — لوحة الرول في القلب، ثم لوحات مضغوطة: الجلسة والقضايا، الأحكام، المراجع، المساعد. «؟» في كل لوحة يشرح أدواتها في سطر لكل أداة
 function tileFit() {   // V173: اسم البطاقة لا يخرج عن حدودها (الكلمة الطويلة مع الخط الكبير على الآيفون) — يُصغَّر الخط بقدر الحاجة
-  document.querySelectorAll('#tiles .tile.app b').forEach(el => { el.style.fontSize = ''; if (!el.clientWidth) return; let fs = parseFloat(getComputedStyle(el).fontSize) || 13, n = 0; while (el.scrollWidth > el.clientWidth + 1 && fs > 9 && n++ < 14) { fs -= 0.5; el.style.fontSize = fs + 'px'; } });
+  document.querySelectorAll('#tiles .tile.app b').forEach(el => { el.style.fontSize = ''; el.style.letterSpacing = ''; const t = el.closest('.tile'); if (t) t.style.paddingInline = ''; if (!el.clientWidth) return; let fs = parseFloat(getComputedStyle(el).fontSize) || 13, n = 0; while (el.scrollWidth > el.clientWidth + 1 && fs > 9 && n++ < 14) { fs -= 0.5; el.style.fontSize = fs + 'px'; }
+    if (el.scrollWidth > el.clientWidth + 1) { if (t) t.style.paddingInline = '1px'; el.style.letterSpacing = '-.3px'; n = 0; while (el.scrollWidth > el.clientWidth + 1 && fs > 8 && n++ < 4) { fs -= 0.5; el.style.fontSize = fs + 'px'; } } });   // V174: مع الخط الحقيقي (Cairo) على 360 قد لا يكفي 9px — تُضيَّق حافة البطاقة والتباعد
 }
 window.addEventListener('resize', () => { clearTimeout(window.__tfT); window.__tfT = setTimeout(tileFit, 150); });
+try { if (document.fonts) { document.fonts.ready.then(() => { try { tileFit(); } catch (e) {} }); document.fonts.addEventListener('loadingdone', () => { clearTimeout(window.__tfT); window.__tfT = setTimeout(tileFit, 80); }); } } catch (e) {}   // V174: بعد تحميل الخط الحقيقي تتغيّر المقاسات — يُعاد الحساب
 function renderHome() {
   try { rlHomeAlert(); } catch (e) {}
   const tile = t => '<button type="button" class="tile app ' + t[4] + '" data-go="' + t[0] + '" title="' + esc(t[2]) + '" aria-label="' + esc(t[1]) + '">' + '<span class="ic">' + t[5] + (AI_TOOLS.has(t[0]) ? '<span class="aibadge" title="تستعمل أداة ذكاء اصطناعي (Claude أو غيرها) — بالنسخ واللصق، أو مباشرة داخل claude.ai">✦ ذكاء</span>' : '') + '</span><b>' + t[1] + '</b></button>';
@@ -5066,7 +5166,7 @@ const RLX_KEY = 'tm_rlexpand';
 let RLX = (() => { try { const a = JSON.parse(localStorage.getItem(RLX_KEY) || '[]'); return new Set(Array.isArray(a) ? a.map(String) : []); } catch (e) { return new Set(); } })();
 function rlxSave() { try { if (RL.cards.length) { const ids = new Set(RL.cards.map(c => String(c.id))); RLX = new Set([...RLX].filter(k => ids.has(k.split('#')[0]))); } localStorage.setItem(RLX_KEY, JSON.stringify([...RLX])); } catch (e) {} }
 function rlxSet(k, on) { k = String(k); if (!!on === RLX.has(k)) return; if (on) RLX.add(k); else RLX.delete(k); rlxSave(); }
-const RL_IC = { cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>', pen: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>', ann: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>', dec: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 2.5h6v3H9zM9 11h6M9 15h4"/>', st: '<circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/>', doc: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/>', bk: '<path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>', hist: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', chev: '<path d="m15 6-6 6 6 6"/>' };
+const RL_IC = { fold: '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M8 13h8"/>', cal: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>', pen: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>', ann: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>', dec: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 2.5h6v3H9zM9 11h6M9 15h4"/>', st: '<circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/>', doc: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/>', bk: '<path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>', hist: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', chev: '<path d="m15 6-6 6 6 6"/>' };
 function rlIc(k) { return '<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + RL_IC[k] + '</svg>'; }
 function rlProg(c) {
   if (!(RL_RES.includes(c.stage) && c.writer === rlMe())) return '';
@@ -5376,7 +5476,7 @@ function rlKnowHtml(c, pr) {   // «تعرّف على قضيتك»: سطور م�
 function rlMineItem(c, pr) { const res = RL_RES.includes(c.stage), w = rlWt(c), D = c.next ? rlDays(c.next) : null;
   return '<article class="mni' + (res ? ' res' : '') + '"><header><b>' + esc(c.code) + '</b>' + (rlSibs(c).length ? '<small>+ ' + esc(rlSibs(c).map(x => x.code).join('، ')) + '</small>' : '') + ctChips(c) + '<span class="mnw" title="وزن القضية في التوزيع">وزن ' + w + '</span></header>'
     + '<p class="mnm">' + (res ? 'النطق ' + rlFmt(c.next) + (D != null ? ' · ' + rlRel(D) : '') + ' · ' + esc(c.js || 'لم يبدأ') : 'جلسة ' + rlFmt(c.next) + (D != null ? ' · ' + rlRel(D) : '') + (rlPrepOf(c) === 'ok' ? ' · جاهزة للحكم' : rlPrepOf(c) === 'no' ? ' · غير جاهزة' + (rlRdTxt(c) ? ': ' + esc(rlRdTxt(c)) : '') : '')) + (c.subj ? ' · ' + esc(c.subj) : '') + '</p>'
-    + rlKnowHtml(c, pr) + (pr ? '' : '<div class="mna"><button type="button" class="linkbtn" data-mo="' + c.id + '">افتح البطاقة ›</button></div>') + '</article>'; }
+    + rlKnowHtml(c, pr) + (pr ? '' : '<div class="mna">' + (res && c.writer === rlMe() ? '<button type="button" class="mini prepb" data-mp="' + c.id + '">' + rlIc('fold') + 'ملف التحضير</button>' : '') + '<button type="button" class="linkbtn" data-mo="' + c.id + '">افتح البطاقة ›</button></div>') + '</article>'; }
 function rlMineOpen() {
   let w = document.getElementById('minesheet'); if (!w) { w = el('div', 'sess minesheet'); w.id = 'minesheet'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-modal', 'true'); w.setAttribute('aria-label', 'خلاصتي'); document.body.appendChild(w); }
   const draw = () => { const L = rlMineList(), easy = rlMineSort() === 'easy', un = L.filter(c => !c.an && !PROF_HIDE.has('i'));
@@ -5389,6 +5489,7 @@ function rlMineOpen() {
     w.querySelector('[data-mn=pr]').onclick = () => { const L2 = rlMineList(); if (!L2.length) { toast('لا قضايا لك'); return; } const h = rlDoc('خلاصتي', rlChip('القضايا', rlAI(L2.length), 'g') + rlChip('حتى', rlFmt(rlToday())), '<div class="mnprint">' + L2.map(c => rlMineItem(c, true)).join('') + '</div>', 'من ملخصاتك المحفوظة — مسودة عمل داخلية'); $('#rl_sheetout').innerHTML = h; rlOut(h); };
     w.querySelectorAll('[data-ms]').forEach(b => b.onclick = () => { try { localStorage.setItem('tm_minesort', b.dataset.ms); } catch (e) {} draw(); });
     w.querySelectorAll('[data-mo]').forEach(b => b.onclick = () => { w.classList.remove('show'); document.documentElement.classList.remove('noscroll'); setView('r'); setTimeout(() => { rlxSet(b.dataset.mo, true); rlGoCard(b.dataset.mo); }, 60); });
+    w.querySelectorAll('[data-mp]').forEach(b => b.onclick = () => { w.classList.remove('show'); document.documentElement.classList.remove('noscroll'); setView('r'); setTimeout(() => rlPrepGo(b.dataset.mp), 60); });   // V174
     w.querySelectorAll('[data-mk]').forEach(b => b.onclick = () => { w.classList.remove('show'); document.documentElement.classList.remove('noscroll'); INX = b.dataset.mk; setView('i'); });
     const qb = w.querySelector('[data-mn=q]'); if (qb) qb.onclick = () => { w.classList.remove('show'); document.documentElement.classList.remove('noscroll'); anQStart(un.map(c => c.id), 'خلاصتي'); };
   };
@@ -5527,6 +5628,7 @@ function rlCard(c, mode, pos) {
     + (sibs.length ? '<span class="tag lnk" title="استئنافات مرتبطة — اضغط الرقم للانتقال إليه">مضموم: ' + sibs.map(s => '<button type="button" data-sib="' + s.id + '">' + esc(s.code) + '</button>').join('، ') + '</span>' : '') + '</div>';
   // السطر المضغوط (للمطويّة)
   h += '<div class="sm"><span class="f" title="' + whenT + '">' + rlIc('cal') + when + '</span>'
+    + (mine && !done ? '<button type="button" class="prepb" data-a="prep" title="افتح ملف التحضير لهذا الحكم">' + rlIc('fold') + 'ملف التحضير</button>' : '')   // V174: ظاهر على البطاقة المطوية
     + (res ? '<span class="f" title="كاتب الحكم">' + rlIc('pen') + (c.writer ? esc(RL_W[c.writer]) + (c.wsub ? ' <em class="wsub" title="كتبه البديل ويُحسب لصاحب الصفة">✱ بديل</em>' : '') : '<span class="bad">غير موزّعة</span>') + '</span>' + rlProg(c) + (rlPnDiff(c) ? '<span class="f bdg rp" title="هيئة المرافعة تختلف عن هيئة النطق">⚠ الهيئة</span>' : '') + (scOn() && c.writer && !mine ? '<span class="f jsr" title="حالة الحكم كما سجّلها كاتبه">' + esc(c.js || 'لم يبدأ') + '</span>' : '')
       : (done ? ((D0 => D0 ? '<span class="f bdg ' + (rlDlState(D0) === 'ok' ? 'rv' : 'rp') + '" title="' + esc(rlDlTxt(D0)) + '">' + (D0.k === 's' ? 'م59' : 'م70') + ': ' + rlFmt(D0.end) + '</span>' : '')(rlDl(c))) : (c.writer && RL_W[c.writer] && rlBalKeys().length > 1 ? '<span class="f wpre" title="كاتب الحكم: ' + esc(RL_W[c.writer]) + '">' + rlIc('pen') + RL_LT[c.writer] + (c.wsub ? '✱' : '') + '</span>' : '') + (rlRevOn(c) ? '<span class="f bdg rv">✓ روجعت</span>' : '<span class="f bdg un">○ لم تُراجع</span>') + (rlPrepOf(c) === 'ok' ? '<span class="f bdg ok">● جاهزة للحكم</span>' : rlPrepOf(c) === 'no' ? '<span class="f bdg no">○ غير جاهزة' + (rlRdTxt(c) ? ': ' + esc(rlRdTxt(c)) : '') + '</span>' : '') + (c.after && rlAfterList().includes(c) ? '<span class="f bdg af">القرار بعد الجلسة</span>' : '') + (rlRep(c).n >= 2 ? '<span class="f bdg rp">⚠ ' + esc(rlRepTxt(rlRep(c))) + '</span>' : '')) + (c.ann ? '<span class="f" title="الإعلان">' + rlIc('ann') + '<span class="ann ' + (ok ? 'ok' : 'no') + '">' + rlAnnTxt(c.ann) + (ok ? ' ✓' : ' ✗') + '</span></span>' : '') + (last ? '<span class="f lastc" title="آخر قرار">' + rlIc('dec') + esc(last.length > 48 ? last.slice(0, 48) + '…' : last) + '</span>' : ''))
     + '</div>';
@@ -5565,7 +5667,7 @@ function rlCard(c, mode, pos) {
     + (prs.length ? '<button type="button" data-a="cites">نسخ الإحالات</button>' : '') + ((c.hist || []).length ? '<button type="button" data-a="undo" title="إلغاء آخر قرار مسجّل">تراجع عن آخر قرار</button>' : '')
     + (c.next && !done ? '<button type="button" data-a="sheet">ورقة الرول (وضع الجلسة)</button>' : '') + '<button type="button" data-a="edit">تعديل</button><hr><button type="button" data-a="del" class="dl">حذف</button>';
   if (hint) { if (s) s += hint; else b += hint; } // V114: لا عمود خلاصة لتلميح وحده
-  const acts = '<div class="acts">' + (done ? (c.stage === 'صدر الحكم' ? '<button type="button" class="mini" data-a="vdedit">تعديل المنطوق</button>' : c.stage === 'شُطبت' ? '<button type="button" class="mini pri" data-a="ren">تجديد من الشطب</button>' : c.stage === 'موقوفة' ? '<button type="button" class="mini pri" data-a="ren">تعجيل من الوقف</button>' : '') : '<button type="button" class="mini pri" data-a="dec">قرار الجلسة</button>') + '<details class="more"><summary class="mini" aria-label="المزيد من الإجراءات">⋯ المزيد</summary><div class="menu" role="menu">' + more + '</div></details></div>';
+  const acts = '<div class="acts">' + (done ? (c.stage === 'صدر الحكم' ? '<button type="button" class="mini" data-a="vdedit">تعديل المنطوق</button>' : c.stage === 'شُطبت' ? '<button type="button" class="mini pri" data-a="ren">تجديد من الشطب</button>' : c.stage === 'موقوفة' ? '<button type="button" class="mini pri" data-a="ren">تعجيل من الوقف</button>' : '') : '<button type="button" class="mini pri" data-a="dec">قرار الجلسة</button>' + (mine ? '<button type="button" class="mini prepb" data-a="prep" title="افتح ملف التحضير لهذا الحكم">' + rlIc('fold') + 'ملف التحضير</button>' : '')) + '<details class="more"><summary class="mini" aria-label="المزيد من الإجراءات">⋯ المزيد</summary><div class="menu" role="menu">' + more + '</div></details></div>';
   d.innerHTML = h + '<div class="bd' + (s ? ' two' : '') + '"><div class="bdm">' + b + '</div>' + (s ? '<div class="bds">' + s + '</div>' : '') + acts + '</div>';
   { const nx = d.querySelector('.bds .rlpath .nx'); if (nx) setTimeout(() => { try { const b = nx.parentElement, r = nx.getBoundingClientRect(), br = b.getBoundingClientRect(); if (b.scrollWidth > b.clientWidth && (r.left < br.left || r.right > br.right)) b.scrollLeft += (r.left + r.width / 2) - (br.left + br.width / 2); } catch (e) {} }, 0); } // V114: الخطوة التالية ظاهرة في شريط المسار على الجوال
   if (rlDecOpen === c.id) d.querySelector('.bd').appendChild(rlDecBox(c));
@@ -5594,6 +5696,7 @@ function rlCard(c, mode, pos) {
   if (q('writer')) q('writer').onchange = e => { c.writer = e.target.value; c.updated = Date.now(); const sw = sibs.filter(x => RL_RES.includes(x.stage)); sw.forEach(x => { x.writer = c.writer; x.updated = Date.now(); }); rlFocus = c.id; rlSave(); rlRender(); if (sw.length) toast('وُزّعت معها المرتبطة: ' + sw.map(x => x.code).join('، ')); };
   if (q('js')) q('js').onchange = e => { rlJsSet(c, e.target.value); rlFocus = c.id; rlSave(); rlRender(); };
   d.querySelectorAll('[data-fb]').forEach(x => x.onclick = () => { c.fb = c.fb === x.dataset.fb ? '' : x.dataset.fb; if (!c.fb) delete c.fb; c.updated = Date.now(); rlFocus = c.id; rlSave(); rlRender(); if (c.fb) toast('شكرًا — يُستعمل لمعايرة أوزان التوزيع'); });   // V163
+  d.querySelectorAll('[data-a=prep]').forEach(x => x.onclick = e => { e.stopPropagation(); rlPrepGo(c.id); });   // V174
   if (q('goi')) q('goi').onclick = () => { INX = c.id; setView('i'); };
   if (q('know')) q('know').onclick = () => { INX = c.id; setView('i'); };   // V167   // V147: التحليل يعرف القضية
   if (q('god')) q('god').onclick = () => { setView('d'); toast('الصق مسودة ' + c.code + ' للفحص'); };
@@ -6606,6 +6709,107 @@ function syRender() {
 { const g = document.getElementById('dm_go'); if (g) g.onclick = () => rlDemoStart({ deg: $('#dm_deg').value, kind: $('#dm_kind').value, n: +$('#dm_n').value, days: [0, 1], exl: false }); }
 $('#sy_file').onchange = async e => { const fs = [...e.target.files]; e.target.value = ''; if (fs.length > 1) await syApplyMany(fs); else if (fs[0]) { SY.fname = fs[0].name; await syApply(await fs[0].text()); } else SY.mode = ''; };
 (async () => { SY.key = await syGet('key') || null; SY.salt = await syGet('salt') || null; SY.handle = await syGet('handle') || null; SY.dir = await syGet('dir') || null; if (!SY.key) SY.salt = null; syRender(); syDot(); })();
+// V174 — شارة المزامنة الموحّدة في الشريط العلوي: أربع حالات (مُزامَن بوقته / N لم تُزامَن / جارٍ / متأخرة) ولوحة واحدة «زامن الآن — الاثنان معًا»
+// للنسخة الشخصية وملف الدائرة. لا تغيّر آلية المزامنة نفسها: تستدعي syPull/syPush/sySyncNow وscNow/scSync/scSend كما هي.
+// على الحاسوب بمجلد مربوط: لمسة واحدة تنفّذ الاثنين. على الآيباد والآيفون: كل اختيار ملف أو حفظ يحتاج لمسة (قيد iOS) فتعرض اللوحة الخطوات بالترتيب.
+const SB_LATE = 24 * 3600e3;
+let SBQ = null;   // تسلسل الجوال الجاري: {t: بدايته}
+function sbCount() {   // عدد التغييرات الشخصية بعد آخر حفظ (بطاقات، حذف، ملفاتي، إعدادات الدائرة)
+  if (!SY.key) return 0; const p = syMeta().pushed || 0; let n = 0;
+  try { n += (RL.cards || []).filter(c => (c.updated || 0) > p).length; n += Object.values(RL.del || {}).filter(t => t > p).length; n += Object.values(CASES || {}).filter(x => x && (x.updated || 0) > p).length; n += Object.values(CS_DEL || {}).filter(t => t > p).length; if ((RL.st || 0) > p) n++; } catch (e) {}
+  return n || (syDirty() ? 1 : 0);
+}
+const sbMob = () => !syCanFS();
+function sbState() {
+  const pOn = !!SY.key && !!(window.crypto && crypto.subtle), cOn = scOn(), m = syMeta(), now = Date.now();
+  const pN = pOn ? sbCount() : 0, cN = cOn ? scDirty() : 0, run = !!(SY.busy || SCK.busy);
+  const pLate = pOn && ((pN && now - (m.pushed || 0) > SB_LATE) || (!m.pushed && sfHasData()));
+  const cLate = cOn && now - (SC.pulled || 0) > SB_LATE;
+  const pk = !pOn ? 'off' : SY.busy ? 'run' : pLate ? 'late' : pN ? 'dirty' : 'ok', ck = !cOn ? 'off' : SCK.busy ? 'run' : cLate ? 'late' : cN ? 'dirty' : 'ok';
+  const k = (!pOn && !cOn) ? 'off' : run ? 'run' : (pLate || cLate) ? 'late' : (pN || cN) ? 'dirty' : 'ok';
+  const last = Math.max(pOn ? Math.max(m.pushed || 0, m.pulled || 0) : 0, cOn ? Math.max(SC.pushed || 0, SC.pulled || 0) : 0);
+  return { k, pOn, cOn, pN, cN, n: pN + cN, pk, ck, last, m };
+}
+const sbTime = t => { if (!t) return '—'; const d = new Date(t), td = new Date(); return d.toDateString() === td.toDateString() ? d.toLocaleTimeString('ar-KW-u-nu-latn', { hour: '2-digit', minute: '2-digit' }) : d.toLocaleDateString('ar-KW-u-nu-latn', { day: 'numeric', month: 'numeric' }); };
+const sbAgo = t => { const d = Math.floor((Date.now() - t) / 864e5); return d <= 0 ? 'اليوم' : d === 1 ? 'قبل يوم' : d === 2 ? 'قبل يومين' : d <= 10 ? 'قبل ' + d + ' أيام' : 'قبل ' + d + ' يومًا'; };
+const sbChg = n => n === 1 ? 'تغيير واحد' : n === 2 ? 'تغييران' : n + ' تغييرات';
+function sbLabel(S) {
+  return S.k === 'run' ? 'جارٍ المزامنة…' : S.k === 'late' ? (S.n ? '⚠ ' + S.n + ' لم تُزامَن' : '⚠ المزامنة متأخرة') : S.k === 'dirty' ? S.n + ' لم تُزامَن' : S.k === 'ok' ? 'مُزامَن ' + sbTime(S.last) : 'المزامنة';
+}
+function sbTitle(S) {
+  return S.k === 'run' ? 'جارٍ المزامنة' : S.k === 'late' ? 'المزامنة متأخرة' + (S.n ? ': ' + sbChg(S.n) + ' لم تُزامَن' : '') + ' — زامن الآن' : S.k === 'dirty' ? sbChg(S.n) + ' لم تُزامَن — زامن الآن' : S.k === 'ok' ? 'مُزامَن — آخر مزامنة ' + syWhen(S.last) : 'المزامنة غير مفعّلة على هذا الجهاز';
+}
+function sbRender() {
+  const b = document.getElementById('sybadge'); if (!b) return;
+  if (window.DEMO) { b.classList.add('hidden'); sbClose(); return; }
+  const S = sbState(); b.classList.remove('hidden'); ['ok', 'dirty', 'run', 'late', 'off'].forEach(k => b.classList.toggle('s-' + k, S.k === k));
+  const t = sbTitle(S); b.title = t; b.setAttribute('aria-label', 'المزامنة: ' + t); b.dataset.state = S.k;
+  const tx = document.getElementById('sbt'); if (tx) tx.textContent = sbLabel(S);
+  const nb = document.getElementById('sbn'); if (nb) { nb.textContent = S.n > 99 ? '99+' : String(S.n); nb.classList.toggle('hidden', !(S.n && (S.k === 'dirty' || S.k === 'late'))); }
+  const pop = document.getElementById('sypop'); if (pop && pop.classList.contains('show')) sbDraw();
+}
+let sbT = 0; function sbSoon() { clearTimeout(sbT); sbT = setTimeout(() => { try { sbRender(); } catch (e) {} }, 120); }
+function sbPlace() { const b = document.getElementById('sybadge'), x = document.querySelector('#sypop .sbx'); if (!b || !x) return; const r = b.getBoundingClientRect(); x.style.setProperty('--sbtop', Math.round(r.bottom + 8) + 'px'); x.style.setProperty('--sbleft', Math.max(12, Math.round(Math.min(r.left, window.innerWidth - x.offsetWidth - 12))) + 'px'); }
+function sbOpen() {
+  let w = document.getElementById('sypop'); if (!w) { w = el('div', ''); w.id = 'sypop'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-modal', 'true'); w.setAttribute('aria-label', 'المزامنة'); w.innerHTML = '<div class="sbbk"></div><div class="sbx" tabindex="-1"></div>'; document.body.appendChild(w); w.querySelector('.sbbk').onclick = sbClose; document.addEventListener('keydown', e => { if (e.key === 'Escape' && w.classList.contains('show')) sbClose(); }); }
+  w.classList.add('show'); sbDraw(); sbPlace(); const b = document.getElementById('sybadge'); if (b) { b.setAttribute('aria-expanded', 'true'); b.classList.remove('pulse'); }
+  setTimeout(() => { const f = w.querySelector('.sbsteps .btn.primary') || w.querySelector('.sbgo') || w.querySelector('.ib'); if (f) try { f.focus({ preventScroll: true, focusVisible: false }); } catch (e) {} }, 30);
+}
+function sbClose() { const w = document.getElementById('sypop'); if (w) w.classList.remove('show'); const b = document.getElementById('sybadge'); if (b) b.setAttribute('aria-expanded', 'false'); }
+function sbSettings(id) { sbClose(); openDrawer(); setTimeout(() => { const t = document.getElementById(id || 'dsync'); if (t) t.scrollIntoView({ block: 'start' }); }, 150); }
+const SB_ICO = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 0 1-14.3 4.9"/><path d="M4 12A8 8 0 0 1 18.3 7.1"/><path d="M18.5 3v4.3h-4.3"/><path d="M5.5 21v-4.3h4.3"/></svg>';
+function sbSteps(S) {   // خطوات الجوال: لكل خطوة لمسة (اختيار ملف أو حفظ)
+  const L = [], t = SBQ ? SBQ.t : Infinity, m = S.m;
+  if (S.pOn) { L.push({ k: 'pp', t: 'اجلب نسختك', d: (m.pulled || 0) >= t || (SBQ && SBQ.skip && SBQ.skip.pp), go: () => syPull() });
+               L.push({ k: 'ps', t: 'احفظ نسختك', d: (m.pushed || 0) >= t || (SBQ && SBQ.skip && SBQ.skip.ps), go: () => syPush() }); }
+  if (S.cOn) L.push({ k: 'c', t: SCK.want && scDirty() ? 'احفظ نسختك من ملف الدائرة' : 'ملف الدائرة: اجلب وأرسل', d: (SC.pushed || 0) >= t || ((SC.pulled || 0) >= t && !scDirty() && !SCK.want) || (SBQ && SBQ.skip && SBQ.skip.c), go: () => { if (SCK.want && scDirty()) scSend(); else scNow(); } });
+  return L;
+}
+function sbRow(name, k, txt, act) { return '<div class="sbr"><span class="sbd ' + k + '" aria-hidden="true"></span><div class="sbrt"><b>' + name + '</b><small>' + txt + '</small></div>' + (act || '') + '</div>'; }
+function sbDraw() {
+  const x = document.querySelector('#sypop .sbx'); if (!x) return; const S = sbState(), m = S.m, mob = sbMob();
+  const head = S.k === 'ok' ? 'كل شيء مُزامَن — آخر مزامنة ' + syWhen(S.last) : S.k === 'dirty' ? sbChg(S.n) + ' لم تُزامَن بعد' : S.k === 'late' ? (S.n ? sbChg(S.n) + ' لم تُزامَن، و' : '') + 'آخر مزامنة ' + (S.last ? sbAgo(S.last) : 'لم تحدث بعد') : S.k === 'run' ? 'جارٍ المزامنة…' : 'المزامنة غير مفعّلة على هذا الجهاز';
+  let h = '<div class="sbh"><span class="sbhi sbs-' + S.k + '">' + SB_ICO + '</span><div class="sbht"><b>المزامنة</b><span>' + head + '</span></div><button type="button" class="ib" data-sb="x" aria-label="إغلاق">✕</button></div>';
+  const pTxt = !S.pOn ? 'غير مفعّلة — نسخة مشفّرة من الرول وملفاتك في مجلدك السحابي' : SY.ask ? 'الملف المختار برمز آخر — أكمل في الإعدادات' : (S.pN ? '<b>' + sbChg(S.pN) + '</b> لم تُحفظ · ' : '') + 'آخر حفظ ' + syWhen(m.pushed) + ' · آخر جلب ' + syWhen(m.pulled);
+  const cTxt = !S.cOn ? '' : (S.cN ? '<b>' + S.cN + ' لم تُرسل</b> · ' : '') + 'آخر سحب ' + syWhen(SC.pulled) + ' · آخر إرسال ' + syWhen(SC.pushed);
+  h += '<div class="sbrows">' + sbRow('نسختي الشخصية', S.pk, pTxt, !S.pOn && S.cOn ? '<button type="button" class="btn mini" data-sb="set">فعّلها</button>' : SY.ask ? '<button type="button" class="btn mini" data-sb="set">أكمل</button>' : '')
+    + (S.cOn ? sbRow('ملف الدائرة', S.ck, cTxt) : '') + '</div>';
+  if (!S.pOn && !S.cOn) h += '<button type="button" class="btn primary sbgo" data-sb="set">فعّل المزامنة</button>';
+  else if (!mob) h += '<button type="button" class="btn primary sbgo" data-sb="all"' + (S.k === 'run' ? ' disabled' : '') + '>' + (S.k === 'run' ? 'جارٍ المزامنة…' : 'زامن الآن' + (S.pOn && S.cOn ? ' — الاثنان معًا' : '')) + '</button>';
+  else {
+    const L = sbSteps(S), cur = SBQ ? L.findIndex(s => !s.d) : -1;
+    if (SBQ && cur < 0) { SBQ = null; h += '<p class="k" style="margin:0">✓ تمّت المزامنة.</p>'; }
+    if (!SBQ) h += '<button type="button" class="btn primary sbgo" data-sb="start">' + 'زامن الآن' + (S.pOn && S.cOn ? ' — الاثنان معًا' : '') + '</button>';
+    h += '<ol class="sbsteps" aria-label="خطوات المزامنة على هذا الجهاز">' + L.map((s, i) => '<li class="' + (SBQ && s.d ? 'done' : SBQ && i === cur ? 'cur' : '') + '"><span class="sbk">' + (SBQ && s.d ? '✓' : (i + 1)) + '</span><span>' + s.t + '</span>' + (SBQ && i === cur ? '<button type="button" class="btn primary mini" data-sbs="' + s.k + '">' + (i ? 'التالي' : 'ابدأ') + '</button><button type="button" class="sylink" data-sbk="' + s.k + '">تخطَّ</button>' : '') + '</li>').join('') + '</ol>'
+      + '<p class="k" style="margin:0;font-size:12.5px;line-height:1.7">على هذا الجهاز كل اختيار للملفات وكل حفظ يحتاج لمسة منك' + (IS_IOS ? ' (قيد في iOS)' : '') + ': اختر <b>كل الملفات</b> في المجلد عند الجلب، و«حفظ في الملفات» ← المجلد نفسه عند الحفظ.</p>';
+  }
+  h += '<div class="sbfoot"><span>مشفّرة في مجلدك السحابي — لا خادم</span><button type="button" class="sylink" data-sb="set">إعدادات المزامنة ›</button></div>';
+  x.innerHTML = h;
+  const q = s => x.querySelectorAll(s);
+  q('[data-sb=x]').forEach(b => b.onclick = sbClose);
+  q('[data-sb=set]').forEach(b => b.onclick = () => sbSettings('dsync'));
+  q('[data-sb=all]').forEach(b => b.onclick = sbAll);
+  q('[data-sb=start]').forEach(b => b.onclick = () => { SBQ = { t: Date.now(), skip: {} }; const L = sbSteps(sbState()); const f = L.find(s => !s.d); if (f) f.go(); sbDraw(); });
+  q('[data-sbs]').forEach(b => b.onclick = () => { const s = sbSteps(sbState()).find(y => y.k === b.dataset.sbs); if (s) s.go(); });
+  q('[data-sbk]').forEach(b => b.onclick = () => { if (SBQ) SBQ.skip[b.dataset.sbk] = 1; sbDraw(); });
+}
+async function sbAll() {   // الحاسوب: الشخصية ثم الدائرة في لمسة واحدة
+  if (SY.busy) return; const S = sbState(); SY.busy = true; sbRender();
+  try { if (S.pOn) await sySyncNow(); } catch (e) {} finally { SY.busy = false; sbRender(); }
+  try { if (scOn()) await scSync({}); } catch (e) {}
+  sbRender();
+}
+{ const b = document.getElementById('sybadge'); if (b) b.onclick = () => { const w = document.getElementById('sypop'); if (w && w.classList.contains('show')) sbClose(); else sbOpen(); }; }
+window.addEventListener('resize', () => { const w = document.getElementById('sypop'); if (w && w.classList.contains('show')) sbPlace(); });
+{ const f = syDot; syDot = function () { const r = f.apply(this, arguments); sbSoon(); return r; }; }
+{ const f = syRender; syRender = function () { const r = f.apply(this, arguments); sbSoon(); return r; }; }
+{ const f = scBar; scBar = function () { const r = f.apply(this, arguments); sbSoon(); return r; }; }
+{ const f = rlSave; rlSave = function () { const r = f.apply(this, arguments); sbSoon(); return r; }; }
+{ const f = rlSessClose; rlSessClose = function () { const r = f.apply(this, arguments); setTimeout(() => { try { const S = sbState(); if (S.n && S.k !== 'off') { const b = document.getElementById('sybadge'); if (b) { b.classList.remove('pulse'); void b.offsetWidth; b.classList.add('pulse'); } if (S.pN && !S.cN) syToast('انتهت الجلسة — ' + sbChg(S.pN) + ' لم تُزامَن: المس شارة المزامنة أعلى الشاشة'); } } catch (e) {} }, 400); return r; }; }   // تذكير بعد الجلسة
+setInterval(() => { try { sbRender(); } catch (e) {} }, 60e3);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') sbSoon(); });
+setTimeout(() => { try { sbRender(); } catch (e) {} }, 900);
+window.__sb = { state: sbState, render: sbRender, open: sbOpen, close: sbClose, count: sbCount, steps: () => sbSteps(sbState()).map(s => ({ k: s.k, t: s.t, d: !!s.d })), get Q() { return SBQ; }, set Q(v) { SBQ = v; }, get SY() { return SY; }, get SC() { return SC; }, set SC(v) { SC = v; }, get SCK() { return SCK; }, get RL() { return RL; }, key: async p => { SY.key = await syDerive(p, new Uint8Array(16)); sbRender(); }, all: () => sbAll() };
 
 function initRoll() {
   if (!rlInit) {
@@ -6906,6 +7110,12 @@ function rlAdj(list) { const out = [], seen = new Set(); list.forEach(c => { if 
 // عدد الأحكام: المرتبطة (أو المتقابلة بالرقم الآلي نفسه) حكم واحد — كما تُكتب في التوزيع
 function rlUnits(list) { return rlDistEntries(list).length; }
 function rlLinkNote(c) { return rlSibs(c).map(s => s.code + (s.next && s.next !== c.next ? ' (' + (RL_RES.includes(s.stage) ? 'النطق ' : RL_DONE.includes(s.stage) ? s.stage + ' ' : 'جلسة ') + rlFmt(s.next) + ')' : RL_DONE.includes(s.stage) ? ' (' + s.stage + ')' : '')).join('، '); }
+// V174: «ملف التحضير» من زر ظاهر — يفتح البطاقة وقسم الملف ويمرّر إليه (من البطاقة ومن «خلاصتي»)
+function rlPrepGo(id) {
+  const c = RL.cards.find(y => y.id === id); if (!c) return; rlxSet(id, true); rlxSet(id + '#vk', true);
+  const go = () => { rlGoCard(id); setTimeout(() => { const x = document.querySelector('#rl-' + CSS.escape(String(id)) + ' details[data-sec=vk]'); if (!x) return; if (!x.open) x.open = true; const hb = document.querySelector('header.bar'), off = hb && getComputedStyle(hb).position !== 'static' ? hb.getBoundingClientRect().bottom : 0; window.scrollTo({ top: Math.max(0, x.getBoundingClientRect().top + window.scrollY - off - 12), behavior: 'smooth' }); x.classList.add('flash'); setTimeout(() => x.classList.remove('flash'), 1400); }, 120); };
+  const rw = document.getElementById('rlwrap'); if (!(rw && rw.classList.contains('show'))) { setView('r'); setTimeout(go, 80); } else go();
+}
 function rlGoCard(id) {
   const x = RL.cards.find(y => y.id === id); if (!x) return; rlFocus = id;
   if (!document.getElementById('rl-' + id)) {
@@ -10790,6 +11000,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [174, 'الإصدار 174', ['كل قسم قابل للطي صار زرًّا واضحًا: إطار وسهم «›» يدور إلى الأسفل حين يُفتح — في البطاقات والخزانة («★ مجلدات أحكامي» و«أعداد الدفوع والمسائل») والتشريعات والإعدادات وغيرها.', 'زر «ملف التحضير» ظاهر على بطاقة حكمك المحجوز وهي مطوية، وفي سطر إجراءاتها، وفي «خلاصتي»: لمسة تفتح البطاقة على الملف مباشرة.', 'شارة المزامنة في الشريط العلوي بأربع حالات: أخضر «مُزامَن» بوقته، كهرماني «N لم تُزامَن»، أزرق «جارٍ»، أحمر «متأخرة». لوحتها «زامن الآن — الاثنان معًا» لنسختك الشخصية وملف الدائرة؛ على الآيباد والآيفون تعرض الخطوات بالترتيب لأن كل اختيار ملف أو حفظ يحتاج لمسة. وبعد إغلاق الجلسة تنبّهك الشارة إن بقي ما لم يُزامَن.']],
   [173, 'الإصدار 173', ['«ملف التحضير» في بطاقة حكمك المحجوز (مكان «نماذج من خزانتك»): مسائل القضية مقترحة من نوعها وملخص ملفها وتعدّلها، ثم ① أسباب الأحكام المشابهة بفقرة كل مسألة مظلّلة و«انسخ الفقرة» — من أحكامك أو نماذج الزملاء أو الكل، ② مبادئ التمييز في مجموعتين: «استشهدت بها الأحكام المشابهة» و«في مسائل القضية من المكتبة»، ③ التشريعات المذكورة فيهما وحدها. لكل بند مفتاح يُحفظ، و«انسخ» و«اطبع». لا يُكتب شيء في مسودتك.', '«★ مجلدات أحكامي» في «إدارة الخزانة»: المس مجلدًا (2024، حولي…) فيُعلَّم كل حكم فيه وفي مجلداته الداخلية، وما تضيفه إليه لاحقًا.', 'أسماء بطاقات الرئيسية لا تخرج عن حدودها على الآيفون بالخط الكبير («حاسبة المستحقات»).']],
   [172, 'الإصدار 172', ['«📂 أوراق الجلسة» بخطوات أوضح: تختار ما يُحلَّل (ومنه إعادة تحليل قضية محللة)، وترى تقدير الوقت والصفحات قبل القراءة، والتقدّم لكل قضية أثناءها.', 'مراجعة التعتيم بلمسة: الكلمات المظلّلة تُرسل معتّمة — المسها لإظهارها إن عُتّمت خطأً، والمس أي كلمة لتعتيمها؛ وكذلك في «تحليل الملف». ولا تنغلق القضية ولا تقفز الصفحة.', 'الطلب المجمّع بثلاث خطوات مرقّمة لكل طلب، والانتقال إلى التالي وحده بعد «وزّع الرد»، و«الصق من الحافظة».', 'الرجوع بين الخطوات دون فقد شيء، و✕ يخفي النافذة ويبقي عملك، و«دفعة جديدة» للبدء من جديد. والنوافذ تُمرَّر من أي مكان في الشاشة.']],
   [171, 'الإصدار 171', ['«★ أحكامي» في خزانة الأحكام: علامة لأحكامك (عند الإضافة، أو مجلد اسمه «أحكامي»، أو من الحكم نفسه) وشرائح «أحكامي · الزملاء · الكل» في الخزانة وفي «نماذج من خزانتك».', '«الدفوع والمسائل» لكل حكم من قاموس جُرّب على 450 مسودة: الدفوع والإثبات من محضر النظر والأسباب، والطلبات من الحكم كله، وتحت كل وسم المقطع الذي استُنتج منه — تحذف وتضيف. والتصفية بالنوع والدفوع (تجتمع)، والنتيجة «تأييد جزئي» و«تصحيح خطأ مادي».', 'الأصول لا تُضم، و«حدّث الفهرسة» يستخرج كل ذلك من أحكامك المحفوظة دون رفعها من جديد، و«أعداد الدفوع والمسائل» للمقارنة.', 'بعد «صدر الحكم»: «أضف مسودتك إلى أحكامي» من بطاقة القضية، مربوطة بها. و«أوراق الجلسة» تستمر في القراءة بعد إغلاق نافذتها.']],
