@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261006211355">
+<meta name="amali-build" content="20261006212157">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3850,6 +3850,7 @@ function bgWork(kind, on) {
 try { window.bgWork = bgWork; } catch (e) {}
 function setView(v) { setTimeout(() => { try { brandFit(); } catch (e) {} }, 0);   // V176
   if (v !== 'j') { try { jdRestore(); } catch (e) {} }   // V177: الأداة المستضافة في الدرج تعود إلى مكانها
+  try { if (v !== 'j' && v !== 'y' && v !== 'h' && NAV.v === 'j' && JW.id && !JW.ret) JW.ret = JW.id; } catch (e) {}   // V177: كل خروج من مساحة الحكم يُبقي زر «↩ مساحة الحكم»
   if (v === 'h') setTimeout(() => { try { tileFit(); } catch (e) {} }, 60);   // V173
   navSync(v === 'c' ? 's' : v === 'j' ? 'y' : v); /* V103: «التحقق» تبويب «فحص سريع» داخل الحاسبة */
   try { calcShare(v); } catch (e) {}
@@ -4090,8 +4091,8 @@ function jwStep(c, box) {
 }
 // ---- درج الأدوات: يُفتح ويُغلق بزره في رأس مساحة الحكم، ويتذكّر حاله (على الشاشة الواسعة) وآخر أداة. الأداة تعمل داخله دون مغادرة القضية.
 const JD_TOOLS = [['s', 'حاسبة المستحقات', 'calc', '#mstwrap', () => initMst()], ['e', 'المواعيد الإجرائية', 'due', '#dlwrap', () => initDl()], ['c', 'قائمة التحقق', 'check', '#chkwrap', () => initCheck()],
-  ['p', 'ابحث في المبادئ', 'prin'], ['l', 'ابحث في التشريعات', 'law'], ['a', 'المساعد — عن هذه القضية', 'ask', '#askwrap', () => initAsk()], ['b', 'بنك الأسباب', 'bank']];
-const JD_SUB = { s: 'المكافأة والإجازات والإنذار', e: 'الاستئناف والتمييز والشطب والوقف', c: 'النصاب، التقادم، المكافأة…', p: 'بالكلمة أو رقم الطعن، و«＋ للقضية»', l: 'م51، أو كلمة من النص', a: 'سؤال بخلاصة هذه القضية', b: 'صياغاتك — يُكمَل في الإصدار القادم' };
+  ['p', 'ابحث في المبادئ', 'prin'], ['l', 'ابحث في التشريعات', 'law'], ['a', 'المساعد — عن هذه القضية', 'ask', '#askwrap', () => initAsk()], ['k', 'خزانة الأحكام', 'vault', '#vkwrap', () => vkInit()], ['b', 'بنك الأسباب', 'bank']];
+const JD_SUB = { s: 'المكافأة والإجازات والإنذار', e: 'الاستئناف والتمييز والشطب والوقف', c: 'النصاب، التقادم، المكافأة…', p: 'بالكلمة أو رقم الطعن، و«＋ للقضية»', l: 'م51، أو كلمة من النص', a: 'سؤال بخلاصة هذه القضية', k: 'أحكامك وأحكام زملائك — ابحث وافتح دون مغادرة القضية', b: 'صياغاتك — يُكمَل في الإصدار القادم' };
 const JD_HOME = {};
 function jdWide() { return window.innerWidth >= 1000; }
 function jdGet() { try { return JSON.parse(localStorage.getItem('tm_jdrw') || '{}') || {}; } catch (e) { return {}; } }
@@ -5885,7 +5886,8 @@ async function vpRender(c, box, br, wire, brWire) {
 }
 function rlVkSec(c, so) { const n = (c.vkpin || []).length; return '<details class="sec vkx" data-sec="vk"' + so('vk') + '><summary>' + rlIc('bk') + (RL_RES.includes(c.stage) ? 'ملف التحضير' : 'نماذج من خزانتك') + ' <span class="cnt">' + (n ? '📌 ' + n : 'لك وحدك') + '</span></summary><div class="vkxb"><p class="k">…</p></div></details>'; }
 async function rlVkFill(c, box) {
-  if (!box) return; const q = rlVkQ(c), go = () => { setView('k'); setTimeout(() => { const i = $('#vk_q'); if (i && q) { i.value = q.slice(0, 400); i.dispatchEvent(new Event('input')); } }, 350); };
+  if (!box) return; const q = rlVkQ(c), go = () => { if (NAV.v === 'j') { jdToggle(true, 'k'); setTimeout(() => { const i = $('#vk_q'); if (i && q) { i.value = q.slice(0, 400); i.dispatchEvent(new Event('input')); } }, 350); return; }   // V177: من مساحة الحكم تُفتح الخزانة في الدرج
+    setView('k'); setTimeout(() => { const i = $('#vk_q'); if (i && q) { i.value = q.slice(0, 400); i.dispatchEvent(new Event('input')); } }, 350); };
   const wire = () => { box.querySelectorAll('[data-vkgo]').forEach(x => x.onclick = go); box.querySelectorAll('[data-vko]').forEach(x => x.onclick = () => vkOpen(x.dataset.vko, new Set(vkTerms(q))));
     box.querySelectorAll('[data-vkp]').forEach(x => x.onclick = () => { const id = x.dataset.vkp, P = c.vkpin || []; c.vkpin = P.includes(id) ? P.filter(y => y !== id) : P.concat(id); if (!c.vkpin.length) delete c.vkpin; c.updated = Date.now(); rlSave(); rlVkFill(c, box); const cn = box.closest('details') && box.closest('details').querySelector('.cnt'); if (cn) cn.textContent = (c.vkpin || []).length ? '📌 ' + c.vkpin.length : 'لك وحدك'; }); };
   try { if (!VK.ready) await vkLoad(); } catch (e) { box.innerHTML = '<p class="k">تعذّر فتح الخزانة على هذا الجهاز.</p>'; return; }
