@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261006210222">
+<meta name="amali-build" content="20261006211355">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3977,7 +3977,8 @@ const JW = { id: null, st: null, ret: null }; try { const s = JSON.parse(session
 VIEW_GROUP.j = 'desk';
 function jwSaveS() { try { sessionStorage.setItem('tm_jw', JSON.stringify({ id: JW.id, st: JW.st })); } catch (e) {} }
 function jwCard(id) { return RL.cards.find(c => c.id === (id == null ? JW.id : id)) || null; }
-function jwOwn(c) { const w = c.ws || {}, j = rlJsIdx(c); return [!!c.an || !!w.u, !!w.p || j >= 2 || !!c.pkAt, j >= 3, !!w.r || j >= 4, !!w.d || j >= 5, j >= 6]; }
+function jwJ(c) { const j = rlJsIdx(c); return RL_RES.includes(c.stage) || RL_DONE.includes(c.stage) ? j : Math.min(j, 3); }   // V177: الطباعة والتوقيع والإيداع لا تُحتسب قبل حجز القضية للحكم
+function jwOwn(c) { const w = c.ws || {}, j = jwJ(c); return [!!c.an || !!w.u, !!w.p || j >= 2 || !!c.pkAt, j >= 3, !!w.r || j >= 4, !!w.d || j >= 5, j >= 6]; }
 function jwDone(c) { const o = jwOwn(c); for (let i = o.length - 2; i >= 0; i--) o[i] = o[i] || o[i + 1]; return o; }
 function jwCur(c) { const d = jwDone(c), i = d.indexOf(false); return i < 0 ? 5 : i; }
 function jwMark(c, k, on) { const w = Object.assign({}, c.ws || {}); if (on) w[k] = Date.now(); else delete w[k]; if (Object.keys(w).length) c.ws = w; else delete c.ws; c.updated = Date.now(); rlSave(); }
@@ -3993,9 +3994,9 @@ function lndDesk() { const w = $('#deskwrap'); if (!w) return; let L = []; try {
   let f = dkFilt(); const n = k => L.filter(c => jwGroupOf(c) === k).length; if (f && !n(f)) f = '';
   const V = f ? L.filter(c => jwGroupOf(c) === f) : L, easy = rlMineSort() === 'easy';
   const chip = (k, t, m) => '<button type="button" class="chip' + (f === k ? ' on' : '') + '" data-dkf="' + k + '" aria-pressed="' + (f === k) + '"' + (m || !k ? '' : ' disabled') + '>' + t + ' <b>' + (k ? m : L.length) + '</b></button>';
-  const card = c => { const cu = jwCur(c), g = jwGist(c), un = !c.an && !PROF_HIDE.has('i'), a = cu === 0 && un ? ['حلّل ملفها', 'an'] : [JW_ACT[cu][0], JW_ACT[cu][1]];
+  const card = c => { const cu = jwCur(c), g = jwGist(c), un = !c.an && !PROF_HIDE.has('i'), fin = jwDone(c).every(Boolean), a = fin ? ['✓ أُودع — سجّل «صدر الحكم»', 'card'] : cu === 0 && un ? ['حلّل ملفها', 'an'] : [JW_ACT[cu][0], JW_ACT[cu][1]];
     return '<article class="dkc' + (RL_RES.includes(c.stage) ? ' res' : '') + '" data-jw="' + esc(c.id) + '"><div class="dkc1"><button type="button" class="dkcode" data-jwo="' + esc(c.id) + '" aria-label="مساحة الحكم ' + esc(c.code) + '"><b>' + esc(c.code) + '</b>' + (rlSibs(c).length ? '<small>+ ' + esc(rlSibs(c).map(x => x.code).join('، ')) + '</small>' : '') + '</button><span class="dkm">' + ((c.ct || []).length ? esc(c.ct.join(' · ')) + ' · ' : '') + 'وزن ' + rlWt(c) + '</span><span class="dkw' + (c.next && rlDays(c.next) != null && rlDays(c.next) <= 7 ? ' soon' : '') + '">' + esc(jwWhen(c)) + '</span></div>'
-      + '<div class="dkc2">' + (g ? '<p class="dkg">' + esc(g) + '</p>' : cu === 0 ? '<p class="dkg no">' + (un ? 'لم يُحلَّل ملفها بعد.' : 'لا ملخص لها.') + '</p>' : '<p class="dkg">' + esc(c.js && c.js !== 'لم يبدأ' ? 'حالة الحكم: ' + c.js : 'لا ملخص لها.') + '</p>') + jwStrip(c, true) + '</div>'
+      + '<div class="dkc2">' + (g ? '<p class="dkg">' + esc(g) + '</p>' : cu === 0 ? '<p class="dkg no">' + (un ? 'لم يُحلَّل ملفها بعد.' : 'لا ملخص لها.') + '</p>' : '<p class="dkg">' + esc(jwJ(c) > 0 ? 'حالة الحكم: ' + RL_JS[jwJ(c)] : 'لا ملخص لها.') + '</p>') + jwStrip(c, true) + '</div>'
       + '<div class="dkc3"><button type="button" class="btn' + (cu < 5 || jwDone(c)[5] === false ? ' primary' : '') + '" data-jwa="' + esc(c.id) + '|' + a[1] + '">' + (a[1] === 'p' ? ico('prep', 16) : a[1] === 'an' ? ico('analyze', 16) : '') + a[0] + '</button></div></article>'; };
   w.innerHTML = '<div class="lnd">' + lndHead('desk', 'مكتبي', 'قضاياك: المحجوزة لك والمسندة إليك قبل الجلسة. افتح أي قضية في «مساحة الحكم»: تعرّف · حضّر · اكتب · راجع · تداول · أودِع — وأدواتك في الدرج دون مغادرتها.')
     + (L.length ? '<div class="dkbar2"><div class="dkf" role="group" aria-label="تصفية قضاياي">' + chip('', 'الكل') + chip('pr', 'قيد التحضير', n('pr')) + chip('dl', 'في المداولة', n('dl')) + chip('dp', 'للتوقيع والإيداع', n('dp')) + '</div><span class="dkpts">' + pts + ' نقطة</span>'
@@ -4008,7 +4009,7 @@ function lndDesk() { const w = $('#deskwrap'); if (!w) return; let L = []; try {
   { const s = w.querySelector('#dk_sort'); if (s) s.onchange = () => { try { localStorage.setItem('tm_minesort', s.value); } catch (e) {} lndDesk(); }; }
   w.querySelectorAll('[data-jwo]').forEach(b => b.onclick = e => { e.stopPropagation(); jwOpen(b.dataset.jwo); });
   w.querySelectorAll('.dkc').forEach(a => a.onclick = e => { if (e.target.closest('button,a,select,input')) return; jwOpen(a.dataset.jw); });
-  w.querySelectorAll('[data-jwa]').forEach(b => b.onclick = e => { e.stopPropagation(); const [id, k] = b.dataset.jwa.split('|'); if (k === 'an') { JW.ret = id; INX = id; setView('i'); return; } jwOpen(id, k); });
+  w.querySelectorAll('[data-jwa]').forEach(b => b.onclick = e => { e.stopPropagation(); const [id, k] = b.dataset.jwa.split('|'); if (k === 'an') { JW.ret = id; INX = id; setView('i'); return; } if (k === 'card') { rlxSet(id, true); setView('r'); setTimeout(() => rlGoCard(id), 60); return; } jwOpen(id, k); });
   const pr = w.querySelector('[data-dk=pr]'); if (pr) pr.onclick = () => { rlMineOpen(); setTimeout(() => { const x = document.querySelector('#minesheet [data-mn=pr]'); if (x) x.click(); }, 80); };
 }
 // ---- مساحة الحكم
@@ -4035,7 +4036,7 @@ function jwRender() {
 }
 function jwFoot(c, i) { const nx = JW_ST[i + 1]; return '<div class="jwnav">' + (i > 0 ? '<button type="button" class="btn" data-jgo="' + JW_ST[i - 1][0] + '">‹ ' + JW_ST[i - 1][1] + '</button>' : '') + '<span></span>' + (nx ? '<button type="button" class="btn primary" data-jgo="' + nx[0] + '">التالي: ' + nx[1] + ' ›</button>' : '') + '</div>'; }
 function jwTick(c, k, on, t1, t0) { return '<button type="button" class="btn jtick' + (on ? ' on' : '') + '" data-jtk="' + k + '" aria-pressed="' + !!on + '">' + (on ? '✓ ' + t1 : t0) + '</button>'; }
-function jwJs(c, list) { const j = rlJsIdx(c), mine = c.writer === rlMe(); return '<div class="jjs" role="group" aria-label="حالة الحكم">' + list.map(v => { const i = RL_JS.indexOf(v), on = j >= i; return '<button type="button" class="chip' + (on ? ' on' : '') + '" data-jjs="' + esc(v) + '" aria-pressed="' + on + '"' + (mine ? '' : ' disabled') + '>' + (on ? '✓ ' : '') + esc(v) + '</button>'; }).join('') + '</div>' + (mine ? '' : '<p class="k">حالة الحكم يسجّلها كاتبه.</p>'); }
+function jwJs(c, list) { const j = jwJ(c), mine = c.writer === rlMe(), res = RL_RES.includes(c.stage) || RL_DONE.includes(c.stage), late = list.some(v => RL_JS.indexOf(v) >= 4); return '<div class="jjs" role="group" aria-label="حالة الحكم">' + list.map(v => { const i = RL_JS.indexOf(v), on = j >= i, ok = mine && (i < 4 || res); return '<button type="button" class="chip' + (on ? ' on' : '') + '" data-jjs="' + esc(v) + '" aria-pressed="' + on + '"' + (ok ? '' : ' disabled') + '>' + (on ? '✓ ' : '') + esc(v) + '</button>'; }).join('') + '</div>' + (!mine ? '<p class="k">حالة الحكم يسجّلها كاتبه.</p>' : late && !res ? '<p class="k">الطباعة والتوقيع والإيداع تُسجَّل بعد حجز القضية للحكم.</p>' : ''); }
 function jwStep(c, box) {
   const k = JW.st, i = JW_ST.findIndex(s => s[0] === k), A = c.an && c.an.v === 2 ? c.an : null, own = jwOwn(c); let h = '';
   if (k === 'u') {
@@ -4076,7 +4077,7 @@ function jwStep(c, box) {
   const rr = () => { jwRender(); try { lndDesk(); } catch (e) {} };
   box.querySelectorAll('[data-jgo]').forEach(b => b.onclick = () => { JW.st = b.dataset.jgo; jwSaveS(); jwRender(); window.scrollTo(0, 0); });
   box.querySelectorAll('[data-jtk]').forEach(b => b.onclick = () => { const kk = b.dataset.jtk; jwMark(c, kk, !(c.ws && c.ws[kk])); rr(); });
-  box.querySelectorAll('[data-jjs]').forEach(b => b.onclick = () => { const v = b.dataset.jjs, ix = RL_JS.indexOf(v), j = rlJsIdx(c); rlJsSet(c, j >= ix ? RL_JS[ix - 1] : v); rlSave(); toast('حالة الحكم: ' + (c.js || 'لم يبدأ')); rr(); });
+  box.querySelectorAll('[data-jjs]').forEach(b => b.onclick = () => { const v = b.dataset.jjs, ix = RL_JS.indexOf(v), j = jwJ(c); rlJsSet(c, j >= ix ? RL_JS[ix - 1] : v); rlSave(); toast('حالة الحكم: ' + (c.js || 'لم يبدأ')); rr(); });
   box.querySelectorAll('[data-jcard]').forEach(b => b.onclick = () => jwLeave('r', () => { rlxSet(c.id, true); rlGoCard(c.id); }));
   { const b = box.querySelector('[data-jan]'); if (b) b.onclick = () => { INX = c.id; jwLeave('i'); }; }
   { const b = box.querySelector('[data-jword]'); if (b) b.onclick = () => { if (rlJsIdx(c) < 2 && c.writer === rlMe()) { rlJsSet(c, 'قيد الكتابة'); rlSave(); } jwLeave('w', () => weFromCard(c)); }; }
