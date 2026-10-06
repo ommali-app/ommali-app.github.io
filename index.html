@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261006184109">
+<meta name="amali-build" content="20261006190401">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -225,6 +225,7 @@ html.locked #lockscr .lkform{display:flex}
 .brand{display:flex;align-items:center;gap:10px;min-width:0}
 .brand>div{min-width:0}
 .brand .seal{width:36px;height:36px;border-radius:10px;overflow:hidden;box-shadow:0 2px 6px rgba(12,22,40,.25);background:#172A4A;color:var(--gold);display:grid;place-items:center;font-weight:700;font-size:22px;font-family:Georgia,"Times New Roman",serif;line-height:1;padding:0;flex:none}.brand .seal svg{width:100%;height:100%;display:block}
+.brand.tight>div:not(.seal){display:none}   /* V176 */
 .brand h1{font-size:19px;margin:0;font-weight:700;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brand small{display:block;color:var(--ink3);font-size:11.5px;font-weight:500}
 .search{position:relative;max-width:820px;width:100%;min-width:0;justify-self:stretch;margin:0 auto}
@@ -1349,9 +1350,10 @@ table.imp select{padding:4px;border:1px solid var(--line2);border-radius:6px;bac
 .bqst li small{font-weight:400;font-size:11px;opacity:.85}
 .bqst li.on>*{background:var(--accent);border-color:var(--accent);color:#fff}
 .bqst li.done>*{background:var(--ok-soft);border-color:var(--ok-soft);color:var(--ok)}
+.bqst li{display:flex;min-width:0}.bqst li>*{flex:1 1 auto;height:100%;justify-content:center}.bqst li span{display:flex;align-items:center;justify-content:center;min-height:2.6em}   /* V176: مربعات متساوية */
 .bqst li button{cursor:pointer}
 .bqst li button:hover{border-color:var(--accent)}
-@media (max-width:600px){.bqst li small{display:none}.bqst li>*{min-height:48px;font-size:11.5px}}
+@media (max-width:600px){.bqst{gap:5px}.bqst li small{display:none}.bqst li>*{min-height:64px;padding:6px 2px;font-size:11.5px}}
 .bqcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:0 0 12px;box-shadow:0 1px 0 color-mix(in srgb,var(--ink) 4%,transparent)}
 .bqcard.soft{background:color-mix(in srgb,var(--gold) 6%,var(--panel));border-color:color-mix(in srgb,var(--gold) 28%,var(--line))}
 .bqcard h3{margin:0 0 6px;font-size:16px;color:var(--title,var(--ink))}
@@ -2187,9 +2189,10 @@ details.indet>summary{padding:10px 2px}
 
 /* V175 — الرئيسية: شارات المرحلة وحال الجلسة و«ما يلزمك الآن» */
 .h2ph{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
-.h2ph span{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:3px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.62)}
-.h2ph span.on{background:#C9A24B;border-color:#C9A24B;color:#0B1F3B}
-.h2ph span.on .ic .a{stroke:#0B1F3B}.h2ph span.on .ic .f{fill:#0B1F3B}
+.h2ph button{font:inherit;cursor:pointer;background:transparent;min-height:32px}.h2ph button:hover{border-color:#C9A24B;color:#fff}.h2ph button:focus-visible{outline:2px solid #C9A24B;outline-offset:2px}
+.h2ph span,.h2ph button{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:3px 11px;border-radius:999px;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.62)}
+.h2ph button.on,.h2ph span.on{background:#C9A24B;border-color:#C9A24B;color:#0B1F3B}
+.h2ph .on .ic .a{stroke:#0B1F3B}.h2ph .on .ic .f{fill:#0B1F3B}
 .h2st{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
 .h2st button{font:inherit;font-size:12.5px;font-weight:700;border:1px solid rgba(242,212,138,.45);background:rgba(201,162,75,.14);color:#F2D48A;border-radius:999px;padding:3px 12px;cursor:pointer;min-height:30px}
 .h2b .ic{width:20px;height:20px}.h2b .ic .a{stroke:currentColor}
@@ -2967,7 +2970,7 @@ details.indet>summary{padding:10px 2px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V175 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V176 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -3718,7 +3721,7 @@ function bgWork(kind, on) {
   else e.hidden = true;
 }
 try { window.bgWork = bgWork; } catch (e) {}
-function setView(v) {
+function setView(v) { setTimeout(() => { try { brandFit(); } catch (e) {} }, 0);   // V176
   if (v === 'h') setTimeout(() => { try { tileFit(); } catch (e) {} }, 60);   // V173
   navSync(v === 'c' ? 's' : v); /* V103: «التحقق» تبويب «فحص سريع» داخل الحاسبة */
   try { calcShare(v); } catch (e) {}
@@ -3897,7 +3900,8 @@ function renderHome() {
 // V132: لوحة الرول — تتبدّل بحسب الجلسة: لا قضايا (ابدأ بالاستيراد)، قبل الجلسة (التحضير)، يوم الجلسة (ابدأ/تابع الجلسة)، ولا جلسة قادمة (المحجوزة)
 // V175: شارات المرحلة (تتبدّل وحدها)، وسطر حال الجلسة، وزرّا الأوراق والتوزيع
 function heroPhaseOf(isToday) { if (isToday) return 'day'; try { const t = rlToday(); for (let i = 1; i <= 2; i++) { const d = new Date(t + 'T12:00:00'); d.setDate(d.getDate() - i); const iso = d.toISOString().slice(0, 10); if (rlIsSession(iso, RL.cal) && RL.cards.some(c => (c.hist || []).some(h => h.d === iso))) return 'after'; } } catch (e) {} return 'before'; }
-function heroPhase(isToday) { const k = heroPhaseOf(isToday); return '<div class="h2ph" role="list" aria-label="مرحلة العمل">' + [['before', 'قبل الجلسة'], ['day', 'يوم الجلسة'], ['after', 'بعد الجلسة']].map(x => '<span role="listitem" class="' + (x[0] === k ? 'on' : '') + '"' + (x[0] === k ? ' aria-current="step"' : '') + '>' + (x[0] === 'day' && k === 'day' ? ico('bench', 15) : '') + x[1] + '</span>').join('') + '</div>'; }
+const HERO_PH_T = { before: 'التحضير: قضايا الجلسة القادمة التي لم تُراجَع', day: 'وضع الجلسة: ورقة الرول أمامك على المنصة', after: 'ما بعد الجلسة: القرارات المعلّقة والأحكام المحجوزة' }, HERO_PH_I = { before: 'prep', day: 'bench', after: 'arch' };   // V176: لكل مرحلة وجهتها
+function heroPhase(isToday) { const k = heroPhaseOf(isToday); return '<div class="h2ph" role="list" aria-label="مرحلة العمل">' + [['before', 'قبل الجلسة'], ['day', 'يوم الجلسة'], ['after', 'بعد الجلسة']].map(x => '<button type="button" role="listitem" data-h="ph-' + x[0] + '" class="' + (x[0] === k ? 'on' : '') + '"' + (x[0] === k ? ' aria-current="step"' : '') + ' title="' + HERO_PH_T[x[0]] + '">' + ico(HERO_PH_I[x[0]], 15) + x[1] + '</button>').join('') + '</div>'; }
 function heroState(L, rp) { if (!L.length) return ''; const un = L.length - rp.rv, an = PROF_HIDE.has('i') ? 0 : L.filter(c => !c.an).length; if (!un && !an) return '';
   return '<div class="h2st">' + (un ? '<button type="button" data-h="unrev">' + un + ' لم تُراجَع</button>' : '') + (an ? '<button type="button" data-h="bq">' + an + ' لم تُحلَّل</button>' : '') + '</div>'; }
 function heroMore() { const b = []; if (!PROF_HIDE.has('i')) b.push('<button type="button" class="h2b sm" data-h="bq">' + ico('papers', 18) + ' أوراق الجلسة</button>'); try { if (rlBalKeys().length > 1) b.push('<button type="button" class="h2b sm" data-h="bal">' + ico('dist', 18) + ' التوزيع المبدئي</button>'); } catch (e) {}
@@ -3954,6 +3958,9 @@ function heroWire(day) {
   const B = $('#homehead'); if (!B) return;
   B.querySelectorAll('[data-h]').forEach(x => x.onclick = e => { e.stopPropagation(); const k = x.dataset.h;
     rlPrepF = ''; rlMine = false;
+    if (k === 'ph-before') { rlMode = 'roll'; if (day) rlDaySel = day; try { if (rlDayList(rlDaySel).some(c => !rlRevOn(c))) rlPrepF = 'un'; } catch (er) {} setView('r'); return; }   // V176
+    if (k === 'ph-day') { rlMode = 'roll'; setView('r'); if (day) setTimeout(() => rlSessOpen(day), 60); return; }
+    if (k === 'ph-after') { const a = rlAfterList()[0]; if (a) { rlMode = 'roll'; rlDaySel = a.after; rlFocus = a.id; } else rlMode = 'res'; setView('r'); return; }
     if (k === 'pn') { rlPnOpen(day, () => { try { heroRender(); } catch (er) {} }); return; }   // V162
     if (k === 'bq') { rlMode = 'roll'; if (day) rlDaySel = day; setView('r'); setTimeout(() => bqOpen(day), 80); return; }   // V175
     if (k === 'bal') { rlMode = 'roll'; if (day) rlDaySel = day; setView('r'); setTimeout(() => rlBalOpen(day), 80); return; }
@@ -3971,6 +3978,9 @@ window.amaliHero = () => { try { heroRender(); } catch (e) {} try { sxPulse(); }
 let HOME_ANIMED = false;
 function searchPrinciples(v) { v = (v || '').trim(); state.q = v; q.value = v; setView('p'); run(); $('#qclr').classList.toggle('hidden', !v); $('#qhint').classList.toggle('hidden', !!v); }
 document.querySelector('.brand').onclick = () => setView('h');
+// V176: اسم التطبيق في الشريط يظهر كاملًا إن اتسع له المكان، وإلا يكفي الشعار — لا كلمة مبتورة («مدا…»)
+function brandFit() { const b = document.querySelector('.brand'), h = b && b.querySelector('h1'); if (!h) return; b.classList.remove('tight'); if (h.scrollWidth > h.clientWidth + 1 || h.clientWidth < 8) b.classList.add('tight'); }
+try { const bar = document.querySelector('.bar'); if (window.ResizeObserver && bar) new ResizeObserver(() => brandFit()).observe(bar); window.addEventListener('resize', brandFit); if (document.fonts && document.fonts.ready) document.fonts.ready.then(brandFit); setTimeout(brandFit, 0); window.__brandFit = brandFit; } catch (e) {}
 
 const LAWNAME = { 'مرافعات': 'قانون المرافعات المدنية والتجارية – المرسوم بالقانون 38/1980 بتعديلاته (نص مجمَّع غير رسمي)', 'عمل 6/2010': 'قانون العمل في القطاع الأهلي رقم 6 لسنة 2010 (النص النافذ)', 'قانون 90/2013': 'قانون رقم 90 لسنة 2013 بتعديل م9 وم10', 'قانون 108/2013': 'قانون رقم 108 لسنة 2013 بتعديل م10', 'قانون 32/2016': 'قانون رقم 32 لسنة 2016 بتعديل م57 و138 و140 و142 وإضافة فقرة لـم146', 'قانون 85/2017': 'قانون رقم 85 لسنة 2017 بتعديل م51 (الفقرة الأخيرة) وم70', 'قانون 17/2018': 'قانون رقم 17 لسنة 2018 بتعديل م51 (الفقرة الأخيرة)', 'مرسوم بقانون 6/2025': 'المرسوم بقانون رقم 6 لسنة 2025 بتعديل م128 و152 و153 و154 و155 مرافعات (الجريدة الرسمية 1726)', 'عمل 38/1964': 'قانون العمل الملغي رقم 38 لسنة 1964', 'نفط 28/1969': 'قانون العمل في قطاع الأعمال النفطية رقم 28 لسنة 1969', 'قرار إداري 842/2015': 'قرار إداري رقم 842 لسنة 2015 بشأن شروط انتقال الأيدي العاملة من صاحب عمل إلى آخر', 'قرار وزاري 3/2024': 'قرار وزاري رقم 3 لسنة 2024 بشأن آلية منح تصاريح العمل وانتقال العمالة والرسوم المقررة', 'قرار إداري 680/2026': 'قرار إداري رقم 680 لسنة 2026 بتعديل بعض أحكام القرار 842/2015' };
 function lawName(l) { if (LAWNAME[l]) return LAWNAME[l]; const a = ARTS.find(x => x.law === l && x.lawname); return a ? a.lawname : l; }
@@ -11194,6 +11204,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [176, 'الإصدار 176', ['أزرار المراحل في الرئيسية صار لكل منها وجهته: «قبل الجلسة» يفتح القضايا التي لم تُراجَع، و«يوم الجلسة» يفتح وضع الجلسة (ورقة الرول)، و«بعد الجلسة» يفتح القرارات المعلّقة أو الأحكام المحجوزة.', 'مربعات خطوات «أوراق الجلسة» بقياس واحد.', 'اسم التطبيق في الشريط العلوي يظهر كاملًا إن اتسع له المكان، وإلا يكتفي الشريط بالشعار — بلا كلمة مبتورة.']],
   [175, 'الإصدار 175', ['التنقل الجديد بخمسة أزرار: الرئيسية · الجلسة · مكتبي · المكتبة · الأدوات، بأيقونات ثنائية اللون (خط بلون الحبر ولمسة ذهبية) — لكل معنى صورة واحدة في التطبيق كله.', 'المكتبة: المبادئ والتشريعات أكبر مربعين في أعلاها، ثم الخرائط والخط الزمني وخزانة الأحكام والمساعد. والأدوات: الحاسبة والمواعيد والتحقق وإخفاء الهوية وتحليل ملف. ومكتبي: قضاياك بخلاصتها و«ملف التحضير»، وأدوات الكتابة.', 'الرئيسية: البطاقة الكبيرة كما هي، وفيها شارات المرحلة (قبل الجلسة · يوم الجلسة · بعد الجلسة)، وسطر «لم تُراجَع · لم تُحلَّل»، وزرّا «أوراق الجلسة» و«التوزيع المبدئي»، و«وضع الجلسة» بأيقونة المنصة والمطرقة. وتحتها «ما يلزمك الآن» وحده.', 'المزامنة في شارتها وحدها: على الحاسوب بمجلد مربوط تُجلب نسختك عند الفتح وتُحفظ بعد كل تعديل؛ وعلى الآيباد والآيفون إن لم يظهر جهاز آخر «يكفي الحفظ»، وتذكير صباح يوم الجلسة، و«وصلك: …» بعد كل مزامنة. ولا نسخة احتياطية = شارة حمراء.']],
   [174, 'الإصدار 174', ['كل قسم قابل للطي صار زرًّا واضحًا: إطار وسهم «›» يدور إلى الأسفل حين يُفتح — في البطاقات والخزانة («★ مجلدات أحكامي» و«أعداد الدفوع والمسائل») والتشريعات والإعدادات وغيرها.', 'زر «ملف التحضير» ظاهر على بطاقة حكمك المحجوز وهي مطوية، وفي سطر إجراءاتها، وفي «خلاصتي»: لمسة تفتح البطاقة على الملف مباشرة.', 'شارة المزامنة في الشريط العلوي بأربع حالات: أخضر «مُزامَن» بوقته، كهرماني «N لم تُزامَن»، أزرق «جارٍ»، أحمر «متأخرة». لوحتها «زامن الآن — الاثنان معًا» لنسختك الشخصية وملف الدائرة؛ على الآيباد والآيفون تعرض الخطوات بالترتيب لأن كل اختيار ملف أو حفظ يحتاج لمسة. وبعد إغلاق الجلسة تنبّهك الشارة إن بقي ما لم يُزامَن.']],
   [173, 'الإصدار 173', ['«ملف التحضير» في بطاقة حكمك المحجوز (مكان «نماذج من خزانتك»): مسائل القضية مقترحة من نوعها وملخص ملفها وتعدّلها، ثم ① أسباب الأحكام المشابهة بفقرة كل مسألة مظلّلة و«انسخ الفقرة» — من أحكامك أو نماذج الزملاء أو الكل، ② مبادئ التمييز في مجموعتين: «استشهدت بها الأحكام المشابهة» و«في مسائل القضية من المكتبة»، ③ التشريعات المذكورة فيهما وحدها. لكل بند مفتاح يُحفظ، و«انسخ» و«اطبع». لا يُكتب شيء في مسودتك.', '«★ مجلدات أحكامي» في «إدارة الخزانة»: المس مجلدًا (2024، حولي…) فيُعلَّم كل حكم فيه وفي مجلداته الداخلية، وما تضيفه إليه لاحقًا.', 'أسماء بطاقات الرئيسية لا تخرج عن حدودها على الآيفون بالخط الكبير («حاسبة المستحقات»).']],
