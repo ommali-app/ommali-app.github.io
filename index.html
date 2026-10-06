@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261005225003">
+<meta name="amali-build" content="20261006091141">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1285,6 +1285,7 @@ table.imp select{padding:4px;border:1px solid var(--line2);border-radius:6px;bac
 .pchip.on{background:var(--ok);border-color:var(--ok);color:#fff}.prepx{color:var(--warn)}.rdyw{color:var(--warn)!important}.pchip.need.on{background:var(--bad);border-color:var(--bad);color:#fff}
 .pchip:not(.on)::before{content:'○ ';opacity:.6}.pchip.on::before{content:'✓ '}
 /* V169: أوراق الجلسة */
+.bqbad{margin:10px 0;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--warn) 10%,var(--panel));border:1px solid color-mix(in srgb,var(--warn) 40%,var(--line));font-size:14px;line-height:1.7}.bqbad ul{margin:6px 0 0;padding-inline-start:18px}.bqbad li{margin:2px 0;overflow-wrap:anywhere}
 .bqsteps{display:flex;flex-wrap:wrap;gap:4px 6px;list-style:none;margin:0 0 12px;padding:0;font-size:12.5px}.bqsteps li{padding:3px 10px;border-radius:999px;background:var(--panel2);color:var(--ink3)}.bqsteps li.on{background:var(--accent);color:var(--accent-ink);font-weight:700}.bqsteps li.done{color:var(--ok)}
 .bqtab{display:flex;flex-direction:column;gap:6px;margin:8px 0 12px}
 .bqr{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;border:1px solid var(--line);border-radius:12px;padding:8px 10px}.bqr.no{border-style:dashed}.bqr.warn{border-color:var(--warn)}
@@ -2670,7 +2671,7 @@ table.sttbl th.mo,table.sttbl td.mo{text-align:center;min-width:44px}
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V169 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V170 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -4118,6 +4119,14 @@ function rlCleanCell(c) {
 // ---- قراءة صورة الكشف: مرور للأرقام (نموذج لاتيني بأرقام فقط) ثم قراءة خليتي «حالة الإعلان» و«القرار» لكل صف بعد تحديد حدود الأعمدة من الصورة
 // V95 — محركات القراءة من مجلد ocr/ على الموقع نفسه فقط، بلا أي احتياط خارجي. إن غاب ملف تظهر رسالة واضحة ولا يُحمَّل من مكان آخر.
 function ocrBase() { return new URL('ocr/', location.href).href; }
+let OCR_WURL = null;
+async function ocrWorkerURL() {   // V170: tesseract.js 5.1.1 يسمّي اللغة في التهيئة بـ data بدل code حين تُمرَّر بياناتها من الذاكرة («Failed loading language 24,0,0…») — نصحّح السطر في نسخة من worker.min.js نفسه (من مجلد ocr/، بلا اتصال خارجي)
+  if (OCR_WURL) return OCR_WURL; const u = ocrBase() + 'worker.min.js';
+  try { const r = await fetch(u); if (!r.ok) throw ocrMissing('worker.min.js'); let s = await r.text(); const bad = 'return"string"==typeof t?t:t.data}';
+    if (s.includes(bad)) s = s.replace(bad, 'return"string"==typeof t?t:t.code}');
+    OCR_WURL = URL.createObjectURL(new Blob([s], { type: 'text/javascript' })); } catch (e) { if (e && e.message === 'engine-missing') throw e; OCR_WURL = u; }
+  return OCR_WURL;
+}
 function ocrMissing(f) { const e = new Error('engine-missing'); e.file = f; return e; }
 function ocrErrMsg(e, dflt) { return e && e.message === 'engine-missing' ? 'ملف محرك القراءة «' + e.file + '» غير موجود في مجلد ocr/ على الموقع. لا يُحمَّل من أي موقع آخر؛ ارفعه إلى مجلد ocr/ في المستودع ثم أعد المحاولة.' : dflt; }
 function ocrScript(f) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = ocrBase() + f; s.onload = res; s.onerror = () => { s.remove(); rej(ocrMissing(f)); }; document.head.appendChild(s); }); }
@@ -4138,7 +4147,7 @@ async function rlWorker(code, st) {
   const base = ocrBase(); await ocrTess();
   st.textContent = 'تحميل محرك القراءة (' + (code === 'eng' ? 'الأرقام' : 'العربية') + ')…';
   const buf = await ocrLang(code);
-  return await Promise.race([Tesseract.createWorker([{ code, data: buf }], 1, { workerPath: base + 'worker.min.js', corePath: base, cacheMethod: 'none', errorHandler: e => console.error('tesseract', e) }), new Promise((_, rej) => setTimeout(() => rej(new Error('ocr-timeout')), 120000))]);
+  return await Promise.race([Tesseract.createWorker([{ code, data: buf }], 1, { workerPath: await ocrWorkerURL(), workerBlobURL: false, corePath: base, cacheMethod: 'none', errorHandler: e => console.error('tesseract', e) }), new Promise((_, rej) => setTimeout(() => rej(new Error('ocr-timeout')), 120000))]);
 }
 // خطوط الجدول الرأسية داخل شريط أفقي: عمود بكسلات أغمق من جواره على معظم ارتفاع الشريط
 function rlVLines(cv, y0, y1) {
@@ -7312,7 +7321,9 @@ function bqNums(t) {   // أزواج رقم/سنة → رموز قضايا «ر�
   return [...new Set(out)];
 }
 function bqCard(code) { const c = rlCardOf(code); return c && !RL_DONE.includes(c.stage) ? c : null; }
-function bqMatchName(g) { for (const k of bqNums(g.name)) { const c = bqCard(k); if (c) return [c, 'اسم المجلد']; } const a = (AR2EN(g.name).match(/\d{9}/) || [])[0]; if (a) { const c = RL.cards.find(x => !RL_DONE.includes(x.stage) && anDig(x.auto) === a); if (c) return [c, 'الرقم الآلي في الاسم']; } return null; }
+function bqMatchName(g) { for (const k of bqNums(g.name)) { const c = bqCard(k); if (c) return [c, 'اسم المجلد']; } const a = (AR2EN(g.name).match(/\d{9}/) || [])[0]; if (a) { const c = RL.cards.find(x => !RL_DONE.includes(x.stage) && anDig(x.auto) === a); if (c) return [c, 'الرقم الآلي في الاسم']; }
+  const n = (AR2EN(g.name).trim().match(/^0*(\d{1,6})$/) || [])[1]; if (n && BQ) { const L = RL.cards.filter(x => !RL_DONE.includes(x.stage) && x.next === BQ.day && String(x.code || '').split('/')[0].replace(/\D/g, '') === n); if (L.length === 1 || (L.length > 1 && L.every(x => rlGrp(L[0]).some(y => y.id === x.id)))) return [L[0], 'رقم المجلد في الجلسة']; }   // V170
+  return null; }
 function bqMatchText(t) {   // من نص الأوراق: «الاستئناف رقم» ← الرقم الآلي ← رقم أول درجة
   const s = AR2EN(t || ''), hit = new Map(), add = (c, how) => { if (c && !hit.has(c.id)) hit.set(c.id, [c, how]); };
   let m; const rx = /(?:الاستئناف|الاستيناف|استئناف|استيناف)\s*(?:رقم)?\s*:?\s*(\d{1,6})\s*(?:\/|لسن[ةه])\s*(\d{4})/g; while ((m = rx.exec(s))) add(bqCard(+m[1] + '/' + m[2]), 'رقم الاستئناف في الأوراق');
@@ -7321,8 +7332,9 @@ function bqMatchText(t) {   // من نص الأوراق: «الاستئناف ر
   const L = [...hit.values()]; if (L.length > 1) { const g0 = rlGrp(L[0][0]).map(x => x.id); if (L.every(x => g0.includes(x[0].id))) return [L[0]]; }
   return L;
 }
-async function bqPdfText(u8, pages) { await pdfjsLocal(); const pdf = await window.pdfjsLib.getDocument({ data: u8 }).promise; let t = ''; for (let i = 1; i <= Math.min(pdf.numPages, pages || 40); i++) { try { const p = await pdf.getPage(i), tc = await p.getTextContent(); t += tc.items.map(x => x.str).join(' ') + '\n'; } catch (e) {} } const ar = (t.match(/[ء-ي]/g) || []).length; return { text: ar > 200 && ar / Math.max(1, t.replace(/\s/g, '').length) > 0.6 ? t : '', pages: pdf.numPages }; }
+async function bqPdfText(u8, pages) { await pdfjsLocal(); const pdf = await window.pdfjsLib.getDocument({ data: u8.slice() }).promise;   /* V170: نسخة — pdf.js 3 ينقل المصفوفة إلى عامله فتفرغ، فكانت قراءة الممسوح بعدها تفشل بصمت (ملفات zip من الآيباد) */ let t = ''; for (let i = 1; i <= Math.min(pdf.numPages, pages || 40); i++) { try { const p = await pdf.getPage(i), tc = await p.getTextContent(); t += tc.items.map(x => x.str).join(' ') + '\n'; } catch (e) {} } const ar = (t.match(/[ء-ي]/g) || []).length; return { text: ar > Math.min(200, 60 * Math.min(pdf.numPages, pages || 40)) && ar / Math.max(1, t.replace(/\s/g, '').length) > 0.6 ? t : '', pages: pdf.numPages }; }
 async function bqCheap(f) { try { const u8 = await f.get(); if (f.kind === 'txt') return new TextDecoder().decode(u8); if (f.kind === 'doc') { const X = await vkRead(u8); return (X.hf || []).concat(X.paras || []).join('\n'); } if (f.kind === 'pdf') return (await bqPdfText(u8, 6)).text; } catch (e) {} return ''; }
+function bqWhy(e) { const m = String(e && (e.name || '') + ' ' + (e.message || e) || ''); return /Password/i.test(m) ? 'محمي بكلمة سر' : /InvalidPDF|Invalid PDF|MissingPDF/i.test(m) ? 'ملف PDF تالف أو غير مكتمل' : e && e.message === 'engine-missing' ? 'ملف محرك القراءة «' + e.file + '» غير موجود في مجلد ocr/' : /zipmeth/.test(m) ? 'ضغط بطريقة غير مدعومة — اضغطه من «الملفات» بـ«ضغط»' : /memory|allocation|RangeError/i.test(m) ? 'كبير على ذاكرة الجهاز — جرّبه على الحاسوب' : 'تعذّرت قراءته (' + m.trim().slice(0, 60) + ')'; }
 function bqLeaks(t) {   // فحص أخير: ما يشبه اسمًا بعد لقب، أو رقمًا مدنيًا، أو هاتفًا — لم يُعتَّم
   const out = [], s = AR2EN(t || ''), gen = /^(■|\[|المستأنف|المستانف|المستأنفة|المدعي|المدعى|المدعية|العامل|العاملة|صاحب|الخصم|الطاعن|المطعون|المذكور|المذكورة|الشركة|المؤسسة|المحترم|المحترمة|ضده|ضدها|عليه|عليها)/;
   let m; const rx = /(?:السيد|السيدة|المدعو|المدعوة|السادة|شركة|مؤسسة)\s+([^\s■\[\]،.:؛()]{2,})(?:\s+([^\s■\[\]،.:؛()]{2,}))?/g;
@@ -7373,7 +7385,7 @@ function bqDraw() {
       + R.map(g => { const c = RL.cards.find(x => x.id === g.cid), i = G.indexOf(g); return '<div class="bqv' + (g.ok ? ' ok' : '') + '"><div class="bqvh"><b>' + esc(c ? c.code : g.name) + '</b><span class="k">' + g.files.length + ' أوراق' + (g.ocr ? ' · قراءة ضوئية' : '') + ' · عُتّم ' + inMw(g.n) + '</span>' + (g.flags.length ? '<span class="bqflag">⚠ تحقّق: ' + g.flags.map(esc).join('، ') + '</span>' : '') + '</div>'
         + '<details><summary>اعرض النص المعتّم</summary><div class="inmprev">' + esc(g.text.slice(0, g.full ? 45000 : 2500)).replace(/■+/g, m => '<mark class="mskm">' + m + '</mark>') + (!g.full && g.text.length > 2500 ? '<button type="button" class="linkbtn" data-bqfull="' + i + '">… النص كله</button>' : '') + '</div></details>'
         + '<div class="row"><button type="button" class="btn mini" data-bqw="' + i + '">عتّم كلمة</button><label class="bqok"><input type="checkbox" data-bqok="' + i + '"' + (g.ok ? ' checked' : '') + '> راجعتها</label></div></div>'; }).join('')
-      + (G.some(g => g.cid && !g.text) ? '<p class="k">لم يُستخرج نص من: ' + G.filter(g => g.cid && !g.text).map(g => esc(g.name)).join('، ') + '.</p>' : '')
+      + (G.some(g => g.cid && (!g.text || (g.bad && g.bad.length))) ? '<div class="bqbad"><b>' + (G.some(g => g.cid && !g.text) ? 'لم يُستخرج نص من بعض الأوراق' : 'أوراق لم تُقرأ') + '</b><ul>' + G.filter(g => g.cid && (!g.text || (g.bad && g.bad.length))).map(g => '<li><b>' + esc(g.name) + '</b>' + (g.text ? ' (قُرئ غيرها)' : '') + ': ' + (g.err ? esc(g.err) + (g.bad && g.bad.length ? '؛ ' : '') : '') + (g.bad || []).map(x => (x[0] ? '«' + esc(x[0].split('/').pop()) + '» ' : '') + esc(x[1])).join('؛ ') + '</li>').join('') + '</ul></div>' : '')
       + '<div class="row"><button type="button" class="btn primary" data-bq="go"' + (all ? '' : ' disabled') + '>' + (live ? 'حلّل في الخلفية (' + R.length + ')' : 'جهّز الطلب المجمّع (' + R.length + ')') + '</button></div>'; }
   else if (S === 'send') { const Q = G.filter(g => g.cid && g.text);
     if (live) h += '<p class="bqprog" role="status">' + esc(BQ.prog || '') + '</p><div class="vkbar"><i style="width:' + Math.round(100 * Q.filter(g => g.res || g.err).length / Math.max(1, Q.length)) + '%"></i></div><p class="k">يمكنك إغلاق هذه النافذة ومتابعة عملك؛ يستمر التحليل وتعود إليه من «📂 أوراق الجلسة».</p>';
@@ -7417,14 +7429,15 @@ async function bqRead() {
   const by = new Map(); G.forEach(g => { if (by.has(g.cid)) { by.get(g.cid).files.push(...g.files); g.cid = ''; g.merged = true; } else by.set(g.cid, g); });
   bqDraw();
   try {
-    for (const g of BQ.groups.filter(x => x.cid)) { if (sig.aborted) break; const c = RL.cards.find(x => x.id === g.cid); let txt = '', imgs = [], ocr = false;
+    for (const g of BQ.groups.filter(x => x.cid)) { if (sig.aborted) break; const c = RL.cards.find(x => x.id === g.cid); let txt = '', imgs = [], ocr = false; g.bad = []; g.err = '';
       st.textContent = 'قراءة أوراق ' + (c ? c.code : g.name) + ' (' + (BQ.pi + 1) + ' من ' + by.size + ')…';
       for (const f of g.files) { if (sig.aborted) break; try { const u8 = await f.get();
           if (f.kind === 'txt') txt += '\n— ' + f.name + ' —\n' + new TextDecoder().decode(u8);
-          else if (f.kind === 'doc') { const X = await vkRead(u8); txt += '\n— ' + f.name + ' —\n' + (X.hf || []).concat(X.paras || []).join('\n'); }
-          else if (f.kind === 'pdf') { const r = await bqPdfText(u8); if (r.text) txt += '\n— ' + f.name + ' —\n' + r.text; else { const R = await inPdfToImages(new File([u8], f.name.split('/').pop(), { type: 'application/pdf' })); imgs.push(...R.images); } }
-          else if (f.kind === 'img') imgs.push({ blob: new Blob([u8]), name: f.name.split('/').pop() }); } catch (e) { console.warn('bq read', f.name, e); } }
-      if (imgs.length && !sig.aborted) { try { txt += await inOcr(imgs, st, sig); ocr = true; } catch (e) { g.err = 'تعذّرت القراءة الضوئية'; } }
+          else if (f.kind === 'doc') { if (/\.doc$/i.test(f.name)) { g.bad.push([f.name, 'صيغة Word القديمة (.doc) — احفظه docx أو PDF']); continue; } const X = await vkRead(u8); txt += '\n— ' + f.name + ' —\n' + (X.hf || []).concat(X.paras || []).join('\n'); }
+          else if (f.kind === 'pdf') { const r = await bqPdfText(u8); if (r.text) txt += '\n— ' + f.name + ' —\n' + r.text; else { const R = await inPdfToImages(new File([u8], f.name.split('/').pop(), { type: 'application/pdf' })); if (!R.images.length) g.bad.push([f.name, 'لا صفحات فيه']); imgs.push(...R.images); } }
+          else if (f.kind === 'img') imgs.push({ blob: new Blob([u8]), name: f.name.split('/').pop() }); } catch (e) { console.warn('bq read', f.name, e); g.bad.push([f.name, bqWhy(e)]); } }
+      if (imgs.length && !sig.aborted) { try { txt += await inOcr(imgs, st, sig); ocr = true; } catch (e) { console.warn('bq ocr', e); g.err = 'تعذّرت القراءة الضوئية'; } }
+      if (!txt.trim() && !g.bad.length && !g.err) g.bad.push(['', 'لم يُعثر على نص ولا صفحات تُقرأ']);
       txt = txt.trim().slice(0, 45000); const M = mskMaskText(txt); g.text = M.text; g.n = M.n; g.ocr = ocr; g.flags = bqLeaks(M.text); g.ok = false;
       if (!g.how || g.how === 'يدوي') { const L = bqMatchText(txt); if (L.length && L[0][0].id !== g.cid && !rlGrp(c).some(x => x.id === L[0][0].id)) g.flags.unshift('الأوراق تذكر ' + L[0][0].code + ' لا ' + (c ? c.code : '')); }
       BQ.pi++; bqDraw(); }
@@ -7762,7 +7775,7 @@ async function inOcr(files, st, signal) {
   const langBuf = await ocrArabic();   // V154: نموذج الخط العربي (ara-script.wasm) إن وُجد — أدق في الأرقام الهندية وبطاقة القيد — وإلا ara.wasm
   st.textContent = 'تهيئة محرك القراءة الضوئية…';
   const worker = await Promise.race([Tesseract.createWorker([{ code: 'ara', data: langBuf }], 1, {
-    workerPath: base + 'worker.min.js', corePath: base, cacheMethod: 'none',
+    workerPath: await ocrWorkerURL(), workerBlobURL: false, corePath: base, cacheMethod: 'none',
     logger: m => { if (m.status === 'recognizing text') st.textContent = 'قراءة ضوئية… ' + Math.round(m.progress * 100) + '%'; else if (m.status) st.textContent = 'تهيئة القراءة الضوئية: ' + m.status; },
     errorHandler: e => { console.error('tesseract', e); }
   }), new Promise((_, rej) => setTimeout(() => rej(new Error('ocr-timeout')), 120000))]);
@@ -9137,7 +9150,7 @@ async function ocrWorker(st) {
   const langBuf = await ocrLang('ara');
   st.textContent = 'تهيئة محرك القراءة الضوئية…';
   const worker = await Promise.race([Tesseract.createWorker([{ code: 'ara', data: langBuf }], 1, {
-    workerPath: base + 'worker.min.js', corePath: base, cacheMethod: 'none',
+    workerPath: await ocrWorkerURL(), workerBlobURL: false, corePath: base, cacheMethod: 'none',
     logger: m => { if (m.status === 'recognizing text' && st.dataset.pg) st.textContent = st.dataset.pg + ' ' + Math.round(m.progress * 100) + '%'; },
     errorHandler: e => { console.error('tesseract', e); }
   }), new Promise((_, rej) => setTimeout(() => rej(new Error('ocr-timeout')), 120000))]);
@@ -10260,8 +10273,9 @@ function psRender() {
 $('#psclose').onclick = () => psClose(false); $('#psbg').onclick = () => psClose(false);
 $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
-const WN_V = 169;
+const WN_V = 170;
 const WN_LOG = [
+  [170, 'الإصدار 170', ['«📂 أوراق الجلسة» تقرأ ملفات PDF المضغوطة من الآيباد: كانت قراءة الأوراق الممسوحة تفشل بصمت بعد محاولة قراءتها نصًا، فيظهر «لم يُستخرج نص» دون سبب.', 'سبب واضح أمام كل ملف لا يُقرأ: Word القديم (.doc)، PDF تالف أو محمي، أو كبير على ذاكرة الجهاز.', 'مجلد باسم رقم القضية وحده (مثل «249») يُربط بقضية الجلسة التي تحمل هذا الرقم.']],
   [169, 'الإصدار 169', ['«⇢ حلّل ملفات الجلسة» صار «📂 أوراق الجلسة»: تختار المجلد الأم (مجلد لكل قضية) أو ملفًا مضغوطًا على الآيباد، فيربط التطبيق كل مجلد بقضيته (اسم المجلد، الرقم الآلي، رقم الاستئناف أو أول درجة في الأوراق) وتراجع الربط.', 'ثم يقرأ الأوراق ويعتّمها على جهازك، وتراجع كل قضية «راجعتها»، مع فحص أخير لما يشبه اسمًا أو رقمًا مدنيًا أو هاتفًا.', 'ثم التحليل: طلب مجمّع (حتى 4 قضايا) تلصقه في أداة الذكاء التي تستعملها وتلصق ردها مرة واحدة — أو في الخلفية داخل claude.ai — ثم «راجع واحفظ» قضية بعد قضية.', 'لا يُحفظ نص الأوراق؛ يُحفظ في القضية ملخصها بعد مراجعتك.']],
   [168, 'الإصدار 168', ['لوحة التوزيع: صفوف القضايا تلتف حسب عرض اللوحة نفسها، فلا يتداخل رقم القضية مع القوائم على الآيباد بأي عرض.']],
   [167, 'الإصدار 167', ['«📋 خلاصتي» في المحجوزة: قضاياك (المحجوزة لك والمسندة إليك قبل الجلسة) بخلاصة كل منها — الحكم المستأنف والطلبات وأوجه النعي — مع «ابدأ بالأسهل» و«اطبع».', '«تعرّف على قضيتك» في بطاقة حكمك غير المحلل: «حلّل ملفها» بلمسة.', '«⇢ حلّل ملفات الجلسة»: التحليل لقضايا الجلسة غير المحللة واحدة بعد أخرى — بعد «احفظ وارجع» تنتقل إلى التالية، مع «تخطَّ» و«أنهِ الدفعة».', '«⚙ ما يظهر» في ملخص البطاقة: تختار أقسام الملخص التي تظهر (الموضوع، حكم أول درجة، الخبير، الطلبات، أوجه النعي، التنبيهات، بيانات القيد).', 'شاشة التعديل منظّمة: البطاقة · القضية · المواعيد والملاحظات · «بعد الحكم» مطويًا، وسطر يبيّن الغرض منها.']],
