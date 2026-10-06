@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261006203422">
+<meta name="amali-build" content="20261006210222">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3970,9 +3970,9 @@ function lndLib() { const w = $('#libwrap'); if (!w) return;
 function lndTools() { const w = $('#toolwrap'); if (!w) return;
   w.innerHTML = '<div class="lnd">' + lndHead('tools', 'الأدوات', 'أدوات مستقلة تعمل على جهازك، وتظهر أيضًا في درج الأدوات أثناء كتابة الحكم.')
     + '<div class="ltg">' + ['s', 'e', 'c', 'x', 'i'].map(v => lndTile(v)).join('') + '</div></div>'; lndWire(w); }
-// ==== V177: «مكتبي» و«مساحة الحكم» لكل قضية (افهم · حضّر · اكتب · راجع · داوِل · أودِع) ودرج الأدوات — خطة إعادة الهيكلة 6/10، اللوحتان ٢ و٣.
+// ==== V177: «مكتبي» و«مساحة الحكم» لكل قضية (تعرّف · حضّر · اكتب · راجع · تداول · أودِع) ودرج الأدوات — خطة إعادة الهيكلة 6/10، اللوحتان ٢ و٣.
 // لا يكتب التطبيق أسبابًا ولا يرجّح: كل خطوة تجمع ما عندك (الملخص، ملف التحضير، المبادئ المحفوظة، الحالة) وتنقلك إلى أداتها. علامات الخطوات في c.ws {u,p,r,d} مع حالة الحكم c.js القائمة.
-const JW_ST = [['u', 'افهم'], ['p', 'حضّر'], ['w', 'اكتب'], ['r', 'راجع'], ['d', 'داوِل'], ['o', 'أودِع']];
+const JW_ST = [['u', 'تعرّف'], ['p', 'حضّر'], ['w', 'اكتب'], ['r', 'راجع'], ['d', 'تداول'], ['o', 'أودِع']];
 const JW = { id: null, st: null, ret: null }; try { const s = JSON.parse(sessionStorage.getItem('tm_jw') || 'null'); if (s && s.id) { JW.id = s.id; JW.st = s.st || null; } } catch (e) {}
 VIEW_GROUP.j = 'desk';
 function jwSaveS() { try { sessionStorage.setItem('tm_jw', JSON.stringify({ id: JW.id, st: JW.st })); } catch (e) {} }
@@ -3984,7 +3984,7 @@ function jwMark(c, k, on) { const w = Object.assign({}, c.ws || {}); if (on) w[k
 function jwStrip(c, mini) { const d = jwDone(c), cu = jwCur(c); return '<div class="jstrip' + (mini ? ' mini' : '') + '" role="list" aria-label="خطوات الحكم">' + JW_ST.map((s, i) => '<span role="listitem" class="' + (d[i] ? 'ok' : i === cu ? 'nx' : '') + '">' + s[1] + (d[i] ? ' ✓' : '') + '</span>').join('') + '</div>'; }
 function jwWhen(c) { const D = c.next ? rlDays(c.next) : null, res = RL_RES.includes(c.stage); if (!c.next) return res ? 'محجوزة للحكم' : ''; return (res ? 'النطق ' : 'مسندة قبل الجلسة ') + rlFmt(c.next) + (D != null ? ' — ' + rlRel(D) : ''); }
 function jwGist(c) { const A = c.an && c.an.v === 2 ? c.an : null; if (!A) return ''; const g = (A.gr || [])[0]; return A.sj || (A.rq || [])[0] || (g ? anW('النعي: ') + g.h : '') || ''; }
-const JW_ACT = [['تعرّف على القضية', 'u'], ['افتح ملف التحضير', 'p'], ['اكتب', 'w'], ['راجع المسودة', 'r'], ['داوِل', 'd'], ['أودِع', 'o']];
+const JW_ACT = [['تعرّف على القضية', 'u'], ['افتح ملف التحضير', 'p'], ['اكتب', 'w'], ['راجع المسودة', 'r'], ['تداول', 'd'], ['أودِع', 'o']];
 function jwGroupOf(c) { const i = jwCur(c); return i <= 3 ? 'pr' : i === 4 ? 'dl' : 'dp'; }
 // ---- مكتبي
 function dkFilt() { try { return localStorage.getItem('tm_dkf') || ''; } catch (e) { return ''; } }
@@ -3997,7 +3997,7 @@ function lndDesk() { const w = $('#deskwrap'); if (!w) return; let L = []; try {
     return '<article class="dkc' + (RL_RES.includes(c.stage) ? ' res' : '') + '" data-jw="' + esc(c.id) + '"><div class="dkc1"><button type="button" class="dkcode" data-jwo="' + esc(c.id) + '" aria-label="مساحة الحكم ' + esc(c.code) + '"><b>' + esc(c.code) + '</b>' + (rlSibs(c).length ? '<small>+ ' + esc(rlSibs(c).map(x => x.code).join('، ')) + '</small>' : '') + '</button><span class="dkm">' + ((c.ct || []).length ? esc(c.ct.join(' · ')) + ' · ' : '') + 'وزن ' + rlWt(c) + '</span><span class="dkw' + (c.next && rlDays(c.next) != null && rlDays(c.next) <= 7 ? ' soon' : '') + '">' + esc(jwWhen(c)) + '</span></div>'
       + '<div class="dkc2">' + (g ? '<p class="dkg">' + esc(g) + '</p>' : cu === 0 ? '<p class="dkg no">' + (un ? 'لم يُحلَّل ملفها بعد.' : 'لا ملخص لها.') + '</p>' : '<p class="dkg">' + esc(c.js && c.js !== 'لم يبدأ' ? 'حالة الحكم: ' + c.js : 'لا ملخص لها.') + '</p>') + jwStrip(c, true) + '</div>'
       + '<div class="dkc3"><button type="button" class="btn' + (cu < 5 || jwDone(c)[5] === false ? ' primary' : '') + '" data-jwa="' + esc(c.id) + '|' + a[1] + '">' + (a[1] === 'p' ? ico('prep', 16) : a[1] === 'an' ? ico('analyze', 16) : '') + a[0] + '</button></div></article>'; };
-  w.innerHTML = '<div class="lnd">' + lndHead('desk', 'مكتبي', 'قضاياك: المحجوزة لك والمسندة إليك قبل الجلسة. افتح أي قضية في «مساحة الحكم»: افهم · حضّر · اكتب · راجع · داوِل · أودِع — وأدواتك في الدرج دون مغادرتها.')
+  w.innerHTML = '<div class="lnd">' + lndHead('desk', 'مكتبي', 'قضاياك: المحجوزة لك والمسندة إليك قبل الجلسة. افتح أي قضية في «مساحة الحكم»: تعرّف · حضّر · اكتب · راجع · تداول · أودِع — وأدواتك في الدرج دون مغادرتها.')
     + (L.length ? '<div class="dkbar2"><div class="dkf" role="group" aria-label="تصفية قضاياي">' + chip('', 'الكل') + chip('pr', 'قيد التحضير', n('pr')) + chip('dl', 'في المداولة', n('dl')) + chip('dp', 'للتوقيع والإيداع', n('dp')) + '</div><span class="dkpts">' + pts + ' نقطة</span>'
       + '<select class="sel mini" id="dk_sort" aria-label="الترتيب"><option value="date"' + (easy ? '' : ' selected') + '>الترتيب: بالموعد</option><option value="easy"' + (easy ? ' selected' : '') + '>ابدأ بالأسهل</option></select><button type="button" class="btn mini" data-dk="pr">🖶 اطبع الخلاصة</button></div>'
       + '<div class="dklist2">' + V.map(card).join('') + '</div>'
@@ -4039,10 +4039,10 @@ function jwJs(c, list) { const j = rlJsIdx(c), mine = c.writer === rlMe(); retur
 function jwStep(c, box) {
   const k = JW.st, i = JW_ST.findIndex(s => s[0] === k), A = c.an && c.an.v === 2 ? c.an : null, own = jwOwn(c); let h = '';
   if (k === 'u') {
-    h = '<h3 class="jwh3">افهم القضية</h3>'
+    h = '<h3 class="jwh3">تعرّف على القضية</h3>'
       + '<div class="jfacts">' + [['المرحلة', esc(c.stage || '—')], [RL_RES.includes(c.stage) ? 'النطق' : 'الجلسة', c.next ? rlFmt(c.next) : '—'], ['الكاتب', esc(RL_LT[c.writer] || '—')], ['الوزن', String(rlWt(c))], ['النوع', (c.ct || []).length ? esc(c.ct.join('، ')) : '—']].map(x => '<div><span>' + x[0] + '</span><b>' + x[1] + '</b></div>').join('') + '</div>'
       + (A ? '<div class="jan anbox">' + anHtml(A) + '</div><p class="k">من «ملخص الملف» المحفوظ بلا أسماء — ما يظهر منه بحسب اختيارك في البطاقة.</p>'
-        : '<div class="jempty"><b>لم يُحلَّل ملفها بعد</b><p>حلّل أوراقها على جهازك فيظهر هنا ملخصها: حكم أول درجة، والطلبات، وأوجه النعي.</p>' + (PROF_HIDE.has('i') ? '' : '<button type="button" class="btn primary" data-jan>' + ico('analyze', 16) + 'حلّل ملفها</button>') + '</div>' + jwTick(c, 'u', own[0], 'فهمتها', 'فهمتها دون تحليل'))
+        : '<div class="jempty"><b>لم يُحلَّل ملفها بعد</b><p>حلّل أوراقها على جهازك فيظهر هنا ملخصها: حكم أول درجة، والطلبات، وأوجه النعي.</p>' + (PROF_HIDE.has('i') ? '' : '<button type="button" class="btn primary" data-jan>' + ico('analyze', 16) + 'حلّل ملفها</button>') + '</div>' + jwTick(c, 'u', own[0], 'تعرّفت عليها', 'تعرّفت عليها دون تحليل'))
       + (() => { const H = (c.hist || []).filter(x => x && x.a && !x.pend).slice(-4).reverse(); return H.length ? '<h4 class="jwh4">آخر القرارات</h4><ul class="jhist">' + H.map(x => '<li><span>' + rlFmt(x.d) + '</span>' + esc(x.a) + '</li>').join('') + '</ul>' : ''; })()
       + '<p class="jlinks"><button type="button" class="linkbtn" data-jcard>افتح بطاقتها في الرول ›</button></p>';
   } else if (k === 'p') {
@@ -4064,7 +4064,7 @@ function jwStep(c, box) {
       + '<p class="jnote">الفحص مراجعة لنص كتبته أنت: ينبّه ويحيل، ولا يضيف أسبابًا.</p>';
   } else if (k === 'd') {
     const pn = (() => { try { return rlPnKeys().length > 1 && c.next ? rlPnTxt(c.next) : ''; } catch (e) { return ''; } })();
-    h = '<div class="jwhrow"><h3 class="jwh3">داوِل</h3>' + jwTick(c, 'd', own[4], 'تمت المداولة', 'تمت المداولة') + '</div>'
+    h = '<div class="jwhrow"><h3 class="jwh3">تداول</h3>' + jwTick(c, 'd', own[4], 'تمت المداولة', 'تمت المداولة') + '</div>'
       + (pn ? '<div class="jfacts"><div><span>هيئة النطق</span><b>' + esc(pn) + '</b></div></div>' : '')
       + '<div class="jempty soft"><b>المداولة حضورية</b><p>«غرفة المداولة» — حال كل عضو وملاحظاته على المسودة — تأتي في آخر مراحل الخطة. سجّل هنا أن المداولة تمت لتنتقل القضية إلى التوقيع والإيداع.</p></div>';
   } else if (k === 'o') {
@@ -11512,7 +11512,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
-  [177, 'الإصدار 177', ['«مكتبي» الجديد: قضاياك (المحجوزة لك والمسندة إليك) بخلاصة كل منها، وخطواتها الست، والخطوة التالية بزر واحد؛ وتصفية: قيد التحضير · في المداولة · للتوقيع والإيداع.', '«مساحة الحكم» لكل قضية: افهم · حضّر (ملف التحضير) · اكتب · راجع · داوِل · أودِع — كل خطوة تجمع ما عندك وتنقلك إلى أداتها، ولا تكتب أسبابًا.', 'درج الأدوات بزره المتحرك في رأس مساحة الحكم: الحاسبة والمواعيد والتحقق والمبادئ والتشريعات والمساعد تعمل داخله دون مغادرة القضية، ويتذكّر حاله.']],
+  [177, 'الإصدار 177', ['«مكتبي» الجديد: قضاياك (المحجوزة لك والمسندة إليك) بخلاصة كل منها، وخطواتها الست، والخطوة التالية بزر واحد؛ وتصفية: قيد التحضير · في المداولة · للتوقيع والإيداع.', '«مساحة الحكم» لكل قضية: تعرّف · حضّر (ملف التحضير) · اكتب · راجع · تداول · أودِع — كل خطوة تجمع ما عندك وتنقلك إلى أداتها، ولا تكتب أسبابًا.', 'درج الأدوات بزره المتحرك في رأس مساحة الحكم: الحاسبة والمواعيد والتحقق والمبادئ والتشريعات والمساعد تعمل داخله دون مغادرة القضية، ويتذكّر حاله.']],
   [176, 'الإصدار 176', ['أزرار المراحل في الرئيسية صار لكل منها وجهته: «قبل الجلسة» يفتح القضايا التي لم تُراجَع، و«يوم الجلسة» يفتح وضع الجلسة (ورقة الرول)، و«بعد الجلسة» يفتح القرارات المعلّقة أو الأحكام المحجوزة.', 'مربعات خطوات «أوراق الجلسة» بقياس واحد.', 'اسم التطبيق في الشريط العلوي يظهر كاملًا إن اتسع له المكان، وإلا يكتفي الشريط بالشعار — بلا كلمة مبتورة.']],
   [175, 'الإصدار 175', ['التنقل الجديد بخمسة أزرار: الرئيسية · الجلسة · مكتبي · المكتبة · الأدوات، بأيقونات ثنائية اللون (خط بلون الحبر ولمسة ذهبية) — لكل معنى صورة واحدة في التطبيق كله.', 'المكتبة: المبادئ والتشريعات أكبر مربعين في أعلاها، ثم الخرائط والخط الزمني وخزانة الأحكام والمساعد. والأدوات: الحاسبة والمواعيد والتحقق وإخفاء الهوية وتحليل ملف. ومكتبي: قضاياك بخلاصتها و«ملف التحضير»، وأدوات الكتابة.', 'الرئيسية: البطاقة الكبيرة كما هي، وفيها شارات المرحلة (قبل الجلسة · يوم الجلسة · بعد الجلسة)، وسطر «لم تُراجَع · لم تُحلَّل»، وزرّا «أوراق الجلسة» و«التوزيع المبدئي»، و«وضع الجلسة» بأيقونة المنصة والمطرقة. وتحتها «ما يلزمك الآن» وحده.', 'المزامنة في شارتها وحدها: على الحاسوب بمجلد مربوط تُجلب نسختك عند الفتح وتُحفظ بعد كل تعديل؛ وعلى الآيباد والآيفون إن لم يظهر جهاز آخر «يكفي الحفظ»، وتذكير صباح يوم الجلسة، و«وصلك: …» بعد كل مزامنة. ولا نسخة احتياطية = شارة حمراء.']],
   [174, 'الإصدار 174', ['كل قسم قابل للطي صار زرًّا واضحًا: إطار وسهم «›» يدور إلى الأسفل حين يُفتح — في البطاقات والخزانة («★ مجلدات أحكامي» و«أعداد الدفوع والمسائل») والتشريعات والإعدادات وغيرها.', 'زر «ملف التحضير» ظاهر على بطاقة حكمك المحجوز وهي مطوية، وفي سطر إجراءاتها، وفي «خلاصتي»: لمسة تفتح البطاقة على الملف مباشرة.', 'شارة المزامنة في الشريط العلوي بأربع حالات: أخضر «مُزامَن» بوقته، كهرماني «N لم تُزامَن»، أزرق «جارٍ»، أحمر «متأخرة». لوحتها «زامن الآن — الاثنان معًا» لنسختك الشخصية وملف الدائرة؛ على الآيباد والآيفون تعرض الخطوات بالترتيب لأن كل اختيار ملف أو حفظ يحتاج لمسة. وبعد إغلاق الجلسة تنبّهك الشارة إن بقي ما لم يُزامَن.']],
