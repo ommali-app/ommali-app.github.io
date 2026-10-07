@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261007003418">
+<meta name="amali-build" content="20261007064712">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2163,6 +2163,33 @@ details.indet>summary{padding:10px 2px}
 .bnav button.on .ic{background:var(--accent-soft)}
 .lndwrap{display:none;max-width:1100px;margin:0 auto;padding:18px 16px 40px;box-sizing:border-box}
 .lndwrap.show{display:block}
+/* V180 — الأصل من نموذج الدائرة · الإيداع والأصول */
+.ogx{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:14px;align-items:start;margin:8px 0}
+.ogc{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ogc h4{margin:0;font-size:16px}.ogc h4 small{font-weight:400;font-size:12.5px;color:var(--ink3);margin-inline-start:6px}
+.og2{border-color:var(--gold)}
+.oglate{margin:0;font-size:13px;color:var(--warn);font-weight:600}
+.ogcols{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:14px;align-items:start}
+.ogsrc{display:flex;flex-direction:column;gap:8px;min-width:0}.ogsrc>b{font-size:14.5px}
+.ogsrc .drjl li small{display:block;color:var(--ink3);font-size:12px}
+.ogact{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.ogact label.btn{cursor:pointer}
+.ogpvw{display:flex;flex-direction:column;gap:6px;min-width:0}.ogpvw>.k{font-size:12px}.ogpvw>.k mark{background:color-mix(in srgb,var(--ok) 18%,transparent);color:inherit;border-radius:3px;padding:0 2px}.ogpv{background:#fff;color:#111;border:1px solid var(--line2);box-shadow:0 6px 18px rgba(0,0,0,.08);border-radius:4px;padding:16px 20px;font-family:Arial,sans-serif;font-size:12px;line-height:1.8;max-height:440px;overflow:hidden;min-width:0}
+.ogpv p{margin:0 0 6px}.ogpv .c{text-align:center}.ogpv .b{font-weight:700}.ogpv .j{text-align:justify}.ogpv .k{color:#555;font-size:11px}
+.ogpv mark{background:color-mix(in srgb,var(--ok) 18%,#fff);color:inherit;border-radius:3px;padding:0 2px}
+.ogempty{display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding:6px 0}.ogempty p{margin:0;font-size:13.5px;color:var(--ink2);line-height:1.8}
+.ogset{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.ogsc{border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}.ogsc>b small{font-weight:400;color:var(--ink3);font-size:12px;margin-inline-start:6px}
+.ogfile{display:flex;align-items:center;gap:10px;border:1px solid var(--gold);border-radius:12px;padding:8px 10px}.ogfile div{display:flex;flex-direction:column;min-width:0}.ogfile b{overflow-wrap:anywhere}.ogfile small{color:var(--ink3);font-size:12px}
+.ogw{flex:0 0 30px;height:36px;border-radius:6px;background:#2b579a;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+.ogdet{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 10px;font-size:13px}.ogdet .ok{color:var(--ok)}.ogdet .no{color:var(--warn)}
+.ogw2{color:var(--warn)!important}
+.ogrow{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:6px 8px;align-items:center;font-size:13.5px}.ogrow input{grid-column:1/-1}.ogrow span{color:var(--ink2)}.ogrow input{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line2);border-radius:10px;background:var(--bg);color:var(--ink);min-width:0;width:100%;box-sizing:border-box}.ogrow select{min-width:0;width:100%}
+.ogdesk{display:flex;flex-direction:column;gap:14px}.ogdesk section{display:flex;flex-direction:column;gap:8px}.ogdesk h4{margin:0;font-size:15px}.ogdesk h4 small{font-weight:400;color:var(--ink3);font-size:12.5px;margin-inline-start:6px}
+.ogdr{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 14px}.ogdr.pri{border-color:var(--gold)}
+.ogdr .dkcode{text-align:start}.ogds{font-size:13.5px;color:var(--ink2);display:flex;flex-direction:column;gap:2px;min-width:0}.ogds .oglate{font-size:12px}
+.ogoth{border-top:1px dashed var(--line2);padding-top:12px}.ogog{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:8px}
+@media (max-width:1000px){.ogx{grid-template-columns:minmax(0,1fr)}.ogcols{grid-template-columns:minmax(0,1fr)}.ogpv{max-height:300px}}
+@media (max-width:600px){.ogdr{grid-template-columns:minmax(0,1fr) auto}.ogdr .ogds{grid-column:1/-1;grid-row:2}.ogdet{grid-template-columns:minmax(0,1fr)}.ogog{grid-template-columns:minmax(0,1fr)}}
 /* V179 — أحكامك في هذه المسألة · فحوص الحكم · إحصاء أحكامي في الخزانة · التوزيع النهائي */
 .jesheet.wide .jeshc{width:min(1180px,100%);height:min(860px,calc(100vh - 32px))}
 .vi{display:flex;flex-direction:column;gap:12px}
@@ -3204,6 +3231,7 @@ details.indet>summary{padding:10px 2px}
       <p class="dsample">نموذج: لما كان من المقرر في قضاء هذه المحكمة أن العبرة بالطلبات الختامية.</p>
     </section>
     <section class="ds" id="dcprof"><h3>دائرتك</h3><p class="synote" id="dcp_sum"></p><button type="button" class="btn" id="dcp_go">تغيير الدائرة أو صفتي فيها</button></section>
+    <section class="ds" id="dorg"><h3>نموذج الأصل والهيئة <small>على هذا الجهاز فقط</small></h3><div id="og_set"><p class="k">…</p></div></section>
     <section class="ds" id="dprof"><h3>الملف الشخصي <small>على هذا الجهاز فقط</small></h3>
       <div class="prof">
         <label class="profpic" for="pf_photo" title="إضافة صورة"><img id="pf_img" alt="" hidden><span id="pf_ph">＋<br>صورة</span><input type="file" id="pf_photo" accept="image/*" hidden></label>
@@ -3263,9 +3291,10 @@ details.indet>summary{padding:10px 2px}
     <section class="ds"><h3>عن التطبيق</h3>
       <p class="abt"><b>مداولة</b> — رول الجلسة وأدوات الدائرة. عمل شخصي مجاني، صمّمه وبناه من يعرف تفاصيل العمل القضائي وإجراءاته وصعوباته العملية أثناء نظر الجلسة وإدارتها؛ وُجد ليعين القضاة على نظر الجلسات وكتابة الأحكام، فتُنجَز القضايا أسرع وتجود الأحكام.</p>
       <p class="abt"><b>السرّية:</b> يعمل على جهازك وحده. لا يحفظ أسماء أطراف القضايا ولا نصوص ملفاتها، ويُخفي الهوية على جهازك قبل أي إرسال، ولا اتصال خارجيًا إلا بما تفتحه بنفسك. بياناتك على جهازك، والمزامنة الاختيارية مشفّرة وشخصية. التطبيق ملف واحد بلا خوادم تحفظ شيئًا ولا مكتبات خارجية، فلا مصدر ثالث لبياناتك.</p>
+      <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V179 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V180 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -4238,11 +4267,10 @@ function jwStep(c, box) {
       + (pn ? '<div class="jfacts"><div><span>هيئة النطق</span><b>' + esc(pn) + '</b></div></div>' : '')
       + '<div class="jempty soft"><b>المداولة حضورية</b><p>«غرفة المداولة» — حال كل عضو وملاحظاته على المسودة — تأتي في آخر مراحل الخطة. سجّل هنا أن المداولة تمت لتنتقل القضية إلى التوقيع والإيداع.</p></div>';
   } else if (k === 'o') {
-    h = '<h3 class="jwh3">أودِع</h3>' + jwJs(c, ['طُبعت', 'وُقّعت', 'أُودعت'])
-      + '<p class="jnote">بعد النطق سجّل «صدر الحكم» من «قرار الجلسة» في الرول، فتنتقل القضية إلى الأرشيف.</p>'
-      + '<p class="jlinks"><button type="button" class="linkbtn" data-jcard>افتح بطاقتها في الرول ›</button></p>';
+    h = ogStepHtml(c);   // V180: المسودة والأصل
   }
   box.innerHTML = h + jwFoot(c, i);
+  if (k === 'o') { try { ogStepWire(c, box); } catch (e) { console.warn('og', e); } }   // V180
   const rr = () => { jwRender(); try { lndDesk(); } catch (e) {} };
   box.querySelectorAll('[data-jgo]').forEach(b => b.onclick = () => { JW.st = b.dataset.jgo; jwSaveS(); jwRender(); window.scrollTo(0, 0); });
   box.querySelectorAll('[data-jtk]').forEach(b => b.onclick = () => { const kk = b.dataset.jtk; jwMark(c, kk, !(c.ws && c.ws[kk])); rr(); });
@@ -4334,7 +4362,7 @@ window.__v177 = { open: (id, st) => jwOpen(id, st), JW, done: id => jwDone(jwCar
 // المسودة فيها أسماء الأطراف: تُحفظ مشفّرة في خزانة هذا الجهاز وحده (amali_vault، المفتاح نفسه)، ولا تدخل المزامنة ولا ملف الدائرة.
 // الفهرس tm_drafts في localStorage بلا نص ولا أسماء: { id: { u: آخر تعديل، sec: القسم، w: كلمات، s: {f,r,o}, m: 'app'|'word', wd: وقت تنزيل Word } }
 const JE = { cid: null, rec: null, t: null, off: 0, range: null, ed: null, busy: false, fq: null, saving: null };
-const JE_SEC = [['h', 'الترويسة'], ['f', 'الوقائع'], ['r', 'الأسباب'], ['o', 'المنطوق']];
+const JE_SEC = [['h', 'الديباجة'], ['f', 'الوقائع'], ['r', 'الأسباب'], ['o', 'المنطوق']];
 function jeIdx() { try { const o = JSON.parse(localStorage.getItem('tm_drafts') || '{}'); return o && typeof o === 'object' ? o : {}; } catch (e) { return {}; } }
 function jeIdxSet(id, p) { const o = jeIdx(); if (p === null) delete o[id]; else o[id] = Object.assign({}, o[id] || {}, p); try { localStorage.setItem('tm_drafts', JSON.stringify(o)); } catch (e) {} }
 function jeList() { const o = jeIdx(); return Object.keys(o).map(id => ({ id, x: o[id], c: RL.cards.find(c => c.id === id) })).filter(e => e.c).sort((a, b) => (b.x.u || 0) - (a.x.u || 0)); }
@@ -4343,7 +4371,7 @@ async function jePut(id, rec) { const e = await vkEnc(rec); await vkTx('kv', 're
 async function jeDel(id) { try { await vkTx('kv', 'readwrite', s => s.delete('dr:' + id)); } catch (e) {} jeIdxSet(id, null); }
 function jeAgo(ts) { if (!ts) return ''; const m = Math.round((Date.now() - ts) / 60000); if (m < 1) return 'الآن'; if (m < 60) return 'قبل ' + (m === 1 ? 'دقيقة' : m === 2 ? 'دقيقتين' : m + (m <= 10 ? ' دقائق' : ' دقيقة')); const h = Math.round(m / 60); if (h < 24) return 'قبل ' + (h === 1 ? 'ساعة' : h === 2 ? 'ساعتين' : h + (h <= 10 ? ' ساعات' : ' ساعة')); const d = Math.round(h / 24); return d === 1 ? 'أمس' : d === 2 ? 'قبل يومين' : 'قبل ' + d + (d <= 10 ? ' أيام' : ' يومًا'); }
 function jeTime(ts) { try { return new Date(ts).toLocaleTimeString('ar-KW', { hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; } }
-// ---- الترويسة: من بطاقة القضية، والأسماء يكتبها القاضي (تُحفظ في المسودة المشفّرة وحدها)
+// ---- الديباجة: من بطاقة القضية، والأسماء يكتبها القاضي (تُحفظ في المسودة المشفّرة وحدها)
 function jeHeadDef(c) { const G = rlGrp(c), autos = [...new Set(G.map(x => x.auto).filter(Boolean))]; return { appealNo: G.map(x => x.code).join('، '), circuit: '', session: c.next && RL_RES.includes(c.stage) ? rlFmt(c.next) : '', from: '', against: '', autoId: autos.join('، '), amount: '', reg: '', civil: '' }; }
 function jeRoles() { const M = weCfg(); return M.key === 'lab' || M.key === 'ap' || M.key === 'jm' ? ['المستأنف', 'المستأنف ضده'] : M.cri ? ['المتهم', 'المدعي بالحق المدني'] : ['المدعي', 'المدعى عليه']; }
 // ---- النص: فقرات <p> بتنسيق محدود (غامق، تحته خط، وسط، عنوان) وتظليل «للمراجعة» و〖 〗
@@ -4406,7 +4434,7 @@ async function jeRender(c, box) {
 function jeNew(c, mode) { JE.rec = { v: 1, h: jeHeadDef(c), html: '', pos: { off: 0, sec: 'f' }, mode: mode || 'app', at: Date.now() }; if (c.writer === rlMe() && rlJsIdx(c) < 2) { rlJsSet(c, 'قيد الكتابة'); rlSave(); } }
 function jeStart(c, w) {
   w.innerHTML = '<div class="jest"><div class="jesth"><h3>ابدأ مسودة ' + esc(c.code) + '</h3><p>تُحفظ على هذا الجهاز وحده، مشفّرة ومربوطة بالقضية — فيها أسماء الأطراف، فلا تدخل المزامنة ولا ملف الدائرة. وتعود إليها متى شئت من حيث توقفت.</p></div>'
-    + '<div class="jestg"><button type="button" class="jestc pri" data-jes="sk"><span class="jesti">' + ico('draft', 26) + '</span><b>من هيكل الحكم وترويسة القضية</b><span>الترويسة من بطاقتها، وعناوين الأقسام ومواضع 〖 〗 لتكتب فيها</span></button>'
+    + '<div class="jestg"><button type="button" class="jestc pri" data-jes="sk"><span class="jesti">' + ico('draft', 26) + '</span><b>من هيكل الحكم وديباجة القضية</b><span>الديباجة من بطاقتها، وعناوين الأقسام ومواضع 〖 〗 لتكتب فيها</span></button>'
     + '<label class="jestc" for="je_open0"><span class="jesti">' + ico('word', 26) + '</span><b>افتح ملف Word بدأتَه</b><span>يُقرأ على جهازك، وتكمل الكتابة هنا</span></label><input type="file" id="je_open0" accept=".docx,.doc,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword" hidden>'
     + '<button type="button" class="jestc" data-jes="wd"><span class="jesti">' + ico('files', 26) + '</span><b>أكتب في Word كعادتي</b><span>ينسخ لك الدرج ما تختار، وتفحص الملف في «راجع» دون لصق</span></button></div></div>';
   w.querySelector('[data-jes=sk]').onclick = async () => { jeNew(c); JE.rec.html = jeSkelHtml(JE.rec.h); await jeFlush(); jeEditor(c, w, true); };
@@ -4416,7 +4444,7 @@ function jeStart(c, w) {
 function jeWordPanel(c, w) {
   const x = jeIdx()[c.id] || {};
   w.innerHTML = '<div class="jewd"><div class="jewdh">' + ico('word', 30) + '<div><h3>تكتب هذه القضية في Word</h3><p>' + (x.wd ? 'آخر تنزيل إلى Word ' + jeAgo(x.wd) + '. ' : '') + 'الدرج يقترح لك فقراتك والمبادئ والتشريعات وعباراتك بزر «انسخ»، وتفحص الملف في «راجع» دون لصق.</p></div></div>'
-    + '<div class="jewdb"><button type="button" class="btn primary" data-jew="dl">' + ico('word', 16) + ' نزّل ملف البداية (الترويسة والهيكل)</button>'
+    + '<div class="jewdb"><button type="button" class="btn primary" data-jew="dl">' + ico('word', 16) + ' نزّل ملف البداية (الديباجة والهيكل)</button>'
     + '<label class="btn" for="je_open1">افتح الملف هنا وأكمل في التطبيق</label><input type="file" id="je_open1" accept=".docx,.doc" hidden>'
     + '<button type="button" class="btn" data-jew="ed">اكتب في التطبيق بدلًا من ذلك</button></div>'
     + '<button type="button" class="linkbtn jedel" data-jew="del">احذف المسودة من هذا الجهاز</button></div>';
@@ -4428,7 +4456,7 @@ function jeWordPanel(c, w) {
 function jeAskDel(c, w) { const b = w.querySelector('[data-jew=del],[data-jem=del]'); if (b && !b.dataset.sure) { b.dataset.sure = '1'; b.textContent = 'تأكيد الحذف؟ لا يمكن التراجع'; setTimeout(() => { if (b.isConnected) { delete b.dataset.sure; b.textContent = 'احذف المسودة من هذا الجهاز'; } }, 4000); return; }
   jeDel(c.id).then(() => { JE.rec = null; JE.ed = null; JE.dirty = undefined; toast('حُذفت المسودة من هذا الجهاز'); jwRender(); }); }
 function jeHeadHtml(H) { const d = Object.assign({}, H), M = weCfg(), fr = weNumbered(weParties(d.from)), ag = weNumbered(weParties(d.against));
-  return '<button type="button" class="jehd" data-jeh title="عدّل الترويسة والأسماء"><span class="jeht">' + esc(weTitle(d)) + '</span><span><b>' + esc(M.fromL) + ':</b> ' + (fr.length ? fr.map(esc).join('<br>') : '<i>اكتب الأسماء ✎</i>') + '</span><span class="jehc">ضد</span><span>' + (ag.length ? ag.map(esc).join('<br>') : '<i>…</i>') + '</span><span class="jehp">' + esc(wePre(d, M)) + '</span></button>'; }
+  return '<button type="button" class="jehd" data-jeh title="عدّل الديباجة والأسماء"><span class="jeht">' + esc(weTitle(d)) + '</span><span><b>' + esc(M.fromL) + ':</b> ' + (fr.length ? fr.map(esc).join('<br>') : '<i>اكتب الأسماء ✎</i>') + '</span><span class="jehc">ضد</span><span>' + (ag.length ? ag.map(esc).join('<br>') : '<i>…</i>') + '</span><span class="jehp">' + esc(wePre(d, M)) + '</span></button>'; }
 function jeEditor(c, w, fresh) {
   const R = JE.rec; if (!R.html) R.html = jeSkelHtml(R.h);
   const x = jeIdx()[c.id] || {}, stale = x.wd && x.u && x.u > x.wd + 1500;
@@ -4526,11 +4554,11 @@ function jeInsText(t, mark, block) {
 
 function jeCanIns() { return !!(JE.ed && JE.ed.isConnected && JE.rec && JE.rec.mode !== 'word'); }
 function jeUse(t, label) { if (jeCanIns()) { if (jeInsText(t, true, true)) { toast('أُدرج ' + (label || '') + ' عند المؤشر — مظلّلًا حتى تراجعه'); const go = () => { const p = jeCurP(); if (p) p.scrollIntoView({ block: 'center', behavior: 'smooth' }); }; if (!jdWide()) { jeFlush(); jdToggle(false); setTimeout(go, 120); } else go(); } } else copy(t, 'نُسخ ' + (label || '') + ' — الصقه في مسودتك'); }
-// ---- الترويسة والأسماء
+// ---- الديباجة والأسماء
 function jeHeadSheet(c, w) {
   const H = JE.rec.h, M = weCfg(), cri = !!M.cri;
   const f = (k, l, ph, ta) => '<label class="jef"><span>' + l + '</span>' + (ta ? '<textarea id="jeh_' + k + '" rows="3" placeholder="' + esc(ph || '') + '">' + esc(H[k] || '') + '</textarea>' : '<input id="jeh_' + k + '" value="' + esc(H[k] || '') + '" placeholder="' + esc(ph || '') + '">') + '</label>';
-  jeSheet('الترويسة والأسماء', '<p class="k">الأسماء على هذا الجهاز وحده، داخل المسودة المشفّرة؛ لا تُحفظ في البطاقة ولا تُزامَن. سطر لكل اسم عند التعدد.</p><div class="jefg">' + f('appealNo', M.no || 'رقم الاستئناف', M.noPh || '123/2026') + f('circuit', 'الدائرة', profKind() === 'lab' && M.key === 'lab' ? 'عمالي/2' : (M.cph || '')) + f('session', 'جلسة النطق', '21/10/2026') + f('autoId', 'الرقم الآلي', '') + (M.reg ? f('reg', 'المقيدة برقم', M.rph || '') : '') + '</div>'
+  jeSheet('الديباجة والأسماء', '<p class="k">الأسماء على هذا الجهاز وحده، داخل المسودة المشفّرة؛ لا تُحفظ في البطاقة ولا تُزامَن. سطر لكل اسم عند التعدد.</p><div class="jefg">' + f('appealNo', M.no || 'رقم الاستئناف', M.noPh || '123/2026') + f('circuit', 'الدائرة', profKind() === 'lab' && M.key === 'lab' ? 'عمالي/2' : (M.cph || '')) + f('session', 'جلسة النطق', '21/10/2026') + f('autoId', 'الرقم الآلي', '') + (M.reg ? f('reg', 'المقيدة برقم', M.rph || '') : '') + '</div>'
     + '<div class="jefg2">' + f('from', M.fromL || 'المقام من', M.pa || 'اسم المستأنف', true) + f('against', 'ضد', M.pe || 'اسم المستأنف ضده', true) + (cri ? f('civil', 'المدعي بالحق المدني', '', true) : '') + '</div><div class="jefg">' + f('amount', 'أتعاب المحاماة', 'مثال: 100 د.ك') + '</div>',
     [['حفظ', true, () => { ['appealNo', 'circuit', 'session', 'autoId', 'reg', 'from', 'against', 'civil', 'amount'].forEach(k => { const e = document.getElementById('jeh_' + k); if (e) H[k] = e.value.trim(); }); JE.dirty = true; jeFlush(); const hd = w.querySelector('[data-jeh]'); if (hd) { hd.outerHTML = jeHeadHtml(H); w.querySelector('[data-jeh]').onclick = () => jeHeadSheet(c, w); } jeOutSync(true); return true; }]]);
 }
@@ -4581,14 +4609,14 @@ async function jeImport(c, file, quiet) {
   JE.rec.html = body.map(l => /^فلهذه\s+الأسباب/.test(l) ? jeP(l, 'h') : jeP(l)).join('') || jeSkelHtml(H); JE.rec.pos = { off: 0, sec: 'f' }; JE.rec.mode = 'app';
   await jePut(c.id, JE.rec); jeIdxSet(c.id, { u: Date.now(), m: 'app', wd: file.lastModified || Date.now() }); jeSwRefresh(); toast('فُتح «' + file.name + '» — تكمل الكتابة هنا'); return true;
 }
-// ---- الوقائع: عناصر الملخص (بلا ذكاء) أو تلخيص الأوراق بأداة الذكاء (معتَّمة) مع إعادة الأسماء من الترويسة
+// ---- الوقائع: عناصر الملخص (بلا ذكاء) أو تلخيص الأوراق بأداة الذكاء (معتَّمة) مع إعادة الأسماء من الديباجة
 function jeElems(c) { const A = c.an && c.an.v === 2 ? c.an : null; if (!A) return ''; const [ap, ae] = jeRoles(), L = [];
   const fr = A.fr || {}; if (fr.date || fr.disp) L.push('وحيث إن محكمة أول درجة قضت' + (fr.date ? ' بجلسة ' + fr.date : '') + (fr.disp ? ': ' + fr.disp : ' 〖منطوق حكم أول درجة〗') + '.');
   if ((A.rq || []).length) L.push('وطلب ‹' + ap + '› في ختام صحيفة استئنافه: ' + A.rq.join('؛ ') + '.');
   if ((A.gr || []).length) L.push('ونعى على الحكم المستأنف:' + '\n' + A.gr.map((g, i) => String(i + 1).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]) + '- ' + g.h + (g.s ? ': ' + g.s : '')).join('\n'));
   if ((A.ex || []).length) L.push('وانتهى تقرير الخبير إلى: ' + A.ex.map(x => (x.b ? x.b + ' ' : '') + anF3(x.a) + ' د.ك').join('، ') + '.');
   return L.join('\n'); }
-function jeNames(t) {   // ‹المستأنف› ‹المستأنف ضده الثاني› … ← الأسماء من الترويسة؛ ما لا اسم له يبقى 〖موضعًا〗
+function jeNames(t) {   // ‹المستأنف› ‹المستأنف ضده الثاني› … ← الأسماء من الديباجة؛ ما لا اسم له يبقى 〖موضعًا〗
   const H = JE.rec.h, F = weParties(H.from), A = weParties(H.against), C = weParties(H.civil), ORD = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس'], ORDF = ['الأولى', 'الثانية', 'الثالثة', 'الرابعة', 'الخامسة', 'السادسة'];
   let n = 0, miss = 0; const out = String(t).replace(/‹([^›]{2,40})›/g, (all, k) => { const s = k.trim(), against = /ضد|عليه|عليها|عليهم/.test(s), civ = /بالحق المدني/.test(s), om = s.match(/\s(الأول|الثاني|الثالث|الرابع|الخامس|السادس|الأولى|الثانية|الثالثة|الرابعة|الخامسة|السادسة)$/), i = om ? Math.max(ORD.indexOf(om[1]), ORDF.indexOf(om[1])) : 0, L = civ ? C : against ? A : F;
     if (L[i]) { n++; return L[i]; } miss++; return '〖' + s + '〗'; });
@@ -4604,11 +4632,11 @@ function jeFactsSheet(c, w) {
   const A = c.an && c.an.v === 2 ? c.an : null, ai = !PROF_HIDE.has('i') && !isHid('i');
   jeSheet('الوقائع — مساعدة اختيارية', '<p class="k">ما يُدرج يظهر مظلّلًا حتى تراجعه وتعدّله، ويُدرج عند المؤشر (ضعه في قسم الوقائع).</p>'
     + '<section class="jefs"><h4>أدرج عناصر «ملخص الملف»</h4><p>' + (A ? 'من تحليل ملف القضية المحفوظ: حكم أول درجة، والطلبات، وأوجه النعي مرقّمة، وما انتهى إليه الخبير — بالصفات. بيانات منقولة لا صياغة.' : 'لم يُحلَّل ملف هذه القضية بعد.') + '</p>' + (A ? '<button type="button" class="btn primary" data-jf="el">↵ أدرج العناصر</button>' : '') + '</section>'
-    + (ai ? '<section class="jefs"><h4>لخّص الوقائع وصحيفة الاستئناف <span class="aitag">✦ ذكاء</span></h4><p>اختر أوراق القضية (PDF أو Word أو صور أو ملف مضغوط). تُقرأ على جهازك وتُعتَّم الأسماء، ثم يُنسخ الطلب لأداة الذكاء التي تستعملها. تلصق الرد هنا فيُدرج بالأسماء من الترويسة. التلخيص للوقائع والطلبات وأوجه النعي وحدها — لا أسباب ولا رأي في النتيجة.</p>'
+    + (ai ? '<section class="jefs"><h4>لخّص الوقائع وصحيفة الاستئناف <span class="aitag">✦ ذكاء</span></h4><p>اختر أوراق القضية (PDF أو Word أو صور أو ملف مضغوط). تُقرأ على جهازك وتُعتَّم الأسماء، ثم يُنسخ الطلب لأداة الذكاء التي تستعملها. تلصق الرد هنا فيُدرج بالأسماء من الديباجة. التلخيص للوقائع والطلبات وأوجه النعي وحدها — لا أسباب ولا رأي في النتيجة.</p>'
       + '<div class="jefq" id="je_fq"></div></section>' : '')
-    + '<section class="jefs"><h4>أعد الأسماء في المسودة</h4><p>يستبدل الرموز ‹' + jeRoles()[0] + '› ‹' + jeRoles()[1] + '›… في النص بالأسماء التي في الترويسة.</p><button type="button" class="btn" data-jf="nm">أعد الأسماء</button></section>', [], s => {
+    + '<section class="jefs"><h4>أعد الأسماء في المسودة</h4><p>يستبدل الرموز ‹' + jeRoles()[0] + '› ‹' + jeRoles()[1] + '›… في النص بالأسماء التي في الديباجة.</p><button type="button" class="btn" data-jf="nm">أعد الأسماء</button></section>', [], s => {
       const eb = s.querySelector('[data-jf=el]'); if (eb) eb.onclick = () => { const r = jeNames(jeElems(c)); s.close(); jeInsText(r.t, true); toast('أُدرجت عناصر الملخص — مظلّلة حتى تراجعها'); };
-      s.querySelector('[data-jf=nm]').onclick = () => { const n = jeNamesInEd(); s.close(); toast(n.n ? 'أُعيد ' + n.n + ' اسمًا من الترويسة' + (n.miss ? ' · ' + n.miss + ' بلا اسم في الترويسة (〖〗)' : '') : n.miss ? 'لا أسماء في الترويسة — اكتبها من «الترويسة»' : 'لا رموز أسماء في المسودة'); };
+      s.querySelector('[data-jf=nm]').onclick = () => { const n = jeNamesInEd(); s.close(); toast(n.n ? 'أُعيد ' + n.n + ' اسمًا من الديباجة' + (n.miss ? ' · ' + n.miss + ' بلا اسم في الديباجة (〖〗)' : '') : n.miss ? 'لا أسماء في الديباجة — اكتبها من «الديباجة»' : 'لا رموز أسماء في المسودة'); };
       if (ai) jeFqDraw(c, s.querySelector('#je_fq'), s); });
 }
 function jeNamesInEd() { const tw = document.createTreeWalker(JE.ed, NodeFilter.SHOW_TEXT), L = []; let n; while ((n = tw.nextNode())) if (/‹[^›]+›/.test(n.nodeValue)) L.push(n); let N = 0, M = 0; L.forEach(x => { const r = jeNames(x.nodeValue); N += r.n; M += r.miss; x.nodeValue = r.t; }); if (N + M) { JE.ed.innerHTML = jeClean(JE.ed); JE.dirty = true; jeSaveSoon(); jeOutSync(true); } return { n: N, miss: M }; }
@@ -4624,7 +4652,7 @@ function jeFqDraw(c, box, sh) {
   box.querySelector('[data-jq=cp]').onclick = () => { copy(jeFactsPrompt(c, Q.text), 'نُسخ الطلب — الصقه في أداة الذكاء'); Q.copied = true; jeFqDraw(c, box, sh); };
   { const b = box.querySelector('[data-jq=clip]'); if (b) b.onclick = async () => { try { box.querySelector('#je_fqr').value = await navigator.clipboard.readText(); } catch (e) { toast('اسمح بالوصول إلى الحافظة أو الصق يدويًا'); } }; }
   box.querySelector('[data-jq=re]').onclick = () => { JE.fq = { cid: c.id, st: 'pick' }; jeFqDraw(c, box, sh); };
-  box.querySelector('[data-jq=ins]').onclick = () => { const t = box.querySelector('#je_fqr').value.trim(); if (!t) { toast('الصق رد أداة الذكاء أولًا'); return; } const clean = t.replace(/^```[a-z]*\n?|```$/g, '').trim(), r = jeNames(clean); sh.close(); JE.fq = null; jeInsText(r.t, true); toast('أُدرجت الوقائع — مظلّلة حتى تراجعها' + (r.n ? ' · ' + r.n + ' اسمًا من الترويسة' : '') + (r.miss ? ' · ' + r.miss + ' بلا اسم (〖〗)' : '')); };
+  box.querySelector('[data-jq=ins]').onclick = () => { const t = box.querySelector('#je_fqr').value.trim(); if (!t) { toast('الصق رد أداة الذكاء أولًا'); return; } const clean = t.replace(/^```[a-z]*\n?|```$/g, '').trim(), r = jeNames(clean); sh.close(); JE.fq = null; jeInsText(r.t, true); toast('أُدرجت الوقائع — مظلّلة حتى تراجعها' + (r.n ? ' · ' + r.n + ' اسمًا من الديباجة' : '') + (r.miss ? ' · ' + r.miss + ' بلا اسم (〖〗)' : '')); };
 }
 async function jeFqRead(c, files, redraw) {
   const Q = JE.fq; let L; try { L = await bqExpand(files); } catch (e) { Q.st = 'err'; Q.err = 'تعذّر فتح الملفات'; return; }
@@ -4857,6 +4885,224 @@ async function dsnGo(d) { dsnSet(null); rlMode = 'res'; rlRender(); try { const 
   const b = el('div', 'dsn'); b.setAttribute('role', 'status'); b.innerHTML = '<span class="dsni" aria-hidden="true">' + ico('dist', 22) + '</span><div><b>التوزيع النهائي لجلسة ' + rlDay(N.d) + ' ' + rlFmt(N.d) + '</b><span>حُجزت ' + L0.length + (L0.length > 2 && L0.length < 11 ? ' قضايا' : ' قضية') + (u < L0.length ? ' (' + u + ' حكمًا)' : '') + ' للحكم' + (nw ? ' — <em>' + nw + ' بلا كاتب</em>' : '') + '. راجع كاتب كل حكم، ثم أرسل التوزيع للأعضاء.</span></div><div class="dsna"><button type="button" class="btn primary" data-dsn>راجع التوزيع وأرسله</button><button type="button" class="linkbtn" data-dsx>لاحقًا</button></div>';
   T.parentNode.insertBefore(b, T); b.querySelector('[data-dsn]').onclick = () => dsnGo(N.d); b.querySelector('[data-dsx]').onclick = () => { dsnSet(null); b.remove(); }; } catch (e) {} return r; }; }
 window.__v179 = { issue: t => vkIssue(t), grp: d => viGrp(d), season: d => viSeason(d), mine: () => viMine().length, judge: (t, ctx) => { DR_CTX = ctx || null; return drJudge(t); }, ctx: () => DR_CTX, setCalc: (cid) => { if (mstLast) mstLast.cid = cid; return !!mstLast; }, dsn: () => dsnGet(), dsnSet: v => dsnSet(v), fileNums: f => drFileNums(f), amts: s => drAmtsIn(s) };
+// ==== V180: الأصل من نموذج الدائرة · الإيداع والأصول ====
+// النموذج: ملف Word يضيفه القاضي مرة واحدة؛ يُفرَّغ من أسمائه وأرقامه، ويُحفظ مشفّرًا في خزانة الجهاز (kv 'og:tpl:'+نوع الدائرة). الأصل يُملأ من البطاقة والديباجة والمسودة ويُنزَّل ولا يُحفظ.
+// الهيئة: الألقاب والأسماء كما تُكتب في الأصل — localStorage tm_og على هذا الجهاز وحده (لا تدخل المزامنة ولا ملف الدائرة).
+const OG_DOTS = '……';
+const OG_KEYS = [['p', 'الرئيس'], ['r', 'العضو اليمين'], ['l', 'العضو اليسار'], ['d', 'الاحتياطي']];
+const OG_TITLES = ['المستشار', 'المستشار أول', 'القاضي', 'الأستاذ المستشار'];
+function ogCfg() { let o = {}; try { o = JSON.parse(localStorage.getItem('tm_og') || '{}') || {}; } catch (e) {} o.t = o.t || {}; o.n = o.n || {}; o.s = o.s || { t: 'السيد', n: '' }; return o; }
+function ogCfgSet(o) { try { localStorage.setItem('tm_og', JSON.stringify(o)); } catch (e) {} }
+function ogTitle(k) { return ogCfg().t[k] || 'المستشار'; }
+function ogName(k) { const o = ogCfg(); return (o.n[k] || '').trim() || rlMName(k) || ''; }
+function ogKey() { try { return weCfg().key || 'lab'; } catch (e) { return 'lab'; } }
+function ogN(s) { return String(s || '').replace(/[ً-ٰٟـ]/g, '').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/\s+/g, ' ').trim(); }
+const ogEsc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+function ogB64(u8) { let s = ''; for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); }
+function ogUnb64(s) { return Uint8Array.from(atob(s), c => c.charCodeAt(0)); }
+// ---- قراءة الملف وكتابته
+async function ogUnzip(u8) { const Z = vkZip(u8), F = []; for (const e of Z.list) { if (/\/$/.test(e.name)) continue; F.push({ name: e.name, data: await vkZipGet(Z, e) }); } return F; }
+function ogTxt(F, n) { const f = F.find(x => x.name === n); return f ? new TextDecoder().decode(f.data) : ''; }
+function ogPut(F, n, s) { const f = F.find(x => x.name === n); if (f) f.data = new TextEncoder().encode(s); }
+// فقرات المستوى الأعلى (لا يُدخل في فقرات مربعات النص المتداخلة)
+function ogParas(x) { const P = [], re = /<w:p[ >]|<w:p\/>|<\/w:p>/g; let m, d = 0, st = -1; while ((m = re.exec(x))) { const t = m[0]; if (t === '<w:p/>') { if (d === 0) P.push({ s: m.index, e: m.index + 6 }); continue; } if (t === '</w:p>') { d--; if (d === 0 && st >= 0) { P.push({ s: st, e: m.index + 6 }); st = -1; } continue; } if (d === 0) st = m.index; d++; }
+  return P.map(p => { const xml = x.slice(p.s, p.e); return Object.assign(p, { xml, t: vkUnesc((xml.match(/<w:t(?:\s[^>]*)?>[^<]*<\/w:t>/g) || []).map(z => z.replace(/<[^>]+>/g, '')).join('')) }); }); }
+function ogPPr(xml) { const m = xml.match(/<w:pPr>[\s\S]*?<\/w:pPr>/); return m ? m[0] : ''; }
+function ogRPr(xml) { const r = xml.match(/<w:r(?:\s[^>]*)?>\s*(<w:rPr>[\s\S]*?<\/w:rPr>)/); if (r) return r[1]; const p = ogPPr(xml).match(/<w:rPr>[\s\S]*?<\/w:rPr>/); return p ? p[0] : ''; }
+function ogOpen(xml) { return xml.match(/^<w:p(?:\s[^>]*)?>/)[0].replace(/\s+w14:(paraId|textId)="[^"]*"/g, ''); }
+function ogRun(rpr, t, f) { let r = rpr || '<w:rPr></w:rPr>'; if (f && f.b && !/<w:b\/>|<w:b\s/.test(r)) r = /<w:rFonts[^>]*\/>/.test(r) ? r.replace(/(<w:rFonts[^>]*\/>)/, '$1<w:b/><w:bCs/>') : r.replace('<w:rPr>', '<w:rPr><w:b/><w:bCs/>'); if (f && f.u && !/<w:u\s/.test(r)) { const k = r.search(/<w:(effect|bdr|shd|fitText|vertAlign|rtl|cs|em|lang|eastAsianLayout)\b/); r = k > 0 ? r.slice(0, k) + '<w:u w:val="single"/>' + r.slice(k) : r.replace('</w:rPr>', '<w:u w:val="single"/></w:rPr>'); }
+  return '<w:r>' + r + '<w:t xml:space="preserve">' + ogEsc(t) + '</w:t></w:r>'; }
+function ogJc(ppr, jc) { if (!jc) return ppr; if (!ppr) return '<w:pPr><w:jc w:val="' + jc + '"/></w:pPr>'; if (/<w:jc\s/.test(ppr)) return ppr.replace(/<w:jc\s[^>]*\/>/, '<w:jc w:val="' + jc + '"/>'); const k = ppr.search(/<w:(textDirection|textAlignment|textboxTightWrap|outlineLvl|divId|cnfStyle|rPr|sectPr|pPrChange)\b/); return k > 0 ? ppr.slice(0, k) + '<w:jc w:val="' + jc + '"/>' + ppr.slice(k) : ppr.replace('</w:pPr>', '<w:jc w:val="' + jc + '"/></w:pPr>'); }
+function ogPara(src, runs, jc) { const rpr = ogRPr(src.xml), ppr = ogJc(ogPPr(src.xml).replace(/<w:sectPr>[\s\S]*?<\/w:sectPr>/, ''), jc); return ogOpen(src.xml) + ppr + (runs || []).map(x => typeof x === 'string' ? ogRun(rpr, x) : ogRun(rpr, x.t, x)).join('') + '</w:p>'; }
+function ogSetT(p, t) { return ogPara(p, [t]); }
+// ---- التعرّف على المواضع
+const OG_ANCH = [['date', 'تاريخ الجلسة (هجري وميلادي)'], ['pres', 'الرئيس'], ['mem', 'العضوان'], ['sec', 'أمين السر'], ['no', 'رقم القضية'], ['from', 'المرفوع من'], ['ag', 'ضد'], ['body', 'بداية المتن'], ['op', 'المنطوق بعد «فلهذه الأسباب»'], ['auto', 'الرقم الآلي وتذييل الصفحات']];
+function ogScan(P) {
+  const N = P.map(p => ogN(p.t)), A = {}, f = (rx, from, to) => { for (let i = from || 0; i < (to == null ? N.length : to); i++) if (rx.test(N[i])) return i; return -1; }, ne = i => { for (let j = i + 1; j < N.length; j++) if (N[j]) return j; return -1; };
+  A.date = f(/بالجلسه المنعقده|\{التاريخ\}/); A.pres = f(/^برئاسه|\{الرئيس\}/); A.memH = f(/^وعضويه/); A.mem = A.memH >= 0 ? ne(A.memH) : f(/\{العضوين\}/); A.sec = f(/^وحضور|\{امين_السر\}/);
+  A.no = f(/^في (الاستئناف|الاستيناف|الدعوي|القضيه)|\{رقم_القضيه\}/); A.from = f(/^(المرفوع|المرفوعه|المقام|المقامه) من|\{المستانف\}/); A.dd = A.from >= 0 ? f(/^ض ?د$/, A.from + 1) : -1;
+  A.court = f(/^المحكمه$/, Math.max(0, A.dd)); A.intro = f(/^بعد (سماع|الاطلاع)|\{المتن\}/, Math.max(0, A.dd)); A.rh = f(/^فلهذه الاسباب/, Math.max(0, A.intro)); A.op = f(/^حكمت المحكمه|\{المنطوق\}/, Math.max(0, A.rh)); A.sign = A.op >= 0 ? f(/امين سر|رئيس الدائره/, A.op + 1) : -1;
+  if (A.mem >= 0 && A.sec >= 0 && A.mem >= A.sec) A.mem = -1;
+  const blk = (a, b) => { const R = []; if (a < 0) return R; for (let i = a + 1; i < (b < 0 ? N.length : b); i++) if (N[i]) R.push(i); return R; };
+  A.fromB = A.dd > A.from ? blk(A.from, A.dd) : []; A.agB = A.dd >= 0 ? blk(A.dd, A.court >= 0 ? A.court : A.intro) : [];
+  const ok = { date: A.date >= 0, pres: A.pres >= 0, mem: A.mem >= 0 || rlPnKeys().length === 1, sec: A.sec >= 0, no: A.no >= 0, from: A.fromB.length > 0, ag: A.agB.length > 0, body: A.intro >= 0 && A.rh > A.intro, op: A.op > A.rh };
+  return { A, ok };
+}
+// ---- الملء: d = { date, panel:[[لقب،اسم]…], sec:[لقب،اسم], no, from:[], ag:[], body:[{runs,jc}], op:[{runs,jc}], auto }
+function ogFillDoc(x, d) {
+  const P = ogParas(x), { A } = ogScan(P), E = [], put = (i, j, s) => { if (i >= 0) E.push([P[i].s, P[j].e, s]); };
+  const txt = i => P[i].t;
+  if (A.date >= 0) { const t = txt(A.date); const k = t.indexOf('بتاريخ'); put(A.date, A.date, ogSetT(P[A.date], /\{التاريخ\}/.test(t) ? t.replace('{التاريخ}', d.date) : (k >= 0 ? t.slice(0, k + 6) : t.replace(/[\d\/\-\s…هـمالموافق]+$/, '')) + ' ' + d.date)); }
+  if (A.pres >= 0) { const t = txt(A.pres), p = d.panel[0] || ['', ''], v = p[0] + '/ ' + p[1]; put(A.pres, A.pres, ogSetT(P[A.pres], /\{الرئيس\}/.test(t) ? t.replace('{الرئيس}', v) : (t.match(/^\s*برئاس[ةه]\s+(?:ال[أا]ستاذ\s+)?/) || ['برئاسة '])[0].replace(/\s*$/, ' ') + v)); }
+  if (A.mem >= 0) { const t = txt(A.mem), v = d.panel.slice(1).map(p => p[0] + '/ ' + p[1]).join('      و'); put(A.mem, A.mem, ogSetT(P[A.mem], /\{العضوين\}/.test(t) ? t.replace('{العضوين}', v) : '   ' + v)); }
+  if (A.sec >= 0) { const t = txt(A.sec), v = d.sec[1]; let s; if (/\{أمين_السر\}/.test(t)) s = t.replace('{أمين_السر}', v); else { const m = t.match(/^(\s*وحضور[^/]*\/\s*)/), suf = /أمين سر الجلسة/.test(t) ? '             أمين سر الجلسة' : ''; s = (m ? m[1] : '         وحضور السيد/ ') + v + suf; } put(A.sec, A.sec, ogSetT(P[A.sec], s)); }
+  if (A.no >= 0) { const t = txt(A.no); put(A.no, A.no, ogSetT(P[A.no], /\{رقم_القضية\}/.test(t) ? t.replace('{رقم_القضية}', d.no) : t.replace(/([0-9٠-٩]+|……)\s*\/\s*([0-9٠-٩]{2,4}|……)/, d.no))); }
+  const parties = (B, names) => { if (!B.length) return; const s0 = P[B[0]], t0 = s0.t.trim(), w = /^\*.*\*$/.test(t0) ? '*' : ''; put(B[0], B[0], (names.length ? names : [OG_DOTS]).map(n => ogSetT(s0, w + n + w)).join('')); B.slice(1).forEach(i => put(i, i, '')); };
+  parties(A.fromB, d.from); parties(A.agB, d.ag);
+  if (A.intro >= 0 && A.rh > A.intro) { const a = A.intro + 1, b = A.rh - 1, src = a <= b ? P[a] : P[A.intro], body = d.body.map(q => ogPara(src, q.runs, q.jc)).join('') || ogPara(src, []); if (a <= b) E.push([P[a].s, P[b].e, body]); else E.push([P[A.intro].e, P[A.intro].e, body]); }
+  if (A.op > A.rh) { const end = A.sign > A.op ? A.sign - 1 : A.op, src = P[A.op], emp = ogPara(src, []), ops = d.op.length ? d.op : [{ runs: ['حكمت المحكمة: ' + OG_DOTS] }]; E.push([P[A.op].s, P[end].e, ops.map(q => ogPara(src, q.runs, q.jc)).join('') + emp + emp]); }
+  E.sort((a, b) => b[0] - a[0]); let out = x; E.forEach(([s, e, r]) => { out = out.slice(0, s) + r + out.slice(e); }); return out;
+}
+function ogFillHF(x, d) {
+  x = x.replace(/<w:tbl>[\s\S]*?<\/w:tbl>/g, tb => { if (!/الرقم\s*ال[آا]لي/.test(vkUnesc(tb.replace(/<[^>]+>/g, '')))) return tb; const T = ogParas(tb).filter(p => /^\s*([0-9٠-٩]|·)\s*$/.test(p.t)); if (!T.length) return tb;
+    const s = String(d.auto || '').replace(/\D/g, ''), digs = (/<w:bidiVisual/.test(tb) ? s.split('').reverse() : s.split('')); let out = tb; for (let i = T.length - 1; i >= 0; i--) { const p = T[i]; out = out.slice(0, p.s) + ogSetT(p, digs[i] != null ? digs[i] : '·') + out.slice(p.e); } return out; });
+  const P = ogParas(x), E = []; P.forEach(p => { if (/تابع/.test(p.t) && /([0-9٠-٩]+|……)\s*\/\s*([0-9٠-٩]{2,4}|……)/.test(p.t)) E.push([p.s, p.e, ogSetT(p, p.t.replace(/([0-9٠-٩]+|……)\s*\/\s*([0-9٠-٩]{2,4}|……)/, d.no))]); });
+  E.sort((a, b) => b[0] - a[0]); E.forEach(([s, e, r]) => { x = x.slice(0, s) + r + x.slice(e); }); return x;
+}
+async function ogFill(u8, d) { const F = await ogUnzip(u8); ogPut(F, 'word/document.xml', ogFillDoc(ogTxt(F, 'word/document.xml'), d)); F.filter(f => /^word\/(header|footer)\d*\.xml$/.test(f.name)).forEach(f => ogPut(F, f.name, ogFillHF(ogTxt(F, f.name), d))); return weZip(F); }
+// ---- تفريغ النموذج عند إضافته: كل اسم ورقم وتاريخ وكل متن يُزال، ثم يُبحث عن بقاياها في الملف كله
+async function ogClean(u8) {
+  const F = await ogUnzip(u8), x = ogTxt(F, 'word/document.xml'); if (!x) throw new Error('notdocx');
+  const P = ogParas(x), S = ogScan(P), A = S.A, old = new Set(), add = v => { v = String(v || '').replace(/^[\s*:،.\-]+|[\s*:،.\-]+$/g, '').trim(); if (v.length >= 4 && !/^[0-9٠-٩\/\s…]+$/.test(v)) old.add(v); };
+  const take = i => { if (i < 0) return; const t = P[i].t; if (i === A.pres || i === A.mem || i === A.sec) { t.split('/').slice(1).forEach(seg => add(seg.replace(/(\s{2,}|\s+و(ال)?مُ?ستشار|\s+أمين سر.*$)[\s\S]*$/, ''))); } else add(t.replace(/\*/g, '')); };
+  [A.pres, A.mem, A.sec].concat(A.fromB, A.agB).forEach(take);
+  const d = { date: OG_DOTS + ' هـ الموافق ' + OG_DOTS + 'م', panel: [['المستشار', OG_DOTS]].concat(A.mem >= 0 ? [['المستشار', OG_DOTS], ['المستشار', OG_DOTS]] : []), sec: ['السيد', OG_DOTS], no: OG_DOTS + '/' + OG_DOTS, from: [OG_DOTS], ag: [OG_DOTS], body: [], op: [{ runs: ['حكمت المحكمة: ' + OG_DOTS] }], auto: '' };
+  ogPut(F, 'word/document.xml', ogFillDoc(x, d)); F.filter(f => /^word\/(header|footer)\d*\.xml$/.test(f.name)).forEach(f => ogPut(F, f.name, ogFillHF(ogTxt(F, f.name), d)));
+  ogPut(F, 'docProps/core.xml', ogTxt(F, 'docProps/core.xml').replace(/<dc:creator>[^<]*<\/dc:creator>/, '<dc:creator></dc:creator>').replace(/<cp:lastModifiedBy>[^<]*<\/cp:lastModifiedBy>/, '<cp:lastModifiedBy></cp:lastModifiedBy>').replace(/<dc:title>[^<]*<\/dc:title>/, '<dc:title></dc:title>'));
+  ogPut(F, 'docProps/app.xml', ogTxt(F, 'docProps/app.xml').replace(/<Company>[^<]*<\/Company>/, '<Company></Company>').replace(/<Manager>[^<]*<\/Manager>/, '<Manager></Manager>'));
+  const W = [...old]; let leak = 0;
+  F.filter(f => /\.xml$/.test(f.name) && /^(word|docProps|customXml)\//.test(f.name)).forEach(f => { let s = ogTxt(F, f.name); W.forEach(w => { const e = ogEsc(w); if (s.includes(e)) { leak++; s = s.split(e).join(OG_DOTS); } }); ogPut(F, f.name, s); });
+  const out = weZip(F), chk = ogScan(ogParas(ogTxt(F, 'word/document.xml')));
+  return { bytes: out, ok: chk.ok, removed: old.size, leak };
+}
+// ---- التخزين على الجهاز
+async function ogTplGet(k) { try { const r = await vkTx('kv', 'readonly', s => s.get('og:tpl:' + (k || ogKey()))); return r ? await vkDec(r) : null; } catch (e) { return null; } }
+async function ogTplPut(rec, k) { const e = await vkEnc(rec); await vkTx('kv', 'readwrite', s => s.put(e, 'og:tpl:' + (k || ogKey()))); }
+async function ogTplDel(k) { try { await vkTx('kv', 'readwrite', s => s.delete('og:tpl:' + (k || ogKey()))); } catch (e) {} }
+async function ogTplAdd(file) {
+  if (typeof DecompressionStream === 'undefined') { toast('هذا المتصفح لا يقرأ ملفات Word — حدّثه'); return null; }
+  let R; try { R = await ogClean(new Uint8Array(await file.arrayBuffer())); } catch (e) { toast('تعذّرت قراءة النموذج — احفظه بصيغة docx'); return null; }
+  const rec = { name: (String(file.name || '').replace(/\.docx?$/i, '').replace(/[0-9٠-٩]+/g, ' ').replace(/[\s\-_.()]+$/g, '').replace(/^[\s\-_.()]+/, '').replace(/\s+/g, ' ').trim() || 'نموذج الأصل') + '.docx', at: Date.now(), b64: ogB64(R.bytes), ok: R.ok, removed: R.removed };
+  if (!VK.key) { try { await vkLoad(); } catch (e) {} }
+  await ogTplPut(rec); return rec;
+}
+// ---- التاريخ الهجري (أم القرى) والميلادي
+function ogHijri(iso) { try { const [y, m, d] = iso.split('-').map(Number), P = new Intl.DateTimeFormat('ar-u-ca-islamic-umalqura-nu-latn', { day: 'numeric', month: 'long', year: 'numeric' }).formatToParts(new Date(y, m - 1, d)), g = t => (P.find(x => x.type === t) || {}).value || ''; return g('day') + ' ' + g('month') + ' ' + g('year').replace(/\D/g, '') + 'هـ'; } catch (e) { return ''; } }
+function ogDateLine(iso) { if (!iso) return OG_DOTS + ' هـ الموافق ' + OG_DOTS + 'م'; const [y, m, d] = iso.split('-').map(Number); return ogHijri(iso) + ' الموافق ' + d + '/' + m + '/' + y + 'م'; }
+function ogDay(c) { return RL_DONE.includes(c.stage) ? rlEndAt(c) : c.next || ''; }
+// ---- البيانات من البطاقة والديباجة والمسودة
+function ogRunsOf(p) { const R = []; const walk = (n, f) => n.childNodes.forEach(x => { if (x.nodeType === 3) { const t = x.nodeValue.replace(/​/g, ''); if (t) R.push(Object.assign({ t }, f)); } else if (x.nodeType === 1) { const g = Object.assign({}, f); if (x.tagName === 'B' || x.tagName === 'STRONG') g.b = true; if (x.tagName === 'U') g.u = true; if (x.classList.contains('jins')) g.ins = true; if (x.classList.contains('jmk')) g.mk = true; if (x.tagName !== 'BR') walk(x, g); } }); walk(p, {}); return R; }
+function ogBodyOf(html) { const tmp = document.createElement('div'); tmp.innerHTML = html || ''; const ps = [...tmp.querySelectorAll(':scope > p')].filter(p => (p.textContent || '').replace(/​/g, '').trim()); const N = ps.map(p => ogN(p.textContent)); const k = N.findIndex(n => /^فلهذه الاسباب/.test(n));
+  const conv = p => { const h = p.classList.contains('h'), c = p.classList.contains('c'); return { runs: ogRunsOf(p).map(r => Object.assign({}, r, h ? { b: true, u: true } : {})), jc: h || c ? 'center' : '' }; };
+  const body = (k >= 0 ? ps.slice(0, k) : ps).map(conv), op = k >= 0 ? ps.slice(k + 1).map(conv) : [];
+  const flat = [...body, ...op].flatMap(q => q.runs); return { body, op, mk: flat.filter(r => r.mk).length, ins: ps.filter(p => p.querySelector('.jins')).length, words: tmp.textContent.split(/\s+/).filter(Boolean).length }; }
+function ogPanel(c, day) { const K = rlPnKeys(), P = rlPnAt(day), miss = []; const L = K.map(k => { const sub = P[k], n = sub ? (sub.n || '') : ogName(k); if (!n) miss.push(sub ? 'اسم البديل عن ' + (RL_W[k] || k) : RL_W[k] || k); return [sub ? 'المستشار' : ogTitle(k), n || '〖اسم ' + (sub ? 'البديل' : rlMLbl(k)) + '〗', !!sub]; }); return { L, miss, sub: L.filter(x => x[2]).length }; }
+async function ogData(c, recOverride) {
+  const rec = recOverride || (JE.rec && JE.cid === c.id ? JE.rec : await jeLoad(c.id)), day = ogDay(c), pn = ogPanel(c, day), o = ogCfg(), H = (rec && rec.h) || jeHeadDef(c), B = ogBodyOf(rec ? rec.html : '');
+  const G = rlGrp(c), nos = G.map(x => x.code).join(' و'), from = weNumbered(weParties(H.from)), ag = weNumbered(weParties(H.against)), auto = (G.find(x => x.auto) || {}).auto || '';
+  const secN = (o.s.n || '').trim(), warn = [];
+  if (!rec || !B.body.length) warn.push(['bad', 'لا مسودة لهذه القضية في التطبيق — افتح ملف المسودة (Word) أدناه']);
+  if (pn.miss.length) warn.push(['warn', 'لا اسم في «ملف الدائرة» لـ: ' + pn.miss.join('، ')]);
+  if (!secN) warn.push(['warn', 'اسم أمين السر غير مسجَّل في «ملف الدائرة»']);
+  if (!from.length || !ag.length) warn.push(['warn', 'أسماء الأطراف ليست في ديباجة المسودة']);
+  if (B.mk) warn.push(['warn', B.mk + ' ' + (B.mk === 1 ? 'موضع قرار 〖〗 ما زال' : 'مواضع قرار 〖〗 ما زالت') + ' في المسودة — ستُكتب في الأصل كما هي']);
+  if (B.ins) warn.push(['warn', B.ins + ' ' + (B.ins === 1 ? 'فقرة مُدرجة لم تراجعها' : 'فقرات مُدرجة لم تراجعها') + ' بعد (مظلّلة في المسودة)']);
+  if (!day) warn.push(['warn', 'لا موعد نطق في البطاقة — التاريخ يبقى فارغًا']);
+  return { d: { date: ogDateLine(day), panel: pn.L.map(x => [x[0], x[1]]), sec: [o.s.t || 'السيد', secN || '〖اسم أمين السر〗'], no: nos, from: from.length ? from : ['〖المستأنف〗'], ag: ag.length ? ag : ['〖المستأنف ضده〗'], body: B.body, op: B.op, auto }, day, pn, B, warn, rec };
+}
+async function ogMake(c, recOverride) {
+  const T = await ogTplGet(); if (!T) { toast('أضف نموذج الأصل أولًا — الإعدادات ← الدائرة وملفي'); return false; }
+  const X = await ogData(c, recOverride); if (!X.B.body.length) { toast('لا مسودة لهذه القضية في التطبيق — افتح ملف المسودة'); return false; }
+  let bytes; try { bytes = await ogFill(ogUnb64(T.b64), X.d); } catch (e) { console.warn(e); toast('تعذّر إخراج الأصل من النموذج'); return false; }
+  const ok = await jeSaveBlob(new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }), 'أصل حكم ' + rlGrp(c).map(x => x.code.replace(/\//g, '-')).join(' و') + '.docx');
+  if (ok) { c.og = Object.assign({}, c.og || {}, { o: Date.now() }); c.updated = Date.now(); rlSave(); toast('أُخرج الأصل — بعد طباعته سجّل «طُبع الأصل»'); }
+  return ok ? bytes : false;
+}
+// ---- «أودِع» في مساحة الحكم
+const OG_TMP = {};   // مسودة Word فُتحت للإخراج — في الذاكرة وحدها
+function ogLate(c) { const day = ogDay(c), D = day ? -rlDays(day) : -1; return D >= 3 && !(c.og && c.og.s) ? D : 0; }
+function ogLateTxt(c) { const D = ogLate(c); return D ? 'مضت ' + (D === 3 ? 'ثلاثة أيام' : D <= 10 ? D + ' أيام' : D + ' يومًا') + ' على النطق ولم يُوقَّع الأصل' : ''; }
+function ogStepHtml(c) {
+  const og = c.og || {}, res = RL_RES.includes(c.stage) || RL_DONE.includes(c.stage), late = ogLateTxt(c);
+  const st = (k, t, on, dis) => '<button type="button" class="chip' + (on ? ' on' : '') + '" data-ogs="' + k + '" aria-pressed="' + !!on + '"' + (dis ? ' disabled' : '') + '>' + (on ? '✓ ' : '') + t + '</button>';
+  return '<h3 class="jwh3">أودِع</h3>'
+    + '<div class="ogx"><section class="ogc"><h4>المسودة <small>يوقّعها أعضاء الهيئة ثم تُودع</small></h4>' + jwJs(c, ['طُبعت', 'وُقّعت', 'أُودعت']) + '</section>'
+    + '<section class="ogc og2"><h4>الأصل <small>يوقّعه الرئيس وأمين السر</small></h4>'
+    + '<div class="jjs ogst" role="group" aria-label="حالة الأصل">' + st('o', 'أُخرج', og.o, !res) + st('p', 'طُبع الأصل', og.p, !res) + st('s', 'وقّعه الرئيس وأمين السر', og.s, !res) + '</div>'
+    + (late ? '<p class="oglate">' + esc(late) + '</p>' : '')
+    + '<div id="og_box" class="ogbox"><p class="k"><span class="spin"></span> يُجهَّز الأصل…</p></div></section></div>'
+    + '<p class="jnote">الأفضل أن يُطبع الأصل مع المسودة في اليوم نفسه بعد توقيع الأعضاء عليها. وبعد النطق سجّل «صدر الحكم» من «قرار الجلسة» في الرول.</p>'
+    + '<p class="jlinks"><button type="button" class="linkbtn" data-jcard>افتح بطاقتها في الرول ›</button></p>';
+}
+async function ogStepFill(c, box) {
+  const b = box.querySelector('#og_box'); if (!b) return; const T = await ogTplGet(); if (!b.isConnected) return;
+  if (!T) { b.innerHTML = '<div class="ogempty"><b>أضف نموذج الأصل لدائرتك مرة واحدة</b><p>ملف Word المعتمد في دائرتك. يُفرَّغ من أسمائه وأرقامه، ويُحفظ مشفّرًا على جهازك، ثم يُخرج منه أصل كل حكم.</p><button type="button" class="btn primary" data-ogset>أضف نموذج الأصل</button></div>'; b.querySelector('[data-ogset]').onclick = ogOpenSet; return; }
+  const X = await ogData(c, OG_TMP[c.id]); if (!b.isConnected) return; const d = X.d, wr = X.warn;
+  const li = (k, t, s) => '<li class="' + k + '"><b aria-hidden="true">' + (k === 'ok' ? '✓' : '!') + '</b><span>' + t + (s ? '<small>' + s + '</small>' : '') + '</span></li>';
+  const pv = '<div class="ogpvw"><span class="k">الصفحة الأولى — <mark>المظلّل</mark> ما يملؤه التطبيق</span><div class="ogpv" aria-label="معاينة الصفحة الأولى"><p class="b">بالجلسة المنعقدة علنًا بالمحكمة بتاريخ <mark>' + esc(d.date) + '</mark></p><p class="c b">برئاسة <mark>' + esc(d.panel[0][0] + '/ ' + d.panel[0][1]) + '</mark>' + (d.panel.length > 1 ? '<br>وعضوية <mark>' + esc(d.panel.slice(1).map(p => p[0] + '/ ' + p[1]).join(' و')) + '</mark>' : '') + '<br>وحضور ' + esc(d.sec[0]) + '/ <mark>' + esc(d.sec[1]) + '</mark> أمين سر الجلسة</p><p class="b">في الاستئناف المقيد برقم: <mark>' + esc(d.no) + '</mark></p><p class="c b"><mark>' + esc(d.from.join(' · ')) + '</mark><br>ضد<br><mark>' + esc(d.ag.join(' · ')) + '</mark></p>' + (d.body[0] ? '<p class="j"><mark>' + esc(d.body[0].runs.map(r => r.t).join('').slice(0, 220)) + '…</mark></p>' : '') + (d.auto ? '<p class="k">الرقم الآلي: <mark>' + esc(d.auto) + '</mark></p>' : '') + '</div></div>';
+  b.innerHTML = '<div class="ogcols"><div class="ogsrc"><b>من أين يُملأ الأصل</b><ul class="drjl">'
+    + li(X.day ? 'ok' : 'warn', 'التاريخ: ' + esc(d.date), 'موعد النطق في البطاقة، والهجري بتقويم أم القرى')
+    + li(X.pn.miss.length ? 'warn' : 'ok', 'الهيئة: ' + esc(d.panel.map(p => p[1]).join(' · ')), 'هيئة جلسة النطق كما سجّلتها' + (X.pn.sub ? ' — ومعها البديل' : '') + ' · الأسماء والألقاب من «ملف الدائرة»')
+    + li(/〖/.test(d.sec[1]) ? 'warn' : 'ok', 'أمين السر: ' + esc(d.sec[1]))
+    + li(/〖/.test(d.from[0] + d.ag[0]) ? 'warn' : 'ok', 'الأطراف من ديباجة المسودة', esc(jeRoles()[0] + ' ' + d.from.length + ' · ' + jeRoles()[1] + ' ' + d.ag.length))
+    + li(X.B.body.length ? 'ok' : 'warn', 'المتن والمنطوق من المسودة', X.B.body.length ? X.B.body.length + ' فقرة · ' + X.B.op.length + ' في المنطوق — بلا عنوان «مسودة» ولا تظليل، بخط النموذج' : 'لا مسودة في التطبيق')
+    + li(d.auto ? 'ok' : 'warn', 'رقم القضية والرقم الآلي من البطاقة', esc(d.no) + (d.auto ? ' · ' + esc(d.auto) : ' · لا رقم آلي'))
+    + wr.filter(w => !/لا مسودة|لا اسم في|أمين السر غير|ليست في ديباجة|لا موعد/.test(w[1])).map(w => li('warn', esc(w[1]))).join('') + '</ul>'
+    + '<div class="ogact"><button type="button" class="btn primary" data-ogmk' + (X.B.body.length ? '' : ' disabled') + '>' + ico('word', 18) + ' أخرج الأصل (Word)</button>'
+    + '<label class="btn"><input type="file" accept=".docx,.doc" hidden data-ogwf>افتح ملف المسودة (Word)</label></div>'
+    + '<p class="k">يُنزَّل على جهازك ولا يُحفظ في التطبيق. النص الثابت (البسملة والديباجة واسم الدائرة والتوقيعات) من نموذجك كما هو. <button type="button" class="linkbtn" data-ogset>النموذج والهيئة</button></p></div>' + pv + '</div>';
+  b.querySelector('[data-ogmk]').onclick = async () => { const r = await ogMake(c, OG_TMP[c.id]); if (r) { jwRender(); } };
+  b.querySelectorAll('[data-ogset]').forEach(x => x.onclick = ogOpenSet);
+  b.querySelector('[data-ogwf]').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; try { const X2 = await vkRead(new Uint8Array(await f.arrayBuffer())); const P = (X2.paras || []).map(s => String(s).replace(/\s+/g, ' ').trim()); const pi = P.findIndex(l => /^بعد\s+(الاطلاع|سماع)/.test(l)), H = Object.assign({}, jeHeadDef(c)), saved = await jeLoad(c.id);
+      if (saved && saved.h) Object.assign(H, { from: saved.h.from, against: saved.h.against });
+      if (pi > 0) { const head = P.slice(0, pi).filter(Boolean), fi = head.findIndex(l => /^(المقام|المرفوعة|المرفوع)\s+من/.test(l)), di = head.findIndex((l, i) => i > fi && /^ضد$/.test(l)); if (fi >= 0 && di > fi) { const a = head[fi].replace(/^[^:]*:\s*/, '').trim(); if (!H.from) H.from = (a ? [a] : []).concat(head.slice(fi + 1, di)).join('\n'); if (!H.against) H.against = head.slice(di + 1).join('\n'); } }
+      const body = (pi >= 0 ? P.slice(pi + 1) : P).filter(Boolean); OG_TMP[c.id] = { h: H, html: body.map(l => /^فلهذه\s+الأسباب/.test(l) ? jeP(l, 'h') : jeP(l)).join('') }; toast('فُتح «' + f.name + '» — للإخراج فقط، لا يُحفظ'); ogStepFill(c, box); } catch (er) { toast('تعذّر قراءة الملف — احفظه docx'); } };
+}
+function ogStepWire(c, box) {
+  box.querySelectorAll('[data-ogs]').forEach(b => b.onclick = () => { const k = b.dataset.ogs, og = Object.assign({}, c.og || {}), order = ['o', 'p', 's'], i = order.indexOf(k); if (og[k]) order.slice(i).forEach(z => delete og[z]); else order.slice(0, i + 1).forEach(z => { if (!og[z]) og[z] = Date.now(); }); c.og = og; c.updated = Date.now(); rlSave(); jwRender(); try { lndDesk(); } catch (e) {} });
+  ogStepFill(c, box);
+}
+// ---- الإعدادات: نموذج الأصل والهيئة
+function ogOpenSet() { try { openDrawer(); } catch (e) {} setTimeout(() => { const s = document.getElementById('dorg'); if (s) { const db = $('#dbody'); db.scrollTo({ top: s.offsetTop - 70, behavior: 'smooth' }); } }, 120); }
+async function ogSetRender() {
+  const box = $('#og_set'); if (!box) return; const o = ogCfg(), K = rlPnKeys().length === 1 ? [['p', 'القاضي']] : OG_KEYS.filter(k => k[0] !== 'd' || rlPnKeys().includes('d') || o.n.d || rlMName('d'));
+  let T = null; try { T = await ogTplGet(); } catch (e) {}
+  const sel = (id, v, list) => '<select class="sel" id="' + id + '">' + (list.includes(v) ? list : [v].concat(list)).map(t => '<option' + (t === v ? ' selected' : '') + '>' + esc(t) + '</option>').join('') + '</select>';
+  const S = T ? ogScan(ogParas(ogTxt(await ogUnzip(ogUnb64(T.b64)), 'word/document.xml'))).ok : null;
+  box.innerHTML = '<div class="ogset"><div class="ogsc"><b>نموذج الأصل <small>' + esc((() => { try { return rlProfName(rlProf()); } catch (e) { return ''; } })()) + '</small></b>'
+    + (T ? '<div class="ogfile"><span class="ogw">W</span><div><b>' + esc(T.name) + '</b><small>أُضيف ' + esc(rlFmt(new Date(T.at).toISOString().slice(0, 10))) + ' · محفوظ مشفّرًا على هذا الجهاز</small></div></div>'
+      + '<ul class="ogdet">' + OG_ANCH.filter(a => a[0] !== 'auto').map(a => '<li class="' + (S[a[0]] ? 'ok' : 'no') + '">' + (S[a[0]] ? '✓ ' : '✕ ') + a[1] + '</li>').join('') + '</ul>'
+      + (Object.values(S).some(v => !v) ? '<p class="k ogw2">ما لم يُتعرّف عليه يبقى في الأصل كما في النموذج. ضع في موضعه في ملف Word علامة: {التاريخ} {الرئيس} {العضوين} {أمين_السر} {رقم_القضية} {المستأنف} {المتن} {المنطوق} ثم استبدله.</p>' : '')
+      + '<p class="k">أُفرغ من أسماء الأطراف والهيئة وأمين السر، ومن الأرقام والتاريخ والمتن. والنص الثابت يُنقل كما هو — لتعديله عدّل ملف Word ثم استبدله.</p>'
+      : '<p class="k">أضف ملف Word المعتمد في دائرتك (نسخة أي حكم صادر تكفي): يُفرَّغ تلقائيًا من الأسماء والأرقام والمتن، ثم يُخرج منه أصل كل حكم من «أودِع».</p>')
+    + '<div class="row"><label class="btn' + (T ? '' : ' primary') + '"><input type="file" accept=".docx" hidden id="og_tf">' + (T ? 'استبدله' : 'أضف نموذج الأصل') + '</label>' + (T ? '<button type="button" class="btn" id="og_tdel">احذفه</button>' : '') + '</div></div>'
+    + '<div class="ogsc"><b>الهيئة وأمين السر <small>كما تُكتب في الأصل</small></b>'
+    + K.map(([k, l]) => '<div class="ogrow"><span>' + esc(l) + '</span>' + sel('og_t_' + k, o.t[k] || 'المستشار', OG_TITLES) + '<input type="text" id="og_n_' + k + '" value="' + esc(o.n[k] || '') + '" placeholder="' + esc(rlMName(k) || 'الاسم كاملًا') + '" autocomplete="off"></div>').join('')
+    + '<div class="ogrow"><span>أمين السر</span>' + sel('og_t_s', o.s.t || 'السيد', ['السيد', 'السيدة']) + '<input type="text" id="og_n_s" value="' + esc(o.s.n || '') + '" placeholder="الاسم" autocomplete="off"></div>'
+    + '<p class="k">في الأصل تُكتب هيئة جلسة النطق كما سجّلتها في وضع الجلسة — ومعها البديل إن حلّ محل أحد الأعضاء. 🔒 الأسماء على هذا الجهاز وحده: لا تدخل ملف الدائرة المشترك ولا أي ملف يُرسل.</p></div></div>';
+  const save = () => { const c2 = ogCfg(); K.forEach(([k]) => { c2.t[k] = $('#og_t_' + k).value; c2.n[k] = $('#og_n_' + k).value.trim(); }); c2.s = { t: $('#og_t_s').value, n: $('#og_n_s').value.trim() }; ogCfgSet(c2); toast('حُفظ على هذا الجهاز'); };
+  box.querySelectorAll('select, input[type=text]').forEach(x => x.onchange = save);
+  $('#og_tf').onchange = async e => { const f = e.target.files[0]; e.target.value = ''; if (!f) return; const r = await ogTplAdd(f); if (r) { toast('أُضيف النموذج وفُرّغ من أسمائه وأرقامه'); ogSetRender(); if (NAV.v === 'j') jwRender(); } };
+  { const d = $('#og_tdel'); if (d) d.onclick = async () => { if (!confirm('حذف نموذج الأصل من هذا الجهاز؟')) return; await ogTplDel(); ogSetRender(); }; }
+}
+{ const f = openDrawer; openDrawer = function () { const r = f.apply(this, arguments); try { ogSetRender(); } catch (e) {} return r; }; }
+// ---- مكتبي: «الإيداع والأصول»
+function ogPending(c) { return !(c.og && c.og.s); }
+function ogDoneRecent() { const me = rlMe(), t = rlToday(); return RL.cards.filter(c => c.stage === 'صدر الحكم' && c.writer && ogPending(c) && (() => { const d = rlEndAt(c); return d && rlDays(d) != null && rlDays(d) >= -30 && d <= t; })()); }
+function ogDeskLists(L) { const me = rlMe(), mineRes = L.filter(c => jwGroupOf(c) === 'dp'), done = ogDoneRecent(), seen = new Set(mineRes.map(c => rlBalGrpId(c)));
+  const mineDone = done.filter(c => c.writer === me && !seen.has(rlBalGrpId(c)) && (seen.add(rlBalGrpId(c)) || true));
+  const others = me === 'p' && rlPnKeys().length > 1 ? RL.cards.filter(c => c.writer && c.writer !== me && RL_W[c.writer] && ogPending(c) && ((RL_RES.includes(c.stage) && rlJsIdx(c) >= 5) || done.includes(c))).filter(c => { const g = rlBalGrpId(c); if (seen.has(g)) return false; seen.add(g); return true; }) : [];
+  return { mine: mineRes.concat(mineDone), others }; }
+function ogDeskHtml(D) {
+  const st = c => { const og = c.og || {}, j = rlJsIdx(c); return og.s ? 'وُقّع الأصل' + (j >= 6 ? ' · أُودعت المسودة' : '') : og.p ? 'طُبع الأصل — بانتظار توقيع الرئيس وأمين السر' : og.o ? 'أُخرج الأصل — لم يُسجَّل طبعه' : j >= 6 ? 'أُودعت المسودة — الأصل لم يُخرج' : j >= 5 ? 'وقّع الأعضاء المسودة — الأصل لم يُخرج' : 'الأصل لم يُخرج'; };
+  const nx = c => { const og = c.og || {}; return !og.o ? ['أخرج الأصل', 'o', true] : !og.p ? ['✓ طُبع الأصل', 'p'] : !og.s ? ['✓ وُقّع الأصل', 's'] : ['أودِع', 'o', false]; };
+  const row = (c, other) => { const a = other ? ['✓ وقّعتُه', 's'] : nx(c), lt = ogLateTxt(c); return '<div class="ogdr' + (a[2] ? ' pri' : '') + '"><button type="button" class="dkcode" data-jwo="' + esc(c.id) + '"><b>' + esc(c.code) + '</b><small>' + esc(((c.ct || []).join(' · ') || '') + (other ? ' · ' + (RL_W[c.writer] || '') : '')) + '</small></button><span class="ogds">' + esc(st(c)) + (lt ? '<small class="oglate">' + esc(lt) + '</small>' : '') + '</span><button type="button" class="btn' + (a[2] ? ' primary' : '') + '" data-ogd="' + esc(c.id) + '|' + a[1] + '">' + a[0] + '</button></div>'; };
+  const byDay = L => { const G = new Map(); L.forEach(c => { const d = ogDay(c) || ''; if (!G.has(d)) G.set(d, []); G.get(d).push(c); }); return [...G].sort((a, b) => (a[0] || '9').localeCompare(b[0] || '9')); };
+  const head = d => { if (!d) return 'بلا موعد نطق'; const D = rlDays(d); return (D != null && D < 0 ? 'نُطق بها ' : 'النطق ') + rlDay(d) + ' ' + rlFmt(d) + ' <small>' + rlRel(D) + '</small>'; };
+  return '<div class="ogdesk">' + (D.mine.length ? byDay(D.mine).map(([d, L]) => '<section><h4>' + head(d) + '</h4>' + L.map(c => row(c)).join('') + '</section>').join('') : '<p class="k">لا أحكام لك في الإيداع الآن.</p>')
+    + (D.others.length ? '<section class="ogoth"><h4>أصول الأعضاء بانتظار توقيعك <small>للرئيس</small></h4><div class="ogog">' + D.others.map(c => row(c, true)).join('') + '</div></section>' : '') + '</div>';
+}
+{ const f = lndDesk; lndDesk = function () { const r = f.apply(this, arguments); try { const w = $('#deskwrap'); if (!w) return r; let L = []; try { L = rlMineList(); } catch (e) {} const D = ogDeskLists(L), n = D.mine.length + D.others.length, ch = w.querySelector('[data-dkf="dp"]');
+    if (ch) { ch.innerHTML = 'الإيداع والأصول <b>' + n + '</b>'; ch.disabled = !n; }
+    if (ch && ch.classList.contains('on')) { const l = w.querySelector('.dklist2'); if (l) { l.outerHTML = ogDeskHtml(D); const g = w.querySelector('.ogdesk');
+      g.querySelectorAll('[data-jwo]').forEach(b => b.onclick = () => jwOpen(b.dataset.jwo, 'o'));
+      g.querySelectorAll('[data-ogd]').forEach(b => b.onclick = () => { const [id, k] = b.dataset.ogd.split('|'), c = RL.cards.find(x => x.id === id); if (!c) return; if (k === 'o' && !(c.og && c.og.o)) { jwOpen(id, 'o'); return; } if (k === 'o') { jwOpen(id, 'o'); return; } const og = Object.assign({}, c.og || {}); ['o', 'p', 's'].slice(0, ['o', 'p', 's'].indexOf(k) + 1).forEach(z => { if (!og[z]) og[z] = Date.now(); }); c.og = og; c.updated = Date.now(); rlSave(); toast(k === 's' ? 'سُجّل توقيع الأصل' : 'سُجّل طبع الأصل'); lndDesk(); }); } } } catch (e) { console.warn('ogDesk', e); } return r; }; }
+// ---- الرئيسية: «ما يلزمك الآن»
+{ const f = homeNow; homeNow = function () { let h = f.apply(this, arguments); try { let L = []; try { L = rlMineList(); } catch (e) {} const D = ogDeskLists(L), n = D.mine.length + D.others.length; if (!n) return h; const late = D.mine.concat(D.others).filter(c => ogLate(c)).length;
+    const card = '<button type="button" class="hn' + (late ? ' warn' : '') + '" data-hn="dp"><span class="hni">' + ico('arch', 24) + '</span><span class="hnt"><b>الإيداع والأصول: ' + n + '</b><small>' + (late ? late + ' ' + (late === 1 ? 'أصل لم يُوقَّع' : 'أصول لم تُوقَّع') + ' بعد ثلاثة أيام من النطق' : 'الأصل ثم توقيع الرئيس وأمين السر') + '</small></span><span class="hnx" aria-hidden="true">›</span></button>';
+    if (!h) return '<section class="hnow" aria-label="ما يلزمك الآن"><h3>ما يلزمك الآن</h3><div class="hnl">' + card + '</div></section>'; return h.replace('<div class="hnl">', '<div class="hnl">' + card); } catch (e) { return h; } }; }
+{ const f = homeNowGo; homeNowGo = function (k) { if (k === 'dp') { try { localStorage.setItem('tm_dkf', 'dp'); } catch (e) {} return setView('y'); } return f.apply(this, arguments); }; }
+window.__v180 = { clean: u8 => ogClean(u8), fill: (u8, d) => ogFill(u8, d), scan: x => ogScan(ogParas(x)), unzip: u8 => ogUnzip(u8), data: id => ogData(jwCard(id)).then(X => ({ d: X.d, warn: X.warn, day: X.day })), make: id => ogMake(jwCard(id)), hijri: s => ogHijri(s), dateLine: s => ogDateLine(s), cfg: () => ogCfg(), setCfg: o => ogCfgSet(o), tpl: () => ogTplGet(), lists: () => { const D = ogDeskLists(rlMineList()); return { mine: D.mine.map(c => c.id), others: D.others.map(c => c.id) }; }, late: id => ogLate(jwCard(id)), b64: u => ogB64(u), unb64: s => ogUnb64(s) };
 
 
 function lndAll() { [lndLib, lndTools, lndDesk].forEach(f => { try { f(); } catch (e) {} }); }
@@ -5312,7 +5558,7 @@ function drawerFill() {
 (function dgroups() {
   const db = $('#dbody'); if (!db) return; const secs = [...db.querySelectorAll(':scope > section.ds')];
   const byH = t => secs.find(x => { const h = x.querySelector('h3'); return h && h.textContent.trim().startsWith(t); });
-  const G = [['dg1', 'الدائرة وملفي', [$('#dcprof'), $('#dprof')]], ['dg2', 'المزامنة', [$('#dsync'), $('#dcirc')]], ['dg3', 'العرض والأدوات', [byH('العرض'), byH('أدوات'), $('#dtools'), $('#dkn'), $('#dlock'), db.querySelector('section.dkeys')]], ['dg4', 'عن التطبيق', [$('#dguide'), $('#dlib'), $('#dfb'), byH('عن التطبيق')]]];
+  const G = [['dg1', 'الدائرة وملفي', [$('#dcprof'), $('#dprof'), $('#dorg')]], ['dg2', 'المزامنة', [$('#dsync'), $('#dcirc')]], ['dg3', 'العرض والأدوات', [byH('العرض'), byH('أدوات'), $('#dtools'), $('#dkn'), $('#dlock'), db.querySelector('section.dkeys')]], ['dg4', 'عن التطبيق', [$('#dguide'), $('#dlib'), $('#dfb'), byH('عن التطبيق')]]];
   const idx = el('nav', 'dgidx'); idx.setAttribute('aria-label', 'أقسام الإعدادات');
   idx.innerHTML = G.map(g => '<button type="button" data-dg="' + g[0] + '">' + g[1] + '</button>').join('');
   const help = $('#dhelp'); help.after(idx); let at = idx;
@@ -12251,6 +12497,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [180, 'الإصدار 180', ['«أخرج الأصل» في خطوة «أودِع»: يُملأ نموذج دائرتك من البطاقة (التاريخ بالهجري والميلادي، ورقم القضية، والرقم الآلي) ومن هيئة جلسة النطق (ومعها البديل) ومن ديباجة المسودة ومتنها — ويُنزَّل ملف Word ولا يُحفظ.', 'نموذج الأصل يُضاف مرة واحدة من الإعدادات ← الدائرة وملفي، فيُفرَّغ تلقائيًا من الأسماء والأرقام والمتن ويُحفظ مشفّرًا على جهازك؛ ومعه ألقاب الهيئة وأسماؤها وأمين السر كما تُكتب في الأصل.', 'المسودة (يوقّعها الأعضاء ثم تُودع) والأصل (يوقّعه الرئيس وأمين السر) حالتان منفصلتان، وتنبيه إن مضت ثلاثة أيام على النطق ولم يُوقَّع الأصل.', 'مكتبي ← «الإيداع والأصول»: أحكامك بموعد النطق وخطوتها التالية، وللرئيس «أصول الأعضاء بانتظار توقيعك».', '«الترويسة» في صفحة الكتابة صارت «الديباجة»، و«التطبيق وأداة الذكاء» في «عن التطبيق».']],
   [179, 'الإصدار 179', ['«أحكامك في هذه المسألة»: كيف عالجتَ المسألة من قبل في «أحكامي»، مجمّعة بالنتيجة وبفقرة الأسباب مظلّلة، مع ما استشهدت به — من بنك الأسباب ودرج «مقترح» وملف التحضير والإحصاءات.', 'فحوص الحكم الجديدة في «فحص المسودة»: رقم القضية في اسم الملف والمتن وبطاقتها، ووجود المنطوق، وعدد الاستئنافات بين الديباجة والمنطوق، وتاريخ الجلسة أمام موعد النطق.', 'دفع ورد في محضر النظر ولم تظهر عبارته في الأسباب — تنبيه مع فقراتك السابقة فيه، دون إدراج شيء.', 'مبالغ المسودة أمام حاسبة المستحقات لهذه القضية: مطابق أو مختلف، بندًا بندًا.', 'الإحصاءات ← «أحكامي في الخزانة»: أحكامك بالموسم والنوع والنتيجة وأكثر الدفوع والمسائل.', 'بعد إنهاء الجلسة: تذكير في رأس الرول بالتوزيع النهائي لما حُجز فيها — راجع كاتب كل حكم ثم أرسله.']],
   [178, 'الإصدار 178', ['اكتب الحكم داخل مساحة القضية: صفحة بقالبك (A4، Arial 14)، تُحفظ وحدها على جهازك مشفّرة، وتعود إليها من حيث توقفت ولو أغلقت التطبيق.', 'اكتب في أكثر من قضية: «تابع الكتابة» في مكتبي، و«مسوداتي» في رأس الصفحة للتنقل بينها.', 'الدرج «مقترح لهذه القضية»: فقراتك من أحكامك، والمبادئ، والتشريعات، وعباراتك — تُدرج عند المؤشر أو تُنسخ لمن يكتب في Word.', 'Word ذهابًا وإيابًا: نزّل المسودة بقالبك، أو افتح ملف Word وأكمل، وافحص الملف في «راجع» دون لصق.', 'الوقائع: أدرج عناصر ملخص الملف، أو لخّص الوقائع وصحيفة الاستئناف بأداة الذكاء (الأوراق معتَّمة) وتعود الأسماء من الترويسة.', '«بنك الأسباب» تبويب في خزانة الأحكام، و«Word وصياغاتي» صار «تصدير Word» وعباراتك فيه.']],
   [177, 'الإصدار 177', ['«مكتبي» الجديد: قضاياك (المحجوزة لك والمسندة إليك) بخلاصة كل منها، وخطواتها الست، والخطوة التالية بزر واحد؛ وتصفية: قيد التحضير · في المداولة · للتوقيع والإيداع.', '«مساحة الحكم» لكل قضية: تعرّف · حضّر (ملف التحضير) · اكتب · راجع · تداول · أودِع — كل خطوة تجمع ما عندك وتنقلك إلى أداتها، ولا تكتب أسبابًا.', 'درج الأدوات بزره المتحرك في رأس مساحة الحكم: الحاسبة والمواعيد والتحقق والمبادئ والتشريعات والمساعد تعمل داخله دون مغادرة القضية، ويتذكّر حاله.']],
