@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261007151539">
+<meta name="amali-build" content="20261007152806">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -5289,10 +5289,13 @@ function msOpen() {
   s.classList.add('wide'); s.id = 'mssheet';
   msDraw(s); return s;
 }
-function msBtnSync() { const b = document.getElementById('rl_mem'); if (!b) return; const on = rlMode === 'res' && rlProf().n !== 1 && rlMe() === 'p'; if (on && RLDIST.parentNode && b.previousElementSibling !== RLDIST) RLDIST.after(b); b.classList.toggle('hidden', !on); }   // في شريط المحجوزة بجانب «إرسال التوزيع»
+let MS_BTN = null;   // V183: مرجع ثابت — شريط المحجوزة يُعاد بناؤه، فكان الزر يضيع مع الشريط القديم بعد التنقل
+function msBtnSync() { const b = MS_BTN || (MS_BTN = document.getElementById('rl_mem')); if (!b) return; const on = rlMode === 'res' && rlProf().n !== 1 && rlMe() === 'p';
+  if (on && RLDIST.isConnected && b.previousElementSibling !== RLDIST) RLDIST.after(b); else if (!b.isConnected) { const t = $('.rltop'); if (t) t.appendChild(b); }
+  b.classList.toggle('hidden', !on); }   // في شريط المحجوزة بجانب «إرسال التوزيع»
 { const f = rlVocab; rlVocab = function () { const r = f.apply(this, arguments); try { msBtnSync(); } catch (e) {} return r; }; }
 { const f = rlRender; rlRender = function () { const r = f.apply(this, arguments); try { msBtnSync(); } catch (e) {} return r; }; }
-setTimeout(() => { try { const b = document.getElementById('rl_mem'); if (b) b.onclick = msOpen; msBtnSync(); } catch (e) {} }, 0);   // RL معرّف لاحقًا في الملف
+setTimeout(() => { try { const b = document.getElementById('rl_mem'); if (b) { MS_BTN = b; b.onclick = msOpen; } msBtnSync(); } catch (e) {} }, 0);   // RL معرّف لاحقًا في الملف
 window.__v181 = { fpH, fpNorm, take: id => { const c = RL.cards.find(x => x.id === id); return jeLoad(id).then(r => fpTake(c, r)); }, cmp: id => { const c = RL.cards.find(x => x.id === id); return ogData(c, OG_TMP[id]).then(X => { const F = fpCmp(c, X); delete F.ch; return F; }); },
   auto: id => { const c = RL.cards.find(x => x.id === id); return ogData(c, OG_TMP[id]).then(X => ogAutoChk(c, X.rec)); }, msg: id => { const c = RL.cards.find(x => x.id === id); return ogData(c).then(X => ogMsg(c, X)); },
   exp: id => jeExport(RL.cards.find(x => x.id === id), true), rows: () => msRows().map(r => ({ id: r.c.id, k: r.k, done: r.done, day: r.day, js: r.js, late: r.late, og: r.og })), text: msText, open: msOpen, sync: msBtnSync };
@@ -12724,7 +12727,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
-  [183, 'الإصدار 183', ['ملف الدائرة: إن لم يكن رمز الدائرة محفوظًا في هذا المتصفح تظهر خانته في الإعدادات ← ملف الدائرة المشترك، فتكتبه دون مغادرة الدائرة؛ والرمز الخطأ يُرفض وتعود الخانة.']],
+  [183, 'الإصدار 183', ['ملف الدائرة: إن لم يكن رمز الدائرة محفوظًا في هذا المتصفح تظهر خانته في الإعدادات ← ملف الدائرة المشترك، فتكتبه دون مغادرة الدائرة؛ والرمز الخطأ يُرفض وتعود الخانة.', 'زر «بيان الأعضاء» في المحجوزة كان يختفي بعد مغادرة الرول والعودة إليه — صار ثابتًا.']],
   [182, 'الإصدار 182', ['«إخفاء الهوية»: لمسة الكلمة تخص موضعها وحده — تعتيمًا أو إظهارًا — ويظهر شريط «في كل الصفحات» إن أردت تعميمها؛ ولا يعود التظليل من نفسه.', 'لا تُتتبَّع المفردات العامة أسماءً (المقرر، النتيجة، المحاماة، الخصم، انتهى…).', 'استجابة أسرع: تُرسم الصفحة الملموسة وحدها، والعرض بدقة الشاشة والتنزيل بالدقة الكاملة.']],
   [181, 'الإصدار 181', ['«أودِع»: الأصل يُقابَل بالمسودة المطبوعة — تُحفظ بصمة لنصها (لا النص) حين تنزّلها لطباعتها، فيظهر «مطابق للمسودة المطبوعة»، أو قائمة بما تغيّر بعدها تطابقها بما أُثبت على المسودة الموقّعة في المداولة قبل إخراج الأصل.', 'الرقم الآلي بخط كبير قبل الإخراج، ويُقارَن رقم البطاقة برقم ديباجة المسودة.', '«أرسل الأصل للطباعة»: الملف جاهز في واتساب أو البريد، فلا يُعاد كتابته عند الطبّاع. والرسالة بلا أسماء.', '«بيان الأعضاء» للرئيس في الرول: قضايا كل عضو، وحالة المسودة والأصل، والمتأخر، ويُطبع أو يُشارك.']],
   [180, 'الإصدار 180', ['«أخرج الأصل» في خطوة «أودِع»: يُملأ نموذج دائرتك من البطاقة (التاريخ بالهجري والميلادي، ورقم القضية، والرقم الآلي) ومن هيئة جلسة النطق (ومعها البديل) ومن ديباجة المسودة ومتنها — ويُنزَّل ملف Word ولا يُحفظ.', 'نموذج الأصل يُضاف مرة واحدة من الإعدادات ← الدائرة وملفي، فيُفرَّغ تلقائيًا من الأسماء والأرقام والمتن ويُحفظ مشفّرًا على جهازك؛ ومعه ألقاب الهيئة وأسماؤها وأمين السر كما تُكتب في الأصل.', 'المسودة (يوقّعها الأعضاء ثم تُودع) والأصل (يوقّعه الرئيس وأمين السر) حالتان منفصلتان، وتنبيه إن مضت ثلاثة أيام على النطق ولم يُوقَّع الأصل.', 'مكتبي ← «الإيداع والأصول»: أحكامك بموعد النطق وخطوتها التالية، وللرئيس «أصول الأعضاء بانتظار توقيعك».', '«الترويسة» في صفحة الكتابة صارت «الديباجة»، و«التطبيق وأداة الذكاء» في «عن التطبيق».']],
