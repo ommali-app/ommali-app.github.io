@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261007140429">
+<meta name="amali-build" content="20261007151539">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2180,6 +2180,7 @@ details.indet>summary{padding:10px 2px}
 .ogdf>b{font-size:14px}.ogdf ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;max-height:260px;overflow:auto}
 .ogdf li{font-size:13.5px;line-height:1.9;background:var(--bg);border-radius:10px;padding:6px 10px;overflow-wrap:anywhere}.ogdf li small{display:block;font-size:12px;color:var(--warn);font-weight:600}.ogdf li.del small{color:var(--bad)}
 .ogack{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;font-weight:600;line-height:1.7;cursor:pointer}.ogack input{margin-top:5px;width:18px;height:18px;flex:0 0 18px}
+.sckey{display:flex;flex-direction:column;gap:6px;border:1px solid var(--warn);background:color-mix(in srgb,var(--warn) 9%,var(--panel));border-radius:14px;padding:12px 14px;margin-bottom:10px}.sckey span{font-size:13px;color:var(--ink2);line-height:1.8}.sckey .row{display:flex;gap:8px;flex-wrap:wrap}.sckey input{flex:1;min-width:160px;font:inherit;padding:8px 10px;border:1px solid var(--line2);border-radius:10px;background:var(--bg);color:var(--ink)}
 .msb{display:inline-flex;align-items:center;gap:6px}.msb.hidden{display:none}.ogshp[hidden]{display:none}.ogshp{border:1px dashed var(--gold);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}.ogshp>b{font-size:13.5px}.ogmsg{margin:0;font-size:13.5px;line-height:1.8;background:var(--bg);border-radius:8px;padding:6px 10px}
 .ms{display:flex;flex-direction:column;gap:12px}
 .mshd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px}.mshd p{margin:0;font-size:13px;color:var(--ink2);line-height:1.8}.msf{display:flex;flex-wrap:wrap;gap:6px}
@@ -3331,7 +3332,7 @@ select.mch{appearance:none;-webkit-appearance:none;cursor:pointer;border-color:v
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V182 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V183 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -8138,13 +8139,13 @@ async function scReadDir(dir) { const L = []; for await (const [name, h] of dir.
 function scMsg(r, n) { if (!r) return ''; const p = []; if (r.add) p.push(r.add + ' قضية جديدة'); if (r.dec) p.push(r.dec + ' قرار أو توزيع محدَّث'); if (r.js) p.push(r.js + ' حالة حكم'); return (p.length ? 'من الدائرة: ' + p.join('، ') : 'لا جديد من الدائرة') + (SC.role === 'm' ? ' · قضاياك المحجوزة: ' + r.mine : '') + (n > 1 ? ' · دُمجت ' + n + ' نسخ' : ''); }
 // المزامنة: قراءة كل نسخ الملف ودمجها، ثم كتابة الملف بحقول هذا الدور وحده، وحذف نسخ التعارض المدموجة
 async function scSync(opt) {
-  opt = opt || {}; if (!scOn() || SCK.busy) return; if (!SCK.key) SCK.key = await syGet('ckey'); if (!SCK.key) { if (!opt.silent) toast('اكتب رمز الدائرة في الإعدادات'); return; }
+  opt = opt || {}; if (!scOn() || SCK.busy) return; if (!SCK.key) SCK.key = await syGet('ckey'); if (!SCK.key && !SCK.pass) { if (!opt.silent) scAskKey(); return; }
   if (!(syCanFS() && window.showDirectoryPicker)) { if (!opt.silent) { SCK.mode = 'sync'; $('#sc_file').click(); } return; }
   SCK.busy = true; scBar();
   try {
     let dir = await scDirOk(!opt.silent); if (!dir && !opt.silent) dir = await scPickDir(); if (!dir) return;
     const L = await scReadDir(dir), ok = L.filter(x => x.d), bad = L.filter(x => !x.d);
-    if (bad.some(x => x.err === 'key') && !ok.length) { if (!opt.silent) toast('رمز الدائرة لا يفتح الملف — تأكّد منه في الإعدادات'); return; }
+    if (bad.some(x => x.err === 'key') && !ok.length) { await scKeyBad(); if (!opt.silent) toast('رمز الدائرة لا يفتح الملف — اكتبه مرة أخرى في الإعدادات'); return; }
     const prev = scCombine(ok.map(x => x.d)); let r = null;
     if (prev) r = scApply(prev); else if (SC.role === 'm') { if (!opt.silent) toast('لا ملف للدائرة في المجلد «' + dir.name + '» بعد — ينشئه الرئيس أولًا'); return; }
     SCK.nfiles = ok.length;
@@ -8160,7 +8161,7 @@ async function scSync(opt) {
 async function scFiles(files) {   // V164: «مزامنة الآن» على الآيباد والآيفون — تختار كل ملفات الدائرة مرة، فتُدمج، ثم تُعرض المشاركة لحفظ نسختك
   const ok = []; let keyBad = false, other = 0; for (const f of files) { if (!SC_RX.test(f.name || '')) { other++; continue; } const o = await scOpen(await f.text()); if (o.d) ok.push(o.d); else if (o.err === 'key') keyBad = true; }
   const mode = SCK.mode; SCK.mode = '';
-  if (!ok.length) { syToast(keyBad ? 'رمز الدائرة لا يفتح الملف — تأكّد منه في الإعدادات' : other ? 'اخترت ملفًا ليس من ملفات الدائرة — اختر الملفات التي تنتهي بـ .mdwl' : 'لم يُختر ملف'); return; }
+  if (!ok.length) { if (keyBad) await scKeyBad(); syToast(keyBad ? 'رمز الدائرة لا يفتح الملف — اكتبه مرة أخرى في الإعدادات' : other ? 'اخترت ملفًا ليس من ملفات الدائرة — اختر الملفات التي تنتهي بـ .mdwl' : 'لم يُختر ملف'); return; }
   const prev = scCombine(ok), r = scApply(prev); await sySet('cdata', prev); SCK.nfiles = ok.length; SC.okn = (SC.okn || 0) + 1; scSave();
   const n = scDirty(); syToast((ok.length > 1 ? 'تم دمج ' + ok.length + ' ملفات. ' : 'قُرئ ملف واحد. ') + scMsg(r, 1) + (n ? ' · ' + n + ' تغييرًا للحفظ' : ''));
   if (mode === 'sync' && n) await scSend(prev, { auto: true });
@@ -8208,6 +8209,13 @@ function scBar() {
   if (q('#cb_now')) q('#cb_now').onclick = scNow;
   if (q('#cb_send')) q('#cb_send').onclick = () => scSend();
 }
+// V183: طلب الرمز في مكانه — يفتح الإعدادات على «ملف الدائرة المشترك» وفيه خانة الرمز
+function scAskKey() { toast('اكتب رمز الدائرة — في الإعدادات ← ملف الدائرة المشترك'); try { openDrawer(); } catch (e) {} setTimeout(() => { scRender(); const s = document.getElementById('dcirc'), db = $('#dbody'); if (s && db) db.scrollTo({ top: s.offsetTop - 70, behavior: 'smooth' }); const i = document.getElementById('sc_kin'); if (i) i.focus({ preventScroll: true }); }, 160); }
+async function scKeyBad() { SCK.key = null; SCK.pass = ''; await sySet('ckey'); scRender(); scBar(); }   // الرمز المكتوب لا يفتح الملفات: تعود خانة الرمز
+async function scKeyFrom(code) {
+  if (SC.salt) { SCK.key = await syDerive(code, syUnb64(SC.salt)); await sySet('ckey', SCK.key); } else SCK.pass = code;   // العضو قبل أول فتح: يُشتق من ملح ملف الدائرة عند القراءة
+  scRender(); scBar(); toast('اعتُمد الرمز — زامن الدائرة الآن');
+}
 // قسم الإعدادات
 function scRender() {
   const b = $('#sc_body'); if (!b) return; const sec = $('#dcirc'); if (sec) sec.classList.toggle('hidden', rlProf().n === 1 || !!window.DEMO);
@@ -8224,9 +8232,12 @@ function scRender() {
     $('#sc_go').onclick = () => scJoin(role, $('#sc_me') ? $('#sc_me').value : '', $('#sc_code').value);
     return;
   }
-  b.innerHTML = '<div class="scf"><div class="scst"><span>الدور: <b>' + esc(scRoleT()) + '</b></span><span>ملفي: <b>' + esc(scMine()) + '</b></span><span>المجلد: <b>' + (SCK.dir ? esc(SCK.dir.name) : fs ? 'غير مربوط' : 'تختار الملفات عند المزامنة') + '</b></span>' + (SCK.nfiles ? '<span>ملفات الدائرة المقروءة: <b>' + SCK.nfiles + '</b></span>' : '') + '<span>آخر سحب: <b>' + syWhen(SC.pulled) + '</b></span><span>آخر إرسال: <b>' + syWhen(SC.pushed) + '</b></span></div>'
+  // V183: الرمز غير محفوظ على هذا الجهاز (فُقدت بيانات المتصفح أو انتقلت إعدادات الدائرة دونه) — يُكتب هنا دون مغادرة ملف الدائرة
+  const needKey = !SCK.key && !SCK.pass ? '<div class="sckey" id="sc_need"><b>اكتب رمز الدائرة على هذا الجهاز</b><span>ملف الدائرة مفعّل، لكن رمزه غير محفوظ في هذا المتصفح. اكتب الرمز نفسه؛ لا يتغيّر شيء في الملفات المشتركة.</span><div class="row"><input type="password" id="sc_kin" autocomplete="current-password" minlength="8" aria-label="رمز الدائرة"><button type="button" class="btn primary" id="sc_kok">اعتمد الرمز</button></div></div>' : '';
+  b.innerHTML = needKey + '<div class="scf"><div class="scst"><span>الدور: <b>' + esc(scRoleT()) + '</b></span><span>ملفي: <b>' + esc(scMine()) + '</b></span><span>المجلد: <b>' + (SCK.dir ? esc(SCK.dir.name) : fs ? 'غير مربوط' : 'تختار الملفات عند المزامنة') + '</b></span>' + (SCK.nfiles ? '<span>ملفات الدائرة المقروءة: <b>' + SCK.nfiles + '</b></span>' : '') + '<span>آخر سحب: <b>' + syWhen(SC.pulled) + '</b></span><span>آخر إرسال: <b>' + syWhen(SC.pushed) + '</b></span></div>'
     + '<div class="row"><button type="button" class="btn primary" id="sc_now">مزامنة الدائرة الآن</button>' + (fs ? '<button type="button" class="btn" id="sc_dir">' + (SCK.dir ? 'تغيير المجلد' : 'ربط المجلد') + '</button>' : '') + '<button type="button" class="btn" id="sc_off">مغادرة ملف الدائرة</button></div>'
     + '<p class="synote">' + (SC.role === 'p' ? 'تملك: المرحلة والجلسة والقرار والتوزيع. وتصلك حالة كل حكم من كاتبه.' : 'تصلك قرارات الرئيس وتوزيعه، وتملك حالة الأحكام الموزّعة عليك. أي تعديل منك على القرار أو الموعد يبقى على جهازك ويُستبدل بما في رول الرئيس عند السحب.') + '</p></div>';
+  if ($('#sc_kok')) $('#sc_kok').onclick = async () => { const v = ($('#sc_kin').value || '').trim(); if (v.length < 8) { toast('رمز الدائرة 8 أحرف فأكثر'); return; } await scKeyFrom(v); };
   $('#sc_now').onclick = scNow; if ($('#sc_dir')) $('#sc_dir').onclick = async () => { if (await scPickDir()) { scRender(); scSync({}); } };
   $('#sc_off').onclick = async () => { if (!confirm('مغادرة ملف الدائرة على هذا الجهاز؟ لا يُحذف الملف المشترك ولا الرول.')) return; SC = {}; scSave(); SCK.key = null; SCK.dir = null; await sySet('ckey'); await sySet('cdir'); await sySet('cdata'); scRender(); scBar(); if (rlInit) rlRender(); };
 }
@@ -12713,6 +12724,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [183, 'الإصدار 183', ['ملف الدائرة: إن لم يكن رمز الدائرة محفوظًا في هذا المتصفح تظهر خانته في الإعدادات ← ملف الدائرة المشترك، فتكتبه دون مغادرة الدائرة؛ والرمز الخطأ يُرفض وتعود الخانة.']],
   [182, 'الإصدار 182', ['«إخفاء الهوية»: لمسة الكلمة تخص موضعها وحده — تعتيمًا أو إظهارًا — ويظهر شريط «في كل الصفحات» إن أردت تعميمها؛ ولا يعود التظليل من نفسه.', 'لا تُتتبَّع المفردات العامة أسماءً (المقرر، النتيجة، المحاماة، الخصم، انتهى…).', 'استجابة أسرع: تُرسم الصفحة الملموسة وحدها، والعرض بدقة الشاشة والتنزيل بالدقة الكاملة.']],
   [181, 'الإصدار 181', ['«أودِع»: الأصل يُقابَل بالمسودة المطبوعة — تُحفظ بصمة لنصها (لا النص) حين تنزّلها لطباعتها، فيظهر «مطابق للمسودة المطبوعة»، أو قائمة بما تغيّر بعدها تطابقها بما أُثبت على المسودة الموقّعة في المداولة قبل إخراج الأصل.', 'الرقم الآلي بخط كبير قبل الإخراج، ويُقارَن رقم البطاقة برقم ديباجة المسودة.', '«أرسل الأصل للطباعة»: الملف جاهز في واتساب أو البريد، فلا يُعاد كتابته عند الطبّاع. والرسالة بلا أسماء.', '«بيان الأعضاء» للرئيس في الرول: قضايا كل عضو، وحالة المسودة والأصل، والمتأخر، ويُطبع أو يُشارك.']],
   [180, 'الإصدار 180', ['«أخرج الأصل» في خطوة «أودِع»: يُملأ نموذج دائرتك من البطاقة (التاريخ بالهجري والميلادي، ورقم القضية، والرقم الآلي) ومن هيئة جلسة النطق (ومعها البديل) ومن ديباجة المسودة ومتنها — ويُنزَّل ملف Word ولا يُحفظ.', 'نموذج الأصل يُضاف مرة واحدة من الإعدادات ← الدائرة وملفي، فيُفرَّغ تلقائيًا من الأسماء والأرقام والمتن ويُحفظ مشفّرًا على جهازك؛ ومعه ألقاب الهيئة وأسماؤها وأمين السر كما تُكتب في الأصل.', 'المسودة (يوقّعها الأعضاء ثم تُودع) والأصل (يوقّعه الرئيس وأمين السر) حالتان منفصلتان، وتنبيه إن مضت ثلاثة أيام على النطق ولم يُوقَّع الأصل.', 'مكتبي ← «الإيداع والأصول»: أحكامك بموعد النطق وخطوتها التالية، وللرئيس «أصول الأعضاء بانتظار توقيعك».', '«الترويسة» في صفحة الكتابة صارت «الديباجة»، و«التطبيق وأداة الذكاء» في «عن التطبيق».']],
