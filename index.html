@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261007075322">
+<meta name="amali-build" content="20261007140429">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -858,6 +858,8 @@ input[type=date]::-webkit-date-and-time-value{min-width:0}
 .mskpage canvas{display:block;width:100%;height:auto;touch-action:pan-y pinch-zoom;cursor:pointer;background:#fff}
 .mskpage canvas.draw{touch-action:none;cursor:crosshair}
 .mskpage figcaption{font-size:12px;color:var(--ink3);margin-top:4px}
+.mskoffer{position:fixed;inset-inline:16px;bottom:calc(84px + env(safe-area-inset-bottom));margin:0 auto;max-width:560px;z-index:60;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;padding:10px 14px;border-radius:14px;background:var(--ink);color:var(--panel);box-shadow:0 10px 28px rgba(0,0,0,.25);font-size:14px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .18s,transform .18s}
+.mskoffer.show{opacity:1;transform:none;pointer-events:auto}.mskoffer .btn{background:var(--panel);color:var(--ink);border-color:transparent;min-height:36px}
 @media (max-width:900px){.intakewrap{padding-bottom:120px}}
 
 
@@ -2178,7 +2180,7 @@ details.indet>summary{padding:10px 2px}
 .ogdf>b{font-size:14px}.ogdf ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;max-height:260px;overflow:auto}
 .ogdf li{font-size:13.5px;line-height:1.9;background:var(--bg);border-radius:10px;padding:6px 10px;overflow-wrap:anywhere}.ogdf li small{display:block;font-size:12px;color:var(--warn);font-weight:600}.ogdf li.del small{color:var(--bad)}
 .ogack{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;font-weight:600;line-height:1.7;cursor:pointer}.ogack input{margin-top:5px;width:18px;height:18px;flex:0 0 18px}
-.ogshp[hidden]{display:none}.ogshp{border:1px dashed var(--gold);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}.ogshp>b{font-size:13.5px}.ogmsg{margin:0;font-size:13.5px;line-height:1.8;background:var(--bg);border-radius:8px;padding:6px 10px}
+.msb{display:inline-flex;align-items:center;gap:6px}.msb.hidden{display:none}.ogshp[hidden]{display:none}.ogshp{border:1px dashed var(--gold);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}.ogshp>b{font-size:13.5px}.ogmsg{margin:0;font-size:13.5px;line-height:1.8;background:var(--bg);border-radius:8px;padding:6px 10px}
 .ms{display:flex;flex-direction:column;gap:12px}
 .mshd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 14px}.mshd p{margin:0;font-size:13px;color:var(--ink2);line-height:1.8}.msf{display:flex;flex-wrap:wrap;gap:6px}
 .mskp{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
@@ -2896,7 +2898,7 @@ select.mch{appearance:none;-webkit-appearance:none;cursor:pointer;border-color:v
     <button class="btn primary" id="rl_kashf" type="button">استيراد كشف الجلسة</button>
     <button class="btn" id="rl_new" type="button">＋ قضية</button>
     <button class="btn primary hidden" id="rl_dist" type="button">إرسال التوزيع</button>
-    <button class="btn mineb hidden" id="rl_mem" type="button" title="بيان الأحكام الموزعة على الأعضاء: حالة المسودة والأصل لكل قضية">بيان الأعضاء</button>
+    <button class="btn msb hidden" id="rl_mem" type="button" title="بيان الأحكام الموزعة على الأعضاء: حالة المسودة والأصل لكل قضية">بيان الأعضاء</button>
     <span class="spacer"></span>
     <button class="btn rlib" id="rl_sheet" type="button" title="طباعة ورقة المراجعة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></svg><span class="lb">طباعة ورقة المراجعة</span></button>
     <button class="btn rlib rlmorebtn" id="rl_morebtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="rl_sec" title="المزيد: التقويم، المزامنة، التصدير والاستيراد">⋯</button>
@@ -3329,7 +3331,7 @@ select.mch{appearance:none;-webkit-appearance:none;cursor:pointer;border-color:v
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V181 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V182 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -11230,7 +11232,10 @@ const MSK_MARK = [
 const MSK_STOP = new Set(('القاضي قاضي امين سر الجلسه الرقم رقم المدني مدني الجنسيه الجنسيه العنوان الساكن ويعلن ضد بصفته بصفتها بصفتهم هاتف الهاتف وهاتفه هاتفه ' +
   'بان بانه بانها بانهم وبان وانه وانها لانه لانها كونه كونها ان انه انها الذي التي الذين في علي علي من عن الي الى او قد كان كانت بتاريخ حيث وحيث وقد لدي وكيل وكيله وكيلها المدعي المدعيه المدعيعليه عليه عليها له لها ' +
   'المستانف المستانفه المستانفين المستانفون المستانفان المستانفتان ضده ضدها ضدهم المدعين المدعيان المطعون الطاعن الطاعنه الطاعنين الشركه العامل العامله صاحب العمل المحكوم الحكم المستانف الاستيناف الاستئناف ' +
-  'اقام اقامت اقامه الدعوي الحكم بالحكم المحكمه تقرير المنتدب المنتدبه بجلسه جلسه وحضر حضر وقدم وقدمت قدم شهد وشهد وقرر قرر وافاد افاد واضاف مع و ثم ف').split(' ').map(mskNorm));
+  'اقام اقامت اقامه الدعوي الحكم بالحكم المحكمه تقرير المنتدب المنتدبه بجلسه جلسه وحضر حضر وقدم وقدمت قدم شهد وشهد وقرر قرر وافاد افاد واضاف مع و ثم ف ' +
+  // V182: مفردات عامة كانت تُلتقط بعد العلامات فتُتتبَّع أسماءً (بملاحظة القاضي)
+  'المقرر مقرر النتيجه نتيجه نتيجته بنتيجته بالنتيجه المحاماه محاماه للمحاماه الخصم الخصوم خصم خصمه انتهي وانتهي انتهت وانتهت انتهاء تقريره بتقريره التقرير الدائره دائره الاوراق المستندات الطلبات طلباته الدفاع دفاع الحاضر الحاضره حاضر نيابه عنه عنها المذكور المذكوره المشار اليه اليها المنتهي المحامين المحامون المحاماه ' +
+  'اودع اودعت ايداع بايداع والذي والتي الماموريه ماموريه المهمه باشر باشرت').split(' ').map(mskNorm));
 // كلمات عامة لا تُعمَّم على بقية الصفحات وإن عُتّمت في موضعها (أجزاء أسماء الشركات والألقاب)
 const MSK_GENERIC = new Set(('شركه الشركه مؤسسه المؤسسه مكتب معهد مطعم مستشفي مركز مجموعه للتجاره التجاريه العامه والمقاولات للمقاولات للخدمات الخدمات الطبيه ' +
   'ذمم شمك شمكع المحدوده الكويتيه العالميه الدوليه المتحده الوطنيه الحديثه للسيدات للرجال للاستشارات للتسويق للسيارات للنقل للتنظيف للحراسه والتجاره والصناعه ' +
@@ -11249,6 +11254,7 @@ function mskStrip(n) { return n.replace(/^(وال|بال|لل|فال|كال|ال
 
 // يكتشف الأسماء المرشحة من العلامات، ويعيد مجموعة الأسماء (مطبَّعة) مع أمثلة العرض
 function mskFindNames(pages) {
+  const CM = typeof P !== 'undefined' && P && P.length ? mskCommon() : null;   // V182
   const names = new Map();   // norm -> {label, n}
   const direct = [];         // [pi, wi, reason] كلمات مجمَّعة بعد العلامات (تُعتَّم في موضعها حتى لو كانت عامة)
   pages.forEach((pg, pi) => {
@@ -11272,8 +11278,9 @@ function mskFindNames(pages) {
           if (mskNear(n, MSK_STOP) && got > 0) break;
           if (mskNear(n, MSK_STOP)) { j++; continue; }
           if (mskDigits(raw) && !/[ء-ي]/.test(raw)) break;
+          if (!mk.party && CM && (CM.has(n) || CM.has(mskStrip(n)))) { if (got) break; j++; continue; }   // V182: «الخبير: انتهى بنتيجته» ليس اسمًا
           direct.push([pi, j, mk.party ? 'party' : 'person']); got++;
-          if (mskIsNameTok(n)) { const s = mskStrip(n); if (!names.has(s)) names.set(s, { label: raw.replace(/[،,.؛;:]+$/, ''), n: 0 }); }
+          if (mskIsNameTok(n) && !(CM && (CM.has(n) || CM.has(mskStrip(n))))) { const s = mskStrip(n); if (!names.has(s)) names.set(s, { label: raw.replace(/[،,.؛;:]+$/, ''), n: 0 }); }
           if (/[،,.؛;]$/.test(raw)) break;
           j++;
         }
@@ -11310,10 +11317,11 @@ function mskCompute(pages, opt) {
     const n = mskStrip(mskNorm(pages[pi].words[wi].t));
     if (off.has(n)) return; out[pi].set(wi, why);
   });
+  const memo = new Map(), mt = n => { if (!memo.has(n)) memo.set(n, mskMatch(n, nameSet, opt.common)); return memo.get(n); };   // V182: الكلمة نفسها تتكرر — تُطابق مرة
   pages.forEach((pg, pi) => {
-    const W = pg.words, N = W.map(w => mskNorm(w.t));
+    const W = pg.words, N = pg.nw || W.map(w => mskNorm(w.t));
     W.forEach((w, wi) => {
-      const hit = mskMatch(N[wi], nameSet, opt.common);
+      const hit = mt(N[wi]);
       if (hit) { out[pi].set(wi, 'name'); counts.set(hit, (counts.get(hit) || 0) + 1); }
       // أرقام طويلة (مدني/هاتف/حساب) دون فاصل تاريخ، وليست مبلغًا
       const dg = mskDigits(w.t);
@@ -11367,8 +11375,8 @@ function mskBoxes(pi) {
   return out;
 }
 function mskDraw(pi, preview) {
-  const pg = MSK.pages[pi], cv = pg.cv, cx = cv.getContext('2d');
-  cx.drawImage(pg.img, 0, 0);
+  const pg = MSK.pages[pi], cv = pg.cv; if (!cv) return; const cx = cv.getContext('2d'), sc = pg.sc || 1;
+  cx.setTransform(sc, 0, 0, sc, 0, 0); cx.drawImage(pg.img, 0, 0);
   mskBoxes(pi).forEach(b => {
     if (MSK.final) { cx.fillStyle = '#000'; cx.fillRect(b.x0, b.y0, b.x1 - b.x0, b.y1 - b.y0); return; }
     cx.fillStyle = 'rgba(0,0,0,.72)'; cx.fillRect(b.x0, b.y0, b.x1 - b.x0, b.y1 - b.y0);
@@ -11381,12 +11389,17 @@ let MSK_COMMON = null;
 function mskCommon() {
   if (MSK_COMMON) return MSK_COMMON; const c = new Map();
   P.forEach(p => (p.summary.join(' ') + ' ' + p.reasoning.join(' ')).split(/\s+/).forEach(w => { const n = mskNorm(w); if (n.length > 2) c.set(n, (c.get(n) || 0) + 1); }));
-  MSK_COMMON = new Set([...c].filter(([, k]) => k >= 30).map(([w]) => w)); return MSK_COMMON;
+  MSK_COMMON = new Set([...c].filter(([, k]) => k >= 30).flatMap(([w]) => [w, mskStrip(w)])); return MSK_COMMON;   // V182: والصيغة بلا «ال» — مفاتيح الأسماء مجرّدة منها
 }
-function mskRecompute() {
+// V182: الحساب فوري، والرسم لما تغيّر من الصفحات وحدها في الإطار التالي (كانت كل لمسة تعيد رسم كل الصفحات بدقتها الكاملة فتتراكم اللمسات وتتأخر)
+function mskSig(m) { let s = ''; m.forEach((w, k) => { s += k + w[0] + ','; }); return s; }
+const MSK_DIRTY = new Set(); let MSK_RAF = 0;
+function mskQueue(pi) { MSK_DIRTY.add(pi); if (MSK_RAF) return; MSK_RAF = requestAnimationFrame(() => { MSK_RAF = 0; const L = [...MSK_DIRTY]; MSK_DIRTY.clear(); L.forEach(i => mskDraw(i)); }); }
+function mskRecompute(only) {
   if (!MSK.pages.length || !MSK.found) return;
+  const prev = MSK.res ? MSK.res.masked.map(mskSig) : null;
   MSK.res = mskCompute(MSK.pages, { found: MSK.found, off: MSK.off, extra: MSK.extra, wordOn: MSK.wordOn, wordOff: MSK.wordOff, header: $('#msk_hdr').checked, common: mskCommon() });
-  MSK.pages.forEach((_, i) => mskDraw(i));
+  MSK.pages.forEach((pg, i) => { if (!prev || prev[i] !== mskSig(MSK.res.masked[i]) || i === only) mskQueue(i); });
   mskChips();
 }
 function mskChips() {
@@ -11404,23 +11417,36 @@ function mskChips() {
     mskRecompute();
   });
 }
-function mskPt(pi, e) { const cv = MSK.pages[pi].cv, r = cv.getBoundingClientRect(); return { x: (e.clientX - r.left) * cv.width / r.width, y: (e.clientY - r.top) * cv.height / r.height }; }
+function mskPt(pi, e) { const pg = MSK.pages[pi], cv = pg.cv, r = cv.getBoundingClientRect(), sc = pg.sc || 1; return { x: (e.clientX - r.left) * cv.width / r.width / sc, y: (e.clientY - r.top) * cv.height / r.height / sc }; }
 function mskTap(pi, p) {
   const pg = MSK.pages[pi];
   const mi = pg.manual.findIndex(r => p.x >= r.x0 && p.x <= r.x1 && p.y >= r.y0 && p.y <= r.y1);
-  if (mi >= 0) { pg.manual.splice(mi, 1); mskRecompute(); return; }
+  if (mi >= 0) { pg.manual.splice(mi, 1); mskQueue(pi); mskChips(); return; }
   let best = -1, bd = 1e9;
   pg.words.forEach((w, i) => { const tol = 8; if (p.x >= w.x0 - tol && p.x <= w.x1 + tol && p.y >= w.y0 - tol && p.y <= w.y1 + tol) { const d = Math.abs((w.x0 + w.x1) / 2 - p.x) + Math.abs((w.y0 + w.y1) / 2 - p.y); if (d < bd) { bd = d; best = i; } } });
   if (best < 0) { toast('لا كلمة مقروءة هنا — استعمل «رسم مستطيل»'); return; }
-  const key = pi + ':' + best, isM = MSK.res && MSK.res.masked[pi].has(best);
-  if (isM) { MSK.wordOn.delete(key); MSK.wordOff.add(key); }
-  else {
-    MSK.wordOff.delete(key);
-    const n = mskStrip(mskNorm(pg.words[best].t));
-    if (mskIsNameTok(mskNorm(pg.words[best].t)) && n.length >= 3) { MSK.extra.add(n); MSK.off.delete(n); toast('عُتّم «' + pg.words[best].t + '» وكل تكراراته'); }
-    else MSK.wordOn.add(key);
-  }
-  mskRecompute();
+  // V182: اللمسة تخص هذا الموضع وحده؛ وتعميمها على التكرارات باختيارك من الشريط الذي يظهر
+  const key = pi + ':' + best, isM = MSK.res && MSK.res.masked[pi].has(best), raw = pg.words[best].t, nm = mskStrip(mskNorm(raw));
+  if (isM) { MSK.wordOn.delete(key); MSK.wordOff.add(key); } else { MSK.wordOff.delete(key); MSK.wordOn.add(key); }
+  mskRecompute(pi);
+  const tracked = MSK.res.names.some(x => x.n === nm), cnt = mskCount(nm);
+  if (isM && tracked && cnt > 1) mskOffer('أُظهرت «' + raw + '» هنا فقط', 'أظهرها في كل الصفحات (' + cnt + ')', () => { MSK.off.add(nm); MSK.extra.delete(nm); mskClearKeys(nm); mskRecompute(); });
+  else if (!isM && nm.length >= 3 && cnt > 1) mskOffer('عُتّمت «' + raw + '» هنا فقط', 'عتّمها في كل الصفحات (' + cnt + ')', () => { MSK.extra.add(nm); MSK.off.delete(nm); mskClearKeys(nm); mskRecompute(); });
+  else mskOffer(isM ? 'أُظهرت «' + raw + '»' : 'عُتّمت «' + raw + '»');
+}
+function mskCount(nm) { let c = 0; MSK.pages.forEach(pg => (pg.nw || pg.words.map(w => mskNorm(w.t))).forEach(n => { if (n && mskStrip(n) === nm) c++; })); return c; }
+function mskClearKeys(nm) { MSK.pages.forEach((pg, pi) => pg.words.forEach((w, wi) => { if (mskStrip(mskNorm(w.t)) === nm) { MSK.wordOn.delete(pi + ':' + wi); MSK.wordOff.delete(pi + ':' + wi); } })); }
+// V182: منفذ للاختبارات الآلية فقط
+window.__v182 = { text: t => mskMaskText(t), state: () => ({ on: [...MSK.wordOn], off: [...MSK.wordOff], extra: [...MSK.extra], offN: [...MSK.off], names: MSK.res ? MSK.res.names.map(x => x.n) : [], masked: MSK.res ? MSK.res.masked.map(m => [...m.keys()]) : [], sc: MSK.pages.map(p => p.sc), cw: MSK.pages.map(p => p.cv && p.cv.width) }),
+  load: async P0 => { const out = []; for (const pg of P0) { const cv = document.createElement('canvas'); cv.width = pg.w; cv.height = pg.h; const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, pg.w, pg.h); const blob = await new Promise(r => cv.toBlob(r, 'image/png')); const img = await mskLoadImg(blob); const W = pg.words; out.push({ blob, name: 'ص', img, words: W, nw: W.map(w => mskNorm(w.t)), manual: [], w: pg.w, h: pg.h }); } MSK.pages = out; MSK.off.clear(); MSK.extra.clear(); MSK.wordOn.clear(); MSK.wordOff.clear(); MSK.res = null; mskRenderPages(); MSK.found = mskFindNames(MSK.pages); mskRecompute(); return out.length; },
+  tap: (pi, x, y) => mskTap(pi, { x, y }), draws: 0 };
+{ const f = mskDraw; mskDraw = function (pi, pv) { window.__v182.draws++; return f(pi, pv); }; }
+let MSK_OFT = 0;
+function mskOffer(msg, act, fn) {
+  let b = document.getElementById('msk_offer'); if (!b) { b = document.createElement('div'); b.id = 'msk_offer'; b.className = 'mskoffer'; b.setAttribute('role', 'status'); document.body.appendChild(b); }
+  b.innerHTML = '<span>' + esc(msg) + '</span>' + (act ? '<button type="button" class="btn">' + esc(act) + '</button>' : '');
+  if (act) b.querySelector('button').onclick = () => { b.classList.remove('show'); fn(); };
+  b.classList.add('show'); clearTimeout(MSK_OFT); MSK_OFT = setTimeout(() => b.classList.remove('show'), act ? 6000 : 1800);
 }
 function mskBind(pi) {
   const cv = MSK.pages[pi].cv; let st = null;
@@ -11432,7 +11458,7 @@ function mskBind(pi) {
   });
   cv.addEventListener('pointerup', e => {
     if (!st || e.pointerId !== st.id) return; const p = mskPt(pi, e), s0 = st; st = null;
-    if (MSK.mode === 'draw' && s0.moved) { const r = { x0: Math.min(p.x, s0.p.x), y0: Math.min(p.y, s0.p.y), x1: Math.max(p.x, s0.p.x), y1: Math.max(p.y, s0.p.y) }; if (r.x1 - r.x0 > 10 && r.y1 - r.y0 > 10) MSK.pages[pi].manual.push(r); mskRecompute(); return; }
+    if (MSK.mode === 'draw' && s0.moved) { const r = { x0: Math.min(p.x, s0.p.x), y0: Math.min(p.y, s0.p.y), x1: Math.max(p.x, s0.p.x), y1: Math.max(p.y, s0.p.y) }; if (r.x1 - r.x0 > 10 && r.y1 - r.y0 > 10) MSK.pages[pi].manual.push(r); mskRecompute(pi); return; }
     if (!s0.moved) mskTap(pi, p);
   });
   cv.addEventListener('pointercancel', () => { st = null; mskDraw(pi); });
@@ -11441,7 +11467,7 @@ function mskRenderPages() {
   const box = $('#msk_pages'); box.innerHTML = '';
   MSK.pages.forEach((pg, i) => {
     const f = document.createElement('figure'); f.className = 'mskpage';
-    const cv = document.createElement('canvas'); cv.width = pg.img.naturalWidth; cv.height = pg.img.naturalHeight; pg.cv = cv;
+    const cv = document.createElement('canvas'); pg.sc = Math.min(1, 1600 / (pg.img.naturalWidth || 1600)); cv.width = Math.round(pg.img.naturalWidth * pg.sc); cv.height = Math.round(pg.img.naturalHeight * pg.sc); pg.cv = cv;   // V182: العرض بدقة الشاشة، والتنزيل بالدقة الكاملة
     cv.className = MSK.mode === 'draw' ? 'draw' : '';
     f.appendChild(cv); const cap = document.createElement('figcaption'); cap.textContent = 'صفحة ' + (i + 1) + ' — ' + pg.name; f.appendChild(cap);
     box.appendChild(f); mskBind(i); mskDraw(i);
@@ -11511,7 +11537,7 @@ function initMask() {
         const { data } = await worker.recognize(pg.blob, {}, { blocks: true, text: false });
         const W = [];
         (data.blocks || []).forEach((b, bi) => (b.paragraphs || []).forEach((p, pi2) => (p.lines || []).forEach((l, li) => (l.words || []).forEach(w => { if (w.text && w.text.trim()) W.push({ t: w.text, x0: w.bbox.x0, y0: w.bbox.y0, x1: w.bbox.x1, y1: w.bbox.y1, ln: bi + '.' + pi2 + '.' + li }); }))));
-        pg.words = W; pg.w = pg.img.naturalWidth; pg.h = pg.img.naturalHeight;
+        pg.words = W; pg.nw = W.map(w => mskNorm(w.t)); pg.w = pg.img.naturalWidth; pg.h = pg.img.naturalHeight;
       }
     } catch (e) { failed = true; st.textContent = ocrErrMsg(e, 'تعذّرت القراءة الضوئية على هذا الجهاز' + (e && e.message === 'ocr-timeout' ? ' (انتهت المهلة)' : '') + '.'); }
     finally { if (worker) { try { await worker.terminate(); } catch (e) {} } delete st.dataset.pg; MSK.ctl = null; setBusy(false); }
@@ -12687,6 +12713,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [182, 'الإصدار 182', ['«إخفاء الهوية»: لمسة الكلمة تخص موضعها وحده — تعتيمًا أو إظهارًا — ويظهر شريط «في كل الصفحات» إن أردت تعميمها؛ ولا يعود التظليل من نفسه.', 'لا تُتتبَّع المفردات العامة أسماءً (المقرر، النتيجة، المحاماة، الخصم، انتهى…).', 'استجابة أسرع: تُرسم الصفحة الملموسة وحدها، والعرض بدقة الشاشة والتنزيل بالدقة الكاملة.']],
   [181, 'الإصدار 181', ['«أودِع»: الأصل يُقابَل بالمسودة المطبوعة — تُحفظ بصمة لنصها (لا النص) حين تنزّلها لطباعتها، فيظهر «مطابق للمسودة المطبوعة»، أو قائمة بما تغيّر بعدها تطابقها بما أُثبت على المسودة الموقّعة في المداولة قبل إخراج الأصل.', 'الرقم الآلي بخط كبير قبل الإخراج، ويُقارَن رقم البطاقة برقم ديباجة المسودة.', '«أرسل الأصل للطباعة»: الملف جاهز في واتساب أو البريد، فلا يُعاد كتابته عند الطبّاع. والرسالة بلا أسماء.', '«بيان الأعضاء» للرئيس في الرول: قضايا كل عضو، وحالة المسودة والأصل، والمتأخر، ويُطبع أو يُشارك.']],
   [180, 'الإصدار 180', ['«أخرج الأصل» في خطوة «أودِع»: يُملأ نموذج دائرتك من البطاقة (التاريخ بالهجري والميلادي، ورقم القضية، والرقم الآلي) ومن هيئة جلسة النطق (ومعها البديل) ومن ديباجة المسودة ومتنها — ويُنزَّل ملف Word ولا يُحفظ.', 'نموذج الأصل يُضاف مرة واحدة من الإعدادات ← الدائرة وملفي، فيُفرَّغ تلقائيًا من الأسماء والأرقام والمتن ويُحفظ مشفّرًا على جهازك؛ ومعه ألقاب الهيئة وأسماؤها وأمين السر كما تُكتب في الأصل.', 'المسودة (يوقّعها الأعضاء ثم تُودع) والأصل (يوقّعه الرئيس وأمين السر) حالتان منفصلتان، وتنبيه إن مضت ثلاثة أيام على النطق ولم يُوقَّع الأصل.', 'مكتبي ← «الإيداع والأصول»: أحكامك بموعد النطق وخطوتها التالية، وللرئيس «أصول الأعضاء بانتظار توقيعك».', '«الترويسة» في صفحة الكتابة صارت «الديباجة»، و«التطبيق وأداة الذكاء» في «عن التطبيق».']],
   [179, 'الإصدار 179', ['«أحكامك في هذه المسألة»: كيف عالجتَ المسألة من قبل في «أحكامي»، مجمّعة بالنتيجة وبفقرة الأسباب مظلّلة، مع ما استشهدت به — من بنك الأسباب ودرج «مقترح» وملف التحضير والإحصاءات.', 'فحوص الحكم الجديدة في «فحص المسودة»: رقم القضية في اسم الملف والمتن وبطاقتها، ووجود المنطوق، وعدد الاستئنافات بين الديباجة والمنطوق، وتاريخ الجلسة أمام موعد النطق.', 'دفع ورد في محضر النظر ولم تظهر عبارته في الأسباب — تنبيه مع فقراتك السابقة فيه، دون إدراج شيء.', 'مبالغ المسودة أمام حاسبة المستحقات لهذه القضية: مطابق أو مختلف، بندًا بندًا.', 'الإحصاءات ← «أحكامي في الخزانة»: أحكامك بالموسم والنوع والنتيجة وأكثر الدفوع والمسائل.', 'بعد إنهاء الجلسة: تذكير في رأس الرول بالتوزيع النهائي لما حُجز فيها — راجع كاتب كل حكم ثم أرسله.']],
