@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261008153145">
+<meta name="amali-build" content="20261008185330">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2194,6 +2194,61 @@ details.indet>summary{padding:10px 2px}
 #odsheet .odsx{position:relative;background:var(--panel);color:var(--ink);border-radius:18px 18px 0 0;padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);max-width:560px;width:100%;margin:0 auto}
 #odsheet .odsx b{font-size:16px}#odsheet .odsx p{margin:0;font-size:14px;color:var(--ink2);line-height:1.8}
 @media print{#odsplash,#odsheet{display:none!important}}
+/* V189 — بعد الجلسة */
+.ssgold{display:flex;flex-direction:column;gap:6px;background:var(--gold-soft);border-bottom:1.5px solid var(--gold);padding:8px 14px;font-size:13.5px}
+.ssgold b{color:var(--gold-ink)}.ssgold .chips{display:flex;flex-wrap:wrap;gap:6px}
+.ssgold .chip{border:1px solid var(--gold);background:var(--panel);color:var(--ink);border-radius:999px;padding:3px 11px;font-family:inherit;font-size:12.5px;cursor:pointer}
+.c2tag{background:var(--gold);color:var(--panel)}
+.sslock{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--panel2);border-radius:10px;padding:8px 12px;margin:8px 0;font-size:13px;color:var(--ink2)}
+.sslock.fix{background:var(--warn-soft);color:var(--warn);font-weight:700}
+.sslocked .ssparts .ssatt button,.sslocked .ssparts .chip,.sslocked .ssadd,.sslocked .ssrm{opacity:.55}
+.rsfix{position:fixed;inset:0;z-index:95;background:rgba(11,31,59,.35);display:flex;align-items:center;justify-content:center;padding:16px}
+.rsfx{background:var(--panel);color:var(--ink);border-radius:16px;padding:16px;max-width:420px;width:100%;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow)}
+.rsfx .rsr{display:flex;gap:8px;align-items:center;border:1px solid var(--line2);border-radius:10px;padding:8px 10px;font-size:14px}
+.rsfx .rsoth{border:1px solid var(--line2);border-radius:9px;padding:8px 10px;background:var(--bg);color:var(--ink);font:inherit}
+.rswarn{margin:0;background:var(--warn-soft);color:var(--warn);border-radius:10px;padding:8px 10px;font-size:13px;line-height:1.8}
+.rsend{display:flex;flex-direction:column;gap:8px;padding:16px}
+.rsend .rsh{margin:8px 0 0;font-size:14px;color:var(--gold-ink)}.rsend .rsh.n{color:var(--ink2)}
+.rsit{display:flex;align-items:center;gap:10px;border-radius:12px;padding:9px 12px;font-size:13.5px}
+.rsit.g{border:1.5px solid var(--gold);background:var(--gold-soft)}.rsit.n{border:1px solid var(--line2);background:var(--panel)}
+.rsit b{font-size:15px}.rsit span{flex:1;color:var(--ink2);font-size:12.5px}
+.rsend .rsgo{min-height:48px;font-size:16px;margin-top:10px}
+.rsend .btn.dis{background:var(--panel2);color:var(--ink3);border-color:var(--line);font-weight:700}
+.rsend .lnk,.rsend2 .lnk{background:none;border:0;color:var(--ink2);text-decoration:underline;font-family:inherit;font-size:13.5px;cursor:pointer;padding:6px 0}
+.rsok{background:var(--ok-soft);color:var(--ok);border-radius:10px;padding:10px 12px;font-weight:700}
+.rsdone{position:fixed;inset:0;z-index:96;background:#0B1F3B;color:#E8EAF0;overflow:auto;display:flex;align-items:center;justify-content:center;padding:calc(24px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px));background-image:linear-gradient(45deg,rgba(212,175,99,.06) 25%,transparent 25%,transparent 75%,rgba(212,175,99,.06) 75%),linear-gradient(45deg,rgba(212,175,99,.06) 25%,transparent 25%,transparent 75%,rgba(212,175,99,.06) 75%);background-size:28px 28px;background-position:0 0,14px 14px}
+.rsin{position:relative;width:100%;max-width:760px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.rsx{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:12px;background:transparent;color:#E8EAF0;border:1px solid rgba(255,255,255,.4);border-radius:10px;padding:6px 12px;font-family:inherit;font-size:14px;cursor:pointer}
+.rsseal{width:96px;height:96px;border-radius:50%;border:3px solid #D4AF63;display:flex;align-items:center;justify-content:center;gap:6px;box-shadow:0 0 0 8px rgba(212,175,99,.12)}
+.rsseal i{width:18px;height:18px;background:#D4AF63;transform:rotate(45deg);border-radius:3px}
+.rsin h2{margin:0;font-family:var(--title);font-size:clamp(30px,6vw,46px);color:#F2D48A}
+.rssub{margin:0;font-size:15px;color:#C9D2E0}
+.rsk{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;width:100%}
+.rsk div{background:rgba(255,255,255,.07);border:1px solid rgba(212,175,99,.3);border-radius:14px;padding:10px;font-size:13px;color:#D9E0EC}
+.rsk b{display:block;font-size:28px;color:#F2D48A;font-variant-numeric:tabular-nums}
+.rsb{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;width:100%}
+.rsb button{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-family:inherit;font-size:15px;border-radius:12px;padding:11px 18px;cursor:pointer;min-height:46px}
+.rsb .rsp{background:#D4AF63;color:#1E1405;border:0;font-weight:700}.rsb .rss{background:transparent;color:#E8EAF0;border:1px solid rgba(255,255,255,.4)}
+.rsnt{margin:0;font-size:13px;color:#C9D2E0;background:rgba(212,175,99,.12);border:1px solid rgba(212,175,99,.4);border-radius:10px;padding:8px 12px}
+.rsft{margin:0;font-size:12.5px;color:#9FAAC0}
+@media (max-width:560px){.rsb{flex-direction:column}.rsb button{width:100%}}
+.rsend2{background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.rsend2.rz{border-color:var(--ok)}
+.rsh2{display:flex;gap:10px;align-items:center}.rsh2 i{font-style:normal;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--panel2);color:var(--ink2);font-weight:700;flex:none}
+.rsend2.rz .rsh2 i{background:var(--ok-soft);color:var(--ok)}
+.rsh2 b{display:block;font-size:15px}.rsh2 small{font-size:12.5px;color:var(--ink2)}
+.rskps{display:grid;grid-template-columns:repeat(auto-fit,minmax(86px,1fr));gap:6px}
+.rskp{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:6px 4px;font-family:inherit;font-size:12px;color:var(--ink2);cursor:pointer}
+.rskp b{display:block;font-size:20px;color:var(--ink);font-variant-numeric:tabular-nums}
+.rsbtn{display:flex;flex-wrap:wrap;gap:6px}
+.rsun{display:flex;flex-wrap:wrap;align-items:center;gap:8px;background:var(--gold-soft);border:1.5px solid var(--gold);border-radius:12px;padding:8px 12px;margin-bottom:10px;font-size:13.5px}
+.rsun b{flex:1;color:var(--gold-ink)}
+.dchip .dn.rsd{background:var(--ok-soft);color:var(--ok)}.dchip .dn.rse{background:var(--gold-soft);color:var(--gold-ink)}
+.apqn{font-style:normal;min-width:18px;height:18px;border-radius:999px;background:var(--gold);color:var(--panel);font-size:11px;display:inline-grid;place-items:center;margin-inline-start:4px;padding:0 5px}
+.apq{display:flex;flex-direction:column;gap:6px}
+.apqr{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:var(--panel)}
+.apqr div{flex:1}.apqr b{display:block}.apqr small{font-size:12px;color:var(--ink3)}
+@media print{.rsdone,.rsfix{display:none!important}}
 
 /* V175 — أيقونات الأقسام الثنائية اللون (ملف الخطة: قسم الأيقونات) */
 .ic .f{fill:var(--gold);fill-opacity:.2}.ic .a{stroke:var(--gold)}
@@ -3418,7 +3473,7 @@ select.mch{appearance:none;-webkit-appearance:none;cursor:pointer;border-color:v
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V188 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V189 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -5239,7 +5294,7 @@ function apCfg() { let o = {}; try { o = JSON.parse(localStorage.getItem('tm_apc
 function apCfgSet(p) { const o = Object.assign(apCfg(), p); try { localStorage.setItem('tm_apcal', JSON.stringify(o)); } catch (e) {} }
 function apFmt() { let o = {}; try { o = JSON.parse(localStorage.getItem('tm_apfmt') || '{}') || {}; } catch (e) {} return { f: o.f === 's' ? 's' : 'f', z: AP_Z[o.z] ? o.z : 'm' }; }
 function apFmtSet(p) { const o = Object.assign(apFmt(), p); try { localStorage.setItem('tm_apfmt', JSON.stringify(o)); } catch (e) {} }
-function apOn() { return rlProf().deg === 'a'; }   // قائمة الاستئناف — دوائر محكمة الاستئناف
+function apOn() { const p = rlProf(); return p.deg === 'a' || p.deg === 'f'; }   // V189: «قائمة الدعوى» للمحكمة الكلية   // قائمة الاستئناف — دوائر محكمة الاستئناف
 function apH() { const C = apCfg(); return Math.max(20, C.B - C.T); }
 function apD(iso, ref) { if (!iso) return ''; const [y, m, d] = iso.split('-'); return +d + '/' + +m + (ref && ref.slice(0, 4) === y ? '' : '/' + y); }
 function apAb(c, p) { const P = rlParties(c), same = P.filter(x => x.r === p.r), b = (rlProf().kind === 'cri' ? { a: 'مت', e: 'ن', x: 'مد' } : { a: 'م', e: 'ض', x: 'خ' })[p.r] || 'ط'; return b + (same.length > 1 ? String(same.indexOf(p) + 1) : ''); }
@@ -5723,7 +5778,7 @@ function renderHome() {
 // V132: لوحة الرول — تتبدّل بحسب الجلسة: لا قضايا (ابدأ بالاستيراد)، قبل الجلسة (التحضير)، يوم الجلسة (ابدأ/تابع الجلسة)، ولا جلسة قادمة (المحجوزة)
 // V175: شارات المرحلة (تتبدّل وحدها)، وسطر حال الجلسة، وزرّا الأوراق والتوزيع
 function heroPhaseOf(isToday) { if (isToday) return 'day'; try { const t = rlToday(); for (let i = 1; i <= 2; i++) { const d = new Date(t + 'T12:00:00'); d.setDate(d.getDate() - i); const iso = d.toISOString().slice(0, 10); if (rlIsSession(iso, RL.cal) && RL.cards.some(c => (c.hist || []).some(h => h.d === iso))) return 'after'; } } catch (e) {} return 'before'; }
-const HERO_PH_T = { before: 'التحضير: قضايا الجلسة القادمة التي لم تُراجَع', day: 'وضع الجلسة: ورقة الرول أمامك على المنصة', after: 'ما بعد الجلسة: القرارات المعلّقة والأحكام المحجوزة' }, HERO_PH_I = { before: 'prep', day: 'bench', after: 'arch' };   // V176: لكل مرحلة وجهتها
+const HERO_PH_T = { before: 'التحضير: قضايا الجلسة القادمة التي لم تُراجَع', day: 'وضع الجلسة: ورقة الرول أمامك على المنصة', after: 'ما بعد الجلسة: آخر الجلسة والرفع والطباعة والأحكام المحجوزة' }, HERO_PH_I = { before: 'prep', day: 'bench', after: 'arch' };   // V176: لكل مرحلة وجهتها
 function heroPhase(isToday) { const k = heroPhaseOf(isToday); return '<div class="h2ph" role="list" aria-label="مرحلة العمل">' + [['before', 'قبل الجلسة'], ['day', 'يوم الجلسة'], ['after', 'بعد الجلسة']].map(x => '<button type="button" role="listitem" data-h="ph-' + x[0] + '" class="' + (x[0] === k ? 'on' : '') + '"' + (x[0] === k ? ' aria-current="step"' : '') + ' title="' + HERO_PH_T[x[0]] + '">' + ico(HERO_PH_I[x[0]], 15) + x[1] + '</button>').join('') + '</div>'; }
 function heroState(L, rp) { if (!L.length) return ''; const un = L.length - rp.rv, an = PROF_HIDE.has('i') ? 0 : L.filter(c => !c.an).length; if (!un && !an) return '';
   return '<div class="h2st">' + (un ? '<button type="button" data-h="unrev">' + un + ' لم تُراجَع</button>' : '') + (an ? '<button type="button" data-h="bq">' + an + ' لم تُحلَّل</button>' : '') + '</div>'; }
@@ -5768,7 +5823,8 @@ function heroRender() {
   const stuck = open.filter(c => rlAnnAdj(c) >= 3).length, xs = [], aft = rlAfterList().length;
   const pnN = rlResList('').filter(c => c.next && c.next >= t && rlDays(c.next) <= 7 && rlPnDiff(c)).length; if (pnN) xs.push('<button type="button" data-h="res">' + pnN + ' ' + (pnN === 1 ? 'حكم يحتاج' : 'أحكام تحتاج') + ' عبارة الهيئة (البديل سمع المرافعة)</button>');   // V162
   { const DL = rlDlList().filter(x => rlDays(x[1].end) >= -7); if (DL.length) xs.push('<button type="button" data-h="dl">' + DL.length + ' ' + (DL.length === 1 ? 'قضية مشطوبة أو موقوفة يقترب' : 'قضايا مشطوبة أو موقوفة يقترب') + ' ميعاد تجديدها</button>'); }   // V165
-  if (aft) xs.push('<button type="button" data-h="after">' + aft + ' ' + (aft === 1 ? 'قضية تنتظر' : 'قضايا تنتظر') + ' «القرار بعد الجلسة»</button>');
+  try { rsHomeX(xs); } catch (e) {}   // V189
+  if (aft) xs.push('<button type="button" data-h="after">' + aft + ' ' + (aft === 1 ? 'قضية تنتظر' : 'قضايا تنتظر') + ' «آخر الجلسة»</button>');
   if (stuck) xs.push('<button type="button" data-h="stat">' + stuck + ' ' + (stuck === 1 ? 'قضية أُجّلت' : 'قضايا أُجّلت') + ' للإعلان 3 مرات فأكثر</button>');
   // V175: المزامنة في شارتها وحدها (الشريط العلوي)
   if (xs.length) body += '<div class="h2x">' + xs.join('') + '</div>';
@@ -6472,7 +6528,7 @@ function rlSortList(list) {
   else if (rlSort === 'exec') a.sort((x, y) => (x.exec ? 1 : 0) - (y.exec ? 1 : 0));
   return rlAdj(a);
 }
-(function rlLoad() { try { const s = localStorage.getItem(RL_KEY); if (s) { const j = JSON.parse(s); if (j && Array.isArray(j.cards)) RL = { v: 2, circuit: j.circuit || '', cards: j.cards, cal: j.cal || { off: [], on: [] }, members: j.members || {}, del: j.del || {}, st: j.st || 0, hol: j.hol || [], fm: j.fm || [], prof: j.prof || null, off: j.off || {}, pn: j.pn || {}, dw: j.dw || {}, dset: j.dset || {} }; } localStorage.setItem(RL_KEY + '_t', '1'); localStorage.removeItem(RL_KEY + '_t'); } catch (e) { RL_MEM = true; } })();
+(function rlLoad() { try { const s = localStorage.getItem(RL_KEY); if (s) { const j = JSON.parse(s); if (j && Array.isArray(j.cards)) RL = { v: 2, circuit: j.circuit || '', cards: j.cards, cal: j.cal || { off: [], on: [] }, members: j.members || {}, del: j.del || {}, st: j.st || 0, hol: j.hol || [], fm: j.fm || [], prof: j.prof || null, off: j.off || {}, pn: j.pn || {}, dw: j.dw || {}, dset: j.dset || {}, rs: j.rs || {} }; } localStorage.setItem(RL_KEY + '_t', '1'); localStorage.removeItem(RL_KEY + '_t'); } catch (e) { RL_MEM = true; } })();
 { let mg = 0; RL.cards.forEach(c => { if (RL_RES.includes(c.stage) && !c.resAt && c.src === 'kashf' && !(c.hist || []).length && c.next && c.stage !== 'مد أجل النطق') { c.resAt = c.next; c.next = rlNextSessions(c.next, 2, RL.cal, false)[1] || c.next; mg++; } }); if (mg) rlSave(); }
 rlCHAll();
 // ==== V155: «نبض الدائرة» في الرئيسية + إحصاءات الدائرة بمصطلحات الإحصائية الشهرية الرسمية ====
@@ -6701,7 +6757,7 @@ function sxPrintTable() {   // V163: الشهر بالمصطلحات الرسم�
   RL.cards.forEach(c => { if (c.rv || !c.an || !c.an.at || !c.next || c.next < T || RL_DONE.includes(c.stage) || RL_RES.includes(c.stage)) return; const at = rlIsoOf(c.an.at), last = (c.hist || []).map(h => h && h.d).filter(d => d && d < c.next).sort().pop() || ''; if (at >= last) { c.rv = c.next; n++; } });
   localStorage.setItem('tm_rv155', '1'); if (n && !window.DEMO) localStorage.setItem(RL_KEY, JSON.stringify(RL)); } catch (e) {} })();
 window.__sx = { month: (m, mine) => sxMonth(m, mine), print: () => sxPrintTable(), payload: () => syPayload(), get mode() { return rlMode; }, get RL() { return RL; } };
-var RL_SH = null; function rlSetHash() { return JSON.stringify([RL.circuit || '', RL.members || {}, RL.cal || {}, RL.hol || [], RL.fm || [], RL.prof || null, RL.off || {}, RL.pn || {}, RL.dw || {}, RL.dset || {}]); }
+var RL_SH = null; function rlSetHash() { return JSON.stringify([RL.circuit || '', RL.members || {}, RL.cal || {}, RL.hol || [], RL.fm || [], RL.prof || null, RL.off || {}, RL.pn || {}, RL.dw || {}, RL.dset || {}, RL.rs || {}]); }
 var RL_CH = {}; function rlCHash(c) { const o = Object.assign({}, c); delete o.updated; delete o.fu; return JSON.stringify(o); }
 function rlCHAll() { RL_CH = {}; RL.cards.forEach(c => { RL_CH[c.id] = rlCHash(c); }); }
 function rlSave() { if (window.DEMO) { try { syDot(); } catch (e) {} return; } if (!SF_ASKED) { SF_ASKED = true; sfPersist(true); } try { const now = Date.now(), nx = {}; RL.cards.forEach(c => { const hh = rlCHash(c); if (RL_CH[c.id] !== undefined && RL_CH[c.id] !== hh && (c.updated || 0) < now - 50) c.updated = now; nx[c.id] = hh; }); RL_CH = nx; } catch (e) {} const h = rlSetHash(); if (RL_SH !== null && h !== RL_SH) RL.st = Date.now(); RL_SH = h; try { localStorage.setItem('tm_chg', String(Date.now())); } catch (e) {} try { syDot(); } catch (e) {} if (RL_MEM) return; try { localStorage.setItem(RL_KEY, JSON.stringify(RL)); } catch (e) { RL_MEM = true; rlStoreNote(); toast('تعذّر الحفظ على الجهاز — صدّر البطاقات'); } }
@@ -6800,11 +6856,12 @@ function rlDecBox(c) {
     const note = b.querySelector('.rdn').value.trim();
     const vd = b.querySelector('.rvd') ? b.querySelector('.rvd').value : '';
     // V58: القرار يُطبَّق على البطاقة، وعلى المرتبطة التي أشّر عليها القاضي فقط
+    if (act[2] === -3) { c.hist = c.hist || []; c.hist.push({ d: sd, a: act[0], n: note, pend: 1, c2: 1 }); c.call2 = sd; c.updated = Date.now(); rlFocus = c.id; rlDecOpen = null; rlSave(); if (typeof SS !== 'undefined' && SS && SS.day === sd) { const j = SS.ids.indexOf(c.id); if (j >= 0) { SS.ids.splice(j, 1); SS.ids.push(c.id); } SS.undo = null; } rlRender(); if (typeof SS !== 'undefined' && SS) rlSessRender(true); toast('نداء ثانٍ — انتقلت إلى آخر الرول؛ يُنادى عليها بعد آخر قضية'); return; }   // V189
     if (act[2] === -2) { const af = x => { x.hist = x.hist || []; x.hist.push({ d: sd, a: act[0], n: note, pend: 1 }); x.after = sd; x.updated = Date.now(); }; af(c); [...b.querySelectorAll('[data-sid]:checked')].map(i => RL.cards.find(x => x.id === i.dataset.sid)).filter(Boolean).forEach(af);   // V161: القرار بعد الجلسة — تبقى في جلستها حتى يُحسم
-      rlFocus = c.id; rlDecOpen = null; rlSave(); rlRender(); toast('القرار بعد الجلسة — تظهر في «قرارات بعد الجلسة» حتى تحسمها'); if (typeof rlAfterDec === 'function' && rlAfterDec) rlAfterDec(c); return; }
+      rlFocus = c.id; rlDecOpen = null; rlSave(); rlRender(); toast('آخر الجلسة — في الشريط الذهبي حتى تقرّر، وتُحسم قبل رفع الجلسة'); if (typeof rlAfterDec === 'function' && rlAfterDec) rlAfterDec(c); return; }
     const apply = (x, via) => { x.hist = x.hist || []; x.hist.push(Object.assign({ d: sd, a: pre ? 'صدر الحكم: ' + pre : act[0], to, n: note, prev: { stage: x.stage, next: x.next, writer: x.writer || '', exec: !!x.exec, await: x.await || '', vd: x.vd || '', after: x.after || '' } }, via ? { via } : {}, pre ? { pre: 1 } : {}));
       if (pre) { delete x.after; x.stage = RL_VD_PRE[pre]; x.next = to; x.exec = false; x.await = 'صدر الحكم: ' + pre + (note ? ' — ' + note : ''); x.pre = (x.pre || []).concat([{ d: sd, v: pre, w: x.writer || w || '' }]); delete x.vdSuggested; x.updated = Date.now(); return; } // V117: حكم قبل الفصل في الموضوع
-      x.stage = act[1]; x.next = to; x.exec = false; x.await = act[0] + (note ? ' — ' + note : ''); delete x.after;
+      x.stage = act[1]; x.next = to; x.exec = false; x.await = act[0] + (note ? ' — ' + note : ''); delete x.after; delete x.call2;
       { const hh = x.hist[x.hist.length - 1]; if (act[1] === 'شُطبت') x.sh = (x.sh || []).concat([{ d: sd }]); if (act[1] === 'موقوفة') { hh.prevStay = x.stay || null; x.stay = { d: sd, k: stK, m: stK === 'j' ? +b.querySelector('.stm').value : 0 }; if (stK === 'j') hh.n = (hh.n ? hh.n + ' — ' : '') + 'وقف جزائي ' + b.querySelector('.stm').selectedOptions[0].textContent; } }   // V165
       if (RL_RES.includes(act[1])) { x.writer = w; if (act[1] !== 'مد أجل النطق') { x.resAt = sd; x.hp = rlPnSnap(sd); if (w && rlPnAt(sd)[w]) x.wsub = 1; else delete x.wsub; } }   /* V162: هيئة المرافعة مع الحجز */
       if (act[1] === 'صدر الحكم') { x.jst = x.jst || 'نُطق به'; x.vd = vd; delete x.vdSuggested; }
@@ -6885,9 +6942,9 @@ function rlVocab() {
   RL_REQ = RL_RQG.flatMap(g => g[1].map(x => [x[0], x[2], x[1], g[0]]));
   Object.keys(RL_RQ_ALL).forEach(k => { if (!RL_REQ.some(r => r[0] === k)) RL_REQ.push([k, RL_RQ_ALL[k][1], RL_RQ_ALL[k][0], '']); });
   if (!RL_REQ.some(r => r[0] === 'tm')) RL_REQ.push(['tm', RL_RQG_TM[2], RL_RQG_TM[1], '']);
-  RL_ACTS = cri ? [['حجز للحكم', 'محجوزة للحكم', 2], ['تأجيل لإعلان المتهم', 'للإعلان', 1], ['تأجيل لإحضار المتهم', 'لإحضار المتهم', 1], ['تأجيل للاطلاع', 'للاطلاع والرد', 1], ['تأجيل لسماع الشهود', 'لسماع الشهود', 1], ['للمرافعة', 'للمرافعة', 1], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['القرار بعد الجلسة', '', -2], ['إعادة للمرافعة', 'للمرافعة', 1], ['إحالة لرئيس المحكمة', 'أُحيلت', -1]]
-    : app ? [['حجز للحكم', 'محجوزة للحكم', 2], ['حجز للحكم مع مذكرات', 'محجوزة للحكم مع مذكرات', 2], ['تأجيل للإعلان', 'للإعلان', 1], ['تأجيل لورود التقرير', 'لدى الخبير', 1], ['تأجيل لضم المفردات', 'لضم المفردات', 1], ['تأجيل لتقديم مستندات', 'لتقديم مستندات', 1], ['تأجيل للاطلاع والرد', 'للاطلاع والرد', 1], ['تأجيل للمذكرات', 'للمذكرات', 1], ['إحالة للخبير', 'لدى الخبير', 0], ['للمرافعة', 'للمرافعة', 1], ['القرار بعد الجلسة', '', -2], ['إعادة للمرافعة', 'للمرافعة', 1], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['وقف', 'موقوفة', -1], ['شطب', 'شُطبت', -1], ['إحالة لرئيس المحكمة', 'أُحيلت', -1]]   /* V161 */
-    : [['تأجيل للإعلان', 'للإعلان', 1], ['تأجيل للاطلاع والرد', 'للاطلاع والرد', 1], ['تأجيل لتبادل المذكرات', 'للمذكرات', 1], ['إحالة للخبير', 'لدى الخبير', 0], ['إحالة للتحقيق', 'للتحقيق', 1], ['للمرافعة', 'للمرافعة', 1], ['حجز للحكم', 'محجوزة للحكم', 2], ['حجز للحكم مع مذكرات', 'محجوزة للحكم مع مذكرات', 2], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['وقف', 'موقوفة', -1], ['شطب', 'شُطبت', -1], ['تأجيل لورود التقرير', 'لدى الخبير', 1], ['تأجيل لتقديم مستندات', 'لتقديم مستندات', 1], ['القرار بعد الجلسة', '', -2], ['إعادة للمرافعة', 'للمرافعة', 1], ['إحالة لرئيس المحكمة', 'أُحيلت', -1]];
+  RL_ACTS = cri ? [['حجز للحكم', 'محجوزة للحكم', 2], ['تأجيل لإعلان المتهم', 'للإعلان', 1], ['تأجيل لإحضار المتهم', 'لإحضار المتهم', 1], ['تأجيل للاطلاع', 'للاطلاع والرد', 1], ['تأجيل لسماع الشهود', 'لسماع الشهود', 1], ['للمرافعة', 'للمرافعة', 1], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['آخر الجلسة', '', -2], ['نداء ثانٍ', '', -3], ['إعادة للمرافعة', 'للمرافعة', 1], ['إحالة لرئيس المحكمة', 'أُحيلت', -1]]
+    : app ? [['حجز للحكم', 'محجوزة للحكم', 2], ['حجز للحكم مع مذكرات', 'محجوزة للحكم مع مذكرات', 2], ['تأجيل للإعلان', 'للإعلان', 1], ['تأجيل لورود التقرير', 'لدى الخبير', 1], ['تأجيل لضم المفردات', 'لضم المفردات', 1], ['تأجيل لتقديم مستندات', 'لتقديم مستندات', 1], ['تأجيل للاطلاع والرد', 'للاطلاع والرد', 1], ['تأجيل للمذكرات', 'للمذكرات', 1], ['إحالة للخبير', 'لدى الخبير', 0], ['للمرافعة', 'للمرافعة', 1], ['آخر الجلسة', '', -2], ['نداء ثانٍ', '', -3], ['إعادة للمرافعة', 'للمرافعة', 1], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['وقف', 'موقوفة', -1], ['شطب', 'شُطبت', -1], ['إحالة لرئيس المحكمة', 'أُحيلت', -1]]   /* V161 */
+    : [['تأجيل للإعلان', 'للإعلان', 1], ['تأجيل للاطلاع والرد', 'للاطلاع والرد', 1], ['تأجيل لتبادل المذكرات', 'للمذكرات', 1], ['إحالة للخبير', 'لدى الخبير', 0], ['إحالة للتحقيق', 'للتحقيق', 1], ['للمرافعة', 'للمرافعة', 1], ['حجز للحكم', 'محجوزة للحكم', 2], ['حجز للحكم مع مذكرات', 'محجوزة للحكم مع مذكرات', 2], ['مد أجل النطق', 'مد أجل النطق', 1], ['صدر الحكم', 'صدر الحكم', -1], ['وقف', 'موقوفة', -1], ['شطب', 'شُطبت', -1], ['تأجيل لورود التقرير', 'لدى الخبير', 1], ['تأجيل لتقديم مستندات', 'لتقديم مستندات', 1], ['آخر الجلسة', '', -2], ['نداء ثانٍ', '', -3], ['إعادة للمرافعة', 'للمرافعة', 1], ['إحالة لرئيس المحكمة', 'أُحيلت', -1]];
   RL_VERDICTS = cri ? (app ? { 'موضوع': ['تأييد', 'تعديل', 'إلغاء والبراءة', 'إلغاء والإدانة', 'الامتناع عن النطق بالعقاب'], 'شكل': ['عدم الجواز', 'عدم القبول شكلًا', 'سقوط الاستئناف'] } : { 'موضوع': ['إدانة', 'براءة', 'الامتناع عن النطق بالعقاب', 'انقضاء الدعوى الجزائية'], 'شكل': ['عدم الاختصاص', 'عدم القبول'] })
     : app ? { 'موضوع': ['رفض وتأييد', 'تعديل', 'إلغاء', 'بطلان الحكم المستأنف والتصدّي', 'الإلغاء والإعادة', 'الإلغاء والإحالة'], 'شكل': ['عدم الجواز', 'عدم القبول شكلًا', 'بطلان صحيفة الاستئناف', 'سقوط الحق', 'اعتبار كأن لم يكن', 'الشطب'], 'قبل الفصل في الموضوع': ['إحالة للخبراء', 'إحالة للاستجواب', 'إحالة للتحقيق', 'حلف اليمين'] }
     : { 'موضوع': ['إجابة الطلبات', 'إجابة جزئية', 'رفض الدعوى'], 'شكل': ['عدم الاختصاص والإحالة', 'عدم القبول', 'اعتبار الدعوى كأن لم تكن', 'سقوط الخصومة', 'ترك الخصومة', 'الشطب'], 'قبل الفصل في الموضوع': ['إحالة للخبراء', 'إحالة للاستجواب', 'إحالة للتحقيق', 'حلف اليمين'] };
@@ -7479,7 +7536,7 @@ function rlActSug(c) { const r = rlRd(c) || rlRdSug(c); if (!r) return ''; if (r
 function rlActsHtml(c) {
   const res = RL_RES.includes(c.stage), sug = rlActSug(c), g = { h: [], t: [], o: [] };
   RL_ACTS.forEach((a, i) => {
-    if (res && !['مد أجل النطق', 'صدر الحكم', 'إعادة للمرافعة', 'إحالة لرئيس المحكمة', 'القرار بعد الجلسة'].includes(a[0])) return;
+    if (res && !['مد أجل النطق', 'صدر الحكم', 'إعادة للمرافعة', 'إحالة لرئيس المحكمة', 'آخر الجلسة'].includes(a[0])) return;
     if (!res && ['مد أجل النطق', 'إعادة للمرافعة'].includes(a[0])) return;
     const k = RL_RES.includes(a[1]) || a[1] === 'صدر الحكم' ? 'h' : a[2] >= 0 && a[0] !== 'إعادة للمرافعة' ? 't' : 'o';
     g[k].push('<button type="button" class="chip' + (a[0] === sug ? ' sug' : '') + '" data-i="' + i + '"' + (a[0] === sug ? ' title="مقترح من حالة الجاهزية"' : '') + '>' + a[0] + '</button>');
@@ -7608,7 +7665,7 @@ function rlCard(c, mode, pos) {
   h += '<div class="sm"><span class="f" title="' + whenT + '">' + rlIc('cal') + when + '</span>'
     + (mine && !done ? '<button type="button" class="prepb" data-a="prep" title="افتح ملف التحضير لهذا الحكم">' + ico('prep', 16) + 'ملف التحضير</button>' : '')   // V174: ظاهر على البطاقة المطوية
     + (res ? '<span class="f" title="كاتب الحكم">' + rlIc('pen') + (c.writer ? esc(RL_W[c.writer]) + (c.wsub ? ' <em class="wsub" title="كتبه البديل ويُحسب لصاحب الصفة">✱ بديل</em>' : '') : '<span class="bad">غير موزّعة</span>') + '</span>' + rlProg(c) + (rlPnDiff(c) ? '<span class="f bdg rp" title="هيئة المرافعة تختلف عن هيئة النطق">⚠ الهيئة</span>' : '') + (scOn() && c.writer && !mine ? '<span class="f jsr" title="حالة الحكم كما سجّلها كاتبه">' + esc(c.js || 'لم يبدأ') + '</span>' : '')
-      : (done ? ((D0 => D0 ? '<span class="f bdg ' + (rlDlState(D0) === 'ok' ? 'rv' : 'rp') + '" title="' + esc(rlDlTxt(D0)) + '">' + (D0.k === 's' ? 'م59' : 'م70') + ': ' + rlFmt(D0.end) + '</span>' : '')(rlDl(c))) : (c.writer && RL_W[c.writer] && rlBalKeys().length > 1 ? '<span class="f wpre" title="كاتب الحكم: ' + esc(RL_W[c.writer]) + '">' + rlIc('pen') + RL_LT[c.writer] + (c.wsub ? '✱' : '') + '</span>' : '') + (rlRevOn(c) ? '<span class="f bdg rv">✓ روجعت</span>' : '<span class="f bdg un">○ لم تُراجع</span>') + (rlPrepOf(c) === 'ok' ? '<span class="f bdg ok">● جاهزة للحكم</span>' : rlPrepOf(c) === 'no' ? '<span class="f bdg no">○ غير جاهزة' + (rlRdTxt(c) ? ': ' + esc(rlRdTxt(c)) : '') + '</span>' : '') + (c.after && rlAfterList().includes(c) ? '<span class="f bdg af">القرار بعد الجلسة</span>' : '') + (rlRep(c).n >= 2 ? '<span class="f bdg rp">⚠ ' + esc(rlRepTxt(rlRep(c))) + '</span>' : '')) + (c.ann ? '<span class="f" title="الإعلان">' + rlIc('ann') + '<span class="ann ' + (ok ? 'ok' : 'no') + '">' + rlAnnTxt(c.ann) + (ok ? ' ✓' : ' ✗') + '</span></span>' : '') + (last ? '<span class="f lastc" title="آخر قرار">' + rlIc('dec') + esc(last.length > 48 ? last.slice(0, 48) + '…' : last) + '</span>' : ''))
+      : (done ? ((D0 => D0 ? '<span class="f bdg ' + (rlDlState(D0) === 'ok' ? 'rv' : 'rp') + '" title="' + esc(rlDlTxt(D0)) + '">' + (D0.k === 's' ? 'م59' : 'م70') + ': ' + rlFmt(D0.end) + '</span>' : '')(rlDl(c))) : (c.writer && RL_W[c.writer] && rlBalKeys().length > 1 ? '<span class="f wpre" title="كاتب الحكم: ' + esc(RL_W[c.writer]) + '">' + rlIc('pen') + RL_LT[c.writer] + (c.wsub ? '✱' : '') + '</span>' : '') + (rlRevOn(c) ? '<span class="f bdg rv">✓ روجعت</span>' : '<span class="f bdg un">○ لم تُراجع</span>') + (rlPrepOf(c) === 'ok' ? '<span class="f bdg ok">● جاهزة للحكم</span>' : rlPrepOf(c) === 'no' ? '<span class="f bdg no">○ غير جاهزة' + (rlRdTxt(c) ? ': ' + esc(rlRdTxt(c)) : '') + '</span>' : '') + (c.after && rlAfterList().includes(c) ? '<span class="f bdg af">آخر الجلسة</span>' : '') + (c.call2 && c.call2 === c.next && !rlDecOn(c, c.next) ? '<span class="f bdg af">نداء ثانٍ</span>' : '') + (rlRep(c).n >= 2 ? '<span class="f bdg rp">⚠ ' + esc(rlRepTxt(rlRep(c))) + '</span>' : '')) + (c.ann ? '<span class="f" title="الإعلان">' + rlIc('ann') + '<span class="ann ' + (ok ? 'ok' : 'no') + '">' + rlAnnTxt(c.ann) + (ok ? ' ✓' : ' ✗') + '</span></span>' : '') + (last ? '<span class="f lastc" title="آخر قرار">' + rlIc('dec') + esc(last.length > 48 ? last.slice(0, 48) + '…' : last) + '</span>' : ''))
     + '</div>';
   // التفاصيل (للمفتوحة)
   let s = ''; // V114: الخلاصة (العمود الثاني على الشاشات العريضة)
@@ -7720,12 +7777,12 @@ function rlSummary() {
   else s.innerHTML = '<b>' + RL.cards.length + '</b> بطاقة';
 }
 function rlDays4() {
-  const b = $('#rl_days'); const t = rlToday(); const prev = RL.cards.map(c => c.next).filter(d => d && d < t && rlIsSession(d, RL.cal)).sort().slice(-1);
+  const b = $('#rl_days'); const t = rlToday(); const prev = RL.cards.map(c => c.next).filter(d => d && d < t && rlIsSession(d, RL.cal)).concat(rsLastDay() ? [rsLastDay()] : []).sort().slice(-1);
   const ds = [...new Set(prev.concat(rlSess(5, t, true)))];
   if (!rlDaySel) rlDaySel = ds.find(d => d >= t) || ds[0];
   if (!ds.includes(rlDaySel)) ds.push(rlDaySel), ds.sort();
   const nx = ds.find(d => d >= t);
-  b.innerHTML = ds.map(d => { const k = rlDayList(d).length + rlResList(d).length, p = d.split('-'); return '<button type="button" role="tab" aria-selected="' + (d === rlDaySel) + '" class="dchip' + (d === rlDaySel ? ' on' : '') + (d < t ? ' past' : '') + '" data-d="' + d + '" title="' + rlDay(d) + ' ' + rlFmt(d) + (k ? ' — ' + k + ' قضية' : '') + '"><span class="dw">' + (d === t ? 'اليوم' : d === nx ? 'القادمة' : rlDay(d).replace('ال', '')) + '</span><b class="dd">' + (+p[2]) + '/' + (+p[1]) + (p[0] !== t.slice(0, 4) ? '/' + p[0].slice(2) : '') + '</b><span class="dn' + (k ? '' : ' z') + '">' + (k || '—') + '</span></button>'; }).join('');
+  b.innerHTML = ds.map(d => { const k = rlDayList(d).length + rlResList(d).length, p = d.split('-'); return '<button type="button" role="tab" aria-selected="' + (d === rlDaySel) + '" class="dchip' + (d === rlDaySel ? ' on' : '') + (d < t ? ' past' : '') + '" data-d="' + d + '" title="' + rlDay(d) + ' ' + rlFmt(d) + (k ? ' — ' + k + ' قضية' : '') + '"><span class="dw">' + (d === t ? 'اليوم' : d === nx ? 'القادمة' : rlDay(d).replace('ال', '')) + '</span><b class="dd">' + (+p[2]) + '/' + (+p[1]) + (p[0] !== t.slice(0, 4) ? '/' + p[0].slice(2) : '') + '</b>' + ((ek => ek ? '<span class="dn ' + ek[0] + '">' + ek[1] + '</span>' : '<span class="dn' + (k ? '' : ' z') + '">' + (k || '—') + '</span>')(rsChip(d, k))) + '</button>'; }).join('');
   const on = b.querySelector('.on'); if (on) setTimeout(() => { try { const r = on.getBoundingClientRect(), br = b.getBoundingClientRect(); if (r.left < br.left || r.right > br.right) b.scrollLeft += (r.left + r.width / 2) - (br.left + br.width / 2); } catch (e) {} }, 0);
   const dx = $('#rl_dayx'); if (dx && document.activeElement !== dx) dx.value = rlDaySel;
   b.querySelectorAll('[data-d]').forEach(x => x.onclick = () => { rlDaySel = x.dataset.d; rlRender(); });
@@ -7781,7 +7838,7 @@ function rlRender() {
     if (!D.length && !R.length) L.innerHTML = '<div class="empty"><b>لا قضايا لجلسة ' + rlFmt(rlDaySel) + '</b>استورد كشف هذه الجلسة من النظام، أو اختر جلسة أخرى.</div>';
     { const ah = rlAlinkHtml(); if (ah) { L.insertAdjacentHTML('afterbegin', ah); const S = RL_ALINK.sugg; L.querySelectorAll('[data-alk]').forEach(b => b.onclick = () => { const g = S[+b.dataset.alk].map(i => RL.cards.find(x => x.id === i)).filter(Boolean); if (g.length > 1) { rlLink(g[0], g.slice(1)); RL_ALINK.sugg.splice(+b.dataset.alk, 1); rlSave(); rlRender(); toast('رُبطت: ' + g.map(x => x.code).join(' + ')); } }); $('#rl_alx').onclick = () => { RL_ALINK = null; rlRender(); }; } }
     if (RL_SSUM && !rlPrepF) { L.insertAdjacentHTML('afterbegin', rlSsumHtml()); const S0 = RL_SSUM; $('#rl_ssx').onclick = () => { RL_SSUM = null; rlRender(); }; $('#rl_ssp').onclick = () => rlSessPrint(S0.day); if ($('#rl_ssr')) $('#rl_ssr').onclick = () => { RL_SSUM = null; rlMode = 'res'; rlRender(); }; }
-    { const AF = rlAfterList(); if (AF.length && !rlPrepF) { L.insertAdjacentHTML('afterbegin', '<div class="afbar"><b>قرارات بعد الجلسة (' + AF.length + ')</b><span class="k">تبقى هنا حتى تحسمها</span><div class="afl">' + AF.map(c => '<button type="button" class="afi" data-afid="' + c.id + '"><b>' + esc(c.code) + '</b><small>' + rlFmt(c.after).replace(/\/\d{4}$/, '') + (ctChips ? '' : '') + '</small><span>قرّر ←</span></button>').join('') + '</div></div>'); L.querySelectorAll('[data-afid]').forEach(x => x.onclick = () => { const c = RL.cards.find(y => y.id === x.dataset.afid); if (!c) return; rlDaySel = c.after; rlDecOpen = c.id; rlFocus = c.id; rlRender(); }); } }   // V161
+    { const AF = rlAfterList(); if (AF.length && !rlPrepF) { L.insertAdjacentHTML('afterbegin', '<div class="afbar"><b>آخر الجلسة (' + AF.length + ')</b><span class="k">تبقى هنا حتى تحسمها</span><div class="afl">' + AF.map(c => '<button type="button" class="afi" data-afid="' + c.id + '"><b>' + esc(c.code) + '</b><small>' + rlFmt(c.after).replace(/\/\d{4}$/, '') + (ctChips ? '' : '') + '</small><span>قرّر ←</span></button>').join('') + '</div></div>'); L.querySelectorAll('[data-afid]').forEach(x => x.onclick = () => { const c = RL.cards.find(y => y.id === x.dataset.afid); if (!c) return; rlDaySel = c.after; rlDecOpen = c.id; rlFocus = c.id; rlRender(); }); } }   // V161
     if (rlGuide && D.length) { L.insertAdjacentHTML('afterbegin', rlGuideHtml()); $('#rl_gx').onclick = () => { rlGuide = false; try { localStorage.setItem('tm_rlguide', '1'); } catch (e) {} rlRender(); }; }
     { const DL = rlDlList(); if (DL.length && !rlPrepF) { const n = el('div', 'rlwarn dlbar'); n.innerHTML = '<b>مواعيد التجديد والتعجيل</b> ' + DL.map(([c, D]) => '<button type="button" class="dlb ' + rlDlState(D) + '" data-dl="' + c.id + '">' + esc(c.code) + ' · ' + (D.k === 's' ? 'شطب' : 'وقف') + ' · ' + (rlDays(D.end) < 0 ? 'انقضى ' + rlFmt(D.end) : 'آخر يوم ' + rlFmt(D.end)) + '</button>').join(''); L.prepend(n); n.querySelectorAll('[data-dl]').forEach(x => x.onclick = () => rlGoCard(x.dataset.dl)); } }   // V165
     const late = RL.cards.filter(c => c.next && c.next < rlToday() && !RL_DONE.includes(c.stage)); if (late.length && rlDaySel >= rlToday()) { const n = el('div', 'rlwarn'); n.innerHTML = late.length + ' قضية فات موعدها دون تسجيل قرار — <button type="button" class="more" id="rl_golate">اعرضها</button>'; L.prepend(n); n.querySelector('#rl_golate').onclick = () => { rlMode = 'all'; rlRender(); }; }
@@ -8457,7 +8514,7 @@ const SC_NAME = 'الدائرة.mdwl', SC_RX = /\.mdwl$/i;   // SC_NAME: ملف 
 const SC_LT = { r: 'ب', l: 'ج', d: 'د' };
 function scMine() { return SC.role === 'p' ? 'الدائرة-الرئيس.mdwl' : 'الدائرة-العضو-' + (SC_LT[SC.me] || 'ب') + '.mdwl'; }
 function scMyCopy(name) { const m = scMine(), st = m.slice(0, -5); if (name === m || !SC_RX.test(name) || name.indexOf(st) !== 0) return false; const rest = name.slice(st.length, -5); return /^[\s\-_(\u2010-\u2015]/.test(rest); }   // «الدائرة-الرئيس 1.mdwl» و«… (1).mdwl» ونسخ OneDrive
-const SC_P = ['code', 'auto', 'stage', 'next', 'writer', 'vd', 'ann', 'exec', 'await', 'resAt', 'first', 'grp', 'created', 'party', 'subj', 'dls', 'noAuto', 'rd', 'after', 'hp', 'ct', 'wt', 'wsub'], SC_W = ['js', 'docs', 'fb'];   // V162: الجاهزية للحكم، والقرار بعد الجلسة، وهيئة المرافعة (بلا أسماء)
+const SC_P = ['code', 'auto', 'stage', 'next', 'writer', 'vd', 'ann', 'exec', 'await', 'resAt', 'first', 'grp', 'created', 'party', 'subj', 'dls', 'noAuto', 'rd', 'after', 'call2', 'hp', 'ct', 'wt', 'wsub'], SC_W = ['js', 'docs', 'fb'];   // V162: الجاهزية للحكم، والقرار بعد الجلسة، وهيئة المرافعة (بلا أسماء)
 const scPn = () => { const o = {}; Object.keys(RL.pn || {}).forEach(d => { const k = Object.keys(RL.pn[d] || {}); if (k.length) { o[d] = {}; k.forEach(x => o[d][x] = 1); } }); return o; };   // الهيئة في الملف المشترك: من غاب ومن حلّ محله بالصفة، والاسم على جهاز كل عضو
 let SC = (() => { try { return JSON.parse(localStorage.getItem('tm_circ') || 'null') || {}; } catch (e) { return {}; } })();
 const SCK = { key: null, dir: null, busy: false, pass: '', soon: 0, seen: 0 };
@@ -8500,6 +8557,7 @@ function scApply(d) {
   });
   if (!isP && d.circuit && !RL.circuit) RL.circuit = d.circuit;
   if (!isP && d.dw && typeof d.dw === 'object' && JSON.stringify(d.dw) !== JSON.stringify(RL.dw || {})) RL.dw = d.dw;   // V163: أوزان الرئيس
+  if (!isP && d.rs && typeof d.rs === 'object') { const o = RL.rs || (RL.rs = {}); Object.keys(d.rs).forEach(k => { if (!o[k] || (d.rs[k].t || 0) > (o[k].t || 0)) { o[k] = d.rs[k]; dec++; } }); }   // V189: رفع الجلسة من الرئيس
   if (!isP && d.pn && typeof d.pn === 'object') { const old = RL.pn || {}, nw = {}; Object.keys(d.pn).forEach(day => { nw[day] = {}; Object.keys(d.pn[day] || {}).forEach(k => nw[day][k] = (old[day] && old[day][k]) || {}); }); if (JSON.stringify(Object.keys(nw).map(x => [x, Object.keys(nw[x])])) !== JSON.stringify(Object.keys(old).map(x => [x, Object.keys(old[x] || {})]))) { RL.pn = nw; dec++; } }   // V162: هيئة الجلسات من الرئيس، وأسماء البدلاء تبقى محلية
   SC.saved = Math.max(SC.saved || 0, d.saved || 0); SC.by = d.by || ''; SC.pulled = Date.now(); scSave();
   if (add || dec || js) { RL_SH = rlSetHash(); rlCHAll(); rlSave(); if (rlInit) rlRender(); try { run(); } catch (e) {} }
@@ -8507,7 +8565,7 @@ function scApply(d) {
 }
 function scBuild(prev) {
   scTrack(); const isP = SC.role === 'p', me = rlMe(), pc = (prev && prev.cards) || {};
-  const out = { app: 'amali-circuit-data', v: 1, saved: Date.now(), by: me, circuit: isP ? (RL.circuit || '') : (prev && prev.circuit) || '', pn: isP ? scPn() : (prev && prev.pn) || {}, dw: isP ? (RL.dw || {}) : (prev && prev.dw) || {}, cards: {} };
+  const out = { app: 'amali-circuit-data', v: 1, saved: Date.now(), by: me, circuit: isP ? (RL.circuit || '') : (prev && prev.circuit) || '', pn: isP ? scPn() : (prev && prev.pn) || {}, dw: isP ? (RL.dw || {}) : (prev && prev.dw) || {}, rs: isP ? (RL.rs || {}) : (prev && prev.rs) || {}, cards: {} };
   if (isP) SC.pnh = scH(out.pn);
   if (isP) {
     RL.cards.forEach(c => { if (!c.code) return; const f = SC.ft[c.code] || {}, o = pc[c.code]; const e = { p: scPick(c, SC_P), pt: f.pt || 0, pby: 'p' };
@@ -9207,6 +9265,163 @@ setInterval(() => { if (odOn() && document.visibilityState === 'visible' && !OD.
   setTimeout(() => { if (odRenewDue() && odRenewNow()) return; odSync('open'); }, 900);
 })();
 window.__od = { get OD() { return OD; }, load: odLoad, save: odSave, on: odOn, can: odCan, sync: w => odSync(w || 'test'), state: odState, login: s => odLogin(s), devs: odDevs, canon: odCanon, fuMerge: (a, b, B, dv) => fuMerge(a, b, B, dv), fuLog: fuLogAll, restore: i => fuRestore(i), fuInit, track: fuTrack, renewDue: odRenewDue, box: odBox, rlSave: () => rlSave(), openDrawer: () => openDrawer(), closeDrawer: () => { try { closeDrawer(); } catch (e) {} } };
+
+// ======== V189 — بعد الجلسة: «آخر الجلسة» و«نداء ثانٍ»، رفع الجلسة والختم والتصحيح، الرول بعد الجلسة، «بانتظار الطباعة»، و«قائمة الدعوى» للكلية ========
+// «آخر الجلسة» (-2، كان «القرار بعد الجلسة») و«نداء ثانٍ» (-3): كلاهما ليس قرارًا (pend)، ويُحسمان قبل الرفع. نداء ثانٍ يُنقل إلى آخر الرول (c.call2 = يوم الجلسة).
+// RL.rs[يوم] = { t: وقت الرفع, fx: [تصحيحات] } — يسافر في المزامنة وملف الدائرة (الرئيس وحده يرفع). الختم يقفل حضور تلك الجلسة وطلباتها وقرارها؛ والتصحيح بسبب حتى بدء الجلسة التالية للدائرة.
+const RL_LAST = 'آخر الجلسة', RL_C2 = 'نداء ثانٍ';
+(function rsMig() { try { let n = 0; (RL.cards || []).forEach(c => (c.hist || []).forEach(h => { if (h && h.a === 'القرار بعد الجلسة') { h.a = RL_LAST; n++; } })); if (n && !window.DEMO && !RL_MEM) localStorage.setItem(RL_KEY, JSON.stringify(RL)); } catch (e) {} })();
+function rsT0() { try { let t = localStorage.getItem('tm_v189'); if (!t) { t = rlToday(); localStorage.setItem('tm_v189', t); } return t; } catch (e) { return rlToday(); } } rsT0();   // تذكير «لم تُرفع» للجلسات من هذا اليوم فصاعدًا
+function rsC2(c, d) { return c.call2 === d && !rlDecOn(c, d); }
+function rsLastP(c, d) { return c.after === d && !rlDecOn(c, d) && !RL_DONE.includes(c.stage); }
+function rsCan() { return !(scOn() && SC.role === 'm'); }   // الرئيس (أو القاضي المنفرد) يرفع الجلسة
+function rsRaised(d) { return !!(RL.rs && RL.rs[d]); }
+function rsNextSess(d) { const x = new Date(d + 'T00:00:00'); for (let i = 0; i < 90; i++) { x.setDate(x.getDate() + 1); const s = rlIso(x.getFullYear(), x.getMonth() + 1, x.getDate()); if (rlIsSession(s, RL.cal)) return s; } return ''; }
+function rsWinEnd(d) { const n = rsNextSess(d); return n ? new Date(n + 'T00:00:00').getTime() : new Date(d + 'T00:00:00').getTime() + 7 * 864e5; }
+function rsCanFix(d) { return rsRaised(d) && rsCan() && Date.now() < rsWinEnd(d); }
+function rsDecDays() { const t = rlToday(), S = new Set(); RL.cards.forEach(c => (c.hist || []).forEach(h => { if (h && h.d && h.d <= t && !h.via && !h.pend) S.add(h.d); })); return [...S].sort(); }
+function rsLastDay() { const D = rsDecDays(); return D[D.length - 1] || ''; }
+function rsDone(d) { const S = rlSessSum(d); if (!S) return false; return !rlSessList(d).some(c => !rlDecOn(c, d)); }
+function rsUnraised() { if (!rsCan() || window.DEMO) return ''; const d = rsLastDay(); if (!d || d < rsT0() || rsRaised(d)) return ''; return (d < rlToday() || rsDone(d)) && !(typeof SS !== 'undefined' && SS && SS.day === d) ? d : ''; }
+function rsChip(d, k) { const t = rlToday(); if (k && d >= t) return null; if (d > t || !rlSessSum(d)) return null; return rsRaised(d) ? ['rsd', 'رُفعت'] : rsDone(d) ? ['rse', 'انتهت'] : null; }
+function rsStats(d) { const S = rlSessSum(d); if (!S) return null; const st = S.by['شُطبت'] || 0, adj = S.rec - S.done - S.res - st, L = rlSessList(d), pend = L.filter(c => rsC2(c, d) || rsLastP(c, d)).length; return { S, done: S.done, res: S.res, adj, st, pend, n: S.n, rec: S.rec }; }
+// اسم الورقة: «قائمة الاستئناف» للاستئناف، و«قائمة الدعوى» للكلية
+function apName() { return rlProf().deg === 'f' ? 'قائمة الدعوى' : 'قائمة الاستئناف'; }
+function apTxt(root) { if (!root || rlProf().deg !== 'f') return; const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) if (n.nodeValue.indexOf('قائمة الاستئناف') >= 0) n.nodeValue = n.nodeValue.replace(/قائمة الاستئناف/g, 'قائمة الدعوى');
+  root.querySelectorAll('[title],[aria-label]').forEach(e => ['title', 'aria-label'].forEach(a => { const v = e.getAttribute(a); if (v && v.indexOf('قائمة الاستئناف') >= 0) e.setAttribute(a, v.replace(/قائمة الاستئناف/g, 'قائمة الدعوى')); })); }
+{ const f = apAb; apAb = function (c, p) { const r = f.apply(this, arguments); if (rlProf().deg === 'f' && rlProf().kind !== 'cri' && p && p.r === 'e') return r.replace(/^ض/, 'ع'); return r; }; }
+{ const f = apOpen; apOpen = async function () { const s = await f.apply(this, arguments); try { apTxt(s); } catch (e) {} return s; }; }
+{ const f = apDraw; apDraw = function (s) { const r = f.apply(this, arguments); try { apTxt(s); } catch (e) {} return r; }; }
+{ const f = apSetDrawer; apSetDrawer = function () { const r = f.apply(this, arguments); try { apTxt(document.getElementById('dap')); } catch (e) {} return r; }; }
+{ const f = apPrint; apPrint = function (title) { const a = [].slice.call(arguments); if (rlProf().deg === 'f' && typeof a[0] === 'string') a[0] = a[0].replace(/قائمة الاستئناف/g, 'قائمة الدعوى'); return f.apply(this, a); }; }
+// «بانتظار الطباعة»: جلسات فيها قرار لم يُطبع على القائمة (آخر ثلاثة أسابيع)
+function apQueue() { if (!apOn()) return []; const lim = rlIsoOf(Date.now() - 21 * 864e5); return apSessDays().filter(d => d >= lim).map(d => ({ d, n: apList(d).filter(c => apDecOn(c, d) && !(c.ap && Array.isArray(c.ap.ds) && c.ap.ds.includes(d))).length, r: rsRaised(d) })).filter(x => x.n).sort((a, b) => a.d < b.d ? -1 : 1); }
+function apQueueOpen() { const Q = apQueue(); const nm = apName();
+  const body = Q.length ? '<div class="apq">' + Q.map(x => '<div class="apqr"><div><b>' + rlDay(x.d) + ' ' + rlFmt(x.d) + '</b><small>' + x.n + (x.n === 1 ? ' قضية لم تُطبع' : ' قضية لم تُطبع') + ' · ' + (x.r ? 'رُفعت' : 'لم تُرفع') + '</small></div><button type="button" class="btn primary" data-apq="' + x.d + '">اطبع</button></div>').join('') + '</div><p class="k">ابدأ بالأقدم. القضية التي في جلستين تُطبع جلستاها معًا على ورقتها حين تطبع الأحدث. بعد الطباعة «خرجت الأوراق صحيحة» تُخرج الجلسة من هنا.</p>'
+    : '<p class="k">لا جلسة بانتظار الطباعة — كل القرارات المسجّلة طُبعت على ' + nm + '.</p>';
+  const s = jeSheet('بانتظار الطباعة — ' + nm, body); s.querySelectorAll('[data-apq]').forEach(b => b.onclick = () => { s.close(); apOpen({ day: b.dataset.apq }); }); return s; }
+// الرئيسية: «ما يلزمك الآن»
+function rsHomeX(xs) { const U = rsUnraised(); if (U) xs.push('<button type="button" data-h="raise" data-d="' + U + '">جلسة ' + rlFmt(U) + ' لم تُرفع — ارفعها</button>');
+  const Q = apQueue(); if (Q.length) xs.push('<button type="button" data-h="apq">بانتظار الطباعة: ' + (Q.length === 1 ? 'جلسة واحدة' : Q.length === 2 ? 'جلستان' : Q.length + ' جلسات') + ' (' + Q.reduce((a, x) => a + x.n, 0) + ' قضية)</button>');
+  const C2 = RL.cards.filter(c => c.call2 && rsC2(c, c.call2)); if (C2.length) xs.push('<button type="button" data-h="c2">نداء ثانٍ: ' + C2.map(c => esc(c.code)).join('، ') + '</button>'); }
+document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-h=raise],[data-h=apq],[data-h=c2]'); if (!b) return; e.stopPropagation(); e.preventDefault();
+  if (b.dataset.h === 'apq') { apQueueOpen(); return; } if (b.dataset.h === 'raise') { rsOpenEnd(b.dataset.d); return; }
+  const c = RL.cards.find(x => x.call2 && rsC2(x, x.call2)); if (c) rlSessOpen(c.call2, c.id); }, true);
+// ترتيب: «نداء ثانٍ» في آخر الرول
+function rsC2Last(L, d) { const a = L.filter(c => !rsC2(c, d)), b = L.filter(c => rsC2(c, d)); return a.concat(b); }
+{ const f = rlSessList; rlSessList = function (day) { return rsC2Last(f.apply(this, arguments), day); }; }
+{ const f = rlDayList; rlDayList = function (day) { return rsC2Last(f.apply(this, arguments), day); }; }
+{ const f = rlUndo; rlUndo = function (c) { const h = (c.hist || [])[(c.hist || []).length - 1]; if (h && !h.pend && !h.via && h.d && rsRaised(h.d) && !(typeof SS !== 'undefined' && SS && SS.fix && SS.fix[c.id])) { toast('جلسة ' + rlFmt(h.d) + ' مختومة — صحّح من وضع الجلسة («تصحيح»)'); return; } const r = f.apply(this, arguments); if (h && h.c2) delete c.call2; return r; }; }
+// المزامنة: اتحاد أيام الرفع
+{ const f = syMerge; syMerge = function (d) { try { const R = d && d.roll && d.roll.rs; if (R && typeof R === 'object') { const o = RL.rs || (RL.rs = {}); Object.keys(R).forEach(k => { if (!o[k] || (R[k].t || 0) > (o[k].t || 0) || ((R[k].fx || []).length > (o[k].fx || []).length)) o[k] = JSON.parse(JSON.stringify(R[k])); }); } } catch (e) {} return f.apply(this, arguments); }; window.syMerge = syMerge; }
+{ const f = syReplace; syReplace = function (d) { const r = f.apply(this, arguments); try { RL.rs = (d && d.roll && d.roll.rs) || {}; RL_SH = rlSetHash(); rlSave(); } catch (e) {} return r; }; window.syReplace = x => syReplace(x); }
+
+// ---- وضع الجلسة: الشريط الذهبي، ونهاية الرول، والختم والتصحيح ----
+function rsCards() { return SS ? SS.ids.map(id => RL.cards.find(x => x.id === id)).filter(Boolean) : []; }
+function rsSnap(c, d) { return { dec: rlDecTxt(rlDecOn(c, d)) || '', sh: JSON.stringify(rlSheet(c, d, false) || {}) }; }
+function rsFixEnd(id) { if (!SS || !SS.fix || !SS.fix[id]) return; const F = SS.fix[id], c = RL.cards.find(x => x.id === id), d = SS.day; delete SS.fix[id]; if (!c) return; const now = rsSnap(c, d);
+  if (now.dec === F.snap.dec && now.sh === F.snap.sh) return; const from = F.snap.dec !== now.dec ? (F.snap.dec || 'بلا قرار') : 'الحضور والطلبات', to = F.snap.dec !== now.dec ? (now.dec || 'بلا قرار') : 'معدّلة';
+  const o = RL.rs[d] || (RL.rs[d] = { t: Date.now() }); o.fx = (o.fx || []).concat([{ code: c.code, at: Date.now(), why: F.why, from, to }]);
+  c.hist = c.hist || []; c.hist.push({ d, a: 'تصحيح بعد الرفع', n: F.why + ': ' + from + ' ← ' + to, pend: 1, fix: 1, at: Date.now() }); c.updated = Date.now(); RL.st = Date.now(); rlSave(); toast('سُجّل التصحيح في سجل ' + c.code); }
+function rsFixAsk(c, d, w) {
+  const pr = c.ap && Array.isArray(c.ap.ds) && c.ap.ds.includes(d), ov = el('div', 'rsfix'); ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'تصحيح بعد الرفع');
+  ov.innerHTML = '<div class="rsfx"><b>تصحيح بعد الرفع — ' + esc(c.code) + '</b><span class="k">جلسة ' + rlFmt(d) + ' مختومة · القرار المسجّل: ' + esc(rlDecTxt(rlDecOn(c, d)) || '—') + '</span><span class="k" style="font-weight:700">السبب</span>'
+    + ['خطأ في الإدخال', 'خطأ في تاريخ الجلسة', 'أخرى'].map((r, i) => '<label class="rsr"><input type="radio" name="rsw" value="' + r + '"' + (i ? '' : ' checked') + '> ' + r + '</label>').join('') + '<input type="text" class="rsoth" placeholder="اكتب السبب" hidden>'
+    + (pr ? '<p class="rswarn">طُبعت هذه الجلسة على ' + apName() + ' قبل التصحيح. صحّح الورقة المطبوعة بخط اليد.</p>' : '') + '<div class="sybtns"><button type="button" class="btn primary" data-r="go">ابدأ التصحيح</button><button type="button" class="btn" data-r="x">إلغاء</button></div></div>';
+  w.appendChild(ov); const oth = ov.querySelector('.rsoth'); ov.querySelectorAll('[name=rsw]').forEach(r => r.onchange = () => { oth.hidden = r.value !== 'أخرى' || !r.checked; });
+  ov.querySelector('[data-r=x]').onclick = () => ov.remove();
+  ov.querySelector('[data-r=go]').onclick = () => { let why = ov.querySelector('[name=rsw]:checked').value; if (why === 'أخرى') { why = oth.value.trim(); if (!why) { toast('اكتب السبب'); return; } } SS.fix = SS.fix || {}; SS.fix[c.id] = { why, snap: rsSnap(c, d), at: Date.now() }; ov.remove(); rlSessRender(); };
+}
+function rsRaise(d) { if (!rsCan()) { toast('الرئيس يرفع الجلسة'); return; } RL.rs = RL.rs || {}; RL.rs[d] = { t: Date.now() }; RL.st = Date.now(); rlSave(); try { rlSessClose(); } catch (e) {} rsShow(d); }
+function rsEndHtml(d) {
+  const L = rsCards(), c2 = L.filter(c => rsC2(c, d)), la = L.filter(c => rsLastP(c, d)), none = L.filter(c => !rlDecOn(c, d) && !rsC2(c, d) && !rsLastP(c, d)), rz = RL.rs && RL.rs[d];
+  const it = (c, k, lbl, b) => '<div class="rsit ' + k + '"><b>' + esc(c.code) + '</b><span>' + lbl + '</span><button type="button" class="btn primary mini" data-go="' + c.id + '">' + b + '</button></div>';
+  const nm = c => { try { const r = rlProf(); return r.kind === 'cri' ? 'لم يحضر المتهم' : r.deg === 'f' ? 'لم يحضر المدعي' : 'لم يحضر المستأنف'; } catch (e) { return ''; } };
+  let h = '<div class="sstop"><button type="button" class="ib" data-e="x" aria-label="إغلاق">✕</button><div class="stt"><b>' + (rz ? 'رُفعت الجلسة' : 'قبل رفع الجلسة') + '</b><span>' + rlDay(d) + ' ' + rlFmt(d) + ' · سُجّل ' + L.filter(c => rlDecOn(c, d)).length + '/' + L.length + '</span></div></div><div class="ssbody rsend">';
+  if (rz) h += '<div class="rsok">✓ رُفعت ' + new Date(rz.t).toLocaleTimeString('ar-KW-u-nu-latn', { hour: '2-digit', minute: '2-digit' }) + '</div><button type="button" class="btn primary" data-e="show">شاشة الرفع</button>';
+  if (c2.length) h += '<h4 class="rsh">① ' + RL_C2 + ' — نادِ على الأطراف</h4>' + c2.map(c => it(c, 'g', nm(c), 'نادِ')).join('');
+  if (la.length) h += '<h4 class="rsh">' + (c2.length ? '②' : '①') + ' ' + RL_LAST + ' — بعد مراجعة الملف</h4>' + la.map(c => it(c, 'g', 'أُرجئ قرارها', 'قرّر')).join('');
+  if (none.length) h += '<h4 class="rsh n">بلا قرار (' + none.length + ')</h4>' + none.map(c => it(c, 'n', 'لم يُسجَّل لها قرار', 'افتح')).join('');
+  if (!rz) { const blk = c2.length + la.length; h += rsCan() ? '<button type="button" class="btn ' + (blk ? 'dis' : 'primary') + ' rsgo" data-e="raise"' + (blk ? ' disabled' : '') + '>' + (blk ? 'ارفع الجلسة — بعد حسم ' + (blk === 1 ? 'قضية واحدة' : blk === 2 ? 'قضيتين' : blk + ' قضايا') : 'ارفع الجلسة') + '</button>' + (none.length && !blk ? '<p class="k">' + none.length + ' بلا قرار. يمكنك الرفع، وتبقى بلا قرار في سجلها.</p>' : '') : '<p class="k">الرئيس يرفع الجلسة، وتصلك حالتها بملف الدائرة.</p>';
+    h += '<button type="button" class="lnk" data-e="close">أغلق ورقة الرول دون رفع</button>'; }
+  h += '<button type="button" class="lnk" data-e="back">‹ رجوع إلى القضايا</button></div>';
+  return h;
+}
+function rsEndRender(w) { const d = SS.day; w.classList.remove('sslocked'); w.innerHTML = rsEndHtml(d);
+  const q = k => w.querySelector('[data-e=' + k + ']');
+  q('x').onclick = rlSessClose; q('back').onclick = () => { SS.end = false; SS.i = Math.max(0, SS.ids.length - 1); rlSessRender(true); };
+  if (q('close')) q('close').onclick = rlSessClose; if (q('raise')) q('raise').onclick = () => rsRaise(d); if (q('show')) q('show').onclick = () => { rlSessClose(); rsShow(d); };
+  w.querySelectorAll('[data-go]').forEach(b => b.onclick = () => { SS.end = false; const j = SS.ids.indexOf(b.dataset.go); if (j >= 0) SS.i = j; rlSessRender(true); }); }
+function rsOpenEnd(d) { rlSessOpen(d); if (SS) { SS.end = true; rlSessRender(true); } }
+{ const f = rlSessRender; rlSessRender = function (top) {
+  const w = document.getElementById('sess'); if (!w || !SS) return f.apply(this, arguments);
+  { const cur = SS.ids[SS.i]; Object.keys(SS.fix || {}).forEach(id => { if (id !== cur) rsFixEnd(id); }); }
+  if (SS.end) { rsEndRender(w); return; }
+  const r = f.apply(this, arguments);
+  try {
+    const d = SS.day, L = rsCards(), c = L[SS.i]; if (!c) return r;
+    const P = L.filter(x => rsC2(x, d) || rsLastP(x, d));
+    if (P.length) { const top = w.querySelector('.sstop'); if (top) top.insertAdjacentHTML('afterend', '<div class="ssgold" role="status"><b>إلى آخر الجلسة (' + P.length + ')</b><div class="chips">' + P.map(x => '<button type="button" class="chip" data-g2="' + x.id + '">' + (rsC2(x, d) ? RL_C2 + ' · ' : '') + esc(x.code) + '</button>').join('') + '</div></div>');
+      w.querySelectorAll('[data-g2]').forEach(b => b.onclick = () => { const j = SS.ids.indexOf(b.dataset.g2); if (j >= 0) { SS.i = j; rlSessRender(true); } }); }
+    if (SS.i === L.length - 1) { const nb = w.querySelector('[data-s=next]'); if (nb) { nb.disabled = false; nb.textContent = rsRaised(d) ? 'الختم ›' : 'نهاية الرول ›'; nb.onclick = () => { SS.end = true; rlSessRender(true); }; } }
+    if (rsC2(c, d)) { const id = w.querySelector('.ssid'); if (id) id.insertAdjacentHTML('beforeend', '<span class="tag c2tag">' + RL_C2 + '</span>'); }
+    const fx = SS.fix && SS.fix[c.id], lock = rsRaised(d) && !fx; w.classList.toggle('sslocked', lock);
+    const cs = w.querySelector('.sscase');
+    if (lock) { const can = rsCanFix(d), n = rsNextSess(d);
+      if (cs) cs.insertAdjacentHTML('afterend', '<div class="sslock">🔒 جلسة ' + rlFmt(d) + ' مختومة' + (can ? ' · التصحيح متاح حتى بدء جلسة ' + rlFmt(n) + ' <button type="button" class="btn mini" data-s="fix">تصحيح</button>' : rsCan() ? ' نهائيًا' : ' — يصححها الرئيس') + '</div>');
+      w.querySelectorAll('.ssbody textarea, .ssbody input').forEach(i => { i.readOnly = true; if (i.type === 'date' || i.type === 'checkbox') i.disabled = true; });
+      const box = w.querySelector('.ssdecbox'); if (box) box.innerHTML = '<p class="k">لم يُسجَّل لها قرار في هذه الجلسة.</p>';
+      w.querySelectorAll('[data-s=undo],[data-s=undoh],[data-s=undob]').forEach(b => b.remove());
+      const fb = w.querySelector('[data-s=fix]'); if (fb) fb.onclick = () => rsFixAsk(c, d, w); }
+    else if (fx && cs) { cs.insertAdjacentHTML('afterend', '<div class="sslock fix">✎ تصحيح بعد الرفع — ' + esc(fx.why) + ' <button type="button" class="btn mini primary" data-s="fixok">انتهيت</button></div>'); const b = w.querySelector('[data-s=fixok]'); if (b) b.onclick = () => { rsFixEnd(c.id); rlSessRender(); }; }
+    if (!w._rsg) { w._rsg = 1; w.addEventListener('click', e => { if (!w.classList.contains('sslocked')) return; const t = e.target.closest && e.target.closest('[data-at],[data-rq],[data-add],[data-rm],[data-s=gov],[data-s=rdok],[data-s=rdno],[data-s=rv],.ssdecbox button,[data-s=undo],[data-s=undoh]'); if (t) { e.stopPropagation(); e.preventDefault(); toast(rsCanFix(SS.day) ? 'الجلسة مختومة — اضغط «تصحيح» أولًا' : 'الجلسة مختومة'); } }, true); }
+  } catch (e) { try { console.warn('V189', e); } catch (_) {} }
+  return r; }; }
+{ const f = rlSessClose; rlSessClose = function () { try { if (SS) Object.keys(SS.fix || {}).forEach(rsFixEnd); } catch (e) {} return f.apply(this, arguments); }; }
+{ const f = rlSessOpen; rlSessOpen = function () { const r = f.apply(this, arguments); try { if (SS) { SS.end = false; SS.fix = {}; } } catch (e) {} return r; }; }
+
+// ---- شاشة «رُفعت الجلسة» ----
+function rsShow(d) { const X = rsStats(d), rz = RL.rs && RL.rs[d]; if (!X || !rz) return;
+  let w = document.getElementById('rsdone'); if (w) w.remove(); w = el('div', 'rsdone'); w.id = 'rsdone'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-modal', 'true'); w.setAttribute('aria-label', 'رُفعت الجلسة');
+  const k = (n, t) => '<div><b>' + n + '</b>' + t + '</div>';
+  w.innerHTML = '<div class="rsin"><button type="button" class="rsx" data-r="x">✕ إلى الرول</button><div class="rsseal" aria-hidden="true"><i></i><i></i></div><h2>رُفعت الجلسة</h2><p class="rssub">' + rlDay(d) + ' ' + rlFmt(d) + ' · الساعة ' + new Date(rz.t).toLocaleTimeString('ar-KW-u-nu-latn', { hour: '2-digit', minute: '2-digit' }) + (rlPnKeys().length > 1 ? ' · الهيئة: ' + esc(rlPnTxt(d)) : '') + '</p>'
+    + '<div class="rsk" style="grid-template-columns:repeat(' + (X.st ? 4 : 3) + ',minmax(0,1fr))">' + k(X.done, 'صدر فيها الحكم') + k(X.res, 'حُجزت للحكم') + k(X.adj, 'أُجّلت') + (X.st ? k(X.st, 'شُطبت') : '') + '</div>'
+    + '<div class="rsb">' + (X.res ? '<button type="button" class="rsp" data-r="dist">' + ico('dist', 18) + ' وزّع المحجوزة (' + X.res + ')</button>' : '') + (apOn() ? '<button type="button" class="' + (X.res ? 'rss' : 'rsp') + '" data-r="ap">▤ اطبع الآن في ' + apName() + '</button>' : '') + '<button type="button" class="rss" data-r="min">🖶 المحاضر المختصرة</button></div>'
+    + (apOn() ? '<p class="rsnt">إن لم تطبع الآن تبقى الجلسة في «بانتظار الطباعة» حتى تطبعها.</p>' : '') + '<p class="rsft">محضر الجلسة مختوم. التصحيح بسببه متاح حتى بدء الجلسة التالية (' + rlFmt(rsNextSess(d)) + ').</p></div>';
+  document.body.appendChild(w); document.documentElement.classList.add('noscroll');
+  const close = () => { w.remove(); document.documentElement.classList.remove('noscroll'); try { rlDaySel = d; rlRender(); } catch (e) {} };
+  const q = s => w.querySelector('[data-r=' + s + ']');
+  q('x').onclick = close; document.addEventListener('keydown', function ek(e) { if (e.key === 'Escape' && w.isConnected) { close(); document.removeEventListener('keydown', ek); } });
+  if (q('dist')) q('dist').onclick = async () => { close(); rlMode = 'res'; rlRender(); try { await rlDistOpen(); } catch (e) {} };
+  if (q('ap')) q('ap').onclick = () => { close(); apOpen({ day: d }); };
+  q('min').onclick = () => { close(); rlSessPrint(d); };
+  setTimeout(() => { try { q('x').focus(); } catch (e) {} }, 30); }
+
+// ---- الرول بعد الجلسة: بطاقة الجلسة المنتهية (محسوبة من السجل)، وتذكير «لم تُرفع»، وزر القائمة الدائم ----
+function rsEndCard(d) { const X = rsStats(d); if (!X) return ''; const rz = RL.rs && RL.rs[d], t = rz ? new Date(rz.t).toLocaleTimeString('ar-KW-u-nu-latn', { hour: '2-digit', minute: '2-digit' }) : '';
+  const kp = (n, l, f) => '<button type="button" class="rskp" data-rsf="' + f + '"><b>' + n + '</b>' + l + '</button>';
+  return '<div class="rsend2' + (rz ? ' rz' : '') + '"><div class="rsh2"><i>' + (rz ? '✓' : '⏸') + '</i><div><b>' + (rz ? 'رُفعت جلسة ' + rlDay(d) + ' ' + rlFmt(d) + ' · ' + t : 'انتهت جلسة ' + rlDay(d) + ' ' + rlFmt(d) + (rsCan() ? ' — لم تُرفع' : '')) + '</b><small>' + X.n + ' قضية · سُجّل قرار ' + X.rec + (rz ? '' : X.pend ? ' · بقي ' + X.pend + ' إلى آخر الجلسة' : '') + '</small></div></div>'
+    + '<div class="rskps">' + kp(X.done, 'صدر الحكم', 'done') + kp(X.res, 'حُجزت', 'res') + kp(X.adj, 'أُجّلت', 'adj') + (X.st ? kp(X.st, 'شُطبت', 'st') : '') + (X.pend ? kp(X.pend, 'آخر الجلسة', 'pend') : '') + '</div>'
+    + '<div class="rsbtn">' + (!rz && rsCan() ? '<button type="button" class="btn primary" data-rse="raise">' + (X.pend ? 'قرّر ثم ارفع' : 'ارفع الجلسة') + '</button>' : '') + (X.res ? '<button type="button" class="btn" data-rse="dist">' + ico('dist', 16) + ' وزّع المحجوزة</button>' : '') + (apOn() ? '<button type="button" class="btn" data-rse="ap">▤ اطبع في ' + apName() + '</button>' : '') + '<button type="button" class="btn" data-rse="min">🖶 المحاضر</button><button type="button" class="btn" data-rse="rev">وضع الجلسة — مراجعة</button></div></div>'; }
+function rsEndWire(root, d) { const q = k => root.querySelector('[data-rse=' + k + ']');
+  if (q('raise')) q('raise').onclick = () => rsOpenEnd(d); if (q('dist')) q('dist').onclick = async () => { rlMode = 'res'; rlRender(); try { await rlDistOpen(); } catch (e) {} };
+  if (q('ap')) q('ap').onclick = () => apOpen({ day: d }); if (q('min')) q('min').onclick = () => rlSessPrint(d); if (q('rev')) q('rev').onclick = () => rlSessOpen(d);
+  root.querySelectorAll('[data-rsf]').forEach(b => b.onclick = () => { const f = b.dataset.rsf, pick = rlSessList(d).filter(c => { if (f === 'pend') return rsC2(c, d) || rsLastP(c, d); if (!rlDecOn(c, d)) return false; const g = c.stage; return f === 'done' ? RL_DONE.includes(g) : f === 'res' ? RL_RES.includes(g) : f === 'st' ? g === 'شُطبت' : !RL_DONE.includes(g) && !RL_RES.includes(g) && g !== 'شُطبت'; });
+    if (!pick.length) return; toast(b.textContent.replace(/^\d+/, '').trim() + ': ' + pick.map(c => c.code).join('، ')); rlSessOpen(d, pick[0].id); }); }
+{ const f = rlRender; rlRender = function () { const r = f.apply(this, arguments); try {
+  const host = document.getElementById('rl_list'); if (rlMode !== 'roll' || rlQ() || !host) { try { rsApBtn(); } catch (e) {} return r; }
+  const d = rlDaySel, X = d && d <= rlToday() ? rsStats(d) : null;
+  const emp = [...host.querySelectorAll('.empty')].find(e => /لا قضايا لجلسة/.test(e.textContent));
+  if (X && (emp || rsRaised(d) || rsDone(d))) { host.querySelectorAll('.ssum').forEach(e => e.remove()); const box = el('div', ''); box.innerHTML = rsEndCard(d); const card = box.firstChild; if (emp) emp.replaceWith(card); else host.prepend(card); rsEndWire(card, d); }
+  else if (emp) emp.innerHTML = '<b>لا قضايا لجلسة ' + rlFmt(d) + '</b>' + (d > rlToday() ? 'استورد كشف هذه الجلسة من النظام، أو اختر جلسة أخرى.' : 'لم يُسجَّل في هذا اليوم قرار. استورد كشفه إن كانت جلسة، أو اختر جلسة أخرى.');
+  const U = rsUnraised(); if (U && U !== d) { const g = el('div', 'rsun'); g.innerHTML = '<b>جلسة ' + rlFmt(U) + ' لم تُرفع</b><button type="button" class="btn mini primary" data-rsu="1">ارفعها</button><button type="button" class="btn mini" data-rsv="1">اعرضها</button>'; host.prepend(g); g.querySelector('[data-rsu]').onclick = () => rsOpenEnd(U); g.querySelector('[data-rsv]').onclick = () => { rlDaySel = U; rlRender(); }; }
+} catch (e) { try { console.warn('V189 roll', e); } catch (_) {} }
+  try { rsApBtn(); } catch (e) {} return r; }; }
+function rsApBtn() { if (!apOn()) { const o = document.getElementById('rl_apq'); if (o) o.remove(); return; } let b = document.getElementById('rl_apq'); const sec = document.getElementById('rl_sec'); if (!sec) return;
+  if (!b) { b = el('button', 'btn rlib'); b.type = 'button'; b.id = 'rl_apq'; sec.prepend(b); b.onclick = () => { const Q = apQueue(); if (Q.length) apQueueOpen(); else apOpen({}); }; }
+  const n = apQueue().length; b.innerHTML = '<span aria-hidden="true">▤</span><span class="lb"> ' + apName() + '</span>' + (n ? '<i class="apqn">' + n + '</i>' : ''); b.title = n ? 'بانتظار الطباعة: ' + n + (n === 1 ? ' جلسة' : ' جلسات') : 'اطبع في ' + apName(); }
+{ const f = rlSessRender; rlSessRender = function () { const r = f.apply(this, arguments); try { apTxt(document.getElementById('sess')); } catch (e) {} return r; }; }
+window.__v189 = { open: (d, id) => rlSessOpen(d, id), acts: () => RL_ACTS.map(x => x[0]), canRaise: () => rsCan(), raise: d => rsRaise(d), show: d => rsShow(d), end: d => rsOpenEnd(d), queue: () => apQueue(), qopen: () => apQueueOpen(), unraised: () => rsUnraised(), stats: d => rsStats(d), next: d => rsNextSess(d), canFix: d => rsCanFix(d), apName: () => apName(), get SS() { return SS; } };
 
 function initRoll() {
   if (!rlInit) {
@@ -13464,6 +13679,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [189, 'الإصدار 189', ['«آخر الجلسة» بدل «القرار بعد الجلسة» في كل الدوائر، و«نداء ثانٍ» جديد: لمن لم يحضر وحضر خصمه، فتنتقل القضية إلى آخر الرول ويُنادى عليها بعد آخر قضية. الشريط الذهبي أعلى ورقة الرول يجمعهما.', 'بعد آخر قضية: «نهاية الرول» ثم «ارفع الجلسة» حين يُحسم كل ما في آخر الجلسة. الرفع يختم محضر الجلسة، والتصحيح بعده بسبب يُسجَّل، ومتاح حتى بدء الجلسة التالية. الرئيس وحده يرفع.', 'شاشة «رُفعت الجلسة» بخلاصتها وأزرار التوزيع والطباعة والمحاضر. والجلسة المنتهية تبقى في الرول بخلاصتها بدل «لا قضايا لجلسة…».', '«بانتظار الطباعة»: كل جلسة فيها قرار لم يُطبع على القائمة، من الرول والرئيسية. والطباعة على «قائمة الدعوى» للمحكمة الكلية كذلك.']],
   [188, 'الإصدار 188', ['المزامنة المباشرة بـ OneDrive: اربط حسابك مرة على كل جهاز، فيحفظ التطبيق نسختك المشفّرة ويجلبها بنفسه — بلا برنامج OneDrive وبلا اختيار الملفات. لا يصل إلى مايكروسوفت إلا الملف المشفّر برمزك، ولا يرى التطبيق إلا مجلد «التطبيقات › مداولة».', 'شارة «محفوظ ✓» لا تظهر إلا بعد أن يتحقق التطبيق من وصول الملف. ولا يكتب جهاز فوق ملف لم يقرأه.', 'الدمج بالحقل: تعديل ملاحظة على جهاز لا يُسقط قرارًا سُجّل على جهاز آخر. وحين يُعدَّل الحقل نفسه على جهازين يُؤخذ الأحدث، وتظهر القيمة الأخرى مع زر «استرجع».', 'جدول «الأجهزة» يبيّن آخر حفظ وجلب وإصدار لكل جهاز، وينبّه إلى الجهاز المتأخر. الطريقة اليدوية باقية لمن يستعمل Google Drive أو iCloud.']],
   [187, 'الإصدار 187', ['إصلاح في المزامنة: جلب ملف الدائرة على جهاز لم يُحدَّث كان يكتب نسخة قديمة من القرارات فوق نسخة أحدث، فتغيب قرارات جلسة عن ذلك الجهاز. الآن يُحفظ لكل قضية وقت قرارها الحقيقي، والأحدث يغلب أيًّا كان الترتيب.']],
   [186, 'الإصدار 186', ['حزم المبادئ 1.7 من «مكتبة مبادئ التمييز» (إصدار خصوصية): سُحب 13 مبدأً ورد في نصها بيان شخصي من وقائع الدعوى، وحُذف «نص القاعدة» من 14 مبدأً فيه عنوان سكن أو اسم شخص (بقي الموجز). تُستبدل الحزم القديمة على جهازك تلقائيًا.']],
