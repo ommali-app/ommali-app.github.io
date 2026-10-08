@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>اختبار الربط بـ OneDrive — مداولة</title>
+<style>
+/* صفحة اختبار مستقلة: لا تقرأ بيانات «مداولة» ولا تغيّرها. تتصل بمايكروسوفت وحدها، وتكتب في «Apps › مداولة» داخل OneDrive (صلاحية مجلد التطبيق فقط). */
+@font-face{font-family:'Cairo';font-weight:400;src:url('../fonts/cairo-400.woff2') format('woff2')}
+@font-face{font-family:'Cairo';font-weight:700;src:url('../fonts/cairo-700.woff2') format('woff2')}
+:root{--navy:#0B1F3B;--gold:#B8923A;--gold2:#F2D48A;--bg:#F6F2EA;--line:#E3DCCD;--ink:#1b2333;--ink2:#5b6475;--ok:#2f7a4f;--bad:#a8352a;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Cairo,Tahoma,sans-serif;font-size:16px;line-height:1.7}
+header{background:var(--navy);color:#fff;padding:calc(14px + env(safe-area-inset-top,0px)) 18px 14px}
+header b{font-size:20px;color:var(--gold2)}
+header p{margin:4px 0 0;font-size:13.5px;color:#d9e0ec}
+main{max-width:720px;margin:0 auto;padding:16px;display:grid;gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.card h2{margin:0 0 6px;font-size:16.5px}
+.k{font-size:13.5px;color:var(--ink2);margin:0}
+button{font-family:inherit;font-size:16px;border-radius:12px;min-height:46px;padding:0 16px;cursor:pointer;border:1px solid var(--line);background:#fff;color:var(--ink)}
+button.pri{background:var(--navy);color:#fff;border-color:var(--navy);font-weight:700}
+button:disabled{opacity:.5}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.row button{flex:1 1 180px}
+#st{font-weight:700}
+#st.ok{color:var(--ok)}#st.bad{color:var(--bad)}
+ol{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+ol li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:8px;font-size:14.5px;align-items:start}
+ol li i{font-style:normal;text-align:center}
+ol li small{display:block;color:var(--ink2);font-size:12.5px;overflow-wrap:anywhere}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;background:var(--bg);border-radius:10px;padding:8px;margin:8px 0 0;direction:ltr;text-align:left;max-height:220px;overflow:auto}
+</style>
+</head>
+<body>
+<header><b>اختبار الربط بـ OneDrive</b><p>تجربة مستقلة لا تمس بيانات «مداولة». تكتب ملفات اختبار في مجلد «Apps › مداولة» داخل OneDrive، ولا ترى غيره.</p></header>
+<main>
+  <section class="card">
+    <h2>الحالة: <span id="st">غير مربوط</span></h2>
+    <p class="k" id="stx">اضغط «سجّل الدخول» وادخل بحساب OneDrive الذي فيه ملفاتك، ثم وافق على الإذن.</p>
+    <div class="row"><button type="button" class="pri" id="login">سجّل الدخول بحساب مايكروسوفت</button><button type="button" id="logout">إلغاء الربط على هذا الجهاز</button></div>
+  </section>
+  <section class="card">
+    <h2>الاختبارات</h2>
+    <p class="k">بعد تسجيل الدخول اضغط «شغّل كل الاختبارات». وفي اليوم التالي افتح الصفحة واضغط «جدّد الدخول دون كلمة مرور» لنعرف هل يبقى الربط.</p>
+    <div class="row"><button type="button" class="pri" id="run" disabled>شغّل كل الاختبارات</button><button type="button" id="refresh" disabled>جدّد الدخول دون كلمة مرور</button></div>
+    <ol id="res" style="margin-top:10px"></ol>
+  </section>
+  <section class="card">
+    <h2>أرسل النتيجة</h2>
+    <p class="k">انسخ النتيجة وأرسلها في المحادثة. لا تحوي اسمك ولا بريدك، ولا شيئًا من ملفاتك.</p>
+    <div class="row"><button type="button" id="copy">انسخ النتيجة</button></div>
+    <pre id="log"></pre>
+  </section>
+</main>
+<script>
+(function () {
+  'use strict';
+  var CLIENT = 'ff54b02b-c2f6-4441-bd46-22dcafda4e8b';
+  var AUTH = 'https://login.microsoftonline.com/common/oauth2/v2.0/';
+  var GRAPH = 'https://graph.microsoft.com/v1.0';
+  var SCOPE = 'Files.ReadWrite.AppFolder offline_access';
+  var REDIRECT = location.origin + location.pathname;
+  var K = 'mdwl_od_test';
+  var $ = function (s) { return document.querySelector(s); };
+  var LOG = [];
+  function log(t) { LOG.push(new Date().toISOString().slice(11, 19) + ' ' + t); $('#log').textContent = LOG.join('\n'); }
+  function load() { try { return JSON.parse(localStorage.getItem(K) || '{}') || {}; } catch (e) { return {}; } }
+  function save(o) { try { localStorage.setItem(K, JSON.stringify(o)); } catch (e) {} }
+  function b64u(buf) { var s = '', b = new Uint8Array(buf); for (var i = 0; i < b.length; i++) s += String.fromCharCode(b[i]); return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
+  function rnd(n) { var a = new Uint8Array(n); crypto.getRandomValues(a); return b64u(a); }
+  function dev() { var u = navigator.userAgent, std = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone; return (/iPhone/.test(u) ? 'iPhone' : /iPad|Macintosh/.test(u) && 'ontouchend' in document ? 'iPad' : /Windows/.test(u) ? 'Windows' : /Mac/.test(u) ? 'Mac' : /Android/.test(u) ? 'Android' : 'other') + (std ? ' (مثبّت)' : ' (متصفح)') + ' · ' + (/Edg\//.test(u) ? 'Edge' : /CriOS|Chrome/.test(u) ? 'Chrome' : /Safari/.test(u) ? 'Safari' : 'browser'); }
+  function setSt(t, cls, x) { var e = $('#st'); e.textContent = t; e.className = cls || ''; if (x !== undefined) $('#stx').textContent = x; }
+  function ui() { var o = load(), on = !!o.rt; $('#run').disabled = !on; $('#refresh').disabled = !on; if (on) setSt('مربوط ✓', 'ok', 'سُجّل الدخول ' + new Date(o.at).toLocaleString('ar-KW') + (o.rat ? ' · آخر تجديد ' + new Date(o.rat).toLocaleString('ar-KW') : '')); }
+  function li(ok, t, d) { var e = document.createElement('li'); e.innerHTML = '<i>' + (ok === null ? '…' : ok ? '✅' : '❌') + '</i><span>' + t + (d ? '<small>' + d + '</small>' : '') + '</span>'; $('#res').appendChild(e); log((ok ? 'OK ' : ok === null ? '.. ' : 'FAIL ') + t + (d ? ' — ' + d : '')); return e; }
+
+  async function login() {
+    var v = rnd(48), st = rnd(16), ch = b64u(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(v)));
+    var o = load(); o.v = v; o.st = st; save(o);
+    location.href = AUTH + 'authorize?' + new URLSearchParams({ client_id: CLIENT, response_type: 'code', redirect_uri: REDIRECT, response_mode: 'query', scope: SCOPE, code_challenge: ch, code_challenge_method: 'S256', state: st, prompt: 'select_account' });
+  }
+  async function token(params) {
+    var r = await fetch(AUTH + 'token', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(Object.assign({ client_id: CLIENT, scope: SCOPE }, params)) });
+    var j = await r.json(); if (!r.ok) throw new Error((j.error || r.status) + ': ' + (j.error_description || '').split('\r')[0]); return j;
+  }
+  function keep(j, first) { var o = load(); o.at_ = j.access_token; o.exp = Date.now() + (j.expires_in || 3600) * 1000; if (j.refresh_token) o.rt = j.refresh_token; if (first) o.at = Date.now(); else o.rat = Date.now(); delete o.v; delete o.st; save(o); }
+  async function back() {
+    var q = new URLSearchParams(location.search); if (!q.has('code') && !q.has('error')) return;
+    history.replaceState(null, '', REDIRECT);
+    if (q.has('error')) { setSt('لم يتم الربط', 'bad', q.get('error') + ': ' + (q.get('error_description') || '')); log('AUTH ERROR ' + q.get('error') + ' ' + (q.get('error_description') || '')); return; }
+    var o = load(); if (!o.v || q.get('state') !== o.st) { setSt('لم يتم الربط', 'bad', 'انتهت الجلسة — اضغط «سجّل الدخول» مرة أخرى.'); log('STATE mismatch'); return; }
+    try { keep(await token({ grant_type: 'authorization_code', code: q.get('code'), redirect_uri: REDIRECT, code_verifier: o.v }), true); log('LOGIN OK · ' + dev()); }
+    catch (e) { setSt('لم يتم الربط', 'bad', String(e.message)); log('TOKEN ERROR ' + e.message); }
+  }
+  async function at() { var o = load(); if (o.at_ && o.exp - Date.now() > 60e3) return o.at_; keep(await token({ grant_type: 'refresh_token', refresh_token: o.rt })); return load().at_; }
+  async function g(path, opt) { opt = opt || {}; var t = await at(); var r = await fetch(GRAPH + path, Object.assign({}, opt, { headers: Object.assign({ Authorization: 'Bearer ' + t }, opt.headers || {}) })); var j = null; try { j = await r.json(); } catch (e) {} if (!r.ok) throw new Error(r.status + ' ' + ((j && j.error && (j.error.code + ': ' + j.error.message)) || '')); return j; }
+
+  async function run() {
+    $('#res').innerHTML = ''; $('#run').disabled = true; log('RUN · ' + dev());
+    try {
+      var t0 = performance.now(), f = await g('/me/drive/special/approot');
+      li(true, 'الوصول إلى مجلد التطبيق «' + (f.name || 'مداولة') + '»', Math.round(performance.now() - t0) + ' مللي ث');
+      var txt = 'اختبار مداولة — ' + new Date().toISOString() + ' — ' + dev();
+      t0 = performance.now(); await g('/me/drive/special/approot:/onedrive-test.txt:/content', { method: 'PUT', headers: { 'Content-Type': 'text/plain' }, body: txt });
+      li(true, 'كتابة ملف صغير', Math.round(performance.now() - t0) + ' مللي ث');
+      t0 = performance.now(); var it = await g('/me/drive/special/approot:/onedrive-test.txt'); var back = await (await fetch(it['@microsoft.graph.downloadUrl'])).text();
+      li(back === txt, 'قراءته مرة أخرى ومطابقته', Math.round(performance.now() - t0) + ' مللي ث');
+      var big = new Uint8Array(460 * 1024); crypto.getRandomValues(big.subarray(0, 65536)); for (var i = 65536; i < big.length; i += 65536) big.set(big.subarray(0, Math.min(65536, big.length - i)), i);
+      t0 = performance.now(); await g('/me/drive/special/approot:/onedrive-test-460k.bin:/content', { method: 'PUT', headers: { 'Content-Type': 'application/octet-stream' }, body: big });
+      li(true, 'رفع ملف بحجم ملف المزامنة (460 ك.ب)', Math.round(performance.now() - t0) + ' مللي ث');
+      t0 = performance.now(); var it2 = await g('/me/drive/special/approot:/onedrive-test-460k.bin'); var b2 = new Uint8Array(await (await fetch(it2['@microsoft.graph.downloadUrl'])).arrayBuffer()); var same = b2.length === big.length && b2[1000] === big[1000] && b2[b2.length - 1] === big[big.length - 1];
+      li(same, 'تنزيله ومطابقته', Math.round(performance.now() - t0) + ' مللي ث');
+      var L = await g('/me/drive/special/approot/children?$select=name,size,lastModifiedDateTime');
+      li(true, 'ما في مجلد التطبيق: ' + (L.value || []).length + ' ملفات', (L.value || []).map(function (x) { return x.name + ' · ' + new Date(x.lastModifiedDateTime).toLocaleString('ar-KW'); }).join(' | '));
+      log('ALL DONE');
+    } catch (e) { li(false, 'توقف الاختبار', String(e.message)); }
+    $('#run').disabled = false; ui();
+  }
+  async function refresh() {
+    var o = load(); var age = o.rat || o.at; li(null, 'تجديد الدخول — مضى على آخر دخول أو تجديد ' + Math.round((Date.now() - age) / 36e5) + ' ساعة');
+    try { keep(await token({ grant_type: 'refresh_token', refresh_token: o.rt })); li(true, 'جُدّد الدخول دون كلمة مرور'); }
+    catch (e) { li(false, 'لم يُجدَّد — يلزم تسجيل الدخول من جديد', String(e.message)); }
+    ui();
+  }
+  $('#login').onclick = function () { login().catch(function (e) { log('LOGIN START ERROR ' + e.message); }); };
+  $('#logout').onclick = function () { try { localStorage.removeItem(K); } catch (e) {} setSt('غير مربوط', '', 'أُلغي الربط على هذا الجهاز.'); ui(); log('LOGOUT'); };
+  $('#run').onclick = run; $('#refresh').onclick = refresh;
+  $('#copy').onclick = function () { var t = 'اختبار OneDrive · ' + dev() + '\n' + LOG.join('\n'); (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { $('#copy').textContent = 'نُسخت ✓'; }, function () { var r = document.createRange(); r.selectNodeContents($('#log')); getSelection().removeAllRanges(); getSelection().addRange(r); }); };
+  log('PAGE · ' + dev());
+  back().then(ui);
+})();
+</script>
+</body>
+</html>
