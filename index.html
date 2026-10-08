@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261008215727">
+<meta name="amali-build" content="20261009002744">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3494,7 +3494,7 @@ select.mch{appearance:none;-webkit-appearance:none;cursor:pointer;border-color:v
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V190 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V191 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -10140,7 +10140,7 @@ function inImport() {
   const setw = (id, v) => { const e = $('#' + id); if (e && String(v == null ? '' : v).trim()) e.value = String(v).trim(); };
   setw('we_appeal', o.appealNo); setw('we_circuit', o.circuit); setw('we_session', o.session); setw('we_autoid', o.autoId);
   try { inThumbs(); } catch (e) {}
-  inRender(); $('#in_status').textContent = 'استُورد الملخص المرجعي — البطاقة والأرقام والنصاب جاهزة (بلا قراءة ضوئية). راجعها.'; window.scrollTo({ top: 0 });
+  inRender(); inPendClear(); $('#in_status').textContent = 'استُورد الملخص المرجعي — البطاقة والأرقام والنصاب جاهزة (بلا قراءة ضوئية). راجعها.'; window.scrollTo({ top: 0 });
 }
 // V163: الميعاد والأثر الناقل ليسا من أوجه النعي — يُستبعدان من القائمة ويُذكران سطرًا، إلا إن جاوز الإيداع ثلاثين يومًا من الحكم ظاهريًّا فيبقيان بتنبيه
 function inGrForm(g) { return /(الاثر الناقل|قبول الاستيناف شكلا|الاستيناف شكلا|في الميعاد|ميعاد الاستيناف|ميعاد الطعن)/.test(norm(((g || {}).title || '') + ' ' + ((g || {}).type || ''))); }
@@ -10454,13 +10454,27 @@ function bqParse(txt, G) {   // ← عدد ما وُزّع
   arr.forEach((r, k) => { if (!r || typeof r !== 'object') return; const key = String(r.caseKey || '').trim(), k2 = AR2EN(key).replace(/\s/g, '').replace(/\.pdf$/i, '').replace(/-/g, '/'); const g = G.find(x => { const c = RL.cards.find(y => y.id === x.cid); return c && (key === c.code || AR2EN(key).replace(/\s/g, '') === c.code || k2 === c.code); }) || (G.length === arr.length ? G[k] : null); if (g && !g.res) { delete r.caseKey; g.res = r; g.err = ''; n++; } });
   return n;
 }
+// ---- V191: مرحلة الإرسال في «أوراق الجلسة» تُحفظ (القضايا والطلبات بلا أسماء في localStorage، والنص المعتّم والنتائج في مخزن العمل المشفّر)
+// فإن أعاد Safari تحميل الصفحة وأنت في Claude، تفتح «أوراق الجلسة» فتعود إلى الطلب نفسه وتلصق الرد.
+function bqPendGet() { try { const p = JSON.parse(localStorage.getItem('tm_bqpend') || 'null'); return p && Date.now() - (p.at || 0) < 3 * 864e5 ? p : null; } catch (e) { return null; } }
+function bqPendClear() { try { localStorage.removeItem('tm_bqpend'); } catch (e) {} }
+function bqPendSave() { try { if (!BQ || !BQ.chunks || !BQ.chunks.length) return; const C = BQ.groups.filter(g => g.cid && g.sel && bqHas(g));
+    localStorage.setItem('tm_bqpend', JSON.stringify({ day: BQ.day, at: Date.now(), ck: BQ.ck || 0, cases: C.map(g => ({ cid: g.cid, n: g.imgN || 0, dims: g.dims || [] })), chunks: BQ.chunks.map(c => c.map(g => g.cid)) }));
+    C.forEach(g => { if (g.text) wsPut('bq:txt:' + g.cid, { t: g.text }); if (g.res) wsPut('bq:res:' + g.cid, g.res); }); } catch (e) {} }
+async function bqRestore() { const P = bqPendGet(), B0 = BQ; if (!P || !BQ || P.day !== BQ.day || BQ.groups.length || BQ.step !== 'pick') return false;
+  const G = []; for (const x of P.cases || []) { const c = RL.cards.find(y => y.id === x.cid); if (!c) continue; const tx = await wsGet('bq:txt:' + x.cid), r = await wsGet('bq:res:' + x.cid);
+    G.push({ key: c.code, name: c.code, cid: x.cid, sel: true, files: [], text: (tx && tx.t) || '', md: mskMaskDoc(''), imgN: x.n || 0, dims: x.dims || [], tcid: x.cid, ok: true, st: 'ok', flags: [], bad: [], th: [], res: r || null }); }
+  if (BQ !== B0 || !G.length || BQ.groups.length) return false;
+  BQ.groups = G; BQ.chunks = (P.chunks || []).map(c => c.map(id => G.find(g => g.cid === id)).filter(Boolean)).filter(c => c.length); if (!BQ.chunks.length) return false;
+  BQ.ck = Math.max(0, Math.min(P.ck || 0, BQ.chunks.length - 1)); BQ.step = G.every(g => g.res) ? 'done' : 'send'; BQ.max = 4; BQ.restored = true; BQ.pf = {}; BQ.msg = 'استُعيدت هذه المرحلة بعد إعادة تحميل الصفحة — الصق رد أداة الذكاء.'; return true; }
 function bqOpen(day) {
   if (BQ && BQ.ctl) try { BQ.ctl.abort(); } catch (e) {}   // V171: قراءة جارية ليوم آخر تُوقف
   BQ = { day: day || rlDaySel || rlToday(), step: 'pick', groups: [], docs: false, ctl: null };
   let w = document.getElementById('bqsheet'); if (!w) { w = el('div', 'sess bqsheet'); w.id = 'bqsheet'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-modal', 'true'); w.setAttribute('aria-label', 'أوراق الجلسة'); document.body.appendChild(w); }
   bqDraw(); w.classList.add('show'); document.documentElement.classList.add('noscroll');
+  bqRestore().then(ok => { if (ok) { bqDraw(); bqBtn(); } }).catch(() => {});   // V191
 }
-function bqClose() { if (BQ && BQ.ctl) try { BQ.ctl.abort(); } catch (e) {} BQ = null; const w = document.getElementById('bqsheet'); if (w) { w.classList.remove('show'); w.innerHTML = ''; } document.documentElement.classList.remove('noscroll'); }
+function bqClose() { if (BQ && BQ.ctl) try { BQ.ctl.abort(); } catch (e) {} BQ = null; bqPendClear(); const w = document.getElementById('bqsheet'); if (w) { w.classList.remove('show'); w.innerHTML = ''; } document.documentElement.classList.remove('noscroll'); }
 function bqOpts(sel) { const day = BQ.day, A = RL.cards.filter(c => !RL_DONE.includes(c.stage)).sort((a, b) => ((b.next === day) - (a.next === day)) || rlCodeCmp(a, b));
   return '<option value="">— اختر القضية —</option>' + A.map(c => '<option value="' + c.id + '"' + (c.id === sel ? ' selected' : '') + '>' + esc(c.code) + (c.next === day ? ' · هذه الجلسة' : c.next ? ' · ' + rlFmt(c.next) : '') + (c.an ? ' · محلَّلة' : '') + '</option>').join(''); }
 // V172: «أوراق الجلسة» بخطوات واضحة — اختيار ما يُحلَّل (ومنه إعادة تحليل المحللة)، والتقدّم لكل قضية بالوقت، والتعتيم يُراجع بلمسة (إظهار/تعتيم)،
@@ -10643,7 +10657,7 @@ function bqDraw() {
         + '<div class="bqstep"><b>٣</b><div>انسخ الرد كاملًا والصقه هنا:<textarea id="bq_paste" rows="4" placeholder="الصق رد أداة الذكاء هنا"></textarea><div class="row">' + (navigator.clipboard && navigator.clipboard.readText ? '<button type="button" class="btn" data-bq="clip">📋 الصق من الحافظة</button>' : '') + '<button type="button" class="btn primary" data-bq="parse">وزّع الرد على القضايا</button></div></div></div>'
         + (BQ.msg ? '<p class="bqmsg">' + BQ.msg + '</p>' : '') + '</section>'; }
     h += '<ul class="bqres">' + Q.map(g => '<li class="' + (g.res ? 'ok' : g.err ? 'no' : '') + '"><b>' + esc(bqCode(g)) + '</b> — ' + (g.res ? '✓ حُلّلت' : g.err ? '✗ ' + esc(g.err) : 'تنتظر') + '</li>').join('') + '</ul>'
-      + '<div class="bqfoot sticky"><button type="button" class="btn" data-bq="torev"' + (BQ.busy ? ' disabled' : '') + '>رجوع إلى المراجعة</button>' + (!live && nres ? '<button type="button" class="btn primary" data-bq="fin">التالي: الحفظ (' + nres + ')</button>' : '') + '</div>'; }
+      + '<div class="bqfoot sticky">' + (BQ.restored ? '' : '<button type="button" class="btn" data-bq="torev"' + (BQ.busy ? ' disabled' : '') + '>رجوع إلى المراجعة</button>') + (!live && nres ? '<button type="button" class="btn primary" data-bq="fin">التالي: الحفظ (' + nres + ')</button>' : '') + '</div>'; }
   else if (S === 'done') { const ok = G.filter(g => g.cid && g.sel && g.res), bad = G.filter(g => g.cid && g.sel && bqHas(g) && !g.res);
     h += '<section class="bqcard"><h3>' + (ok.length ? 'حُلّلت ' + ok.length + ' ' + (ok.length === 1 ? 'قضية' : ok.length === 2 ? 'قضيتان' : 'قضايا') : 'لم يكتمل تحليل أي قضية') + '</h3><p>«راجع واحفظ» يفتح كل قضية بملخصها: راجعه ثم «احفظ وارجع» فتنتقل إلى التالية. لا يُحفظ شيء في البطاقة قبل ذلك.</p>'
       + '<ul class="bqres">' + ok.map(g => '<li class="ok"><b>' + esc(bqCode(g)) + '</b> — ✓ حُلّلت</li>').join('') + bad.map(g => '<li class="no"><b>' + esc(bqCode(g)) + '</b> — ✗ ' + esc(g.err || 'لم تُحلَّل') + '</li>').join('') + '</ul>'
@@ -10685,16 +10699,16 @@ function bqWire(w) {
   if (q('copy')) q('copy').onclick = () => { const p = bqBatchPrompt(BQ.chunks[BQ.ck]), lk = bqLeaks(p); BQ.lastPrompt = p; if (lk.length && !q('copy').dataset.sure) { q('copy').dataset.sure = '1'; q('copy').textContent = 'انسخه رغم ذلك'; toast('⚠ في الطلب ما يشبه بيانات شخصية: ' + lk.slice(0, 3).join('، ') + ' — راجع التعتيم'); return; } copy(p, 'نُسخ الطلب ' + (BQ.ck + 1) + ' — الصقه في محادثة جديدة'); BQ.copied = BQ.ck; const b = q('copy'); if (b) b.textContent = '✓ نُسخ — انسخه ثانية'; };
   if (q('clip')) q('clip').onclick = async () => { try { const t = await navigator.clipboard.readText(); const a = w.querySelector('#bq_paste'); if (a && t) { a.value = t; toast('لُصق الرد — اضغط «وزّع الرد»'); } } catch (e) { toast('لم يُسمح بقراءة الحافظة — الصق يدويًا في المربع'); } };
   w.querySelectorAll('[data-bqrq]').forEach(b => b.onclick = () => { BQ.ck = +b.dataset.bqrq; BQ.msg = ''; bqDraw(); });
-  if (q('parse')) q('parse').onclick = () => { const cur = BQ.chunks[BQ.ck], n = bqParse(w.querySelector('#bq_paste').value, cur); if (n < 0) { toast('لم أجد بيانات صالحة — انسخ الرد كاملًا من أداة الذكاء'); return; }
+  if (q('parse')) q('parse').onclick = () => { const cur = BQ.chunks[BQ.ck], n = bqParse(w.querySelector('#bq_paste').value, cur); if (n < 0) { toast('لم أجد بيانات صالحة — انسخ الرد كاملًا من أداة الذكاء'); return; } BQ.msg = '';
     const miss = cur.filter(g => !g.res); miss.forEach(g => g.err = 'لم ترد في الرد');
     BQ.msg = (n ? '✓ الطلب ' + (BQ.ck + 1) + ': حُلّلت ' + cur.filter(g => g.res).map(g => esc(bqCode(g))).join('، ') : '') + (miss.length ? (n ? ' · ' : '') + '✗ لم ترد: ' + miss.map(g => esc(bqCode(g))).join('، ') + ' — أعد نسخ الطلب أو اطلب من الأداة إكماله' : '');
-    const nx = BQ.chunks.findIndex((c, i) => i > BQ.ck && c.some(g => !g.res)); if (!miss.length && nx >= 0) { BQ.ck = nx; BQ.copied = -1; toast('وُزّع — إلى الطلب ' + (nx + 1)); } else if (!miss.length && BQ.chunks.every(c => c.every(g => g.res))) { BQ.step = 'done'; toast('اكتمل التحليل — راجع واحفظ'); } bqDraw(); };
+    const nx = BQ.chunks.findIndex((c, i) => i > BQ.ck && c.some(g => !g.res)); if (!miss.length && nx >= 0) { BQ.ck = nx; BQ.copied = -1; toast('وُزّع — إلى الطلب ' + (nx + 1)); } else if (!miss.length && BQ.chunks.every(c => c.every(g => g.res))) { BQ.step = 'done'; toast('اكتمل التحليل — راجع واحفظ'); } bqPendSave(); bqDraw(); };
   if (q('fin')) q('fin').onclick = () => { BQ.step = 'done'; bqDraw(); };
   if (q('retry')) q('retry').onclick = () => { G.forEach(g => { if (!g.res) g.err = ''; }); BQ.step = 'send'; if (SAMPLEX) { bqDraw(); bqLive(); } else { bqChunks(); bqDraw(); } };
   if (q('rev')) q('rev').onclick = () => { const ok = G.filter(g => g.cid && g.sel && g.res), pre = {}; ok.forEach(g => pre[g.cid] = g.res); const d = BQ.day; bqClose(); wsDel('bq:'); anQStart(ok.map(g => g.cid), 'أوراق جلسة ' + rlFmt(d), pre); };
 }
 function bqChunks() { const Q = BQ.groups.filter(g => g.cid && g.sel && bqHas(g) && !g.res), ch = []; let cur = [], len = 0, np = 0; Q.forEach(g => { const img = !!g.imgN || cur.some(x => x.imgN); if (cur.length && (cur.length >= (img ? BQ_PER_I : BQ_PER) || len + g.text.length > BQ_MAX || np + (g.imgN || 0) > BQ_PGS)) { ch.push(cur); cur = []; len = 0; np = 0; } cur.push(g); len += g.text.length; np += g.imgN || 0; }); if (cur.length) ch.push(cur); BQ.pf = {};
-  const done = (BQ.chunks || []).filter(c => c.every(g => g.res)); BQ.chunks = done.concat(ch); const k = BQ.chunks.findIndex(c => c.some(g => !g.res)); BQ.ck = k < 0 ? 0 : k; }
+  const done = (BQ.chunks || []).filter(c => c.every(g => g.res)); BQ.chunks = done.concat(ch); const k = BQ.chunks.findIndex(c => c.some(g => !g.res)); BQ.ck = k < 0 ? 0 : k; bqPendSave(); }
 async function bqMatchAll() {
   const used = new Set();
   for (const g of BQ.groups) { const m = bqMatchName(g); if (m) { g.cid = m[0].id; g.how = m[1]; used.add(g.cid); } }
@@ -11009,6 +11023,7 @@ function csGo(id) { setView('f'); setTimeout(() => { const e = document.querySel
 function inSafeText() { const t = ($('#in_text') || {}).value || ''; return !!t.trim() && MSK_SAFE.get('in_text') === t.trim(); }
 function inNeedRead() { const t = (($('#in_text') || {}).value || '').trim(); return !t && inFiles.length && !inOcrDone && !inFiles.every(f => f.masked); }   // V190: الصفحات المعتّمة تُرسل صورًا في النسختين
 function inGoLabel() { const t = (($('#in_text') || {}).value || '').trim();
+  if (inIsReply(t)) return 'اعرض البطاقة من الرد';   // V191
   if (inNeedRead()) return 'اقرأ الصفحات على جهازي';
   if (!t) return inFiles.length ? (SAMPLEX ? 'أرسل الصفحات المعتَّمة للتحليل' : 'جهّز ملف PDF المعتّم والطلب') : (SAMPLEX ? 'حلّل الملف' : 'حلّل عبر أداة الذكاء');
   if (!inSafeText()) return 'عتّم الأسماء وراجع';
@@ -11038,6 +11053,7 @@ function inPrimaryWire() {   // يُستدعى مرة من initIntake: زر وا
   const go0 = $('#in_go').onclick, ocr0 = $('#in_ocr').onclick, fl0 = $('#in_files').onchange, cl0 = $('#in_clear').onclick, cf0 = $('#in_clearfiles').onclick;
   $('#in_ocr').onclick = async () => { await ocr0(); if (inOcrDone && $('#in_text').value.trim() && !inSafeText()) inAutoMask('قُرئت الصفحات على جهازك.'); inStepsUpd(); };
   $('#in_go').onclick = async () => { const t = $('#in_text').value.trim();
+    if (inIsReply(t)) { inImport(); return; }   // V191: رد أداة الذكاء لُصق في مربع الأوراق — يُعرض مباشرة
     if (inNeedRead()) { await $('#in_ocr').onclick(); return; }
     if (t && !inSafeText()) { inAutoMask(); return; }
     await go0(); inStepsUpd(); };
@@ -11181,11 +11197,26 @@ async function inHostedImg() {   // V190: الصفحات المعتّمة في �
   const cp = () => copy(prompt, 'نُسخ طلب التحليل — الصقه مع الملف');
   if ($('#in_ishare')) $('#in_ishare').onclick = () => { cp(); try { navigator.share({ files: [file] }).catch(() => {}); } catch (e) { toast('المشاركة غير متاحة — نزّل الملف'); } };
   $('#in_idl').onclick = () => { pgSave(file, fname).catch(() => toast('تعذّر الحفظ')); }; $('#in_icopy').onclick = cp;
-  $('#in_pshow').onclick = () => { const t = $('#in_paste').value, a = t.indexOf('{'), b = t.lastIndexOf('}'); let r = null; if (a >= 0 && b > a) { try { r = JSON.parse(t.slice(a, b + 1)); } catch (e) { r = null; } }
-    if (!r || typeof r !== 'object' || Array.isArray(r)) { toast('لم أجد بيانات صالحة في الرد — انسخ الرد كاملًا'); return; } inResult = r; inChosen = new Set(); inRender(); st.textContent = 'تم. راجع البطاقة وصحّح ما يلزم (الحقول قابلة للتحرير).'; };
+  $('#in_pshow').onclick = () => inPasteShow($('#in_paste').value);
+  try { localStorage.setItem('tm_inpend', JSON.stringify({ at: Date.now(), cid: INX || '', f: fname, n: bl.length })); } catch (e) {}   // V191: إن أعاد Safari تحميل الصفحة وأنت في Claude يبقى مربع اللصق
 }
+function inPasteShow(t) { t = String(t || ''); const a = t.indexOf('{'), b = t.lastIndexOf('}'); let r = null; if (a >= 0 && b > a) { try { r = JSON.parse(t.slice(a, b + 1)); } catch (e) { r = null; } }
+  if (!r || typeof r !== 'object' || Array.isArray(r)) { toast('لم أجد بيانات صالحة في الرد — انسخ الرد كاملًا'); return false; }
+  inResult = r; inChosen = new Set(); inRender(); inPendClear(); $('#in_status').textContent = 'تم. راجع البطاقة وصحّح ما يلزم (الحقول قابلة للتحرير)، ثم احفظها في قضيتها.'; return true; }
+// ---- V191: «بانتظار رد التحليل» — Safari على الآيباد يعيد تحميل الصفحة حين تنتقل إلى Claude فتضيع شاشة اللصق؛ تبقى إشارة بلا أسماء (القضية والملف والعدد) فيعود المربع
+function inPendGet() { try { const p = JSON.parse(localStorage.getItem('tm_inpend') || 'null'); return p && Date.now() - (p.at || 0) < 2 * 864e5 ? p : null; } catch (e) { return null; } }
+function inPendClear() { try { localStorage.removeItem('tm_inpend'); } catch (e) {} }
+function inPendBox() { const p = inPendGet(), O = $('#in_out'); if (!p || !O || inResult || O.querySelector('.inhost')) return;
+  if (p.cid && !INX && RL.cards.some(c => c.id === p.cid)) { INX = p.cid; try { anCtxRender(); } catch (e) {} }
+  const m = Math.max(1, Math.round((Date.now() - p.at) / 60000));
+  O.innerHTML = '<div class="inhost inpend"><b>بانتظار رد التحليل</b><p class="k">أرسلتَ «<bdi>' + esc(p.f || '') + '</bdi>» (' + (p.n || 0) + ' صفحة) قبل ' + (m < 60 ? m + ' د' : Math.round(m / 60) + ' س') + '. الرد في محادثة Claude: انسخه كاملًا والصقه هنا.</p><textarea id="in_paste" rows="5" placeholder="الصق رد أداة الذكاء هنا"></textarea><div class="row"><button class="btn primary" id="in_pshow" type="button">اعرض البطاقة</button><button class="btn" id="in_pdrop" type="button">تجاهل</button></div></div>';
+  $('#in_pshow').onclick = () => inPasteShow($('#in_paste').value);
+  $('#in_pdrop').onclick = () => { inPendClear(); O.innerHTML = '<div class="empty"><b>لا تحليل بعد</b>الصق الأوراق أو ارفعها ثم اضغط «حلّل الملف».</div>'; };
+  $('#in_status').textContent = 'بانتظار رد التحليل — الصقه في المربع.'; }
+function inIsReply(t) { const j = t && /[{\[]/.test(t) ? inJsonExtract(t) : null; return !!(j && typeof j === 'object' && !Array.isArray(j) && (j.appealNo || j.caseNo || j.amali || j.claims || j.firstRuling)); }
 function initIntake() {
   try { anCtxRender(); } catch (e) {}
+  try { inPendBox(); } catch (e) {}   // V191
   try { inProfUI(); } catch (e) {}
   if (inInit) return; inInit = true;
   const st = $('#in_status');
@@ -11271,6 +11302,7 @@ function initIntake() {
     } finally { $('#in_go').disabled = false; $('#in_stop').disabled = true; inCtl = null; bgWork('i', false); }
   };
   inPrimaryWire();   // V151
+  try { inPendBox(); } catch (e) {}   // V191
 }
 // ---- فاحص المسودة (Draft checker)
 let drInit = false, drCtl = null, drLast = null;
@@ -13929,6 +13961,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [191, 'الإصدار 191', ['إن أعاد Safari تحميل الصفحة وأنت في Claude تنتظر التحليل، لا يضيع شيء: في «تحليل الملف» تجد «بانتظار رد التحليل» ومربع اللصق، وفي «أوراق الجلسة» تعود إلى الطلب نفسه فتلصق الرد.', 'ورد أداة الذكاء إن لصقته في مربع «الأوراق» يُعرض بطاقةً مباشرة بزر «اعرض البطاقة من الرد».']],
   [190, 'الإصدار 190', ['«إخفاء الهوية» يقرأ الصفحات صفحةً صفحة ولا يُبقي صورها في الذاكرة: ملف من 60 صفحة أو أكثر لا يُغلق الصفحة على الآيباد. ولا سقف لعدد الصفحات (كان يقف عند 40 بصمت).', 'العمل محفوظ أثناءه على جهازك مشفّرًا: إن انقطع، تفتح «إخفاء الهوية» فتُكمل من حيث وقفت. ويُحذف بإغلاق التبويب.', '«أوراق الجلسة» ترسل الصفحات الممسوحة صورًا معتّمة لا نصًا مقروءًا ضوئيًا: ملف PDF لكل قضية باسم رقمها، تشاركه أو تنزّله وترفقه مع الطلب، فيقرأ الذكاء الورقة نفسها. وتراجع التعتيم بمصغّرات الصفحات، وتعدّله في «إخفاء الهوية» ثم «احفظ وارجع».', 'في «تحليل الملف»: الصفحات المعتّمة تُرسل في ملف PDF مع الطلب. وأُصلحت رسالة «غير موجود في الرول» حين تكون القضية في الرول.']],
   [189, 'الإصدار 189', ['«آخر الجلسة» بدل «القرار بعد الجلسة» في كل الدوائر، و«نداء ثانٍ» جديد باختيارك حين ترى منح فرصة ثانية، فتنتقل القضية إلى آخر الرول ويُنادى عليها بعد آخر قضية. الشريط الذهبي أعلى ورقة الرول يجمعهما.', 'بعد آخر قضية: «نهاية الرول» ثم «ارفع الجلسة» حين يُحسم كل ما في آخر الجلسة. الرفع يختم محضر الجلسة، والتصحيح بعده بسبب يُسجَّل، ومتاح حتى بدء الجلسة التالية. الرئيس وحده يرفع.', 'شاشة «رُفعت الجلسة» بخلاصتها وأزرار التوزيع والطباعة والمحاضر. والجلسة المنتهية تبقى في الرول بخلاصتها بدل «لا قضايا لجلسة…».', '«بانتظار الطباعة»: كل جلسة فيها قرار لم يُطبع على القائمة، من الرول والرئيسية. والطباعة على «قائمة الدعوى» للمحكمة الكلية كذلك.']],
   [188, 'الإصدار 188', ['المزامنة المباشرة بـ OneDrive: اربط حسابك مرة على كل جهاز، فيحفظ التطبيق نسختك المشفّرة ويجلبها بنفسه — بلا برنامج OneDrive وبلا اختيار الملفات. لا يصل إلى مايكروسوفت إلا الملف المشفّر برمزك، ولا يرى التطبيق إلا مجلد «التطبيقات › مداولة».', 'شارة «محفوظ ✓» لا تظهر إلا بعد أن يتحقق التطبيق من وصول الملف. ولا يكتب جهاز فوق ملف لم يقرأه.', 'الدمج بالحقل: تعديل ملاحظة على جهاز لا يُسقط قرارًا سُجّل على جهاز آخر. وحين يُعدَّل الحقل نفسه على جهازين يُؤخذ الأحدث، وتظهر القيمة الأخرى مع زر «استرجع».', 'جدول «الأجهزة» يبيّن آخر حفظ وجلب وإصدار لكل جهاز، وينبّه إلى الجهاز المتأخر. الطريقة اليدوية باقية لمن يستعمل Google Drive أو iCloud.']],
