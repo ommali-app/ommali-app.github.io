@@ -46,8 +46,8 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;background:var(--
   </section>
   <section class="card">
     <h2>الاختبارات</h2>
-    <p class="k">بعد تسجيل الدخول اضغط «شغّل كل الاختبارات». وفي اليوم التالي افتح الصفحة واضغط «جدّد الدخول دون كلمة مرور» لنعرف هل يبقى الربط.</p>
-    <div class="row"><button type="button" class="pri" id="run" disabled>شغّل كل الاختبارات</button><button type="button" id="refresh" disabled>جدّد الدخول دون كلمة مرور</button></div>
+    <p class="k">بعد تسجيل الدخول اضغط «شغّل كل الاختبارات». وفي اليوم التالي افتح الصفحة واضغط «جدّد الدخول دون كلمة مرور»، ثم «جدّد بالانتقال الصامت» (تنتقل الصفحة إلى مايكروسوفت وتعود وحدها)، ثم «انسخ النتيجة».</p>
+    <div class="row"><button type="button" class="pri" id="run" disabled>شغّل كل الاختبارات</button><button type="button" id="refresh" disabled>جدّد الدخول دون كلمة مرور</button><button type="button" id="silent" disabled>جدّد بالانتقال الصامت</button></div>
     <ol id="res" style="margin-top:10px"></ol>
   </section>
   <section class="card">
@@ -67,21 +67,21 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;background:var(--
   var REDIRECT = location.origin + location.pathname;
   var K = 'mdwl_od_test';
   var $ = function (s) { return document.querySelector(s); };
-  var LOG = [];
-  function log(t) { LOG.push(new Date().toISOString().slice(11, 19) + ' ' + t); $('#log').textContent = LOG.join('\n'); }
+  var LOG = []; try { LOG = JSON.parse(sessionStorage.getItem('mdwl_od_log') || '[]') || []; } catch (e) {}
+  function log(t) { LOG.push(new Date().toISOString().slice(11, 19) + ' ' + t); $('#log').textContent = LOG.join('\n'); try { sessionStorage.setItem('mdwl_od_log', JSON.stringify(LOG.slice(-80))); } catch (e) {} }
   function load() { try { return JSON.parse(localStorage.getItem(K) || '{}') || {}; } catch (e) { return {}; } }
   function save(o) { try { localStorage.setItem(K, JSON.stringify(o)); } catch (e) {} }
   function b64u(buf) { var s = '', b = new Uint8Array(buf); for (var i = 0; i < b.length; i++) s += String.fromCharCode(b[i]); return btoa(s).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
   function rnd(n) { var a = new Uint8Array(n); crypto.getRandomValues(a); return b64u(a); }
   function dev() { var u = navigator.userAgent, std = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone; return (/iPhone/.test(u) ? 'iPhone' : /iPad|Macintosh/.test(u) && 'ontouchend' in document ? 'iPad' : /Windows/.test(u) ? 'Windows' : /Mac/.test(u) ? 'Mac' : /Android/.test(u) ? 'Android' : 'other') + (std ? ' (مثبّت)' : ' (متصفح)') + ' · ' + (/Edg\//.test(u) ? 'Edge' : /CriOS|Chrome/.test(u) ? 'Chrome' : /Safari/.test(u) ? 'Safari' : 'browser'); }
   function setSt(t, cls, x) { var e = $('#st'); e.textContent = t; e.className = cls || ''; if (x !== undefined) $('#stx').textContent = x; }
-  function ui() { var o = load(), on = !!o.rt; $('#run').disabled = !on; $('#refresh').disabled = !on; if (on) setSt('مربوط ✓', 'ok', 'سُجّل الدخول ' + new Date(o.at).toLocaleString('ar-KW') + (o.rat ? ' · آخر تجديد ' + new Date(o.rat).toLocaleString('ar-KW') : '')); }
+  function ui() { var o = load(), on = !!o.rt; $('#run').disabled = !on; $('#refresh').disabled = !on; $('#silent').disabled = !o.at; if (on) setSt('مربوط ✓', 'ok', 'سُجّل الدخول ' + new Date(o.at).toLocaleString('ar-KW') + (o.rat ? ' · آخر تجديد ' + new Date(o.rat).toLocaleString('ar-KW') : '')); }
   function li(ok, t, d) { var e = document.createElement('li'); e.innerHTML = '<i>' + (ok === null ? '…' : ok ? '✅' : '❌') + '</i><span>' + t + (d ? '<small>' + d + '</small>' : '') + '</span>'; $('#res').appendChild(e); log((ok ? 'OK ' : ok === null ? '.. ' : 'FAIL ') + t + (d ? ' — ' + d : '')); return e; }
 
-  async function login() {
+  async function login(silent) {
     var v = rnd(48), st = rnd(16), ch = b64u(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(v)));
-    var o = load(); o.v = v; o.st = st; save(o);
-    location.href = AUTH + 'authorize?' + new URLSearchParams({ client_id: CLIENT, response_type: 'code', redirect_uri: REDIRECT, response_mode: 'query', scope: SCOPE, code_challenge: ch, code_challenge_method: 'S256', state: st, prompt: 'select_account' });
+    var o = load(); o.v = v; o.st = st; o.silent = silent ? Date.now() : 0; save(o);
+    location.href = AUTH + 'authorize?' + new URLSearchParams({ client_id: CLIENT, response_type: 'code', redirect_uri: REDIRECT, response_mode: 'query', scope: SCOPE, code_challenge: ch, code_challenge_method: 'S256', state: st, prompt: silent ? 'none' : 'select_account' });
   }
   async function token(params) {
     var r = await fetch(AUTH + 'token', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(Object.assign({ client_id: CLIENT, scope: SCOPE }, params)) });
@@ -91,9 +91,11 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;background:var(--
   async function back() {
     var q = new URLSearchParams(location.search); if (!q.has('code') && !q.has('error')) return;
     history.replaceState(null, '', REDIRECT);
+    var o0 = load(), sil = !!o0.silent; if (sil) { o0.silent = 0; save(o0); }
+    if (q.has('error') && sil) { li(false, 'التجديد بالانتقال الصامت لم ينجح — يلزم الدخول بكلمة المرور', q.get('error') + ': ' + (q.get('error_description') || '').split('\r')[0]); return; }
     if (q.has('error')) { setSt('لم يتم الربط', 'bad', q.get('error') + ': ' + (q.get('error_description') || '')); log('AUTH ERROR ' + q.get('error') + ' ' + (q.get('error_description') || '')); return; }
     var o = load(); if (!o.v || q.get('state') !== o.st) { setSt('لم يتم الربط', 'bad', 'انتهت الجلسة — اضغط «سجّل الدخول» مرة أخرى.'); log('STATE mismatch'); return; }
-    try { keep(await token({ grant_type: 'authorization_code', code: q.get('code'), redirect_uri: REDIRECT, code_verifier: o.v }), true); log('LOGIN OK · ' + dev()); }
+    try { var age0 = o.rat || o.at; keep(await token({ grant_type: 'authorization_code', code: q.get('code'), redirect_uri: REDIRECT, code_verifier: o.v }), !sil); if (sil) li(true, 'جُدّد الربط بالانتقال الصامت دون كلمة مرور', 'مضى على آخر دخول أو تجديد ' + Math.round((Date.now() - age0) / 36e5) + ' ساعة'); else log('LOGIN OK · ' + dev()); }
     catch (e) { setSt('لم يتم الربط', 'bad', String(e.message)); log('TOKEN ERROR ' + e.message); }
   }
   async function at() { var o = load(); if (o.at_ && o.exp - Date.now() > 60e3) return o.at_; keep(await token({ grant_type: 'refresh_token', refresh_token: o.rt })); return load().at_; }
@@ -127,7 +129,8 @@ pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;background:var(--
     ui();
   }
   $('#login').onclick = function () { login().catch(function (e) { log('LOGIN START ERROR ' + e.message); }); };
-  $('#logout').onclick = function () { try { localStorage.removeItem(K); } catch (e) {} setSt('غير مربوط', '', 'أُلغي الربط على هذا الجهاز.'); ui(); log('LOGOUT'); };
+  $('#logout').onclick = function () { try { localStorage.removeItem(K); sessionStorage.removeItem('mdwl_od_log'); } catch (e) {} setSt('غير مربوط', '', 'أُلغي الربط على هذا الجهاز.'); ui(); log('LOGOUT'); };
+  $('#silent').onclick = function () { log('SILENT START · ' + dev()); login(true).catch(function (e) { log('SILENT START ERROR ' + e.message); }); };
   $('#run').onclick = run; $('#refresh').onclick = refresh;
   $('#copy').onclick = function () { var t = 'اختبار OneDrive · ' + dev() + '\n' + LOG.join('\n'); (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { $('#copy').textContent = 'نُسخت ✓'; }, function () { var r = document.createRange(); r.selectNodeContents($('#log')); getSelection().removeAllRanges(); getSelection().addRange(r); }); };
   log('PAGE · ' + dev());
