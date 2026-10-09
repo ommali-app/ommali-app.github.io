@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261009130458">
+<meta name="amali-build" content="20261009133556">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3520,7 +3520,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V194 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V195 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -5000,8 +5000,9 @@ function jeSwitchWire(root) { const w = root.querySelector('.jesw'); if (!w) ret
   b.onclick = e => { e.stopPropagation(); m.hidden = !m.hidden; b.setAttribute('aria-expanded', String(!m.hidden)); if (!m.hidden) jeMenuFit(m); if (!m.hidden) setTimeout(() => document.addEventListener('click', function f() { m.hidden = true; b.setAttribute('aria-expanded', 'false'); document.removeEventListener('click', f); }), 0); };
   m.querySelectorAll('[data-jesw]').forEach(x => x.onclick = async () => { if (JE.ed) await jeFlush(); jwOpen(x.dataset.jesw, 'w'); }); }
 function jeMenuFit(m) {   // V193: القائمة داخل الشاشة دائمًا (كانت تخرج يمينًا على الآيفون)
-  m.style.transform = ''; const r = m.getBoundingClientRect(), W = document.documentElement.clientWidth, pad = 8; let dx = 0;
-  if (r.right > W - pad) dx = (W - pad) - r.right; if (r.left + dx < pad) dx = pad - r.left; if (dx) m.style.transform = 'translateX(' + Math.round(dx) + 'px)'; }
+  m.style.transform = ''; const r = m.getBoundingClientRect(), pad = 8, cl = m.closest('.jeed-wrap,.jepw'), C = cl ? cl.getBoundingClientRect() : null;   // V195: داخل حدود صفحة الكتابة أيضًا (تقصّ ما يخرج عنها حين يُفتح درج الأدوات)
+  const L = Math.max(pad, C ? C.left + 4 : pad), R = Math.min(document.documentElement.clientWidth - pad, C ? C.right - 4 : 1e9); let dx = 0;
+  if (r.right > R) dx = R - r.right; if (r.left + dx < L) dx = L - r.left; if (dx) m.style.transform = 'translateX(' + Math.round(dx) + 'px)'; }
 // «تابع الكتابة» في مكتبي
 function jeDeskHtml() { const L = jeList().filter(e => !RL_DONE.includes(e.c.stage) || e.c.stage === 'صدر الحكم').slice(0, 6); if (!L.length) return '';
   return '<section class="jedk" aria-labelledby="jedk_h"><div class="jedkh"><h3 id="jedk_h">تابع الكتابة</h3><span>مسوداتك المفتوحة — كل منها محفوظة حيث توقفت، وتنتقل بين أجهزتك</span></div><div class="jedkg">'
@@ -14195,6 +14196,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [195, 'الإصدار 195', ['قائمة Word في صفحة الكتابة داخل الصفحة حين يكون درج الأدوات مفتوحًا على الآيباد.']],
   [194, 'الإصدار 194', ['الوقائع ✦ «أدرج العناصر»: التاريخ يومًا/شهرًا/سنة (كان يُدرج 2026-07-27 فيبدو مقلوبًا)، وبلا نقطتين في آخر المنطوق.', '«أعد الأسماء» يملأ أيضًا 〖المستأنف〗 الذي أُدرج قبل كتابة الأسماء في الديباجة.', 'قائمة Word في صفحة الكتابة لا تخرج عن الشاشة.']],
   [193, 'الإصدار 193', ['المسودات تنتقل بين أجهزتك: ملف مستقل مشفّر في OneDrive (لا يدخل ملف الدائرة). المسودة التي فيها كتابتك تغلب المسودة الهيكلية الفارغة، وإن كُتب فيها على جهازين احتُفظ بالنسختين لتختار. ومعها نموذج الأصل والهيئة.', 'أسماء الأطراف: خانة لكل اسم و«＋» عند التعدد، وفي المتن ‹المستأنف الثاني› أو ‹المستأنفين› و‹المستأنف ضدهم› لهم جميعًا.', '«⤢ ملء الشاشة» في صفحة الكتابة: الصفحة وحدها مع الأدوات، وتكبير الخط وتصغيره، وعرض الصفحة.', 'غرفة المداولة: حال كل عضو (أُرسلت، اطّلع، موافق، له ملاحظات) وملاحظاته داخل المسودة، وقرار المداولة، و«أرسل المسودة للأعضاء» ملف Word بالأدوار بدل الأسماء — ولا شيء منها شرط للطباعة أو الإيداع.', '«ترتيبي» في مكتبي وخلاصتي: رتّب قضاياك بالسهمين ▲▼ فيُحفظ ويتزامن.', 'قائمة «مسوداتي» لا تخرج عن الشاشة على الآيفون.']],
   [192, 'الإصدار 192', ['«فحص المسودة»: كان يأخذ رقم القضية من إحالة إلى طعن تمييز («241/2010») ولا يجد المنطوق حين تبدأ المسودة بـ«حيث إن وقائع الدعوى» — أُصلح. وإن لم تكن الديباجة في النص قيل ذلك بدل التحذير.', '«نقد معمّق» و«دور الخصم» في الموقع: يُنسخ الطلب بمسودتك معتّمة إلى أداة الذكاء، وتلصق الرد فيُعرض (كانا لا يعملان إلا داخل claude.ai).', 'في صفحة الكتابة زر «١٢٣»: الأرقام بالعربية، والتاريخ يومًا/شهرًا/سنة؛ ولمسة ثانية تعيدها.', 'زر حفظ التحليل للقضية المحجوزة: «وارجع إلى القضية».']],
