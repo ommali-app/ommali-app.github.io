@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261011220049">
+<meta name="amali-build" content="20261011220941">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2826,6 +2826,9 @@ html.jefsm,html.jefsm body{overflow:hidden}
 
 /* V205 — الآيفون: «أوراق الجلسة» و«التوزيع» سطرًا، ثم الترتيب بعرضه و«ترتيب يدوي» — لا يضيق الترتيب إلى سهم */
 @media (max-width:520px){.rlsumrow .rlanqb,.rlsumrow .rlbalb{order:1!important;flex:1 1 40%;justify-content:center;min-width:0}.rlsumrow .rlsort{order:3!important;flex:1 1 58%!important;min-width:0}.rlsumrow .rlordb{order:4!important;flex:0 0 auto}}
+
+/* V206 — اسم التطبيق لا ينكمش عموده إلى صفر (Safari) */
+.brand>div:not(.seal){flex:0 0 auto}
 </style>
 </head>
 <body>
@@ -3591,7 +3594,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V205 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V206 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -4366,7 +4369,7 @@ function bgWork(kind, on) {
   else e.hidden = true;
 }
 try { window.bgWork = bgWork; } catch (e) {}
-function setView(v) { setTimeout(() => { try { brandFit(); } catch (e) {} }, 0);   // V176
+function setView(v) { [0, 200, 700].forEach(ms => setTimeout(() => { try { brandFit(); } catch (e) {} }, ms));   // V176 · V206: بعد استقرار الصفحة أيضًا
   try { const fb = document.getElementById('msk_casefab'); if (fb) fb.classList.toggle('hidden', v !== 'x' || !MSK.case); } catch (e) {}   // V190: زر «احفظ وارجع» في إخفاء الهوية وحده
   if (v !== 'j') { try { if (JE.ed && JE.ed.isConnected) jeFlush(); } catch (e) {} try { jdRestore(); } catch (e) {} }   // V178: احفظ المسودة عند الخروج   // V177: الأداة المستضافة في الدرج تعود إلى مكانها
   try { if (v !== 'j' && v !== 'y' && v !== 'h' && NAV.v === 'j' && JW.id && !JW.ret) JW.ret = JW.id; } catch (e) {}   // V177: كل خروج من مساحة الحكم يُبقي زر «↩ مساحة الحكم»
@@ -6272,7 +6275,11 @@ let HOME_ANIMED = false;
 function searchPrinciples(v) { v = (v || '').trim(); state.q = v; q.value = v; setView('p'); run(); $('#qclr').classList.toggle('hidden', !v); $('#qhint').classList.toggle('hidden', !!v); }
 document.querySelector('.brand').onclick = () => setView('h');
 // V176: اسم التطبيق في الشريط يظهر كاملًا إن اتسع له المكان، وإلا يكفي الشعار — لا كلمة مبتورة («مدا…»)
-function brandFit() { const b = document.querySelector('.brand'), h = b && b.querySelector('h1'); if (!h) return; b.classList.remove('tight'); if (h.scrollWidth > h.clientWidth + 1 || h.clientWidth < 8) b.classList.add('tight'); }
+function brandFit() {   // V206: يُخفى الاسم حين يتداخل فعلًا مع أزرار الشريط أو يفيض الشريط — لا حين يضيق عموده لحظة (كان Safari على الآيفون يُبقيه مخفيًا خارج الرئيسية)
+  const b = document.querySelector('.brand'), h = b && b.querySelector('h1'); if (!h) return; b.classList.remove('tight'); if (!b.offsetWidth) return;
+  const t = document.querySelector('.bar .tools'), bar = document.querySelector('.bar'), hr = h.getBoundingClientRect(); let ov = false;
+  if (t && t.offsetWidth && hr.width) { const tr = t.getBoundingClientRect(); ov = hr.left < tr.right + 4 && hr.right > tr.left && hr.top < tr.bottom && hr.bottom > tr.top; }
+  if (ov || h.scrollWidth > h.clientWidth + 1 || (bar && bar.scrollWidth > bar.clientWidth + 1)) b.classList.add('tight'); }
 try { const bar = document.querySelector('.bar'); if (window.ResizeObserver && bar) new ResizeObserver(() => brandFit()).observe(bar); window.addEventListener('resize', brandFit); if (document.fonts && document.fonts.ready) document.fonts.ready.then(brandFit); setTimeout(brandFit, 0); window.__brandFit = brandFit; } catch (e) {}
 
 const LAWNAME = { 'مرافعات': 'قانون المرافعات المدنية والتجارية – المرسوم بالقانون 38/1980 بتعديلاته (نص مجمَّع غير رسمي)', 'عمل 6/2010': 'قانون العمل في القطاع الأهلي رقم 6 لسنة 2010 (النص النافذ)', 'قانون 90/2013': 'قانون رقم 90 لسنة 2013 بتعديل م9 وم10', 'قانون 108/2013': 'قانون رقم 108 لسنة 2013 بتعديل م10', 'قانون 32/2016': 'قانون رقم 32 لسنة 2016 بتعديل م57 و138 و140 و142 وإضافة فقرة لـم146', 'قانون 85/2017': 'قانون رقم 85 لسنة 2017 بتعديل م51 (الفقرة الأخيرة) وم70', 'قانون 17/2018': 'قانون رقم 17 لسنة 2018 بتعديل م51 (الفقرة الأخيرة)', 'مرسوم بقانون 6/2025': 'المرسوم بقانون رقم 6 لسنة 2025 بتعديل م128 و152 و153 و154 و155 مرافعات (الجريدة الرسمية 1726)', 'عمل 38/1964': 'قانون العمل الملغي رقم 38 لسنة 1964', 'نفط 28/1969': 'قانون العمل في قطاع الأعمال النفطية رقم 28 لسنة 1969', 'قرار إداري 842/2015': 'قرار إداري رقم 842 لسنة 2015 بشأن شروط انتقال الأيدي العاملة من صاحب عمل إلى آخر', 'قرار وزاري 3/2024': 'قرار وزاري رقم 3 لسنة 2024 بشأن آلية منح تصاريح العمل وانتقال العمالة والرسوم المقررة', 'قرار إداري 680/2026': 'قرار إداري رقم 680 لسنة 2026 بتعديل بعض أحكام القرار 842/2015' };
@@ -14700,6 +14707,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [206, 'الإصدار 206', ['اسم «مداولة» بجوار الشعار يظهر في كل الصفحات على الآيفون، لا في الرئيسية وحدها. يُخفى فقط إن لم يتسع له الشريط فعلًا.']],
   [205, 'الإصدار 205', ['على الآيفون: قائمة الترتيب تحت «وضع الجلسة» كانت تضيق حتى لا يظهر منها إلا سهم؛ صارت «أوراق الجلسة» و«التوزيع» في سطر، والترتيب بعرضه مع «ترتيب يدوي» في سطر بعده.']],
   [204, 'الإصدار 204', ['«وضع الجلسة» صار زرًّا كبيرًا بعرض السطر وبلون ذهبي واضح، أول ما في سطره.', 'البحث برقم القضية من شريط البحث: اكتب «861» أو «861/2026» فتظهر قضاياك بهذا الرقم أولًا — المحجوزة والمحكوم فيها وغيرها — بحالتها، ومنها «مساحة الحكم» و«البطاقة في الرول» و«بطاقة الحكم» والحكم في الخزانة، ثم المبادئ تحتها.']],
   [203, 'الإصدار 203', ['«بطاقة الحكم» بزر اختياري لكل حكم صادر، لك وللأعضاء: المسائل التي فصل فيها، والمبادئ المستند إليها، والمواد، وما قررته الدائرة في سطر — بلا أسماء.', 'تُربط بالحكم في الخزانة: «أضف مسودتي من التطبيق» أو «أضف ملف Word للحكم» (لحكم العضو)، فيُعتَّم ويُفهرس ويُقترح منه المسائل والمواد لتراجعها.', 'تجدها في «أودِع» وفي الأرشيف (زر في كل حكم) وفي بطاقة الرول، وتظهر في «ملفات البحث» تحت «أحكام الدائرة في هذه المسألة».']],
