@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261014123807">
+<meta name="amali-build" content="20261014130910">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3606,7 +3606,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V209 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V210 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -9221,8 +9221,9 @@ async function scOdSync(opt) {
   finally { SCK.busy = false; scBar(); scRender(); } }
 async function scOdLink() {   // رابط «عرض فقط» لملفي — وإن رفضته مايكروسوفت فالإنشاء اليدوي من OneDrive
   try { let r = await odFetch(scOdPath()); if (r.status === 404) { await scOdSync({ silent: true }); r = await odFetch(scOdPath()); } if (!r.ok) throw odE('graph', r.status);
-    const c = await odFetch(scOdPath() + ':/createLink', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ type: 'view', scope: 'anonymous' }) });
-    if (!c.ok) throw odE('link', c.status); const j = await c.json(), u = j.link && j.link.webUrl; if (!u) throw odE('link');
+    const it = await r.json(), mk = async (path, sc) => odFetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(sc ? { type: 'view', scope: sc } : { type: 'view' }) });   // V210: بمعرّف الملف (المسار تحت approot رُفض 400)
+    let c = await mk('/me/drive/items/' + encodeURIComponent(it.id) + '/createLink', 'anonymous'); if (!c.ok && c.status === 400) c = await mk('/me/drive/items/' + encodeURIComponent(it.id) + '/createLink', '');
+    if (!c.ok) { let m = ''; try { const e = await c.json(); m = (e.error && (e.error.code || '') + ' ' + (e.error.message || '')).trim().slice(0, 120); } catch (er) {} throw odE('link', c.status + (m ? ' ' + m : '')); } const j = await c.json(), u = j.link && j.link.webUrl; if (!u) throw odE('link');
     SC.mylk = u; scSave(); scRender(); try { await navigator.clipboard.writeText(u); toast('نُسخ رابط ملفك — أرسله للأعضاء'); } catch (e) { toast('أُنشئ الرابط — انسخه من الخانة'); } }
   catch (e) { SC.mylkerr = (e.code || 'net') + ' ' + (e.message || '').replace(e.code || '', '').trim(); scSave(); scRender(); toast('لم يُنشأ الرابط تلقائيًا — أنشئه من OneDrive (التعليمات تحت الزر)'); } }
 function scOdHtml() {
@@ -14791,6 +14792,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [210, 'الإصدار 210', ['«انسخ رابط ملفي» في الربط المباشر: رُفض الطلب (400) على الآيفون — صار يُنشأ الرابط بمعرّف الملف، ويُعرض سبب الرفض كاملًا إن تكرر.']],
   [209, 'الإصدار 209', ['تجربة «الربط المباشر» لملف الدائرة بـ OneDrive: كل قاضٍ يكتب ملفه في حسابه، ويعطي زملاءه رابط «عرض فقط» له، فيقرؤونه تلقائيًا بعد كل قرار وعند الفتح — بلا مجلد مشترك ولا حفظ يدوي. في الإعدادات ← ملف الدائرة المشترك، بعد ربط OneDrive في «المزامنة». المجلد المشترك يبقى احتياطًا.']],
   [208, 'الإصدار 208', ['ملف الدائرة على جهاز ثانٍ للرئيس (الآيباد مثلًا): زر «الملف موجود — هذا جهاز آخر لي» يعمل على ملف الدائرة نفسه بالرمز نفسه، بدل «أنشئ» التي تنشئ ملفًا جديدًا برمز جديد. وعلى الحاسوب تنبيه قبل إنشاء ملف جديد في مجلد فيه دائرة قائمة.']],
   [207, 'الإصدار 207', ['قائمة «⋯ المزيد» في بطاقة القضية لا تختفي تحت الشريط السفلي على الآيفون: تُفتح للأعلى إن لم يتسع لها أسفل البطاقة، فيصل «تعديل» و«حذف».', 'مربع «قضية للنظر» في رأس الجلسة صار زرًّا: يعيد عرض كل قضايا الجلسة بعد اختيار «لم تُراجع» أو «غير جاهزة» أو غيرهما.']],
