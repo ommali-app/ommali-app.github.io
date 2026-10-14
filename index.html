@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261014082234">
+<meta name="amali-build" content="20261014120551">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2833,6 +2833,9 @@ html.jefsm,html.jefsm body{overflow:hidden}
 /* V207 — «⋯ المزيد» للأعلى عند الحاجة، و«قضية للنظر» زرّ الكل */
 .rlc details.more .menu{overflow-y:auto;overscroll-behavior:contain}.rlc details.more .menu.up{top:auto;bottom:calc(100% + 4px)}
 .rlstats .st.all0{cursor:pointer}
+
+/* V208 — الرئيس على جهاز ثانٍ */
+.scpj{display:flex;flex-wrap:wrap;gap:8px}.scpj .btn{flex:1 1 220px}.scpjn{margin-top:6px}
 </style>
 </head>
 <body>
@@ -3598,7 +3601,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V207 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V208 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -9145,11 +9148,12 @@ function scRender() {
     b.innerHTML = '<div class="scf"><div class="scl">دوري في الدائرة</div><div class="seg2" role="radiogroup"><button type="button" data-scr="p" class="' + (role === 'p' ? 'on' : '') + '">الرئيس</button><button type="button" data-scr="m" class="' + (role === 'm' ? 'on' : '') + '">عضو</button></div>'
       + (role === 'm' ? '<label class="scl">صفتي<select class="sel" id="sc_me">' + ['r', 'l', 'd'].filter(k => RL_W[k]).map(k => '<option value="' + k + '"' + (k === me ? ' selected' : '') + '>' + esc(RL_W[k]) + '</option>').join('') + '</select></label>' : '')
       + '<label class="scl">رمز الدائرة <small>(8 أحرف فأكثر — يُبلَّغ للأعضاء شفهيًا، ولا يُحفظ في أي ملف)</small><input type="password" id="sc_code" autocomplete="new-password" minlength="8"></label>'
-      + '<button type="button" class="btn primary" id="sc_go">' + (role === 'p' ? 'أنشئ ملف الدائرة' : 'انضم إلى ملف الدائرة') + '</button>'
+      + (role === 'p' ? '<div class="scpj"><button type="button" class="btn primary" id="sc_pj">الملف موجود — هذا جهاز آخر لي</button><button type="button" class="btn" id="sc_go">أنشئ ملف الدائرة أول مرة</button></div><p class="synote scpjn">أنشأت ملف الدائرة من قبل على جهاز آخر (الحاسوب مثلًا)؟ اختر «الملف موجود» واكتب الرمز نفسه، ثم اختر ملفات الدائرة — فيعمل هذا الجهاز على الملف نفسه. «أنشئ» تنشئ ملفًا جديدًا برمز جديد لا يقرؤه الأعضاء حتى ينضموا إليه من جديد.</p>' : '<button type="button" class="btn primary" id="sc_go">انضم إلى ملف الدائرة</button>')
       + '<p class="synote">' + (role === 'p' ? 'ستختار مجلدًا مشتركًا مع الأعضاء (مثل مجلد في OneDrive تشاركه معهم)، فينشأ فيه ملفك «الدائرة-الرئيس.mdwl»، ولكل عضو ملفه باسم صفته. الرمز نفسه يكتبه كل عضو مرة واحدة.' : 'اختر المجلد المشترك الذي فيه ملفات الدائرة (.mdwl)، واكتب الرمز الذي أبلغك به الرئيس. ملفك يُنشأ باسم صفتك.') + (fs ? '' : ' على هذا الجهاز لا وصول للمجلد: «مزامنة الآن» تختار ملفات الدائرة (.mdwl) كلها، فتُدمج، ثم تحفظ نسختك مكانها.') + '</p></div>';
     b.querySelectorAll('[data-scr]').forEach(x => x.onclick = () => { SCK.role = x.dataset.scr; scRender(); });
     if ($('#sc_me')) $('#sc_me').onchange = e => { SCK.me = e.target.value; };
     $('#sc_go').onclick = () => scJoin(role, $('#sc_me') ? $('#sc_me').value : '', $('#sc_code').value);
+    if ($('#sc_pj')) $('#sc_pj').onclick = () => scJoin('pj', 'p', $('#sc_code').value);   // V208: الرئيس على جهاز ثانٍ
     return;
   }
   // V183: الرمز غير محفوظ على هذا الجهاز (فُقدت بيانات المتصفح أو انتقلت إعدادات الدائرة دونه) — يُكتب هنا دون مغادرة ملف الدائرة
@@ -9165,10 +9169,12 @@ async function scJoin(role, me, code) {
   code = (code || '').trim(); if (code.length < 8) { toast('رمز الدائرة 8 أحرف فأكثر'); return; }
   const fs = syCanFS() && window.showDirectoryPicker;
   if (role === 'p') {
+    if (fs) { const d0 = await scPickDir(); if (!d0) { toast('اختر المجلد المشترك لإنشاء الملف'); scRender(); scBar(); return; } let L0 = []; try { L0 = await scReadDir(d0); } catch (e) {}   // V208: لا يُنشأ ملف جديد فوق دائرة قائمة دون تأكيد
+      if (L0.length && !confirm('في هذا المجلد ملفات دائرة قائمة (' + L0.length + '). إنشاء ملف جديد برمز جديد يقطع الأعضاء عنه حتى ينضموا من جديد.\n\nإن كان هذا جهازًا آخر لك فاضغط «إلغاء» ثم اختر «الملف موجود — هذا جهاز آخر لي».\n\nأنشئ ملفًا جديدًا مع ذلك؟')) { scRender(); scBar(); return; } }
     const salt = crypto.getRandomValues(new Uint8Array(16)); SCK.key = await syDerive(code, salt); SC = { role: 'p', me: 'p', salt: syB64(salt), ft: {} }; await sySet('ckey', SCK.key); scSave();
-    if (fs) { const d = await scPickDir(); if (!d) { toast('اختر المجلد المشترك لإنشاء الملف'); scRender(); scBar(); return; } await scSync({}); } else await scSend(null);
+    if (fs) { const d = SCK.dir || await scPickDir(); if (!d) { toast('اختر المجلد المشترك لإنشاء الملف'); scRender(); scBar(); return; } await scSync({}); } else await scSend(null);
   } else {
-    SCK.pass = code; SC = { role: 'm', me: me || 'r', ft: {} };
+    SCK.pass = code; SC = role === 'pj' ? { role: 'p', me: 'p', ft: {} } : { role: 'm', me: me || 'r', ft: {} };   // V208: «pj» الرئيس ينضم إلى ملفه من جهاز آخر (الملح من الملف القائم)
     if (fs) { const d = await scPickDir(); if (!d) { SC = {}; return; } const L = await scReadDir(d), ok = L.filter(x => x.d); if (!ok.length) { SC = {}; SCK.pass = ''; toast(L.length ? 'الرمز لا يفتح ملف الدائرة' : 'لا ملف للدائرة في هذا المجلد'); scRender(); return; } scSave(); await scSync({ pullOnly: true }); }
     else { SC.pending = 1; SCK.mode = ''; $('#sc_file').click(); if (rlInit) rlRender(); scRender(); return; }   // V164: الرمز يبقى في الذاكرة حتى يُختار الملف (كان يُمسح قبل الاختيار فيتعذّر الانضمام على الآيباد)
   }
@@ -14719,6 +14725,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [208, 'الإصدار 208', ['ملف الدائرة على جهاز ثانٍ للرئيس (الآيباد مثلًا): زر «الملف موجود — هذا جهاز آخر لي» يعمل على ملف الدائرة نفسه بالرمز نفسه، بدل «أنشئ» التي تنشئ ملفًا جديدًا برمز جديد. وعلى الحاسوب تنبيه قبل إنشاء ملف جديد في مجلد فيه دائرة قائمة.']],
   [207, 'الإصدار 207', ['قائمة «⋯ المزيد» في بطاقة القضية لا تختفي تحت الشريط السفلي على الآيفون: تُفتح للأعلى إن لم يتسع لها أسفل البطاقة، فيصل «تعديل» و«حذف».', 'مربع «قضية للنظر» في رأس الجلسة صار زرًّا: يعيد عرض كل قضايا الجلسة بعد اختيار «لم تُراجع» أو «غير جاهزة» أو غيرهما.']],
   [206, 'الإصدار 206', ['اسم «مداولة» بجوار الشعار يظهر في كل الصفحات على الآيفون، لا في الرئيسية وحدها. يُخفى فقط إن لم يتسع له الشريط فعلًا.']],
   [205, 'الإصدار 205', ['على الآيفون: قائمة الترتيب تحت «وضع الجلسة» كانت تضيق حتى لا يظهر منها إلا سهم؛ صارت «أوراق الجلسة» و«التوزيع» في سطر، والترتيب بعرضه مع «ترتيب يدوي» في سطر بعده.']],
