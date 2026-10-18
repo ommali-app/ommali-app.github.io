@@ -4,7 +4,7 @@
 <script>window.__DJ0 = location.hash.indexOf('#dj=') === 0 ? location.hash : '';</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261018113618">
+<meta name="amali-build" content="20261018174704">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2494,6 +2494,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
 .jeed-wrap.jefs{position:fixed;inset:0;z-index:8000;border-radius:0;border:0;background:var(--bg);padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
 .jeed-wrap.jefs .jebar{position:sticky;top:0}
 .jeed-wrap.jefs .jebody{flex:1;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch}
+.jeed-wrap.jefs .jebody{align-items:flex-start}.jeed-wrap.jefs .jepw{min-height:100%;box-sizing:border-box;align-items:flex-start}   /* V212: الصفحة تمتد بطول النص (كانت تقف عند ارتفاع الشاشة) */
 .jeed-wrap.jefs .jeout{display:none}
 .jeed-wrap.jefs .jepage{font-size:calc(var(--jez,1) * clamp(15px,2.35cqw,18.67px))}
 .jeed-wrap.jefs.wide .jepage{max-width:none}
@@ -2559,7 +2560,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
 .jeshc>footer{display:flex;gap:8px;justify-content:flex-start;padding:12px 18px;border-top:1px solid var(--line)}
 .jefg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.jefg2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .jef{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--ink2)}.jef input,.jef textarea{font:inherit;font-size:15px;padding:9px 11px;border:1px solid var(--line2);border-radius:10px;background:var(--bg);color:var(--ink);width:100%;box-sizing:border-box}
-.jefs{border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}.jefs h4{margin:0;font-size:15px}.jefs p{margin:0;font-size:13px;color:var(--ink2);line-height:1.8}.jefs .btn{align-self:flex-start}
+.jefsec{border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}.jefsec h4{margin:0;font-size:15px}.jefsec p{margin:0;font-size:13px;color:var(--ink2);line-height:1.8}.jefsec .btn{align-self:flex-start}
 .jefq textarea{width:100%;box-sizing:border-box;margin:6px 0;font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--line2);border-radius:10px;background:var(--bg);color:var(--ink)}
 .jefqs{margin:4px 0;padding-inline-start:20px;display:flex;flex-direction:column;gap:10px;font-size:13.5px}.jefqm{font-size:13px;color:var(--ink2);margin:0}
 .spin{display:inline-block;width:12px;height:12px;border:2px solid var(--line2);border-top-color:var(--gold);border-radius:50%;animation:jspin .8s linear infinite;vertical-align:-1px}@keyframes jspin{to{transform:rotate(360deg)}}
@@ -2848,6 +2849,11 @@ html.jefsm,html.jefsm body{overflow:hidden}
 .scodf{display:flex;gap:8px;align-items:flex-start;font-size:13px;line-height:1.6}.scodf input{margin-top:4px;flex:none}
 .djsteps{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:12px}.djsteps li.ok b{color:var(--ok,#1a7f4b)}.djsteps .btn{margin-top:6px}
 .djpend{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--gold-soft);border:1px solid var(--gold);border-radius:10px;padding:8px 10px;margin-bottom:10px}
+
+/* V212 — أطراف كل استئناف في ورقة الديباجة، والفاصل بينها في الديباجة */
+.jexa{border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}.jexa>b{font-size:14px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}.jexa>b small{color:var(--ink3);font-weight:400}
+#jeh_xa{display:flex;flex-direction:column;gap:10px}#jeh_xa[hidden],#jeh_gp[hidden]{display:none}.jexah{margin:0}
+.jehd .jehx{margin-top:8px}
 </style>
 </head>
 <body>
@@ -3613,7 +3619,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V211 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V212 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -4681,6 +4687,7 @@ async function dlDraftBlob(c, hide) {
   if (hide) { const RO = jeRoles(), ORD = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر'], F = weParties(rec.h.from), A = weParties(rec.h.against), C = weParties(rec.h.civil), lab = (L, r, i) => L.length > 1 ? r + ' ' + (ORD[i] || (i + 1)) : r;
     const pairs = [].concat(F.map((n, i) => [n, lab(F, RO[0], i)]), A.map((n, i) => [n, lab(A, RO[1], i)]), C.map((n, i) => [n, lab(C, 'المدعي بالحق المدني', i)])).filter(p => p[0].length >= 3).sort((x, y) => y[0].length - x[0].length);
     let html = rec.html || ''; pairs.forEach(([n, r]) => { html = html.split(JE_ESC(n)).join(r); }); rec.html = html;
+    if (Array.isArray(rec.h.xa)) rec.h.xa = rec.h.xa.map(x => { const sw = t => { let v = String(t || ''); pairs.forEach(([n, r]) => { v = v.split(n).join(r); }); return v; }; return { from: sw(x && x.from), against: sw(x && x.against) }; });   // V212
     rec.h.from = F.map((n, i) => lab(F, RO[0], i)).join('\n'); rec.h.against = A.map((n, i) => lab(A, RO[1], i)).join('\n'); if (C.length) rec.h.civil = C.map((n, i) => lab(C, 'المدعي بالحق المدني', i)).join('\n'); }
   const tmp = document.createElement('div'); tmp.innerHTML = jeClean(Object.assign(document.createElement('div'), { innerHTML: rec.html || jeSkelHtml(rec.h) }));
   const kE = JE.ed, kR = JE.rec; let paras; JE.ed = tmp; JE.rec = rec; try { paras = jeDocParas(); } finally { JE.ed = kE; JE.rec = kR; }
@@ -4958,8 +4965,10 @@ function jeAskReset(c, w, b) {   // V200: «ابدأ من جديد» — الد�
     toast('بدأتَ من جديد بالديباجة نفسها — نصك السابق محفوظ، تسترجعه من الشريط أعلى الصفحة'); jeEditor(c, w); })(); }
 function jeAskDel(c, w) { const b = w.querySelector('[data-jew=del],[data-jem=del]'); if (b && !b.dataset.sure) { b.dataset.sure = '1'; b.textContent = 'تأكيد الحذف؟ لا يمكن التراجع'; setTimeout(() => { if (b.isConnected) { delete b.dataset.sure; b.textContent = 'احذف المسودة من هذا الجهاز'; } }, 4000); return; }
   jeDel(c.id).then(() => { JE.rec = null; JE.ed = null; JE.dirty = undefined; toast(odOn() ? 'حُذفت المسودة — وتُحذف من أجهزتك الأخرى عند المزامنة' : 'حُذفت المسودة من هذا الجهاز'); jwRender(); }); }
-function jeHeadHtml(H) { const d = Object.assign({}, H), M = weCfg(), fr = weNumbered(weParties(d.from)), ag = weNumbered(weParties(d.against));
-  return '<button type="button" class="jehd" data-jeh title="عدّل الديباجة والأسماء"><span class="jeht">' + esc(weTitle(d)) + '</span><span><b>' + esc(M.fromL) + ':</b> ' + (fr.length ? fr.map(esc).join('<br>') : '<i>اكتب الأسماء ✎</i>') + '</span><span class="jehc">ضد</span><span>' + (ag.length ? ag.map(esc).join('<br>') : '<i>…</i>') + '</span><span class="jehp">' + esc(wePre(d, M)) + '</span></button>'; }
+function jeHeadHtml(H) { const d = Object.assign({}, H), M = weCfg(), fr = weNumbered(weParties(d.from)), ag = weNumbered(weParties(d.against)), XA = weXa(d);
+  const pr = XA ? XA.map((x, i) => '<span' + (i ? ' class="jehx"' : '') + '><b>' + esc(weXaLab(i, M)) + ':</b> ' + (x.fr.length ? x.fr.map(esc).join('<br>') : '<i>…</i>') + '</span><span class="jehc">' + WE_DD + '</span><span>' + (x.ag.length ? x.ag.map(esc).join('<br>') : '<i>…</i>') + '</span>').join('')   // V212
+    : '<span><b>' + esc(M.fromL) + ':</b> ' + (fr.length ? fr.map(esc).join('<br>') : '<i>اكتب الأسماء ✎</i>') + '</span><span class="jehc">ضد</span><span>' + (ag.length ? ag.map(esc).join('<br>') : '<i>…</i>') + '</span>';
+  return '<button type="button" class="jehd" data-jeh title="عدّل الديباجة والأسماء"><span class="jeht">' + esc(weTitle(d)) + '</span>' + pr + '<span class="jehp">' + esc(wePre(d, M)) + '</span></button>'; }
 function jeEditor(c, w, fresh) {
   const R = JE.rec; if (!R.html) R.html = jeSkelHtml(R.h);
   const x = jeIdx()[c.id] || {}, stale = x.wd && x.u && x.u > x.wd + 1500;
@@ -5128,9 +5137,24 @@ function jeHeadSheet(c, w) {
   const H = JE.rec.h, M = weCfg(), cri = !!M.cri, RO = jeRoles();
   const f = (k, l, ph, ta) => '<label class="jef"><span>' + l + '</span>' + (ta ? '<textarea id="jeh_' + k + '" rows="3" placeholder="' + esc(ph || '') + '">' + esc(H[k] || '') + '</textarea>' : '<input id="jeh_' + k + '" value="' + esc(H[k] || '') + '" placeholder="' + esc(ph || '') + '">') + '</label>';
   jeSheet('الديباجة والأسماء', '<p class="k">الأسماء داخل المسودة المشفّرة وحدها؛ لا تُحفظ في البطاقة ولا تدخل ملف الدائرة، وتنتقل بين أجهزتك مع المسودة. اسم في كل خانة، و«＋» عند التعدد — فتُرقَّم في الديباجة، وتكتب في المتن ‹' + RO[0] + ' الثاني› أو ‹' + (RO[0] === 'المستأنف' ? 'المستأنفين' : RO[0] === 'المدعي' ? 'المدعين' : RO[0]) + '› لهم جميعًا.</p><div class="jefg">' + f('appealNo', M.no || 'رقم الاستئناف', M.noPh || '123/2026') + f('circuit', 'الدائرة', profKind() === 'lab' && M.key === 'lab' ? 'عمالي/2' : (M.cph || '')) + f('session', 'جلسة النطق', '21/10/2026') + f('autoId', 'الرقم الآلي', '') + (M.reg ? f('reg', 'المقيدة برقم', M.rph || '') : '') + '</div>'
-    + '<div class="jefg2">' + jePartyBox('from', (M.fromL || 'المقام من') + ' (' + RO[0] + ')', RO[0], H.from) + jePartyBox('against', 'ضد (' + RO[1] + ')', RO[1], H.against) + (cri ? jePartyBox('civil', 'المدعي بالحق المدني', 'مدعٍ بالحق المدني', H.civil) : '') + '</div><div class="jefg">' + f('amount', 'أتعاب المحاماة', 'مثال: 100 د.ك') + '</div>',
-    [['حفظ', true, s => { ['appealNo', 'circuit', 'session', 'autoId', 'reg', 'amount'].forEach(k => { const e = document.getElementById('jeh_' + k); if (e) H[k] = jeRlm(e.value.trim()); }); ['from', 'against', 'civil'].forEach(k => { const v = jePartyGet(s, k); if (v != null) H[k] = v; }); JE.dirty = true; jeFlush(); const hd = w.querySelector('[data-jeh]'); if (hd) { hd.outerHTML = jeHeadHtml(H); w.querySelector('[data-jeh]').onclick = () => jeHeadSheet(c, w); } jeOutSync(true); return true; }]], jePartyWire);
+    + '<div class="jefg2" id="jeh_gp">' + jePartyBox('from', (M.fromL || 'المقام من') + ' (' + RO[0] + ')', RO[0], H.from) + jePartyBox('against', 'ضد (' + RO[1] + ')', RO[1], H.against) + (cri ? jePartyBox('civil', 'المدعي بالحق المدني', 'مدعٍ بالحق المدني', H.civil) : '') + '</div><div id="jeh_xa"></div><div class="jefg">' + f('amount', 'أتعاب المحاماة', 'مثال: 100 د.ك') + '</div>',
+    [['حفظ', true, s => { ['appealNo', 'circuit', 'session', 'autoId', 'reg', 'amount'].forEach(k => { const e = document.getElementById('jeh_' + k); if (e) H[k] = jeRlm(e.value.trim()); });
+      const XS = jeXaGet(s); if (XS) { H.xa = XS; const U = k => [...new Set(XS.flatMap(x => weParties(x[k])))].join('\n'); H.from = U('from'); H.against = U('against'); }   // V212: الأطراف العامة = مجموع أطراف الاستئنافات (للأدوار والتعتيم)
+      else { delete H.xa; ['from', 'against'].forEach(k => { const v = jePartyGet(s, k); if (v != null) H[k] = v; }); }
+      { const v = jePartyGet(s, 'civil'); if (v != null) H.civil = v; } JE.dirty = true; jeFlush(); const hd = w.querySelector('[data-jeh]'); if (hd) { hd.outerHTML = jeHeadHtml(H); w.querySelector('[data-jeh]').onclick = () => jeHeadSheet(c, w); } jeOutSync(true); return true; }]], s => { jePartyWire(s); jeXaWire(s, H); });
 }
+// V212: الاستئنافات المتعددة — «أطراف كل استئناف» تظهر بدل الخانتين العامتين متى كان في «رقم الاستئناف» رقمان فأكثر
+function jeXaVals(s) { const bx = s.querySelector('#jeh_xa'); if (!bx || bx.hidden) return null; return [...bx.querySelectorAll('.jexa')].map((d, i) => ({ from: jePartyGet(s, 'xf' + i) || '', against: jePartyGet(s, 'xg' + i) || '' })); }
+function jeXaGet(s) { const V = jeXaVals(s); return V && V.length >= 2 && V.some(x => x.from || x.against) ? V : null; }
+function jeXaWire(s, H) { const M = weCfg(), RO = jeRoles(), box = s.querySelector('#jeh_xa'), gp = s.querySelector('#jeh_gp'), no = s.querySelector('#jeh_appealNo'); if (!box || !no) return;
+  let last = -1; const draw = (force, given) => { const a = weAppeals(no.value); if (!force && a.length === last) return; last = a.length; const prev = given || jeXaVals(s); if (M.cri || a.length < 2) { box.hidden = true; box.innerHTML = ''; if (gp) gp.hidden = false; return; }
+    const G = { from: jePartyGet(s, 'from') || H.from || '', against: jePartyGet(s, 'against') || H.against || '' }, X = Array.isArray(H.xa) ? H.xa : [];
+    const val = i => (prev && prev[i]) || X[i] || (i === 0 ? G : i === 1 ? { from: G.against, against: G.from } : { from: '', against: '' });
+    box.hidden = false; if (gp) gp.hidden = true;
+    box.innerHTML = '<p class="k jexah">أطراف كل استئناف — تظهر في الديباجة «الأول المقام من … ضد …» ثم «والثاني المقام من … ضد …».</p>' + a.map((n, i) => { const v = val(i); return '<div class="jexa"><b>الاستئناف ' + (WE_ORD[i] || i + 1) + ' <small dir="ltr">' + esc(n) + '</small>' + (i ? ' <button type="button" class="linkbtn" data-jxr="' + i + '">عكس الأول ⇄</button>' : '') + '</b><div class="jefg2">' + jePartyBox('xf' + i, weXaLab(i, M).replace(/^و/, '') + ' (' + RO[0] + ')', RO[0], v.from) + jePartyBox('xg' + i, 'ضد (' + RO[1] + ')', RO[1], v.against) + '</div></div>'; }).join('');
+    jePartyWire(box);
+    box.querySelectorAll('[data-jxr]').forEach(b => b.onclick = () => { const V = jeXaVals(s), i = +b.dataset.jxr; if (!V) return; V[i] = { from: V[0].against, against: V[0].from }; draw(true, V); }); };
+  no.addEventListener('change', () => draw()); no.addEventListener('input', () => draw()); draw(); }
 function jeSheet(title, body, acts, onOpen) {
   let s = document.getElementById('jesheet'); if (s) s.remove(); s = el('div', 'jesheet'); s.id = 'jesheet'; s.setAttribute('role', 'dialog'); s.setAttribute('aria-modal', 'true'); s.setAttribute('aria-label', title);
   s.innerHTML = '<div class="jeshb" data-jsx></div><div class="jeshc"><header><b>' + title + '</b><button type="button" class="ib" data-jsx aria-label="إغلاق">✕</button></header><div class="jeshm">' + body + '</div>' + (acts && acts.length ? '<footer>' + acts.map((a, i) => '<button type="button" class="btn' + (a[1] ? ' primary' : '') + '" data-jsa="' + i + '">' + a[0] + '</button>').join('') + '</footer>' : '') + '</div>';
@@ -5199,10 +5223,10 @@ function jeFactsPrompt(c, text) { const [ap, ae] = jeRoles(); return 'أنت ت�
 function jeFactsSheet(c, w) {
   const A = c.an && c.an.v === 2 ? c.an : null, ai = !PROF_HIDE.has('i') && !isHid('i');
   jeSheet('الوقائع — مساعدة اختيارية', '<p class="k">ما يُدرج يظهر مظلّلًا حتى تراجعه وتعدّله، ويُدرج عند المؤشر (ضعه في قسم الوقائع).</p>'
-    + '<section class="jefs"><h4>عناصر المسودة — من واقع الأوراق</h4><p>' + (A ? 'بترتيب الحكم: الدعوى أمام أول درجة، والخبير، والمنطوق، وتسبيبه، وصحيفة الاستئناف، ونظره، ثم عناوين الأوجه لتكتب ردّك. بيانات منقولة بالصفات لا صياغة؛ وما لم يرد يبقى 〖موضعًا〗.' : 'لم يُحلَّل ملف هذه القضية بعد — حلّله من «تعرّف» فتظهر العناصر هنا.') + '</p>' + (A ? anElemsHtml(A, c, true) + '<div class="jeels"><button type="button" class="btn primary" data-jf="el">↵ أدرج المحدد بالترتيب</button></div>' : '') + '</section>'
-    + (ai ? '<section class="jefs"><h4>لخّص الوقائع وصحيفة الاستئناف <span class="aitag">✦ ذكاء</span></h4><p>أوراق PDF أو صور: تُعتَّم صفحةً صفحة (كما في «تحليل الملف») وتُرسل صورًا معتّمة مع الطلب — بلا قراءة ضوئية لنصها. وملفات Word تُقرأ نصًا كما هي. تلصق الرد هنا فيُدرج بالأسماء من الديباجة. التلخيص للوقائع والطلبات وأوجه النعي وحدها — لا أسباب ولا رأي في النتيجة.</p>'
+    + '<section class="jefsec"><h4>عناصر المسودة — من واقع الأوراق</h4><p>' + (A ? 'بترتيب الحكم: الدعوى أمام أول درجة، والخبير، والمنطوق، وتسبيبه، وصحيفة الاستئناف، ونظره، ثم عناوين الأوجه لتكتب ردّك. بيانات منقولة بالصفات لا صياغة؛ وما لم يرد يبقى 〖موضعًا〗.' : 'لم يُحلَّل ملف هذه القضية بعد — حلّله من «تعرّف» فتظهر العناصر هنا.') + '</p>' + (A ? anElemsHtml(A, c, true) + '<div class="jeels"><button type="button" class="btn primary" data-jf="el">↵ أدرج المحدد بالترتيب</button></div>' : '') + '</section>'
+    + (ai ? '<section class="jefsec"><h4>لخّص الوقائع وصحيفة الاستئناف <span class="aitag">✦ ذكاء</span></h4><p>أوراق PDF أو صور: تُعتَّم صفحةً صفحة (كما في «تحليل الملف») وتُرسل صورًا معتّمة مع الطلب — بلا قراءة ضوئية لنصها. وملفات Word تُقرأ نصًا كما هي. تلصق الرد هنا فيُدرج بالأسماء من الديباجة. التلخيص للوقائع والطلبات وأوجه النعي وحدها — لا أسباب ولا رأي في النتيجة.</p>'
       + '<div class="jefq" id="je_fq"></div></section>' : '')
-    + '<section class="jefs"><h4>أعد الأسماء في المسودة</h4><p>يستبدل الرموز ‹' + jeRoles()[0] + '› ‹' + jeRoles()[1] + '›… في النص بالأسماء التي في الديباجة.</p><button type="button" class="btn" data-jf="nm">أعد الأسماء</button></section>', [], s => {
+    + '<section class="jefsec"><h4>أعد الأسماء في المسودة</h4><p>يستبدل الرموز ‹' + jeRoles()[0] + '› ‹' + jeRoles()[1] + '›… في النص بالأسماء التي في الديباجة.</p><button type="button" class="btn" data-jf="nm">أعد الأسماء</button></section>', [], s => {
       const eb = s.querySelector('[data-jf=el]'); if (eb) eb.onclick = () => { const K = [...s.querySelectorAll('[data-aelc]')].filter(x => x.checked).map(x => +x.dataset.aelc); if (!K.length) { toast('اختر عنصرًا واحدًا على الأقل'); return; } const r = jeNames(jeElems(c, K)); s.close(); jeInsText(r.t, true); toast('أُدرجت ' + K.length + ' من عناصر المسودة — مظلّلة حتى تراجعها'); };
       s.querySelectorAll('[data-aeli]').forEach(b => b.onclick = () => { const k = +b.dataset.aeli, r = jeNames(jeElems(c, [k])); s.close(); jeInsText(r.t, true); toast('أُدرج العنصر ' + k + ' — مظلّلًا حتى تراجعه'); });   // V198
       s.querySelector('[data-jf=nm]').onclick = () => { const n = jeNamesInEd(); s.close(); toast(n.n ? 'أُعيد ' + n.n + ' اسمًا من الديباجة' + (n.miss ? ' · ' + n.miss + ' بلا اسم في الديباجة (〖〗)' : '') : n.miss ? 'لا أسماء في الديباجة — اكتبها من «الديباجة»' : 'لا رموز أسماء في المسودة'); };
@@ -8490,7 +8514,7 @@ async function rlReadFile(file, st) {
       const its = tc.items.filter(x => x.str && x.str.trim()).map(x => ({ s: x.str, x: x.transform[4] + (x.width || 0) / 2, w: x.width || 0, y: off + vp.height - x.transform[5], h: Math.abs(x.transform[3]) || x.height || 10, pg: i }));
       text += tc.items.map(x => x.str).join(' ') + '\n';
       if (its.filter(x => /\d/.test(x.s)).length >= 3) items = items.concat(rlGlyphWords(its));
-      else { st.textContent = 'الصفحة ' + i + ' ممسوحة — قراءة ضوئية على جهازك…'; const v2 = page.getViewport({ scale: 3 }); const cv = document.createElement('canvas'); cv.width = v2.width; cv.height = v2.height; await page.render({ canvasContext: cv.getContext('2d'), viewport: v2 }).promise; const blob = await new Promise(r => cv.toBlob(r, 'image/png')); const R = await rlReadImage(blob, st); scanned = scanned.concat(R.rows); if (R.meta) smeta = Object.assign(smeta, R.meta); if (R.clerk) sclerk = { seq: R.clerk.seq, seen: scanned.length }; }
+      else { st.textContent = 'الصفحة ' + i + ' ممسوحة — قراءة ضوئية على جهازك…'; const v2 = page.getViewport({ scale: 3 }); const cv = document.createElement('canvas'); cv.width = v2.width; cv.height = v2.height; await page.render({ canvasContext: cv.getContext('2d'), viewport: v2, intent: 'print' }).promise; const blob = await new Promise(r => cv.toBlob(r, 'image/png')); const R = await rlReadImage(blob, st); scanned = scanned.concat(R.rows); if (R.meta) smeta = Object.assign(smeta, R.meta); if (R.clerk) sclerk = { seq: R.clerk.seq, seen: scanned.length }; }
     }
   } else if (/^image\//.test(file.type)) { st.textContent = 'قراءة ضوئية للصورة على جهازك…'; return await rlReadImage(file, st); }
   else { text = await file.text(); return { rows: rlParseText(text, rlWho), meta: rlMeta(text) }; }
@@ -11970,7 +11994,7 @@ async function inPdfToImages(file) {
     const page = await pdf.getPage(i);
     try { const tc = await page.getTextContent(); text += tc.items.map(x => x.str).join(' ') + '\n'; } catch (e) {}
     const sc = Math.min(IS_IOS ? 3 : 9, window.__pdfScale || await ocrNativeScale(page)); /* V172: سقف على الآيباد والآيفون لذاكرة Safari */ /* V154: بدقة الصورة الممسوحة نفسها (كان 3 ثابتًا) */ const vp = page.getViewport({ scale: sc }); const cv = document.createElement('canvas'); cv.width = vp.width; cv.height = vp.height;
-    await page.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
+    await page.render({ canvasContext: cv.getContext('2d'), viewport: vp, intent: 'print' }).promise;
     const blob = await new Promise(res => cv.toBlob(res, 'image/png')); /* V154: بلا ضغط JPEG — يشوّه حواف الحروف */ cv.width = 0; cv.height = 0; /* V172: تحرير ذاكرة اللوحة فورًا */ out.push({ blob, name: file.name + ' – ص' + i });
   }
   const arab = (text.match(/[ء-ي]/g) || []).length; const good = arab > 200 && arab / Math.max(1, text.replace(/\s/g, '').length) > 0.6;
@@ -12568,6 +12592,10 @@ const WE_AUTHS = ['النيابة العامة', 'الإدارة العامة ل
 function weAuth(M) { if (M.key === 'jn') return 'النيابة العامة'; const e = $('#we_auth'); return (e && e.value) || 'النيابة العامة'; }
 function weCfg() { const k = weModeKey(); return k === 'lab' ? { key: 'lab', fromL: 'المقام من' } : Object.assign({ key: k }, WE_MODES[k]); }
 function wePre(d, M) { return M.cri ? 'بعد سماع المرافعة والاطلاع على الأوراق والمداولة:' : 'بعد الاطلاع على الأوراق وسماع المرافعة والمداولة:'; }   // V96: صيغة عامة لكل القضايا الجزائية
+// V212: الاستئنافات المتعددة المتقابلة — لكل استئناف «المقام من … ضد …»: «الأول المقام من» ثم «والثاني المقام من» (d.xa = [{from, against}])
+const WE_ORD = ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر'], WE_DD = 'ضـــــــــــد';
+function weXa(d) { const M = weCfg(), a = weAppeals(d && d.appealNo), X = d && Array.isArray(d.xa) ? d.xa : []; if (M.cri || a.length < 2 || X.length < 2) return null; const L = X.slice(0, a.length).map(x => ({ fr: weNumbered(weParties(x && x.from)), ag: weNumbered(weParties(x && x.against)) })); return L.length >= 2 && L.some(x => x.fr.length || x.ag.length) ? L : null; }
+function weXaLab(i, M) { return (i ? 'و' : '') + (WE_ORD[i] || String(i + 1)) + ' ' + (M || weCfg()).fromL; }
 function weCivil(d, M) { return M.cri ? weNumbered(weParties(d.civil)) : []; }
 function weTitle(d) {
   const M = weCfg(), a = weAppeals(d.appealNo), arD = /[٠-٩]/.test(String(d.appealNo || '') + String(d.session || '')), cv0 = d.circuit || (profKind() === 'lab' && M.key === 'lab' ? 'عمالي/2' : ''), cv = arD ? cv0.replace(/[0-9]/g, x => '٠١٢٣٤٥٦٧٨٩'[+x]) : cv0, c = cv ? ' ' + cv : '';   // V197: رقم الدائرة بأرقام الديباجة نفسها
@@ -12580,11 +12608,16 @@ function weBuild(d) {
   // العنوان (وسط + تحته خط)
   paras.push(wePara(weTitle(d), { jc: 'center', u: true, b: true }));
   paras.push(wePara('', { jc: 'center' }));
-  const fr = weNumbered(weParties(d.from)), ag = weNumbered(weParties(d.against)), M = weCfg(), cvl = weCivil(d, M);
+  const fr = weNumbered(weParties(d.from)), ag = weNumbered(weParties(d.against)), M = weCfg(), cvl = weCivil(d, M), XA = weXa(d);
+  if (XA) XA.forEach((x, i) => { const lb = weXaLab(i, M);   // V212
+    if (x.fr.length > 1) { paras.push(wePara([{ t: lb + ':', b: true }], { jc: 'center' })); x.fr.forEach(y => paras.push(wePara(y, { jc: 'center' }))); }
+    else paras.push(wePara([{ t: lb + ': ', b: true }, { t: x.fr[0] || '.........' }], { jc: 'center' }));
+    paras.push(wePara(WE_DD, { jc: 'center', b: true })); (x.ag.length ? x.ag : ['.........']).forEach(y => paras.push(wePara(y, { jc: 'center' }))); });
+  else {
   if (fr.length > 1) { paras.push(wePara([{ t: M.fromL + ':', b: true }], { jc: 'center' })); fr.forEach(x => paras.push(wePara(x, { jc: 'center' }))); }
   else paras.push(wePara([{ t: M.fromL + ': ', b: true }, { t: fr[0] || '.........' }], { jc: 'center' }));
   paras.push(wePara('ضد', { jc: 'center', b: true }));
-  (ag.length ? ag : ['.........']).forEach(x => paras.push(wePara(x, { jc: 'center' })));
+  (ag.length ? ag : ['.........']).forEach(x => paras.push(wePara(x, { jc: 'center' }))); }
   if (cvl.length === 1) paras.push(wePara([{ t: 'والمدعي بالحق المدني: ', b: true }, { t: cvl[0] }], { jc: 'center' }));
   else if (cvl.length > 1) { paras.push(wePara([{ t: 'والمدعون بالحق المدني:', b: true }], { jc: 'center' })); cvl.forEach(x => paras.push(wePara(x, { jc: 'center' }))); }
   paras.push(wePara('', { jc: 'center' }));
@@ -13409,12 +13442,12 @@ async function pgPages(S, si, only) {   // صفحات المصدر بأبعاد�
   }
   return out;
 }
-async function pgCanvas(S, pg, mode, k) {   // mode 'ocr': بدقة المسح (ويضبط pg.s) | 'px': بعرض k بكسل
+async function pgCanvas(S, pg, mode, k) {   // V212: الرسم بغرض print لا ينتظر requestAnimationFrame فلا يتوقف حين تُخفى النافذة؛ mode 'ocr': بدقة المسح (ويضبط pg.s) | 'px': بعرض k بكسل
   const cv = document.createElement('canvas');
   if (S.kind === 'pdf') { const p = await S.doc.getPage(pg.i + 1); let sc;
     if (mode === 'ocr') { sc = pg.s || Math.min(IS_IOS ? 3 : 9, window.__pdfScale || await ocrNativeScale(p)); pg.s = sc; } else sc = k / pg.pw;
     const vp = p.getViewport({ scale: sc }); cv.width = Math.max(1, Math.round(vp.width)); cv.height = Math.max(1, Math.round(vp.height)); const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height);
-    await p.render({ canvasContext: cx, viewport: vp }).promise; try { p.cleanup(); } catch (e) {} return cv; }
+    await p.render({ canvasContext: cx, viewport: vp, intent: 'print' }).promise; try { p.cleanup(); } catch (e) {} return cv; }
   const bm = await createImageBitmap(S.blob); let W = bm.width, H = bm.height;
   if (mode === 'ocr') { const f = pg.s || Math.min(1, (IS_IOS ? 3600 : 6000) / Math.max(W, H)); pg.s = f; W = Math.round(W * f); H = Math.round(H * f); } else { W = Math.round(k); H = Math.round(k / pg.ar); }
   cv.width = Math.max(1, W); cv.height = Math.max(1, H); const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height); cx.drawImage(bm, 0, 0, cv.width, cv.height); try { bm.close(); } catch (e) {} return cv;
@@ -14858,6 +14891,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [212, 'الإصدار 212', ['إخفاء الهوية والقراءة الضوئية وتحليل الملف لا تتوقف حين تنتقل إلى برنامج آخر أو تبويب آخر على الحاسوب، ولا حين تنتقل إلى شاشة أخرى داخل التطبيق.', 'ملء الشاشة في «اكتب»: الصفحة البيضاء تمتد بطول النص، وتكبير الخط يشمل المتن كله لا الديباجة وحدها.', 'أكثر من استئناف: في «الديباجة والأسماء» خانات لأطراف كل استئناف، وتظهر في المسودة وفي Word: «الأول المقام من … ضـــد …» ثم «والثاني المقام من … ضـــد …»، وزر «عكس الأول» للاستئناف المقابل.']],
   [211, 'الإصدار 211', ['«الدعوة» لملف الدائرة: رابط واحد ترسله بواتساب (فيه روابط الملفات دون الرمز). يفتحه العضو فيدخل بحساب مايكروسوفت ويكتب الرمز، فينضم دون مجلد ولا اختيار ملفات، ويعيد إليك «ردّه» برابط ملفه فيُضاف وحده.', 'إعدادات الدائرة والربط المباشر وروابط الأعضاء تنتقل بين أجهزتك مع مزامنتك الشخصية — يُكتب رمز الدائرة مرة واحدة على كل جهاز.', '«فترة الانتقال»: الحاسوب المربوط بالمجلد المشترك يكتب ملفك فيه أيضًا ويقرأ منه، حتى يتحول كل الأعضاء.']],
   [210, 'الإصدار 210', ['«انسخ رابط ملفي» في الربط المباشر: رُفض الطلب (400) على الآيفون — صار يُنشأ الرابط بمعرّف الملف، ويُعرض سبب الرفض كاملًا إن تكرر.']],
   [209, 'الإصدار 209', ['تجربة «الربط المباشر» لملف الدائرة بـ OneDrive: كل قاضٍ يكتب ملفه في حسابه، ويعطي زملاءه رابط «عرض فقط» له، فيقرؤونه تلقائيًا بعد كل قرار وعند الفتح — بلا مجلد مشترك ولا حفظ يدوي. في الإعدادات ← ملف الدائرة المشترك، بعد ربط OneDrive في «المزامنة». المجلد المشترك يبقى احتياطًا.']],
