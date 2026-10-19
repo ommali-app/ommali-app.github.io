@@ -4,7 +4,7 @@
 <script>window.__DJ0 = location.hash.indexOf('#dj=') === 0 ? location.hash : '';</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261018174704">
+<meta name="amali-build" content="20261019073124">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2854,6 +2854,11 @@ html.jefsm,html.jefsm body{overflow:hidden}
 .jexa{border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}.jexa>b{font-size:14px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}.jexa>b small{color:var(--ink3);font-weight:400}
 #jeh_xa{display:flex;flex-direction:column;gap:10px}#jeh_xa[hidden],#jeh_gp[hidden]{display:none}.jexah{margin:0}
 .jehd .jehx{margin-top:8px}
+
+/* V213 — ما يُطبع في قائمة الاستئناف */
+.apsel{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:8px 0}.apsel>span{font-size:13px;color:var(--ink2)}.apsel small{flex-basis:100%;color:var(--ink3);font-size:12px}
+.aplist .api{width:18px;height:18px;margin:0;flex:none;accent-color:var(--accent)}.aplist li.apx{opacity:.55}
+.aplist li{grid-template-columns:20px 22px auto minmax(0,1fr)}.aplist li .apst,.aplist li .linkbtn{grid-column:3/-1}
 </style>
 </head>
 <body>
@@ -3619,7 +3624,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V212 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V213 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -5246,11 +5251,11 @@ async function jeFqFromMask(c) {   // من صفحات «إخفاء الهوية�
 function jeFactsPromptImg(c, Q) { return jeFactsPrompt(c, '').replace('من أوراق القضية المرفقة أدناه وحدها، وقد عُتّمت الأسماء فيها بـ ■■■', 'من صور صفحات أوراق القضية في ملف PDF المرفق وحدها، وقد عُتّمت الأسماء فيها بمستطيلات سوداء — ما تحت المستطيل لا تحاول قراءته')
   .replace(/أوراق القضية \(معتَّمة\):\n———\n$/, '[الأوراق في الملف المرفق «' + Q.fname + '» — ' + Q.n + ' صفحة، بالترتيب]') + inSessBlock(c); }
 function jeFqImgDraw(c, box, sh, Q) { const can = bqCanShare();
-  box.innerHTML = '<p class="jefqm">✓ ' + Q.n + ' صفحة معتّمة في «<bdi>' + esc(Q.fname) + '</bdi>».</p><ol class="jefqs"><li><div class="row">' + (can ? '<button type="button" class="btn primary" data-jq="share">شارك الملف وانسخ الطلب</button>' : '') + '<button type="button" class="btn' + (can ? '' : ' primary') + '" data-jq="dl">نزّل الملف</button><button type="button" class="btn" data-jq="cp">' + (Q.copied ? '✓ نُسخ — انسخ ثانية' : 'انسخ الطلب') + '</button></div> ثم افتح محادثة جديدة في Claude، وأرفق الملف، والصق الطلب.</li>'
+  box.innerHTML = '<p class="jefqm">✓ ' + Q.n + ' صفحة معتّمة في «<bdi>' + esc(Q.fname) + '</bdi>».</p><ol class="jefqs"><li><div class="row">' + (can ? '<button type="button" class="btn primary" data-jq="share">شارك الملف وانسخ الطلب</button>' : '') + '<button type="button" class="btn' + (can ? '' : ' primary') + '" data-jq="dl">' + (can ? 'نزّل الملف' : 'نزّل الملف وانسخ الطلب') + '</button><button type="button" class="btn" data-jq="cp">' + (Q.copied ? '✓ نُسخ — انسخ ثانية' : 'انسخ الطلب') + '</button></div> ثم افتح محادثة جديدة في Claude، وأرفق الملف، والصق الطلب.</li>'
     + '<li>انسخ الرد كاملًا والصقه هنا:<textarea id="je_fqr" rows="5" placeholder="الصق رد أداة الذكاء"></textarea><div class="row">' + (navigator.clipboard && navigator.clipboard.readText ? '<button type="button" class="btn" data-jq="clip">📋 الصق من الحافظة</button>' : '') + '<button type="button" class="btn primary" data-jq="ins">↵ أدرج في الوقائع بالأسماء</button></div></li></ol><button type="button" class="linkbtn" data-jq="re">أوراق أخرى</button>';
   const cp = () => { copy(jeFactsPromptImg(c, Q), 'نُسخ الطلب — الصقه مع الملف في أداة الذكاء'); Q.copied = true; };
   { const b = box.querySelector('[data-jq=share]'); if (b) b.onclick = () => { cp(); try { navigator.share({ files: [Q.file] }).catch(() => {}); } catch (e) { toast('المشاركة غير متاحة — نزّل الملف'); } }; }
-  box.querySelector('[data-jq=dl]').onclick = () => { pgSave(Q.file, Q.fname).catch(() => toast('تعذّر الحفظ')); };
+  box.querySelector('[data-jq=dl]').onclick = () => { if (!can) cp(); pgSave(Q.file, Q.fname).then(() => { if (!can) toast(BQ_DLT); }, () => toast('تعذّر الحفظ')); };   // V213
   box.querySelector('[data-jq=cp]').onclick = () => { cp(); jeFqDraw(c, box, sh); };
   { const b = box.querySelector('[data-jq=clip]'); if (b) b.onclick = async () => { try { box.querySelector('#je_fqr').value = await navigator.clipboard.readText(); } catch (e) { toast('اسمح بالوصول إلى الحافظة أو الصق يدويًا'); } }; }
   box.querySelector('[data-jq=re]').onclick = () => { JE.fq = { cid: c.id, st: 'pick' }; jeFqDraw(c, box, sh); };
@@ -5796,7 +5801,11 @@ let AP_MB = null, AP_FONT = null;
 async function apFonts() { if (!AP_FONT) AP_FONT = (async () => { try { await Promise.all(['400 10pt Cairo', '700 10pt Cairo'].map(f => document.fonts.load(f))); } catch (e) {} })(); return AP_FONT; }
 function apMeasure(html, wmm) { if (!AP_MB || !AP_MB.isConnected) { AP_MB = document.createElement('div'); AP_MB.setAttribute('aria-hidden', 'true'); AP_MB.style.cssText = 'position:absolute;left:-9999px;top:0;visibility:hidden;zoom:1;pointer-events:none'; AP_MB.innerHTML = '<style>' + AP_CSS + '</style><div></div>'; document.body.appendChild(AP_MB); } const b = AP_MB.lastChild; b.style.width = wmm + 'mm'; b.innerHTML = html; return b.getBoundingClientRect().height / AP_PX; }
 // خطة قضية: ما يُطبع في العمود وما يُكمل في ورقة المتابعة
-const AP = { st: {}, day: '', last: null, job: null };
+const AP = { st: {}, day: '', last: null, job: null, pick: {} };
+// V213: ما يُطبع — «المحجوزة للحكم وحدها» (أوراقها تبقى مع الهيئة بعد الجلسة) أو «كل القضايا»، ومربع لكل قضية يغيّر الاختيار لها وحدها
+function apOnly() { try { return localStorage.getItem('tm_apsel') === 'all' ? 'all' : 'res'; } catch (e) { return 'res'; } }
+function apIsRes(c, d) { const h = apDecOn(c, d); return !!h && (/^حجز للحكم/.test(h.a || '') || h.a === 'مد أجل النطق'); }
+function apInc(c, d) { return Object.prototype.hasOwnProperty.call(AP.pick, c.id) ? !!AP.pick[c.id] : apOnly() === 'all' || apIsRes(c, d); }
 const AP_ST = [['top', 'من أعلى العمود — تُطبع كل الجلسات المسجّلة'], ['q1', 'تحت الكتابة الموجودة: بعد ربع العمود'], ['q2', 'تحت الكتابة الموجودة: بعد نصف العمود'], ['q3', 'تحت الكتابة الموجودة: بعد ثلاثة أرباعه'], ['full', 'العمود ممتلئ — في ورقة متابعة']];
 function apDates(c, d) { return rlSheetDates(c).filter(x => x <= d && apDecOn(c, x)); }
 function apPlan(c, d) {
@@ -5851,7 +5860,7 @@ function apTestPage() { const C = apCfg(), L = C.L + C.dx, T = C.T + C.dy, X = (
 function apSessDays() { const t = rlToday(), S = new Set(); RL.cards.forEach(c => { (c.hist || []).forEach(h => { if (h.d && h.d <= t && !h.via && !h.pend) S.add(h.d); }); Object.keys(c.sheets || {}).forEach(d => { if (d <= t && rlSheetHasData(c.sheets[d])) S.add(d); }); }); return [...S].sort().reverse().slice(0, 8); }
 async function apOpen(opt) {
   opt = opt || {}; if (!apOn()) { toast('الطباعة على «قائمة الاستئناف» لدوائر محكمة الاستئناف'); return; }
-  const days = apSessDays(); AP.day = opt.day && days.includes(opt.day) ? opt.day : (AP.day && days.includes(AP.day) ? AP.day : days[0] || rlToday()); AP.sel = ''; AP.job = null;
+  const days = apSessDays(); AP.day = opt.day && days.includes(opt.day) ? opt.day : (AP.day && days.includes(AP.day) ? AP.day : days[0] || rlToday()); AP.sel = ''; AP.job = null; AP.pick = {};
   const s = jeSheet('اطبع في «قائمة الاستئناف»', '<div class="ap" id="ap_box"><p class="k">…</p></div>');
   s.classList.add('wide'); s.id = 'apsheet'; await apFonts(); apDraw(s, opt.cal); return s;
 }
@@ -5859,29 +5868,33 @@ function apList(d) { return rlSessList(d); }
 function apDraw(s, cal) {
   s = s || document.getElementById('apsheet'); if (!s) return; const box = s.querySelector('#ap_box'); if (!box) return; const d = AP.day, F = apFmt(), C = apCfg();
   const L = apList(d), plans = L.map(c => apPlan(c, d)); AP.plans = plans;
-  const rdy = plans.filter(P => P.main.length), cont = plans.filter(P => P.cont.length && !P.main.length), need = plans.filter(P => P.need), days = apSessDays();
+  const IN = P => apInc(P.c, d), only = apOnly(), nRes = plans.filter(P => apIsRes(P.c, d)).length;
+  const rdy = plans.filter(P => IN(P) && P.main.length), cont = plans.filter(P => IN(P) && P.cont.length && !P.main.length), need = plans.filter(P => IN(P) && P.need), days = apSessDays();
   const sel = AP.sel && plans.find(P => P.c.id === AP.sel) || rdy[0] || cont[0] || plans[0];
   let h = '<p class="apintro">تُعاد ورقة النظام إلى الطابعة، فيُطبع في عمود «القرارات والأحكام» وحده: تاريخ الجلسة بخط صغير، ثم الحضور وما قُدّم وما طُلب، ثم القرار؛ وخط خفيف بعد كل جلسة. <b>لا يُطبع اسم.</b></p>';
   h += '<div class="apgrid"><div class="apmain">';
   h += '<div class="aphd"><label>الجلسة <select id="ap_day">' + (days.length ? days : [d]).map(x => '<option value="' + x + '"' + (x === d ? ' selected' : '') + '>' + rlDay(x) + ' ' + rlFmt(x) + '</option>').join('') + '</select></label><span class="apcnt"><b>' + L.length + '</b> قضية · <b>' + rdy.length + '</b> جاهزة للطبع' + (need.length ? ' · <b class="w">' + need.length + '</b> تحتاج تحديد الموضع' : '') + '</span></div>';
+  h += '<div class="apsel" role="group" aria-label="ما يُطبع"><span>اطبع:</span>' + [['res', 'المحجوزة للحكم وحدها (' + nRes + ')'], ['all', 'كل القضايا (' + plans.length + ')']].map(o => '<button type="button" class="chip' + (only === o[0] ? ' on' : '') + '" data-apsl="' + o[0] + '" aria-pressed="' + (only === o[0]) + '">' + (only === o[0] ? '✓ ' : '') + o[1] + '</button>').join('') + '<small>' + (only === 'res' ? 'أوراق المؤجلة تعود لأمين السر بعد الجلسة — اكتب قرارها بيدك، أو أضفها بالمربع.' : 'ضع في الطابعة أوراق كل القضايا المحددة.') + '</small></div>';   // V213
   if (need.length > 1) h += '<div class="apbulk"><span>' + need.length + ' قضايا لم تُطبع من قبل وفيها جلسات سابقة:</span><button type="button" class="btn" data-apb="top">كلها أوراق جديدة — من أعلى العمود</button><button type="button" class="btn" data-apb="q2">كلها تحت الكتابة الموجودة</button></div>';
   h += '<ol class="aplist">' + plans.map((P, i) => { const S = apStatus(P);
-    return '<li class="' + S.cls + (sel === P ? ' on' : '') + '" data-apc="' + P.c.id + '"><b class="n">' + (i + 1) + '</b><button type="button" class="cd" data-apv="' + P.c.id + '">' + esc(P.c.code) + '</button><span class="st">' + esc(S.t) + '</span>'
+    return '<li class="' + S.cls + (sel === P ? ' on' : '') + (IN(P) ? '' : ' apx') + '" data-apc="' + P.c.id + '"><input type="checkbox" class="api" data-api="' + P.c.id + '"' + (IN(P) ? ' checked' : '') + ' aria-label="اطبع ' + esc(P.c.code) + '"><b class="n">' + (i + 1) + '</b><button type="button" class="cd" data-apv="' + P.c.id + '">' + esc(P.c.code) + '</button><span class="st">' + esc(S.t) + '</span>'
       + (P.need || AP.st[P.c.id] || (P.c.ap && (P.main.length || P.cont.length)) ? '<select class="apst" data-aps="' + P.c.id + '" aria-label="موضع البدء ' + esc(P.c.code) + '">' + (P.need ? '<option value="">اختر الموضع…</option>' : '<option value="">' + (P.c.ap ? 'تحت آخر جلسة طُبعت' : 'تلقائي') + '</option>') + AP_ST.map(o => '<option value="' + o[0] + '"' + (AP.st[P.c.id] === o[0] ? ' selected' : '') + '>' + o[1] + '</option>').join('') + '</select>' : '')
       + (P.c.ap && P.c.ap.prev ? '<button type="button" class="linkbtn" data-apu="' + P.c.id + '">تراجع عن آخر طبع</button>' : '') + '</li>'; }).join('') + '</ol>';
   if (AP.job) h += '<div class="apjob" role="status"><b>' + (AP.job.kind === 'm' ? 'هل خرجت ' + AP.job.ids.length + ' أوراق صحيحة؟' : 'هل طُبعت أوراق المتابعة (' + AP.job.ids.length + ')؟') + '</b><span>يُسجَّل موضع آخر سطر لكل قضية بعد تأكيدك، فتبدأ الجلسة القادمة تحته.</span><div class="row"><button type="button" class="btn primary" data-apj="ok">نعم — سجّل أنها طُبعت</button><button type="button" class="btn" data-apj="no">لا — لم تُطبع</button></div></div>';
-  h += '<div class="apgo"><button type="button" class="btn primary" id="ap_go"' + (rdy.length ? '' : ' disabled') + '>🖶 اطبع الجلسة الجديدة لكل القضايا (' + rdy.length + ')</button>' + (cont.length ? '<button type="button" class="btn" id="ap_gc">اطبع أوراق المتابعة (' + cont.length + ')</button>' : '') + '</div>';
+  h += '<div class="apgo"><button type="button" class="btn primary" id="ap_go"' + (rdy.length ? '' : ' disabled') + '>🖶 اطبع الجلسة الجديدة ' + (only === 'res' && !Object.keys(AP.pick).length ? 'للمحجوزة للحكم' : 'للقضايا المحددة') + ' (' + rdy.length + ')</button>' + (cont.length ? '<button type="button" class="btn" id="ap_gc">اطبع أوراق المتابعة (' + cont.length + ')</button>' : '') + '</div>';
   h += '<p class="k">' + (rdy.length ? 'ضع أوراق هذه القضايا في الطابعة بالترتيب نفسه: ' + rdy.map(P => P.c.code).join('، ') + '. ' : '') + 'كل قضية صفحة، والمطبوع يقع تحت آخر جلسة طُبعت فيها. اطبع بمقياس 100٪.' + (cont.length ? ' أوراق المتابعة تُطبع بعدها على ورق أبيض (أو على ورقة المتابعة السابقة للقضية).' : '') + '</p>';
   h += '</div><div class="apside"><div class="appv"><span class="k">' + (sel ? 'معاينة على الورقة — ' + esc(sel.c.code) : 'معاينة') + '</span><div class="appvw" aria-label="معاينة القائمة">' + (sel ? apPreview(sel) : '') + '</div></div>';
   h += '<details class="apset" id="ap_set"' + (cal ? ' open' : '') + '><summary>⚙ شكل الطباعة وضبط الطابعة</summary>' + apSetHtml() + '</details></div></div>';
   box.innerHTML = h;
   const q = x => box.querySelector(x);
-  q('#ap_day').onchange = e => { AP.day = e.target.value; AP.st = {}; AP.job = null; apDraw(s); };
+  q('#ap_day').onchange = e => { AP.day = e.target.value; AP.st = {}; AP.job = null; AP.pick = {}; apDraw(s); };
   box.querySelectorAll('[data-apv]').forEach(b => b.onclick = () => { AP.sel = b.dataset.apv; apDraw(s); });
+  box.querySelectorAll('[data-apsl]').forEach(b => b.onclick = () => { try { localStorage.setItem('tm_apsel', b.dataset.apsl); } catch (e) {} AP.pick = {}; AP.job = null; apDraw(s); });   // V213
+  box.querySelectorAll('[data-api]').forEach(x => x.onchange = () => { const id = x.dataset.api, c = RL.cards.find(y => y.id === id); if (!c) return; const def = apOnly() === 'all' || apIsRes(c, d); if (x.checked === def) delete AP.pick[id]; else AP.pick[id] = x.checked; AP.job = null; apDraw(s); });
   box.querySelectorAll('[data-aps]').forEach(x => x.onchange = () => { if (x.value) AP.st[x.dataset.aps] = x.value; else delete AP.st[x.dataset.aps]; AP.sel = x.dataset.aps; apDraw(s); });
   box.querySelectorAll('[data-apb]').forEach(b => b.onclick = () => { need.forEach(P => AP.st[P.c.id] = b.dataset.apb); apDraw(s); });
   box.querySelectorAll('[data-apu]').forEach(b => b.onclick = () => { const c = RL.cards.find(x => x.id === b.dataset.apu); if (!c || !c.ap || !c.ap.prev) return; const p = c.ap.prev; if (p.none) delete c.ap; else c.ap = p; c.updated = Date.now(); rlSave(); apDraw(s); toast('أُلغي تسجيل آخر طبع لـ ' + c.code); });
-  q('#ap_go').onclick = () => { const P = plans.filter(x => x.main.length); if (!P.length) return; AP.job = { kind: 'm', ids: P.map(x => x.c.id), plans: P }; apPrint('قائمة الاستئناف — جلسة ' + rlFmt(d), P.map(x => apPageMain(x)).join('')); apDraw(s); };
+  q('#ap_go').onclick = () => { const P = rdy; if (!P.length) return; AP.job = { kind: 'm', ids: P.map(x => x.c.id), plans: P }; apPrint('قائمة الاستئناف — جلسة ' + rlFmt(d), P.map(x => apPageMain(x)).join('')); apDraw(s); };
   if (q('#ap_gc')) q('#ap_gc').onclick = () => { const P = cont; AP.job = { kind: 'c', ids: P.map(x => x.c.id), plans: P }; apPrint('أوراق المتابعة — جلسة ' + rlFmt(d), P.map(x => apPagesCont(x)).join('')); apDraw(s); };
   box.querySelectorAll('[data-apj]').forEach(b => b.onclick = () => { if (b.dataset.apj === 'ok') apCommit(AP.job); AP.job = null; apDraw(s); });
   apSetWire(box, () => apDraw(s));
@@ -11424,11 +11437,14 @@ function bqThumbsHtml(g, i) {
     + (g.th || []).map((u, k) => '<button type="button" class="bqthp" data-bqe="' + i + ':' + k + '" aria-label="الصفحة ' + (k + 1) + ' — كبّرها وعدّل تعتيمها">' + (u ? '<img src="' + u + '" alt="">' : '') + '<span>' + (k + 1) + '</span></button>').join('')
     + '</div><div class="row"><button type="button" class="btn" data-bqe="' + i + ':0">عدّل التعتيم صفحةً صفحة</button>' + (g.names ? '<span class="k">' + g.names + ' ' + (g.names === 1 ? 'اسم متتبَّع' : 'أسماء متتبَّعة') + ' في كل الصفحات</span>' : '') + '</div></div>';
 }
-function bqCanShare() { try { return !!(navigator.canShare && navigator.share && navigator.canShare({ files: [new File([new Uint8Array(1)], 'a.pdf', { type: 'application/pdf' })] })); } catch (e) { return false; } }
+function bqDesk() { return !IS_IOS && !/Android/i.test(navigator.userAgent || ''); }   // V213: الحاسوب — نافذة المشاركة فيه لا تعرض Claude
+const BQ_DLT = 'نُزّل الملف ونُسخ الطلب — اسحب الملف من «التنزيلات» إلى محادثة جديدة في Claude، والصق الطلب';
+function bqCanShare() { if (bqDesk()) return false; try { return !!(navigator.canShare && navigator.share && navigator.canShare({ files: [new File([new Uint8Array(1)], 'a.pdf', { type: 'application/pdf' })] })); } catch (e) { return false; } }
+window.__v213 = { canShare: () => bqCanShare(), desk: () => bqDesk(), only: () => apOnly(), isRes: (id, d) => apIsRes(RL.cards.find(c => c.id === id), d) };
 function bqSendImgHtml(cur, k, P) {
   const F = BQ.pf && BQ.pf[k], sh = bqCanShare(), np = cur.reduce((a, g) => a + (g.imgN || 0), 0), IM = cur.filter(g => g.imgN);
   return '<div class="bqstep"><b>١</b><div><div class="row bqshare">' + (sh ? '<button type="button" class="btn primary" data-bq="share"' + (F ? '' : ' disabled') + '>' + (F ? 'شارك الملفات وانسخ الطلب' : '<span class="spin"></span> تجهيز الملفات…') + '</button>' : '')
-    + '<button type="button" class="btn' + (sh ? '' : ' primary') + '" data-bq="dlf"' + (F ? '' : ' disabled') + '>' + (F || sh ? 'نزّل الملفات (' + IM.length + ')' : '<span class="spin"></span> تجهيز الملفات…') + '</button>'
+    + '<button type="button" class="btn' + (sh ? '' : ' primary') + '" data-bq="dlf"' + (F ? '' : ' disabled') + '>' + (F || sh ? (sh ? 'نزّل الملفات (' + IM.length + ')' : 'نزّل ' + (IM.length === 1 ? 'الملف' : 'الملفات (' + IM.length + ')') + ' وانسخ الطلب') : '<span class="spin"></span> تجهيز الملفات…') + '</button>'
     + '<button type="button" class="btn" data-bq="copy">' + (BQ.copied === k ? '✓ نُسخ الطلب — انسخه ثانية' : 'انسخ الطلب ' + (k + 1)) + '</button></div>'
     + '<p class="k">' + IM.map(g => '<bdi>' + esc(bqFile(g)) + '</bdi>').join('، ') + ' · ' + np + ' صفحة معتّمة · الطلب ' + Math.round(P.length / 1000) + ' ألف حرف</p></div></div>'
     + '<div class="bqstep"><b>٢</b><div>افتح <b>محادثة جديدة</b> في Claude (أو أداة تقرأ صور ملفات PDF)، وأرفق ' + (IM.length === 1 ? 'الملف' : 'الملفات ' + IM.length) + (sh ? ' — أو اختر Claude من نافذة المشاركة —' : '') + ' والصق الطلب، وانتظر حتى يكتمل الرد.</div></div>';
@@ -11586,7 +11602,7 @@ function bqWire(w) {
   w.querySelectorAll('[data-bqw]').forEach(x => x.onclick = () => { const i = +x.dataset.bqw, g = G[i], wd = String(prompt('الكلمة أو الاسم المراد تعتيمه في كل النص') || '').trim(); if (wd.length < 2) return; const k = mdWord(g.md, wd); if (!k) { toast('لم أجد «' + wd + '»'); return; } upd(i); const box = w.querySelector('[data-bqp="' + i + '"]'); if (box) { const r = mdHtml(g.md, g.full ? 0 : 3000); box.innerHTML = r.html + (r.cut ? '<button type="button" class="btn mini bqmore" data-bqfull="' + i + '">اعرض النص كله</button>' : ''); const f = box.querySelector('[data-bqfull]'); if (f) f.onclick = e => { e.stopPropagation(); g.full = true; box.innerHTML = mdHtml(g.md, 0).html; }; } toast('عُتّم ' + inMw(k)); });
   w.querySelectorAll('[data-bqe]').forEach(b => b.onclick = () => { const [i, k] = b.dataset.bqe.split(':').map(Number); bqEditMask(i, k); });   // V190
   if (q('share')) q('share').onclick = () => { const k = BQ.ck, F = BQ.pf && BQ.pf[k]; if (!F) return; const p = bqBatchPrompt(BQ.chunks[k]); BQ.lastPrompt = p; copy(p, 'نُسخ الطلب — اختر Claude في نافذة المشاركة ثم الصقه'); BQ.copied = k; try { navigator.share({ files: F }).catch(() => {}); } catch (e) { toast('المشاركة غير متاحة — استعمل «نزّل الملفات»'); } };
-  if (q('dlf')) q('dlf').onclick = async () => { const F = BQ.pf && BQ.pf[BQ.ck]; if (!F) return; for (const f of F) { try { await pgSave(f, f.name); } catch (e) { toast('لم يُحفظ ' + f.name); } } toast('نُزّلت الملفات — أرفقها في محادثة جديدة مع الطلب'); };
+  if (q('dlf')) q('dlf').onclick = async () => { const F = BQ.pf && BQ.pf[BQ.ck]; if (!F) return; const desk = !bqCanShare(); if (desk && q('copy')) q('copy').onclick(); for (const f of F) { try { await pgSave(f, f.name); } catch (e) { toast('لم يُحفظ ' + f.name); } } toast(desk ? (F.length === 1 ? BQ_DLT : 'نُزّلت الملفات ونُسخ الطلب — اسحبها من «التنزيلات» إلى محادثة جديدة في Claude، والصق الطلب') : 'نُزّلت الملفات — أرفقها في محادثة جديدة مع الطلب'); };   // V213
   if (BQ.step === 'send' && !SAMPLEX && BQ.chunks && BQ.chunks[BQ.ck] && BQ.chunks[BQ.ck].some(g => g.imgN) && !(BQ.pf && BQ.pf[BQ.ck]) && !BQ.pfBusy) bqPrepFiles(BQ.ck);
   if (q('go')) q('go').onclick = () => { BQ.step = 'send'; BQ.msg = ''; if (SAMPLEX) { bqDraw(); bqLive(); } else { bqChunks(); bqDraw(); } };
   if (q('copy')) q('copy').onclick = () => { const p = bqBatchPrompt(BQ.chunks[BQ.ck]), lk = bqLeaks(p); BQ.lastPrompt = p; if (lk.length && !q('copy').dataset.sure) { q('copy').dataset.sure = '1'; q('copy').textContent = 'انسخه رغم ذلك'; toast('⚠ في الطلب ما يشبه بيانات شخصية: ' + lk.slice(0, 3).join('، ') + ' — راجع التعتيم'); return; } copy(p, 'نُسخ الطلب ' + (BQ.ck + 1) + ' — الصقه في محادثة جديدة'); BQ.copied = BQ.ck; const b = q('copy'); if (b) b.textContent = '✓ نُسخ — انسخه ثانية'; };
@@ -12109,11 +12125,11 @@ async function inHostedImg() {   // V190: الصفحات المعتّمة في �
   const file = new File([await pgPdfFrom(bl)], fname, { type: 'application/pdf' }), raw = (($('#in_text') || {}).value || '').trim();
   const prompt = inPromptImg().replace('أجب بكائن JSON واحد فقط بهذه المفاتيح:', 'أجب بكائن JSON واحد فقط داخل كتلة شيفرة واحدة، دون أي شرح قبله أو بعده، بهذه المفاتيح:') + '[الصور في ملف PDF المرفق «' + fname + '» — ' + bl.length + ' صفحة]' + (raw && inSafeText() ? '\n\nونص رقمي لأوراق أخرى:\n' + raw.slice(0, 45000) : '') + inSessBlock(c);
   const sh = bqCanShare();
-  $('#in_out').innerHTML = '<div class="inhost"><b>التحليل بالصور المعتّمة</b><ol><li><div class="row bqshare">' + (sh ? '<button class="btn primary" id="in_ishare" type="button">شارك الملف وانسخ الطلب</button>' : '') + '<button class="btn' + (sh ? '' : ' primary') + '" id="in_idl" type="button">نزّل الملف</button><button class="btn" id="in_icopy" type="button">انسخ الطلب</button></div><p class="k"><bdi>' + esc(fname) + '</bdi> · ' + bl.length + ' صفحة معتّمة</p></li><li>افتح <b>محادثة جديدة</b> في Claude، وأرفق الملف، والصق الطلب، وانتظر حتى يكتمل الرد.</li><li>انسخ الرد كاملًا والصقه هنا:</li></ol><textarea id="in_paste" rows="5" placeholder="الصق رد أداة الذكاء هنا"></textarea><div class="row"><button class="btn primary" id="in_pshow" type="button">اعرض البطاقة</button></div></div>';
+  $('#in_out').innerHTML = '<div class="inhost"><b>التحليل بالصور المعتّمة</b><ol><li><div class="row bqshare">' + (sh ? '<button class="btn primary" id="in_ishare" type="button">شارك الملف وانسخ الطلب</button>' : '') + '<button class="btn' + (sh ? '' : ' primary') + '" id="in_idl" type="button">' + (sh ? 'نزّل الملف' : 'نزّل الملف وانسخ الطلب') + '</button><button class="btn" id="in_icopy" type="button">انسخ الطلب</button></div><p class="k"><bdi>' + esc(fname) + '</bdi> · ' + bl.length + ' صفحة معتّمة</p></li><li>افتح <b>محادثة جديدة</b> في Claude، وأرفق الملف، والصق الطلب، وانتظر حتى يكتمل الرد.</li><li>انسخ الرد كاملًا والصقه هنا:</li></ol><textarea id="in_paste" rows="5" placeholder="الصق رد أداة الذكاء هنا"></textarea><div class="row"><button class="btn primary" id="in_pshow" type="button">اعرض البطاقة</button></div></div>';
   st.textContent = 'جُهّز الملف — أرفقه في Claude مع الطلب.';
   const cp = () => copy(prompt, 'نُسخ طلب التحليل — الصقه مع الملف');
   if ($('#in_ishare')) $('#in_ishare').onclick = () => { cp(); try { navigator.share({ files: [file] }).catch(() => {}); } catch (e) { toast('المشاركة غير متاحة — نزّل الملف'); } };
-  $('#in_idl').onclick = () => { pgSave(file, fname).catch(() => toast('تعذّر الحفظ')); }; $('#in_icopy').onclick = cp;
+  $('#in_idl').onclick = () => { if (!sh) cp(); pgSave(file, fname).then(() => { if (!sh) toast(BQ_DLT); }, () => toast('تعذّر الحفظ')); };   // V213 $('#in_icopy').onclick = cp;
   $('#in_pshow').onclick = () => inPasteShow($('#in_paste').value);
   try { localStorage.setItem('tm_inpend', JSON.stringify({ at: Date.now(), cid: INX || '', f: fname, n: bl.length })); } catch (e) {}   // V191: إن أعاد Safari تحميل الصفحة وأنت في Claude يبقى مربع اللصق
 }
@@ -14891,6 +14907,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [213, 'الإصدار 213', ['«اطبع في قائمة الاستئناف»: اختيار «المحجوزة للحكم وحدها» (افتراضيًا) أو «كل القضايا»، ومربع بجانب كل قضية لإضافتها أو استثنائها.', 'على الحاسوب: زر «نزّل الملف وانسخ الطلب» بدل المشاركة في تحليل الملف والدفعة و«الوقائع ✦» — ثم تسحب الملف إلى محادثة Claude وتلصق الطلب. الآيفون والآيباد كما هما.']],
   [212, 'الإصدار 212', ['إخفاء الهوية والقراءة الضوئية وتحليل الملف لا تتوقف حين تنتقل إلى برنامج آخر أو تبويب آخر على الحاسوب، ولا حين تنتقل إلى شاشة أخرى داخل التطبيق.', 'ملء الشاشة في «اكتب»: الصفحة البيضاء تمتد بطول النص، وتكبير الخط يشمل المتن كله لا الديباجة وحدها.', 'أكثر من استئناف: في «الديباجة والأسماء» خانات لأطراف كل استئناف، وتظهر في المسودة وفي Word: «الأول المقام من … ضـــد …» ثم «والثاني المقام من … ضـــد …»، وزر «عكس الأول» للاستئناف المقابل.']],
   [211, 'الإصدار 211', ['«الدعوة» لملف الدائرة: رابط واحد ترسله بواتساب (فيه روابط الملفات دون الرمز). يفتحه العضو فيدخل بحساب مايكروسوفت ويكتب الرمز، فينضم دون مجلد ولا اختيار ملفات، ويعيد إليك «ردّه» برابط ملفه فيُضاف وحده.', 'إعدادات الدائرة والربط المباشر وروابط الأعضاء تنتقل بين أجهزتك مع مزامنتك الشخصية — يُكتب رمز الدائرة مرة واحدة على كل جهاز.', '«فترة الانتقال»: الحاسوب المربوط بالمجلد المشترك يكتب ملفك فيه أيضًا ويقرأ منه، حتى يتحول كل الأعضاء.']],
   [210, 'الإصدار 210', ['«انسخ رابط ملفي» في الربط المباشر: رُفض الطلب (400) على الآيفون — صار يُنشأ الرابط بمعرّف الملف، ويُعرض سبب الرفض كاملًا إن تكرر.']],
