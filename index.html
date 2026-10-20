@@ -4,7 +4,7 @@
 <script>window.__DJ0 = location.hash.indexOf('#dj=') === 0 ? location.hash : '';</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261021004456">
+<meta name="amali-build" content="20261021012334">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3627,7 +3627,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V216 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V217 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -9065,7 +9065,7 @@ async function scOpen(txt) {
   if (!j || j.app !== 'amali-circuit' || !j.kdf || !j.ct) return { err: 'fmt' };
   let key = null; if (SCK.key && SC.salt === j.kdf.salt) key = SCK.key; else if (SCK.pass) { try { key = await syDerive(SCK.pass, syUnb64(j.kdf.salt)); } catch (e) {} }
   if (!key) return { err: 'key' };
-  try { const d = JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: syUnb64(j.iv) }, key, syUnb64(j.ct)))); if (key !== SCK.key) { SCK.key = key; SC.salt = j.kdf.salt; await sySet('ckey', key); scSave(); } return { d, iv: j.iv }; } catch (e) { return { err: 'key' }; }
+  try { const d = JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: syUnb64(j.iv) }, key, syUnb64(j.ct)))); if (key !== SCK.key) { SCK.key = key; if (SC.salt && SC.salt !== j.kdf.salt) { SC.salt = j.kdf.salt; try { scCirTouch(); } catch (e) {} } SC.salt = j.kdf.salt; await sySet('ckey', key); scSave(); } return { d, iv: j.iv }; } catch (e) { return { err: 'key' }; }   // V217: الملح القديم يُستبدل بملح الملف الذي فتحه الرمز
 }
 // يجمع نسخ الملف (ومنها نسخ التعارض التي يضيفها OneDrive) في نسخة واحدة: لكل قضية أحدث حقول الرئيس وأحدث حالة حكم
 function scCombine(L) {
@@ -9190,7 +9190,7 @@ function scBar() {
 function scAskKey() { toast('اكتب رمز الدائرة — في الإعدادات ← ملف الدائرة المشترك'); try { openDrawer(); } catch (e) {} setTimeout(() => { scRender(); const s = document.getElementById('dcirc'), db = $('#dbody'); if (s && db) db.scrollTo({ top: s.offsetTop - 70, behavior: 'smooth' }); const i = document.getElementById('sc_kin'); if (i) i.focus({ preventScroll: true }); }, 160); }
 async function scKeyBad() { SCK.key = null; SCK.pass = ''; await sySet('ckey'); scRender(); scBar(); }   // الرمز المكتوب لا يفتح الملفات: تعود خانة الرمز
 async function scKeyFrom(code) {
-  if (SC.salt) { SCK.key = await syDerive(code, syUnb64(SC.salt)); await sySet('ckey', SCK.key); } else SCK.pass = code;   // العضو قبل أول فتح: يُشتق من ملح ملف الدائرة عند القراءة
+  if (SC.salt) { SCK.key = await syDerive(code, syUnb64(SC.salt)); await sySet('ckey', SCK.key); } SCK.pass = code;   // العضو قبل أول فتح: يُشتق من ملح ملف الدائرة عند القراءة — V217: ويبقى الرمز في الذاكرة فيُجرَّب بملح الملف إن اختلف عن ملح هذا الجهاز (إعدادات قديمة)
   scRender(); scBar(); toast('اعتُمد الرمز — زامن الدائرة الآن');
 }
 // قسم الإعدادات
@@ -9212,8 +9212,8 @@ function scRender() {
   }
   // V183: الرمز غير محفوظ على هذا الجهاز (فُقدت بيانات المتصفح أو انتقلت إعدادات الدائرة دونه) — يُكتب هنا دون مغادرة ملف الدائرة
   const needKey = !SCK.key && !SCK.pass ? '<div class="sckey" id="sc_need"><b>اكتب رمز الدائرة على هذا الجهاز</b><span>ملف الدائرة مفعّل، لكن رمزه غير محفوظ في هذا المتصفح. اكتب الرمز نفسه؛ لا يتغيّر شيء في الملفات المشتركة.</span><div class="row"><input type="password" id="sc_kin" autocomplete="current-password" minlength="8" aria-label="رمز الدائرة"><button type="button" class="btn primary" id="sc_kok">اعتمد الرمز</button></div></div>' : '';
-  b.innerHTML = needKey + '<div class="scf"><div class="scst"><span>الدور: <b>' + esc(scRoleT()) + '</b></span><span>ملفي: <b>' + esc(scMine()) + '</b></span><span>المجلد: <b>' + (SCK.dir ? esc(SCK.dir.name) : fs ? 'غير مربوط' : 'تختار الملفات عند المزامنة') + '</b></span>' + (SCK.nfiles ? '<span>ملفات الدائرة المقروءة: <b>' + SCK.nfiles + '</b></span>' : '') + '<span>آخر سحب: <b>' + syWhen(SC.pulled) + '</b></span><span>آخر إرسال: <b>' + syWhen(SC.pushed) + '</b></span></div>'
-    + (!scDirect() && odOn() ? '<div class="sckey scfix"><b>تعمل بالربط المباشر على جهاز آخر لك؟</b><span>خذ إعدادات الدائرة منه عبر مزامنتك الشخصية، ثم اكتب الرمز مرة واحدة — يُصلح أيضًا طلب الرمز المتكرر.</span><div class="row"><button type="button" class="btn primary" id="sc_take">خذ إعدادات الدائرة من جهازي الآخر</button></div></div>' : '')   // V216
+  b.innerHTML = needKey + '<div class="scf"><div class="scst"><span>الدور: <b>' + esc(scRoleT()) + '</b></span><span>ملفي: <b>' + esc(scMine()) + '</b></span><span>المجلد: <b>' + (SCK.dir ? esc(SCK.dir.name) : fs ? 'غير مربوط' : 'تختار الملفات عند المزامنة') + '</b></span>' + (SCK.nfiles ? '<span>ملفات الدائرة المقروءة: <b>' + SCK.nfiles + '</b></span>' : '') + (SC.salt ? '<span>بصمة الدائرة: <b dir="ltr">' + esc(String(SC.salt).replace(/[^A-Za-z0-9]/g, '').slice(0, 6).toUpperCase()) + '</b></span>' : '') + '<span>آخر سحب: <b>' + syWhen(SC.pulled) + '</b></span><span>آخر إرسال: <b>' + syWhen(SC.pushed) + '</b></span></div>'
+    + ((!scDirect() || (!SCK.key && !SCK.pass)) && odOn() ? '<div class="sckey scfix"><b>تعمل بالربط المباشر على جهاز آخر لك؟</b><span>خذ إعدادات الدائرة منه عبر مزامنتك الشخصية، ثم اكتب الرمز مرة واحدة — يُصلح أيضًا طلب الرمز المتكرر.</span><div class="row"><button type="button" class="btn primary" id="sc_take">خذ إعدادات الدائرة من جهازي الآخر</button></div></div>' : '')   // V216
     + '<div class="row"><button type="button" class="btn primary" id="sc_now">مزامنة الدائرة الآن</button>' + (fs ? '<button type="button" class="btn" id="sc_dir">' + (SCK.dir ? 'تغيير المجلد' : 'ربط المجلد') + '</button>' : '') + '<button type="button" class="btn" id="sc_off">مغادرة ملف الدائرة</button></div>'
     + '<p class="synote">' + (SC.role === 'p' ? 'تملك: المرحلة والجلسة والقرار والتوزيع. وتصلك حالة كل حكم من كاتبه.' : 'تصلك قرارات الرئيس وتوزيعه، وتملك حالة الأحكام الموزّعة عليك. أي تعديل منك على القرار أو الموعد يبقى على جهازك ويُستبدل بما في رول الرئيس عند السحب.') + '</p></div>';
   if ($('#sc_kok')) $('#sc_kok').onclick = async () => { const v = ($('#sc_kin').value || '').trim(); if (v.length < 8) { toast('رمز الدائرة 8 أحرف فأكثر'); return; } await scKeyFrom(v); };
@@ -14923,6 +14923,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [217, 'الإصدار 217', ['رمز الدائرة على جهاز إعداداته قديمة: يُجرَّب الرمز على ملفات الدائرة الحالية نفسها، فإن فتحها تتحول إعدادات الجهاز إليها — فلا يُطلب الرمز مرة بعد مرة. و«بصمة الدائرة» في القسم لتقارن بين أجهزتك.']],
   [216, 'الإصدار 216', ['ملف الدائرة على جهاز ثانٍ (كالآيباد) كان يطلب الرمز في كل مرة لأن عليه إعدادات دائرة قديمة: تُستبدل الآن بإعدادات جهازك الآخر تلقائيًا، وزر «خذ إعدادات الدائرة من جهازي الآخر» يفعل ذلك فورًا.']],
   [215, 'الإصدار 215', ['«تابع الكتابة» في مكتبي يعرض المسودات التي لم تكتمل كتابتها ومراجعتها وحدها؛ وما اكتمل (في المداولة فما بعدها) يُشار إليه بسطر «اعرضها في «في المداولة»».']],
   [214, 'الإصدار 214', ['إصلاح: زر «انسخ الطلب» في «تحليل الملف» بالصور المعتّمة لم يكن ينسخ (منذ V213).']],
