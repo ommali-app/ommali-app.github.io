@@ -4,7 +4,7 @@
 <script>window.__DJ0 = location.hash.indexOf('#dj=') === 0 ? location.hash : '';</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261020173439">
+<meta name="amali-build" content="20261021004456">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3627,7 +3627,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V215 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V216 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -9213,9 +9213,11 @@ function scRender() {
   // V183: الرمز غير محفوظ على هذا الجهاز (فُقدت بيانات المتصفح أو انتقلت إعدادات الدائرة دونه) — يُكتب هنا دون مغادرة ملف الدائرة
   const needKey = !SCK.key && !SCK.pass ? '<div class="sckey" id="sc_need"><b>اكتب رمز الدائرة على هذا الجهاز</b><span>ملف الدائرة مفعّل، لكن رمزه غير محفوظ في هذا المتصفح. اكتب الرمز نفسه؛ لا يتغيّر شيء في الملفات المشتركة.</span><div class="row"><input type="password" id="sc_kin" autocomplete="current-password" minlength="8" aria-label="رمز الدائرة"><button type="button" class="btn primary" id="sc_kok">اعتمد الرمز</button></div></div>' : '';
   b.innerHTML = needKey + '<div class="scf"><div class="scst"><span>الدور: <b>' + esc(scRoleT()) + '</b></span><span>ملفي: <b>' + esc(scMine()) + '</b></span><span>المجلد: <b>' + (SCK.dir ? esc(SCK.dir.name) : fs ? 'غير مربوط' : 'تختار الملفات عند المزامنة') + '</b></span>' + (SCK.nfiles ? '<span>ملفات الدائرة المقروءة: <b>' + SCK.nfiles + '</b></span>' : '') + '<span>آخر سحب: <b>' + syWhen(SC.pulled) + '</b></span><span>آخر إرسال: <b>' + syWhen(SC.pushed) + '</b></span></div>'
+    + (!scDirect() && odOn() ? '<div class="sckey scfix"><b>تعمل بالربط المباشر على جهاز آخر لك؟</b><span>خذ إعدادات الدائرة منه عبر مزامنتك الشخصية، ثم اكتب الرمز مرة واحدة — يُصلح أيضًا طلب الرمز المتكرر.</span><div class="row"><button type="button" class="btn primary" id="sc_take">خذ إعدادات الدائرة من جهازي الآخر</button></div></div>' : '')   // V216
     + '<div class="row"><button type="button" class="btn primary" id="sc_now">مزامنة الدائرة الآن</button>' + (fs ? '<button type="button" class="btn" id="sc_dir">' + (SCK.dir ? 'تغيير المجلد' : 'ربط المجلد') + '</button>' : '') + '<button type="button" class="btn" id="sc_off">مغادرة ملف الدائرة</button></div>'
     + '<p class="synote">' + (SC.role === 'p' ? 'تملك: المرحلة والجلسة والقرار والتوزيع. وتصلك حالة كل حكم من كاتبه.' : 'تصلك قرارات الرئيس وتوزيعه، وتملك حالة الأحكام الموزّعة عليك. أي تعديل منك على القرار أو الموعد يبقى على جهازك ويُستبدل بما في رول الرئيس عند السحب.') + '</p></div>';
   if ($('#sc_kok')) $('#sc_kok').onclick = async () => { const v = ($('#sc_kin').value || '').trim(); if (v.length < 8) { toast('رمز الدائرة 8 أحرف فأكثر'); return; } await scKeyFrom(v); };
+  if ($('#sc_take')) $('#sc_take').onclick = () => scTakeOther($('#sc_take'));
   $('#sc_now').onclick = scNow; if ($('#sc_dir')) $('#sc_dir').onclick = async () => { if (await scPickDir()) { scRender(); scSync({}); } };
   $('#sc_off').onclick = async () => { if (!confirm('مغادرة ملف الدائرة على هذا الجهاز؟ لا يُحذف الملف المشترك ولا الرول.')) return; SC = {}; scSave(); SCK.key = null; SCK.dir = null; await sySet('ckey'); await sySet('cdir'); await sySet('cdata'); scRender(); scBar(); if (rlInit) rlRender(); };
 }
@@ -9315,6 +9317,12 @@ document.addEventListener('visibilitychange', () => { try { if (document.visibil
 // يفتحه العضو فيكتب الرمز ويدخل بحساب مايكروسوفت، فينضم من ملف الرئيس عبر رابطه (بلا مجلد ولا اختيار ملفات)، ويُنشئ رابط ملفه ويعيده «ردًّا» بالطريقة نفسها.
 // (٢) إعدادات الدائرة (الصفة، الملح، الربط المباشر، الروابط) تنتقل بين أجهزتك مع مزامنتك الشخصية المشفّرة — لا الرمز ولا المفتاح: يُكتب الرمز مرة على كل جهاز.
 // (٣) فترة الانتقال (SC.odf): الجهاز المربوط بالمجلد يكتب ملفه فيه أيضًا ويقرأ منه، حتى يتحول الجميع.
+async function scTakeOther(btn) {   // V216: تنزيل ملف المزامنة الشخصية من جديد وأخذ إعدادات الدائرة منه ولو اختلفت عن هذا الجهاز
+  if (!odOn()) { toast('اربط OneDrive في «المزامنة» أولًا'); return false; } if (btn) btn.disabled = true; const salt0 = SC.salt || '';
+  SC_FORCE = true; try { const o = odLoad(); o.etag = ''; odSave(o); await odSync('circ'); } catch (e) {} finally { SC_FORCE = false; if (btn) btn.disabled = false; }
+  if (SC.salt && SC.salt !== salt0) { try { scRender(); scBar(); } catch (e) {} toast('وصلت إعدادات الدائرة من جهازك الآخر — اكتب رمز الدائرة مرة واحدة'); setTimeout(() => { const i = document.getElementById('sc_kin'); if (i) i.focus(); }, 200); return true; }
+  if (SC.salt && SC.salt === salt0 && scDirect()) { toast('إعدادات الدائرة على هذا الجهاز هي نفسها، والربط المباشر مفعّل'); try { scRender(); } catch (e) {} return true; }
+  toast('لم تصل إعدادات دائرة أحدث — افتح التطبيق على الجهاز الذي يعمل بالربط المباشر (الحاسوب أو الآيفون) ثم أعد المحاولة هنا'); return false; }
 function scCirTouch() { SC.cu = Date.now(); scSave(); try { localStorage.setItem('tm_chg', String(Date.now())); odSoon(2000); } catch (e) {} }
 function djB64(o) { return btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/=+$/, '').replace(/\+/g, '-').replace(/\//g, '_'); }
 function djUnb64(t) { t = String(t || '').replace(/-/g, '+').replace(/_/g, '/'); t += '='.repeat((4 - t.length % 4) % 4); return JSON.parse(decodeURIComponent(escape(atob(t)))); }
@@ -9354,11 +9362,14 @@ setTimeout(() => { try { djCatch(); if (djGet() && !OD.link) djSheet(); } catch 
 window.addEventListener('hashchange', () => { try { if (djCatch()) djSheet(); } catch (e) {} });
 // إعدادات الدائرة مع المزامنة الشخصية — بلا رمز ولا مفتاح
 { const f = syPayload; syPayload = function () { const o = f.apply(this, arguments); try { if (SC && SC.salt && SC.role) o.circ = { role: SC.role, me: SC.me, salt: SC.salt, od: SC.od ? 1 : 0, odf: 0, lk: SC.lk || {}, mylk: SC.mylk || '', u: SC.cu || 0 }; } catch (e) {} return o; }; window.syPayload = syPayload; }
+let SC_FORCE = false;   // V216: «خذ إعدادات الدائرة من جهازي الآخر»
 function scCirIn(R) { if (!R || !R.salt || !R.role) return '';
+  if (SC.salt && SC.salt !== R.salt && (SC_FORCE || !SCK.key) && (R.u || 0) > 0) { SC = {}; SCK.key = null; SCK.pass = ''; try { sySet('ckey'); } catch (e) {} }   // V216: إعدادات دائرة قديمة على هذا الجهاز (ملح آخر) لا يفتحها الرمز — تُستبدل بإعدادات جهازك الآخر
   if (!SC.salt) { SC = { role: R.role, me: R.me, salt: R.salt, ft: {}, lk: R.lk || {}, mylk: R.mylk || '', cu: R.u || 0 }; if (R.od) SC.od = 1; scSave(); SCK.key = null; try { scBar(); scRender(); } catch (e) {} return 'new'; }
   if (SC.salt !== R.salt || SC.role !== R.role || (R.u || 0) <= (SC.cu || 0)) return '';
   SC.lk = Object.assign({}, R.lk || {}); if (R.mylk) SC.mylk = R.mylk; if (R.od) SC.od = 1; SC.cu = R.u; scSave(); try { scRender(); scBar(); } catch (e) {} return 'upd'; }
 { const f = syMerge; syMerge = function (d) { const r = f.apply(this, arguments); try { const x = scCirIn(d && d.circ); if (x === 'new') setTimeout(() => syToast('وصلت إعدادات ملف الدائرة من جهازك الآخر — اكتب رمز الدائرة مرة واحدة على هذا الجهاز (الإعدادات ← ملف الدائرة)'), 400); } catch (e) {} return r; }; window.syMerge = syMerge; }
+window.__v216 = { take: () => scTakeOther(), cirIn: R => scCirIn(R), setForce: v => { SC_FORCE = !!v; } };
 window.__v211 = { make: k => djMake(k), unb: t => djUnb64(t), get: () => djGet(), sheet: () => djSheet(), cirIn: R => scCirIn(R), payload: () => syPayload() };
 window.__v209 = { enc: u => scOdEnc(u), sync: o => scOdSync(o), link: () => scOdLink(), direct: () => scDirect(), keys: () => scOdKeys(), path: () => scOdPath(), read: u => scOdRead(u) };
 
@@ -14912,6 +14923,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [216, 'الإصدار 216', ['ملف الدائرة على جهاز ثانٍ (كالآيباد) كان يطلب الرمز في كل مرة لأن عليه إعدادات دائرة قديمة: تُستبدل الآن بإعدادات جهازك الآخر تلقائيًا، وزر «خذ إعدادات الدائرة من جهازي الآخر» يفعل ذلك فورًا.']],
   [215, 'الإصدار 215', ['«تابع الكتابة» في مكتبي يعرض المسودات التي لم تكتمل كتابتها ومراجعتها وحدها؛ وما اكتمل (في المداولة فما بعدها) يُشار إليه بسطر «اعرضها في «في المداولة»».']],
   [214, 'الإصدار 214', ['إصلاح: زر «انسخ الطلب» في «تحليل الملف» بالصور المعتّمة لم يكن ينسخ (منذ V213).']],
   [213, 'الإصدار 213', ['«اطبع في قائمة الاستئناف»: اختيار «المحجوزة للحكم وحدها» (افتراضيًا) أو «كل القضايا»، ومربع بجانب كل قضية لإضافتها أو استثنائها.', 'على الحاسوب: زر «نزّل الملف وانسخ الطلب» بدل المشاركة في تحليل الملف والدفعة و«الوقائع ✦» — ثم تسحب الملف إلى محادثة Claude وتلصق الطلب. الآيفون والآيباد كما هما.']],
