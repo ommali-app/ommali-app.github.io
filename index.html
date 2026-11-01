@@ -4,7 +4,7 @@
 <script>window.__DJ0 = location.hash.indexOf('#dj=') === 0 ? location.hash : '';</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261021120912">
+<meta name="amali-build" content="20261101181520">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -2978,7 +2978,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
 <button class="ib fabtop" id="fabtop" type="button" title="إلى البحث">↑</button>
 
 <div class="lawwrap" id="lawwrap">
-  <div class="note">قانون العمل 6/2010 بنصه النافذ، والمرافعات والإثبات والخبرة والقرارات المنظمة — و«مكتبة التشريعات»: 238 تشريعًا من «مكتبة مبادئ التمييز» تُحمَّل عند الحاجة. <button type="button" class="more" data-help>المزيد</button></div>
+  <div class="note" id="lg_note">قانون العمل 6/2010 بنصه النافذ، والمرافعات والإثبات والخبرة والقرارات المنظمة — و«مكتبة التشريعات»: 238 تشريعًا من «مكتبة مبادئ التمييز» تُحمَّل عند الحاجة. <button type="button" class="more" data-help>المزيد</button></div>
   <div class="lawmode" id="lawmode" role="tablist"><button type="button" data-lm="c" class="on" role="tab">تشريعات الدائرة</button><button type="button" data-lm="g" role="tab">مكتبة التشريعات<small id="lgcount"></small></button></div>
   <div id="lawcirc">
   <div class="lawhead"><input id="lawq" type="search" placeholder="ابحث برقم المادة أو بكلمة في نصها…"><select class="sel" id="lawsel"></select><select class="sel" id="lawchap"><option value="">كل الأبواب</option></select></div>
@@ -3630,7 +3630,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V218 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V219 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -4516,11 +4516,12 @@ const AI_TOOLS = new Set(HOME_TILES.filter(t => (t[6] || '').includes('ذكاء'
 // V175 — أيقونات البطاقات من المجموعة المعتمدة، وصفحات «مكتبي» و«المكتبة» و«الأدوات»
 const V_ICO = { r: 'sess', p: 'prin', l: 'law', m: 'maps', c: 'check', s: 'calc', e: 'due', x: 'mask', i: 'analyze', d: 'draft', t: 'tline', w: 'word', k: 'vault', f: 'files', a: 'ask' };
 HOME_TILES.forEach(t => { if (V_ICO[t[0]]) t[5] = ico(V_ICO[t[0]]); });
+const LG_GEN = 'المرافعات والإثبات والخبرة والقرارات المنظمة، ومكتبة التشريعات (238 تشريعًا)، وقانون العمل 6/2010.';   // V219: وصف التشريعات لغير العمالي
 const LND_SHORT = { p: 'مبادئ محكمة التمييز بالإحالة الكاملة والقاعدة', l: 'قانون العمل والمرافعات والإثبات ومكتبة التشريعات', m: 'خرائط المكافأة والإجازات والفصل والتقادم', t: 'تتبّع القاعدة عبر السنين', k: 'نماذج أحكامك وأحكام زملائك على جهازك', a: 'سؤال بالعربية بإحالة من قاعدة التطبيق',
   s: 'المكافأة والإجازات والإنذار خطوة بخطوة', e: 'الاستئناف والتمييز والشطب والوقف بحساب م17', c: 'النصاب والتقادم والمكافأة والفوائد', x: 'تعتيم الأسماء والأرقام على جهازك', i: 'بطاقة القضية والطلبات وأوجه النعي من أوراقها',
   d: 'الإحالات والمواد والأرقام في مسودتك', w: 'لنص كتبته خارج التطبيق: صياغاتك وقالبك', f: 'قضاياك المحفوظة بمبادئها وملاحظاتك' };
 function lndTile(v, big) { const t = HOME_TILES.find(x => x[0] === v); if (!t || isHid(v)) return ''; let m = ''; try { m = t[3](); } catch (e) {}
-  return '<button type="button" class="lt' + (big ? ' big' : '') + '" data-go="' + v + '" title="' + esc(t[2]) + '"><span class="lti">' + ico(V_ICO[v], big ? 30 : 26) + '</span><span class="ltt"><b>' + esc(t[1]) + (AI_TOOLS.has(v) ? ' <i class="aib">✦ ذكاء</i>' : '') + '</b><small>' + esc(LND_SHORT[v] || '') + '</small>' + (m ? '<em>' + esc(m) + '</em>' : '') + '</span></button>'; }
+  return '<button type="button" class="lt' + (big ? ' big' : '') + '" data-go="' + v + '" title="' + esc(v === 'l' && rlProf().kind !== 'lab' ? LG_GEN : t[2]) + '"><span class="lti">' + ico(V_ICO[v], big ? 30 : 26) + '</span><span class="ltt"><b>' + esc(t[1]) + (AI_TOOLS.has(v) ? ' <i class="aib">✦ ذكاء</i>' : '') + '</b><small>' + esc(v === 'l' && rlProf().kind !== 'lab' ? 'المرافعات والإثبات والخبرة ومكتبة التشريعات' : LND_SHORT[v] || '') + '</small>' + (m ? '<em>' + esc(m) + '</em>' : '') + '</span></button>'; }
 function lndHead(g, t, p) { const k = { lib: 'lib', tools: 'tools', desk: 'desk' }[g]; return '<header class="lndh"><span class="lndhi">' + ico(g, 26) + '</span><div><h2>' + t + '</h2><p>' + p + '</p></div>' + (k ? '<button type="button" class="tghelp lndq" data-hg="' + k + '" aria-label="ما هذه الأدوات؟" title="ما هذه الأدوات؟">?</button>' : '') + '</header>'; }
 function lndWire(w) { w.querySelectorAll('[data-go]').forEach(b => b.onclick = () => setView(b.dataset.go)); w.querySelectorAll('[data-hg]').forEach(b => b.onclick = () => hsOpen('g:' + b.dataset.hg)); }
 function lndLib() { const w = $('#libwrap'); if (!w) return;
@@ -7461,7 +7462,19 @@ const CT_LIST = {
 function ctList(k) { return CT_LIST[k || rlProf().kind] || CT_LIST.lab; }
 function ctChips(c) { return (c.ct || []).length ? '<span class="ctt">' + c.ct.map(t => '<span class="ctc">' + esc(t) + '</span>').join('') + '</span>' : ''; }
 function ctSuggest(text) { const n = ' ' + norm(text || '') + ' '; return ctList().filter(t => t[1].some(ph => { const q = norm(ph); return q && n.includes(q); })).map(t => t[0]); }
+// V219: أمثلة الخانات بحسب نوع الدائرة — العمالي كما هو حرفيًا، ولغيره أمثلة من مسائله (أمثلة بحث لا نصوص)
+const PH_KIND = {
+  adm: { q: 'ابحث في المبادئ أو برقم قضيتك… مثال: ميعاد دعوى الإلغاء، القرار الإداري، 861/2026', homeq: 'ابحث عن قضية أو مبدأ أو مادة: 783/2026 · القرار الإداري · ميعاد دعوى الإلغاء…', tl_q: 'مسألة: ميعاد دعوى الإلغاء، التعويض عن القرار الإداري، الترقية…', askq: 'اسأل… مثال: متى يبدأ ميعاد الطعن بالإلغاء في القرار الإداري؟', casenew: 'اسم مسألة جديدة… مثال: ميعاد دعوى الإلغاء', rf_new: 'اسم المسألة الجديدة، مثال: ميعاد دعوى الإلغاء', rf_subj: 'إلغاء قرار + تعويض — بلا أسماء', rl_circ: 'مثال: الدائرة الإدارية الأولى', pf_circ: 'مثال: الدائرة الإدارية الأولى', dr_claims: 'مثال:\nإلغاء القرار المطعون فيه\nالتعويض عن القرار' },
+  gov: { q: 'ابحث في المبادئ أو برقم قضيتك… مثال: البدلات، إنهاء الخدمة، 861/2026', homeq: 'ابحث عن قضية أو مبدأ أو مادة: 783/2026 · البدلات · إنهاء الخدمة…', tl_q: 'مسألة: البدلات، الترقية، إنهاء الخدمة…', askq: 'اسأل… مثال: ما شروط استحقاق البدل؟', casenew: 'اسم مسألة جديدة… مثال: استحقاق البدلات', rf_new: 'اسم المسألة الجديدة، مثال: استحقاق البدلات', rf_subj: 'بدلات + فروق راتب — بلا أسماء', rl_circ: 'مثال: الدائرة الحكومية الأولى', pf_circ: 'مثال: الدائرة الحكومية الأولى', dr_claims: 'مثال:\nفروق البدلات\nالتعويض' },
+  civ: { q: 'ابحث في المبادئ أو برقم قضيتك… مثال: المسؤولية التقصيرية، فسخ العقد، 861/2026', homeq: 'ابحث عن قضية أو مبدأ أو مادة: 783/2026 · فسخ العقد · التعويض…', tl_q: 'مسألة: المسؤولية التقصيرية، فسخ العقد، التعويض…', askq: 'اسأل… مثال: متى يُفسخ العقد لعدم التنفيذ؟', casenew: 'اسم مسألة جديدة… مثال: فسخ العقد', rf_new: 'اسم المسألة الجديدة، مثال: فسخ العقد', rf_subj: 'فسخ عقد + تعويض — بلا أسماء', rl_circ: 'مثال: الدائرة المدنية الأولى', pf_circ: 'مثال: الدائرة المدنية الأولى', dr_claims: 'مثال:\nفسخ العقد\nالتعويض' },
+  com: { q: 'ابحث في المبادئ أو برقم قضيتك… مثال: الشيك، الحساب الجاري، 861/2026', homeq: 'ابحث عن قضية أو مبدأ أو مادة: 783/2026 · الشيك · الحساب الجاري…', tl_q: 'مسألة: الشيك، الحساب الجاري، الفوائد…', askq: 'اسأل… مثال: متى تُستحق الفوائد التأخيرية؟', casenew: 'اسم مسألة جديدة… مثال: الحساب الجاري', rf_new: 'اسم المسألة الجديدة، مثال: الحساب الجاري', rf_subj: 'مطالبة بمبلغ + فوائد — بلا أسماء', rl_circ: 'مثال: الدائرة التجارية الأولى', pf_circ: 'مثال: الدائرة التجارية الأولى', dr_claims: 'مثال:\nإلزام بالمبلغ\nالفوائد' },
+  fam: { q: 'ابحث في المبادئ أو برقم قضيتك… مثال: النفقة، الحضانة، 861/2026', homeq: 'ابحث عن قضية أو مبدأ أو مادة: 783/2026 · النفقة · الحضانة…', tl_q: 'مسألة: النفقة، الحضانة، التطليق للضرر…', askq: 'اسأل… مثال: ما ضوابط تقدير النفقة؟', casenew: 'اسم مسألة جديدة… مثال: تقدير النفقة', rf_new: 'اسم المسألة الجديدة، مثال: تقدير النفقة', rf_subj: 'نفقة + حضانة — بلا أسماء', rl_circ: 'مثال: دائرة الأسرة الأولى', pf_circ: 'مثال: دائرة الأسرة الأولى', dr_claims: 'مثال:\nالنفقة\nالحضانة' },
+  cri: { q: 'ابحث في المبادئ أو برقم قضيتك… مثال: التفتيش، القصد الجنائي، 861/2026', homeq: 'ابحث عن قضية أو مبدأ أو مادة: 783/2026 · التفتيش · القصد الجنائي…', tl_q: 'مسألة: بطلان التفتيش، القصد الجنائي، الاعتراف…', askq: 'اسأل… مثال: متى يبطل التفتيش؟', casenew: 'اسم مسألة جديدة… مثال: بطلان التفتيش', rf_new: 'اسم المسألة الجديدة، مثال: بطلان التفتيش', rf_subj: 'تهمة + دفع ببطلان — بلا أسماء', rl_circ: 'مثال: الدائرة الجزائية الأولى', pf_circ: 'مثال: الدائرة الجزائية الأولى', dr_claims: 'مثال:\nالبراءة\nإلغاء الحكم المستأنف' } };
+function phKind(k) { const M = PH_KIND[rlProf().kind]; return M && M[k] || null; }
+function phApply() {
+  { const n = document.getElementById('lg_note'); if (n) { if (n.dataset.h0 == null) n.dataset.h0 = n.innerHTML; n.innerHTML = rlProf().kind === 'lab' ? n.dataset.h0 : n.dataset.h0.replace('قانون العمل 6/2010 بنصه النافذ، والمرافعات والإثبات والخبرة والقرارات المنظمة', 'المرافعات والإثبات والخبرة والقرارات المنظمة، وقانون العمل 6/2010'); } } ['q', 'homeq', 'tl_q', 'askq', 'casenew', 'rf_subj', 'rl_circ', 'pf_circ', 'dr_claims'].forEach(id => { const e = document.getElementById(id); if (!e) return; if (e.dataset.ph0 == null) e.dataset.ph0 = e.getAttribute('placeholder') || ''; e.setAttribute('placeholder', phKind(id) || e.dataset.ph0); }); }
 function rlProfHide() {
+  try { phApply(); } catch (e) {}
   const P = rlProf(); PROF_HIDE = new Set(P.kind === 'lab' ? [] : GEN_KINDS.includes(P.kind) ? ['m', 's', 'c'] : ['m', 's', 'c', 'i']);   // V109: للجزائي حزمة مبادئه من المكتبة. V150: المساعد والخط الزمني لكل الدوائر، وتحليل الملف للمدني والتجاري والحكومي والإداري
   try { if (typeof run === 'function' && typeof results !== 'undefined') run(); } catch (e) {}
   try { toolVisApply(); } catch (e) {}
@@ -8861,8 +8874,9 @@ function dlHols() {
   box.querySelectorAll('[data-d]').forEach(b => b.onclick = () => { RL.hol = (RL.hol || []).filter(x => x !== b.dataset.d); rlSave(); dlHols(); dlCompute(); });
 }
 function initDl() {
+  { const sel = $('#dl_kind'), v0 = sel.value, K = Object.keys(DL_KINDS).filter(k => k !== 'p144' || rlProf().kind === 'lab');   // V219: «عدم سماع الدعوى العمالية» للعمالي وحده
+    sel.innerHTML = K.map(k => '<option value="' + k + '">' + esc(DL_KINDS[k].name) + '</option>').join(''); if (K.includes(v0)) sel.value = v0; }
   if (!dlInit) { dlInit = true;
-    $('#dl_kind').innerHTML = Object.keys(DL_KINDS).map(k => '<option value="' + k + '">' + esc(DL_KINDS[k].name) + '</option>').join('');
     $('#dl_kind').onchange = () => { dlOpts(); dlCompute(); };
     ['#dl_start', '#dl_act', '#dl_mon', '#dl_wknd'].forEach(q => $(q).onchange = dlCompute);
     $('#dl_holadd').onclick = () => { const v = $('#dl_holin').value; if (!v) { toast('اختر تاريخ العطلة'); return; } RL.hol = RL.hol || []; if (!RL.hol.includes(v)) RL.hol.push(v); rlSave(); $('#dl_holin').value = ''; dlHols(); dlCompute(); };
@@ -10895,7 +10909,7 @@ function rfSheet(text, src, pre) {
     + (src && src.s === 'd' ? '<p class="k">استُبدلت أسماء الأطراف بأدوارهم. راجع النص قبل الحفظ، واحذف أي اسم بقي.</p>' : '<p class="k">لا تكتب أسماء الأطراف — بالأدوار وحدها.</p>')
     + '<textarea id="rf_t" rows="7" aria-label="نص الفقرة"></textarea>'
     + '<label class="rfl">في ملف <select id="rf_sel"><option value="">＋ مسألة جديدة…</option>' + L.map(([id, c]) => '<option value="' + esc(id) + '"' + (id === sel ? ' selected' : '') + '>' + esc((rfKind(c) === 'q' ? '' : '📁 ') + c.name) + '</option>').join('') + '</select></label>'
-    + '<input type="text" id="rf_new" placeholder="اسم المسألة الجديدة، مثال: احتساب مكافأة نهاية الخدمة" aria-label="اسم المسألة الجديدة"' + (sel ? ' hidden' : '') + '>'
+    + '<input type="text" id="rf_new" placeholder="' + esc(phKind('rf_new') || 'اسم المسألة الجديدة، مثال: احتساب مكافأة نهاية الخدمة') + '" aria-label="اسم المسألة الجديدة"' + (sel ? ' hidden' : '') + '>'
     + '<div class="row"><button type="button" class="btn primary" id="rf_ok">احفظ في الملف</button><button type="button" class="btn" data-rfx>إلغاء</button></div></div>';
   document.body.appendChild(w); w.querySelector('#rf_t').value = text || '';
   const S = w.querySelector('#rf_sel'), N = w.querySelector('#rf_new'), close = () => { w.remove(); document.removeEventListener('keydown', k1); }, k1 = e => { if (e.key === 'Escape') close(); };
@@ -14933,6 +14947,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [219, 'الإصدار 219', ['أمثلة خانات البحث والأسئلة والمسائل بحسب نوع الدائرة (الإداري والمدني والتجاري والحكومي والأسرة والجزائي)؛ والعمالي كما هو.']],
   [218, 'الإصدار 218', ['وضع الجلسة: «ورقة الرول» للقضايا التي تُنظر وحدها، والمحجوزة للحكم في «النطق» بزر مستقل في أعلى الورقة — لا تختلط بالرول.', '«نداء ثانٍ» لا يغيّر ترتيب الرول ولا أرقامه؛ تبقى القضية في موضعها وتظهر في «نهاية الرول».', '«أحكامي» في المحجوزة بصفة صاحب الجهاز: (ب) أو (ج) عند العضوين.']],
   [217, 'الإصدار 217', ['رمز الدائرة على جهاز إعداداته قديمة: يُجرَّب الرمز على ملفات الدائرة الحالية نفسها، فإن فتحها تتحول إعدادات الجهاز إليها — فلا يُطلب الرمز مرة بعد مرة. و«بصمة الدائرة» في القسم لتقارن بين أجهزتك.']],
   [216, 'الإصدار 216', ['ملف الدائرة على جهاز ثانٍ (كالآيباد) كان يطلب الرمز في كل مرة لأن عليه إعدادات دائرة قديمة: تُستبدل الآن بإعدادات جهازك الآخر تلقائيًا، وزر «خذ إعدادات الدائرة من جهازي الآخر» يفعل ذلك فورًا.']],
