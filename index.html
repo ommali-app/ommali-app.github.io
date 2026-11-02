@@ -4,7 +4,7 @@
 <script>window.__DJ0 = location.hash.indexOf('#dj=') === 0 ? location.hash : '';</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261102192635">
+<meta name="amali-build" content="20261103003612">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3630,7 +3630,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V220 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V221 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -11465,14 +11465,17 @@ async function bqImgRun(g, srcs, pages, map, sig, st) {
   g.otext = pages.map(pgLines).join('\n'); g.pages = pages; g.mk = bqMkFrom(null); g.found = null;
   await bqBurnAll(g, srcs, st); await bqPersistCase(g, fs); return 'ok';
 }
-async function bqBurnAll(g, srcs, st, only) {   // يحسب التعتيم لأوراق القضية كلها ويحرق الصفحات (أو ما تغيّر منها) صورًا ومصغّرات
+async function bqBurnAll(g, srcs, st, only, prog) {   // يحسب التعتيم لأوراق القضية كلها ويحرق الصفحات (أو ما تغيّر منها) صورًا ومصغّرات
   const P0 = g.pages, found = g.found || (g.found = mskFindNames(P0)), hp = new Set(P0.map((p, i) => p.i === 0 ? i : -1));
   const R = mskCompute(P0, { found, off: g.mk.off, extra: g.mk.extra, wordOn: g.mk.wordOn, wordOff: g.mk.wordOff, header: false, hp, common: mskCommon() });   // لا تعتيم للترويسة: فيها رقم الدعوى وتاريخ الجلسة، والأطراف تُكشف بعلاماتها
   let n = 0; R.masked.forEach(m => n += m.size); P0.forEach(p => n += (p.manual || []).length); g.nImg = n; g.names = R.names.length; g.th = g.th || []; g.dims = g.dims || [];
-  for (let i = 0; i < P0.length; i++) { if (only && !only.has(i)) continue; const bx = pgBoxes(P0[i], R.masked[i]), S = srcs[P0[i].src];
-    if (st) st.textContent = 'تعتيم الصفحة ' + (i + 1) + ' من ' + P0.length + '…';
-    const big = await pgBurn(S, P0[i], bx); await wsPut('bq:i:' + g.cid + ':' + i, big.blob); g.dims[i] = { w: big.w, h: big.h };
-    const th = await pgBurn(S, P0[i], bx, PG_TH, 0.7); await wsPut('bq:t:' + g.cid + ':' + i, th.blob); if (g.th[i]) { try { URL.revokeObjectURL(g.th[i]); } catch (e) {} } g.th[i] = URL.createObjectURL(th.blob); }
+  const tot = only ? only.size : P0.length; let k = 0, w = Promise.resolve();
+  for (let i = 0; i < P0.length; i++) { if (only && !only.has(i)) continue; const bx = pgBoxes(P0[i], R.masked[i]), S = srcs[P0[i].src]; k++;
+    if (st) st.textContent = only ? 'حفظ التعتيم: الصفحة ' + k + ' من ' + tot + ' المعدّلة…' : 'تعتيم الصفحة ' + (i + 1) + ' من ' + P0.length + '…'; if (prog) prog(k, tot);
+    const [big, th] = await pgBurn2(S, P0[i], bx); g.dims[i] = { w: big.w, h: big.h };   // V221: رسم واحد للصفحة يخرج منه الكبير والمصغّر (كانت تُرسم مرتين)
+    await w; w = Promise.all([wsPut('bq:i:' + g.cid + ':' + i, big.blob), wsPut('bq:t:' + g.cid + ':' + i, th.blob)]);   // الحفظ المشفّر يجري مع رسم الصفحة التالية
+    if (g.th[i]) { try { URL.revokeObjectURL(g.th[i]); } catch (e) {} } g.th[i] = URL.createObjectURL(th.blob); }
+  await w;
   g.imgN = P0.length; g.esig = P0.map((p, i) => mskSig(R.masked[i]) + '|' + (p.manual || []).length);
 }
 async function bqPersistCase(g, fs) {
@@ -11542,7 +11545,7 @@ function mskCaseBar() { const b = $('#msk_case'); if (!b) return; const C = MSK.
   b.querySelector('[data-mc=ok]').onclick = () => bqEditDone(); }
 async function bqEditDone() {
   const C = MSK.case; if (!C) return; const g = BQ && BQ.groups[C.gi], st = $('#msk_status'), btn = document.querySelector('#msk_case [data-mc=ok]'); if (btn) { btn.disabled = true; btn.textContent = 'حفظ التعتيم…'; } { const fb = document.getElementById('msk_casefab'); if (fb) { fb.disabled = true; fb.textContent = 'حفظ التعتيم…'; } }
-  try { if (g && g.cid === C.cid) { const R = MSK.res; const ch = new Set(); if (R) g.pages.forEach((p, i) => { if (mskSig(R.masked[i]) + '|' + (p.manual || []).length !== (g.esig || [])[i]) ch.add(i); }); if (ch.size) await bqBurnAll(g, MSK.srcs, st, ch); await bqPersistCase(g); if (BQ) BQ.pf = {}; } }
+  try { if (g && g.cid === C.cid) { const R = MSK.res; const ch = new Set(); if (R) g.pages.forEach((p, i) => { if (mskSig(R.masked[i]) + '|' + (p.manual || []).length !== (g.esig || [])[i]) ch.add(i); }); if (ch.size) await bqBurnAll(g, MSK.srcs, st, ch, (k, n) => { const t = 'حفظ التعتيم… ' + k + ' من ' + n; const fb = document.getElementById('msk_casefab'); if (fb) fb.textContent = t; if (btn) btn.textContent = t; }); await bqPersistCase(g); if (BQ) BQ.pf = {}; } }
   catch (e) { console.warn(e); toast('تعذّر حفظ التعتيم'); }
   MSK.srcs.forEach(S => { try { if (S.doc) S.doc.destroy(); } catch (e) {} });
   if (MSK_IO) { MSK_IO.disconnect(); MSK_IO = null; } MSK.pages.forEach((p, i) => mskHide(i));
@@ -11550,6 +11553,7 @@ async function bqEditDone() {
   $('#msk_pages').innerHTML = ''; $('#msk_names').innerHTML = ''; $('#msk_info').textContent = 'لا ملفات'; mskCaseBar(); st.textContent = ''; $('#msk_pdf').disabled = $('#msk_send').disabled = true;
   if (BQ) { setView('r'); const w = document.getElementById('bqsheet'); if (w) { BQ.step = 'review'; if (g) g.open = true; bqDraw(); w.classList.add('show'); document.documentElement.classList.add('noscroll'); } }
 }
+window.__v221 = { burn: async (gi) => { const g = BQ.groups[gi], S = await bqSrcs(g), t = performance.now(); await bqBurnAll(g, S, null); S.forEach(x => { try { x.doc && x.doc.destroy(); } catch (e) {} }); return performance.now() - t; } };   // للاختبار
 window.__v190 = { wsGet: k => wsGet(k), get MSK() { return MSK; }, compute: (P0, o) => mskCompute(P0, o), find: P0 => mskFindNames(P0), common: () => mskCommon(), promptImg: () => inPromptImg(), draw: () => bqDraw(), live: () => bqLive() };   // للاختبار
 function bqDraw() {
   const w = document.getElementById('bqsheet'); if (!w || !BQ) return; const G = BQ.groups, S = BQ.step, live = !!SAMPLEX, si = bqSI(S);
@@ -13533,6 +13537,15 @@ async function pgBurn(S, pg, boxes, long, q) {   // صورة الصفحة معت
   (boxes || []).forEach(b => cx.fillRect(b.x0 * r, b.y0 * r, (b.x1 - b.x0) * r, (b.y1 - b.y0) * r));
   const blob = await pgBlob(cv, 'image/jpeg', q || 0.85), out = { blob, w: cv.width, h: cv.height }; pgFree(cv); return out;
 }
+async function pgBurn2(S, pg, boxes) {   // V221: الصورة المعتّمة (PG_OUT) ومصغّرها (PG_TH) من رسم واحد للصفحة — رسم الصفحة الممسوحة هو الأبطأ
+  const long = PG_OUT, W0 = pgW0(pg, long), H0 = pg.h || Math.round(W0 / pg.ar), f = Math.min(1, long / Math.max(W0, H0));
+  const cv = await pgCanvas(S, pg, 'px', Math.round(W0 * f)), cx = cv.getContext('2d'), r = cv.width / W0; cx.fillStyle = '#000';
+  (boxes || []).forEach(b => cx.fillRect(b.x0 * r, b.y0 * r, (b.x1 - b.x0) * r, (b.y1 - b.y0) * r));
+  const big = { blob: await pgBlob(cv, 'image/jpeg', 0.85), w: cv.width, h: cv.height };
+  const ft = Math.min(1, PG_TH / Math.max(cv.width, cv.height)), tc = document.createElement('canvas'); tc.width = Math.max(1, Math.round(cv.width * ft)); tc.height = Math.max(1, Math.round(cv.height * ft));
+  const tx = tc.getContext('2d'); tx.imageSmoothingQuality = 'high'; tx.drawImage(cv, 0, 0, tc.width, tc.height); pgFree(cv);
+  const th = { blob: await pgBlob(tc, 'image/jpeg', 0.7), w: tc.width, h: tc.height }; pgFree(tc); return [big, th];
+}
 function pgBoxes(pg, M) {   // مستطيلات الكلمات المعتَّمة (M: wi → السبب) ومستطيلات الرسم، بإحداثيات القراءة
   const out = []; (M || new Map()).forEach((why, wi) => { const w = pg.words[wi]; if (!w) return; const p = Math.max(4, (w.y1 - w.y0) * 0.18); out.push({ x0: w.x0 - p, y0: w.y0 - p, x1: w.x1 + p, y1: w.y1 + p, why }); });
   (pg.manual || []).forEach(r => out.push(Object.assign({}, r, { why: 'draw' }))); return out;
@@ -14957,6 +14970,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [221, 'الإصدار 221', ['«احفظ وارجع» بعد تعديل التعتيم أسرع: تُرسم كل صفحة معدّلة مرة واحدة (كانت تُرسم مرتين: للصورة ولمصغّرها)، والحفظ المشفّر يجري مع رسم الصفحة التالية؛ ويظهر على الزر «حفظ التعتيم… 3 من 14». ولا يُعاد إلا ما تغيّر من الصفحات.']],
   [220, 'الإصدار 220', ['استيراد الكشف: القضية المحجوزة للحكم التي عادت في كشف جلسة لاحقة (مؤجلة) تُضاف إلى رول الجلسة بالقرار الذي تختاره، لا إلى قائمة النطق؛ وفي المراجعة تنبيه «اختر القرار لتعود إلى الرول» على كل قضية محجوزة أو منتهية.']],
   [219, 'الإصدار 219', ['أمثلة خانات البحث والأسئلة والمسائل بحسب نوع الدائرة (الإداري والمدني والتجاري والحكومي والأسرة والجزائي)؛ والعمالي كما هو.']],
   [218, 'الإصدار 218', ['وضع الجلسة: «ورقة الرول» للقضايا التي تُنظر وحدها، والمحجوزة للحكم في «النطق» بزر مستقل في أعلى الورقة — لا تختلط بالرول.', '«نداء ثانٍ» لا يغيّر ترتيب الرول ولا أرقامه؛ تبقى القضية في موضعها وتظهر في «نهاية الرول».', '«أحكامي» في المحجوزة بصفة صاحب الجهاز: (ب) أو (ج) عند العضوين.']],
