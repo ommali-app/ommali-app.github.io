@@ -4,7 +4,7 @@
 <script>window.__DJ0 = location.hash.indexOf('#dj=') === 0 ? location.hash : '';</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261103003612">
+<meta name="amali-build" content="20261103012359">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1507,6 +1507,8 @@ table.imp select{padding:4px;border:1px solid var(--line2);border-radius:6px;bac
 .rlc .ln.fbq{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .kc.grdrop{border-style:dashed}.tag.grlate{background:var(--bad-soft);color:var(--bad)}
 @media (max-width:700px){.balc{flex:1 1 100%}.balr .balt,.balr .balw{flex:1 1 40%}.balr .balseg{flex:1 1 100%;display:flex}.balseg button{flex:1}.balr select.mini{max-width:none;width:100%}.balm{grid-template-columns:1fr auto}.balm .balbar{grid-column:1/-1;order:3}.rlsumrow .rlbalb{flex:0 0 auto}}
+/* V222: أرقام الميزان (العدد والأحكام والمسندة ولهذه الجلسة) سطر كامل يلتفّ تحت الاسم والشريط */
+.balsum .balm{grid-template-columns:minmax(96px,auto) 1fr;gap:4px 10px}.balsum .balm .balbar{grid-column:auto;order:0}.balsum .baln{grid-column:1/-1;white-space:normal;font-size:12.5px;line-height:1.6}
 /* V162: هيئة الجلسة */
 .pnov{position:fixed;inset:0;z-index:9000;background:rgba(10,18,32,.45);display:flex;align-items:center;justify-content:center;padding:16px}
 .pnbox{background:var(--panel);color:var(--ink);border-radius:18px;padding:18px;width:min(440px,100%);box-shadow:0 18px 50px rgba(0,0,0,.25);display:flex;flex-direction:column;gap:10px}
@@ -3630,7 +3632,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V221 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V222 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -7765,6 +7767,8 @@ function rlBal(A) {   // A: Map(id → كاتب) من اللوحة قبل الح
     if (!held && !pend) return; seen.add(g); const x = B[w]; x.pts += rlWt(c); x.n++; if (pend) x.pend++; if (c.wsub) x.sub++; if (held) ses.add(c.resAt); });
   B._ses = ses.size; return B;
 }
+// V222: «20 حكمًا» كانت تعدّ القضايا المسندة قبل الحجز (التوزيع قبل الجلسة، والمؤجلة للتحقيق أو اليمين بعد إسنادها) مع المحجوزة — صارتا مفصولتين
+function rlBalNs(x) { const held = x.n - x.pend; if (!x.n) return 'لا شيء'; return [held ? vkNum(held) : '', x.pend ? rlN(x.pend, 'قضية مسندة قبل الحجز', 'قضيتان مسندتان قبل الحجز', 'قضايا مسندة قبل الحجز', 'قضية مسندة قبل الحجز') : ''].filter(Boolean).join(' · '); }
 function rlBalAuto(rows, A) {
   const K = rlBalKeys(), B = rlBal(A), D = rlDset(), ws = rows.map(rlWt), avg = ws.length ? ws.reduce((a, b) => a + b, 0) / ws.length : 2.5, ns = (B._ses || 0) + 1;
   const off = k => k === 'p' ? -(+D.pp || 0) * avg * ns : 0;
@@ -7780,15 +7784,15 @@ function rlBalOpen(day) {
   if (rlBalKeys().length < 2) { toast('التوزيع لهيئة من أكثر من قاضٍ'); return; }
   day = day || rlDaySel || rlToday(); const can = rlPnCan(), K = rlBalKeys(), A = new Map(), CT = new Map(), WT = new Map(), all = rlBalRows(day), sub = rlPnAt(day);
   all.forEach(c => { if (c.writer && RL_W[c.writer]) A.set(c.id, c.writer); });
-  let flt = all.some(c => rlPrepOf(c) === 'ok') ? 'ok' : 'all'; const D = rlDset();
+  let flt = 'ok'; /* V222: يُفتح دائمًا على «الجاهزة للحكم»؛ و«كل قضايا الجلسة» (التوزيع قبل الجلسة) باقٍ بلمسة */ const D = rlDset();
   const ov = document.createElement('div'); ov.className = 'pnov balov'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true'); ov.setAttribute('aria-label', 'توزيع القضايا');
   const wt = c => { const o = Object.assign({}, c); if (CT.has(c.id)) o.ct = CT.get(c.id); if (WT.has(c.id)) o.wt = WT.get(c.id); return rlWt(o); };
   const draw = () => {
-    const rows = all.filter(c => flt === 'all' || rlPrepOf(c) === 'ok' || RL_RES.includes(c.stage) || A.get(c.id)), B = rlBal(A), mx = Math.max(1, ...K.map(k => B[k].pts)), ses = {}; K.forEach(k => ses[k] = 0); rows.forEach(c => { const k = A.get(c.id); if (k && ses[k] != null) ses[k] += wt(c); });
+    const rows = all.filter(c => flt === 'all' || rlPrepOf(c) === 'ok' || RL_RES.includes(c.stage) || A.get(c.id)), B = rlBal(A), mx = Math.max(1, ...K.map(k => B[k].pts)), ses = {}, sesN = {}; K.forEach(k => { ses[k] = 0; sesN[k] = 0; }); rows.forEach(c => { const k = A.get(c.id); if (k && ses[k] != null) { ses[k] += wt(c); sesN[k]++; } });
     const fb = {}; RL.cards.forEach(c => { if (!c.fb) return; const t = (c.ct || [])[0] || 'بلا نوع'; fb[t] = fb[t] || { l: 0, m: 0, h: 0 }; fb[t][c.fb]++; });
     ov.innerHTML = '<div class="pnbox balbox"><div class="balh"><b class="pnt">التوزيع — جلسة ' + rlDay(day) + ' ' + rlFmt(day) + '</b><button type="button" class="ib" data-b="x" aria-label="إغلاق">✕</button></div>'
       + (can ? '' : '<p class="k">يحدّده الرئيس في ملف الدائرة — هذا عرض فقط.</p>')
-      + '<section class="balsum" aria-label="ميزان الموسم"><h4>ميزان الموسم <small>منذ ' + rlFmt(rlSeasonStart()) + ' · الوزن: ' + ['نصاب', 'إقامة', 'مستحقات'].map(t => t + ' ' + rlDW()[t]).join(' · ') + '</small></h4>' + K.map(k => '<div class="balm"><span class="pnm"><b>' + RL_LT[k] + '</b>' + esc(rlMLbl(k)) + (sub[k] ? ' <em class="balsub">✱ بديل في هذه الجلسة</em>' : '') + '</span><span class="balbar"><i style="width:' + Math.round(100 * B[k].pts / mx) + '%"></i></span><span class="baln"><b>' + B[k].pts + '</b> نقطة · ' + (B[k].n ? vkNum(B[k].n) : 'لا شيء') + (ses[k] ? ' · <span class="balnew" title="منها لهذه الجلسة">' + ses[k] + ' لهذه الجلسة</span>' : '') + (B[k].sub ? ' · ✱' + B[k].sub : '') + '</span></div>').join('') + '</section>'
+      + '<section class="balsum" aria-label="ميزان الموسم"><h4>ميزان الموسم <small>منذ ' + rlFmt(rlSeasonStart()) + ' · الوزن: ' + ['نصاب', 'إقامة', 'مستحقات'].map(t => t + ' ' + rlDW()[t]).join(' · ') + '</small></h4>' + K.map(k => '<div class="balm"><span class="pnm"><b>' + RL_LT[k] + '</b>' + esc(rlMLbl(k)) + (sub[k] ? ' <em class="balsub">✱ بديل في هذه الجلسة</em>' : '') + '</span><span class="balbar"><i style="width:' + Math.round(100 * B[k].pts / mx) + '%"></i></span><span class="baln"><b>' + B[k].pts + '</b> نقطة · ' + rlBalNs(B[k]) + (sesN[k] ? ' · <span class="balnew" title="منها لهذه الجلسة: عدد القضايا ومجموع أوزانها">' + rlN(sesN[k], 'قضية واحدة', 'قضيتان', 'قضايا', 'قضية') + ' (' + rlN(ses[k], 'نقطة واحدة', 'نقطتان', 'نقاط', 'نقطة') + ') لهذه الجلسة</span>' : '') + (B[k].sub ? ' · ✱' + B[k].sub : '') + '</span></div>').join('') + '</section>'
       + '<div class="balf"><span class="chips"><button type="button" class="chip' + (flt === 'ok' ? ' on' : '') + '" data-f="ok">الجاهزة للحكم</button><button type="button" class="chip' + (flt === 'all' ? ' on' : '') + '" data-f="all">كل قضايا الجلسة</button></span>' + (can ? '<button type="button" class="btn primary" data-b="auto">' + ico('dist', 18) + ' وزّع بالتوازن</button>' + (A.size ? '<button type="button" class="btn" data-b="clr">امسح التوزيع</button>' : '') : '') + '</div>'
       + (rows.length ? '<div class="balrows">' + rows.map(c => { const w = A.get(c.id) || '', t = CT.has(c.id) ? CT.get(c.id) : (c.ct || []), m = WT.has(c.id) ? WT.get(c.id) : (c.wt || ''), st = RL_RES.includes(c.stage) ? '<span class="tag">محجوزة</span>' : rlPrepOf(c) === 'ok' ? '<span class="tag ok">جاهزة</span>' : rlPrepOf(c) === 'no' ? '<span class="tag no">غير جاهزة</span>' : '';
           return '<div class="balr" data-id="' + c.id + '"><span class="balc"><b>' + esc(c.code) + '</b>' + (rlSibs(c).length ? '<small>+ ' + esc(rlSibs(c).map(x => x.code).join('، ')) + '</small>' : '') + st + '</span>'
@@ -14970,6 +14974,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [222, 'الإصدار 222', ['التوزيع أوضح: «قضيتان (5 نقاط) لهذه الجلسة» بدل «5 لهذه الجلسة» (كان الرقم مجموع الأوزان لا عدد القضايا)، وفي ميزان الموسم الأحكام المحجوزة مفصولة عن «القضايا المسندة قبل الحجز»، ويُفتح على «الجاهزة للحكم». التوزيع قبل الجلسة باقٍ في «كل قضايا الجلسة»، والقضية المسندة تبقى لكاتبها إذا أُجّلت (للتحقيق أو اليمين).']],
   [221, 'الإصدار 221', ['«احفظ وارجع» بعد تعديل التعتيم أسرع: تُرسم كل صفحة معدّلة مرة واحدة (كانت تُرسم مرتين: للصورة ولمصغّرها)، والحفظ المشفّر يجري مع رسم الصفحة التالية؛ ويظهر على الزر «حفظ التعتيم… 3 من 14». ولا يُعاد إلا ما تغيّر من الصفحات.']],
   [220, 'الإصدار 220', ['استيراد الكشف: القضية المحجوزة للحكم التي عادت في كشف جلسة لاحقة (مؤجلة) تُضاف إلى رول الجلسة بالقرار الذي تختاره، لا إلى قائمة النطق؛ وفي المراجعة تنبيه «اختر القرار لتعود إلى الرول» على كل قضية محجوزة أو منتهية.']],
   [219, 'الإصدار 219', ['أمثلة خانات البحث والأسئلة والمسائل بحسب نوع الدائرة (الإداري والمدني والتجاري والحكومي والأسرة والجزائي)؛ والعمالي كما هو.']],
