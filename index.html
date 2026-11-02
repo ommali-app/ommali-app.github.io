@@ -4,7 +4,7 @@
 <script>window.__DJ0 = location.hash.indexOf('#dj=') === 0 ? location.hash : '';</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261101181520">
+<meta name="amali-build" content="20261102192635">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3630,7 +3630,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V219 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V220 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -8564,6 +8564,16 @@ async function rlReadFile(file, st) {
   const out = { rows: rlParseItems(items, rlWho).concat(scanned), meta }; if (sclerk && !items.length) out.clerk = sclerk;   // V140
   return out;
 }
+// V220: قضية محجوزة للحكم ثم ظهرت في كشف جلسة لاحقة بقرار تأجيل (يختاره القاضي في المراجعة): تعود إلى رول الجلسة بذلك القرار
+//       (كانت تبقى «محجوزة» فتُعرض في «النطق» لا في الرول). وإعادة استيراد كشف جلسة الحجز نفسها لا تُنزلها. وفي المراجعة تنبيه على كل قضية محجوزة أو منتهية بلا قرار.
+function rlImpOut(c, dec) { return !!c && (RL_RES.includes(c.stage) || RL_DONE.includes(c.stage)) && !RL_RES.includes(dec || ''); }
+function rlImpDec(c, dec, day) {
+  if (!dec) return;
+  c.why = dec;
+  const at = c.resAt || (c.hist || []).filter(h => /حجز|مد أجل/.test(h.a || '')).map(h => h.d || '').sort().pop() || '';
+  const back = RL_RES.includes(c.stage) && !RL_RES.includes(dec) && day > at;
+  if (!RL_RES.includes(c.stage) || RL_RES.includes(dec) || back) c.stage = dec;
+}
 function rlImpShow(res, how) {
   const box = $('#rl_imprev'); const rows = res.rows;
   if (!rows.length) { box.innerHTML = '<div class="rlwarn">لم يُعثر على أرقام قضايا في ' + how + '. جرّب ملف PDF المحفوظ من النظام، أو انسخ جدول الكشف والصقه.</div>'; return; }
@@ -8577,7 +8587,7 @@ function rlImpShow(res, how) {
     + '<div class="rw"><span>جلسة</span><input type="date" id="rl_impd" value="' + sd + '"><div class="chips" id="rl_impdc"></div></div>'
     + (rows.some(r => RL_RES.includes(r.dec) && r.dec !== 'مد أجل النطق') ? '<div class="rw"><span>المحجوزة</span><select class="sel" id="rl_impjm"><option value="res">حُجزت في هذه الجلسة — النطق في:</option><option value="pron">النطق في هذه الجلسة</option></select><input type="date" id="rl_impj" value="' + (rlNextSessions(sd, 2, RL.cal, false)[1] || '') + '"></div>' : '')
     + '<div class="tblw"><table class="imp"><thead><tr><th></th><th>م</th><th>رقم القضية</th><th>الرقم الآلي</th><th>الإعلان</th><th>القرار</th><th>الكاتب</th><th>الحالة</th></tr></thead><tbody>'
-    + rows.map((r, i) => { const ex = rlCardOf(r.code); r.annS = r.ann ? (r.ann.prev ? 'سابق' : r.ann.d + '/' + r.ann.t) : ''; return '<tr data-i="' + i + '"' + (r.pet ? ' data-pet="1"' : '') + '><td><input type="checkbox" checked></td><td>' + (i + 1) + '</td><td><input class="c" value="' + esc(r.code) + '"></td><td><input class="a" value="' + esc(r.auto) + '" inputmode="numeric" placeholder="؟"></td><td><input class="n' + (r.ann && r.ann.d < r.ann.t ? ' no' : '') + '" value="' + r.annS + '" placeholder="؟"></td><td><select class="d">' + '<option value="">—</option>' + decs.map(s => '<option' + (s === r.dec ? ' selected' : '') + '>' + s + '</option>').join('') + '</select></td><td><select class="w"><option value="">—</option>' + Object.keys(RL_W).map(k => '<option value="' + k + '"' + (r.writer === k ? ' selected' : '') + '>' + RL_W[k] + '</option>').join('') + '</select></td><td>' + (ex ? '<span class="tag">تحديث</span>' : '<span class="tag stg">جديدة</span>') + '</td></tr>'; }).join('')
+    + rows.map((r, i) => { const ex = rlCardOf(r.code); r.annS = r.ann ? (r.ann.prev ? 'سابق' : r.ann.d + '/' + r.ann.t) : ''; return '<tr data-i="' + i + '"' + (r.pet ? ' data-pet="1"' : '') + '><td><input type="checkbox" checked></td><td>' + (i + 1) + '</td><td><input class="c" value="' + esc(r.code) + '"></td><td><input class="a" value="' + esc(r.auto) + '" inputmode="numeric" placeholder="؟"></td><td><input class="n' + (r.ann && r.ann.d < r.ann.t ? ' no' : '') + '" value="' + r.annS + '" placeholder="؟"></td><td><select class="d">' + '<option value="">—</option>' + decs.map(s => '<option' + (s === r.dec ? ' selected' : '') + '>' + s + '</option>').join('') + '</select></td><td><select class="w"><option value="">—</option>' + Object.keys(RL_W).map(k => '<option value="' + k + '"' + (r.writer === k ? ' selected' : '') + '>' + RL_W[k] + '</option>').join('') + '</select></td><td>' + (ex ? (rlImpOut(ex, r.dec) ? '<span class="tag no" data-out="1">' + esc(ex.stage) + ' — اختر القرار لتعود إلى الرول</span>' : '<span class="tag">تحديث</span>') : '<span class="tag stg">جديدة</span>') + '</td></tr>'; }).join('')
     + '</tbody></table></div><div class="row"><button type="button" class="btn primary" id="rl_impok">إضافة إلى الرول</button><button type="button" class="btn" id="rl_impx">إلغاء</button></div>';
   rlChips('rl_impdc', 'rl_impd', rlToday(), 4, sd);
   if ($('#rl_impj')) { const upd = () => { $('#rl_impj').value = rlNextSessions($('#rl_impd').value || sd, 2, RL.cal, false)[1] || ''; }; $('#rl_impd').addEventListener('change', upd); $('#rl_impdc').addEventListener('click', () => setTimeout(upd, 0)); $('#rl_impjm').onchange = () => { $('#rl_impj').disabled = $('#rl_impjm').value === 'pron'; }; }
@@ -8595,7 +8605,7 @@ function rlImpShow(res, how) {
       Object.assign(c, { auto: auto || c.auto || '', ann: ann || c.ann || null, next: resv ? ($('#rl_impj').value || day) : day, ord: k, ordFor: day, updated: now, src: 'kashf' });
       if (resv) c.resAt = day;
       if (!c.first || day < c.first) c.first = day;   // V59: أول جلسة ظهرت فيها القضية في الرول
-      if (dec) { c.why = dec; if (!RL_RES.includes(c.stage) || RL_RES.includes(dec)) c.stage = dec; }
+      rlImpDec(c, dec, day);
       const wv = tr.querySelector('.w').value; if (wv) c.writer = wv; if (tr.dataset.pet) ctPet(c);   // V151
     });
     if (!RL.circuit && rlImp.meta.circuit) RL.circuit = 'الدائرة ' + rlImp.meta.circuit; $('#rl_circ').value = RL.circuit;
@@ -8655,7 +8665,7 @@ function rlImpMulti(results, errs) {
       + '<div class="rw"><span>جلسة</span><input type="date" class="gd" value="' + (g.sd || '') + '"></div>'
       + (resv ? '<div class="rw"><span>المحجوزة</span><select class="sel jm"><option value="res">حُجزت في هذه الجلسة — النطق في:</option><option value="pron">النطق في هذه الجلسة</option></select><input type="date" class="gj" value="' + (g.sd ? (rlNextSessions(g.sd, 2, RL.cal, false)[1] || '') : '') + '"></div>' : '')
       + '<div class="tblw"><table class="imp"><thead><tr><th></th><th>م</th><th>رقم القضية</th><th>الرقم الآلي</th><th>الإعلان</th><th>القرار</th><th>الكاتب</th><th>الحالة</th></tr></thead><tbody>'
-      + g.rows.map((r, i) => { const ex = rlCardOf(r.code); r.annS = r.ann ? (r.ann.prev ? 'سابق' : r.ann.d + '/' + r.ann.t) : ''; return '<tr data-i="' + i + '"' + (r.pet ? ' data-pet="1"' : '') + '><td><input type="checkbox"' + (foreign ? '' : ' checked') + '></td><td>' + (i + 1) + '</td><td><input class="c" value="' + esc(r.code) + '">' + (r.only === 's' ? '<div class="tag no">في النظام فقط</div>' : r.only === 'c' ? '<div class="tag no">في أمين السر فقط</div>' : '') + '</td><td><input class="a" value="' + esc(r.auto) + '" inputmode="numeric" placeholder="؟"></td><td><input class="n' + (r.ann && r.ann.d < r.ann.t ? ' no' : '') + '" value="' + r.annS + '" placeholder="؟"></td><td><select class="d"><option value="">—</option>' + decs.map(x => '<option' + (x === r.dec ? ' selected' : '') + '>' + x + '</option>').join('') + '</select></td><td><select class="w"><option value="">—</option>' + Object.keys(RL_W).map(k => '<option value="' + k + '"' + (r.writer === k ? ' selected' : '') + '>' + RL_W[k] + '</option>').join('') + '</select></td><td>' + (ex ? '<span class="tag">تحديث</span>' : '<span class="tag stg">جديدة</span>') + '' + '</td></tr>'; }).join('')
+      + g.rows.map((r, i) => { const ex = rlCardOf(r.code); r.annS = r.ann ? (r.ann.prev ? 'سابق' : r.ann.d + '/' + r.ann.t) : ''; return '<tr data-i="' + i + '"' + (r.pet ? ' data-pet="1"' : '') + '><td><input type="checkbox"' + (foreign ? '' : ' checked') + '></td><td>' + (i + 1) + '</td><td><input class="c" value="' + esc(r.code) + '">' + (r.only === 's' ? '<div class="tag no">في النظام فقط</div>' : r.only === 'c' ? '<div class="tag no">في أمين السر فقط</div>' : '') + '</td><td><input class="a" value="' + esc(r.auto) + '" inputmode="numeric" placeholder="؟"></td><td><input class="n' + (r.ann && r.ann.d < r.ann.t ? ' no' : '') + '" value="' + r.annS + '" placeholder="؟"></td><td><select class="d"><option value="">—</option>' + decs.map(x => '<option' + (x === r.dec ? ' selected' : '') + '>' + x + '</option>').join('') + '</select></td><td><select class="w"><option value="">—</option>' + Object.keys(RL_W).map(k => '<option value="' + k + '"' + (r.writer === k ? ' selected' : '') + '>' + RL_W[k] + '</option>').join('') + '</select></td><td>' + (ex ? (rlImpOut(ex, r.dec) ? '<span class="tag no" data-out="1">' + esc(ex.stage) + ' — اختر القرار لتعود إلى الرول</span>' : '<span class="tag">تحديث</span>') : '<span class="tag stg">جديدة</span>') + '' + '</td></tr>'; }).join('')
       + '</tbody></table></div></details>';
   };
   box.innerHTML = '<div class="h">قُرئ ' + rlN(total, 'قضية واحدة', 'قضيتان', 'قضايا', 'قضية') + ' من ' + rlN(results.length, 'ملف واحد', 'ملفين', 'ملفات', 'ملفًا') + ' — موزَّعة على ' + rlN(groups.length, 'جلسة واحدة', 'جلستين', 'جلسات', 'جلسة') + ' بحسب التاريخ المكتوب في كل كشف. راجع كل جلسة قبل الإضافة — لا يُحفظ أي اسم.</div>'
@@ -8685,7 +8695,7 @@ function rlImpMulti(results, errs) {
         Object.assign(c, { auto: auto || c.auto || '', ann: ann || c.ann || null, next: resv ? ((gj && gj.value) || day) : day, ord: k, ordFor: day, updated: now, src: 'kashf' });
         if (resv) c.resAt = day;
         if (!c.first || day < c.first) c.first = day;
-        if (dec) { c.why = dec; if (!RL_RES.includes(c.stage) || RL_RES.includes(dec)) c.stage = dec; }
+        rlImpDec(c, dec, day);
         const wv = tr.querySelector('.w').value; if (wv) c.writer = wv; if (tr.dataset.pet) ctPet(c);   // V151
       });
       if (k) { sess.add(day); days.push(day); }
@@ -14947,6 +14957,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [220, 'الإصدار 220', ['استيراد الكشف: القضية المحجوزة للحكم التي عادت في كشف جلسة لاحقة (مؤجلة) تُضاف إلى رول الجلسة بالقرار الذي تختاره، لا إلى قائمة النطق؛ وفي المراجعة تنبيه «اختر القرار لتعود إلى الرول» على كل قضية محجوزة أو منتهية.']],
   [219, 'الإصدار 219', ['أمثلة خانات البحث والأسئلة والمسائل بحسب نوع الدائرة (الإداري والمدني والتجاري والحكومي والأسرة والجزائي)؛ والعمالي كما هو.']],
   [218, 'الإصدار 218', ['وضع الجلسة: «ورقة الرول» للقضايا التي تُنظر وحدها، والمحجوزة للحكم في «النطق» بزر مستقل في أعلى الورقة — لا تختلط بالرول.', '«نداء ثانٍ» لا يغيّر ترتيب الرول ولا أرقامه؛ تبقى القضية في موضعها وتظهر في «نهاية الرول».', '«أحكامي» في المحجوزة بصفة صاحب الجهاز: (ب) أو (ج) عند العضوين.']],
   [217, 'الإصدار 217', ['رمز الدائرة على جهاز إعداداته قديمة: يُجرَّب الرمز على ملفات الدائرة الحالية نفسها، فإن فتحها تتحول إعدادات الجهاز إليها — فلا يُطلب الرمز مرة بعد مرة. و«بصمة الدائرة» في القسم لتقارن بين أجهزتك.']],
