@@ -4,7 +4,7 @@
 <script>window.__DJ0 = location.hash.indexOf('#dj=') === 0 ? location.hash : '';</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261111094046">
+<meta name="amali-build" content="20261111101901">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3633,7 +3633,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V225 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V226 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -5777,7 +5777,7 @@ function apD(iso, ref) { if (!iso) return ''; const [y, m, d] = iso.split('-'); 
 function apAb(c, p) { const P = rlParties(c), same = P.filter(x => x.r === p.r), b = (rlProf().kind === 'cri' ? { a: 'مت', e: 'ن', x: 'مد' } : { a: 'م', e: 'ض', x: 'خ' })[p.r] || 'ط'; return b + (same.length > 1 ? String(same.indexOf(p) + 1) : ''); }
 const AP_AT = { h: 'حضر', j: 'محبوسًا', q: 'لم يُحضر', p: 'بشخصه', o: 'صاحب الشركة', l: 'بمحامٍ', w: 'بوكيل', g: 'محامي الحكومة', n: 'لم يحضر' };
 function apAtt(a) { if (!a || !a.length) return ''; if (a.includes('n')) return AP_AT.n; return Object.keys(AP_AT).filter(k => k !== 'n' && a.includes(k)).map(k => AP_AT[k]).join(' و'); }
-function apDecOn(c, d) { return (c.hist || []).filter(h => h.d === d && !h.via && !h.pend && h.a && h.a !== 'تصحيح المنطوق').slice(-1)[0] || null; }
+function apDecOn(c, d) { return (c.hist || []).filter(h => h.d === d && !h.pend && h.a && h.a !== 'تصحيح المنطوق').slice(-1)[0] || null; }   /* V226: ومنه المطبَّق من المرتبطة */
 function apDec(c, h, d0) {
   if (!h) return ''; const a = h.a || '', to = h.to ? apD(h.to, d0) : '', n = (h.n || '').trim(); let t;
   if (a === 'صدر الحكم') return 'حكمت' + (c.vd && apDecOn(c, d0) === h ? ': ' + c.vd : '') + (n ? ' — ' + n : '');
@@ -7306,7 +7306,7 @@ function rlSubmit(e) {
 // V83: عدد ما وُزّع على كل كاتب من القضايا المحجوزة في جلسة (resAt) — يُحسب حكمًا واحدًا للمرتبطة
 function rlWCnt(sd, k) { return rlUnits(RL.cards.filter(x => RL_RES.includes(x.stage) && x.resAt === sd && (x.writer || '') === k)); }
 function rlDecBox(c) {
-  const sd = c.next || rlDaySel || rlToday();
+  const sd = (typeof SS !== 'undefined' && SS && SS.day) || c.next || rlDaySel || rlToday();   /* V226: في وضع الجلسة القرار لجلستها — كانت المرتبطة المؤجلة من أختها تُفتح على جلستها الجديدة */
   const b = el('div', 'rldec'), sibs = rlSibs(c).filter(x => !RL_DONE.includes(x.stage));
   b.innerHTML = '<div class="h">قرار جلسة ' + rlDay(sd) + ' ' + rlFmt(sd) + '</div>' + rlActsHtml(c)
     + '<div class="rw hidden" data-k="w"><span>كاتب الحكم</span><div class="chips">' + Object.keys(RL_W).filter(k => k !== 'd' || rlWCnt(sd, k)).map(k => '<button type="button" class="chip" data-w="' + k + '">' + RL_W[k] + ' <small class="wc" title="ما وُزّع عليه من محجوزات هذه الجلسة">' + rlWCnt(sd, k) + '</small></button>').join('') + '</div><p class="wnote">اختياري — يمكن تسجيل الحجز دون توزيع الآن. <span class="k">في هذه الجلسة: ' + Object.keys(RL_W).filter(k => k !== 'd' || rlWCnt(sd, k)).map(k => RL_W[k].replace(/^\((.)\).*/, '$1') + ' ' + rlWCnt(sd, k)).join(' · ') + (rlWCnt(sd, '') ? ' · غير موزّعة ' + rlWCnt(sd, '') : '') + '</span></p></div>'
@@ -7543,7 +7543,7 @@ function rlGovAdd(c) { if (c.govx || !Array.isArray(c.parties) || c.parties.some
 function rlPLabel(c, p) { const same = rlParties(c).filter(x => x.r === p.r); return (RL_ROLES[p.r] || '') + ' ' + String(same.indexOf(p) + 1).padStart(3, '0') + (p.lbl ? ' (' + p.lbl + ')' : ''); }
 function rlSheet(c, d, make) { c.sheets = c.sheets || {}; if (!c.sheets[d] && make) c.sheets[d] = { att: {}, req: {}, oth: {}, note: '' }; return c.sheets[d] || null; }
 function rlSheetHasData(s) { return !!s && (Object.keys(s.att || {}).length || Object.values(s.req || {}).some(a => a && a.length) || Object.values(s.oth || {}).some(Boolean) || (s.note || '').trim()); }
-function rlDecOn(c, d) { return (c.hist || []).filter(x => x.d === d && !x.via && !x.pend).slice(-1)[0] || null; }   // V161: «القرار بعد الجلسة» ليس قرارًا بعد
+function rlDecOn(c, d) { return (c.hist || []).filter(x => x.d === d && !x.pend).slice(-1)[0] || null; }   /* V226: القرار المطبَّق من المرتبطة (via) قرارٌ لها في جلستها — كان يُستثنى فتبقى «بلا قرار» في نهاية الرول وقائمة الاستئناف */   // V161: «القرار بعد الجلسة» ليس قرارًا بعد
 function rlDecTxt(h) { return h ? h.a + (h.to ? ' ← ' + rlFmt(h.to) : '') + (h.n ? ' — ' + h.n : '') : ''; }
 // نص الجلسة: سطر لكل طرف + الملاحظة + القرار
 function rlSheetLines(c, d) {
@@ -14981,6 +14981,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [226, 'الإصدار 226', ['المرتبطة: القرار المطبَّق عليها بـ«تطبيق القرار نفسه على…» يُحسب قرارًا لها في الجلسة (كانت تبقى «بلا قرار» في نهاية الرول وفي قائمة الاستئناف)، وقرار وضع الجلسة يُسجَّل لجلسة اليوم دائمًا.']],
   [225, 'الإصدار 225', ['رقم الرول: الاستئنافان المرتبطان في الجلسة نفسها برقم واحد هو رقم الأقدم (مثل 17 و17)، ويتصل الترقيم بعدهما — في الرول ووضع الجلسة وورقة المراجعة المطبوعة.']],
   [224, 'الإصدار 224', ['التوزيع: «الجاهزة للحكم» للجاهزة والمحجوزة وحدها، والقضية المسندة من قبل وهي غير جاهزة (تأجيل لحلف اليمين أو للرد) في قسم مطويّ «مسندة سابقًا وتنتظر الجلسة — تبقى لكاتبها»، لا تُحسب «لهذه الجلسة»، وتنتقل إلى القائمة إذا وُسمت جاهزة أو حُجزت.']],
   [223, 'الإصدار 223', ['تحليل الملف: بعد «احفظ وارجع إلى الرول» تُفرَّغ الشاشة، وفتح التحليل لقضية أخرى أو إرسال أوراق معتّمة جديدة يبدأ تحليلًا جديدًا — كانت أوراق القضية السابقة ونتيجتها تبقى فتمنع تحليل التالية.']],
