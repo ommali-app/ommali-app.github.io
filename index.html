@@ -4,7 +4,7 @@
 <script>window.__DJ0 = location.hash.indexOf('#dj=') === 0 ? location.hash : '';</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261103012359">
+<meta name="amali-build" content="20261111094046">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -3633,7 +3633,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V224 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V225 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -7602,10 +7602,10 @@ function rlSessRender(top) {
   const s = rlSheet(c, d, false) || { att: {}, req: {}, oth: {}, note: '' }, P = rlParties(c), dec = rlDecOn(c, d), prev = rlSheetAll(c, d), sibs = rlSibs(c);
   const nd = cards.filter(x => rlDecOn(x, d)).length;
   let h = '<div class="sstop"><button type="button" class="ib" data-s="x" aria-label="إغلاق وضع الجلسة">✕</button><div class="stt"><b>' + (SS.mode === 'n' ? 'النطق بالأحكام' : 'ورقة الرول') + '</b>' + ((o => o.length ? '<button type="button" class="chip ssmode" data-s="mode">' + (SS.mode === 'n' ? '↩ الرول (' + o.length + ')' : 'النطق (' + o.length + ')') + '</button>' : '')(SS.mode === 'n' ? rlSessHear(d) : rlSessPron(d))) + '<span>' + rlDay(d) + ' ' + rlFmt(d) + ' · سُجّل ' + nd + '/' + cards.length + (rlPnKeys().length > 1 ? ' · <button type="button" class="sspn' + (Object.keys(rlPnAt(d)).length ? ' sub' : '') + '" data-s="pn" title="هيئة الجلسة">الهيئة: ' + esc(rlPnTxt(d)) + '</button>' : '') + '</span></div>'
-    + '<select class="ssjump" aria-label="الانتقال إلى قضية">' + cards.map((x, k) => '<option value="' + k + '"' + (k === SS.i ? ' selected' : '') + '>' + (k + 1) + '. ' + esc(x.code) + (rlDecOn(x, d) ? ' ✓' : '') + '</option>').join('') + '</select>'
+    + '<select class="ssjump" aria-label="الانتقال إلى قضية">' + cards.map((x, k) => '<option value="' + k + '"' + (k === SS.i ? ' selected' : '') + '>' + rlSeqNums(cards).get(x.id) + '. ' + esc(x.code) + (rlDecOn(x, d) ? ' ✓' : '') + '</option>').join('') + '</select>'
     + '<button type="button" class="btn sspr2" data-s="print" title="طباعة محاضر مختصرة لكل قضايا الجلسة" aria-label="طباعة المحاضر"><span aria-hidden="true">🖶</span><span class="lb"> طباعة المحاضر</span></button></div>';
   h += '<div class="ssbody">';
-  h += '<div class="sscase"><div class="ssn">' + (SS.i + 1) + '<small>/' + cards.length + '</small></div><div class="ssid"><b>' + esc(c.code) + '</b>' + (c.auto ? '<span class="auto">آلي ' + esc(c.auto) + '</span>' : '') + '<span class="tag stg">' + esc(c.stage || 'مؤجلة') + '</span>' + ctChips(c) + (dec ? '<span class="ssdh"><span class="tag ssdtag">✓ ' + esc(rlDecTxt(dec)) + '</span><button type="button" class="linkbtn" data-s="undoh">تراجع</button></span>' : '')
+  const SQ = rlSeqNums(cards); h += '<div class="sscase"><div class="ssn">' + SQ.get(c.id) + '<small>/' + SQ.n + '</small></div><div class="ssid"><b>' + esc(c.code) + '</b>' + (c.auto ? '<span class="auto">آلي ' + esc(c.auto) + '</span>' : '') + '<span class="tag stg">' + esc(c.stage || 'مؤجلة') + '</span>' + ctChips(c) + (dec ? '<span class="ssdh"><span class="tag ssdtag">✓ ' + esc(rlDecTxt(dec)) + '</span><button type="button" class="linkbtn" data-s="undoh">تراجع</button></span>' : '')
     + (c.ann ? '<span class="ann ' + (rlAnnOk(c) ? 'ok' : 'no') + '">الإعلان ' + rlAnnTxt(c.ann) + (rlAnnOk(c) ? ' ✓' : ' ✗') + '</span>' : '') + (rlPrepOf(c) === 'need' ? '<span class="tag" style="background:var(--bad);color:#fff">يحتاج إجراء</span>' : '') + (sibs.length ? '<span class="tag lnk">مضموم: ' + sibs.map(x => esc(x.code)).join('، ') + '</span>' : '') + rlPrevLine(c, d) + anSessHtml(c) + '</div>'
     + (rlProf().deg === 'f' && rlPenSub() !== 'jm' ? '' : '<details class="ssfi"><summary>أول درجة' + (c.fi ? ': ' + esc(c.fi) + (c.fid ? ' · ' + rlFmt(c.fid) : '') : '') + '</summary><div class="ssfr"><label>رقم القضية<input type="text" data-f="fi" value="' + esc(c.fi || '') + '" inputmode="numeric" placeholder="مثال: 25/2103"></label><label>تاريخ الحكم<input type="date" data-f="fid" value="' + esc(c.fid || '') + '"></label></div></details>') + '</div>';
   // الجلسة السابقة
@@ -8209,7 +8209,7 @@ function rlCard(c, mode, pos) {
   const whenT = res ? 'جلسة النطق' : 'الجلسة القادمة';
   const annH = c.ann ? '<span class="ann ' + (ok ? 'ok' : 'no') + '" title="الإعلانات التي تمت / المطلوبة">الإعلان ' + rlAnnTxt(c.ann) + (ok ? ' ✓' : ' ✗') + '</span>' : '';
   // الرأس (يظهر دائمًا — النقر عليه يطوي/يفتح)
-  let h = '<div class="h" role="button" tabindex="0" aria-expanded="' + open + '" title="' + (open ? 'طيّ البطاقة' : 'فتح التفاصيل') + '"><span class="chev">' + rlIc('chev') + '</span>' + (pos ? (rlReord ? '<span class="mv"><button type="button" data-mv="-1" aria-label="تحريك إلى أعلى"' + (pos.n === 1 ? ' disabled' : '') + '>▲</button><button type="button" data-mv="1" aria-label="تحريك إلى أسفل"' + (pos.n === pos.of ? ' disabled' : '') + '>▼</button></span>' : '') + '<span class="ordn" title="الترتيب في رول الجلسة">' + pos.n + '</span>' : '') + '<b>' + esc(c.code) + '</b>' + (c.auto ? '<span class="auto">آلي ' + esc(c.auto) + '</span>' : '') + '<span class="tag stg">' + esc(c.stage || 'مؤجلة') + '</span>'
+  let h = '<div class="h" role="button" tabindex="0" aria-expanded="' + open + '" title="' + (open ? 'طيّ البطاقة' : 'فتح التفاصيل') + '"><span class="chev">' + rlIc('chev') + '</span>' + (pos ? (rlReord ? '<span class="mv"><button type="button" data-mv="-1" aria-label="تحريك إلى أعلى"' + ((pos.k || pos.n) === 1 ? ' disabled' : '') + '>▲</button><button type="button" data-mv="1" aria-label="تحريك إلى أسفل"' + ((pos.k || pos.n) === (pos.len || pos.of) ? ' disabled' : '') + '>▼</button></span>' : '') + '<span class="ordn" title="الترتيب في رول الجلسة">' + pos.n + '</span>' : '') + '<b>' + esc(c.code) + '</b>' + (c.auto ? '<span class="auto">آلي ' + esc(c.auto) + '</span>' : '') + '<span class="tag stg">' + esc(c.stage || 'مؤجلة') + '</span>'
     + (c.stage === 'صدر الحكم' && c.vd ? '<span class="tag vd" title="منطوق الحكم">' + esc(c.vd) + '</span>' : '')
     + (c.stage !== 'صدر الحكم' && c.vdSuggested ? '<span class="tag sug" title="منطوق مقترح من مسودة الدائرة — يُثبَّت عند صدور الحكم">مقترح: ' + esc(c.vdSuggested) + '</span>' : '')
     + rlDraftBadge(c) + annH
@@ -8384,7 +8384,7 @@ function rlRender() {
   $('#rl_balb').classList.toggle('hidden', rlMode !== 'roll' || !!rlQ() || rlBalKeys().length < 2 || !rlDayList(rlDaySel || '').some(c => !RL_DONE.includes(c.stage) && !RL_RES.includes(c.stage)));   // V163
   const L = $('#rl_list'); L.innerHTML = '';
   if (!RL.cards.length) { L.innerHTML = '<div class="empty"><b>لا قضايا بعد</b>ابدأ بـ«استيراد كشف الجلسة» من نظام الاطلاع (ملف PDF أو صورة أو نص منسوخ)، أو أضف قضية يدويًا.</div>'; rlSummary(); return; }
-  const add = (title, list, cls, num) => { if (!list.length) return; const g = el('div', 'rlgh' + (cls ? ' ' + cls : '')); g.innerHTML = title; L.appendChild(g); list.forEach((c, i) => L.appendChild(rlCard(c, rlMode, num ? { n: i + 1, of: list.length, day: num } : null))); };
+  const add = (title, list, cls, num) => { if (!list.length) return; const g = el('div', 'rlgh' + (cls ? ' ' + cls : '')); g.innerHTML = title; L.appendChild(g); const SQ = num ? rlSeqNums(list) : null; list.forEach((c, i) => L.appendChild(rlCard(c, rlMode, num ? { n: SQ.get(c.id), of: SQ.n, k: i + 1, len: list.length, day: num } : null))); };
   const rq = rlQ();
   if (rq && (rlMode === 'roll' || rlMode === 'res')) {
     const hits = rlAdj(RL.cards.filter(c => rlMatch(c, rq)).sort((a, b) => (RL_DONE.includes(a.stage) ? 1 : 0) - (RL_DONE.includes(b.stage) ? 1 : 0) || (a.next || '9').localeCompare(b.next || '9')));
@@ -8501,9 +8501,9 @@ function rlPrint() {
     if (!L.length && !R.length) { toast('لا قضايا لجلسة ' + rlFmt(day)); return; }
     const pw = rlPnKeys().length > 1;   // V163: ورقة المراجعة — النوع والجاهزية والكاتب بدل المبادئ؛ والخانات الفارغة للقلم
     h = (L.length ? '<table class="rvsheet"><thead><tr><th>م</th><th>رقم القضية</th><th>النوع</th><th>الإعلان</th><th>آخر قرار</th><th>المراجعة والجاهزية</th>' + (pw ? '<th>الكاتب</th>' : '') + '<th class="dec">القرار</th></tr></thead><tbody>' : '');
-    L.forEach((c, i) => { const ok = rlAnnOk(c), st = rlPrepOf(c), rp = rlRep(c), ct = (c.ct || []);
+    const SQ = rlSeqNums(L); L.forEach((c, i) => { const ok = rlAnnOk(c), st = rlPrepOf(c), rp = rlRep(c), ct = (c.ct || []);
       const rdy = st === 'ok' ? '<b class="rdk">● جاهزة للحكم</b>' : st === 'no' ? '<b class="rdn2">○ غير جاهزة</b>' + (rlRdTxt(c) ? '<div class="nt">' + cell(rlRdTxt(c)) + '</div>' : '') : '<span class="box2">☐ جاهزة&nbsp;&nbsp;☐ غير جاهزة</span>';
-      h += '<tr' + (rlSibs(c).length ? ' class="lk"' : '') + '><td class="num">' + (rlSort === 'sess' && c.ordFor === day && c.ord ? c.ord : i + 1) + '</td><td class="code"><b>' + cell(c.code) + '</b>' + (c.auto ? '<div class="nt">آلي ' + cell(c.auto) + '</div>' : '') + (rlSibs(c).length ? '<div class="nt">مرتبط بـ ' + cell(rlLinkNote(c)) + '</div>' : '') + (c.subj ? '<div class="nt">' + cell(c.subj) + '</div>' : '') + '</td>'
+      h += '<tr' + (rlSibs(c).length ? ' class="lk"' : '') + '><td class="num">' + (rlSort === 'sess' && c.ordFor === day && c.ord ? c.ord : SQ.get(c.id)) + '</td><td class="code"><b>' + cell(c.code) + '</b>' + (c.auto ? '<div class="nt">آلي ' + cell(c.auto) + '</div>' : '') + (rlSibs(c).length ? '<div class="nt">مرتبط بـ ' + cell(rlLinkNote(c)) + '</div>' : '') + (c.subj ? '<div class="nt">' + cell(c.subj) + '</div>' : '') + '</td>'
         + '<td class="ctd">' + (ct.length ? ct.map(t => '<span class="ctp">' + cell(t) + '</span>').join('') : '<span class="ln2"></span>') + (rlSibs(c).length ? '<span class="ctp x">استئنافان</span>' : '') + '</td>'
         + '<td class="' + (ok === false ? 'no' : '') + '">' + rlAnnTxt(c.ann) + (ok === false ? ' ✗' : ok ? ' ✓' : '') + '</td><td>' + cell(rlLast(c)) + (rp.n >= 2 ? '<div class="nt w">⚠ ' + cell(rlRepTxt(rp)) + '</div>' : rlAnnAdj(c) >= 2 ? '<div class="nt">أُجّلت للإعلان ' + rlAnnAdj(c) + ' مرات</div>' : '') + (c.note ? '<div class="nt">' + cell(c.note) + '</div>' : '') + '</td>'
         + '<td class="rvc"><div>' + (rlRevOn(c) ? '✓ روجعت' : '☐ روجعت') + '</div><div>' + rdy + '</div></td>' + (pw ? '<td class="wr">' + (c.writer && RL_LT[c.writer] ? '<b>' + RL_LT[c.writer] + '</b>' : '') + '</td>' : '') + '<td class="dec"></td></tr>'; });
@@ -10521,6 +10521,8 @@ function rlAlinkHtml() {
     + S.map((g, k) => '<span>الرقم الآلي نفسه بجلستين مختلفتين: <b>' + nm(g) + '</b> <button type="button" class="linkbtn" data-alk="' + k + '">اربطهما</button></span>').join('') + '<button type="button" class="linkbtn" id="rl_alx">إخفاء</button></div>';
 }
 // المرتبطة متجاورة: أول ظهور لأحد أفراد المجموعة يجلب أخواته الموجودة في القائمة نفسها
+// V225: رقم الرول — الاستئنافات المرتبطة (grp) في الجلسة نفسها تأخذ رقمًا واحدًا هو رقم أولاها (الأقدم في الترتيب المعتمد)، ويتصل الترقيم بعدها
+function rlSeqNums(list) { const m = new Map(), g = new Map(); let n = 0; list.forEach(c => { const k = c.grp && rlSibs(c).some(x => x !== c && list.includes(x)) ? c.grp : null; if (k && g.has(k)) { m.set(c.id, g.get(k)); return; } n++; m.set(c.id, n); if (k) g.set(k, n); }); m.n = n; return m; }
 function rlAdj(list) { const out = [], seen = new Set(); list.forEach(c => { if (seen.has(c)) return; [c].concat(rlSibs(c).filter(x => list.includes(x))).forEach(x => { if (!seen.has(x)) { seen.add(x); out.push(x); } }); }); return out; }
 // عدد الأحكام: المرتبطة (أو المتقابلة بالرقم الآلي نفسه) حكم واحد — كما تُكتب في التوزيع
 function rlUnits(list) { return rlDistEntries(list).length; }
@@ -14979,6 +14981,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [225, 'الإصدار 225', ['رقم الرول: الاستئنافان المرتبطان في الجلسة نفسها برقم واحد هو رقم الأقدم (مثل 17 و17)، ويتصل الترقيم بعدهما — في الرول ووضع الجلسة وورقة المراجعة المطبوعة.']],
   [224, 'الإصدار 224', ['التوزيع: «الجاهزة للحكم» للجاهزة والمحجوزة وحدها، والقضية المسندة من قبل وهي غير جاهزة (تأجيل لحلف اليمين أو للرد) في قسم مطويّ «مسندة سابقًا وتنتظر الجلسة — تبقى لكاتبها»، لا تُحسب «لهذه الجلسة»، وتنتقل إلى القائمة إذا وُسمت جاهزة أو حُجزت.']],
   [223, 'الإصدار 223', ['تحليل الملف: بعد «احفظ وارجع إلى الرول» تُفرَّغ الشاشة، وفتح التحليل لقضية أخرى أو إرسال أوراق معتّمة جديدة يبدأ تحليلًا جديدًا — كانت أوراق القضية السابقة ونتيجتها تبقى فتمنع تحليل التالية.']],
   [222, 'الإصدار 222', ['التوزيع أوضح: «قضيتان (5 نقاط) لهذه الجلسة» بدل «5 لهذه الجلسة» (كان الرقم مجموع الأوزان لا عدد القضايا)، وفي ميزان الموسم الأحكام المحجوزة مفصولة عن «القضايا المسندة قبل الحجز»، ويُفتح على «الجاهزة للحكم». التوزيع قبل الجلسة باقٍ في «كل قضايا الجلسة»، والقضية المسندة تبقى لكاتبها إذا أُجّلت (للتحقيق أو اليمين).']],
