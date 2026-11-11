@@ -3632,7 +3632,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V222 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V223 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -11115,7 +11115,7 @@ function inApplyLink(c) {
   c.updated = Date.now(); rlSave();
 }
 // ---- V147: ربط «تحليل الملف» بالرول — سياق القضية، المطابقة، بطاقة القيد، ملخص الملف المحفوظ (أرقام وتواريخ ومبالغ وطلبات وعناوين النعي وتنبيهات فقط)
-let INX = null;   // القضية التي فُتح لها التحليل من بطاقتها
+let INX = null, AN_FOR = null;   /* V223: AN_FOR القضية التي تخصها الأوراق والنتيجة المعروضة */   // القضية التي فُتح لها التحليل من بطاقتها
 function anNos(s) {   // «851/2026» «26/851» (بطاقة القيد: السنة أولًا) «851 لسنة 2026» «2026/851» ← [{n,y}]
   const t = AR2EN(String(s || '')).replace(/لسن[ةه]/g, '/'), m = t.match(/(\d{1,6})\s*[\/\\_\-]\s*(\d{1,6})/); if (!m) return [];
   const a = m[1], b = m[2], Y = x => x.length === 4 ? x : x.length === 2 ? '20' + x : '', out = [], P = (n, y) => { if (Y(y)) out.push({ n: String(+n), y: Y(y) }); };
@@ -11332,6 +11332,7 @@ function anEdit(c, box) {
 function anCtxRender() {
   const b = $('#in_ctx'); if (!b) return; const c = INX && RL.cards.find(x => x.id === INX);
   if (!c) { INX = null; b.classList.add('hidden'); b.innerHTML = ''; return; }
+  if (AN_FOR && AN_FOR !== c.id && (inResult || inFiles.length)) anQReset(); AN_FOR = c.id;   /* V223: فُتح التحليل لقضية أخرى — لا تبقى أوراق السابقة ونتيجتها */
   b.classList.remove('hidden'); b.innerHTML = '<span>للقضية <b>' + esc(c.code) + '</b>' + (c.auto ? ' · آلي ' + esc(c.auto) : '') + '</span><span class="anctxb"><button type="button" class="linkbtn" id="in_back">→ رجوع إلى الرول</button><button type="button" class="ib" id="in_ctxx" aria-label="إلغاء ربط التحليل بهذه القضية" title="تحليل بلا قضية محددة">✕</button></span>';
   $('#in_back').onclick = () => { ANQ = null; anBack(c.id); }; $('#in_ctxx').onclick = () => { ANQ = null; INX = null; anCtxRender(); if (inResult) inRender(); };
   { const qh = anQBar(); if (qh) { b.insertAdjacentHTML('beforeend', qh); $('#anq_skip').onclick = () => { ANQ.i++; anQGo(); }; $('#anq_end').onclick = () => { const id = INX; ANQ = null; anCtxRender(); toast('أُنهيت الدفعة'); }; } else if (ANQ && (!INX || ANQ.ids[ANQ.i] !== INX)) ANQ = null; }   // V167
@@ -11730,7 +11731,7 @@ async function bqLive() {
 }
 window.__t169 = { open: d => bqOpen(d), get BQ() { return BQ; }, prompt: () => BQ && BQ.chunks ? bqBatchPrompt(BQ.chunks[BQ.ck || 0]) : '', nums: s => bqNums(s), leaks: s => bqLeaks(s), setSample: o => { SAMPLEX = o; } };   // للاختبار
 window.__t167 = { q: () => ANQ ? { i: ANQ.i, n: ANQ.ids.length, ids: ANQ.ids.slice() } : null, save: id => { const c = RL.cards.find(x => x.id === id); inResult = inResult || { appealNo: '', appeal: { grounds: [] }, firstRuling: {} }; anSave(c); }, inx: () => INX, mine: () => rlMineList().map(c => c.code), open: () => rlMineOpen() };   // V167: للاختبار
-function anSave(c) { const st = anSticker(inResult || {}); inApplyLink(c); { const tf = $('#in_tofiles'); const on = tf ? tf.checked : (localStorage.getItem('tm_intf') !== '0'); if (on) try { inFilesSync(c); } catch (e) {} } if (!c.auto && st.auto.length === 9 && !st.auto.includes('?')) { c.auto = st.auto; c.updated = Date.now(); rlSave(); } INX = null; if (ANQ && ANQ.ids[ANQ.i] === c.id) { ANQ.done++; ANQ.i++; toast('حُفظ ملخص ' + c.code + (ANQ.i < ANQ.ids.length ? ' — التالية: ' + ((RL.cards.find(x => x.id === ANQ.ids[ANQ.i]) || {}).code || '') + ' (' + (ANQ.i + 1) + ' من ' + ANQ.ids.length + ')' : '')); anQGo(); return; } anCtxRender(); toast('حُفظ ملخص الملف في ' + c.code); anBack(c.id); }
+function anSave(c) { const st = anSticker(inResult || {}); inApplyLink(c); { const tf = $('#in_tofiles'); const on = tf ? tf.checked : (localStorage.getItem('tm_intf') !== '0'); if (on) try { inFilesSync(c); } catch (e) {} } if (!c.auto && st.auto.length === 9 && !st.auto.includes('?')) { c.auto = st.auto; c.updated = Date.now(); rlSave(); } INX = null; if (ANQ && ANQ.ids[ANQ.i] === c.id) { ANQ.done++; ANQ.i++; toast('حُفظ ملخص ' + c.code + (ANQ.i < ANQ.ids.length ? ' — التالية: ' + ((RL.cards.find(x => x.id === ANQ.ids[ANQ.i]) || {}).code || '') + ' (' + (ANQ.i + 1) + ' من ' + ANQ.ids.length + ')' : '')); anQGo(); return; } anQReset(); inPendClear(); anCtxRender(); toast('حُفظ ملخص الملف في ' + c.code); anBack(c.id); }   /* V223: بعد الحفظ تُفرَّغ شاشة التحليل (الأوراق والنتيجة) فلا تبقى القضية السابقة حين تُفتح أخرى */
 function anIntakeHtml(r) {   // يُعرض أعلى نتيجة التحليل
   const M = anMatch(r), st = M.st, tgt = INX && RL.cards.find(x => x.id === INX); let h = '';
   const sameT = tgt && M.one && M.one.id === tgt.id, num = M.nos[0];
@@ -13831,6 +13832,7 @@ function initMask() {
     if (!MSK.res) return;
     if (MSK.forIn && MSK.forIn.facts) { const c = jwCard(MSK.forIn.cid); if (c) { await jeFqFromMask(c); MSK.forIn.sent = true; mskInBar(); jeFqBack(c.id); } return; }   // V198: «لخّص الوقائع»
     const bl = await mskFinalBlobs(st);
+    { const fc = MSK.forIn && MSK.forIn.cid && RL.cards.some(c => c.id === MSK.forIn.cid) ? MSK.forIn.cid : null; if (inResult || (fc && AN_FOR && AN_FOR !== fc)) anQReset(); if (fc) { INX = fc; AN_FOR = fc; } }   /* V223: أوراق معتّمة جديدة = تحليل جديد، لقضيتها */
     inFiles = bl.map(b => ({ blob: b.blob, name: b.name, masked: true, w: b.w, h: b.h })); inOcrDone = false; inTextOnly = false;
     if (MSK.forIn) { MSK.forIn.sent = true; mskInBar(); }   // V197
     setView('i'); inThumbs(); try { inStepsUpd(); } catch (e) {}
@@ -14974,6 +14976,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [223, 'الإصدار 223', ['تحليل الملف: بعد «احفظ وارجع إلى الرول» تُفرَّغ الشاشة، وفتح التحليل لقضية أخرى أو إرسال أوراق معتّمة جديدة يبدأ تحليلًا جديدًا — كانت أوراق القضية السابقة ونتيجتها تبقى فتمنع تحليل التالية.']],
   [222, 'الإصدار 222', ['التوزيع أوضح: «قضيتان (5 نقاط) لهذه الجلسة» بدل «5 لهذه الجلسة» (كان الرقم مجموع الأوزان لا عدد القضايا)، وفي ميزان الموسم الأحكام المحجوزة مفصولة عن «القضايا المسندة قبل الحجز»، ويُفتح على «الجاهزة للحكم». التوزيع قبل الجلسة باقٍ في «كل قضايا الجلسة»، والقضية المسندة تبقى لكاتبها إذا أُجّلت (للتحقيق أو اليمين).']],
   [221, 'الإصدار 221', ['«احفظ وارجع» بعد تعديل التعتيم أسرع: تُرسم كل صفحة معدّلة مرة واحدة (كانت تُرسم مرتين: للصورة ولمصغّرها)، والحفظ المشفّر يجري مع رسم الصفحة التالية؛ ويظهر على الزر «حفظ التعتيم… 3 من 14». ولا يُعاد إلا ما تغيّر من الصفحات.']],
   [220, 'الإصدار 220', ['استيراد الكشف: القضية المحجوزة للحكم التي عادت في كشف جلسة لاحقة (مؤجلة) تُضاف إلى رول الجلسة بالقرار الذي تختاره، لا إلى قائمة النطق؛ وفي المراجعة تنبيه «اختر القرار لتعود إلى الرول» على كل قضية محجوزة أو منتهية.']],
