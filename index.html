@@ -4,7 +4,7 @@
 <script>window.__DJ0 = location.hash.indexOf('#dj=') === 0 ? location.hash : '';</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="amali-build" content="20261111103325">
+<meta name="amali-build" content="20261111104306">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -1767,6 +1767,7 @@ label>input[type=date]:not(#rl_dayx)::-webkit-date-and-time-value{text-align:rig
 #rl_list.reord .rlc{border-style:dashed}
 .rlc.moved{box-shadow:0 0 0 3px var(--accent-soft);transition:box-shadow .2s}
 /* V80: «إرسال التوزيع» في شريط المحجوزة */
+#rl_distbox .dhd{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}#rl_distbox .dhd h3{margin:0}
 .rlbar .rldist{margin-inline-start:auto}
 @media (max-width:520px){.rlsumrow{flex-direction:row!important;flex-wrap:wrap;align-items:center!important}.rlsumrow .rlsum{flex:1 1 100%}.rlsumrow .rlsort{flex:1 1 0;min-width:0;align-self:auto!important}.rlsumrow .rlsort select{max-width:none;flex:1;min-width:0}.rlsumrow .rlordb{flex:none}}
 .rlstats{display:flex!important;flex-wrap:wrap}
@@ -3633,7 +3634,7 @@ html.jefsm,html.jefsm body{overflow:hidden}
       <p class="abt"><b>التطبيق وأداة الذكاء:</b> أداة الذكاء تقرأ وتلخّص بسرعة، والتطبيق لا ينافسها بل يحيط بها بما لا تقدر عليه وحدها: <b>السرية</b> — تُعتَّم الأوراق والمسودات على جهازك قبل أي نسخ، ولا يُنسخ نص بقي فيه اسم؛ <b>السند</b> — كل مبدأ تذكره الأداة يُفحص في قاعدة التطبيق، فإن لم يوجد قيل «لا يوجد سند»؛ <b>الأرقام</b> — مبالغ المسودة وتواريخها تُقارن بالحاسبة وبطاقة القضية؛ <b>الذاكرة</b> — رولك وتوزيعك وأحكامك السابقة في المسألة، وهي ما تنساه المحادثة؛ <b>الأصل</b> — يخرج من نموذج دائرتك بهيئة جلسة النطق وتاريخها الصحيح. والتكييف والترجيح والمنطوق للقاضي وحده، وما تُخرجه الأداة مسودة تُراجع.</p>
       <p><button type="button" class="linkbtn" id="dabtmsg">نسخ رسالة تعريف بالتطبيق (للإرسال مع الرابط)</button></p>
       <p>كل ما يُنتجه التطبيق مسودة عمل داخلية تُراجع على الأوراق. البحث والفحص المحلي لا يرسلان شيئًا خارج المتصفح؛ الميزات الموسومة «✦ ذكاء» تُرسل النص (المعتّم) إلى أداة الذكاء الاصطناعي التي تستعملها — بالنسخ واللصق في أي أداة، أو مباشرة داخل claude.ai. أدوات الذكاء تعتمد على بيانات التطبيق وحدها، وتقول «لا يوجد سند في قاعدة التطبيق» عند غيابه، ولا ترجّح نتيجة قضية.</p>
-      <p class="dver">الإصدار V227 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
+      <p class="dver">الإصدار V228 <span id="dbuild"></span> · <button type="button" class="linkbtn" id="dwn">ما الجديد</button></p>
     </section>
   </div>
 </div>
@@ -10378,10 +10379,11 @@ async function rlDistOpen() {
   const ds = [...new Set(RL.cards.map(c => c.resAt).filter(Boolean))].sort().reverse();
   if (!ds.length) { toast('لا قضايا محجوزة مسجّلة بجلسة حجز'); return; }
   box.classList.remove('hidden');
-  box.innerHTML = '<h3>إرسال التوزيع</h3><div class="rw"><span>جلسة الحجز</span><select class="sel" id="rl_dsel">' + ds.map(d => '<option value="' + d + '">' + rlDay(d) + ' ' + rlFmt(d) + '</option>').join('') + '</select></div><p class="k warn hidden" id="rl_dwarn">تنبيه: جلسة النطق مطابقة لجلسة الحجز في بعض القضايا — راجع «موعد النطق» في بطاقاتها.</p><div class="dprev"><img id="rl_dimg" alt="صورة التوزيع"></div><textarea id="rl_dtxt" rows="7"></textarea><div class="row"><button type="button" class="btn primary" id="rl_dshare">مشاركة (صورة + نص)</button><button type="button" class="btn" id="rl_dwa">واتساب — النص</button><button type="button" class="btn" id="rl_dcopy">نسخ النص</button><button type="button" class="btn" id="rl_dpng">تنزيل الصورة</button><button type="button" class="btn" id="rl_dx">إغلاق</button></div><p class="k">«مشاركة» تفتح نافذة الجهاز فتختار الواتساب ثم القروب. على الحاسوب: نزّل الصورة وافتح «واتساب — النص».</p>';
+  box.innerHTML = '<div class="dhd"><h3>إرسال التوزيع</h3>' + (rlBalKeys().length > 1 && rlPnCan() ? '<button type="button" class="btn" id="rl_dedit">✎ عدّل التوزيع</button>' : '') + '</div><div class="rw"><span>جلسة الحجز</span><select class="sel" id="rl_dsel">' + ds.map(d => '<option value="' + d + '">' + rlDay(d) + ' ' + rlFmt(d) + '</option>').join('') + '</select></div><p class="k warn hidden" id="rl_dwarn">تنبيه: جلسة النطق مطابقة لجلسة الحجز في بعض القضايا — راجع «موعد النطق» في بطاقاتها.</p><div class="dprev"><img id="rl_dimg" alt="صورة التوزيع"></div><textarea id="rl_dtxt" rows="7"></textarea><div class="row"><button type="button" class="btn primary" id="rl_dshare">مشاركة (صورة + نص)</button><button type="button" class="btn" id="rl_dwa">واتساب — النص</button><button type="button" class="btn" id="rl_dcopy">نسخ النص</button><button type="button" class="btn" id="rl_dpng">تنزيل الصورة</button><button type="button" class="btn" id="rl_dx">إغلاق</button></div><p class="k">«مشاركة» تفتح نافذة الجهاز فتختار الواتساب ثم القروب. على الحاسوب: نزّل الصورة وافتح «واتساب — النص».</p>';
   let cv = null;
   const draw = async () => { const D = rlDistData($('#rl_dsel').value); $('#rl_dtxt').value = rlDistText(D); cv = await rlDistCanvas(D); $('#rl_dimg').src = cv.toDataURL('image/png'); const wn = $('#rl_dwarn'); if (wn) wn.classList.toggle('hidden', !D.judg.includes(D.resAt)); };
   $('#rl_dsel').onchange = draw; await draw();
+  { const ed = $('#rl_dedit'); if (ed) ed.onclick = () => { const d = $('#rl_dsel').value; box.classList.add('hidden'); rlBalOpen(d); }; }   /* V228: من «إرسال التوزيع» إلى شاشة التوزيع لجلسة الحجز المختارة */
   const fname = () => 'توزيع جلسة ' + $('#rl_dsel').value + '.png';
   const blobP = () => new Promise(r => cv.toBlob(r, 'image/png'));
   const dl = async () => { const b = await blobP(); if (DLX) { try { await DLX.save({ filename: fname(), data: b }); } catch (e) {} return; } const u = URL.createObjectURL(b); const a = document.createElement('a'); a.href = u; a.download = fname(); document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000); };
@@ -14981,6 +14983,7 @@ $('#dcp_go').onclick = () => psOpen(false);
 // V141: «ما الجديد» — يظهر مرة بعد كل تحديث لمن سبق له استعمال التطبيق، ومتى شئت من الإعدادات. لمستخدم جديد لا يظهر (يرى الافتتاحية).
 const WN_V = 173;
 const WN_LOG = [
+  [228, 'الإصدار 228', ['«✎ عدّل التوزيع» في «إرسال التوزيع» (المحجوزة للحكم): يفتح شاشة التوزيع لجلسة الحجز المختارة، ففيها تغيير الكاتب و«امسح التوزيع» و«وزّع بالتوازن».']],
   [227, 'الإصدار 227', ['التوزيع بعد الجلسة: محجوزات الجلسة تبقى في شاشة التوزيع ولو وُزّعت، فتُعاد توزيعها أو تُمسح ثم «وزّع بالتوازن» — كانت تختفي بعد إسنادها.']],
   [226, 'الإصدار 226', ['المرتبطة: القرار المطبَّق عليها بـ«تطبيق القرار نفسه على…» يُحسب قرارًا لها في الجلسة (كانت تبقى «بلا قرار» في نهاية الرول وفي قائمة الاستئناف)، وقرار وضع الجلسة يُسجَّل لجلسة اليوم دائمًا.']],
   [225, 'الإصدار 225', ['رقم الرول: الاستئنافان المرتبطان في الجلسة نفسها برقم واحد هو رقم الأقدم (مثل 17 و17)، ويتصل الترقيم بعدهما — في الرول ووضع الجلسة وورقة المراجعة المطبوعة.']],
